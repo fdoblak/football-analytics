@@ -1,13 +1,16 @@
-"""CLI: version, info, and Stage 2B foundation-safe helpers."""
+"""CLI: version, info, foundation, contracts, and Stage 2D project/cache helpers."""
 
 from __future__ import annotations
 
 import argparse
 import json
 import platform
+import re
 import sys
 from collections.abc import Sequence
 from pathlib import Path
+
+_CACHE_KEY_RE = re.compile(r"^[a-f0-9]{64}$")
 
 
 def _project_root() -> Path:
@@ -263,10 +266,123 @@ def cmd_contracts_migrate(
     return 0
 
 
+def cmd_project_check(*, profile: str, deep: bool, as_json: bool) -> int:
+    from football_analytics.pipeline.project_check import run_project_checks
+
+    report = run_project_checks(profile=profile, mode="deep" if deep else "quick", strict=False)
+    payload = report.to_dict()
+    if as_json:
+        print(json.dumps(payload, sort_keys=True, ensure_ascii=False, indent=2))
+    else:
+        for check in report.checks:
+            print(f"{check.status:4} {check.id}: {check.message}")
+        print(f"overall={report.overall_status} exit_code={report.exit_code}")
+    return int(report.exit_code)
+
+
+def _load_cache_roots() -> tuple[Path, object]:
+    from football_analytics.pipeline.cache import load_cache_policy, resolve_cache_root
+
+    root = _project_root()
+    policy = load_cache_policy(root / "configs" / "system" / "cache_policy.yaml")
+    cache_root = resolve_cache_root(root / "configs" / "system" / "paths.yaml")
+    return cache_root, policy
+
+
+def cmd_cache_inspect(cache_key: str) -> int:
+    from football_analytics.core.redaction import redact_value
+    from football_analytics.pipeline.cache import entry_dir
+
+    if not _CACHE_KEY_RE.fullmatch(cache_key):
+        print("error: cache-key must be 64 lowercase hex", file=sys.stderr)
+        return 2
+    try:
+        cache_root, policy = _load_cache_roots()
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 2
+    entry = entry_dir(cache_root, cache_key)
+    if not entry.is_dir():
+        print(f"error: cache entry missing: {cache_key[:12]}…", file=sys.stderr)
+        return 1
+    max_bytes = int(getattr(policy, "max_manifest_bytes", 1_048_576))
+    payload: dict[str, object] = {"cache_key": cache_key, "entry_exists": True}
+    for name in ("cache_manifest.json", "stage_result.json"):
+        path = entry / name
+        if not path.is_file() or path.is_symlink():
+            payload[name] = None
+            continue
+        if path.stat().st_size > max_bytes:
+            print(f"error: {name} too large", file=sys.stderr)
+            return 3
+        try:
+            payload[name.replace(".json", "")] = json.loads(path.read_text(encoding="utf-8"))
+        except Exception as exc:  # noqa: BLE001
+            print(f"error: failed to read {name}: {type(exc).__name__}", file=sys.stderr)
+            return 3
+    print(json.dumps(redact_value(payload), sort_keys=True, ensure_ascii=False, indent=2))
+    return 0
+
+
+def cmd_cache_verify(cache_key: str) -> int:
+    from football_analytics.pipeline.artifacts import verify_artifact_on_disk
+    from football_analytics.pipeline.cache import entry_dir
+    from football_analytics.pipeline.types import ArtifactRef
+
+    if not _CACHE_KEY_RE.fullmatch(cache_key):
+        print("error: cache-key must be 64 lowercase hex", file=sys.stderr)
+        return 2
+    try:
+        cache_root, policy = _load_cache_roots()
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 2
+    entry = entry_dir(cache_root, cache_key)
+    manifest_path = entry / "cache_manifest.json"
+    arts_dir = entry / "artifacts"
+    if not entry.is_dir() or not manifest_path.is_file() or not arts_dir.is_dir():
+        print("error: cache entry incomplete", file=sys.stderr)
+        return 3
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: manifest unreadable: {type(exc).__name__}", file=sys.stderr)
+        return 3
+    if manifest.get("cache_key") != cache_key:
+        print("error: manifest cache_key mismatch", file=sys.stderr)
+        return 3
+    artifacts = manifest.get("artifacts")
+    if not isinstance(artifacts, list):
+        print("error: manifest artifacts invalid", file=sys.stderr)
+        return 3
+    reject_hl = bool(getattr(policy, "reject_hardlinks", True))
+    try:
+        for item in artifacts:
+            if not isinstance(item, dict):
+                raise ValueError("artifact entry not object")
+            ref = ArtifactRef(
+                logical_name=str(item["logical_name"]),
+                relative_path=str(item["relative_path"]),
+                media_type=str(item["media_type"]),
+                size_bytes=int(item["size_bytes"]),
+                sha256=str(item["sha256"]),
+                contract_name=item.get("contract_name"),
+                contract_version=item.get("contract_version"),
+                schema_fingerprint=item.get("schema_fingerprint"),
+                metadata=item.get("metadata") or {},
+            )
+            verify_artifact_on_disk(ref, root=arts_dir, reject_hardlinks=reject_hl)
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: verify failed: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 3
+    print(json.dumps({"cache_key": cache_key, "status": "PASS"}, sort_keys=True))
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="football-analytics",
-        description="Broadcast football video analytics pipeline (Stage 2C CLI)",
+        description="Broadcast football video analytics pipeline (Stage 2D CLI)",
         epilog="Use 'football-analytics --version' for the package version.",
     )
     # Package --version is handled in main() before parse so it does not
@@ -309,6 +425,22 @@ def build_parser() -> argparse.ArgumentParser:
     p_mig.add_argument("destination", type=Path)
     p_mig.add_argument("--from-version", type=int, required=True)
     p_mig.add_argument("--to-version", type=int, required=True)
+
+    p_proj = sub.add_parser("project", help="Project validation helpers")
+    proj_sub = p_proj.add_subparsers(dest="project_command")
+    p_check = proj_sub.add_parser("check", help="Run unified project checks")
+    p_check.add_argument("--profile", choices=("local", "ci"), default="local")
+    depth = p_check.add_mutually_exclusive_group()
+    depth.add_argument("--quick", action="store_true", default=False)
+    depth.add_argument("--deep", action="store_true", default=False)
+    p_check.add_argument("--json", action="store_true")
+
+    p_cache = sub.add_parser("cache", help="Read-only cache inspect/verify")
+    cache_sub = p_cache.add_subparsers(dest="cache_command")
+    p_ins = cache_sub.add_parser("inspect", help="Print secret-safe cache entry JSON")
+    p_ins.add_argument("cache_key")
+    p_ver = cache_sub.add_parser("verify", help="Verify cache entry artifacts (read-only)")
+    p_ver.add_argument("cache_key")
     return parser
 
 
@@ -358,6 +490,22 @@ def main(argv: Sequence[str] | None = None) -> int:
                 args.to_version,
             )
         parser.parse_args(["contracts", "--help"])
+        return 2
+    if args.command == "project":
+        if args.project_command == "check":
+            return cmd_project_check(
+                profile=str(args.profile),
+                deep=bool(args.deep),
+                as_json=bool(args.json),
+            )
+        parser.parse_args(["project", "--help"])
+        return 2
+    if args.command == "cache":
+        if args.cache_command == "inspect":
+            return cmd_cache_inspect(str(args.cache_key))
+        if args.cache_command == "verify":
+            return cmd_cache_verify(str(args.cache_key))
+        parser.parse_args(["cache", "--help"])
         return 2
     parser.print_help()
     return 2

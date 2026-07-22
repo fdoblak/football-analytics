@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/pipeline/artifact_ref.schema.json",
+  "title": "Artifact reference (Stage 2D)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "logical_name",
+    "relative_path",
+    "media_type",
+    "size_bytes",
+    "sha256"
+  ],
+  "properties": {
+    "logical_name": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
+    },
+    "relative_path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[^/\\\\]([^\\\\]*[^/\\\\])?$"
+    },
+    "media_type": { "type": "string", "minLength": 1 },
+    "size_bytes": { "type": "integer", "minimum": 0 },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "contract_name": { "type": ["string", "null"], "minLength": 1 },
+    "contract_version": { "type": ["integer", "null"], "minimum": 0 },
+    "schema_fingerprint": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

@@ -3,9 +3,9 @@
 Proprietary broadcast football video analytics pipeline (detection → tracking →
 identity → calibration → game state → events → reports/API).
 
-**Current stage:** Stage 2C — Canonical PyArrow data contracts and schema migrations.
-Stages 0–2B (audit, storage, registries, archive, package, GitHub sync, runtime foundation)
-are closed.
+**Current stage:** Stage 2D — foundation complete
+(`PASS_WITH_FINDINGS — STAGE 2 FOUNDATION COMPLETE`).
+Stages 0–2D closed. Milestone tag: **`foundation-v0.1.0`**.
 
 ## Principles
 
@@ -22,11 +22,12 @@ are closed.
 ```text
 src/football_analytics/   # installable package
 scripts/                  # validators & archive tools
-configs/                  # paths, archive, security policies
-schemas/                  # JSON schemas / registries schemas
+configs/                  # paths, archive, security, cache policies
+schemas/                  # JSON schemas / registries / pipeline / cache
 tests/                    # unittest + pytest
 docs/                     # audits, ADRs, stages, development
-requirements/             # base / dev / ai-dev constraints
+requirements/             # base / dev / ci / ai-dev constraints
+.github/workflows/        # least-privilege SHA-pinned CI
 ```
 
 ## Development environment
@@ -45,7 +46,7 @@ Protected CUDA/vision stack pins live in `requirements/constraints-ai-dev.txt`
 
 See [docs/development/environment.md](docs/development/environment.md).
 
-## Working CLI (Stage 2B)
+## Working CLI (Stage 2D)
 
 ```bash
 football-analytics --version
@@ -56,12 +57,21 @@ football-analytics config fingerprint --config configs/project/defaults.yaml
 football-analytics environment show
 football-analytics contracts list
 football-analytics contracts show detections --version 1
+football-analytics project check --profile local --quick
+football-analytics cache inspect <64_hex_cache_key>
+football-analytics cache verify <64_hex_cache_key>
 ```
 
 No `run` / `ingest` / `detect` / `track` / `evaluate` commands yet.
 
-See [docs/development/runtime_foundation.md](docs/development/runtime_foundation.md)
-and [docs/data/canonical_contracts.md](docs/data/canonical_contracts.md).
+Foundation docs:
+
+- [Stage interface](docs/development/stage_interface.md)
+- [Cache design](docs/development/cache_design.md)
+- [Project validation](docs/development/project_validation.md)
+- [CI](docs/development/ci.md)
+- [Runtime foundation](docs/development/runtime_foundation.md)
+- [Canonical contracts](docs/data/canonical_contracts.md)
 
 ## Tests and quality
 
@@ -84,11 +94,15 @@ python scripts/check_registries.py --model-registry model_registry.yaml \
 python scripts/check_secrets.py --root /home/fdoblak/projects/football-analytics
 python scripts/check_runtime_foundation.py --config configs/project/defaults.yaml
 python scripts/check_data_contracts.py --registry configs/data/schema_registry.yaml
+python scripts/check_stage_cache.py --config configs/system/cache_policy.yaml --synthetic
+python scripts/check_ci_workflow.py --workflow .github/workflows/ci.yml --strict
+python scripts/check_project.py --profile local --quick
+# or: football-analytics project check --profile local --quick
 ```
 
 ## Data / models / licenses
 
-- Broadcast datasets are **not** downloaded in Stages 0–2A.
+- Broadcast datasets are **not** downloaded in Stages 0–2D.
 - Demo MP4s inside external clones are not project datasets.
 - Model weights (e.g. `SV_*.pth`) may exist locally; redistribution license is `review_required`.
 - See `docs/legal/license_inventory.md`, `docs/data/data_access_matrix.md`, `THIRD_PARTY_NOTICES.md`.
@@ -104,16 +118,17 @@ Policy: `docs/security/secrets_policy.md`. Use `.env.example` names only; never 
 
 ## Not done yet
 
-- Canonical schemas / foundation contracts (Stage 2B+)
-- Ingest / detection / tracking pipelines
+- Video ingest / probe / normalize / frame timebase (Stage 3)
+- Detection / tracking pipelines
 - Real match evaluation
 - Independent off-device backup
-- `v0.1.0-foundation` tag (only after Stage 2 completes)
+- Cache GC / automatic purge
 
 ## Roadmap / GitHub
 
 - Development workflow: [docs/development/git_github_workflow.md](docs/development/git_github_workflow.md)
-- Stage docs under `docs/stages/`
+- CI notes: [docs/development/ci.md](docs/development/ci.md)
+- Stage docs under `docs/stages/` (see [Stage 2 completion](docs/stages/stage_02_completion.md))
 
 ## License
 

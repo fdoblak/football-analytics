@@ -1,0 +1,22 @@
+# Local content-addressed stage cache policy (Stage 2D).
+# Cache root is resolved from configs/system/paths.yaml → system.cache.
+schema_version: 1
+
+enabled: true
+algorithm: sha256
+layout_version: 1
+
+verify_on_read: true
+verify_on_publish: true
+reject_symlinks: true
+reject_special_files: true
+reject_hardlinks: true
+
+lock_timeout_seconds: 30
+max_manifest_bytes: 1048576
+max_entry_files: 256
+max_entry_bytes: 1073741824
+
+quarantine_corrupt_entries: true
+# Permanent purge/GC is out of scope for Stage 2D.
+automatic_purge: false

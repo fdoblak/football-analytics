@@ -1,6 +1,6 @@
 # Risk Register — football-analytics
 
-**Updated:** 2026-07-22 (Stage 2C)
+**Updated:** 2026-07-22 (Stage 2D)
 
 **Owner default:** Furkan Doblak unless stated otherwise
 
@@ -441,3 +441,157 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | mitigated (foundation) |
 | target_stage | Stage 2C+ |
+
+## RISK-032 — Cache poisoning / corruption
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-032 |
+| description | Tampered or partially written cache entries could restore incorrect artifacts into later stages. |
+| probability | medium |
+| impact | high |
+| mitigation | Verify-on-publish/read; symlink/special/hardlink rejection; recompute cache key; quarantine corrupt entries (no permanent delete). |
+| trigger | Stage 2D cache hit path |
+| owner | Furkan Doblak |
+| status | mitigated (foundation) |
+| target_stage | Stage 2D+ |
+
+## RISK-033 — Cache key omission
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-033 |
+| description | Omitting code/config/input/contract fingerprints from the cache key yields false hits across incompatible executions. |
+| probability | medium |
+| impact | high |
+| mitigation | Canonical key payload includes stage identity, fingerprints, ordered inputs, output contracts; unit tests for byte/schema/config diffs. |
+| trigger | Stage 2D key design |
+| owner | Furkan Doblak |
+| status | mitigated (foundation) |
+| target_stage | Stage 2D+ |
+
+## RISK-034 — Nondeterministic stage caching
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-034 |
+| description | Caching a nondeterministic stage publishes unreproducible outputs as reusable hits. |
+| probability | medium |
+| impact | high |
+| mitigation | Publish only when `deterministic` and `cacheable` and policy/request enable cache; `force_miss` escape hatch. |
+| trigger | Stage 2D execute_stage |
+| owner | Furkan Doblak |
+| status | mitigated (foundation) |
+| target_stage | Stage 2D+ |
+
+## RISK-035 — Concurrent publish race
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-035 |
+| description | Two processes publishing the same key could corrupt the final entry or leave partial trees visible. |
+| probability | medium |
+| impact | high |
+| mitigation | flock per key; stage into temp; atomic rename; if final exists, discard temp and re-verify winner. |
+| trigger | Stage 2D concurrent publish |
+| owner | Furkan Doblak |
+| status | mitigated (foundation) |
+| target_stage | Stage 2D+ |
+
+## RISK-036 — Partial stage output
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-036 |
+| description | Failed or interrupted stage execution leaves partial outputs that look like valid results or get cached. |
+| probability | medium |
+| impact | high |
+| mitigation | Failures return `failed` with no publish; outputs verified before publish; restore refuses overwrite; temp cleanup on publish failure. |
+| trigger | Stage 2D execution |
+| owner | Furkan Doblak |
+| status | mitigated (foundation) |
+| target_stage | Stage 2D+ |
+
+## RISK-037 — CI / local environment drift
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-037 |
+| description | Local `ai-dev` GPU stack and CI lightweight deps diverge, hiding host-only failures or falsely failing CI. |
+| probability | high |
+| impact | medium |
+| mitigation | Separate `requirements/ci.txt`; project-check `ci` vs `local` profiles with explicit host SKIP; local-equivalent CI commands documented. |
+| trigger | Stage 2D CI |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 2D+ |
+
+## RISK-038 — CI supply-chain action references
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-038 |
+| description | Mutable or third-party GitHub Actions could inject untrusted workflow code. |
+| probability | medium |
+| impact | high |
+| mitigation | Official actions only; full 40-hex SHA pins; `check_ci_workflow.py` allowlist + pin enforcement; `contents: read` only. |
+| trigger | Stage 2D workflow |
+| owner | Furkan Doblak |
+| status | mitigated (foundation) |
+| target_stage | Stage 2D+ |
+
+## RISK-039 — Validator false PASS
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-039 |
+| description | Host-only skips or swallowed exceptions could be reported as PASS, masking real failures. |
+| probability | medium |
+| impact | high |
+| mitigation | Explicit SKIP records; per-check isolation to FAIL; strict mode promotes WARN; CI profile must not PASS host probes. |
+| trigger | Stage 2D project check |
+| owner | Furkan Doblak |
+| status | mitigated (foundation) |
+| target_stage | Stage 2D+ |
+
+## RISK-040 — Validation subprocess timeout
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-040 |
+| description | Hung validators inside project check can stall CI/local gates indefinitely. |
+| probability | medium |
+| impact | medium |
+| mitigation | `shell=False`, 120s subprocess timeout, bounded capture; hung check recorded as FAIL. |
+| trigger | Stage 2D project check |
+| owner | Furkan Doblak |
+| status | mitigated (foundation) |
+| target_stage | Stage 2D+ |
+
+## RISK-041 — Cache disk growth / no GC
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-041 |
+| description | Content-addressed cache grows without bound because automatic purge/GC is disabled. |
+| probability | high |
+| impact | medium |
+| mitigation | `automatic_purge: false` by design; publish-time size/file caps; manual operator cleanup later; document limitation. |
+| trigger | Stage 2D cache use |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 3+ (policy) |
+
+## RISK-042 — GitHub API proxy / remote CI visibility
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-042 |
+| description | Cursor Agent `api.github.com` proxy 403 prevents verifying remote GitHub Actions run status; green remote CI must not be invented. |
+| probability | high |
+| impact | medium |
+| mitigation | Classify remote CI status as `UNVERIFIABLE_AGENT_API_CONTEXT`. Rely on local-equivalent commands and the workflow YAML validator. Use Git smart HTTPS for push only. |
+| trigger | Stage 2D push / CI |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 2D+ |

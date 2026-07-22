@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/cache/cache_manifest.schema.json",
+  "title": "Cache manifest (Stage 2D)",
+  "description": "Content-addressed cache entry integrity record. Distinct from stage_result and run_manifest.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "cache_key",
+    "layout_version",
+    "stage_name",
+    "stage_version",
+    "config_fingerprint",
+    "artifacts",
+    "created_at_utc",
+    "source_run_id"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "cache_key": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "layout_version": { "type": "integer", "const": 1 },
+    "stage_name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{1,63}$"
+    },
+    "stage_version": { "type": "integer", "minimum": 1 },
+    "config_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "artifacts": {
+      "type": "array",
+      "items": { "$ref": "../pipeline/artifact_ref.schema.json" }
+    },
+    "created_at_utc": { "type": "string", "minLength": 1 },
+    "source_run_id": {
+      "type": "string",
+      "pattern": "^run_[0-9]{8}T[0-9]{12}Z_[a-f0-9]{12}$"
+    }
+  }
+}

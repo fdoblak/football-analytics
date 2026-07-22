@@ -38,6 +38,8 @@ outputs/
 environment_checks/
 foundation_checks/
 data_contract_checks/
+project_checks/
+stage_cache_checks/
 
 # --- model / data / video / array artifacts (default deny) ---
 *.pt

@@ -1,6 +1,9 @@
-# Stage 2C — ship authoritative contract specs with the sdist.
+# Stage 2 — ship authoritative specs with the sdist.
 graft configs/data
+graft configs/system
 graft schemas/data
+graft schemas/pipeline
+graft schemas/cache
 include LICENSE
 include README.md
 global-exclude *.pyc __pycache__ .DS_Store

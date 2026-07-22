@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/pipeline/stage_request.schema.json",
+  "title": "Stage request (Stage 2D)",
+  "description": "Single-stage call contract. Distinct from run_context (run init) and run_manifest (inventory).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "stage_identity",
+    "config_fingerprint",
+    "compatibility_fingerprint",
+    "inputs",
+    "working_directory",
+    "output_directory",
+    "requested_at_utc",
+    "cache_policy_enabled"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "pattern": "^run_[0-9]{8}T[0-9]{12}Z_[a-f0-9]{12}$"
+    },
+    "stage_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "version",
+        "code_fingerprint",
+        "input_contracts",
+        "output_contracts",
+        "deterministic",
+        "cacheable"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{1,63}$"
+        },
+        "version": { "type": "integer", "minimum": 1 },
+        "code_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "input_contracts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "version"],
+            "properties": {
+              "name": { "type": "string", "minLength": 1 },
+              "version": { "type": "integer", "minimum": 0 }
+            }
+          }
+        },
+        "output_contracts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "version"],
+            "properties": {
+              "name": { "type": "string", "minLength": 1 },
+              "version": { "type": "integer", "minimum": 0 }
+            }
+          }
+        },
+        "deterministic": { "type": "boolean" },
+        "cacheable": { "type": "boolean" }
+      }
+    },
+    "config_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "compatibility_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "artifact_ref.schema.json"
+      }
+    },
+    "working_directory": { "type": "string", "minLength": 1 },
+    "output_directory": { "type": "string", "minLength": 1 },
+    "requested_at_utc": { "type": "string", "minLength": 1 },
+    "cache_policy_enabled": { "type": "boolean" }
+  }
+}
