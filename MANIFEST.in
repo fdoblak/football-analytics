@@ -6,7 +6,9 @@ graft schemas/pipeline
 graft schemas/cache
 graft configs/product
 graft configs/metrics
+graft configs/video
 graft schemas/metrics
+graft schemas/video
 include AGENTS.md
 include LICENSE
 include README.md

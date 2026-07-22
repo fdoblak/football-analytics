@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/video/normalize_plan.schema.json",
+  "title": "Video normalize plan (Stage 3A)",
+  "description": "Declarative normalization plan only. No FFmpeg execution in Stage 3A.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "plan_id",
+    "source_id",
+    "source_sha256",
+    "policy_version",
+    "required",
+    "reasons",
+    "target_container",
+    "target_video_codec",
+    "target_audio_policy",
+    "target_pixel_format",
+    "target_width",
+    "target_height",
+    "resize_policy",
+    "target_frame_rate",
+    "frame_rate_policy",
+    "target_time_base",
+    "rotation_policy",
+    "sar_policy",
+    "audio_policy",
+    "copy_metadata_policy",
+    "estimated_output_path",
+    "overwrite_policy",
+    "plan_fingerprint"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "plan_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "source_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "source_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "policy_version": { "type": "string", "minLength": 1 },
+    "required": { "type": "boolean" },
+    "reasons": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 1
+    },
+    "target_container": { "type": "string", "minLength": 1 },
+    "target_video_codec": { "type": "string", "minLength": 1 },
+    "target_audio_policy": {
+      "type": "string",
+      "enum": ["copy", "transcode", "drop", "copy_if_present_else_drop"]
+    },
+    "target_pixel_format": { "type": "string", "minLength": 1 },
+    "target_width": { "type": ["integer", "null"], "minimum": 1 },
+    "target_height": { "type": ["integer", "null"], "minimum": 1 },
+    "resize_policy": {
+      "type": "string",
+      "enum": ["none", "fit_within_keep_aspect", "exact_forbidden_distortion"]
+    },
+    "target_frame_rate": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["numerator", "denominator"],
+      "properties": {
+        "numerator": { "type": "integer" },
+        "denominator": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "frame_rate_policy": {
+      "type": "string",
+      "enum": ["preserve", "force_cfr", "preserve_unless_explicit_cfr"]
+    },
+    "target_time_base": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["numerator", "denominator"],
+      "properties": {
+        "numerator": { "type": "integer" },
+        "denominator": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "rotation_policy": {
+      "type": "string",
+      "enum": ["preserve_metadata", "apply_metadata_once", "none"]
+    },
+    "sar_policy": {
+      "type": "string",
+      "enum": ["preserve", "force_1_1", "normalize_display"]
+    },
+    "audio_policy": {
+      "type": "string",
+      "enum": ["copy", "transcode", "drop", "copy_if_present_else_drop"]
+    },
+    "copy_metadata_policy": {
+      "type": "string",
+      "enum": ["copy_safe", "strip_all", "copy_timing_only"]
+    },
+    "estimated_output_path": { "type": "string", "minLength": 1 },
+    "overwrite_policy": { "type": "boolean" },
+    "plan_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  }
+}

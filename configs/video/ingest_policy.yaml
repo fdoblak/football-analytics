@@ -1,0 +1,99 @@
+# Safe local video ingest policy (Stage 3A).
+# Contracts and validation only — no production ingest execution.
+schema_version: 1
+policy_version: video_ingest_policy_v1
+
+allowed_source_kinds:
+  - user_local_video
+  - synthetic_fixture
+  - project_fixture
+
+allowed_file_extensions:
+  - .mp4
+  - .mkv
+  - .mov
+  - .webm
+
+allowed_container_names:
+  - mp4
+  - mov
+  - matroska
+  - webm
+  - mpegts
+
+allowed_video_codecs:
+  - h264
+  - hevc
+  - vp9
+  - av1
+  - mpeg4
+  - mpeg2video
+
+allowed_audio_codecs:
+  - aac
+  - opus
+  - mp3
+  - pcm_s16le
+  - ac3
+
+allowed_pixel_formats:
+  - yuv420p
+  - yuv422p
+  - yuv444p
+  - nv12
+  - yuvj420p
+
+# ~8 GiB — full-match capable, not unlimited
+maximum_source_size_bytes: 8589934592
+# 0.1 s minimum; ~4 h maximum
+minimum_duration_us: 100000
+maximum_duration_us: 14400000000
+
+minimum_width: 160
+minimum_height: 120
+maximum_width: 7680
+maximum_height: 4320
+
+network_sources_allowed: false
+symlinks_allowed: false
+special_files_allowed: false
+overwrite_allowed: false
+
+hash_algorithm: sha256
+canonical_time_unit: microseconds
+
+unknown_frame_count_allowed: true
+unknown_duration_allowed: true
+
+rotation_policy:
+  allowed_degrees: [0, 90, 180, 270, -90, -180, -270]
+  normalize_to: [0, 90, 180, 270]
+  double_apply_forbidden: true
+
+stream_selection_policy:
+  prefer_largest_resolution: true
+  reject_attached_picture_as_primary: true
+  require_video_stream: true
+  audio_optional: true
+  deterministic_tie_break: lowest_stream_index
+
+fixture_policy:
+  allowed_kinds: [synthetic_fixture, project_fixture]
+  max_duration_us: 5000000
+  max_width: 320
+  max_height: 240
+  runtime_root: /home/fdoblak/workspace/video_contract_checks
+  git_tracked_forbidden: true
+  network_forbidden: true
+
+normalization_defaults:
+  target_container: mp4
+  target_video_codec: h264
+  target_pixel_format: yuv420p
+  target_audio_policy: copy_if_present_else_drop
+  resize_policy: fit_within_keep_aspect
+  frame_rate_policy: preserve_unless_explicit_cfr
+  rotation_policy: apply_metadata_once
+  sar_policy: preserve
+  overwrite_policy: false
+  inplace_forbidden: true

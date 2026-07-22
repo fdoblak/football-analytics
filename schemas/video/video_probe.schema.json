@@ -1,0 +1,209 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/video/video_probe.schema.json",
+  "title": "Video probe metadata (Stage 3A)",
+  "description": "Deterministic FFprobe-shaped metadata contract. Rational rates use numerator/denominator; unknown duration/frame_count stay null. Stage 3A does not run FFprobe.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_id",
+    "source_sha256",
+    "probe_tool",
+    "probe_tool_version",
+    "probed_at_utc",
+    "container",
+    "format_name",
+    "duration_us",
+    "start_time_us",
+    "bit_rate_bps",
+    "file_size_bytes",
+    "streams",
+    "selected_video_stream_index",
+    "selected_audio_stream_index",
+    "warnings"
+  ],
+  "definitions": {
+    "rational": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["numerator", "denominator"],
+      "properties": {
+        "numerator": { "type": "integer" },
+        "denominator": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "disposition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["default", "attached_pic", "forced"],
+      "properties": {
+        "default": { "type": "boolean" },
+        "attached_pic": { "type": "boolean" },
+        "forced": { "type": "boolean" }
+      }
+    },
+    "video_stream": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stream_index",
+        "codec_type",
+        "codec_name",
+        "codec_long_name",
+        "profile",
+        "pixel_format",
+        "width",
+        "height",
+        "coded_width",
+        "coded_height",
+        "sample_aspect_ratio",
+        "display_aspect_ratio",
+        "rotation_degrees",
+        "time_base",
+        "codec_time_base",
+        "r_frame_rate",
+        "avg_frame_rate",
+        "nominal_frame_rate",
+        "frame_rate_mode",
+        "start_pts",
+        "duration_ts",
+        "duration_us",
+        "frame_count",
+        "frame_count_source",
+        "bit_rate_bps",
+        "color_range",
+        "color_space",
+        "color_transfer",
+        "color_primaries",
+        "field_order",
+        "disposition"
+      ],
+      "properties": {
+        "stream_index": { "type": "integer", "minimum": 0 },
+        "codec_type": { "type": "string", "const": "video" },
+        "codec_name": { "type": "string", "minLength": 1 },
+        "codec_long_name": { "type": ["string", "null"] },
+        "profile": { "type": ["string", "null"] },
+        "pixel_format": { "type": ["string", "null"] },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "coded_width": { "type": ["integer", "null"], "minimum": 1 },
+        "coded_height": { "type": ["integer", "null"], "minimum": 1 },
+        "sample_aspect_ratio": { "$ref": "#/definitions/rational" },
+        "display_aspect_ratio": { "$ref": "#/definitions/rational" },
+        "rotation_degrees": {
+          "type": "integer",
+          "enum": [0, 90, 180, 270]
+        },
+        "time_base": { "$ref": "#/definitions/rational" },
+        "codec_time_base": {
+          "oneOf": [
+            { "$ref": "#/definitions/rational" },
+            { "type": "null" }
+          ]
+        },
+        "r_frame_rate": { "$ref": "#/definitions/rational" },
+        "avg_frame_rate": { "$ref": "#/definitions/rational" },
+        "nominal_frame_rate": {
+          "oneOf": [
+            { "$ref": "#/definitions/rational" },
+            { "type": "null" }
+          ]
+        },
+        "frame_rate_mode": {
+          "type": "string",
+          "enum": ["cfr", "vfr", "unknown"]
+        },
+        "start_pts": { "type": ["integer", "null"] },
+        "duration_ts": { "type": ["integer", "null"], "minimum": 0 },
+        "duration_us": { "type": ["integer", "null"], "minimum": 0 },
+        "frame_count": { "type": ["integer", "null"], "minimum": 0 },
+        "frame_count_source": {
+          "type": "string",
+          "enum": ["nb_frames", "estimated", "unknown"]
+        },
+        "bit_rate_bps": { "type": ["integer", "null"], "minimum": 0 },
+        "color_range": { "type": ["string", "null"] },
+        "color_space": { "type": ["string", "null"] },
+        "color_transfer": { "type": ["string", "null"] },
+        "color_primaries": { "type": ["string", "null"] },
+        "field_order": { "type": ["string", "null"] },
+        "disposition": { "$ref": "#/definitions/disposition" }
+      }
+    },
+    "audio_stream": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stream_index",
+        "codec_type",
+        "codec_name",
+        "sample_rate_hz",
+        "channels",
+        "channel_layout",
+        "time_base",
+        "duration_us",
+        "bit_rate_bps",
+        "disposition"
+      ],
+      "properties": {
+        "stream_index": { "type": "integer", "minimum": 0 },
+        "codec_type": { "type": "string", "const": "audio" },
+        "codec_name": { "type": "string", "minLength": 1 },
+        "sample_rate_hz": { "type": ["integer", "null"], "minimum": 1 },
+        "channels": { "type": ["integer", "null"], "minimum": 1 },
+        "channel_layout": { "type": ["string", "null"] },
+        "time_base": { "$ref": "#/definitions/rational" },
+        "duration_us": { "type": ["integer", "null"], "minimum": 0 },
+        "bit_rate_bps": { "type": ["integer", "null"], "minimum": 0 },
+        "disposition": { "$ref": "#/definitions/disposition" }
+      }
+    }
+  },
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "source_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "source_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "probe_tool": { "type": "string", "enum": ["ffprobe", "synthetic_metadata"] },
+    "probe_tool_version": { "type": "string", "minLength": 1 },
+    "probed_at_utc": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,6})?Z$"
+    },
+    "container": { "type": ["string", "null"], "minLength": 1 },
+    "format_name": { "type": ["string", "null"], "minLength": 1 },
+    "duration_us": { "type": ["integer", "null"], "minimum": 0 },
+    "start_time_us": { "type": ["integer", "null"] },
+    "bit_rate_bps": { "type": ["integer", "null"], "minimum": 0 },
+    "file_size_bytes": { "type": "integer", "minimum": 0 },
+    "streams": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          { "$ref": "#/definitions/video_stream" },
+          { "$ref": "#/definitions/audio_stream" }
+        ]
+      }
+    },
+    "selected_video_stream_index": { "type": "integer", "minimum": 0 },
+    "selected_audio_stream_index": { "type": ["integer", "null"], "minimum": 0 },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message", "severity"],
+        "properties": {
+          "code": { "type": "string", "minLength": 1 },
+          "message": { "type": "string" },
+          "severity": {
+            "type": "string",
+            "enum": ["warning", "unsupported", "hard_failure"]
+          }
+        }
+      }
+    }
+  }
+}
