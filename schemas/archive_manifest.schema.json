@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/archive_manifest.schema.json",
+  "title": "Archive manifest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "archive_id",
+    "run_id",
+    "created_at",
+    "source_run_path",
+    "archive_path",
+    "archive_backend",
+    "failure_domain",
+    "independent_backup",
+    "checksum_algorithm",
+    "source_manifest_sha256",
+    "total_files",
+    "total_bytes",
+    "files",
+    "verification",
+    "tool_version"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "archive_id": { "type": "string" },
+    "run_id": { "type": "string" },
+    "created_at": { "type": "string" },
+    "source_run_path": { "type": "string" },
+    "archive_path": { "type": "string" },
+    "archive_backend": { "type": "string" },
+    "failure_domain": { "type": "string" },
+    "independent_backup": { "type": "boolean", "const": false },
+    "checksum_algorithm": { "type": "string", "const": "sha256" },
+    "source_manifest_sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" },
+    "total_files": { "type": "integer", "minimum": 0 },
+    "total_bytes": { "type": "integer", "minimum": 0 },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["relative_path", "size_bytes", "sha256", "file_type"],
+        "properties": {
+          "relative_path": { "type": "string", "minLength": 1 },
+          "size_bytes": { "type": "integer", "minimum": 0 },
+          "sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" },
+          "file_type": { "type": "string", "const": "regular" }
+        }
+      }
+    },
+    "verification": { "type": "object" },
+    "tool_version": { "type": "string" }
+  }
+}

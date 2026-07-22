@@ -1,0 +1,39 @@
+# Stage 1D archive / cleanup policy
+schema_version: 1
+
+paths:
+  runs_root: /home/fdoblak/workspace/runs
+  archive_root: /home/fdoblak/football_data/experiments_archive
+  quarantine_root: /home/fdoblak/workspace/quarantine
+  workspace_root: /home/fdoblak/workspace
+  current_symlink: /home/fdoblak/workspace/current
+  planned_external_archive_root: /mnt/d/football_data/experiments_archive
+
+policy:
+  active_archive_backend: wsl_local
+  failure_domain: same_wsl_vhdx
+  independent_backup: false
+  checksum_algorithm: sha256
+  require_completed_status: true
+  require_archive_verification: true
+  reject_symlinks: true
+  reject_special_files: true
+  reject_path_escape: true
+  cleanup_mode: quarantine
+  quarantine_retention_days: 30
+  minimum_archive_free_bytes: 21474836480
+  # Archive is copy+verify. Cleanup moves source to quarantine (no permanent delete).
+  # Quarantine purge is NOT automatic in Stage 1D.
+  # Planned D: archive is inactive until verified.
+
+run_id:
+  pattern: "^run_[0-9]{8}_[0-9]{6}_[a-z0-9]{6,12}$"
+
+required_source_files:
+  - run_manifest.json
+
+tool_version: "1.0.0-stage1d"
+
+notes: >
+  Active archive shares the WSL VHDX failure domain with workspace runs.
+  It is a verified local archive, not an independent or off-device backup.

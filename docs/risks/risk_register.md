@@ -1,6 +1,6 @@
 # Risk Register — football-analytics
 
-**Updated:** 2026-07-22 (Stage 0)
+**Updated:** 2026-07-22 (Stage 1D)
 
 **Owner default:** Furkan Doblak unless stated otherwise
 
@@ -33,7 +33,7 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | mitigation | Confirm Stage 1 storage design; never delete sources; checksummed archive protocol; do not invent mounts in Stage 0. |
 | trigger | `/mnt/d` missing (verified 2026-07-22) |
 | owner | Furkan Doblak |
-| status | open — **Stage 1 blocker** |
+| status | open — **storage availability finding** (local backend active; D: still unverified) |
 | target_stage | Stage 1 |
 
 ## RISK-003 — Broadcast occlusion and off-camera players
@@ -223,11 +223,39 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | Field | Value |
 |-------|-------|
 | risk_id | RISK-016 |
-| description | Active storage `/home/fdoblak/football_data` lives on WSL ext4 (`/dev/sdd`) inside the Windows C: VHDX. Large datasets/videos can fill C: unexpectedly. D: archive backend remains `planned_unverified`. |
+| description | Active storage `/home/fdoblak/football_data` and workspace runs live on WSL ext4 inside the Windows C: VHDX. Large archives/datasets can fill C:. Active archive shares this failure domain — it is a verified local archive, **not** an independent/off-device backup. D: remains `planned_unverified`. |
 | probability | medium |
 | impact | high |
-| mitigation | Free-space gate (warn below 100 GiB); per-run size telemetry; when D: is verified, checksummed migration to `/mnt/d/football_data` then switch active backend (ADR-0002). |
-| trigger | Stage 1A-R1 selected `WSL_LOCAL_PRIMARY_D_UNVERIFIED` |
+| mitigation | Free-space gate on archive; full archive verification + restore smoke; quarantine instead of delete; checksummed migration when D: verified; release-gate real backup test on independent media. |
+| trigger | Stage 1A-R1 `WSL_LOCAL_PRIMARY_D_UNVERIFIED`; Stage 1D archive policy |
 | owner | Furkan Doblak |
 | status | open — accepted finding while local backend is active |
-| target_stage | Stage 1D / operations |
+| target_stage | operations / post-1D migration |
+
+## RISK-017 — Quarantine retention without automatic purge
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-017 |
+| description | Cleanup moves runs to `workspace/quarantine` with retention_days recorded but Stage 1D does not auto-purge. Quarantine can grow. |
+| probability | medium |
+| impact | medium |
+| mitigation | Monitor quarantine size; future explicit purge tool with confirmations; never silent `rm -rf`. |
+| trigger | Stage 1D cleanup design |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | post-1D operations |
+
+## RISK-018 — Planned D: archive still unverified
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-018 |
+| description | `/mnt/d/football_data` archive path is configured as planned only. Tools must not treat it as active. |
+| probability | high (current) |
+| impact | high if operators assume DR coverage |
+| mitigation | `independent_backup: false`; docs/ADR-0003; no `/mnt/d` writes until verified mount + checksum migration. |
+| trigger | Stage 1A–1D |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | when D: interop verified |

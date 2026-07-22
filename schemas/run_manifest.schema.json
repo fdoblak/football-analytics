@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/run_manifest.schema.json",
+  "title": "Minimal run manifest (Stage 1D forward-compatible)",
+  "type": "object",
+  "required": ["schema_version", "run_id", "status", "created_at"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "run_id": { "type": "string", "minLength": 1 },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "running", "failed", "completed", "archived"]
+    },
+    "created_at": { "type": "string" },
+    "completed_at": { "type": ["string", "null"] },
+    "input": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "source": { "type": "string" },
+        "sha256": { "type": ["string", "null"] }
+      }
+    },
+    "stages": { "type": "object" },
+    "required_artifacts": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "notes": { "type": "string" },
+    "fixture_marker": { "type": ["string", "null"] }
+  }
+}
