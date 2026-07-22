@@ -3,8 +3,9 @@
 Proprietary broadcast football video analytics pipeline (detection → tracking →
 identity → calibration → game state → events → reports/API).
 
-**Current stage:** Stage 2B — Run identity, config, logging, hash, and environment records.
-Stages 0–2A (audit, storage, registries, archive, package, private GitHub sync) are closed.
+**Current stage:** Stage 2C — Canonical PyArrow data contracts and schema migrations.
+Stages 0–2B (audit, storage, registries, archive, package, GitHub sync, runtime foundation)
+are closed.
 
 ## Principles
 
@@ -53,12 +54,14 @@ football-analytics run-id
 football-analytics config validate --config configs/project/defaults.yaml
 football-analytics config fingerprint --config configs/project/defaults.yaml
 football-analytics environment show
-python -m football_analytics --version
+football-analytics contracts list
+football-analytics contracts show detections --version 1
 ```
 
 No `run` / `ingest` / `detect` / `track` / `evaluate` commands yet.
 
-See [docs/development/runtime_foundation.md](docs/development/runtime_foundation.md).
+See [docs/development/runtime_foundation.md](docs/development/runtime_foundation.md)
+and [docs/data/canonical_contracts.md](docs/data/canonical_contracts.md).
 
 ## Tests and quality
 
@@ -80,6 +83,7 @@ python scripts/check_registries.py --model-registry model_registry.yaml \
   --verify-files --verify-repos
 python scripts/check_secrets.py --root /home/fdoblak/projects/football-analytics
 python scripts/check_runtime_foundation.py --config configs/project/defaults.yaml
+python scripts/check_data_contracts.py --registry configs/data/schema_registry.yaml
 ```
 
 ## Data / models / licenses

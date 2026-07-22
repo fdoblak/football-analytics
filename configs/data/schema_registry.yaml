@@ -1,0 +1,90 @@
+# Canonical Arrow/Parquet schema registry (Stage 2C)
+registry_version: 1
+
+contracts:
+  videos:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/videos.json
+    migration_edges: []
+
+  frames:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/frames.json
+    migration_edges: []
+
+  detections:
+    current_version: 1
+    supported_versions: [0, 1]
+    status: active
+    versions:
+      0:
+        spec_path: schemas/data/v0/detections.json
+        note: legacy_compatibility_fixture
+      1:
+        spec_path: schemas/data/v1/detections.json
+    migration_edges:
+      - from: 0
+        to: 1
+        migration_id: detections_0_to_1
+
+  track_observations:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/track_observations.json
+    migration_edges: []
+
+  track_summaries:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/track_summaries.json
+    migration_edges: []
+
+  calibrations:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/calibrations.json
+    migration_edges: []
+
+  team_assignments:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/team_assignments.json
+    migration_edges: []
+
+  jersey_observations:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/jersey_observations.json
+    migration_edges: []
+
+  events:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/events.json
+    migration_edges: []

@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/data/schema_registry.schema.json",
+  "title": "Schema registry (Stage 2C)",
+  "type": "object",
+  "required": ["registry_version", "contracts"],
+  "additionalProperties": false,
+  "properties": {
+    "registry_version": { "type": "integer", "const": 1 },
+    "contracts": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "current_version",
+          "supported_versions",
+          "status",
+          "versions",
+          "migration_edges"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "current_version": { "type": "integer", "minimum": 0 },
+          "supported_versions": {
+            "type": "array",
+            "items": { "type": "integer", "minimum": 0 },
+            "minItems": 1
+          },
+          "status": { "type": "string", "enum": ["active", "deprecated", "experimental"] },
+          "versions": {
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": {
+              "type": "object",
+              "required": ["spec_path"],
+              "properties": {
+                "spec_path": { "type": "string", "minLength": 1 },
+                "note": { "type": "string" }
+              }
+            }
+          },
+          "migration_edges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["from", "to", "migration_id"],
+              "additionalProperties": false,
+              "properties": {
+                "from": { "type": "integer", "minimum": 0 },
+                "to": { "type": "integer", "minimum": 0 },
+                "migration_id": { "type": "string", "minLength": 1 }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

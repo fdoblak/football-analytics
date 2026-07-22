@@ -1,0 +1,140 @@
+{
+  "contract_name": "detections",
+  "version": 0,
+  "description": "Legacy compatibility fixture contract (xywh). Not historical production data.",
+  "fields": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "video_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "frame_index",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "detection_id",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "class_name",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "confidence",
+      "type": "float32",
+      "nullable": false
+    },
+    {
+      "name": "bbox_x",
+      "type": "float32",
+      "nullable": false
+    },
+    {
+      "name": "bbox_y",
+      "type": "float32",
+      "nullable": false
+    },
+    {
+      "name": "bbox_width",
+      "type": "float32",
+      "nullable": false
+    },
+    {
+      "name": "bbox_height",
+      "type": "float32",
+      "nullable": false
+    },
+    {
+      "name": "model_id",
+      "type": "string",
+      "nullable": false
+    }
+  ],
+  "primary_key": [
+    "run_id",
+    "video_id",
+    "frame_index",
+    "detection_id"
+  ],
+  "foreign_keys": [],
+  "partition_by": [
+    "run_id",
+    "video_id"
+  ],
+  "sort_by": [
+    "run_id",
+    "video_id",
+    "frame_index",
+    "detection_id"
+  ],
+  "semantic_rules": [
+    {
+      "id": "run_id_format",
+      "rule": "run_id_stage2b"
+    },
+    {
+      "id": "video_id_safe",
+      "rule": "safe_identifier",
+      "field": "video_id"
+    },
+    {
+      "id": "frame_ge0",
+      "rule": "int_ge",
+      "field": "frame_index",
+      "value": 0
+    },
+    {
+      "id": "det_id_ge0",
+      "rule": "int_ge",
+      "field": "detection_id",
+      "value": 0
+    },
+    {
+      "id": "conf_unit",
+      "rule": "float_unit_interval",
+      "field": "confidence"
+    },
+    {
+      "id": "bbox_wh_positive",
+      "rule": "float_gt",
+      "fields": [
+        "bbox_width",
+        "bbox_height"
+      ],
+      "value": 0
+    },
+    {
+      "id": "bbox_xy_ge0",
+      "rule": "float_ge",
+      "fields": [
+        "bbox_x",
+        "bbox_y"
+      ],
+      "value": 0
+    },
+    {
+      "id": "class_name_nonempty",
+      "rule": "nonempty_string",
+      "field": "class_name"
+    },
+    {
+      "id": "model_id_safe",
+      "rule": "safe_identifier",
+      "field": "model_id"
+    }
+  ],
+  "table_metadata": {
+    "legacy_fixture": "true",
+    "bbox_format": "xywh",
+    "coordinate_space": "image_pixels"
+  }
+}

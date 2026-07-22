@@ -1,0 +1,168 @@
+{
+  "contract_name": "calibrations",
+  "version": 1,
+  "description": "Per-frame pitch calibration (homography row-major 3x3).",
+  "fields": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "video_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "frame_index",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "calibration_id",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "method",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "is_valid",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "confidence",
+      "type": "float32",
+      "nullable": true
+    },
+    {
+      "name": "homography_image_to_pitch",
+      "type": "fixed_size_list",
+      "nullable": true,
+      "value_type": "float64",
+      "list_size": 9
+    },
+    {
+      "name": "pitch_length_m",
+      "type": "float32",
+      "nullable": false
+    },
+    {
+      "name": "pitch_width_m",
+      "type": "float32",
+      "nullable": false
+    },
+    {
+      "name": "reprojection_error_px",
+      "type": "float32",
+      "nullable": true
+    },
+    {
+      "name": "quality_flags",
+      "type": "list",
+      "nullable": false,
+      "value_type": "string"
+    }
+  ],
+  "primary_key": [
+    "run_id",
+    "video_id",
+    "frame_index",
+    "calibration_id"
+  ],
+  "foreign_keys": [
+    {
+      "fields": [
+        "run_id",
+        "video_id",
+        "frame_index"
+      ],
+      "ref_contract": "frames",
+      "ref_fields": [
+        "run_id",
+        "video_id",
+        "frame_index"
+      ],
+      "ref_version": 1
+    }
+  ],
+  "partition_by": [
+    "run_id",
+    "video_id"
+  ],
+  "sort_by": [
+    "run_id",
+    "video_id",
+    "frame_index",
+    "calibration_id"
+  ],
+  "semantic_rules": [
+    {
+      "id": "run_id_format",
+      "rule": "run_id_stage2b"
+    },
+    {
+      "id": "video_id_safe",
+      "rule": "safe_identifier",
+      "field": "video_id"
+    },
+    {
+      "id": "frame_ge0",
+      "rule": "int_ge",
+      "field": "frame_index",
+      "value": 0
+    },
+    {
+      "id": "cal_id_ge0",
+      "rule": "int_ge",
+      "field": "calibration_id",
+      "value": 0
+    },
+    {
+      "id": "method_nonempty",
+      "rule": "nonempty_string",
+      "field": "method"
+    },
+    {
+      "id": "conf_unit_or_null",
+      "rule": "float_unit_interval_or_null",
+      "field": "confidence"
+    },
+    {
+      "id": "pitch_positive",
+      "rule": "float_gt",
+      "fields": [
+        "pitch_length_m",
+        "pitch_width_m"
+      ],
+      "value": 0
+    },
+    {
+      "id": "reproj_ge0",
+      "rule": "float_ge_or_null",
+      "field": "reprojection_error_px",
+      "value": 0
+    },
+    {
+      "id": "valid_requires_H",
+      "rule": "calibration_valid_homography"
+    },
+    {
+      "id": "H_finite",
+      "rule": "fixed_list_finite_or_null",
+      "field": "homography_image_to_pitch"
+    },
+    {
+      "id": "quality_no_null_items",
+      "rule": "list_no_null_items",
+      "field": "quality_flags"
+    }
+  ],
+  "table_metadata": {
+    "homography_layout": "row_major_3x3",
+    "homography_maps": "image_to_pitch"
+  }
+}

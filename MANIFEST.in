@@ -1,0 +1,6 @@
+# Stage 2C — ship authoritative contract specs with the sdist.
+graft configs/data
+graft schemas/data
+include LICENSE
+include README.md
+global-exclude *.pyc __pycache__ .DS_Store

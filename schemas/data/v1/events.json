@@ -1,0 +1,165 @@
+{
+  "contract_name": "events",
+  "version": 1,
+  "description": "Temporal football events with optional actor tracks.",
+  "fields": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "video_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "event_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "event_type",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "start_frame_index",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "end_frame_index",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "start_time_us",
+      "type": "int64",
+      "nullable": true
+    },
+    {
+      "name": "end_time_us",
+      "type": "int64",
+      "nullable": true
+    },
+    {
+      "name": "confidence",
+      "type": "float32",
+      "nullable": true
+    },
+    {
+      "name": "team_id",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "actor_track_ids",
+      "type": "list",
+      "nullable": false,
+      "value_type": "int64"
+    },
+    {
+      "name": "source",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "attributes_json",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "quality_flags",
+      "type": "list",
+      "nullable": false,
+      "value_type": "string"
+    }
+  ],
+  "primary_key": [
+    "run_id",
+    "video_id",
+    "event_id"
+  ],
+  "foreign_keys": [],
+  "partition_by": [
+    "run_id",
+    "video_id"
+  ],
+  "sort_by": [
+    "run_id",
+    "video_id",
+    "start_frame_index",
+    "event_id"
+  ],
+  "semantic_rules": [
+    {
+      "id": "run_id_format",
+      "rule": "run_id_stage2b"
+    },
+    {
+      "id": "video_id_safe",
+      "rule": "safe_identifier",
+      "field": "video_id"
+    },
+    {
+      "id": "event_id_safe",
+      "rule": "safe_identifier",
+      "field": "event_id"
+    },
+    {
+      "id": "event_type_safe",
+      "rule": "safe_identifier",
+      "field": "event_type"
+    },
+    {
+      "id": "frame_interval",
+      "rule": "int_le_pair",
+      "left": "start_frame_index",
+      "right": "end_frame_index"
+    },
+    {
+      "id": "time_interval",
+      "rule": "time_interval_or_null"
+    },
+    {
+      "id": "conf_unit_or_null",
+      "rule": "float_unit_interval_or_null",
+      "field": "confidence"
+    },
+    {
+      "id": "team_safe_or_null",
+      "rule": "safe_identifier_or_null",
+      "field": "team_id"
+    },
+    {
+      "id": "actors",
+      "rule": "actor_track_ids"
+    },
+    {
+      "id": "source_enum",
+      "rule": "enum",
+      "field": "source",
+      "values": [
+        "model",
+        "rule",
+        "manual",
+        "imported"
+      ]
+    },
+    {
+      "id": "attributes_json",
+      "rule": "canonical_json_object_or_null",
+      "field": "attributes_json"
+    },
+    {
+      "id": "quality_no_null_items",
+      "rule": "list_no_null_items",
+      "field": "quality_flags"
+    }
+  ],
+  "table_metadata": {
+    "time_unit": "microseconds",
+    "time_domain": "video_relative"
+  }
+}

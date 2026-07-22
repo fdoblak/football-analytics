@@ -1,0 +1,123 @@
+{
+  "contract_name": "frames",
+  "version": 1,
+  "description": "Per-frame timeline within a video.",
+  "fields": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "video_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "frame_index",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "pts",
+      "type": "int64",
+      "nullable": true
+    },
+    {
+      "name": "video_time_us",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "duration_us",
+      "type": "int64",
+      "nullable": true
+    },
+    {
+      "name": "is_key_frame",
+      "type": "bool",
+      "nullable": true
+    },
+    {
+      "name": "decode_status",
+      "type": "string",
+      "nullable": false
+    }
+  ],
+  "primary_key": [
+    "run_id",
+    "video_id",
+    "frame_index"
+  ],
+  "foreign_keys": [
+    {
+      "fields": [
+        "run_id",
+        "video_id"
+      ],
+      "ref_contract": "videos",
+      "ref_fields": [
+        "run_id",
+        "video_id"
+      ],
+      "ref_version": 1
+    }
+  ],
+  "partition_by": [
+    "run_id",
+    "video_id"
+  ],
+  "sort_by": [
+    "run_id",
+    "video_id",
+    "frame_index"
+  ],
+  "semantic_rules": [
+    {
+      "id": "run_id_format",
+      "rule": "run_id_stage2b"
+    },
+    {
+      "id": "video_id_safe",
+      "rule": "safe_identifier",
+      "field": "video_id"
+    },
+    {
+      "id": "frame_ge0",
+      "rule": "int_ge",
+      "field": "frame_index",
+      "value": 0
+    },
+    {
+      "id": "time_ge0",
+      "rule": "int_ge",
+      "field": "video_time_us",
+      "value": 0
+    },
+    {
+      "id": "duration_pos_or_null",
+      "rule": "int_gt_or_null",
+      "field": "duration_us",
+      "value": 0
+    },
+    {
+      "id": "decode_status_enum",
+      "rule": "enum",
+      "field": "decode_status",
+      "values": [
+        "ok",
+        "failed",
+        "skipped",
+        "unknown"
+      ]
+    },
+    {
+      "id": "monotonic_time",
+      "rule": "monotonic_video_time"
+    }
+  ],
+  "table_metadata": {
+    "time_unit": "microseconds",
+    "time_domain": "video_relative"
+  }
+}

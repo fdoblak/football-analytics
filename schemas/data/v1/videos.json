@@ -1,0 +1,159 @@
+{
+  "contract_name": "videos",
+  "version": 1,
+  "description": "Canonical video identity and timing metadata (no local paths).",
+  "fields": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "video_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "container",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "codec",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "width_px",
+      "type": "int32",
+      "nullable": false
+    },
+    {
+      "name": "height_px",
+      "type": "int32",
+      "nullable": false
+    },
+    {
+      "name": "fps_numerator",
+      "type": "int32",
+      "nullable": false
+    },
+    {
+      "name": "fps_denominator",
+      "type": "int32",
+      "nullable": false
+    },
+    {
+      "name": "time_base_numerator",
+      "type": "int32",
+      "nullable": false
+    },
+    {
+      "name": "time_base_denominator",
+      "type": "int32",
+      "nullable": false
+    },
+    {
+      "name": "frame_count",
+      "type": "int64",
+      "nullable": true
+    },
+    {
+      "name": "duration_us",
+      "type": "int64",
+      "nullable": true
+    },
+    {
+      "name": "has_audio",
+      "type": "bool",
+      "nullable": true
+    },
+    {
+      "name": "source_ref",
+      "type": "string",
+      "nullable": true
+    }
+  ],
+  "primary_key": [
+    "run_id",
+    "video_id"
+  ],
+  "foreign_keys": [],
+  "partition_by": [
+    "run_id"
+  ],
+  "sort_by": [
+    "run_id",
+    "video_id"
+  ],
+  "semantic_rules": [
+    {
+      "id": "run_id_format",
+      "rule": "run_id_stage2b"
+    },
+    {
+      "id": "video_id_safe",
+      "rule": "safe_identifier",
+      "field": "video_id"
+    },
+    {
+      "id": "sha256_hex",
+      "rule": "sha256_hex64",
+      "field": "source_sha256"
+    },
+    {
+      "id": "dims_positive",
+      "rule": "int_gt",
+      "fields": [
+        "width_px",
+        "height_px"
+      ],
+      "value": 0
+    },
+    {
+      "id": "fps_positive",
+      "rule": "int_gt",
+      "fields": [
+        "fps_numerator",
+        "fps_denominator"
+      ],
+      "value": 0
+    },
+    {
+      "id": "time_base_positive",
+      "rule": "int_gt",
+      "fields": [
+        "time_base_numerator",
+        "time_base_denominator"
+      ],
+      "value": 0
+    },
+    {
+      "id": "frame_count_ge0",
+      "rule": "int_ge_or_null",
+      "field": "frame_count",
+      "value": 0
+    },
+    {
+      "id": "duration_ge0",
+      "rule": "int_ge_or_null",
+      "field": "duration_us",
+      "value": 0
+    },
+    {
+      "id": "no_path_source_ref",
+      "rule": "no_path_like",
+      "field": "source_ref"
+    }
+  ],
+  "table_metadata": {
+    "coordinate_space": "image_pixels",
+    "time_unit": "microseconds",
+    "time_domain": "video_relative"
+  }
+}

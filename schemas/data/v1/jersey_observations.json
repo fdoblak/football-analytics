@@ -1,0 +1,213 @@
+{
+  "contract_name": "jersey_observations",
+  "version": 1,
+  "description": "Jersey number observations (OCR contract only; no OCR execution).",
+  "fields": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "video_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "frame_index",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "observation_id",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "track_id",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "raw_text",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "normalized_number",
+      "type": "int16",
+      "nullable": true
+    },
+    {
+      "name": "digit_count",
+      "type": "int8",
+      "nullable": true
+    },
+    {
+      "name": "visibility",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "readability",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "confidence",
+      "type": "float32",
+      "nullable": true
+    },
+    {
+      "name": "source",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "review_status",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "crop_artifact_id",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "quality_flags",
+      "type": "list",
+      "nullable": false,
+      "value_type": "string"
+    }
+  ],
+  "primary_key": [
+    "run_id",
+    "video_id",
+    "frame_index",
+    "observation_id"
+  ],
+  "foreign_keys": [
+    {
+      "fields": [
+        "run_id",
+        "video_id",
+        "track_id"
+      ],
+      "ref_contract": "track_summaries",
+      "ref_fields": [
+        "run_id",
+        "video_id",
+        "track_id"
+      ],
+      "ref_version": 1
+    }
+  ],
+  "partition_by": [
+    "run_id",
+    "video_id"
+  ],
+  "sort_by": [
+    "run_id",
+    "video_id",
+    "frame_index",
+    "observation_id"
+  ],
+  "semantic_rules": [
+    {
+      "id": "run_id_format",
+      "rule": "run_id_stage2b"
+    },
+    {
+      "id": "video_id_safe",
+      "rule": "safe_identifier",
+      "field": "video_id"
+    },
+    {
+      "id": "frame_ge0",
+      "rule": "int_ge",
+      "field": "frame_index",
+      "value": 0
+    },
+    {
+      "id": "ids_ge0",
+      "rule": "int_ge",
+      "fields": [
+        "observation_id",
+        "track_id"
+      ],
+      "value": 0
+    },
+    {
+      "id": "jersey_number",
+      "rule": "jersey_number_policy"
+    },
+    {
+      "id": "digit_count",
+      "rule": "int_between_or_null",
+      "field": "digit_count",
+      "min": 0,
+      "max": 2
+    },
+    {
+      "id": "visibility_enum",
+      "rule": "enum",
+      "field": "visibility",
+      "values": [
+        "visible",
+        "partial",
+        "occluded",
+        "unknown"
+      ]
+    },
+    {
+      "id": "readability_enum",
+      "rule": "enum",
+      "field": "readability",
+      "values": [
+        "clear",
+        "uncertain",
+        "illegible",
+        "none"
+      ]
+    },
+    {
+      "id": "review_enum",
+      "rule": "enum",
+      "field": "review_status",
+      "values": [
+        "unreviewed",
+        "accepted",
+        "rejected",
+        "needs_review"
+      ]
+    },
+    {
+      "id": "source_enum",
+      "rule": "enum",
+      "field": "source",
+      "values": [
+        "model",
+        "rule",
+        "manual"
+      ]
+    },
+    {
+      "id": "conf_unit_or_null",
+      "rule": "float_unit_interval_or_null",
+      "field": "confidence"
+    },
+    {
+      "id": "crop_safe_or_null",
+      "rule": "safe_identifier_or_null",
+      "field": "crop_artifact_id"
+    },
+    {
+      "id": "quality_no_null_items",
+      "rule": "list_no_null_items",
+      "field": "quality_flags"
+    }
+  ],
+  "table_metadata": {
+    "jersey_number_range": "0_99_or_null"
+  }
+}

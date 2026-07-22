@@ -1,0 +1,160 @@
+{
+  "contract_name": "team_assignments",
+  "version": 1,
+  "description": "Temporal team role assignments for tracks.",
+  "fields": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "video_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "assignment_id",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "track_id",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "start_frame_index",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "end_frame_index",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "team_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "team_role",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "confidence",
+      "type": "float32",
+      "nullable": true
+    },
+    {
+      "name": "source",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "quality_flags",
+      "type": "list",
+      "nullable": false,
+      "value_type": "string"
+    }
+  ],
+  "primary_key": [
+    "run_id",
+    "video_id",
+    "assignment_id"
+  ],
+  "foreign_keys": [
+    {
+      "fields": [
+        "run_id",
+        "video_id",
+        "track_id"
+      ],
+      "ref_contract": "track_summaries",
+      "ref_fields": [
+        "run_id",
+        "video_id",
+        "track_id"
+      ],
+      "ref_version": 1
+    }
+  ],
+  "partition_by": [
+    "run_id",
+    "video_id"
+  ],
+  "sort_by": [
+    "run_id",
+    "video_id",
+    "assignment_id"
+  ],
+  "semantic_rules": [
+    {
+      "id": "run_id_format",
+      "rule": "run_id_stage2b"
+    },
+    {
+      "id": "video_id_safe",
+      "rule": "safe_identifier",
+      "field": "video_id"
+    },
+    {
+      "id": "ids_ge0",
+      "rule": "int_ge",
+      "fields": [
+        "assignment_id",
+        "track_id",
+        "start_frame_index",
+        "end_frame_index"
+      ],
+      "value": 0
+    },
+    {
+      "id": "interval",
+      "rule": "int_le_pair",
+      "left": "start_frame_index",
+      "right": "end_frame_index"
+    },
+    {
+      "id": "team_id_safe",
+      "rule": "safe_identifier",
+      "field": "team_id"
+    },
+    {
+      "id": "role_enum",
+      "rule": "enum",
+      "field": "team_role",
+      "values": [
+        "home",
+        "away",
+        "official",
+        "goalkeeper_home",
+        "goalkeeper_away",
+        "unknown"
+      ]
+    },
+    {
+      "id": "source_enum",
+      "rule": "enum",
+      "field": "source",
+      "values": [
+        "model",
+        "rule",
+        "manual"
+      ]
+    },
+    {
+      "id": "conf_unit_or_null",
+      "rule": "float_unit_interval_or_null",
+      "field": "confidence"
+    },
+    {
+      "id": "quality_no_null_items",
+      "rule": "list_no_null_items",
+      "field": "quality_flags"
+    }
+  ],
+  "table_metadata": {}
+}

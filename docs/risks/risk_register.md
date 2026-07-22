@@ -1,6 +1,6 @@
 # Risk Register — football-analytics
 
-**Updated:** 2026-07-22 (Stage 2B)
+**Updated:** 2026-07-22 (Stage 2C)
 
 **Owner default:** Furkan Doblak unless stated otherwise
 
@@ -343,3 +343,101 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open — accepted finding |
 | target_stage | operations / tooling |
+
+## RISK-025 — Schema drift across pipeline stages
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-025 |
+| description | Divergent table layouts between producers/consumers break joins and analytics. |
+| probability | medium |
+| impact | high |
+| mitigation | Stage 2C registry + strict Parquet metadata fingerprint; contract CLI/validator. |
+| trigger | Stage 2C |
+| owner | Furkan Doblak |
+| status | mitigated (foundation) |
+| target_stage | Stage 2C+ |
+
+## RISK-026 — Semantic mismatch / unit confusion
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-026 |
+| description | BBox conventions or time domains may be misinterpreted (xyxy vs xywh; video-relative vs UTC). |
+| probability | medium |
+| impact | high |
+| mitigation | Explicit table_metadata + semantic rules; docs in canonical_contracts.md. |
+| trigger | Stage 2C |
+| owner | Furkan Doblak |
+| status | mitigated (foundation) |
+| target_stage | Stage 2C+ |
+
+## RISK-027 — Lossy schema migration
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-027 |
+| description | Migrations may drop or invent fields incorrectly. |
+| probability | medium |
+| impact | high |
+| mitigation | Explicit edges only; receipt with hashes; detections 0→1 lossless PK/order; no overwrite. |
+| trigger | Stage 2C |
+| owner | Furkan Doblak |
+| status | mitigated (foundation) |
+| target_stage | Stage 2C+ |
+
+## RISK-028 — Parquet/PyArrow compatibility
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-028 |
+| description | Writer/reader metadata or list field naming differences can falsely fail validation. |
+| probability | medium |
+| impact | medium |
+| mitigation | Pin pyarrow 25.0.0; type-compatible comparison; zstd + metadata stamps. |
+| trigger | Stage 2C |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 2C+ |
+
+## RISK-029 — Validation memory pressure
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-029 |
+| description | Large tables validated via pylist conversion may use excess memory. |
+| probability | medium |
+| impact | medium |
+| mitigation | Bounded error lists; document complexity; future Arrow-compute paths. |
+| trigger | Stage 2C |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 2C+/2D |
+
+## RISK-030 — Cross-table orphan data
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-030 |
+| description | Orphan detections/tracks/events break analytics integrity. |
+| probability | medium |
+| impact | high |
+| mitigation | Bundle FK validation; synthetic E2E; pipeline stages must pass validator. |
+| trigger | Stage 2C |
+| owner | Furkan Doblak |
+| status | mitigated (foundation) |
+| target_stage | Stage 2C+ |
+
+## RISK-031 — Metadata tampering
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-031 |
+| description | Parquet contract fingerprint metadata may be altered without content change. |
+| probability | low |
+| impact | medium |
+| mitigation | Reader verifies fingerprint against registry contract; tamper tests. |
+| trigger | Stage 2C |
+| owner | Furkan Doblak |
+| status | mitigated (foundation) |
+| target_stage | Stage 2C+ |
