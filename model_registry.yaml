@@ -1,0 +1,65 @@
+schema_version: 1
+updated_at: "2026-07-22T17:20:00+03:00"
+notes: >
+  Stage 1C model registry. File presence and hashes verified locally.
+  Code license of source repos is recorded separately from weight redistribution terms.
+  No inference was executed in Stage 1C.
+
+models:
+  - id: sn_banner_sv_kp
+    display_name: SoccerNet Banner / NBJW SV keypoints
+    task: sports_field_keypoint_localization
+    status: available
+    file_path: /home/fdoblak/models/soccernet/sn-banner/SV_kp.pth
+    size_bytes: 264964645
+    sha256: 7ea78fa76aaf94976a8eca428d6e3c59697a93430cba1a4603e20284b61f5113
+    framework: pytorch
+    source_type: third_party_checkpoint
+    source_repo: no_bells_just_whistles
+    source_commit: bd993b31c2917096c23bb8aadf148314d17f8345
+    source_url: https://github.com/mguti97/No-Bells-Just-Whistles
+    related_soccernet_repo: sn_banner
+    related_soccernet_commit: f6d50b24a33d6705d4c04dc4d4d93ecd12b08e74
+    license: null
+    license_status: review_required
+    input_spec: null
+    output_spec: null
+    classes: null
+    precision: null
+    device_requirements: {min_vram_mb: null, notes: "Not inference-tested in Stage 1C"}
+    tested: false
+    test_scope: file_integrity_only
+    last_verified: "2026-07-22"
+    notes: >
+      Weight file present on disk. SHA-256 recomputed in Stage 1C and matches prior Stage 0 short prefix.
+      Weight redistribution/license is NOT assumed from GPL-2.0 repo LICENSE; review_required.
+      No model inference performed.
+
+  - id: sn_banner_sv_lines
+    display_name: SoccerNet Banner / NBJW SV lines
+    task: sports_field_line_localization
+    status: available
+    file_path: /home/fdoblak/models/soccernet/sn-banner/SV_lines.pth
+    size_bytes: 264857893
+    sha256: 2751242917f8c0f858a396e0cfe4521be39fe07bf049590eb21714526acecac1
+    framework: pytorch
+    source_type: third_party_checkpoint
+    source_repo: no_bells_just_whistles
+    source_commit: bd993b31c2917096c23bb8aadf148314d17f8345
+    source_url: https://github.com/mguti97/No-Bells-Just-Whistles
+    related_soccernet_repo: sn_banner
+    related_soccernet_commit: f6d50b24a33d6705d4c04dc4d4d93ecd12b08e74
+    license: null
+    license_status: review_required
+    input_spec: null
+    output_spec: null
+    classes: null
+    precision: null
+    device_requirements: {min_vram_mb: null, notes: "Not inference-tested in Stage 1C"}
+    tested: false
+    test_scope: file_integrity_only
+    last_verified: "2026-07-22"
+    notes: >
+      Weight file present on disk. SHA-256 recomputed in Stage 1C and matches prior Stage 0 short prefix.
+      Weight redistribution/license is NOT assumed from repo LICENSE; review_required.
+      No model inference performed.

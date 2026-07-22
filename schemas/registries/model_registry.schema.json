@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/model_registry.schema.json",
+  "title": "football-analytics model registry",
+  "type": "object",
+  "required": ["schema_version", "models"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "updated_at": { "type": ["string", "null"] },
+    "notes": { "type": ["string", "null"] },
+    "models": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id", "display_name", "task", "status", "file_path", "size_bytes",
+          "sha256", "framework", "source_type", "license_status", "tested", "test_scope"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "status": {
+            "type": "string",
+            "enum": ["planned", "missing", "available", "verified", "blocked", "deprecated"]
+          },
+          "file_path": { "type": ["string", "null"] },
+          "size_bytes": { "type": ["integer", "null"], "minimum": 1 },
+          "sha256": {
+            "type": ["string", "null"],
+            "pattern": "^[a-fA-F0-9]{64}$"
+          },
+          "license_status": {
+            "type": "string",
+            "enum": ["approved", "review_required", "restricted", "unknown", "prohibited"]
+          },
+          "tested": { "type": "boolean" },
+          "source_url": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

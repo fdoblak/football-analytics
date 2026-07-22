@@ -1,0 +1,49 @@
+# football-analytics — Stage 1C secret / artifact ignore policy
+# Order matters: allowlist patterns after broad denies.
+
+# --- secrets & credentials ---
+.env
+.env.*
+!.env.example
+secrets/
+credentials/
+*.pem
+*.key
+*.p12
+*.pfx
+
+# --- python / tooling ---
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# --- logs & local runtime ---
+*.log
+workspace/
+runs/
+outputs/
+
+# --- model / data / video / array artifacts (default deny) ---
+*.pt
+*.pth
+*.onnx
+*.engine
+*.mkv
+*.mp4
+*.avi
+*.parquet
+*.npy
+*.npz
+
+# Controlled small fixtures may be committed under tests/fixtures/**
+!tests/fixtures/**
+!tests/fixtures/**/**
+
+# Keep registry / schema / docs trackable (do not ignore YAML/JSON registries)
+# model_registry.yaml / dataset_registry.yaml / schemas/** intentionally not ignored

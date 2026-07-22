@@ -1,6 +1,5 @@
 schema_version: 1
-generated_at: "2026-07-12T16:44:26+03:00"
-
+generated_at: '2026-07-12T16:44:26+03:00'
 repositories:
   active_spotting:
     path: /home/fdoblak/projects/soccernet/ActiveSpotting
@@ -10,7 +9,6 @@ repositories:
     integration: action_spotting_baseline
     validation_status: cloned_not_smoke_tested
     dirty: false
-
   pts_baseline:
     path: /home/fdoblak/projects/soccernet/PTS-baseline
     remote: https://github.com/SoccerNet/PTS-baseline.git
@@ -19,7 +17,6 @@ repositories:
     integration: ball_action_spotting_baseline
     validation_status: cloned_not_smoke_tested
     dirty: false
-
   soccernet_sdk_source:
     path: /home/fdoblak/projects/soccernet/SoccerNet
     remote: https://github.com/SoccerNet/SoccerNet.git
@@ -28,7 +25,6 @@ repositories:
     integration: sdk_source_reference
     validation_status: cloned_not_smoke_tested
     dirty: false
-
   soccernet_v3:
     path: /home/fdoblak/projects/soccernet/SoccerNet-v3
     remote: https://github.com/SoccerNet/SoccerNet-v3.git
@@ -37,7 +33,6 @@ repositories:
     integration: annotation_tool_reference
     validation_status: cloned_not_smoke_tested
     dirty: false
-
   sn_banner:
     path: /home/fdoblak/projects/soccernet/sn-banner
     remote: https://github.com/SoccerNet/sn-banner.git
@@ -46,7 +41,6 @@ repositories:
     integration: banner_detection_reference
     validation_status: cloned_not_smoke_tested
     dirty: false
-
   sn_calibration:
     path: /home/fdoblak/projects/soccernet/sn-calibration
     remote: https://github.com/SoccerNet/sn-calibration.git
@@ -55,7 +49,6 @@ repositories:
     integration: camera_calibration_reference
     validation_status: cloned_not_smoke_tested
     dirty: false
-
   sn_caption:
     path: /home/fdoblak/projects/soccernet/sn-caption
     remote: https://github.com/SoccerNet/sn-caption.git
@@ -64,7 +57,6 @@ repositories:
     integration: dense_captioning_reference
     validation_status: cloned_not_smoke_tested
     dirty: false
-
   sn_depth:
     path: /home/fdoblak/projects/soccernet/sn-depth
     remote: https://github.com/SoccerNet/sn-depth.git
@@ -73,7 +65,6 @@ repositories:
     integration: depth_estimation_reference
     validation_status: cloned_not_smoke_tested
     dirty: false
-
   sn_echoes:
     path: /home/fdoblak/projects/soccernet/sn-echoes
     remote: https://github.com/SoccerNet/sn-echoes.git
@@ -82,7 +73,6 @@ repositories:
     integration: audio_commentary_reference
     validation_status: cloned_not_smoke_tested
     dirty: false
-
   sn_gamestate:
     path: /home/fdoblak/projects/soccernet/sn-gamestate
     remote: https://github.com/SoccerNet/sn-gamestate.git
@@ -91,7 +81,6 @@ repositories:
     integration: gamestate_reference
     validation_status: cloned_not_smoke_tested
     dirty: false
-
   sn_grounding:
     path: /home/fdoblak/projects/soccernet/sn-grounding
     remote: https://github.com/SoccerNet/sn-grounding.git
@@ -100,7 +89,6 @@ repositories:
     integration: replay_grounding_reference
     validation_status: cloned_not_smoke_tested
     dirty: false
-
   sn_jersey:
     path: /home/fdoblak/projects/soccernet/sn-jersey
     remote: https://github.com/SoccerNet/sn-jersey.git
@@ -109,7 +97,6 @@ repositories:
     integration: jersey_recognition_reference
     validation_status: cloned_not_smoke_tested
     dirty: false
-
   sn_mvfoul:
     path: /home/fdoblak/projects/soccernet/sn-mvfoul
     remote: https://github.com/SoccerNet/sn-mvfoul.git
@@ -118,7 +105,6 @@ repositories:
     integration: multiview_foul_reference
     validation_status: cloned_not_smoke_tested
     dirty: false
-
   sn_nvs:
     path: /home/fdoblak/projects/soccernet/sn-nvs
     remote: https://github.com/SoccerNet/sn-nvs.git
@@ -127,7 +113,6 @@ repositories:
     integration: novel_view_synthesis_reference
     validation_status: cloned_not_smoke_tested
     dirty: false
-
   sn_reid:
     path: /home/fdoblak/projects/soccernet/sn-reid
     remote: https://github.com/SoccerNet/sn-reid.git
@@ -136,7 +121,6 @@ repositories:
     integration: reid_reference
     validation_status: cloned_not_smoke_tested
     dirty: false
-
   sn_spotting:
     path: /home/fdoblak/projects/soccernet/sn-spotting
     remote: https://github.com/SoccerNet/sn-spotting.git
@@ -145,7 +129,6 @@ repositories:
     integration: action_spotting_reference
     validation_status: cloned_not_smoke_tested
     dirty: false
-
   sn_teamspotting:
     path: /home/fdoblak/projects/soccernet/sn-teamspotting
     remote: https://github.com/SoccerNet/sn-teamspotting.git
@@ -154,7 +137,6 @@ repositories:
     integration: team_action_spotting_devkit
     validation_status: cloned_not_smoke_tested
     dirty: false
-
   sn_trackeval:
     path: /home/fdoblak/projects/soccernet/sn-trackeval
     remote: https://github.com/SoccerNet/sn-trackeval.git
@@ -163,7 +145,6 @@ repositories:
     integration: evaluation_adapter_and_cli
     validation_status: cloned_not_smoke_tested
     dirty: false
-
   sn_tracking:
     path: /home/fdoblak/projects/soccernet/sn-tracking
     remote: https://github.com/SoccerNet/sn-tracking.git
@@ -171,4 +152,37 @@ repositories:
     commit: b0bbba35e07ff58010b6313ef8aa59ef663ad392
     integration: dataset_and_reference
     validation_status: cloned_not_smoke_tested
+    dirty: false
+updated_at: '2026-07-22T17:15:00+03:00'
+update_notes: 'Stage 1C: added third_party_repositories with exact local SHAs; SoccerNet
+  repositories unchanged'
+third_party_repositories:
+  tracklab:
+    path: /home/fdoblak/projects/third-party/tracklab
+    remote: https://github.com/TrackingLaboratory/tracklab.git
+    branch: main
+    tag: v1.3.24
+    commit: 5767e86c32a6d6c68e2fc8ae7311f558fff6c7b2
+    integration: runtime_and_reference
+    validation_status: locked_stage_1c
+    dirty: false
+  pnlcalib:
+    path: /home/fdoblak/projects/third-party/pnlcalib
+    remote: https://github.com/mguti97/PnLCalib.git
+    branch: main
+    tag: null
+    describe: v1.0.0-58-g8c87391
+    commit: 8c87391d6f4ea40c5e4d65e61529916c7a49ce62
+    integration: calibration_candidate
+    validation_status: locked_stage_1c
+    dirty: false
+  no_bells_just_whistles:
+    path: /home/fdoblak/projects/third-party/no-bells-just-whistles
+    remote: https://github.com/mguti97/No-Bells-Just-Whistles.git
+    branch: main
+    tag: null
+    describe: v1.0.0-70-gbd993b3
+    commit: bd993b31c2917096c23bb8aadf148314d17f8345
+    integration: model_source_and_reference
+    validation_status: locked_stage_1c
     dirty: false

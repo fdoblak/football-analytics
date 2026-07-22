@@ -1,0 +1,193 @@
+schema_version: 1
+updated_at: "2026-07-22T17:20:00+03:00"
+notes: >
+  Stage 1C dataset registry. No datasets were downloaded in this stage.
+  Demo MP4s inside cloned repos are NOT registered as project datasets.
+  Broadcast SoccerNet video access must not be generalized to all SoccerNet tasks.
+
+datasets:
+  - id: golden_clips
+    display_name: Project golden clips
+    task: regression_smoke_fixtures
+    status: planned
+    local_path: null
+    source: project_owned
+    source_url: null
+    version: null
+    modalities: [video]
+    splits: null
+    annotation_format: null
+    license: project_internal
+    license_status: review_required
+    access_level: restricted
+    nda_required: false
+    credentials_required: false
+    redistribution_allowed: false
+    checksum: null
+    size_bytes: null
+    last_verified: "2026-07-22"
+    planned_stage: MVP-1
+    notes: "Short 10-30s clips to be selected by Furkan; not present yet."
+
+  - id: soccernet_tracking
+    display_name: SoccerNet Tracking
+    task: multi_object_tracking
+    status: not_downloaded
+    local_path: null
+    source: SoccerNet
+    source_url: https://www.soccer-net.org/data
+    version: null
+    modalities: [video, labels]
+    splits: [train, test, challenge]
+    annotation_format: MOT20_CSV
+    license: null
+    license_status: review_required
+    access_level: unknown
+    nda_required: null
+    credentials_required: null
+    redistribution_allowed: null
+    checksum: null
+    size_bytes: null
+    last_verified: "2026-07-22"
+    planned_stage: MVP-1
+    notes: >
+      Code/reference in sn-tracking (locked). Official tracking clips via downloadDataTask;
+      full broadcast corpus NDA must not be assumed for all tracking assets without source confirmation.
+
+  - id: soccernet_field_localization_calibration
+    display_name: SoccerNet Field Localization / Camera Calibration
+    task: camera_calibration
+    status: not_downloaded
+    local_path: null
+    source: SoccerNet
+    source_url: https://www.soccer-net.org/data
+    version: null
+    modalities: [image, annotations]
+    splits: null
+    annotation_format: json_camera_params
+    license: null
+    license_status: review_required
+    access_level: unknown
+    nda_required: null
+    credentials_required: null
+    redistribution_allowed: null
+    checksum: null
+    size_bytes: null
+    last_verified: "2026-07-22"
+    planned_stage: MVP-2
+    notes: "Referenced by sn-calibration. Task data via downloadDataTask; license/access review_required."
+
+  - id: soccernet_game_state
+    display_name: SoccerNet Game State Reconstruction
+    task: game_state_reconstruction
+    status: not_downloaded
+    local_path: null
+    source: SoccerNet
+    source_url: https://www.soccer-net.org/tasks/game-state-reconstruction
+    version: ">=1.3"
+    modalities: [video, labels]
+    splits: null
+    annotation_format: gamestate
+    license: null
+    license_status: review_required
+    access_level: unknown
+    nda_required: null
+    credentials_required: null
+    redistribution_allowed: null
+    checksum: null
+    size_bytes: null
+    last_verified: "2026-07-22"
+    planned_stage: MVP-2
+    notes: "sn-gamestate/TrackLab reference. Dataset not downloaded; Zenodo weights coupled in prior install notes."
+
+  - id: soccernet_reid_thumbnails
+    display_name: SoccerNet Re-Identification thumbnails
+    task: player_reid
+    status: not_downloaded
+    local_path: null
+    source: SoccerNet
+    source_url: https://www.soccer-net.org/data
+    version: null
+    modalities: [image]
+    splits: null
+    annotation_format: ranking_pairs
+    license: null
+    license_status: review_required
+    access_level: unknown
+    nda_required: null
+    credentials_required: null
+    redistribution_allowed: null
+    checksum: null
+    size_bytes: null
+    last_verified: "2026-07-22"
+    planned_stage: identity
+    notes: "sn-reid reference. Within-action identity labels only; not a global player ID solution."
+
+  - id: soccernet_jersey_number
+    display_name: SoccerNet Jersey Number Recognition
+    task: jersey_number_classification
+    status: not_downloaded
+    local_path: null
+    source: SoccerNet
+    source_url: https://www.soccer-net.org/data
+    version: null
+    modalities: [image, json]
+    splits: null
+    annotation_format: tracklet_json
+    license: null
+    license_status: review_required
+    access_level: unknown
+    nda_required: null
+    credentials_required: null
+    redistribution_allowed: null
+    checksum: null
+    size_bytes: null
+    last_verified: "2026-07-22"
+    planned_stage: identity
+    notes: "sn-jersey mostly docs/challenge kit; dataset not downloaded."
+
+  - id: soccernet_ball_action_spotting
+    display_name: SoccerNet Ball Action Spotting
+    task: ball_action_spotting
+    status: not_downloaded
+    local_path: null
+    source: SoccerNet
+    source_url: https://www.soccer-net.org/tasks/ball-action-spotting
+    version: null
+    modalities: [video, labels]
+    splits: null
+    annotation_format: temporal_events
+    license: null
+    license_status: review_required
+    access_level: unknown
+    nda_required: null
+    credentials_required: null
+    redistribution_allowed: null
+    checksum: null
+    size_bytes: null
+    last_verified: "2026-07-22"
+    planned_stage: MVP-3
+    notes: "Referenced via sn-spotting / PTS-baseline ecosystem. Not downloaded."
+
+  - id: soccernet_team_ball_action_spotting
+    display_name: SoccerNet Team Ball Action Spotting
+    task: team_ball_action_spotting
+    status: not_downloaded
+    local_path: null
+    source: SoccerNet
+    source_url: https://www.soccer-net.org/tasks
+    version: null
+    modalities: [video, labels]
+    splits: null
+    annotation_format: temporal_events_with_team_side
+    license: null
+    license_status: review_required
+    access_level: unknown
+    nda_required: null
+    credentials_required: null
+    redistribution_allowed: null
+    checksum: null
+    size_bytes: null
+    last_verified: "2026-07-22"
+    planned_stage: MVP-3
+    notes: "sn-teamspotting reference. Not downloaded; HF/GD checkpoints previously noted as external."

@@ -126,6 +126,53 @@ def audit_storage(paths: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def audit_external_lock(project_root: Path) -> dict[str, Any]:
+    """Read-only HEAD↔lock check for SoccerNet + third_party groups."""
+    lock_path = project_root / "external_repos.lock.yaml"
+    out: dict[str, Any] = {"path": str(lock_path), "exists": lock_path.is_file()}
+    if not out["exists"]:
+        out["status"] = "MISSING"
+        return out
+    try:
+        import yaml  # local optional
+    except ImportError:
+        out["status"] = "PYYAML_MISSING"
+        return out
+    try:
+        data = yaml.safe_load(lock_path.read_text(encoding="utf-8"))
+    except Exception as exc:  # noqa: BLE001
+        out["status"] = "PARSE_ERROR"
+        out["error"] = str(exc)
+        return out
+    repos = data.get("repositories") or {}
+    third = data.get("third_party_repositories") or {}
+    out["soccernet_count"] = len(repos) if isinstance(repos, dict) else 0
+    out["third_party_count"] = len(third) if isinstance(third, dict) else 0
+    out["total"] = out["soccernet_count"] + out["third_party_count"]
+    matches = []
+    mismatches = []
+    for group in (repos, third):
+        if not isinstance(group, dict):
+            continue
+        for rid, meta in group.items():
+            path = Path((meta or {}).get("path") or "")
+            expect = (meta or {}).get("commit")
+            head = run(["git", "rev-parse", "HEAD"], cwd=path if path.is_dir() else None)
+            entry = {
+                "id": rid,
+                "path": str(path),
+                "lock": expect,
+                "head": head.get("stdout") if head.get("ok") else None,
+                "ok": bool(head.get("ok") and head.get("stdout") == expect),
+            }
+            (matches if entry["ok"] else mismatches).append(entry)
+    out["matched"] = len(matches)
+    out["mismatched"] = mismatches
+    out["status"] = "OK" if not mismatches and out["total"] == 22 else "MISMATCH_OR_COUNT"
+    return out
+
+
+
 def audit_ai_dev(python_bin: Path) -> dict[str, Any]:
     if not python_bin.exists():
         return {"status": "MISSING", "python_bin": str(python_bin)}
@@ -195,6 +242,7 @@ def main() -> int:
         "paths": load_paths(args.project_root),
         "main_repo": audit_main_repo(args.project_root),
         "storage": audit_storage(load_paths(args.project_root)),
+        "external_lock": audit_external_lock(args.project_root),
         "ai_dev": audit_ai_dev(args.ai_dev_python),
         "ffmpeg": run(["ffmpeg", "-version"], timeout=10),
         "nvidia_smi": run(
