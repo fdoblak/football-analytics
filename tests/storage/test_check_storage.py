@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import importlib.util
 import json
-import os
 import shutil
 import stat
 import tempfile
@@ -76,7 +75,7 @@ def write_config(path: Path, active_root: Path, **overrides) -> None:
         "reject_symlink_escape": True,
     }
     validation.update(overrides.get("validation_overrides", {}))
-    text = (
+    (
         "schema_version: 1\n"
         "storage:\n"
         + "".join(f"  {k}: {json.dumps(v)}\n" for k, v in storage.items())
@@ -132,7 +131,10 @@ class CheckStorageTests(unittest.TestCase):
         write_config(self.config, self.storage, storage_overrides={"active_root": "/"})
         # Also force leaf paths under / would be invalid separately; root alone fails first
         result = CS.run_validation(self.config)
-        self.assertTrue(any("forbidden" in e.lower() or "absolute" in e.lower() for e in result.errors) or result.errors)
+        self.assertTrue(
+            any("forbidden" in e.lower() or "absolute" in e.lower() for e in result.errors)
+            or result.errors
+        )
         self.assertNotEqual(result.exit_code, 0)
 
     def test_04_broad_home_root_rejected(self) -> None:
@@ -168,9 +170,7 @@ class CheckStorageTests(unittest.TestCase):
         write_config(
             self.config,
             self.storage,
-            storage_overrides={
-                "datasets": str(self.storage / "datasets" / ".." / ".." / "nope")
-            },
+            storage_overrides={"datasets": str(self.storage / "datasets" / ".." / ".." / "nope")},
         )
         result = CS.run_validation(self.config)
         self.assertTrue(result.errors)
@@ -264,9 +264,7 @@ class CheckStorageTests(unittest.TestCase):
     def test_16_probe_refuses_overwrite(self) -> None:
         existing = self.storage / ".storage_probe_collision"
         existing.write_text("do-not-touch\n", encoding="utf-8")
-        # Force probe name by patching secrets/time is hard; instead call run_probe with monkeypatch via crafting FileExists by precreating matching pattern is random.
-        # Directly invoke run_probe after creating exclusive conflict by patching Path behavior is complex.
-        # Simulate FileExistsError path: open O_EXCL on existing exact file through run_probe after replacing name generation.
+        # Patch probe name generation to collide with a pre-existing file.
         original_token = CS.secrets.token_hex
         original_dt = CS.datetime
 
@@ -319,9 +317,7 @@ class CheckStorageTests(unittest.TestCase):
 
     def test_19_json_output_valid(self) -> None:
         out = self.tmp / "report.json"
-        code = CS.main(
-            ["--config", str(self.config), "--json-out", str(out), "--quiet"]
-        )
+        code = CS.main(["--config", str(self.config), "--json-out", str(out), "--quiet"])
         self.assertEqual(code, 0)
         payload = json.loads(out.read_text(encoding="utf-8"))
         self.assertEqual(payload["schema_version"], 1)

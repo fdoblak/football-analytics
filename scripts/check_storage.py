@@ -8,6 +8,7 @@ No package installs, mounts, chmod/chown, or recursive deletes.
 from __future__ import annotations
 
 import argparse
+import contextlib
 import hashlib
 import json
 import os
@@ -18,12 +19,12 @@ import stat
 import subprocess
 import sys
 import tempfile
-import time
 import traceback
+from collections.abc import Sequence
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Sequence, Tuple
+from typing import Any
 
 try:
     import yaml
@@ -63,16 +64,16 @@ EXIT_SECURITY = 3
 class ValidationResult:
     status: str = "PASS"
     exit_code: int = EXIT_PASS
-    errors: List[str] = field(default_factory=list)
-    warnings: List[str] = field(default_factory=list)
+    errors: list[str] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
     config_path: str = ""
     active_backend: str = ""
-    active_root: Dict[str, Any] = field(default_factory=dict)
-    filesystem: Dict[str, Any] = field(default_factory=dict)
-    thresholds: Dict[str, Any] = field(default_factory=dict)
-    paths: Dict[str, Any] = field(default_factory=dict)
-    probe: Dict[str, Any] = field(default_factory=dict)
-    extras: Dict[str, Any] = field(default_factory=dict)
+    active_root: dict[str, Any] = field(default_factory=dict)
+    filesystem: dict[str, Any] = field(default_factory=dict)
+    thresholds: dict[str, Any] = field(default_factory=dict)
+    paths: dict[str, Any] = field(default_factory=dict)
+    probe: dict[str, Any] = field(default_factory=dict)
+    extras: dict[str, Any] = field(default_factory=dict)
 
     def add_error(self, message: str) -> None:
         self.errors.append(message)
@@ -80,7 +81,7 @@ class ValidationResult:
     def add_warning(self, message: str) -> None:
         self.warnings.append(message)
 
-    def finalize(self, security_failure: bool = False) -> "ValidationResult":
+    def finalize(self, security_failure: bool = False) -> ValidationResult:
         if security_failure or self.exit_code == EXIT_SECURITY:
             self.status = "FAIL"
             self.exit_code = EXIT_SECURITY
@@ -96,7 +97,7 @@ class ValidationResult:
             self.exit_code = EXIT_PASS
         return self
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         payload = {
             "schema_version": 1,
             "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -117,7 +118,7 @@ class ValidationResult:
         return payload
 
 
-def load_config(config_path: Path) -> Tuple[Optional[Dict[str, Any]], Optional[str]]:
+def load_config(config_path: Path) -> tuple[dict[str, Any] | None, str | None]:
     if yaml is None:
         return None, "PyYAML is not available in this interpreter"
     if not config_path.is_file():
@@ -155,14 +156,14 @@ def _is_under(child: Path, parent: Path) -> bool:
         return False
 
 
-def _path_mode(path: Path) -> Optional[str]:
+def _path_mode(path: Path) -> str | None:
     try:
         return oct(path.stat().st_mode & 0o777)
     except OSError:
         return None
 
 
-def _owner_ids(path: Path) -> Tuple[Optional[int], Optional[int]]:
+def _owner_ids(path: Path) -> tuple[int | None, int | None]:
     try:
         st = path.stat()
         return st.st_uid, st.st_gid
@@ -170,8 +171,8 @@ def _owner_ids(path: Path) -> Tuple[Optional[int], Optional[int]]:
         return None, None
 
 
-def _filesystem_info(path: Path) -> Dict[str, Any]:
-    info: Dict[str, Any] = {
+def _filesystem_info(path: Path) -> dict[str, Any]:
+    info: dict[str, Any] = {
         "device": None,
         "type": None,
         "total_bytes": None,
@@ -209,8 +210,8 @@ def _filesystem_info(path: Path) -> Dict[str, Any]:
 
 
 def validate_config_structure(
-    data: Dict[str, Any], result: ValidationResult
-) -> Optional[Dict[str, Any]]:
+    data: dict[str, Any], result: ValidationResult
+) -> dict[str, Any] | None:
     storage = data.get("storage")
     if not isinstance(storage, dict):
         result.add_error("Missing or invalid 'storage' mapping")
@@ -226,8 +227,7 @@ def validate_config_structure(
     backend = storage.get("active_backend")
     if backend not in SUPPORTED_BACKENDS:
         result.add_error(
-            f"Unsupported active_backend={backend!r}; "
-            f"supported={sorted(SUPPORTED_BACKENDS)}"
+            f"Unsupported active_backend={backend!r}; " f"supported={sorted(SUPPORTED_BACKENDS)}"
         )
         result.exit_code = EXIT_CONFIG
         return None
@@ -244,8 +244,7 @@ def validate_config_structure(
     warning = validation["warning_free_bytes"]
     if minimum >= warning:
         result.add_error(
-            "storage_validation.minimum_free_bytes must be strictly less than "
-            "warning_free_bytes"
+            "storage_validation.minimum_free_bytes must be strictly less than " "warning_free_bytes"
         )
         result.exit_code = EXIT_CONFIG
         return None
@@ -286,11 +285,9 @@ def validate_config_structure(
     return {"storage": storage, "storage_validation": validation}
 
 
-def validate_active_root(
-    storage: Dict[str, Any], result: ValidationResult
-) -> Optional[Path]:
+def validate_active_root(storage: dict[str, Any], result: ValidationResult) -> Path | None:
     configured = storage.get("active_root")
-    root_info: Dict[str, Any] = {
+    root_info: dict[str, Any] = {
         "configured": configured,
         "resolved": None,
         "exists": False,
@@ -316,15 +313,14 @@ def validate_active_root(
 
     configured_norm = _normalize_configured(configured)
     if str(configured_norm) in FORBIDDEN_ACTIVE_ROOTS:
-        result.add_error(
-            f"storage.active_root is a forbidden broad path: {configured_norm}"
-        )
+        result.add_error(f"storage.active_root is a forbidden broad path: {configured_norm}")
         return None
-    if ".." in Path(configured).parts:
+    if ".." in Path(configured).parts and (
+        "/../" in configured or configured.endswith("/..") or configured.startswith("../")
+    ):
         # normpath may collapse; still reject explicit traversal intent in config text
-        if "/../" in configured or configured.endswith("/..") or configured.startswith("../"):
-            result.add_error("storage.active_root must not contain '..' traversal")
-            return None
+        result.add_error("storage.active_root must not contain '..' traversal")
+        return None
 
     root_path = Path(configured)
     root_info["is_symlink"] = root_path.is_symlink()
@@ -332,9 +328,7 @@ def validate_active_root(
         try:
             target = root_path.resolve(strict=False)
             root_info["symlink_target"] = str(target)
-            result.add_warning(
-                f"active_root is a symlink -> {target}; evaluating resolved target"
-            )
+            result.add_warning(f"active_root is a symlink -> {target}; evaluating resolved target")
         except OSError as exc:
             result.add_error(f"Unable to resolve active_root symlink: {exc}")
             return None
@@ -370,9 +364,7 @@ def validate_active_root(
     try:
         mode = resolved.stat().st_mode
         if mode & stat.S_IWOTH:
-            result.add_warning(
-                f"active_root is world-writable (mode={root_info['mode']})"
-            )
+            result.add_warning(f"active_root is world-writable (mode={root_info['mode']})")
     except OSError:
         pass
 
@@ -383,24 +375,25 @@ def validate_active_root(
 
     # Optional consistency: ssd_root should match active_root when present
     ssd_root = storage.get("ssd_root")
-    if isinstance(ssd_root, str) and ssd_root:
-        if _normalize_configured(ssd_root) != configured_norm:
-            result.add_warning(
-                f"storage.ssd_root ({ssd_root}) differs from active_root ({configured})"
-            )
+    if (
+        isinstance(ssd_root, str)
+        and ssd_root
+        and _normalize_configured(ssd_root) != configured_norm
+    ):
+        result.add_warning(f"storage.ssd_root ({ssd_root}) differs from active_root ({configured})")
 
     return resolved
 
 
 def validate_required_paths(
-    storage: Dict[str, Any],
+    storage: dict[str, Any],
     active_root: Path,
     result: ValidationResult,
     reject_symlink_escape: bool,
 ) -> None:
-    seen_canonical: Dict[str, str] = {}
+    seen_canonical: dict[str, str] = {}
     for key in REQUIRED_PATH_KEYS:
-        entry: Dict[str, Any] = {
+        entry: dict[str, Any] = {
             "configured": storage.get(key),
             "status": "FAIL",
             "exists": False,
@@ -433,9 +426,7 @@ def validate_required_paths(
             # Compare against configured active_root string as well as resolved
             configured_root = _normalize_configured(str(result.active_root["configured"]))
             if not _is_under(lexically, configured_root):
-                result.add_error(
-                    f"{key}: path escapes active_root lexically ({lexically})"
-                )
+                result.add_error(f"{key}: path escapes active_root lexically ({lexically})")
                 continue
 
         entry["is_symlink"] = configured_path.is_symlink()
@@ -488,14 +479,10 @@ def apply_capacity_gate(result: ValidationResult) -> None:
         result.add_error("Unable to evaluate capacity thresholds")
         return
     if free_bytes < minimum:
-        result.add_error(
-            f"free_bytes {free_bytes} is below minimum_free_bytes {minimum}"
-        )
+        result.add_error(f"free_bytes {free_bytes} is below minimum_free_bytes {minimum}")
         result.filesystem["capacity_status"] = "FAIL"
     elif free_bytes < warning:
-        result.add_warning(
-            f"free_bytes {free_bytes} is below warning_free_bytes {warning}"
-        )
+        result.add_warning(f"free_bytes {free_bytes} is below warning_free_bytes {warning}")
         result.filesystem["capacity_status"] = "WARNING"
     else:
         result.filesystem["capacity_status"] = "PASS"
@@ -503,7 +490,7 @@ def apply_capacity_gate(result: ValidationResult) -> None:
 
 def run_probe(active_root: Path, result: ValidationResult) -> bool:
     """Returns True if security/cleanup failure should force exit code 3."""
-    probe_info: Dict[str, Any] = {
+    probe_info: dict[str, Any] = {
         "requested": True,
         "executed": False,
         "passed": False,
@@ -567,7 +554,7 @@ def run_probe(active_root: Path, result: ValidationResult) -> bool:
                 probe_info["cleanup_verified"] = False
             else:
                 probe_info["cleanup_verified"] = True
-                # Ensure no leftover probe names from this run pattern only checked for this exact path
+                # Ensure no leftover probe names from this run (exact path only)
         elif probe_info["path"] and Path(probe_info["path"]).exists() and not created:
             # Did not create; do not delete pre-existing
             probe_info["cleanup_verified"] = None
@@ -578,19 +565,15 @@ def run_probe(active_root: Path, result: ValidationResult) -> bool:
     return security_fail
 
 
-def write_json_atomic(path: Path, payload: Dict[str, Any]) -> None:
+def write_json_atomic(path: Path, payload: dict[str, Any]) -> None:
     path = path.resolve()
     parent = path.parent
     if not parent.exists():
-        raise FileNotFoundError(
-            f"JSON output parent directory does not exist: {parent}"
-        )
+        raise FileNotFoundError(f"JSON output parent directory does not exist: {parent}")
     if not parent.is_dir():
         raise NotADirectoryError(f"JSON output parent is not a directory: {parent}")
     if path.exists():
-        raise FileExistsError(
-            f"Refusing to overwrite existing JSON report: {path}"
-        )
+        raise FileExistsError(f"Refusing to overwrite existing JSON report: {path}")
     fd, tmp_name = tempfile.mkstemp(prefix=".storage_validation_", dir=str(parent))
     tmp_path = Path(tmp_name)
     try:
@@ -602,10 +585,8 @@ def write_json_atomic(path: Path, payload: Dict[str, Any]) -> None:
         os.replace(str(tmp_path), str(path))
     except Exception:
         if tmp_path.exists():
-            try:
+            with contextlib.suppress(OSError):
                 tmp_path.unlink()
-            except OSError:
-                pass
         raise
 
 
@@ -696,7 +677,7 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main(argv: Optional[Sequence[str]] = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     try:
         args = parser.parse_args(argv)
@@ -706,9 +687,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
     config_path = Path(args.config)
     try:
-        result = run_validation(
-            config_path, do_probe=bool(args.probe), strict=bool(args.strict)
-        )
+        result = run_validation(config_path, do_probe=bool(args.probe), strict=bool(args.strict))
     except Exception as exc:  # noqa: BLE001
         result = ValidationResult(config_path=str(config_path))
         result.add_error(f"Unhandled validator exception: {exc}")
@@ -736,14 +715,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         print(f"active_backend={result.active_backend}")
         print(f"active_root={result.active_root.get('resolved')}")
         print(
-            "capacity={0} free_bytes={1}".format(
+            "capacity={} free_bytes={}".format(
                 result.filesystem.get("capacity_status"),
                 result.filesystem.get("free_bytes"),
             )
         )
         if result.probe.get("requested"):
             print(
-                "probe_passed={0} cleanup_verified={1}".format(
+                "probe_passed={} cleanup_verified={}".format(
                     result.probe.get("passed"),
                     result.probe.get("cleanup_verified"),
                 )

@@ -18,7 +18,6 @@ import sys
 from pathlib import Path
 from typing import Any
 
-
 DEFAULT_PROJECT_ROOT = Path(
     os.environ.get("FOOTBALL_ANALYTICS_ROOT", "/home/fdoblak/projects/football-analytics")
 )
@@ -119,9 +118,7 @@ def audit_storage(paths: dict[str, Any]) -> dict[str, Any]:
         "workspace_staging": (workspace / "staging").is_dir(),
         "workspace_cache": (workspace / "cache").is_dir(),
         "workspace_current": (
-            str((workspace / "current").resolve())
-            if (workspace / "current").exists()
-            else None
+            str((workspace / "current").resolve()) if (workspace / "current").exists() else None
         ),
     }
 
@@ -170,7 +167,6 @@ def audit_external_lock(project_root: Path) -> dict[str, Any]:
     out["mismatched"] = mismatches
     out["status"] = "OK" if not mismatches and out["total"] == 22 else "MISMATCH_OR_COUNT"
     return out
-
 
 
 def audit_ai_dev(python_bin: Path) -> dict[str, Any]:
@@ -256,7 +252,8 @@ def main() -> int:
         "notes": [
             "This script does not clone, fetch, install, download, or mutate git state.",
             "Prefer configs/environment/current_ai_dev.json from Stage 0 for frozen evidence.",
-            "Missing /dev/nvidia* alone is not proof of WSL CUDA failure; prefer /dev/dxg and /usr/lib/wsl/lib.",
+            "Missing /dev/nvidia* alone is not proof of WSL CUDA failure; "
+            "prefer /dev/dxg and /usr/lib/wsl/lib.",
             "Agent-context CUDA False should be classified carefully; see Stage 0 gpu_validation.",
         ],
     }

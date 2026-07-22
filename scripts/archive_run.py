@@ -4,15 +4,16 @@
 from __future__ import annotations
 
 import argparse
-import json
 import os
 import sys
 import traceback
+from collections.abc import Sequence
 from pathlib import Path
-from typing import Optional, Sequence
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
+
+import contextlib
 
 from football_analytics.utils import archive_safety as safety  # noqa: E402
 
@@ -22,10 +23,10 @@ def archive_run(
     run_id: str,
     policy_path: Path,
     execute: bool,
-    json_out: Optional[Path],
+    json_out: Path | None,
 ) -> safety.OpResult:
     result = safety.OpResult()
-    tmp_archive: Optional[Path] = None
+    tmp_archive: Path | None = None
     policy = safety.load_policy(policy_path)
     paths = policy["paths"]
     pol = policy["policy"]
@@ -53,7 +54,10 @@ def archive_run(
     run_manifest = safety.parse_run_manifest(manifest_path)
     if run_manifest["run_id"] != run_id:
         return result.fail("manifest run_id mismatch", safety.EXIT_INTEGRITY).finalize()
-    if pol.get("require_completed_status", True) and run_manifest["status"] != safety.ARCHIVEABLE_STATUS:
+    if (
+        pol.get("require_completed_status", True)
+        and run_manifest["status"] != safety.ARCHIVEABLE_STATUS
+    ):
         return result.fail(
             f"run status must be completed, got {run_manifest['status']!r}",
             safety.EXIT_INTEGRITY,
@@ -62,7 +66,9 @@ def archive_run(
     for rel in run_manifest.get("required_artifacts") or []:
         art = source / rel
         if not art.is_file() or art.is_symlink():
-            return result.fail(f"required artifact missing: {rel}", safety.EXIT_INTEGRITY).finalize()
+            return result.fail(
+                f"required artifact missing: {rel}", safety.EXIT_INTEGRITY
+            ).finalize()
 
     try:
         safety.scan_tree_for_unsafe(source)
@@ -207,7 +213,7 @@ def build_parser() -> argparse.ArgumentParser:
     return p
 
 
-def main(argv: Optional[Sequence[str]] = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
     execute = bool(args.execute) and not bool(args.dry_run)
@@ -228,10 +234,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         result.extras["traceback"] = traceback.format_exc(limit=15)
         result.finalize()
         if args.json_out:
-            try:
+            with contextlib.suppress(Exception):
                 safety.write_json_atomic(Path(args.json_out), result.to_dict())
-            except Exception:
-                pass
     if not args.quiet:
         print(f"status={result.status} exit_code={result.exit_code}")
         for w in result.warnings:

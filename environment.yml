@@ -1,0 +1,15 @@
+name: ai-dev
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - -r requirements/base.txt
+      - -r requirements/dev.txt
+# Notes:
+# - CUDA toolkit/driver is NOT installed via this file.
+# - Torch/CUDA wheels and vision stack are managed inside the existing ai-dev env
+#   and pinned in requirements/constraints-ai-dev.txt.
+# - External SoccerNet/third-party environments stay isolated.

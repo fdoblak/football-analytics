@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import contextlib
 import json
 import math
 import os
@@ -11,10 +12,11 @@ import re
 import subprocess
 import sys
 import tempfile
+from collections.abc import Iterable, Sequence
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Any
 
 EXIT_PASS = 0
 EXIT_FINDING = 1
@@ -62,18 +64,12 @@ BINARY_EXTENSIONS = {
 
 CREDENTIAL_EXTENSIONS = {".pem", ".key", ".p12", ".pfx", ".p8"}
 
-PRIVATE_KEY_RE = re.compile(
-    r"-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----"
-)
+PRIVATE_KEY_RE = re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----")
 GITHUB_TOKEN_RE = re.compile(r"\b(?:ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})\b")
 AWS_KEY_RE = re.compile(r"\bAKIA[0-9A-Z]{16}\b")
 BEARER_RE = re.compile(r"(?i)\bBearer\s+[A-Za-z0-9\-._~+/]+=*")
-URL_SECRET_RE = re.compile(
-    r"(?i)[?&](?:token|access_token|api_key|password|secret)=([^\s&#]+)"
-)
-PASSWORD_ASSIGN_RE = re.compile(
-    r"(?i)\b(?:password|passwd|pwd)\s*=\s*['\"]([^'\"]{8,})['\"]"
-)
+URL_SECRET_RE = re.compile(r"(?i)[?&](?:token|access_token|api_key|password|secret)=([^\s&#]+)")
+PASSWORD_ASSIGN_RE = re.compile(r"(?i)\b(?:password|passwd|pwd)\s*=\s*['\"]([^'\"]{8,})['\"]")
 ENV_ASSIGN_RE = re.compile(
     r"(?m)^(?:export\s+)?"
     r"([A-Z][A-Z0-9_]*(?:_PASSWORD|_PASSWD|_TOKEN|_SECRET|_API_KEY|_KEY))"
@@ -96,11 +92,11 @@ CODE_PATTERN_LINE = re.compile(
 class Finding:
     rule: str
     path: str
-    line: Optional[int]
+    line: int | None
     evidence: str
     severity: str = "high"
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "rule": self.rule,
             "path": self.path,
@@ -114,15 +110,15 @@ class Finding:
 class ScanResult:
     status: str = "PASS"
     exit_code: int = EXIT_PASS
-    findings: List[Finding] = field(default_factory=list)
-    skipped: List[Dict[str, str]] = field(default_factory=list)
+    findings: list[Finding] = field(default_factory=list)
+    skipped: list[dict[str, str]] = field(default_factory=list)
     scanned_files: int = 0
-    errors: List[str] = field(default_factory=list)
+    errors: list[str] = field(default_factory=list)
 
     def add(self, finding: Finding) -> None:
         self.findings.append(finding)
 
-    def finalize(self) -> "ScanResult":
+    def finalize(self) -> ScanResult:
         if self.errors and not self.findings:
             self.status = "CONFIG_ERROR"
             self.exit_code = EXIT_CONFIG
@@ -134,7 +130,7 @@ class ScanResult:
             self.exit_code = EXIT_PASS
         return self
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "schema_version": 1,
             "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -160,7 +156,7 @@ def redact(value: str, keep: int = 4) -> str:
 def shannon_entropy(s: str) -> float:
     if not s:
         return 0.0
-    freq: Dict[str, int] = {}
+    freq: dict[str, int] = {}
     for ch in s:
         freq[ch] = freq.get(ch, 0) + 1
     length = len(s)
@@ -176,7 +172,7 @@ def is_probably_binary(data: bytes) -> bool:
     return (text_chars / len(data)) < 0.70
 
 
-def write_json_atomic(path: Path, payload: Dict[str, Any]) -> None:
+def write_json_atomic(path: Path, payload: dict[str, Any]) -> None:
     path = path.resolve()
     parent = path.parent
     if not parent.is_dir():
@@ -194,10 +190,8 @@ def write_json_atomic(path: Path, payload: Dict[str, Any]) -> None:
         os.replace(str(tmp_path), str(path))
     except Exception:
         if tmp_path.exists():
-            try:
+            with contextlib.suppress(OSError):
                 tmp_path.unlink()
-            except OSError:
-                pass
         raise
 
 
@@ -217,7 +211,7 @@ def iter_candidate_paths(root: Path) -> Iterable[Path]:
             yield Path(dirpath) / name
 
 
-def staged_paths(root: Path) -> List[Path]:
+def staged_paths(root: Path) -> list[Path]:
     proc = subprocess.run(
         ["git", "diff", "--cached", "--name-only", "--diff-filter=ACMR"],
         cwd=str(root),
@@ -227,7 +221,7 @@ def staged_paths(root: Path) -> List[Path]:
     )
     if proc.returncode != 0:
         raise RuntimeError(proc.stderr.strip() or "git staged listing failed")
-    out: List[Path] = []
+    out: list[Path] = []
     for line in (proc.stdout or "").splitlines():
         rel = line.strip()
         if not rel:
@@ -265,13 +259,9 @@ def scan_text(path: Path, text: str, result: ScanResult, *, is_env_example: bool
         if CODE_PATTERN_LINE.search(line):
             continue
         if PRIVATE_KEY_RE.search(line):
-            result.add(
-                Finding("private_key_header", rel, lineno, "BEGIN PRIVATE KEY [REDACTED]")
-            )
+            result.add(Finding("private_key_header", rel, lineno, "BEGIN PRIVATE KEY [REDACTED]"))
         for m in GITHUB_TOKEN_RE.finditer(line):
-            result.add(
-                Finding("github_token", rel, lineno, redact(m.group(0)))
-            )
+            result.add(Finding("github_token", rel, lineno, redact(m.group(0))))
         for m in AWS_KEY_RE.finditer(line):
             result.add(Finding("aws_access_key", rel, lineno, redact(m.group(0))))
         for m in BEARER_RE.finditer(line):
@@ -436,7 +426,7 @@ def build_parser() -> argparse.ArgumentParser:
     return p
 
 
-def main(argv: Optional[Sequence[str]] = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     try:
         args = parser.parse_args(argv)
@@ -455,10 +445,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             result.status = "CONFIG_ERROR"
             payload = result.to_dict()
     if not args.quiet:
-        print(f"status={result.status} exit_code={result.exit_code} findings={len(result.findings)}")
+        print(
+            f"status={result.status} exit_code={result.exit_code} findings={len(result.findings)}"
+        )
         for finding in result.findings:
             print(
-                f"FINDING: {finding.rule} path={finding.path} line={finding.line} evidence={finding.evidence}"
+                "FINDING: "
+                f"{finding.rule} path={finding.path} "
+                f"line={finding.line} evidence={finding.evidence}"
             )
     return int(result.exit_code)
 

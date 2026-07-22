@@ -22,12 +22,20 @@ __pycache__/
 .ipynb_checkpoints/
 .venv/
 venv/
+dist/
+build/
+*.egg-info/
+.eggs/
+*.egg
 
 # --- logs & local runtime ---
 *.log
 workspace/
 runs/
 outputs/
+
+# Environment evidence (never commit)
+environment_checks/
 
 # --- model / data / video / array artifacts (default deny) ---
 *.pt

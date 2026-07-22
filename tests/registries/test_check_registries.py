@@ -6,7 +6,6 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
-import os
 import subprocess
 import sys
 import tempfile
@@ -43,7 +42,9 @@ def init_git_repo(path: Path, commit_message: str = "init") -> str:
     subprocess.run(["git", "config", "user.name", "Test"], cwd=path, check=True)
     (path / "README").write_text("x\n", encoding="utf-8")
     subprocess.run(["git", "add", "README"], cwd=path, check=True, capture_output=True)
-    subprocess.run(["git", "commit", "-m", commit_message], cwd=path, check=True, capture_output=True)
+    subprocess.run(
+        ["git", "commit", "-m", commit_message], cwd=path, check=True, capture_output=True
+    )
     head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=path, text=True).strip()
     return head
 
@@ -282,9 +283,7 @@ class CheckRegistriesTests(unittest.TestCase):
         self.assertEqual(self._run(), 3)
 
     def test_16_token_dataset_url_fail(self) -> None:
-        self.dataset_reg["datasets"][0]["source_url"] = (
-            "https://x/?" + "access_token=" + "leak"
-        )
+        self.dataset_reg["datasets"][0]["source_url"] = "https://x/?" + "access_token=" + "leak"
         self._write_all()
         self.assertEqual(self._run(), 3)
 

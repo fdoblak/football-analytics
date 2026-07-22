@@ -7,9 +7,9 @@ import argparse
 import os
 import sys
 import traceback
+from collections.abc import Sequence
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Optional, Sequence
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
@@ -20,10 +20,10 @@ from football_analytics.utils import archive_safety as safety  # noqa: E402
 def cleanup_run(
     *,
     run_id: str,
-    confirm_run_id: Optional[str],
+    confirm_run_id: str | None,
     policy_path: Path,
     execute: bool,
-    json_out: Optional[Path],
+    json_out: Path | None,
 ) -> safety.OpResult:
     result = safety.OpResult()
     policy = safety.load_policy(policy_path)
@@ -35,12 +35,11 @@ def cleanup_run(
     result.extras["cleanup_mode"] = pol.get("cleanup_mode", "quarantine")
     result.extras["independent_backup"] = False
 
-    if execute:
-        if confirm_run_id != run_id:
-            return result.fail(
-                "execute requires --confirm-run-id matching --run-id exactly",
-                safety.EXIT_SECURITY,
-            ).finalize()
+    if execute and confirm_run_id != run_id:
+        return result.fail(
+            "execute requires --confirm-run-id matching --run-id exactly",
+            safety.EXIT_SECURITY,
+        ).finalize()
 
     runs_root = Path(paths["runs_root"])
     archive_root = Path(paths["archive_root"])
@@ -80,7 +79,9 @@ def cleanup_run(
         return result.fail(f"archive re-verify failed: {exc}", exc.exit_code).finalize()
 
     if receipt.get("source_manifest_sha256") != manifest.get("source_manifest_sha256"):
-        return result.fail("receipt↔archive source_manifest_sha256 mismatch", safety.EXIT_INTEGRITY).finalize()
+        return result.fail(
+            "receipt↔archive source_manifest_sha256 mismatch", safety.EXIT_INTEGRITY
+        ).finalize()
     if receipt.get("archive_id") and receipt.get("archive_id") != manifest.get("archive_id"):
         return result.fail("receipt↔archive archive_id mismatch", safety.EXIT_INTEGRITY).finalize()
 
@@ -144,7 +145,9 @@ def cleanup_run(
         return result.fail(f"quarantine move failed: {exc}", safety.EXIT_INTEGRITY).finalize()
 
     if source.exists():
-        return result.fail("source still exists after quarantine move", safety.EXIT_INTEGRITY).finalize()
+        return result.fail(
+            "source still exists after quarantine move", safety.EXIT_INTEGRITY
+        ).finalize()
     if not quarantine_target.is_dir():
         return result.fail("quarantine target missing after move", safety.EXIT_INTEGRITY).finalize()
 
@@ -175,7 +178,7 @@ def build_parser() -> argparse.ArgumentParser:
     return p
 
 
-def main(argv: Optional[Sequence[str]] = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     execute = bool(args.execute) and not bool(args.dry_run)
     if not args.execute:

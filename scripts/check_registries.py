@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import contextlib
 import hashlib
 import json
 import os
@@ -12,10 +13,11 @@ import subprocess
 import sys
 import tempfile
 import traceback
+from collections.abc import Sequence
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Sequence, Tuple
+from typing import Any
 
 import yaml
 
@@ -68,9 +70,9 @@ EXIT_INTEGRITY = 3
 class Result:
     status: str = "PASS"
     exit_code: int = EXIT_PASS
-    errors: List[str] = field(default_factory=list)
-    warnings: List[str] = field(default_factory=list)
-    extras: Dict[str, Any] = field(default_factory=dict)
+    errors: list[str] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
+    extras: dict[str, Any] = field(default_factory=dict)
 
     def err(self, msg: str, integrity: bool = False) -> None:
         self.errors.append(msg)
@@ -80,7 +82,7 @@ class Result:
     def warn(self, msg: str) -> None:
         self.warnings.append(msg)
 
-    def finalize(self) -> "Result":
+    def finalize(self) -> Result:
         if self.exit_code == EXIT_INTEGRITY:
             self.status = "FAIL"
         elif self.errors:
@@ -95,7 +97,7 @@ class Result:
             self.exit_code = EXIT_PASS
         return self
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "schema_version": 1,
             "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -107,7 +109,7 @@ class Result:
         }
 
 
-def load_yaml(path: Path) -> Tuple[Optional[Any], Optional[str]]:
+def load_yaml(path: Path) -> tuple[Any | None, str | None]:
     try:
         return yaml.safe_load(path.read_text(encoding="utf-8")), None
     except Exception as exc:  # noqa: BLE001
@@ -125,7 +127,7 @@ def sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
-def run_git(path: Path, *args: str) -> Tuple[int, str]:
+def run_git(path: Path, *args: str) -> tuple[int, str]:
     try:
         proc = subprocess.run(
             ["git", *args],
@@ -140,7 +142,7 @@ def run_git(path: Path, *args: str) -> Tuple[int, str]:
         return 1, str(exc)
 
 
-def write_json_atomic(path: Path, payload: Dict[str, Any]) -> None:
+def write_json_atomic(path: Path, payload: dict[str, Any]) -> None:
     path = path.resolve()
     parent = path.parent
     if not parent.is_dir():
@@ -158,20 +160,18 @@ def write_json_atomic(path: Path, payload: Dict[str, Any]) -> None:
         os.replace(str(tmp_path), str(path))
     except Exception:
         if tmp_path.exists():
-            try:
+            with contextlib.suppress(OSError):
                 tmp_path.unlink()
-            except OSError:
-                pass
         raise
 
 
 def validate_model_registry(
-    data: Dict[str, Any],
+    data: dict[str, Any],
     result: Result,
     *,
     verify_files: bool,
-    lock: Optional[Dict[str, Any]],
-    schema_path: Optional[Path],
+    lock: dict[str, Any] | None,
+    schema_path: Path | None,
 ) -> None:
     if data.get("schema_version") != 1:
         result.err("model_registry schema_version must be 1", integrity=True)
@@ -207,7 +207,7 @@ def validate_model_registry(
         url = item.get("source_url")
         if isinstance(url, str) and SECRET_URL_RE.search(url):
             result.err(f"{mid}: source_url appears to contain a secret", integrity=True)
-        for key in item.keys():
+        for key in item:
             if key.lower() in CREDENTIAL_KEYS:
                 result.err(f"{mid}: credential-like field forbidden: {key}", integrity=True)
 
@@ -262,10 +262,10 @@ def validate_model_registry(
 
 
 def validate_dataset_registry(
-    data: Dict[str, Any],
+    data: dict[str, Any],
     result: Result,
     *,
-    schema_path: Optional[Path],
+    schema_path: Path | None,
 ) -> None:
     if data.get("schema_version") != 1:
         result.err("dataset_registry schema_version must be 1", integrity=True)
@@ -303,7 +303,7 @@ def validate_dataset_registry(
             result.err(f"{did}: invalid access_level {access!r}")
         if item.get("license_status") not in LICENSE_STATUS:
             result.err(f"{did}: invalid license_status")
-        for key in item.keys():
+        for key in item:
             if key.lower() in CREDENTIAL_KEYS:
                 result.err(f"{did}: credential-like field forbidden: {key}", integrity=True)
         url = item.get("source_url")
@@ -335,7 +335,7 @@ def validate_dataset_registry(
 
 
 def validate_external_lock(
-    lock: Dict[str, Any],
+    lock: dict[str, Any],
     result: Result,
     *,
     verify_repos: bool,
@@ -353,10 +353,10 @@ def validate_external_lock(
     if len(all_ids) != len(set(all_ids)):
         result.err("duplicate repo ids across lock groups", integrity=True)
 
-    paths_seen: Dict[str, str] = {}
-    remotes_seen: Dict[str, str] = {}
+    paths_seen: dict[str, str] = {}
+    remotes_seen: dict[str, str] = {}
     matched = 0
-    for group_name, group in (("repositories", repos), ("third_party_repositories", third)):
+    for _group_name, group in (("repositories", repos), ("third_party_repositories", third)):
         for rid, meta in group.items():
             if not isinstance(meta, dict):
                 result.err(f"{rid}: invalid metadata")
@@ -470,7 +470,7 @@ def build_parser() -> argparse.ArgumentParser:
     return p
 
 
-def main(argv: Optional[Sequence[str]] = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     try:
         args = parser.parse_args(argv)

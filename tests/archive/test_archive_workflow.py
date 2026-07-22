@@ -6,8 +6,6 @@ from __future__ import annotations
 import importlib.util
 import json
 import os
-import shutil
-import stat
 import sys
 import tempfile
 import unittest
@@ -128,24 +126,16 @@ class ArchiveWorkflowTests(unittest.TestCase):
         self._td.cleanup()
 
     def _archive(self, *extra: str, run_id: str = RUN_ID) -> int:
-        return AR.main(
-            ["--run-id", run_id, "--policy", str(self.policy), "--quiet", *extra]
-        )
+        return AR.main(["--run-id", run_id, "--policy", str(self.policy), "--quiet", *extra])
 
     def _verify(self, *extra: str, run_id: str = RUN_ID) -> int:
-        return VA.main(
-            ["--run-id", run_id, "--policy", str(self.policy), "--quiet", *extra]
-        )
+        return VA.main(["--run-id", run_id, "--policy", str(self.policy), "--quiet", *extra])
 
     def _restore(self, *extra: str, run_id: str = RUN_ID) -> int:
-        return RR.main(
-            ["--run-id", run_id, "--policy", str(self.policy), "--quiet", *extra]
-        )
+        return RR.main(["--run-id", run_id, "--policy", str(self.policy), "--quiet", *extra])
 
     def _cleanup(self, *extra: str, run_id: str = RUN_ID) -> int:
-        return CU.main(
-            ["--run-id", run_id, "--policy", str(self.policy), "--quiet", *extra]
-        )
+        return CU.main(["--run-id", run_id, "--policy", str(self.policy), "--quiet", *extra])
 
     def test_01_valid_completed_archive_pass(self) -> None:
         make_completed_run(self.runs)
@@ -173,7 +163,7 @@ class ArchiveWorkflowTests(unittest.TestCase):
         self.assertEqual(code, 3)
 
     def test_06_source_outside_runs_root(self) -> None:
-        # craft policy pointing runs elsewhere vs run path escape via symlink root — use bad policy path
+        # Craft outside path; archive must not treat it as runs_root child.
         outside = self.root / "outside" / RUN_ID
         outside.mkdir(parents=True)
         (outside / "run_manifest.json").write_text("{}", encoding="utf-8")
@@ -229,12 +219,14 @@ class ArchiveWorkflowTests(unittest.TestCase):
         make_completed_run(self.runs)
         self.assertEqual(self._archive("--execute"), 0)
         # modify source so not identical idempotent
-        (self.runs / RUN_ID / "logs" / "smoke.jsonl").write_text('{"event":"changed"}\n', encoding="utf-8")
+        (self.runs / RUN_ID / "logs" / "smoke.jsonl").write_text(
+            '{"event":"changed"}\n', encoding="utf-8"
+        )
         self.assertEqual(self._archive("--execute"), 1)
 
     def test_15_temp_archive_failure_cleanup(self) -> None:
         make_completed_run(self.runs)
-        # Force failure by making archive_root a file after policy load — simulate via monkeypatch copy
+        # Force copy failure; temporary archive dirs must be cleaned up.
         orig = safety.copy_file_verified
 
         def boom(*a, **k):
@@ -250,7 +242,7 @@ class ArchiveWorkflowTests(unittest.TestCase):
             safety.copy_file_verified = orig  # type: ignore
 
     def test_16_archive_file_hash_exact(self) -> None:
-        run = make_completed_run(self.runs)
+        make_completed_run(self.runs)
         self.assertEqual(self._archive("--execute"), 0)
         manifest = json.loads((self.archive / RUN_ID / "archive_manifest.json").read_text())
         for entry in manifest["files"]:
@@ -402,13 +394,8 @@ class ArchiveWorkflowTests(unittest.TestCase):
     def test_35_quarantine_collision_rejected(self) -> None:
         make_completed_run(self.runs)
         self.assertEqual(self._archive("--execute"), 0)
-        # pre-create colliding name by patching timestamp — create dir matching pattern after freeze
-        # Instead: create quarantine dir that cleanup will try — monkeypatch datetime in module hard;
-        # simpler: call cleanup twice after manually placing collision for known ts is flaky.
-        # Create any existing path that assert would hit: run cleanup once, restore source?
-        # Move back and set quarantine target exists with same second — use fixed name via policy trick.
-        # Pre-create all possible? Use monkeypatch on datetime in cleanup module.
-        fixed = "20260722T000000Z"
+
+        # Pre-create colliding quarantine name via datetime monkeypatch.
         class FixedDateTime:
             @staticmethod
             def now(tz=None):
@@ -419,10 +406,10 @@ class ArchiveWorkflowTests(unittest.TestCase):
                 raise NotImplementedError
 
         # patch cleanup_run.datetime
-        import scripts.cleanup_run as cu_mod  # type: ignore
 
         # module already loaded as CU; patch CU.datetime
         real = CU.datetime
+
         class D:
             timezone = timezone
 

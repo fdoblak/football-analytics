@@ -101,9 +101,7 @@ class CheckSecretsTests(unittest.TestCase):
 
     def test_07_password_assignment(self) -> None:
         val = "hunter2hunter2"
-        (self.root / "p.txt").write_text(
-            "password" + " = " + f'"{val}"\n', encoding="utf-8"
-        )
+        (self.root / "p.txt").write_text("password" + " = " + f'"{val}"\n', encoding="utf-8")
         result = CS.run_scan(self.root, staged=False)
         self.assertTrue(any(f.rule == "password_assignment" for f in result.findings))
 
@@ -162,7 +160,9 @@ class CheckSecretsTests(unittest.TestCase):
         dirty.write_text(_gh_token("D") + "\n", encoding="utf-8")
         code = CS.main(["--root", str(self.root), "--staged", "--quiet"])
         self.assertEqual(code, 0)
-        subprocess.run(["git", "add", "staged_leak.txt"], cwd=self.root, check=True, capture_output=True)
+        subprocess.run(
+            ["git", "add", "staged_leak.txt"], cwd=self.root, check=True, capture_output=True
+        )
         code2 = CS.main(["--root", str(self.root), "--staged", "--quiet"])
         self.assertEqual(code2, 1)
 

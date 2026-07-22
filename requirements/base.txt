@@ -1,0 +1,4 @@
+# Direct runtime dependencies for football-analytics (Stage 2A).
+# Heavy CV/ML stacks stay in the Conda ai-dev constraint file, not here.
+PyYAML>=6.0
+pyarrow==25.0.0

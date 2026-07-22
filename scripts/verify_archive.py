@@ -6,8 +6,8 @@ from __future__ import annotations
 import argparse
 import sys
 import traceback
+from collections.abc import Sequence
 from pathlib import Path
-from typing import Optional, Sequence
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
@@ -17,10 +17,10 @@ from football_analytics.utils import archive_safety as safety  # noqa: E402
 
 def verify(
     *,
-    run_id: Optional[str],
+    run_id: str | None,
     policy_path: Path,
-    archive_path: Optional[Path],
-    json_out: Optional[Path],
+    archive_path: Path | None,
+    json_out: Path | None,
 ) -> safety.OpResult:
     result = safety.OpResult()
     policy = safety.load_policy(policy_path)
@@ -64,7 +64,9 @@ def verify(
             if data.get("archive_path") != str(archive_path):
                 result.warn("receipt archive_path differs from verified path")
             if data.get("source_manifest_sha256") != manifest.get("source_manifest_sha256"):
-                return result.fail("receipt source_manifest_sha256 mismatch", safety.EXIT_INTEGRITY).finalize()
+                return result.fail(
+                    "receipt source_manifest_sha256 mismatch", safety.EXIT_INTEGRITY
+                ).finalize()
 
     if json_out:
         safety.write_json_atomic(json_out, result.finalize().to_dict())
@@ -84,7 +86,7 @@ def build_parser() -> argparse.ArgumentParser:
     return p
 
 
-def main(argv: Optional[Sequence[str]] = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
         result = verify(

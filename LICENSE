@@ -1,0 +1,19 @@
+Copyright (c) 2026 Furkan Doblak
+All rights reserved.
+
+This software and associated documentation files (the "Software") are the
+proprietary property of Furkan Doblak.
+
+Permission is NOT granted to any person to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, or to permit persons
+to whom the Software is furnished to do so, except with prior written permission
+from the copyright holder.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+Third-party components (including SoccerNet ecosystem repositories, TrackLab,
+calibration/model sources, and other dependencies) remain under their own
+licenses. See THIRD_PARTY_NOTICES.md and docs/legal/license_inventory.md.
+This LICENSE text is a project policy statement, not legal advice.

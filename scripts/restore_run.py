@@ -7,8 +7,8 @@ import argparse
 import os
 import sys
 import traceback
+from collections.abc import Sequence
 from pathlib import Path
-from typing import Optional, Sequence
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
@@ -21,10 +21,10 @@ def restore_run(
     run_id: str,
     policy_path: Path,
     execute: bool,
-    json_out: Optional[Path],
+    json_out: Path | None,
 ) -> safety.OpResult:
     result = safety.OpResult()
-    tmp: Optional[Path] = None
+    tmp: Path | None = None
     policy = safety.load_policy(policy_path)
     paths = policy["paths"]
     safety.validate_run_id(run_id, policy)
@@ -87,7 +87,10 @@ def restore_run(
         # verify hashes of restored payload files (exclude receipt)
         for rec in records:
             p = tmp / rec.relative_path
-            if p.stat().st_size != rec.size_bytes or safety.sha256_file(p).lower() != rec.sha256.lower():
+            if (
+                p.stat().st_size != rec.size_bytes
+                or safety.sha256_file(p).lower() != rec.sha256.lower()
+            ):
                 raise safety.ArchiveError(f"restore hash mismatch: {rec.relative_path}")
         os.rename(str(tmp), str(target))
         tmp = None
@@ -131,7 +134,7 @@ def build_parser() -> argparse.ArgumentParser:
     return p
 
 
-def main(argv: Optional[Sequence[str]] = None) -> int:
+def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     execute = bool(args.execute) and not bool(args.dry_run)
     if not args.execute:

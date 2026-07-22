@@ -1,18 +1,17 @@
 #!/usr/bin/env python3
 """Orchestrate SoccerNet repo environment setup, asset download, and smoke tests."""
+
 from __future__ import annotations
 
 import hashlib
 import json
 import os
-import re
 import subprocess
 import sys
 import urllib.request
-from dataclasses import dataclass, field, asdict
-from datetime import datetime, timezone
+from dataclasses import asdict, dataclass, field
+from datetime import datetime
 from pathlib import Path
-from typing import Any
 
 TIMESTAMP = os.environ.get("SOCCERNET_INSTALL_TS", "20260712_170330")
 HOME = Path.home()
@@ -25,7 +24,20 @@ MODEL_ROOT = HOME / "models/soccernet"
 ASSETS = HOME / "workspace/soccernet_nonvideo_assets"
 REPO_ENVS = PROJECT / "requirements/repo_envs"
 CONFIG_DIR = PROJECT / "configs/soccernet_install"
-VIDEO_EXTS = {".mp4", ".mkv", ".avi", ".mov", ".webm", ".mpeg", ".mpg", ".m4v", ".ts", ".vob", ".wmv", ".flv"}
+VIDEO_EXTS = {
+    ".mp4",
+    ".mkv",
+    ".avi",
+    ".mov",
+    ".webm",
+    ".mpeg",
+    ".mpg",
+    ".m4v",
+    ".ts",
+    ".vob",
+    ".wmv",
+    ".flv",
+}
 
 CONDA = HOME / "miniconda3/bin/conda"
 UV = HOME / ".local/bin/uv"
@@ -56,7 +68,9 @@ class RepoResult:
     notes: str = ""
 
 
-def run(cmd: list[str], cwd: Path | None = None, env: dict | None = None, timeout: int = 1800) -> subprocess.CompletedProcess:
+def run(
+    cmd: list[str], cwd: Path | None = None, env: dict | None = None, timeout: int = 1800
+) -> subprocess.CompletedProcess:
     e = os.environ.copy()
     if env:
         e.update(env)
@@ -75,6 +89,7 @@ def git_info(repo_path: Path) -> dict:
     def g(*args):
         r = run(["git", *args], cwd=repo_path)
         return r.stdout.strip() if r.returncode == 0 else ""
+
     return {
         "commit": g("rev-parse", "HEAD"),
         "branch": g("branch", "--show-current"),
@@ -88,7 +103,9 @@ def conda_env_exists(name: str) -> bool:
     if r.returncode != 0:
         return False
     data = json.loads(r.stdout)
-    return name in data.get("envs", []) or any(str(e).endswith(f"/envs/{name}") for e in data.get("envs", []))
+    return name in data.get("envs", []) or any(
+        str(e).endswith(f"/envs/{name}") for e in data.get("envs", [])
+    )
 
 
 def create_conda_env(name: str, python: str = "3.10") -> bool:
@@ -115,8 +132,15 @@ def env_metadata(env: str) -> dict:
     meta = {}
     for label, code in [
         ("python", "import sys; print(sys.version.split()[0])"),
-        ("pytorch", "import importlib; m=importlib.import_module('torch'); print(getattr(m,'__version__','NA'))"),
-        ("cuda", "import importlib; m=importlib.import_module('torch'); print(m.cuda.is_available())"),
+        (
+            "pytorch",
+            "import importlib; m=importlib.import_module('torch'); "
+            "print(getattr(m,'__version__','NA'))",
+        ),
+        (
+            "cuda",
+            "import importlib; m=importlib.import_module('torch'); print(m.cuda.is_available())",
+        ),
     ]:
         r = run([str(py), "-c", code])
         meta[label] = r.stdout.strip() if r.returncode == 0 else "N/A"
@@ -152,7 +176,12 @@ def download_file(url: str, dest: Path, repo: str) -> dict | None:
             return None
         part.write_bytes(data)
         part.rename(dest)
-        return {"path": str(dest), "sha256": sha256_file(dest), "byte_size": dest.stat().st_size, "status": "downloaded"}
+        return {
+            "path": str(dest),
+            "sha256": sha256_file(dest),
+            "byte_size": dest.stat().st_size,
+            "status": "downloaded",
+        }
     except Exception as e:
         log(repo, f"DOWNLOAD FAIL {url}: {e}", "assets")
         return None
@@ -168,20 +197,39 @@ def install_sn_trackeval() -> RepoResult:
     repo = "sn-trackeval"
     path = SOCCERNET / repo
     gi = git_info(path)
-    res = RepoResult(repo=repo, repo_type="EVALUATION_TOOL", commit=gi["commit"], environment="sn-trackeval", install_method="conda+pip-editable")
+    res = RepoResult(
+        repo=repo,
+        repo_type="EVALUATION_TOOL",
+        commit=gi["commit"],
+        environment="sn-trackeval",
+        install_method="conda+pip-editable",
+    )
     if not create_conda_env("sn-trackeval", "3.10"):
-        res.install_status = "FAILED"; res.blocker = "conda create failed"; return res
+        res.install_status = "FAILED"
+        res.blocker = "conda create failed"
+        return res
     r = pip_in_env("sn-trackeval", "install", "-e", str(path))
     log(repo, r.stdout + r.stderr)
     if r.returncode != 0:
-        res.install_status = "FAILED"; res.blocker = r.stderr[:300]; return res
+        res.install_status = "FAILED"
+        res.blocker = r.stderr[:300]
+        return res
     res.env_path = str(HOME / "miniconda3/envs/sn-trackeval")
     meta = env_metadata("sn-trackeval")
-    res.python = meta.get("python", ""); res.pytorch = meta.get("pytorch", "N/A"); res.pip_check = meta.get("pip_check", "")
+    res.python = meta.get("python", "")
+    res.pytorch = meta.get("pytorch", "N/A")
+    res.pip_check = meta.get("pip_check", "")
     res.tests["import_trackeval"] = smoke_import("sn-trackeval", "trackeval")
-    r = run([str(conda_python("sn-trackeval")), str(path / "scripts/run_soccernet_gs.py"), "--help"], cwd=path)
+    r = run(
+        [str(conda_python("sn-trackeval")), str(path / "scripts/run_soccernet_gs.py"), "--help"],
+        cwd=path,
+    )
     res.tests["cli_help"] = r.returncode == 0
-    res.smoke_level = "L3_CLI" if res.tests["cli_help"] else ("L2_IMPORT" if res.tests["import_trackeval"] else "L1_ENV")
+    res.smoke_level = (
+        "L3_CLI"
+        if res.tests["cli_help"]
+        else ("L2_IMPORT" if res.tests["import_trackeval"] else "L1_ENV")
+    )
     res.install_status = "INSTALLED"
     res.final_status = "EVALUATION_READY" if res.tests["import_trackeval"] else "PARTIALLY_READY"
     return res
@@ -191,9 +239,16 @@ def install_sn_echoes() -> RepoResult:
     repo = "sn-echoes"
     path = SOCCERNET / repo
     gi = git_info(path)
-    res = RepoResult(repo=repo, repo_type="DATASET_RELEASE", commit=gi["commit"], environment="sn-echoes", install_method="conda-minimal")
+    res = RepoResult(
+        repo=repo,
+        repo_type="DATASET_RELEASE",
+        commit=gi["commit"],
+        environment="sn-echoes",
+        install_method="conda-minimal",
+    )
     if not create_conda_env("sn-echoes", "3.10"):
-        res.install_status = "FAILED"; return res
+        res.install_status = "FAILED"
+        return res
     py = conda_python("sn-echoes")
     json_count = len(list((path / "Dataset").rglob("*.json"))) if (path / "Dataset").exists() else 0
     res.tests["dataset_json_count"] = json_count
@@ -210,7 +265,13 @@ def install_sn_jersey() -> RepoResult:
     repo = "sn-jersey"
     path = SOCCERNET / repo
     gi = git_info(path)
-    res = RepoResult(repo=repo, repo_type="CHALLENGE_DOCS_ONLY", commit=gi["commit"], environment="ai-dev-ref", install_method="none-docs-only")
+    res = RepoResult(
+        repo=repo,
+        repo_type="CHALLENGE_DOCS_ONLY",
+        commit=gi["commit"],
+        environment="ai-dev-ref",
+        install_method="none-docs-only",
+    )
     res.tests["readme_exists"] = (path / "README.md").exists()
     res.smoke_level = "L0_CLONE"
     res.install_status = "CLONED_ONLY"
@@ -225,14 +286,30 @@ def install_sn_calibration() -> RepoResult:
     path = SOCCERNET / repo
     gi = git_info(path)
     env = "sn-calibration"
-    res = RepoResult(repo=repo, repo_type="CHALLENGE_DEVKIT", commit=gi["commit"], environment=env, install_method="conda+pip-reqs")
+    res = RepoResult(
+        repo=repo,
+        repo_type="CHALLENGE_DEVKIT",
+        commit=gi["commit"],
+        environment=env,
+        install_method="conda+pip-reqs",
+    )
     if not create_conda_env(env, "3.10"):
-        res.install_status = "FAILED"; return res
+        res.install_status = "FAILED"
+        return res
     # Install pinned old torch stack per requirements
-    r = pip_in_env(env, "install", "torch==1.10.2", "torchvision==0.11.3", "--index-url", "https://download.pytorch.org/whl/cpu")
+    pip_in_env(
+        env,
+        "install",
+        "torch==1.10.2",
+        "torchvision==0.11.3",
+        "--index-url",
+        "https://download.pytorch.org/whl/cpu",
+    )
     pip_in_env(env, "install", "-r", str(path / "requirements.txt"))
     meta = env_metadata(env)
-    res.python = meta.get("python", ""); res.pytorch = meta.get("pytorch", ""); res.pip_check = meta.get("pip_check", "")
+    res.python = meta.get("python", "")
+    res.pytorch = meta.get("pytorch", "")
+    res.pip_check = meta.get("pip_check", "")
     res.tests["import_cv2"] = smoke_import(env, "cv2")
     # Google Drive weight - often blocked without gdown; try gdown if available
     weight_dir = MODEL_ROOT / repo
@@ -240,7 +317,9 @@ def install_sn_calibration() -> RepoResult:
     res.weights_failed.append("model_extremities.pth (Google Drive - needs gdown or manual)")
     res.smoke_level = "L2_IMPORT" if res.tests.get("import_cv2") else "L1_ENV"
     res.install_status = "INSTALLED"
-    res.final_status = "READY_FOR_NONVIDEO_USE" if res.tests.get("import_cv2") else "PARTIALLY_READY"
+    res.final_status = (
+        "READY_FOR_NONVIDEO_USE" if res.tests.get("import_cv2") else "PARTIALLY_READY"
+    )
     res.blocker = "Model weights on Google Drive not auto-downloaded"
     return res
 
@@ -250,15 +329,33 @@ def install_sn_teamspotting() -> RepoResult:
     path = SOCCERNET / repo
     gi = git_info(path)
     env = "sn-teamspotting"
-    res = RepoResult(repo=repo, repo_type="CHALLENGE_BASELINE", commit=gi["commit"], environment=env, install_method="conda+pip-reqs")
+    res = RepoResult(
+        repo=repo,
+        repo_type="CHALLENGE_BASELINE",
+        commit=gi["commit"],
+        environment=env,
+        install_method="conda+pip-reqs",
+    )
     if not create_conda_env(env, "3.10"):
-        res.install_status = "FAILED"; return res
-    r = pip_in_env(env, "install", "torch==2.5.0", "torchvision==0.20.0", "--index-url", "https://download.pytorch.org/whl/cpu")
+        res.install_status = "FAILED"
+        return res
+    pip_in_env(
+        env,
+        "install",
+        "torch==2.5.0",
+        "torchvision==0.20.0",
+        "--index-url",
+        "https://download.pytorch.org/whl/cpu",
+    )
     r2 = pip_in_env(env, "install", "-r", str(path / "requirements.txt"))
     if r2.returncode != 0:
-        res.install_status = "FAILED"; res.blocker = r2.stderr[:300]; return res
+        res.install_status = "FAILED"
+        res.blocker = r2.stderr[:300]
+        return res
     meta = env_metadata(env)
-    res.python = meta.get("python", ""); res.pytorch = meta.get("pytorch", ""); res.pip_check = meta.get("pip_check", "")
+    res.python = meta.get("python", "")
+    res.pytorch = meta.get("pytorch", "")
+    res.pip_check = meta.get("pip_check", "")
     res.tests["import_torch"] = smoke_import(env, "torch")
     res.smoke_level = "L2_IMPORT" if res.tests["import_torch"] else "L1_ENV"
     res.install_status = "INSTALLED"
@@ -273,30 +370,49 @@ def install_sn_gamestate() -> RepoResult:
     path = SOCCERNET / repo
     gi = git_info(path)
     env = "sn-gamestate"
-    res = RepoResult(repo=repo, repo_type="CHALLENGE_BASELINE_FRAMEWORK", commit=gi["commit"], environment=env, install_method="uv+python3.9")
+    res = RepoResult(
+        repo=repo,
+        repo_type="CHALLENGE_BASELINE_FRAMEWORK",
+        commit=gi["commit"],
+        environment=env,
+        install_method="uv+python3.9",
+    )
     venv = VENV_ROOT / env
     if not UV.exists():
-        res.install_status = "FAILED"; res.blocker = "uv not found"; return res
-  # Python 3.9 via conda for uv
+        res.install_status = "FAILED"
+        res.blocker = "uv not found"
+        return res
+    # Python 3.9 via conda for uv
     if not create_conda_env(env, "3.9"):
-        res.install_status = "FAILED"; return res
+        res.install_status = "FAILED"
+        return res
     py39 = conda_python(env)
     if not venv.exists():
         r = run([str(UV), "venv", str(venv), "--python", str(py39)])
         log(repo, r.stdout + r.stderr)
     vpy = venv / "bin/python"
     # Install with uv pip using pyproject constraints
-    r = run([str(UV), "pip", "install", "-e", str(path)], env={"VIRTUAL_ENV": str(venv), "UV_PROJECT_ENVIRONMENT": str(venv)})
+    r = run(
+        [str(UV), "pip", "install", "-e", str(path)],
+        env={"VIRTUAL_ENV": str(venv), "UV_PROJECT_ENVIRONMENT": str(venv)},
+    )
     log(repo, f"uv pip install -e: {r.returncode}\n{r.stdout}\n{r.stderr}")
     if r.returncode != 0:
-        res.install_status = "FAILED"; res.blocker = r.stderr[:500]; res.final_status = "BLOCKED_DEPENDENCY"; return res
+        res.install_status = "FAILED"
+        res.blocker = r.stderr[:500]
+        res.final_status = "BLOCKED_DEPENDENCY"
+        return res
     res.env_path = str(venv)
     res.tests["import_tracklab"] = run([str(vpy), "-c", "import tracklab"]).returncode == 0
     res.tests["import_sn_gamestate"] = run([str(vpy), "-c", "import sn_gamestate"]).returncode == 0
-    res.tests["import_mmcv"] = run([str(vpy), "-c", "import mmcv; print(mmcv.__version__)"]).returncode == 0
+    res.tests["import_mmcv"] = (
+        run([str(vpy), "-c", "import mmcv; print(mmcv.__version__)"]).returncode == 0
+    )
     r = run([str(venv / "bin/tracklab"), "--help"])
     res.tests["cli_tracklab"] = r.returncode == 0
-    meta_r = run([str(vpy), "-c", "import torch; print(torch.__version__, torch.cuda.is_available())"])
+    meta_r = run(
+        [str(vpy), "-c", "import torch; print(torch.__version__, torch.cuda.is_available())"]
+    )
     res.pytorch = meta_r.stdout.strip()
     res.python = "3.9"
     if res.tests["import_tracklab"] and res.tests["import_sn_gamestate"]:

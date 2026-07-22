@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import contextlib
 import hashlib
 import json
 import os
@@ -10,10 +11,11 @@ import shutil
 import stat
 import tempfile
 import uuid
+from collections.abc import Sequence
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
+from typing import Any
 
 import yaml
 
@@ -57,7 +59,7 @@ class FileRecord:
     sha256: str
     file_type: str = "regular"
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "relative_path": self.relative_path,
             "size_bytes": self.size_bytes,
@@ -70,11 +72,11 @@ class FileRecord:
 class OpResult:
     status: str = "PASS"
     exit_code: int = EXIT_OK
-    errors: List[str] = field(default_factory=list)
-    warnings: List[str] = field(default_factory=list)
-    extras: Dict[str, Any] = field(default_factory=dict)
+    errors: list[str] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
+    extras: dict[str, Any] = field(default_factory=dict)
 
-    def fail(self, msg: str, code: int = EXIT_INTEGRITY) -> "OpResult":
+    def fail(self, msg: str, code: int = EXIT_INTEGRITY) -> OpResult:
         self.errors.append(msg)
         self.exit_code = code
         self.status = "FAIL"
@@ -83,7 +85,7 @@ class OpResult:
     def warn(self, msg: str) -> None:
         self.warnings.append(msg)
 
-    def finalize(self) -> "OpResult":
+    def finalize(self) -> OpResult:
         if self.errors:
             self.status = "FAIL"
         elif self.warnings:
@@ -94,7 +96,7 @@ class OpResult:
             self.exit_code = EXIT_OK
         return self
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "schema_version": 1,
             "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -110,7 +112,7 @@ def utc_now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def load_policy(path: Path) -> Dict[str, Any]:
+def load_policy(path: Path) -> dict[str, Any]:
     if not path.is_file():
         raise ArchiveError(f"policy missing: {path}", EXIT_CONFIG)
     try:
@@ -145,13 +147,13 @@ def load_policy(path: Path) -> Dict[str, Any]:
     return data
 
 
-def validate_run_id(run_id: str, policy: Dict[str, Any]) -> None:
+def validate_run_id(run_id: str, policy: dict[str, Any]) -> None:
     if not isinstance(run_id, str) or not run_id:
         raise ArchiveError("run_id empty", EXIT_SECURITY)
     if "/" in run_id or "\\" in run_id or ".." in run_id:
         raise ArchiveError("run_id contains path separators", EXIT_SECURITY)
     pattern = (policy.get("run_id") or {}).get("pattern")
-    if not re.fullmatch(pattern, run_id):
+    if not isinstance(pattern, str) or not re.fullmatch(pattern, run_id):
         raise ArchiveError(f"run_id does not match policy pattern: {run_id}", EXIT_SECURITY)
 
 
@@ -213,9 +215,7 @@ def is_special_file(path: Path) -> bool:
     if stat.S_ISFIFO(mode) or stat.S_ISCHR(mode) or stat.S_ISBLK(mode) or stat.S_ISSOCK(mode):
         return True
     is_door = getattr(stat, "S_ISDOOR", None)
-    if callable(is_door) and is_door(mode):
-        return True
-    return False
+    return bool(callable(is_door) and is_door(mode))
 
 
 def normalize_rel_path(rel: str) -> str:
@@ -253,9 +253,9 @@ def scan_tree_for_unsafe(root: Path) -> None:
                 raise ArchiveError(f"special file rejected: {p}", EXIT_SECURITY)
 
 
-def inventory_regular_files(root: Path) -> List[FileRecord]:
+def inventory_regular_files(root: Path) -> list[FileRecord]:
     scan_tree_for_unsafe(root)
-    records: List[FileRecord] = []
+    records: list[FileRecord] = []
     for dirpath, _, filenames in os.walk(root, followlinks=False):
         base = Path(dirpath)
         for name in sorted(filenames):
@@ -273,7 +273,7 @@ def inventory_regular_files(root: Path) -> List[FileRecord]:
             )
     records.sort(key=lambda r: r.relative_path)
     # duplicate check
-    seen: Set[str] = set()
+    seen: set[str] = set()
     for rec in records:
         if rec.relative_path in seen:
             raise ArchiveError(f"duplicate relative_path: {rec.relative_path}", EXIT_SECURITY)
@@ -281,7 +281,7 @@ def inventory_regular_files(root: Path) -> List[FileRecord]:
     return records
 
 
-def write_json_atomic(path: Path, payload: Dict[str, Any]) -> None:
+def write_json_atomic(path: Path, payload: dict[str, Any]) -> None:
     path = Path(path)
     parent = path.parent
     if not parent.is_dir():
@@ -298,10 +298,8 @@ def write_json_atomic(path: Path, payload: Dict[str, Any]) -> None:
         fsync_dir(parent)
     except Exception:
         if tmp_path.exists():
-            try:
+            with contextlib.suppress(OSError):
                 tmp_path.unlink()
-            except OSError:
-                pass
         raise
 
 
@@ -338,7 +336,7 @@ def copy_file_verified(src: Path, dst: Path, expected: FileRecord) -> None:
         raise ArchiveError(f"hash mismatch after copy: {dst}", EXIT_INTEGRITY)
 
 
-def remove_exact_tree(path: Path, *, must_be_under: Path, marker_name: Optional[str] = None) -> None:
+def remove_exact_tree(path: Path, *, must_be_under: Path, marker_name: str | None = None) -> None:
     """Remove only an exact temporary tree we created. No rm -rf of broad roots."""
     path = path.resolve()
     must = must_be_under.resolve()
@@ -374,7 +372,7 @@ def remove_exact_tree(path: Path, *, must_be_under: Path, marker_name: Optional[
     path.rmdir()
 
 
-def load_json(path: Path) -> Dict[str, Any]:
+def load_json(path: Path) -> dict[str, Any]:
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
     except Exception as exc:  # noqa: BLE001
@@ -384,7 +382,7 @@ def load_json(path: Path) -> Dict[str, Any]:
     return data
 
 
-def parse_run_manifest(path: Path) -> Dict[str, Any]:
+def parse_run_manifest(path: Path) -> dict[str, Any]:
     data = load_json(path)
     if data.get("schema_version") != 1:
         raise ArchiveError("run_manifest schema_version must be 1", EXIT_CONFIG)
@@ -395,7 +393,7 @@ def parse_run_manifest(path: Path) -> Dict[str, Any]:
     return data
 
 
-def validate_archive_manifest_structure(manifest: Dict[str, Any]) -> List[FileRecord]:
+def validate_archive_manifest_structure(manifest: dict[str, Any]) -> list[FileRecord]:
     if manifest.get("schema_version") != 1:
         raise ArchiveError("archive_manifest schema_version must be 1", EXIT_INTEGRITY)
     for key in (
@@ -418,8 +416,8 @@ def validate_archive_manifest_structure(manifest: Dict[str, Any]) -> List[FileRe
     files = manifest.get("files")
     if not isinstance(files, list):
         raise ArchiveError("files must be list", EXIT_INTEGRITY)
-    records: List[FileRecord] = []
-    seen: Set[str] = set()
+    records: list[FileRecord] = []
+    seen: set[str] = set()
     for item in files:
         if not isinstance(item, dict):
             raise ArchiveError("file entry must be object", EXIT_INTEGRITY)
@@ -454,9 +452,9 @@ def validate_archive_manifest_structure(manifest: Dict[str, Any]) -> List[FileRe
 def verify_archive_tree(
     archive_path: Path,
     *,
-    expected_run_id: Optional[str] = None,
-    policy: Optional[Dict[str, Any]] = None,
-) -> Tuple[Dict[str, Any], List[FileRecord]]:
+    expected_run_id: str | None = None,
+    policy: dict[str, Any] | None = None,
+) -> tuple[dict[str, Any], list[FileRecord]]:
     if archive_path.is_symlink():
         raise ArchiveError(f"archive path is symlink: {archive_path}", EXIT_SECURITY)
     if not archive_path.is_dir():
@@ -475,7 +473,7 @@ def verify_archive_tree(
     if expected_run_id and manifest.get("run_id") != expected_run_id:
         raise ArchiveError("manifest run_id mismatch", EXIT_INTEGRITY)
     scan_tree_for_unsafe(archive_path)
-    on_disk: Dict[str, Path] = {}
+    on_disk: dict[str, Path] = {}
     for dirpath, _, filenames in os.walk(archive_path, followlinks=False):
         base = Path(dirpath)
         for name in filenames:
@@ -506,7 +504,7 @@ def verify_archive_tree(
     return manifest, records
 
 
-def current_points_to_run(policy: Dict[str, Any], run_path: Path) -> bool:
+def current_points_to_run(policy: dict[str, Any], run_path: Path) -> bool:
     current = Path((policy.get("paths") or {}).get("current_symlink") or "")
     if not current or not str(current):
         return False
@@ -519,9 +517,7 @@ def current_points_to_run(policy: Dict[str, Any], run_path: Path) -> bool:
                 target = current.resolve(strict=False)
             except OSError:
                 return False
-            workspace = Path(
-                (policy.get("paths") or {}).get("workspace_root") or current.parent
-            )
+            workspace = Path((policy.get("paths") or {}).get("workspace_root") or current.parent)
             runs_root = Path((policy.get("paths") or {}).get("runs_root") or "")
             allowed_roots = []
             for root in (workspace, runs_root):
@@ -557,8 +553,8 @@ def build_archive_manifest(
     archive_path: Path,
     records: Sequence[FileRecord],
     source_manifest_sha256: str,
-    policy: Dict[str, Any],
-) -> Dict[str, Any]:
+    policy: dict[str, Any],
+) -> dict[str, Any]:
     pol = policy.get("policy") or {}
     files = [r.to_dict() for r in sorted(records, key=lambda x: x.relative_path)]
     return {
@@ -586,8 +582,9 @@ def build_archive_manifest(
 
 def same_filesystem(a: Path, b: Path) -> bool:
     try:
-        return os.stat(a if a.exists() else a.parent).st_dev == os.stat(
-            b if b.exists() else b.parent
-        ).st_dev
+        return (
+            os.stat(a if a.exists() else a.parent).st_dev
+            == os.stat(b if b.exists() else b.parent).st_dev
+        )
     except OSError:
         return False
