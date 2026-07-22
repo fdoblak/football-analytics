@@ -12,13 +12,19 @@ system:
   logs: /home/fdoblak/logs
 
 storage:
-  ssd_root: /mnt/d/football_data
-  raw_matches: /mnt/d/football_data/videos/raw_matches
-  test_clips: /mnt/d/football_data/videos/test_clips
-  datasets: /mnt/d/football_data/datasets
-  results: /mnt/d/football_data/results
-  rendered_outputs: /mnt/d/football_data/rendered_outputs
-  reports: /mnt/d/football_data/reports
-  model_archive: /mnt/d/football_data/model_archive
-  experiments_archive: /mnt/d/football_data/experiments_archive
-  backups: /mnt/d/football_data/backups
+  active_backend: wsl_local
+  active_root: /home/fdoblak/football_data
+  planned_archive_root: /mnt/d/football_data
+  planned_archive_status: unverified
+  classification: WSL_LOCAL_PRIMARY_D_UNVERIFIED
+  # Active paths resolve under active_root (WSL local primary).
+  ssd_root: /home/fdoblak/football_data
+  raw_matches: /home/fdoblak/football_data/videos/raw_matches
+  test_clips: /home/fdoblak/football_data/videos/test_clips
+  datasets: /home/fdoblak/football_data/datasets
+  results: /home/fdoblak/football_data/results
+  rendered_outputs: /home/fdoblak/football_data/rendered_outputs
+  reports: /home/fdoblak/football_data/reports
+  model_archive: /home/fdoblak/football_data/model_archive
+  experiments_archive: /home/fdoblak/football_data/experiments_archive
+  backups: /home/fdoblak/football_data/backups

@@ -1,177 +1,138 @@
-# Stage 1A — Storage Discovery and Safe Backend Activation
+# Stage 1A — Storage Discovery and Backend Activation
 
 | Field | Value |
 |-------|-------|
-| Stage | 1A |
+| Stage | 1A / 1A-R1 |
 | Date | 2026-07-22 |
-| Gate decision | **BLOCKED — WINDOWS INTEROP** |
-| D: classification | `D_STATUS_UNVERIFIABLE_AGENT_CONTEXT` |
-| Storage backend active? | **No** |
+| Initial gate | `BLOCKED — WINDOWS INTEROP` (preserved) |
+| Resolution gate | **`PASS_WITH_FINDINGS — WSL LOCAL STORAGE ACTIVE`** |
+| Classification | `WSL_LOCAL_PRIMARY_D_UNVERIFIED` |
+| Active backend | `/home/fdoblak/football_data` |
+| Archive backend | `/mnt/d/football_data` (`planned_unverified`) |
 | Next sub-stage started? | **No** |
 
-Machine-readable companion: `configs/storage/storage_status_20260722.json`
+Companion: `configs/storage/storage_status_20260722.json` · ADR: `docs/decisions/ADR-0002-storage-backend.md`
 
 ---
 
-## 1. Amaç
+## Initial attempt
 
-Windows `D:` varlığını kanıtlamak, WSL `/mnt/d` durumunu açıklamak, güvenliyse geçici mount + `football_data` + bütünlük probe ile kalıcı storage backend’i etkinleştirmek. Kanıt yoksa uydurma mount/yol yönlendirmesi yapmamak.
+### Purpose
+Discover Windows `D:`, mount `/mnt/d` if safe, create `football_data`, pass probe.
 
-## 2. Başlangıç checkpoint’i
+### Starting checkpoint (initial)
+- HEAD `24634a7eb419a9294db98d92e0d227d9601566ab`
+- Working tree clean
 
-| Field | Expected | Observed |
-|-------|----------|----------|
-| Branch | `main` | `main` |
-| HEAD | `24634a7eb419a9294db98d92e0d227d9601566ab` | match |
-| Message | Record Stage 0 audit and project baseline | match |
-| Working tree | clean | clean |
+### Result
+Windows PowerShell/CMD interop failed (`UtilConnectUnix connect failed`). Classification: `D_STATUS_UNVERIFIABLE_AGENT_CONTEXT`. No mount, no `football_data` on D:, `paths.yaml` unchanged. Commit: `fbf98e5` — `Record Stage 1A storage blocker`.
 
-**Git gate:** PASS — storage mutation başlamadı (ve bu oturumda mount da yapılmadı).
+That blocker commit is **preserved** (not amended/reset).
 
-## 3. Kullanılan salt-okunur kontroller
+---
 
-- `whoami`, `id`, `uname -a`, `/etc/os-release`, `/proc/version`, `WSL_*`
-- `findmnt`, `findmnt -T /mnt/c`, `findmnt -T /mnt/d`, `/proc/mounts`, `df -hT`, `ls -la /mnt`
-- `/etc/wsl.conf` okuma
-- Windows interop denemeleri (tam yollar):
-  - `/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe` → `Get-Volume`, `Win32_LogicalDisk`, `Get-PSDrive`
-  - `/mnt/c/Windows/System32/cmd.exe` → `wmic logicaldisk ...`, `fsutil fsinfo drives`, `dir D:\`
-- `sudo -n true` (mount yetkisi ön-kontrolü; mount uygulanmadı)
-- Workspace path `stat` / child inventory
+## Resolution attempt A1A-R1
 
-## 4. WSL mount durumu
-
-| Mount | Result |
-|-------|--------|
-| `/mnt/c` | **Present and mounted** — source `C:\`, fstype `9p` (drvfs), `rw,noatime`, uid/gid 1000 |
-| `/mnt/d` | **Absent** — path does not exist; not a mountpoint; no pre-existing directory contents |
-| Other Windows letters under `/mnt` | None observed (`c`, `wsl`, `wslg` only) |
-| Automount | Partially working (`C:` visible). No evidence in this session that `D:` is automounted |
-
-`/etc/wsl.conf` contains `boot.systemd=true` and `user.default=fdoblak` only. No automount section was present. **No edits** were made to `wsl.conf` or `fstab`.
-
-## 5. Windows volume sorguları
-
-All Windows process launches failed at WSL interop before producing stdout:
-
-```text
-UtilGetPpid: Failed to parse: /proc/1/stat
-UtilConnectUnix: connect failed 2
-```
-
-| Method | Attempted | Stdout bytes | Result |
-|--------|-----------|--------------|--------|
-| PowerShell `Get-Volume` | yes | 0 | `WINDOWS_INTEROP_BLOCKED` |
-| PowerShell `Win32_LogicalDisk` | yes | 0 | `WINDOWS_INTEROP_BLOCKED` |
-| CMD `wmic logicaldisk` | yes | 0 | `WINDOWS_INTEROP_BLOCKED` |
-| CMD `fsutil fsinfo drives` | yes | 0 | `WINDOWS_INTEROP_BLOCKED` |
-| CMD `dir D:\` | yes | 0 | `WINDOWS_INTEROP_BLOCKED` |
-
-`windows_volumes` list in status JSON is therefore empty (`[]`) — **not** because D: was proven absent.
-
-## 6. D: sınıflandırması
-
-**`D_STATUS_UNVERIFIABLE_AGENT_CONTEXT`**
-
-Rationale:
-
-1. Windows volume queries could not run successfully from the Agent context.
-2. `/mnt/d` is missing, which is consistent with either “no D:” or “D: present but not mounted”, so absence of `/mnt/d` is inconclusive.
-3. Per Stage 1A rules, D: must not be declared absent solely due to interop blockage.
-
-Not used: `D_ABSENT_CONFIRMED`, `D_PRESENT_AND_MOUNTED`, `D_PRESENT_NOT_MOUNTED`, `MNT_D_CONFLICT`.
-
-## 7. Mount işlemi
-
-**Yapılmadı.**
-
-Reason: Windows-side D: presence was not verified. Creating `/mnt/d` and/or mounting `D:` without proof would invent a storage backend.
-
-Secondary note: `sudo -n true` also failed in this Agent context (sudo plugin/config ownership anomalies). Even if D: were later verified, elevated mount may need a non-agent interactive session. Primary gate remains Windows interop.
-
-## 8. Oluşturulan klasörler
-
-`/mnt/d/football_data` and subdirectories: **not created** (no verified D: mount).
-
-## 9. Probe testi ve SHA-256
-
+### Starting checkpoint (R1)
 | Field | Value |
 |-------|-------|
-| Executed | false |
-| Passed | false |
-| Cleanup verified | false |
-| Reason | Skipped — D: not verified / not mounted |
+| Branch | `main` |
+| HEAD | `fbf98e5f0bd7062a0c9a6f591824d29734e07bbf` |
+| Message | Record Stage 1A storage blocker |
+| Working tree | clean |
+| Git gate | PASS |
 
-## 10. WSL workspace durumu
+### Agent vs host identity
+| Observation | Value |
+|-------------|-------|
+| `whoami` in Agent | `root` |
+| `/proc/self/uid_map` | `0 1000 1` |
+| `/proc/self/gid_map` | `0 1000 1` |
+| `getent passwd fdoblak` | uid/gid **1000** |
+| Interpretation | Agent uid 0 maps to host **fdoblak (1000)** |
+| `chown 1000:1000` in Agent NS | `EINVAL` (expected; only uid 0 exists in map) |
 
-| Path | Exists | Notes |
-|------|--------|-------|
-| `/home/fdoblak/workspace` | yes | ext4 on `/dev/sdd`; ~926G avail on `/` |
-| `.../runs` | yes | empty |
-| `.../staging` | yes | empty |
-| `.../cache` | yes | empty |
-| `.../current` | no | **not created** (Aşama 3 orchestration) |
+Effective host ownership of newly created storage paths: **fdoblak**.
 
-Existing workspace children were not modified. Observed extra names under workspace root (left untouched): `soccernet_nonvideo_assets`, `futbol_analiz_proje_plani_extracted.txt`.
+### Host terminal / Windows interop retry
+Retried full-path PowerShell and CMD volume queries. Result again: **WINDOWS_INTEROP_BLOCKED** (empty stdout; same UtilConnectUnix errors). D: still **not** declared absent.
 
-## 11. `paths.yaml` değişikliği
+### Storage selection policy applied
+**Option C** — WSL local primary while D: remains `planned_unverified`.
 
-**None.**
+### Active backend
+| Field | Value |
+|-------|-------|
+| Type | `wsl_local` |
+| Root | `/home/fdoblak/football_data` |
+| Filesystem | ext4 |
+| Mount source | `/dev/sdd` (WSL VHDX on Windows C:) |
+| Total | 1081101176832 bytes (~1007 GiB) |
+| Free | 993518985216 bytes (~925 GiB) |
+| Free-space warning (&lt; 100 GiB) | false |
+| Writable | true |
+| Probe | PASS |
 
-`configs/system/paths.yaml` still lists `/mnt/d/football_data/...` as **planned/unverified** storage paths. They were not redirected to another backend and not marked verified.
+### Archive backend
+| Field | Value |
+|-------|-------|
+| Root | `/mnt/d/football_data` |
+| Status | `planned_unverified` |
+| `/mnt/d` created? | **No** |
 
-## 12. Güvenlik doğrulamaları
+### Created directories
+Under `/home/fdoblak/football_data`:
 
-- No package installs/updates/removals
-- No dataset/video/model downloads
-- No git clone/fetch/pull
-- No edits outside the main repo for this stage’s deliverables
-- No deletion/move of existing user data
-- No `/etc/wsl.conf` or `/etc/fstab` changes
-- No disk partitioning/formatting
-- No fake `/mnt/d` success claim
+- `videos/raw_matches`
+- `videos/test_clips`
+- `datasets`
+- `results`
+- `rendered_outputs`
+- `reports`
+- `model_archive`
+- `experiments_archive`
+- `backups`
+
+No pre-existing conflict. No recursive chown on `/home/fdoblak`. No deletion of unrelated user files.
+
+### Probe test
+| Check | Result |
+|-------|--------|
+| write | PASS |
+| read | PASS |
+| sha256_match | PASS (`6e69c97e5436cde6fd128a8df81240c2cc073006e7111d1c2f3beb0ad2591892`) |
+| size_match | PASS (4147 bytes) |
+| cleanup | PASS (exact probe file removed) |
+| parents remain | PASS |
+
+### `paths.yaml` change
+Updated minimally:
+
+- `storage.active_backend: wsl_local`
+- `storage.active_root: /home/fdoblak/football_data`
+- `storage.planned_archive_root: /mnt/d/football_data`
+- `storage.planned_archive_status: unverified`
+- Active leaf paths retargeted under `active_root`
+- Classification recorded: `WSL_LOCAL_PRIMARY_D_UNVERIFIED`
+
+### ADR / risk
+- Added `docs/decisions/ADR-0002-storage-backend.md`
+- Added RISK-016 (WSL VHDX capacity / migration)
+
+### Security attestations
+- No package mutation; no downloads; no clone/fetch/pull
+- External repos untouched
+- No user data deleted/moved/overwritten
+- No recursive permission changes on existing trees
+- No `wsl.conf`/`fstab` changes
+- Previous blocker commit preserved
 - Aşama 1B not started
 
-## 13. Blockerlar
+### Acceptance (R1)
+Active backend exists, directories present, probe passed, config consistent, history preserved → Stage 1A closable with findings.
 
-1. **B1A-001 — WINDOWS_INTEROP_BLOCKED:** Agent cannot query Windows volumes; D: unverifiable.
-2. **B1A-002 — STORAGE_BACKEND_INACTIVE:** `/mnt/d` absent; `football_data` and probe not executed.
-3. **Secondary:** `sudo -n` unavailable in Agent context (relevant only after D: is verified).
+### Gate decision (final)
+**`PASS_WITH_FINDINGS — WSL LOCAL STORAGE ACTIVE`**
 
-## 14. Aşama 1A kabul kriterleri
-
-| Criterion | Result |
-|-----------|--------|
-| Starting HEAD matches expected commit | PASS |
-| Starting working tree clean | PASS |
-| WSL/mount structure recorded | PASS |
-| Windows volume query attempted | PASS (blocked) |
-| D: classified with evidence | PASS (`D_STATUS_UNVERIFIABLE_AGENT_CONTEXT`) |
-| D: mount verified if present | NOT_APPLICABLE (unverifiable) |
-| Wrong volume not mounted | PASS (no mount) |
-| `/mnt/d` user data not overwritten | PASS (path absent) |
-| `football_data` only on verified D: | PASS (not created) |
-| Probe write/read/hash/cleanup | NOT_EXECUTED (correctly skipped) |
-| Workspace paths verified | PASS |
-| `paths.yaml` updated only with evidence | PASS (unchanged) |
-| Status JSON valid | PASS |
-| Markdown report complete | PASS |
-| No package/repo/dataset/model mutation | PASS |
-| External repos untouched | PASS |
-| Stage 1B not started | PASS |
-| Secret scan clean | PASS (closure validation) |
-| Diff check clean | PASS (closure validation) |
-
-## 15. Nihai gate kararı
-
-### `BLOCKED — WINDOWS INTEROP`
-
-Storage backend was **not** activated. Findings are preserved in status JSON + this report for a later retry from a context with working Windows interop.
-
-## 16. Sonraki alt aşama — yalnız isim
-
-**Aşama 1A retry / completion after Windows volume verification** (still Stage 1A scope until storage is active).
-
-When Stage 1A eventually passes, the next named sub-stage remains:
-
-**Aşama 1B — Veri erişimi, lisans/NDA ve güvenlik kontrolleri**
+### Next sub-stage (name only)
+**Aşama 1B — Klasör Standardı, paths.yaml ve Storage Validator**

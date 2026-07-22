@@ -217,3 +217,17 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Aşama 2 — Ana Repo Foundation ve Canonical Sözleşmeler |
+
+## RISK-016 — WSL local storage consumes Windows C: VHDX capacity
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-016 |
+| description | Active storage `/home/fdoblak/football_data` lives on WSL ext4 (`/dev/sdd`) inside the Windows C: VHDX. Large datasets/videos can fill C: unexpectedly. D: archive backend remains `planned_unverified`. |
+| probability | medium |
+| impact | high |
+| mitigation | Free-space gate (warn below 100 GiB); per-run size telemetry; when D: is verified, checksummed migration to `/mnt/d/football_data` then switch active backend (ADR-0002). |
+| trigger | Stage 1A-R1 selected `WSL_LOCAL_PRIMARY_D_UNVERIFIED` |
+| owner | Furkan Doblak |
+| status | open — accepted finding while local backend is active |
+| target_stage | Stage 1D / operations |

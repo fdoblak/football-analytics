@@ -1,14 +1,119 @@
 {
   "schema_version": 1,
   "audit_date": "2026-07-22",
-  "stage": "1A",
-  "gate_decision": "BLOCKED \u2014 WINDOWS INTEROP",
-  "starting_checkpoint": {
+  "stage": "1A-R1",
+  "gate_decision": "PASS_WITH_FINDINGS \u2014 WSL LOCAL STORAGE ACTIVE",
+  "classification": "WSL_LOCAL_PRIMARY_D_UNVERIFIED",
+  "history": {
+    "initial_attempt": {
+      "commit": "fbf98e5f0bd7062a0c9a6f591824d29734e07bbf",
+      "gate_decision": "BLOCKED \u2014 WINDOWS INTEROP",
+      "d_drive_classification": "D_STATUS_UNVERIFIABLE_AGENT_CONTEXT",
+      "windows_interop": "WINDOWS_INTEROP_BLOCKED",
+      "preserved": true,
+      "snapshot_fields": {
+        "windows_volume_query": {
+          "powershell_get_volume": {
+            "attempted": true,
+            "executable": "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe",
+            "stdout_bytes": 0,
+            "result": "WINDOWS_INTEROP_BLOCKED",
+            "error_summary": "UtilConnectUnix connect failed 2 / UtilGetPpid Failed to parse /proc/1/stat"
+          },
+          "powershell_win32_logicaldisk": {
+            "attempted": true,
+            "stdout_bytes": 0,
+            "result": "WINDOWS_INTEROP_BLOCKED"
+          },
+          "cmd_wmic": {
+            "attempted": true,
+            "executable": "/mnt/c/Windows/System32/cmd.exe",
+            "stdout_bytes": 0,
+            "result": "WINDOWS_INTEROP_BLOCKED"
+          },
+          "cmd_fsutil_drives": {
+            "attempted": true,
+            "stdout_bytes": 0,
+            "result": "WINDOWS_INTEROP_BLOCKED"
+          },
+          "cmd_dir_d": {
+            "attempted": true,
+            "stdout_bytes": 0,
+            "result": "WINDOWS_INTEROP_BLOCKED"
+          }
+        },
+        "d_drive": {
+          "classification": "D_STATUS_UNVERIFIABLE_AGENT_CONTEXT",
+          "windows_verified": false,
+          "mount_path": "/mnt/d",
+          "path_exists": false,
+          "is_mountpoint": false,
+          "filesystem": null,
+          "total_bytes": null,
+          "free_bytes": null,
+          "writable": null,
+          "mount_attempted": false,
+          "mount_result": null,
+          "notes": [
+            "Cannot conclude D: absent solely because Agent Windows interop is blocked.",
+            "/mnt/d does not currently exist as a path or mountpoint.",
+            "No temporary mount performed because Windows volume presence was not verified."
+          ]
+        },
+        "football_data": {
+          "path": "/mnt/d/football_data",
+          "exists": false,
+          "created_this_stage": false,
+          "directories": {},
+          "probe_test": {
+            "executed": false,
+            "passed": false,
+            "cleanup_verified": false,
+            "reason": "Skipped: D: not verified / not mounted"
+          }
+        },
+        "blockers": [
+          {
+            "id": "B1A-001",
+            "type": "WINDOWS_INTEROP_BLOCKED",
+            "summary": "Agent context cannot execute Windows PowerShell/CMD via WSL interop; D: presence unverifiable"
+          },
+          {
+            "id": "B1A-002",
+            "type": "STORAGE_BACKEND_INACTIVE",
+            "summary": "/mnt/d absent; football_data not created; probe not executed"
+          }
+        ]
+      }
+    }
+  },
+  "resolution": {
+    "previous_result": "BLOCKED_WINDOWS_INTEROP",
+    "current_result": "PASS_WITH_FINDINGS_WSL_LOCAL_STORAGE_ACTIVE",
+    "reason": "Windows volume queries remain blocked in Agent context after retry; policy Option C activates WSL local primary storage without declaring D: absent. Probe write/read/hash/cleanup passed on /home/fdoblak/football_data.",
+    "policy_option": "C",
+    "host_interop_retry": {
+      "attempted": true,
+      "powershell": "WINDOWS_INTEROP_BLOCKED",
+      "cmd": "WINDOWS_INTEROP_BLOCKED",
+      "error_summary": "UtilConnectUnix connect failed / UtilGetPpid Failed to parse /proc/1/stat"
+    }
+  },
+  "starting_checkpoint_r1": {
     "branch": "main",
-    "head": "24634a7eb419a9294db98d92e0d227d9601566ab",
-    "message": "Record Stage 0 audit and project baseline",
+    "head": "fbf98e5f0bd7062a0c9a6f591824d29734e07bbf",
+    "message": "Record Stage 1A storage blocker",
     "working_tree": "clean",
     "verified": true
+  },
+  "identity": {
+    "agent_whoami": "root",
+    "agent_uid_map": "0       1000          1",
+    "agent_gid_map": "0       1000          1",
+    "interpretation": "agent_uid_0_maps_to_host_uid_1000_fdoblak",
+    "fdoblak_passwd": "fdoblak:x:1000:1000",
+    "chown_to_1000_in_agent_ns": "EINVAL_expected_single_uid_map",
+    "owner_effective_on_host": "fdoblak (uid 1000)"
   },
   "wsl": {
     "distribution": "Ubuntu-22.04",
@@ -26,35 +131,13 @@
     }
   },
   "windows_volumes": [],
-  "windows_volume_query": {
-    "powershell_get_volume": {
-      "attempted": true,
-      "executable": "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe",
-      "stdout_bytes": 0,
-      "result": "WINDOWS_INTEROP_BLOCKED",
-      "error_summary": "UtilConnectUnix connect failed 2 / UtilGetPpid Failed to parse /proc/1/stat"
-    },
-    "powershell_win32_logicaldisk": {
-      "attempted": true,
-      "stdout_bytes": 0,
-      "result": "WINDOWS_INTEROP_BLOCKED"
-    },
-    "cmd_wmic": {
-      "attempted": true,
-      "executable": "/mnt/c/Windows/System32/cmd.exe",
-      "stdout_bytes": 0,
-      "result": "WINDOWS_INTEROP_BLOCKED"
-    },
-    "cmd_fsutil_drives": {
-      "attempted": true,
-      "stdout_bytes": 0,
-      "result": "WINDOWS_INTEROP_BLOCKED"
-    },
-    "cmd_dir_d": {
-      "attempted": true,
-      "stdout_bytes": 0,
-      "result": "WINDOWS_INTEROP_BLOCKED"
-    }
+  "windows_volume_query_r1": {
+    "result": "WINDOWS_INTEROP_BLOCKED",
+    "attempted_methods": [
+      "powershell_Get-Volume",
+      "powershell_Win32_LogicalDisk",
+      "cmd_fsutil"
+    ]
   },
   "d_drive": {
     "classification": "D_STATUS_UNVERIFIABLE_AGENT_CONTEXT",
@@ -67,36 +150,64 @@
     "free_bytes": null,
     "writable": null,
     "mount_attempted": false,
-    "mount_result": null,
+    "declared_absent": false,
     "notes": [
-      "Cannot conclude D: absent solely because Agent Windows interop is blocked.",
-      "/mnt/d does not currently exist as a path or mountpoint.",
-      "No temporary mount performed because Windows volume presence was not verified."
+      "Still unverifiable; not declared absent.",
+      "No /mnt/d created.",
+      "Planned archive backend only."
     ]
   },
-  "mnt_c": {
-    "exists": true,
-    "is_mountpoint": true,
-    "source": "C:\\",
-    "fstype": "9p",
-    "options_summary": "drvfs path=C:\\; uid=1000;gid=1000; rw,noatime",
-    "df": {
-      "size": "476G",
-      "used": "174G",
-      "avail": "303G",
-      "use_pct": "37%"
-    }
+  "active_backend": {
+    "type": "wsl_local",
+    "root": "/home/fdoblak/football_data",
+    "verified": true,
+    "writable": true,
+    "probe_passed": true,
+    "filesystem": "ext4",
+    "mount_source": "/dev/sdd",
+    "total_bytes": 1081101176832,
+    "free_bytes": 993520312320,
+    "used_bytes": 32588509184,
+    "warning_below_bytes": 107374182400,
+    "free_space_warning": false,
+    "owner_uid_agent_ns": 0,
+    "owner_gid_agent_ns": 0,
+    "mode": "0o755",
+    "owner_note": "Visible as root:root in Agent NS; maps to host fdoblak:fdoblak via uid/gid map 0->1000",
+    "vhd_note": "WSL ext4 root lives in Windows C: VHDX"
+  },
+  "archive_backend": {
+    "root": "/mnt/d/football_data",
+    "status": "planned_unverified",
+    "active": false
   },
   "football_data": {
-    "path": "/mnt/d/football_data",
-    "exists": false,
-    "created_this_stage": false,
-    "directories": {},
+    "path": "/home/fdoblak/football_data",
+    "exists": true,
+    "created_this_stage": true,
+    "directories": {
+      "videos": true,
+      "videos/raw_matches": true,
+      "videos/test_clips": true,
+      "datasets": true,
+      "results": true,
+      "rendered_outputs": true,
+      "reports": true,
+      "model_archive": true,
+      "experiments_archive": true,
+      "backups": true
+    },
     "probe_test": {
-      "executed": false,
-      "passed": false,
-      "cleanup_verified": false,
-      "reason": "Skipped: D: not verified / not mounted"
+      "executed": true,
+      "passed": true,
+      "cleanup_verified": true,
+      "sha256": "6e69c97e5436cde6fd128a8df81240c2cc073006e7111d1c2f3beb0ad2591892",
+      "size_bytes": 4147,
+      "probe_path_pattern": ".storage_probe_<timestamp>_<random>",
+      "write": true,
+      "read": true,
+      "sha256_match": true,
+      "size_match": true
     }
   },
   "workspace": {
@@ -164,26 +275,22 @@
   },
   "paths_yaml": {
     "path": "/home/fdoblak/projects/football-analytics/configs/system/paths.yaml",
-    "modified_this_stage": false,
-    "storage_backend_status": "planned_unverified",
-    "ssd_root_planned": "/mnt/d/football_data",
-    "reason": "No evidence-backed D: mount; left planned paths unchanged"
+    "modified_this_stage": true,
+    "active_backend": "wsl_local",
+    "active_root": "/home/fdoblak/football_data",
+    "planned_archive_root": "/mnt/d/football_data",
+    "planned_archive_status": "unverified",
+    "storage_backend_status": "active_verified_wsl_local"
   },
-  "privilege": {
-    "sudo_n_true": false,
-    "sudo_error_summary": "sudo plugins/config ownership errors in agent context (uid 65534 ownership anomaly)",
-    "note": "Secondary observation; primary blocker remains Windows interop preventing D: verification"
-  },
-  "blockers": [
+  "blockers": [],
+  "findings": [
     {
-      "id": "B1A-001",
-      "type": "WINDOWS_INTEROP_BLOCKED",
-      "summary": "Agent context cannot execute Windows PowerShell/CMD via WSL interop; D: presence unverifiable"
+      "id": "F1A-R1-001",
+      "summary": "Windows interop still blocked; D: remains planned_unverified archive candidate"
     },
     {
-      "id": "B1A-002",
-      "type": "STORAGE_BACKEND_INACTIVE",
-      "summary": "/mnt/d absent; football_data not created; probe not executed"
+      "id": "F1A-R1-002",
+      "summary": "WSL local storage uses C: VHDX capacity; require free-space gates and future checksum migration to D:"
     }
   ],
   "safety_attestations": {
@@ -192,10 +299,10 @@
     "no_git_clone_fetch_pull": true,
     "no_external_repo_edits": true,
     "no_user_data_deleted_or_moved": true,
+    "no_recursive_permission_changes_on_existing_trees": true,
     "no_persistent_wsl_mount_config_change": true,
-    "no_paths_yaml_rewrite_without_evidence": true,
-    "no_mnt_d_created_without_d_proof": true,
+    "previous_blocker_commit_preserved": true,
     "stage_1b_not_started": true
   },
-  "next_action": "Re-run Stage 1A volume discovery from an interactive WSL session with working Windows interop (or provide verified D: evidence), then perform temporary drvfs mount of D: to /mnt/d only if D: is confirmed and /mnt/d has no conflicting user content."
+  "next_action": "A\u015fama 1B \u2014 Klas\u00f6r Standard\u0131, paths.yaml ve Storage Validator"
 }
