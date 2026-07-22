@@ -101,6 +101,7 @@ def load_ingest_policy(path: Path) -> dict[str, Any]:
         "stream_selection_policy",
         "fixture_policy",
         "normalization_defaults",
+        "ffprobe_policy",
     }
     missing = sorted(required - set(raw))
     if missing:
@@ -117,6 +118,34 @@ def load_ingest_policy(path: Path) -> dict[str, Any]:
         raise VideoPolicyError("hash_algorithm must be sha256")
     if raw["canonical_time_unit"] != "microseconds":
         raise VideoPolicyError("canonical_time_unit must be microseconds")
+    ffprobe = raw["ffprobe_policy"]
+    if not isinstance(ffprobe, dict):
+        raise VideoPolicyError("ffprobe_policy must be a mapping")
+    ffprobe_required = {
+        "ffprobe_binary",
+        "allowed_binary_realpaths",
+        "probe_timeout_seconds",
+        "maximum_stdout_bytes",
+        "maximum_stderr_bytes",
+        "maximum_stream_count",
+        "maximum_metadata_entries",
+        "maximum_metadata_key_length",
+        "maximum_metadata_value_length",
+        "maximum_json_depth",
+        "count_frames",
+        "persist_raw_ffprobe_json",
+        "protocol_whitelist",
+        "runtime_root",
+    }
+    missing_ff = sorted(ffprobe_required - set(ffprobe))
+    if missing_ff:
+        raise VideoPolicyError(f"ffprobe_policy missing keys: {missing_ff}")
+    if ffprobe.get("count_frames") is not False:
+        raise VideoPolicyError("ffprobe_policy.count_frames must be false by default")
+    if ffprobe.get("persist_raw_ffprobe_json") is not False:
+        raise VideoPolicyError("persist_raw_ffprobe_json must be false by default")
+    if str(ffprobe.get("ffprobe_binary")) != "/usr/bin/ffprobe":
+        raise VideoPolicyError("ffprobe_binary must be /usr/bin/ffprobe")
     # Enum alignment with Python
     for kind in raw["allowed_source_kinds"]:
         SourceKind(kind)

@@ -8,12 +8,12 @@ claim Opta data.
 
 ## Sub-stages
 
-| Sub-stage | Name | Scope |
-|-----------|------|-------|
-| **3A** | Safe video ingest contracts & fixture design | JSON schemas, policy, typed models, path/hash safety, synthetic fixture design, validators/tests. **No** FFprobe runner, **no** FFmpeg normalize execution, **no** real user video ingest. |
-| **3B** | Safe FFprobe & media validation | Run FFprobe against allowed local sources; map tool JSON into the Stage 3A probe contract; hard-fail vs warning policy. |
-| **3C** | Normalization | Execute normalize **plans** from 3A (non-destructive, no overwrite, aspect-safe). |
-| **3D** | Frame extraction / time mapping & Stage 3 close | Frame table time mapping (`video_time_us`), close Stage 3 gates. |
+| Sub-stage | Name | Scope | Status |
+|-----------|------|-------|--------|
+| **3A** | Safe video ingest contracts & fixture design | JSON schemas, policy, typed models, path/hash safety, synthetic fixture design, validators/tests. | **CLOSED** |
+| **3B** | Safe FFprobe & media validation | Run FFprobe against allowed local sources; map tool JSON into the Stage 3A probe contract; hard-fail vs warning policy; atomic probe outputs. | **CLOSED** (this stage) |
+| **3C** | Normalization | Execute normalize **plans** from 3A (non-destructive, no overwrite, aspect-safe). | not started |
+| **3D** | Frame extraction / time mapping & Stage 3 close | Frame table time mapping (`video_time_us`), close Stage 3 gates. | not started |
 
 ## Product link
 

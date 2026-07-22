@@ -97,3 +97,22 @@ normalization_defaults:
   sar_policy: preserve
   overwrite_policy: false
   inplace_forbidden: true
+
+# Stage 3B — safe FFprobe execution limits (local file only)
+ffprobe_policy:
+  ffprobe_binary: /usr/bin/ffprobe
+  allowed_binary_realpaths:
+    - /usr/bin/ffprobe
+  probe_timeout_seconds: 30
+  maximum_stdout_bytes: 1048576
+  maximum_stderr_bytes: 65536
+  maximum_stream_count: 32
+  maximum_metadata_entries: 128
+  maximum_metadata_key_length: 128
+  maximum_metadata_value_length: 1024
+  maximum_json_depth: 12
+  count_frames: false
+  persist_raw_ffprobe_json: false
+  protocol_whitelist:
+    - file
+  runtime_root: /home/fdoblak/workspace/video_probe_checks

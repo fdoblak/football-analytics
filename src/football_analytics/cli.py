@@ -379,6 +379,43 @@ def cmd_cache_verify(cache_key: str) -> int:
     return 0
 
 
+def cmd_video_probe(
+    *,
+    source: Path,
+    output_dir: Path,
+    policy_path: Path,
+    contain_root: Path | None,
+) -> int:
+    """Stage 3B: safe local FFprobe media validation (lazy imports)."""
+    from football_analytics.video.contracts import default_repo_root, load_ingest_policy
+    from football_analytics.video.probe_service import run_media_probe
+
+    root = default_repo_root()
+    pol = policy_path if policy_path.is_absolute() else root / policy_path
+    try:
+        policy = load_ingest_policy(pol)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    contain = contain_root
+    if contain is None:
+        contain = Path(str(policy["ffprobe_policy"]["runtime_root"]))
+    result = run_media_probe(
+        source=str(source),
+        output_dir=str(output_dir),
+        policy=policy,
+        contain_root=contain,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"receipt_status: {summary['receipt_status']}")
+    print(f"output_dir: {summary['output_dir']}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="football-analytics",
@@ -441,6 +478,24 @@ def build_parser() -> argparse.ArgumentParser:
     p_ins.add_argument("cache_key")
     p_ver = cache_sub.add_parser("verify", help="Verify cache entry artifacts (read-only)")
     p_ver.add_argument("cache_key")
+
+    p_video = sub.add_parser("video", help="Video ingest/probe helpers (Stage 3)")
+    video_sub = p_video.add_subparsers(dest="video_command")
+    p_probe = video_sub.add_parser("probe", help="Safe local FFprobe media validation")
+    p_probe.add_argument("--source", type=Path, required=True, help="Absolute local video path")
+    p_probe.add_argument("--output-dir", type=Path, required=True, help="Runtime output directory")
+    p_probe.add_argument(
+        "--policy",
+        type=Path,
+        default=Path("configs/video/ingest_policy.yaml"),
+        help="Ingest/ffprobe policy YAML",
+    )
+    p_probe.add_argument(
+        "--contain-root",
+        type=Path,
+        default=None,
+        help="Containment root (default: ffprobe_policy.runtime_root)",
+    )
     return parser
 
 
@@ -506,6 +561,16 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.cache_command == "verify":
             return cmd_cache_verify(str(args.cache_key))
         parser.parse_args(["cache", "--help"])
+        return 2
+    if args.command == "video":
+        if args.video_command == "probe":
+            return cmd_video_probe(
+                source=args.source,
+                output_dir=args.output_dir,
+                policy_path=args.policy,
+                contain_root=args.contain_root,
+            )
+        parser.parse_args(["video", "--help"])
         return 2
     parser.print_help()
     return 2
