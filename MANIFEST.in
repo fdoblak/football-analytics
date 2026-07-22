@@ -4,6 +4,10 @@ graft configs/system
 graft schemas/data
 graft schemas/pipeline
 graft schemas/cache
+graft configs/product
+graft configs/metrics
+graft schemas/metrics
+include AGENTS.md
 include LICENSE
 include README.md
 global-exclude *.pyc __pycache__ .DS_Store

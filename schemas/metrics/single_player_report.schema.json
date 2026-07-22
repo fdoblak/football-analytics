@@ -1,0 +1,245 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/metrics/single_player_report.schema.json",
+  "title": "Single-player performance report (product v1)",
+  "description": "Evidence-based report for exactly one target_player. Team/opponent context is optional metadata only.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "dictionary_version",
+    "run_id",
+    "git_commit",
+    "target_player",
+    "match",
+    "coverage",
+    "identity_confidence",
+    "metrics"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "dictionary_version": { "type": "integer", "const": 1 },
+    "run_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Canonical analysis run id"
+    },
+    "git_commit": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$",
+      "description": "Full git commit SHA of code that produced the report"
+    },
+    "generated_at_utc": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_player": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_player_id",
+        "display_name",
+        "match_id",
+        "manual_identity_status"
+      ],
+      "properties": {
+        "target_player_id": { "type": "string", "minLength": 1 },
+        "display_name": { "type": "string", "minLength": 1 },
+        "team_hint": { "type": ["string", "null"] },
+        "jersey_number_hint": { "type": ["integer", "string", "null"] },
+        "match_id": { "type": "string", "minLength": 1 },
+        "reference_images": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["path"],
+            "properties": {
+              "path": { "type": "string", "minLength": 1 },
+              "note": { "type": "string" }
+            }
+          }
+        },
+        "manual_identity_status": {
+          "type": "string",
+          "enum": [
+            "unconfirmed",
+            "confirmed",
+            "rejected",
+            "manual_identity_confirmation_required"
+          ]
+        },
+        "identity_confidence": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "match": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["match_id"],
+      "properties": {
+        "match_id": { "type": "string", "minLength": 1 },
+        "competition_hint": { "type": ["string", "null"] },
+        "home_team_hint": { "type": ["string", "null"] },
+        "away_team_hint": { "type": ["string", "null"] },
+        "kickoff_local": { "type": ["string", "null"] },
+        "video_path": { "type": ["string", "null"] },
+        "analysis_duration_s": { "type": ["number", "null"], "minimum": 0 },
+        "tracked_duration_s": { "type": ["number", "null"], "minimum": 0 }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "track_coverage",
+        "calibration_coverage",
+        "ball_tracking_coverage"
+      ],
+      "properties": {
+        "track_coverage": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "calibration_coverage": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "ball_tracking_coverage": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "metrics_evaluable_fraction": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "notes": { "type": ["string", "null"] }
+      }
+    },
+    "identity_confidence": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Run-level identity confidence for target_player binding"
+    },
+    "models_versions": {
+      "type": "object",
+      "additionalProperties": { "type": ["string", "number", "integer", "null"] }
+    },
+    "code_versions": {
+      "type": "object",
+      "additionalProperties": { "type": ["string", "number", "integer", "null"] }
+    },
+    "metrics": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/metric_row" }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["evidence_id"],
+        "properties": {
+          "evidence_id": { "type": "string", "minLength": 1 },
+          "metric_id": { "type": "string" },
+          "event_id": { "type": ["string", "null"] },
+          "path": { "type": ["string", "null"] },
+          "frame_index": { "type": ["integer", "null"], "minimum": 0 },
+          "t_s": { "type": ["number", "null"], "minimum": 0 },
+          "note": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "definitions": {
+    "metric_row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "metric_id",
+        "version",
+        "value",
+        "status",
+        "confidence",
+        "coverage",
+        "provenance"
+      ],
+      "properties": {
+        "metric_id": {
+          "type": "string",
+          "enum": [
+            "opta_style_events",
+            "heatmap",
+            "duels_won",
+            "duel_win_rate",
+            "pass_attempts",
+            "pass_completion_rate",
+            "dribbles_successful",
+            "dribbles_failed",
+            "take_on_success_rate",
+            "tackles_interceptions_recoveries",
+            "ball_losses",
+            "aerial_duels",
+            "aerial_win_rate",
+            "clearances",
+            "progressive_passes_def_to_mid",
+            "progressive_passes_mid_to_att",
+            "long_pass_attempts",
+            "long_pass_completion_rate",
+            "distance_covered_m",
+            "sprint_count",
+            "sprint_max_speed_mps",
+            "speed_avg_mps",
+            "penalty_area_ball_touches",
+            "activation",
+            "coverage_reliability"
+          ]
+        },
+        "display_name_tr": { "type": ["string", "null"] },
+        "display_name_en": { "type": ["string", "null"] },
+        "version": { "type": "integer", "minimum": 1 },
+        "value": {
+          "type": ["number", "integer", "string", "object", "array", "boolean", "null"],
+          "description": "Scalar or structured value; null when not evaluable — never fake 0"
+        },
+        "unit": { "type": ["string", "null"] },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ok",
+            "not_evaluable",
+            "insufficient_coverage",
+            "identity_uncertain",
+            "ball_tracking_insufficient",
+            "calibration_insufficient",
+            "event_uncertain"
+          ]
+        },
+        "confidence": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "coverage": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "reason_not_evaluable": {
+          "type": ["string", "null"],
+          "description": "Human-readable reason when value is null or status is non-ok"
+        },
+        "provenance": {
+          "type": "string",
+          "enum": [
+            "official_opta",
+            "opta_style_project",
+            "video_derived",
+            "project_generated"
+          ]
+        },
+        "components": {
+          "type": ["object", "null"],
+          "description": "Optional breakdown (e.g. activation components, tackle subtypes)"
+        }
+      }
+    }
+  }
+}

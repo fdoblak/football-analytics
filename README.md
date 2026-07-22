@@ -7,6 +7,12 @@ identity → calibration → game state → events → reports/API).
 (`PASS_WITH_FINDINGS — STAGE 2 FOUNDATION COMPLETE`).
 Stages 0–2D closed. Milestone tag: **`foundation-v0.1.0`**.
 
+**Product direction:** single-player report v1 (one `target_player`) — see
+[docs/scope/single_player_product_v1.md](docs/scope/single_player_product_v1.md),
+metric dictionary / registry / report schema under `docs/metrics`,
+`configs/metrics`, `schemas/metrics`, and permanent agent rules in
+[AGENTS.md](AGENTS.md). Stage 3 ingest is **not** started by those docs alone.
+
 ## Principles
 
 - Isolated external SoccerNet/third-party repos (locked SHAs); prefer adapters.

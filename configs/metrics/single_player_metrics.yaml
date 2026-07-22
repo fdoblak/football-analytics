@@ -1,0 +1,200 @@
+# Single-player metric registry — machine-readable companion to
+# docs/metrics/single_player_metric_dictionary.md
+# Thresholds are placeholders; calibration-sensitive values are flagged.
+
+schema_version: 1
+dictionary_version: 1
+registry_version: 1
+product: single_player_report_v1
+
+provenance_labels:
+  official_opta:
+    description: "Licensed Opta import only; no scraping"
+    may_label_as_official_opta: true
+  opta_style_project:
+    description: "Project event taxonomy inspired by Opta-style schemas"
+    may_label_as_official_opta: false
+  video_derived:
+    description: "Estimated from broadcast/video pipeline"
+    may_label_as_official_opta: false
+  project_generated:
+    description: "Project meta/composite metrics (e.g. coverage)"
+    may_label_as_official_opta: false
+
+null_reasons:
+  - not_evaluable
+  - insufficient_coverage
+  - identity_uncertain
+  - ball_tracking_insufficient
+  - calibration_insufficient
+  - event_uncertain
+
+status_enums:
+  duel:
+    - attempt
+    - won
+    - lost
+    - uncertain
+  pass:
+    - attempt
+    - completed
+    - failed
+    - uncertain
+  dribble:
+    - attempt
+    - successful
+    - failed
+    - uncertain
+  aerial:
+    - attempt
+    - won
+    - lost
+    - uncertain
+
+thresholds:
+  long_pass_distance_m:
+    value: 30.0
+    unit: m
+    version: 1
+    requires_calibration: true
+    note: "Placeholder; do not apply without sufficient pitch calibration"
+
+  sprint:
+    speed_mps:
+      value: 7.0
+      unit: m/s
+      version: 1
+      requires_calibration: true
+      note: "Placeholder sprint threshold"
+    min_duration_s: 1.0
+    min_samples: 5
+    gap_tolerance_s: 0.4
+    smoothing:
+      method: "moving_average"
+      window_samples: 5
+      version: 1
+    merge_gap_s: 0.8
+    outlier_filter:
+      method: "mad_clip"
+      version: 1
+      note: "Placeholder; refine before production claims"
+
+  zone_thirds:
+    version: 1
+    requires_calibration: true
+    coordinate_frame: "pitch_normalized_length_0_to_100"
+    attack_direction_normalized_per_half: true
+    # Fractions along attacking direction after half normalize
+    defensive_third: [0.0, 33.333]
+    middle_third: [33.333, 66.667]
+    attacking_third: [66.667, 100.0]
+    note: "Placeholder equal thirds; may be replaced by pitch markings ADR"
+
+  opponent_penalty_area:
+    version: 1
+    requires_calibration: true
+    note: "Geometry from pitch model; occupancy alone is not a ball touch"
+
+min_observations:
+  min_track_samples: 30
+  min_evaluable_duels: 3
+  min_evaluable_passes: 5
+  min_evaluable_take_ons: 3
+  min_evaluable_aerials: 3
+  min_evaluable_long_passes: 3
+  speed_avg_min_samples: 50
+
+activation:
+  version: 1
+  formula_id: "activation_v1_placeholder"
+  note: "Explainable composite; single score requires component breakdown in report"
+  components:
+    - id: mobility_in_evaluable_time
+      weight: 0.2
+    - id: on_ball_action_rate
+      weight: 0.2
+    - id: off_ball_high_intensity_runs
+      weight: 0.15
+    - id: possessions_involved
+      weight: 0.15
+    - id: press_duel_involvement
+      weight: 0.15
+    - id: visibility_track_coverage
+      weight: 0.15
+
+metrics:
+  - metric_id: opta_style_events
+    version: 1
+    default_provenance: opta_style_project
+  - metric_id: heatmap
+    version: 1
+    default_provenance: video_derived
+  - metric_id: duels_won
+    version: 1
+    default_provenance: video_derived
+  - metric_id: duel_win_rate
+    version: 1
+    default_provenance: video_derived
+  - metric_id: pass_attempts
+    version: 1
+    default_provenance: video_derived
+  - metric_id: pass_completion_rate
+    version: 1
+    default_provenance: video_derived
+  - metric_id: dribbles_successful
+    version: 1
+    default_provenance: video_derived
+  - metric_id: dribbles_failed
+    version: 1
+    default_provenance: video_derived
+  - metric_id: take_on_success_rate
+    version: 1
+    default_provenance: video_derived
+  - metric_id: tackles_interceptions_recoveries
+    version: 1
+    default_provenance: video_derived
+  - metric_id: ball_losses
+    version: 1
+    default_provenance: video_derived
+  - metric_id: aerial_duels
+    version: 1
+    default_provenance: video_derived
+  - metric_id: aerial_win_rate
+    version: 1
+    default_provenance: video_derived
+  - metric_id: clearances
+    version: 1
+    default_provenance: video_derived
+  - metric_id: progressive_passes_def_to_mid
+    version: 1
+    default_provenance: video_derived
+  - metric_id: progressive_passes_mid_to_att
+    version: 1
+    default_provenance: video_derived
+  - metric_id: long_pass_attempts
+    version: 1
+    default_provenance: video_derived
+  - metric_id: long_pass_completion_rate
+    version: 1
+    default_provenance: video_derived
+  - metric_id: distance_covered_m
+    version: 1
+    default_provenance: video_derived
+  - metric_id: sprint_count
+    version: 1
+    default_provenance: video_derived
+  - metric_id: sprint_max_speed_mps
+    version: 1
+    default_provenance: video_derived
+  - metric_id: speed_avg_mps
+    version: 1
+    default_provenance: video_derived
+  - metric_id: penalty_area_ball_touches
+    version: 1
+    default_provenance: video_derived
+  - metric_id: activation
+    version: 1
+    default_provenance: video_derived
+  - metric_id: coverage_reliability
+    version: 1
+    default_provenance: project_generated

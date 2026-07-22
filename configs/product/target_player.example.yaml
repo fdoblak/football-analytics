@@ -1,0 +1,34 @@
+# EXAMPLE — fictional demo target_player
+# Not a real athlete. Replace all fields for production runs.
+# See: docs/scope/single_player_product_v1.md
+
+schema_version: 1
+example: true
+note: "DEMO ONLY — fictional names and IDs; no real PII"
+
+target_player:
+  target_player_id: "tp_demo_0001"
+  display_name: "Ada Yılmaz"
+  team_hint: "Demo United"
+  jersey_number_hint: 10
+  match_id: "match_demo_2026_07_22_001"
+  reference_images:
+    - path: "fixtures/identity/demo_ada_yilmaz_ref_01.jpg"
+      note: "placeholder path — file may not exist yet"
+    - path: "fixtures/identity/demo_ada_yilmaz_ref_02.jpg"
+      note: "placeholder path — file may not exist yet"
+  manual_identity_status: "unconfirmed"
+  # Allowed examples: unconfirmed | confirmed | rejected | manual_identity_confirmation_required
+  identity_confidence: null
+  # Set after identity stage; null means not yet evaluated
+
+match_context:
+  competition_hint: "Demo Cup"
+  home_team_hint: "Demo United"
+  away_team_hint: "Example City FC"
+  kickoff_local: "2026-07-22T18:00:00+03:00"
+
+identity_policy:
+  require_manual_confirmation_when_uncertain: true
+  on_uncertain: "manual_identity_confirmation_required"
+  forbid_cross_player_attribution: true
