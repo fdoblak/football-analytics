@@ -1,0 +1,174 @@
+schema_version: 1
+generated_at: "2026-07-12T16:44:26+03:00"
+
+repositories:
+  active_spotting:
+    path: /home/fdoblak/projects/soccernet/ActiveSpotting
+    remote: https://github.com/SoccerNet/ActiveSpotting.git
+    branch: main
+    commit: 33a81cb834978ee474ecec0c5a76b6f3f99b4bf4
+    integration: action_spotting_baseline
+    validation_status: cloned_not_smoke_tested
+    dirty: false
+
+  pts_baseline:
+    path: /home/fdoblak/projects/soccernet/PTS-baseline
+    remote: https://github.com/SoccerNet/PTS-baseline.git
+    branch: main
+    commit: af2ea8234e0c887758ef674071da2a17e2bc6c61
+    integration: ball_action_spotting_baseline
+    validation_status: cloned_not_smoke_tested
+    dirty: false
+
+  soccernet_sdk_source:
+    path: /home/fdoblak/projects/soccernet/SoccerNet
+    remote: https://github.com/SoccerNet/SoccerNet.git
+    branch: main
+    commit: 74461027ac2095ce2f8d4ee991eccb5dd5f42459
+    integration: sdk_source_reference
+    validation_status: cloned_not_smoke_tested
+    dirty: false
+
+  soccernet_v3:
+    path: /home/fdoblak/projects/soccernet/SoccerNet-v3
+    remote: https://github.com/SoccerNet/SoccerNet-v3.git
+    branch: main
+    commit: 7d483a85ad62b5e98f59427eabee8cb87c710d7b
+    integration: annotation_tool_reference
+    validation_status: cloned_not_smoke_tested
+    dirty: false
+
+  sn_banner:
+    path: /home/fdoblak/projects/soccernet/sn-banner
+    remote: https://github.com/SoccerNet/sn-banner.git
+    branch: main
+    commit: f6d50b24a33d6705d4c04dc4d4d93ecd12b08e74
+    integration: banner_detection_reference
+    validation_status: cloned_not_smoke_tested
+    dirty: false
+
+  sn_calibration:
+    path: /home/fdoblak/projects/soccernet/sn-calibration
+    remote: https://github.com/SoccerNet/sn-calibration.git
+    branch: main
+    commit: ab38f461bec729fead86b6986839de1bb826f16d
+    integration: camera_calibration_reference
+    validation_status: cloned_not_smoke_tested
+    dirty: false
+
+  sn_caption:
+    path: /home/fdoblak/projects/soccernet/sn-caption
+    remote: https://github.com/SoccerNet/sn-caption.git
+    branch: main
+    commit: c05973d4f00853e208d54965f4d6fa47364b8d66
+    integration: dense_captioning_reference
+    validation_status: cloned_not_smoke_tested
+    dirty: false
+
+  sn_depth:
+    path: /home/fdoblak/projects/soccernet/sn-depth
+    remote: https://github.com/SoccerNet/sn-depth.git
+    branch: main
+    commit: 9f6636fafb11447a5bada765e197928ee9efc467
+    integration: depth_estimation_reference
+    validation_status: cloned_not_smoke_tested
+    dirty: false
+
+  sn_echoes:
+    path: /home/fdoblak/projects/soccernet/sn-echoes
+    remote: https://github.com/SoccerNet/sn-echoes.git
+    branch: main
+    commit: 7105a85b7a8c1c000a31a30d0c29c388105c3de5
+    integration: audio_commentary_reference
+    validation_status: cloned_not_smoke_tested
+    dirty: false
+
+  sn_gamestate:
+    path: /home/fdoblak/projects/soccernet/sn-gamestate
+    remote: https://github.com/SoccerNet/sn-gamestate.git
+    branch: main
+    commit: 1c958345067218297d221e45e1a6405f975f83e0
+    integration: gamestate_reference
+    validation_status: cloned_not_smoke_tested
+    dirty: false
+
+  sn_grounding:
+    path: /home/fdoblak/projects/soccernet/sn-grounding
+    remote: https://github.com/SoccerNet/sn-grounding.git
+    branch: main
+    commit: 910bf859ac6d7aff2b80a6d66155956254f24c6b
+    integration: replay_grounding_reference
+    validation_status: cloned_not_smoke_tested
+    dirty: false
+
+  sn_jersey:
+    path: /home/fdoblak/projects/soccernet/sn-jersey
+    remote: https://github.com/SoccerNet/sn-jersey.git
+    branch: main
+    commit: 2f43b48c59eefe0bb5d948888db07f55f51208ad
+    integration: jersey_recognition_reference
+    validation_status: cloned_not_smoke_tested
+    dirty: false
+
+  sn_mvfoul:
+    path: /home/fdoblak/projects/soccernet/sn-mvfoul
+    remote: https://github.com/SoccerNet/sn-mvfoul.git
+    branch: main
+    commit: 502fb44a76c254e332394f095d54abc830131a44
+    integration: multiview_foul_reference
+    validation_status: cloned_not_smoke_tested
+    dirty: false
+
+  sn_nvs:
+    path: /home/fdoblak/projects/soccernet/sn-nvs
+    remote: https://github.com/SoccerNet/sn-nvs.git
+    branch: main
+    commit: 1655ab19b3bd78f624a96d0f0c27ec2c9f550f61
+    integration: novel_view_synthesis_reference
+    validation_status: cloned_not_smoke_tested
+    dirty: false
+
+  sn_reid:
+    path: /home/fdoblak/projects/soccernet/sn-reid
+    remote: https://github.com/SoccerNet/sn-reid.git
+    branch: main
+    commit: 621e2b0f2d2a7a3e207b8dd747542b6608bf72db
+    integration: reid_reference
+    validation_status: cloned_not_smoke_tested
+    dirty: false
+
+  sn_spotting:
+    path: /home/fdoblak/projects/soccernet/sn-spotting
+    remote: https://github.com/SoccerNet/sn-spotting.git
+    branch: main
+    commit: 9842826f94e1419580a9d17219c11aca7225f7ce
+    integration: action_spotting_reference
+    validation_status: cloned_not_smoke_tested
+    dirty: false
+
+  sn_teamspotting:
+    path: /home/fdoblak/projects/soccernet/sn-teamspotting
+    remote: https://github.com/SoccerNet/sn-teamspotting.git
+    branch: main
+    commit: 091fed2fc35c33f7489f3596958a2fe385e37d65
+    integration: team_action_spotting_devkit
+    validation_status: cloned_not_smoke_tested
+    dirty: false
+
+  sn_trackeval:
+    path: /home/fdoblak/projects/soccernet/sn-trackeval
+    remote: https://github.com/SoccerNet/sn-trackeval.git
+    branch: main
+    commit: 9c25232f6f2b56c9f203f1eb55784ff1e97df683
+    integration: evaluation_adapter_and_cli
+    validation_status: cloned_not_smoke_tested
+    dirty: false
+
+  sn_tracking:
+    path: /home/fdoblak/projects/soccernet/sn-tracking
+    remote: https://github.com/SoccerNet/sn-tracking.git
+    branch: main
+    commit: b0bbba35e07ff58010b6313ef8aa59ef663ad392
+    integration: dataset_and_reference
+    validation_status: cloned_not_smoke_tested
+    dirty: false

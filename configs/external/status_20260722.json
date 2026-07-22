@@ -1,0 +1,1036 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-07-22T16:15:00+03:00",
+  "gate_decision": "PASS_WITH_FINDINGS \u2014 CLOSED",
+  "main_repo": {
+    "path": "/home/fdoblak/projects/football-analytics",
+    "branch": "main",
+    "has_commits": false,
+    "head_sha": null,
+    "remote": null,
+    "working_tree": "untracked_skeleton_no_commits",
+    "status": "PRESENT_NOT_VERIFIED"
+  },
+  "storage": {
+    "mnt_d_exists": false,
+    "mnt_d_mountpoint": false,
+    "football_data_exists": false,
+    "status": "MISSING",
+    "stage1_blocker": true,
+    "workspace": {
+      "path": "/home/fdoblak/workspace",
+      "runs": true,
+      "staging": true,
+      "cache": true,
+      "current_symlink": false,
+      "extra": [
+        "soccernet_nonvideo_assets (empty)",
+        "futbol_analiz_proje_plani_extracted.txt"
+      ]
+    },
+    "logs_dir": "/home/fdoblak/logs",
+    "logs_empty": true
+  },
+  "soccernet_repositories": [
+    {
+      "name": "sn-gamestate",
+      "path": "/home/fdoblak/projects/soccernet/sn-gamestate",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/SoccerNet/sn-gamestate.git",
+      "full_head_sha": "1c958345067218297d221e45e1a6405f975f83e0",
+      "short_head_sha": "1c95834",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "196M",
+      "lock_entry_exists": true,
+      "lock_key": "sn_gamestate",
+      "lock_sha": "1c958345067218297d221e45e1a6405f975f83e0",
+      "head_matches_lock": true,
+      "status_class": "VERIFIED",
+      "notes": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": true,
+        "import_or_cli_smoke_verified": true,
+        "model_weights_available": false,
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      }
+    },
+    {
+      "name": "sn-banner",
+      "path": "/home/fdoblak/projects/soccernet/sn-banner",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/SoccerNet/sn-banner.git",
+      "full_head_sha": "f6d50b24a33d6705d4c04dc4d4d93ecd12b08e74",
+      "short_head_sha": "f6d50b2",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "130M",
+      "lock_entry_exists": true,
+      "lock_key": "sn_banner",
+      "lock_sha": "f6d50b24a33d6705d4c04dc4d4d93ecd12b08e74",
+      "head_matches_lock": true,
+      "status_class": "VERIFIED",
+      "notes": [],
+      "license_files": [
+        "LICENSE.txt"
+      ],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": false,
+        "import_or_cli_smoke_verified": "NOT_RETESTED_SAFETY",
+        "model_weights_available": true,
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      }
+    },
+    {
+      "name": "sn-nvs",
+      "path": "/home/fdoblak/projects/soccernet/sn-nvs",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/SoccerNet/sn-nvs.git",
+      "full_head_sha": "1655ab19b3bd78f624a96d0f0c27ec2c9f550f61",
+      "short_head_sha": "1655ab1",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "present_lines=2",
+      "git_lfs_detected": false,
+      "disk_usage": "395M",
+      "lock_entry_exists": true,
+      "lock_key": "sn_nvs",
+      "lock_sha": "1655ab19b3bd78f624a96d0f0c27ec2c9f550f61",
+      "head_matches_lock": true,
+      "status_class": "VERIFIED",
+      "notes": [],
+      "license_files": [],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": false,
+        "import_or_cli_smoke_verified": false,
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      }
+    },
+    {
+      "name": "sn-teamspotting",
+      "path": "/home/fdoblak/projects/soccernet/sn-teamspotting",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/SoccerNet/sn-teamspotting.git",
+      "full_head_sha": "091fed2fc35c33f7489f3596958a2fe385e37d65",
+      "short_head_sha": "091fed2",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "4.8M",
+      "lock_entry_exists": true,
+      "lock_key": "sn_teamspotting",
+      "lock_sha": "091fed2fc35c33f7489f3596958a2fe385e37d65",
+      "head_matches_lock": true,
+      "status_class": "VERIFIED",
+      "notes": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": true,
+        "import_or_cli_smoke_verified": "NOT_RETESTED_SAFETY",
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      }
+    },
+    {
+      "name": "sn-trackeval",
+      "path": "/home/fdoblak/projects/soccernet/sn-trackeval",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/SoccerNet/sn-trackeval.git",
+      "full_head_sha": "9c25232f6f2b56c9f203f1eb55784ff1e97df683",
+      "short_head_sha": "9c25232",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "2.4M",
+      "lock_entry_exists": true,
+      "lock_key": "sn_trackeval",
+      "lock_sha": "9c25232f6f2b56c9f203f1eb55784ff1e97df683",
+      "head_matches_lock": true,
+      "status_class": "VERIFIED",
+      "notes": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": true,
+        "import_or_cli_smoke_verified": true,
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      }
+    },
+    {
+      "name": "SoccerNet",
+      "path": "/home/fdoblak/projects/soccernet/SoccerNet",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/SoccerNet/SoccerNet.git",
+      "full_head_sha": "74461027ac2095ce2f8d4ee991eccb5dd5f42459",
+      "short_head_sha": "7446102",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "120M",
+      "lock_entry_exists": true,
+      "lock_key": "soccernet_sdk_source",
+      "lock_sha": "74461027ac2095ce2f8d4ee991eccb5dd5f42459",
+      "head_matches_lock": true,
+      "status_class": "VERIFIED",
+      "notes": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": true,
+        "import_or_cli_smoke_verified": true,
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      }
+    },
+    {
+      "name": "sn-echoes",
+      "path": "/home/fdoblak/projects/soccernet/sn-echoes",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/SoccerNet/sn-echoes.git",
+      "full_head_sha": "7105a85b7a8c1c000a31a30d0c29c388105c3de5",
+      "short_head_sha": "7105a85",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "599M",
+      "lock_entry_exists": true,
+      "lock_key": "sn_echoes",
+      "lock_sha": "7105a85b7a8c1c000a31a30d0c29c388105c3de5",
+      "head_matches_lock": true,
+      "status_class": "VERIFIED",
+      "notes": [],
+      "license_files": [],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": true,
+        "import_or_cli_smoke_verified": "PARTIAL_STATS_PY_SYNTAX_ERROR",
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      }
+    },
+    {
+      "name": "sn-depth",
+      "path": "/home/fdoblak/projects/soccernet/sn-depth",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/SoccerNet/sn-depth.git",
+      "full_head_sha": "9f6636fafb11447a5bada765e197928ee9efc467",
+      "short_head_sha": "9f6636f",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "20M",
+      "lock_entry_exists": true,
+      "lock_key": "sn_depth",
+      "lock_sha": "9f6636fafb11447a5bada765e197928ee9efc467",
+      "head_matches_lock": true,
+      "status_class": "VERIFIED",
+      "notes": [],
+      "license_files": [],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": false,
+        "import_or_cli_smoke_verified": "NOT_RETESTED_SAFETY",
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      }
+    },
+    {
+      "name": "sn-mvfoul",
+      "path": "/home/fdoblak/projects/soccernet/sn-mvfoul",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/SoccerNet/sn-mvfoul.git",
+      "full_head_sha": "502fb44a76c254e332394f095d54abc830131a44",
+      "short_head_sha": "502fb44",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "67M",
+      "lock_entry_exists": true,
+      "lock_key": "sn_mvfoul",
+      "lock_sha": "502fb44a76c254e332394f095d54abc830131a44",
+      "head_matches_lock": true,
+      "status_class": "VERIFIED",
+      "notes": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": true,
+        "import_or_cli_smoke_verified": "NOT_RETESTED_SAFETY",
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      }
+    },
+    {
+      "name": "sn-jersey",
+      "path": "/home/fdoblak/projects/soccernet/sn-jersey",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/SoccerNet/sn-jersey.git",
+      "full_head_sha": "2f43b48c59eefe0bb5d948888db07f55f51208ad",
+      "short_head_sha": "2f43b48",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "212K",
+      "lock_entry_exists": true,
+      "lock_key": "sn_jersey",
+      "lock_sha": "2f43b48c59eefe0bb5d948888db07f55f51208ad",
+      "head_matches_lock": true,
+      "status_class": "VERIFIED",
+      "notes": [],
+      "license_files": [],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": false,
+        "import_or_cli_smoke_verified": "NOT_RETESTED_SAFETY",
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      }
+    },
+    {
+      "name": "sn-calibration",
+      "path": "/home/fdoblak/projects/soccernet/sn-calibration",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/SoccerNet/sn-calibration.git",
+      "full_head_sha": "ab38f461bec729fead86b6986839de1bb826f16d",
+      "short_head_sha": "ab38f46",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": true,
+      "disk_usage": "5.7M",
+      "lock_entry_exists": true,
+      "lock_key": "sn_calibration",
+      "lock_sha": "ab38f461bec729fead86b6986839de1bb826f16d",
+      "head_matches_lock": true,
+      "status_class": "VERIFIED",
+      "notes": [],
+      "license_files": [],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": true,
+        "import_or_cli_smoke_verified": "NOT_RETESTED_SAFETY",
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      }
+    },
+    {
+      "name": "sn-caption",
+      "path": "/home/fdoblak/projects/soccernet/sn-caption",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/SoccerNet/sn-caption.git",
+      "full_head_sha": "c05973d4f00853e208d54965f4d6fa47364b8d66",
+      "short_head_sha": "c05973d",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "1020K",
+      "lock_entry_exists": true,
+      "lock_key": "sn_caption",
+      "lock_sha": "c05973d4f00853e208d54965f4d6fa47364b8d66",
+      "head_matches_lock": true,
+      "status_class": "VERIFIED",
+      "notes": [],
+      "license_files": [],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": false,
+        "import_or_cli_smoke_verified": "NOT_RETESTED_SAFETY",
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      }
+    },
+    {
+      "name": "sn-spotting",
+      "path": "/home/fdoblak/projects/soccernet/sn-spotting",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/SoccerNet/sn-spotting.git",
+      "full_head_sha": "9842826f94e1419580a9d17219c11aca7225f7ce",
+      "short_head_sha": "9842826",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "555M",
+      "lock_entry_exists": true,
+      "lock_key": "sn_spotting",
+      "lock_sha": "9842826f94e1419580a9d17219c11aca7225f7ce",
+      "head_matches_lock": true,
+      "status_class": "VERIFIED",
+      "notes": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": false,
+        "import_or_cli_smoke_verified": "NOT_RETESTED_SAFETY",
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      }
+    },
+    {
+      "name": "sn-reid",
+      "path": "/home/fdoblak/projects/soccernet/sn-reid",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/SoccerNet/sn-reid.git",
+      "full_head_sha": "621e2b0f2d2a7a3e207b8dd747542b6608bf72db",
+      "short_head_sha": "621e2b0",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "92M",
+      "lock_entry_exists": true,
+      "lock_key": "sn_reid",
+      "lock_sha": "621e2b0f2d2a7a3e207b8dd747542b6608bf72db",
+      "head_matches_lock": true,
+      "status_class": "VERIFIED",
+      "notes": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": true,
+        "import_or_cli_smoke_verified": false,
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      }
+    },
+    {
+      "name": "sn-tracking",
+      "path": "/home/fdoblak/projects/soccernet/sn-tracking",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/SoccerNet/sn-tracking.git",
+      "full_head_sha": "b0bbba35e07ff58010b6313ef8aa59ef663ad392",
+      "short_head_sha": "b0bbba3",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "6.3M",
+      "lock_entry_exists": true,
+      "lock_key": "sn_tracking",
+      "lock_sha": "b0bbba35e07ff58010b6313ef8aa59ef663ad392",
+      "head_matches_lock": true,
+      "status_class": "VERIFIED",
+      "notes": [],
+      "license_files": [],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": false,
+        "import_or_cli_smoke_verified": "NOT_RETESTED_SAFETY",
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      }
+    },
+    {
+      "name": "ActiveSpotting",
+      "path": "/home/fdoblak/projects/soccernet/ActiveSpotting",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/SoccerNet/ActiveSpotting.git",
+      "full_head_sha": "33a81cb834978ee474ecec0c5a76b6f3f99b4bf4",
+      "short_head_sha": "33a81cb",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "700K",
+      "lock_entry_exists": true,
+      "lock_key": "active_spotting",
+      "lock_sha": "33a81cb834978ee474ecec0c5a76b6f3f99b4bf4",
+      "head_matches_lock": true,
+      "status_class": "VERIFIED",
+      "notes": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": true,
+        "import_or_cli_smoke_verified": "NOT_RETESTED_SAFETY",
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      }
+    },
+    {
+      "name": "PTS-baseline",
+      "path": "/home/fdoblak/projects/soccernet/PTS-baseline",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/SoccerNet/PTS-baseline.git",
+      "full_head_sha": "af2ea8234e0c887758ef674071da2a17e2bc6c61",
+      "short_head_sha": "af2ea82",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "24M",
+      "lock_entry_exists": true,
+      "lock_key": "pts_baseline",
+      "lock_sha": "af2ea8234e0c887758ef674071da2a17e2bc6c61",
+      "head_matches_lock": true,
+      "status_class": "VERIFIED",
+      "notes": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": true,
+        "import_or_cli_smoke_verified": "NOT_RETESTED_SAFETY",
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      }
+    },
+    {
+      "name": "sn-grounding",
+      "path": "/home/fdoblak/projects/soccernet/sn-grounding",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/SoccerNet/sn-grounding.git",
+      "full_head_sha": "910bf859ac6d7aff2b80a6d66155956254f24c6b",
+      "short_head_sha": "910bf85",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "39M",
+      "lock_entry_exists": true,
+      "lock_key": "sn_grounding",
+      "lock_sha": "910bf859ac6d7aff2b80a6d66155956254f24c6b",
+      "head_matches_lock": true,
+      "status_class": "VERIFIED",
+      "notes": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": false,
+        "import_or_cli_smoke_verified": "NOT_RETESTED_SAFETY",
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      }
+    },
+    {
+      "name": "SoccerNet-v3",
+      "path": "/home/fdoblak/projects/soccernet/SoccerNet-v3",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/SoccerNet/SoccerNet-v3.git",
+      "full_head_sha": "7d483a85ad62b5e98f59427eabee8cb87c710d7b",
+      "short_head_sha": "7d483a8",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "15M",
+      "lock_entry_exists": true,
+      "lock_key": "soccernet_v3",
+      "lock_sha": "7d483a85ad62b5e98f59427eabee8cb87c710d7b",
+      "head_matches_lock": true,
+      "status_class": "VERIFIED",
+      "notes": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": false,
+        "import_or_cli_smoke_verified": "NOT_RETESTED_SAFETY",
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      }
+    }
+  ],
+  "third_party_repositories": [
+    {
+      "name": "tracklab",
+      "path": "/home/fdoblak/projects/third-party/tracklab",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/TrackingLaboratory/tracklab.git",
+      "full_head_sha": "5767e86c32a6d6c68e2fc8ae7311f558fff6c7b2",
+      "short_head_sha": "5767e86",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "190M",
+      "lock_entry_exists": false,
+      "lock_key": null,
+      "lock_sha": null,
+      "head_matches_lock": null,
+      "status_class": "PRESENT_NOT_VERIFIED",
+      "notes": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": null,
+        "import_or_cli_smoke_verified": "NOT_RETESTED_SAFETY",
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      },
+      "usage": "ACTIVE_IN_SN_GAMESTATE_VENV_PIP_PLUS_CLONE_REFERENCE",
+      "reproducibility_risk": "NOT_PINNED_IN_external_repos.lock.yaml",
+      "tag": "v1.3.24"
+    },
+    {
+      "name": "pnlcalib",
+      "path": "/home/fdoblak/projects/third-party/pnlcalib",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/mguti97/PnLCalib.git",
+      "full_head_sha": "8c87391d6f4ea40c5e4d65e61529916c7a49ce62",
+      "short_head_sha": "8c87391",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "137M",
+      "lock_entry_exists": false,
+      "lock_key": null,
+      "lock_sha": null,
+      "head_matches_lock": null,
+      "status_class": "PRESENT_NOT_VERIFIED",
+      "notes": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": null,
+        "import_or_cli_smoke_verified": "NOT_RETESTED_SAFETY",
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      },
+      "usage": "REFERENCE_CLONE_CANDIDATE_CALIBRATION_MOTOR",
+      "reproducibility_risk": "NOT_PINNED_IN_external_repos.lock.yaml",
+      "describe": "v1.0.0-58-g8c87391"
+    },
+    {
+      "name": "no-bells-just-whistles",
+      "path": "/home/fdoblak/projects/third-party/no-bells-just-whistles",
+      "exists": true,
+      "is_git_repo": true,
+      "remote_url_sanitized": "https://github.com/mguti97/No-Bells-Just-Whistles.git",
+      "full_head_sha": "bd993b31c2917096c23bb8aadf148314d17f8345",
+      "short_head_sha": "bd993b3",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "shallow_clone": false,
+      "submodule_status": "none",
+      "git_lfs_detected": false,
+      "disk_usage": "85M",
+      "lock_entry_exists": false,
+      "lock_key": null,
+      "lock_sha": null,
+      "head_matches_lock": null,
+      "status_class": "PRESENT_NOT_VERIFIED",
+      "notes": [],
+      "license_files": [
+        "LICENSE"
+      ],
+      "axes": {
+        "source_cloned": true,
+        "environment_exists": null,
+        "import_or_cli_smoke_verified": "NOT_RETESTED_SAFETY",
+        "model_weights_available": "UNKNOWN",
+        "dataset_available": false,
+        "custom_video_e2e_verified": false
+      },
+      "usage": "REFERENCE_CLONE_BANNER_WEIGHTS_SOURCE",
+      "reproducibility_risk": "NOT_PINNED_IN_external_repos.lock.yaml",
+      "describe": "v1.0.0-70-gbd993b3"
+    }
+  ],
+  "isolated_environments": [
+    {
+      "name": "ai-dev",
+      "path": "/home/fdoblak/miniconda3/envs/ai-dev",
+      "environment_type": "conda",
+      "exists": true,
+      "owning_repo": "football-analytics/main",
+      "python_version": "3.10.20",
+      "disk_usage": "8.2G",
+      "basic_interpreter_smoke": "PASS",
+      "known_import_or_cli_status": {},
+      "known_blocker": null
+    },
+    {
+      "name": "sn-active-spotting",
+      "path": "/home/fdoblak/miniconda3/envs/sn-active-spotting",
+      "environment_type": "conda",
+      "exists": true,
+      "owning_repo": "ActiveSpotting",
+      "python_version": "3.10.20",
+      "disk_usage": "643M",
+      "basic_interpreter_smoke": "PASS",
+      "known_import_or_cli_status": {
+        "torch": {
+          "ok": false,
+          "out": "",
+          "err": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nModuleNotFoundError: No module named 'torch'"
+        }
+      },
+      "known_blocker": null
+    },
+    {
+      "name": "sn-calibration",
+      "path": "/home/fdoblak/miniconda3/envs/sn-calibration",
+      "environment_type": "conda",
+      "exists": true,
+      "owning_repo": "sn-calibration",
+      "python_version": "3.10.20",
+      "disk_usage": "814M",
+      "basic_interpreter_smoke": "PASS",
+      "known_import_or_cli_status": {
+        "core": {
+          "ok": false,
+          "out": "",
+          "err": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nModuleNotFoundError: No module named 'torch'"
+        }
+      },
+      "known_blocker": null
+    },
+    {
+      "name": "sn-echoes",
+      "path": "/home/fdoblak/miniconda3/envs/sn-echoes",
+      "environment_type": "conda",
+      "exists": true,
+      "owning_repo": "sn-echoes",
+      "python_version": "3.10.20",
+      "disk_usage": "155M",
+      "basic_interpreter_smoke": "PASS",
+      "known_import_or_cli_status": {
+        "stats_py_compile": {
+          "/home/fdoblak/projects/soccernet/sn-echoes/stats.py": {
+            "compile_ok": false,
+            "err": "File \"/home/fdoblak/projects/soccernet/sn-echoes/stats.py\", line 26\n    print(f\"Total number of annotations across all files: {tot_count}\")s\n                                                                       ^\nSyntaxError: invalid syntax"
+          }
+        }
+      },
+      "known_blocker": "stats.py syntax/compile failure (pre-existing)"
+    },
+    {
+      "name": "sn-gamestate",
+      "path": "/home/fdoblak/miniconda3/envs/sn-gamestate",
+      "environment_type": "conda",
+      "exists": true,
+      "owning_repo": "sn-gamestate (conda base interpreter?)",
+      "python_version": "3.9.23",
+      "disk_usage": "151M",
+      "basic_interpreter_smoke": "PASS",
+      "known_import_or_cli_status": {},
+      "known_blocker": null
+    },
+    {
+      "name": "sn-mvfoul",
+      "path": "/home/fdoblak/miniconda3/envs/sn-mvfoul",
+      "environment_type": "conda",
+      "exists": true,
+      "owning_repo": "sn-mvfoul",
+      "python_version": "3.9.23",
+      "disk_usage": "1.3G",
+      "basic_interpreter_smoke": "PASS",
+      "known_import_or_cli_status": {
+        "model_cli": "NOT_RETESTED_SAFETY"
+      },
+      "known_blocker": null
+    },
+    {
+      "name": "sn-pts-baseline",
+      "path": "/home/fdoblak/miniconda3/envs/sn-pts-baseline",
+      "environment_type": "conda",
+      "exists": true,
+      "owning_repo": "PTS-baseline",
+      "python_version": "3.10.20",
+      "disk_usage": "1.2G",
+      "basic_interpreter_smoke": "PASS",
+      "known_import_or_cli_status": {
+        "numpy_torch": {
+          "ok": true,
+          "out": "numpy 2.2.6\ntorch 1.11.0+cpu",
+          "err": "A module that was compiled using NumPy 1.x cannot be run in\nNumPy 2.2.6 as it may crash. To support both 1.x and 2.x\nversions of NumPy, modules must be compiled with NumPy 2.0.\nSome module may need to rebuild instead e.g. with 'pybind11>=2.12'.\n\nIf you are a user of the module, the easiest solution "
+        },
+        "path_insert": {
+          "ok": true,
+          "out": "path_ok",
+          "err": ""
+        },
+        "full_training_import": "NOT_RETESTED_SAFETY"
+      },
+      "known_blocker": null
+    },
+    {
+      "name": "sn-reid",
+      "path": "/home/fdoblak/miniconda3/envs/sn-reid",
+      "environment_type": "conda",
+      "exists": true,
+      "owning_repo": "sn-reid",
+      "python_version": "3.10.20",
+      "disk_usage": "1.8G",
+      "basic_interpreter_smoke": "PASS",
+      "known_import_or_cli_status": {
+        "torchreid": {
+          "ok": false,
+          "err": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nModuleNotFoundError: No module named 'torchreid'"
+        }
+      },
+      "known_blocker": "torchreid import failed"
+    },
+    {
+      "name": "sn-teamspotting",
+      "path": "/home/fdoblak/miniconda3/envs/sn-teamspotting",
+      "environment_type": "conda",
+      "exists": true,
+      "owning_repo": "sn-teamspotting",
+      "python_version": "3.10.20",
+      "disk_usage": "1.7G",
+      "basic_interpreter_smoke": "PASS",
+      "known_import_or_cli_status": {
+        "model_cli": "NOT_RETESTED_SAFETY"
+      },
+      "known_blocker": null
+    },
+    {
+      "name": "sn-trackeval",
+      "path": "/home/fdoblak/miniconda3/envs/sn-trackeval",
+      "environment_type": "conda",
+      "exists": true,
+      "owning_repo": "sn-trackeval",
+      "python_version": "3.10.20",
+      "disk_usage": "700M",
+      "basic_interpreter_smoke": "PASS",
+      "known_import_or_cli_status": {
+        "TrackEval": {
+          "ok": false,
+          "err": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nModuleNotFoundError: No module named 'TrackEval'",
+          "alt": "pyok 3.10.20",
+          "bin_candidates": []
+        },
+        "trackeval_from_repo": {
+          "ok": true,
+          "out": "/home/fdoblak/projects/soccernet/sn-trackeval/trackeval/__init__.py",
+          "err": ""
+        },
+        "soccernet_scripts": [
+          "generate_predictions_soccernet_gs.py",
+          "run_soccernet_gs.py",
+          "run_soccernet_mot.py",
+          "soccernet_gs.cpython-310.pyc",
+          "soccernet_gs.py"
+        ]
+      },
+      "known_blocker": null
+    },
+    {
+      "name": "sn-gamestate-venv",
+      "path": "/home/fdoblak/.venvs/soccernet/sn-gamestate",
+      "environment_type": "venv",
+      "exists": true,
+      "owning_repo": "sn-gamestate",
+      "python_version": "3.9.23",
+      "disk_usage": "5.0G",
+      "basic_interpreter_smoke": "PASS",
+      "known_import_or_cli_status": {
+        "tracklab": {
+          "ok": true,
+          "out": "ok",
+          "err": null
+        },
+        "sn_gamestate": {
+          "ok": true,
+          "out": "0.2.0",
+          "err": null
+        },
+        "mmcv": {
+          "ok": true,
+          "out": "2.0.1",
+          "err": null
+        },
+        "tracklab_help": {
+          "ok": true,
+          "out_head": "main is powered by Hydra.\n\n== Configuration groups ==\nCompose your configuration from those groups (group=option)\n\ndataset: bee24, dancetrack, default, mot17, mot20, posetrack18, posetrack21, soccernet_gs, soccernet_mot, sportsmot, video, youtube\nengine: offline, online, video\neval: gs_hota, posetrack18, posetrack21, trackeval\nmodules/bbox_detector: rtdetr_transformers, rtdetr_transformers_s, rtdetr_transformers_x, rtmdet_rtmlib, yolo_ultralytics, yolo_ultralytics_l, yolo_ultralytics_s, yolo_ultralytics_x, yolox_rtmlib, yolox_rtmlib_l, yolox_rtmlib_s, yolox_rtmlib_x\nmodules/calibration: baseline, bbox2pitch, nbjw_calib, pnlcalib, tvcalib",
+          "err_head": null
+        },
+        "mmcv_detail": {
+          "ok": true,
+          "out": "2.0.1\n/home/fdoblak/.venvs/soccernet/sn-gamestate/lib/python3.9/site-packages/mmcv/__init__.py",
+          "err": null,
+          "note": "Import success is NOT CUDA ops verification"
+        }
+      },
+      "known_blocker": null
+    }
+  ],
+  "nvcc": {
+    "present": false,
+    "path": null
+  },
+  "models": {
+    "model_registry_yaml": {
+      "path": "/home/fdoblak/projects/football-analytics/model_registry.yaml",
+      "status": "MISSING"
+    },
+    "dataset_registry_yaml": {
+      "path": "/home/fdoblak/projects/football-analytics/dataset_registry.yaml",
+      "status": "MISSING"
+    },
+    "known_weights": [
+      {
+        "name": "SV_kp.pth",
+        "path": "/home/fdoblak/models/soccernet/sn-banner/SV_kp.pth",
+        "exists": true,
+        "size_bytes": 264964645,
+        "sha256": "7ea78fa76aaf94976a8eca428d6e3c59697a93430cba1a4603e20284b61f5113",
+        "registry_recorded": false,
+        "status": "PRESENT_NOT_VERIFIED"
+      },
+      {
+        "name": "SV_lines.pth",
+        "path": "/home/fdoblak/models/soccernet/sn-banner/SV_lines.pth",
+        "exists": true,
+        "size_bytes": 264857893,
+        "sha256": "2751242917f8c0f858a396e0cfe4521be39fe07bf049590eb21714526acecac1",
+        "registry_recorded": false,
+        "status": "PRESENT_NOT_VERIFIED"
+      }
+    ],
+    "datasets_broadcast": {
+      "status": "MISSING",
+      "downloaded_in_this_or_prior_session": false
+    },
+    "demo_mp4_count": 17,
+    "demo_mp4_note": "Git-cloned demo samples only; not user/broadcast datasets"
+  },
+  "lock_meta": {
+    "lock_generated_at": "2026-07-12T16:44:26+03:00",
+    "lock_repo_count": 19,
+    "lock_has_third_party": false,
+    "git_fsck": "NOT_RERUN_THIS_AUDIT"
+  },
+  "notes": [
+    "git fsck not re-run in this audit",
+    "No network fetch/pull/clone performed",
+    "No package or model installs performed",
+    "GPU reclassified on closure: AGENT_CONTEXT_GPU_UNVERIFIABLE (not host regression)",
+    "/dev/nvidia* absence is not WSL failure evidence by itself"
+  ],
+  "closure_revalidation_at": "2026-07-22T16:35:00+03:00",
+  "gpu_validation": {
+    "classification": "AGENT_CONTEXT_GPU_UNVERIFIABLE",
+    "torch_cuda_available_in_agent_context": false,
+    "torch_version": "2.11.0+cu128",
+    "torch_cuda_runtime": "12.8",
+    "agent_process_user": "root",
+    "normal_wsl_user_expected": "fdoblak",
+    "wsl_distro_name": "Ubuntu-22.04",
+    "wsl_interop_env_set": true,
+    "wsl_dxg_present": false,
+    "wsl_nvidia_device_nodes_present": false,
+    "note_on_nvidia_device_nodes": "Absence of /dev/nvidia* is NOT by itself evidence of WSL CUDA failure; WSL2 typically uses /dev/dxg and /usr/lib/wsl/lib for GPU paravirtualization.",
+    "wsl_lib_dir_present": true,
+    "wsl_nvidia_smi_path": "/usr/lib/wsl/lib/nvidia-smi",
+    "wsl_nvidia_smi_status": "FAILED_IN_AGENT_CONTEXT: GPU access blocked by the operating system",
+    "windows_nvidia_smi_exe_present": true,
+    "windows_nvidia_smi_path": "/mnt/c/Windows/System32/nvidia-smi.exe",
+    "windows_nvidia_smi_status": "NOT_EXECUTABLE_FROM_AGENT_CONTEXT: WSL interop connect failed when launching Windows nvidia-smi.exe / powershell.exe",
+    "historical_physical_wsl_test": "previously_verified",
+    "historical_evidence": "2026-07-10 PC setup report and 2026-07-12 check_env: CUDA available=True, device NVIDIA GeForce RTX 3050 Laptop GPU, 4GB VRAM, driver visible via nvidia-smi",
+    "interpretation": "GPU durumu Agent \u00e7al\u0131\u015fma ba\u011flam\u0131ndan do\u011frulanamad\u0131. \u00d6nceki ba\u015far\u0131l\u0131 WSL testi ge\u00e7erli tarihsel kan\u0131tt\u0131r; GPU, A\u015fama 5 ba\u015flamadan \u00f6nce ger\u00e7ek inference smoke testiyle yeniden do\u011frulanacakt\u0131r. Bu oturumdan sistem/GPU ar\u0131zas\u0131 sonucu \u00e7\u0131kar\u0131lamaz.",
+    "not_a_confirmed_host_regression": true,
+    "mandatory_recheck_before_stage": 5
+  },
+  "recommended_next_stage": "A\u015fama 1 \u2014 Depolama, Veri Eri\u015fimi, Lisans ve G\u00fcvenlik"
+}

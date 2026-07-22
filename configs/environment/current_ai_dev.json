@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-07-22T16:35:00+03:00",
+  "environment_name": "ai-dev",
+  "environment_path": "/home/fdoblak/miniconda3/envs/ai-dev",
+  "python": {
+    "executable": "/home/fdoblak/miniconda3/envs/ai-dev/bin/python",
+    "version": "3.10.20",
+    "build": "packaged by conda-forge | GCC 14.3.0",
+    "status": "VERIFIED"
+  },
+  "pip": {
+    "executable": "/home/fdoblak/miniconda3/envs/ai-dev/bin/pip",
+    "version": "26.1.2",
+    "pip_check": "No broken requirements found.",
+    "status": "VERIFIED"
+  },
+  "packages": {
+    "torch": {
+      "expected": "2.11.0+cu128",
+      "actual": "2.11.0+cu128",
+      "status": "VERIFIED"
+    },
+    "torchvision": {
+      "expected": "0.26.0+cu128",
+      "actual": "0.26.0+cu128",
+      "status": "VERIFIED"
+    },
+    "torchaudio": {
+      "expected": "2.11.0+cu128",
+      "actual": "2.11.0+cu128",
+      "status": "VERIFIED"
+    },
+    "numpy": {
+      "expected": "2.2.6",
+      "actual": "2.2.6",
+      "status": "VERIFIED"
+    },
+    "pandas": {
+      "expected": "2.3.3",
+      "actual": "2.3.3",
+      "status": "VERIFIED"
+    },
+    "opencv": {
+      "expected": "5.0.0.93",
+      "actual": "5.0.0",
+      "dist_versions": {
+        "opencv-python": "5.0.0.93",
+        "opencv-python-headless": "5.0.0.93"
+      },
+      "status": "VERIFIED",
+      "notes": "Both opencv-python and opencv-python-headless installed together"
+    },
+    "ultralytics": {
+      "expected": "8.4.91",
+      "actual": "8.4.91",
+      "status": "VERIFIED"
+    },
+    "fastapi": {
+      "expected": null,
+      "actual": "0.139.0",
+      "status": "VERIFIED"
+    },
+    "SoccerNet": {
+      "expected": "0.1.62",
+      "actual": "0.1.62",
+      "status": "VERIFIED"
+    },
+    "pyarrow": {
+      "expected": "required_for_mvp_schemas",
+      "actual": null,
+      "status": "MISSING"
+    }
+  },
+  "cuda": {
+    "torch_cuda_runtime": "12.8",
+    "torch_cuda_available_in_agent_context": false,
+    "device_count_in_agent_context": 0,
+    "device_name_in_agent_context": null,
+    "wsl_libcuda_present": true,
+    "wsl_lib_nvidia_smi_present": true,
+    "nvcc": {
+      "present": false,
+      "status": "MISSING_EXPECTED"
+    },
+    "status": "AGENT_CONTEXT_GPU_UNVERIFIABLE"
+  },
+  "ffmpeg": {
+    "path": "/usr/bin/ffmpeg",
+    "version": "4.4.2-0ubuntu0.22.04.1",
+    "status": "VERIFIED"
+  },
+  "devtools_cli": {
+    "pytest": "MISSING",
+    "ruff": "MISSING",
+    "black": "MISSING",
+    "isort": "MISSING",
+    "mypy": "MISSING",
+    "pyright": "MISSING"
+  },
+  "check_env_script": {
+    "path": "/home/fdoblak/dev-check/check_env.py",
+    "status": "VERIFIED",
+    "result_summary": "Python/Torch/OpenCV/NumPy/pandas/FFmpeg OK; CUDA False in agent context only (classification AGENT_CONTEXT_GPU_UNVERIFIABLE)"
+  },
+  "deviations_from_prior_expectations": [
+    {
+      "item": "torch.cuda.is_available",
+      "expected": true,
+      "actual": false,
+      "impact": "Agent context cannot verify CUDA; not treated as proven host regression. Mandatory GPU inference smoke before Stage 5.",
+      "classification": "AGENT_CONTEXT_GPU_UNVERIFIABLE"
+    },
+    {
+      "item": "pyarrow",
+      "expected": "present_for_parquet_contracts",
+      "actual": "not installed",
+      "impact": "MVP schema Parquet I/O cannot proceed without later install (not done in Stage 0)"
+    },
+    {
+      "item": "pytest/ruff/black/isort",
+      "expected": "optional_but_useful",
+      "actual": "not installed",
+      "impact": "No in-env test/lint CLI; repo also has empty tests/"
+    }
+  ],
+  "cuda_first_audit_20260722_1615": {
+    "note": "Initial Stage 0 audit snapshot before WSL-semantics correction",
+    "snapshot": {
+      "torch_cuda_runtime": "12.8",
+      "torch_cuda_available": false,
+      "device_count": 0,
+      "device_name": null,
+      "nvidia_smi": "Failed to initialize NVML: GPU access blocked by the operating system",
+      "dev_nodes": {
+        "nvidia_glob": "MISSING",
+        "dxg": "MISSING"
+      },
+      "wsl_libcuda_present": true,
+      "nvcc": {
+        "present": false,
+        "status": "MISSING"
+      },
+      "status": "INCONSISTENT",
+      "notes": [
+        "Previous reports (2026-07-10/12) recorded CUDA available=True on RTX 3050 4GB.",
+        "This Stage 0 audit session cannot access GPU device nodes; torch.cuda.is_available()=False.",
+        "Package builds remain cu128; runtime GPU access is blocked at OS/device level in this session.",
+        "Treat as Stage 1+ blocker until nvidia-smi and torch CUDA are re-verified interactively."
+      ]
+    }
+  },
+  "closure_revalidation_at": "2026-07-22T16:35:00+03:00",
+  "gpu_validation": {
+    "classification": "AGENT_CONTEXT_GPU_UNVERIFIABLE",
+    "torch_cuda_available_in_agent_context": false,
+    "torch_version": "2.11.0+cu128",
+    "torch_cuda_runtime": "12.8",
+    "agent_process_user": "root",
+    "normal_wsl_user_expected": "fdoblak",
+    "wsl_distro_name": "Ubuntu-22.04",
+    "wsl_interop_env_set": true,
+    "wsl_dxg_present": false,
+    "wsl_nvidia_device_nodes_present": false,
+    "note_on_nvidia_device_nodes": "Absence of /dev/nvidia* is NOT by itself evidence of WSL CUDA failure; WSL2 typically uses /dev/dxg and /usr/lib/wsl/lib for GPU paravirtualization.",
+    "wsl_lib_dir_present": true,
+    "wsl_nvidia_smi_path": "/usr/lib/wsl/lib/nvidia-smi",
+    "wsl_nvidia_smi_status": "FAILED_IN_AGENT_CONTEXT: GPU access blocked by the operating system",
+    "windows_nvidia_smi_exe_present": true,
+    "windows_nvidia_smi_path": "/mnt/c/Windows/System32/nvidia-smi.exe",
+    "windows_nvidia_smi_status": "NOT_EXECUTABLE_FROM_AGENT_CONTEXT: WSL interop connect failed when launching Windows nvidia-smi.exe / powershell.exe",
+    "historical_physical_wsl_test": "previously_verified",
+    "historical_evidence": "2026-07-10 PC setup report and 2026-07-12 check_env: CUDA available=True, device NVIDIA GeForce RTX 3050 Laptop GPU, 4GB VRAM, driver visible via nvidia-smi",
+    "interpretation": "GPU durumu Agent \u00e7al\u0131\u015fma ba\u011flam\u0131ndan do\u011frulanamad\u0131. \u00d6nceki ba\u015far\u0131l\u0131 WSL testi ge\u00e7erli tarihsel kan\u0131tt\u0131r; GPU, A\u015fama 5 ba\u015flamadan \u00f6nce ger\u00e7ek inference smoke testiyle yeniden do\u011frulanacakt\u0131r. Bu oturumdan sistem/GPU ar\u0131zas\u0131 sonucu \u00e7\u0131kar\u0131lamaz.",
+    "not_a_confirmed_host_regression": true,
+    "mandatory_recheck_before_stage": 5
+  }
+}

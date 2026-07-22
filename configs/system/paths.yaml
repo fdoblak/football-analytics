@@ -1,0 +1,24 @@
+schema_version: 1
+
+system:
+  project_root: /home/fdoblak/projects/football-analytics
+  soccernet_root: /home/fdoblak/projects/soccernet
+  third_party_root: /home/fdoblak/projects/third-party
+  active_models: /home/fdoblak/models
+  workspace: /home/fdoblak/workspace
+  runs: /home/fdoblak/workspace/runs
+  staging: /home/fdoblak/workspace/staging
+  cache: /home/fdoblak/workspace/cache
+  logs: /home/fdoblak/logs
+
+storage:
+  ssd_root: /mnt/d/football_data
+  raw_matches: /mnt/d/football_data/videos/raw_matches
+  test_clips: /mnt/d/football_data/videos/test_clips
+  datasets: /mnt/d/football_data/datasets
+  results: /mnt/d/football_data/results
+  rendered_outputs: /mnt/d/football_data/rendered_outputs
+  reports: /mnt/d/football_data/reports
+  model_archive: /mnt/d/football_data/model_archive
+  experiments_archive: /mnt/d/football_data/experiments_archive
+  backups: /mnt/d/football_data/backups
