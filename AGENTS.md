@@ -1,6 +1,6 @@
 # AGENTS.md — football-analytics
 
-Permanent instructions for Cursor (executor) and Codex (read-only supervisor).
+Permanent instructions for **manual Cursor** development (single-stage prompts).
 Product foundation checkpoint after Stage 2 (`foundation-v0.1.0` /
 `4b5089eeb8b022c95ed67a8ba1f60166b6058cdd`).
 
@@ -25,18 +25,20 @@ Opta: no scraping; license-only official data; otherwise label
 
 ---
 
-## 2. Roles
+## 2. Manual Cursor workflow
 
-| Agent | Role | Write |
-|-------|------|-------|
-| **Cursor** | Executor / writer | Allowed project / automation worktree only |
-| **Codex** | Supervisor | **Read-only** — review, gates, structured decisions |
+| Role | Behavior |
+|------|----------|
+| **User** | Issues one explicit prompt for one stage / sub-stage |
+| **Cursor** | Implements only that stage, reports results, then **stops** |
 
-Do not let both agents write the same worktree concurrently.
+Rules:
 
-Codex decisions (automation mode): `APPROVE_TASK`, `REQUEST_FIX`,
-`APPROVE_CHECKPOINT`, `ABANDON_SAFE`, `BLOCKED`, `STOP_SCOPE_COMPLETE`,
-`STOP_SAFETY`.
+- Do **not** call Codex CLI, Codex MCP, or any Codex reviewer.
+- Do **not** start background timers, systemd services, or overnight automation.
+- Do **not** invent the next stage or queue follow-up work without a new user prompt.
+- After tests / commit / push / report for the requested stage: **stop and wait**.
+- Continuous Cursor+Codex automation has been **removed**; do not recreate it unless the user explicitly requests it.
 
 ---
 
@@ -60,7 +62,6 @@ Do not claim Stage 3 started until ingest work is explicitly in progress.
 
 - No force push; no history rewrite of published commits.
 - Normal `git push` only.
-- In automation mode: Codex **`APPROVE_CHECKPOINT`** required before commit and before push.
 - Stage only explicit paths — avoid blind `git add .` / `git add -A`.
 - Never commit secrets, datasets, videos, model binaries, or caches.
 - See `docs/development/git_github_workflow.md`.
@@ -118,18 +119,12 @@ These remain open until independently verified and closed by policy:
 
 ---
 
-## 9. Continuous automation paths
+## 9. Reports path (audit only)
 
 | Item | Path |
 |------|------|
-| Automation workspace | `/home/fdoblak/workspace/agent_automation` |
 | Windows reports (WSL) | `/mnt/c/Users/furka/Desktop/Cursor&Codex Reports` |
-| PAUSE | `/home/fdoblak/workspace/agent_automation/PAUSE` |
-| STOP | `/home/fdoblak/workspace/agent_automation/STOP` |
-
-If `PAUSE` exists: do not start a new cycle.
-If `STOP` exists: safe cleanup + session summary, then exit.
-Do not delete PAUSE/STOP yourselves.
+| Manual handoff / preservation | `/home/fdoblak/workspace/manual_handoff/` |
 
 Network defaults: `network_video_download_allowed: false`,
 `dataset_download_allowed: false`, `large_model_download_allowed: false`.
@@ -138,7 +133,9 @@ Network defaults: `network_video_download_allowed: false`,
 
 ## 10. Stage bootstrap vs Stage 3
 
-This product-scope bootstrap may add docs, configs, and schemas only.
+Product-scope docs/configs/schemas on `main` are accepted.
+Stage 3A ingest contracts are **not** complete on `main` unless an explicit
+user prompt implements and merges them.
 Do not modify SoccerNet repos.
 Do not change protected packages.
-Do not add pipeline execution code beyond docs/configs/schemas in this bootstrap.
+Do not start Stage 3 without an explicit user prompt.
