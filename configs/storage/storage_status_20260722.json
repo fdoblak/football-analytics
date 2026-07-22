@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-07-22",
+  "stage": "1A",
+  "gate_decision": "BLOCKED \u2014 WINDOWS INTEROP",
+  "starting_checkpoint": {
+    "branch": "main",
+    "head": "24634a7eb419a9294db98d92e0d227d9601566ab",
+    "message": "Record Stage 0 audit and project baseline",
+    "working_tree": "clean",
+    "verified": true
+  },
+  "wsl": {
+    "distribution": "Ubuntu-22.04",
+    "os_release": "Ubuntu 22.04.5 LTS",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "windows_interop_env": "/run/WSL/360_interop",
+    "windows_interop": "WINDOWS_INTEROP_BLOCKED",
+    "agent_process_user": "root",
+    "wsl_conf_present": true,
+    "wsl_conf_notes": "boot.systemd=true; user.default=fdoblak; no automount section observed",
+    "automount_observed": {
+      "mnt_c": true,
+      "mnt_d": false,
+      "other_windows_drive_letters_under_mnt": []
+    }
+  },
+  "windows_volumes": [],
+  "windows_volume_query": {
+    "powershell_get_volume": {
+      "attempted": true,
+      "executable": "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe",
+      "stdout_bytes": 0,
+      "result": "WINDOWS_INTEROP_BLOCKED",
+      "error_summary": "UtilConnectUnix connect failed 2 / UtilGetPpid Failed to parse /proc/1/stat"
+    },
+    "powershell_win32_logicaldisk": {
+      "attempted": true,
+      "stdout_bytes": 0,
+      "result": "WINDOWS_INTEROP_BLOCKED"
+    },
+    "cmd_wmic": {
+      "attempted": true,
+      "executable": "/mnt/c/Windows/System32/cmd.exe",
+      "stdout_bytes": 0,
+      "result": "WINDOWS_INTEROP_BLOCKED"
+    },
+    "cmd_fsutil_drives": {
+      "attempted": true,
+      "stdout_bytes": 0,
+      "result": "WINDOWS_INTEROP_BLOCKED"
+    },
+    "cmd_dir_d": {
+      "attempted": true,
+      "stdout_bytes": 0,
+      "result": "WINDOWS_INTEROP_BLOCKED"
+    }
+  },
+  "d_drive": {
+    "classification": "D_STATUS_UNVERIFIABLE_AGENT_CONTEXT",
+    "windows_verified": false,
+    "mount_path": "/mnt/d",
+    "path_exists": false,
+    "is_mountpoint": false,
+    "filesystem": null,
+    "total_bytes": null,
+    "free_bytes": null,
+    "writable": null,
+    "mount_attempted": false,
+    "mount_result": null,
+    "notes": [
+      "Cannot conclude D: absent solely because Agent Windows interop is blocked.",
+      "/mnt/d does not currently exist as a path or mountpoint.",
+      "No temporary mount performed because Windows volume presence was not verified."
+    ]
+  },
+  "mnt_c": {
+    "exists": true,
+    "is_mountpoint": true,
+    "source": "C:\\",
+    "fstype": "9p",
+    "options_summary": "drvfs path=C:\\; uid=1000;gid=1000; rw,noatime",
+    "df": {
+      "size": "476G",
+      "used": "174G",
+      "avail": "303G",
+      "use_pct": "37%"
+    }
+  },
+  "football_data": {
+    "path": "/mnt/d/football_data",
+    "exists": false,
+    "created_this_stage": false,
+    "directories": {},
+    "probe_test": {
+      "executed": false,
+      "passed": false,
+      "cleanup_verified": false,
+      "reason": "Skipped: D: not verified / not mounted"
+    }
+  },
+  "workspace": {
+    "root": {
+      "exists": true,
+      "path": "/home/fdoblak/workspace",
+      "owner_uid": 1000,
+      "owner_gid": 1000,
+      "mode_octal": "0o755",
+      "is_symlink": false,
+      "symlink_target": null,
+      "child_count": 5,
+      "child_names": [
+        "cache",
+        "futbol_analiz_proje_plani_extracted.txt",
+        "runs",
+        "soccernet_nonvideo_assets",
+        "staging"
+      ]
+    },
+    "runs": {
+      "exists": true,
+      "path": "/home/fdoblak/workspace/runs",
+      "owner_uid": 1000,
+      "owner_gid": 1000,
+      "mode_octal": "0o755",
+      "is_symlink": false,
+      "symlink_target": null,
+      "child_count": 0,
+      "child_names": []
+    },
+    "staging": {
+      "exists": true,
+      "path": "/home/fdoblak/workspace/staging",
+      "owner_uid": 1000,
+      "owner_gid": 1000,
+      "mode_octal": "0o755",
+      "is_symlink": false,
+      "symlink_target": null,
+      "child_count": 0,
+      "child_names": []
+    },
+    "cache": {
+      "exists": true,
+      "path": "/home/fdoblak/workspace/cache",
+      "owner_uid": 1000,
+      "owner_gid": 1000,
+      "mode_octal": "0o755",
+      "is_symlink": false,
+      "symlink_target": null,
+      "child_count": 0,
+      "child_names": []
+    },
+    "current": {
+      "exists": false
+    },
+    "filesystem": "ext4",
+    "mount_source": "/dev/sdd",
+    "df": {
+      "size": "1007G",
+      "used": "31G",
+      "avail": "926G",
+      "use_pct": "4%"
+    }
+  },
+  "paths_yaml": {
+    "path": "/home/fdoblak/projects/football-analytics/configs/system/paths.yaml",
+    "modified_this_stage": false,
+    "storage_backend_status": "planned_unverified",
+    "ssd_root_planned": "/mnt/d/football_data",
+    "reason": "No evidence-backed D: mount; left planned paths unchanged"
+  },
+  "privilege": {
+    "sudo_n_true": false,
+    "sudo_error_summary": "sudo plugins/config ownership errors in agent context (uid 65534 ownership anomaly)",
+    "note": "Secondary observation; primary blocker remains Windows interop preventing D: verification"
+  },
+  "blockers": [
+    {
+      "id": "B1A-001",
+      "type": "WINDOWS_INTEROP_BLOCKED",
+      "summary": "Agent context cannot execute Windows PowerShell/CMD via WSL interop; D: presence unverifiable"
+    },
+    {
+      "id": "B1A-002",
+      "type": "STORAGE_BACKEND_INACTIVE",
+      "summary": "/mnt/d absent; football_data not created; probe not executed"
+    }
+  ],
+  "safety_attestations": {
+    "no_package_mutation": true,
+    "no_dataset_model_download": true,
+    "no_git_clone_fetch_pull": true,
+    "no_external_repo_edits": true,
+    "no_user_data_deleted_or_moved": true,
+    "no_persistent_wsl_mount_config_change": true,
+    "no_paths_yaml_rewrite_without_evidence": true,
+    "no_mnt_d_created_without_d_proof": true,
+    "stage_1b_not_started": true
+  },
+  "next_action": "Re-run Stage 1A volume discovery from an interactive WSL session with working Windows interop (or provide verified D: evidence), then perform temporary drvfs mount of D: to /mnt/d only if D: is confirmed and /mnt/d has no conflicting user content."
+}
