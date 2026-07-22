@@ -17,7 +17,7 @@ storage:
   planned_archive_root: /mnt/d/football_data
   planned_archive_status: unverified
   classification: WSL_LOCAL_PRIMARY_D_UNVERIFIED
-  # Active paths resolve under active_root (WSL local primary).
+  # Active leaf paths must stay under active_root.
   ssd_root: /home/fdoblak/football_data
   raw_matches: /home/fdoblak/football_data/videos/raw_matches
   test_clips: /home/fdoblak/football_data/videos/test_clips
@@ -28,3 +28,10 @@ storage:
   model_archive: /home/fdoblak/football_data/model_archive
   experiments_archive: /home/fdoblak/football_data/experiments_archive
   backups: /home/fdoblak/football_data/backups
+
+storage_validation:
+  minimum_free_bytes: 21474836480
+  warning_free_bytes: 107374182400
+  require_absolute_paths: true
+  require_paths_under_active_root: true
+  reject_symlink_escape: true
