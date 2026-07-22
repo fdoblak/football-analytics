@@ -1,0 +1,33 @@
+# Project defaults for runtime foundation (Stage 2B).
+# Precedence: defaults < user config < approved env overrides < explicit overrides
+schema_version: 1
+
+project:
+  name: football-analytics
+  version: 0.1.0.dev0
+
+runtime:
+  foundation_schema_version: 1
+  # Synthetic/foundation checks only — real user runs are Stage 2D+.
+  synthetic_root_hint: /home/fdoblak/workspace/foundation_checks
+
+logging:
+  level: INFO
+  format: human
+  jsonl_basename: events.jsonl
+  max_bytes: 10485760
+  backup_count: 3
+
+hashing:
+  algorithm: sha256
+  chunk_size_bytes: 1048576
+  include_hidden_files: false
+
+environment_record:
+  schema_version: 1
+  gpu_classification: AGENT_CONTEXT_GPU_UNVERIFIABLE
+
+storage_config:
+  # Pointers only — actual path validation remains Stage 1 paths.yaml + check_storage.
+  paths_config_rel: configs/system/paths.yaml
+  require_paths_validator: true

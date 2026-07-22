@@ -1,8 +1,9 @@
-"""Minimal CLI for Stage 2A: --version and info only."""
+"""CLI: version, info, and Stage 2B foundation-safe helpers."""
 
 from __future__ import annotations
 
 import argparse
+import json
 import platform
 import sys
 from collections.abc import Sequence
@@ -46,10 +47,97 @@ def cmd_info() -> int:
     return 0
 
 
+def cmd_run_id() -> int:
+    from football_analytics.core.run_id import generate_run_id
+
+    print(generate_run_id())
+    return 0
+
+
+def cmd_config_validate(config_path: Path) -> int:
+    from football_analytics.core.config import (
+        ConfigError,
+        default_defaults_path,
+        load_resolved_config,
+    )
+
+    try:
+        defaults = default_defaults_path()
+        if config_path.resolve() == defaults.resolve():
+            load_resolved_config(defaults_path=config_path)
+        else:
+            load_resolved_config(defaults_path=defaults, user_config_path=config_path)
+        print("config_valid: true")
+        return 0
+    except ConfigError as exc:
+        print(f"config_valid: false\nerror: {exc}", file=sys.stderr)
+        return 1
+
+
+def cmd_config_fingerprint(config_path: Path, *, as_json: bool) -> int:
+    from football_analytics.core.config import (
+        ConfigError,
+        config_fingerprint,
+        default_defaults_path,
+        load_resolved_config,
+    )
+
+    try:
+        if config_path.resolve() == default_defaults_path().resolve():
+            cfg = load_resolved_config(defaults_path=config_path)
+        else:
+            cfg = load_resolved_config(
+                defaults_path=default_defaults_path(),
+                user_config_path=config_path,
+            )
+        fp = config_fingerprint(cfg)
+        if as_json:
+            print(json.dumps(fp, sort_keys=True, ensure_ascii=False))
+        else:
+            print(f"algorithm: {fp['algorithm']}")
+            print(f"canonicalization_version: {fp['canonicalization_version']}")
+            print(f"digest: {fp['digest']}")
+        return 0
+    except ConfigError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
+
+
+def cmd_environment_show(*, as_json: bool) -> int:
+    from football_analytics import __version__
+    from football_analytics.core.config import (
+        config_fingerprint,
+        default_defaults_path,
+        load_resolved_config,
+    )
+    from football_analytics.core.environment import build_environment_record
+
+    cfg = load_resolved_config(defaults_path=default_defaults_path())
+    fp = config_fingerprint(cfg)
+    rec = build_environment_record(
+        project_version=__version__,
+        config_fingerprint=fp,
+        repo_root=_project_root(),
+    )
+    if as_json:
+        print(json.dumps(rec, sort_keys=True, ensure_ascii=False, indent=2, allow_nan=False))
+    else:
+        print(f"project_version: {rec['project_version']}")
+        print(f"python_version: {rec['python']['version']}")
+        print(f"conda_env: {rec['conda']['environment_name']}")
+        print(f"git_commit: {rec['git']['commit']}")
+        print(f"git_dirty: {rec['git']['dirty']}")
+        print(f"remote: {rec['git']['remote_sanitized']}")
+        print(f"gpu_classification: {rec['gpu_validation']['classification']}")
+        print(f"config_fingerprint: {rec['config_fingerprint']['digest']}")
+        print(f"packages_allowlist_count: {len(rec['packages'])}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="football-analytics",
-        description="Broadcast football video analytics pipeline (Stage 2A CLI)",
+        description="Broadcast football video analytics pipeline (Stage 2B CLI)",
     )
     parser.add_argument(
         "--version",
@@ -58,6 +146,20 @@ def build_parser() -> argparse.ArgumentParser:
     )
     sub = parser.add_subparsers(dest="command")
     sub.add_parser("info", help="Show safe environment summary (no secrets)")
+    sub.add_parser("run-id", help="Generate a canonical Stage 2B run ID")
+
+    cfg = sub.add_parser("config", help="Config helpers")
+    cfg_sub = cfg.add_subparsers(dest="config_command")
+    p_val = cfg_sub.add_parser("validate", help="Validate a YAML config against defaults merge")
+    p_val.add_argument("--config", type=Path, required=True)
+    p_fp = cfg_sub.add_parser("fingerprint", help="Print resolved config fingerprint")
+    p_fp.add_argument("--config", type=Path, required=True)
+    p_fp.add_argument("--json", action="store_true")
+
+    p_env = sub.add_parser("environment", help="Environment record helpers")
+    env_sub = p_env.add_subparsers(dest="environment_command")
+    p_show = env_sub.add_parser("show", help="Print secret-safe environment record (stdout only)")
+    p_show.add_argument("--json", action="store_true")
     return parser
 
 
@@ -71,6 +173,20 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
     if args.command == "info":
         return cmd_info()
+    if args.command == "run-id":
+        return cmd_run_id()
+    if args.command == "config":
+        if args.config_command == "validate":
+            return cmd_config_validate(args.config)
+        if args.config_command == "fingerprint":
+            return cmd_config_fingerprint(args.config, as_json=bool(args.json))
+        parser.parse_args(["config", "--help"])
+        return 2
+    if args.command == "environment":
+        if args.environment_command == "show":
+            return cmd_environment_show(as_json=bool(args.json))
+        parser.parse_args(["environment", "--help"])
+        return 2
     parser.print_help()
     return 2
 

@@ -3,8 +3,8 @@
 Proprietary broadcast football video analytics pipeline (detection → tracking →
 identity → calibration → game state → events → reports/API).
 
-**Current stage:** Stage 2A — Python package, development tooling, GitHub sync.
-Stages 0–1 (audit, storage, registries, archive/quarantine) are closed.
+**Current stage:** Stage 2B — Run identity, config, logging, hash, and environment records.
+Stages 0–2A (audit, storage, registries, archive, package, private GitHub sync) are closed.
 
 ## Principles
 
@@ -44,15 +44,21 @@ Protected CUDA/vision stack pins live in `requirements/constraints-ai-dev.txt`
 
 See [docs/development/environment.md](docs/development/environment.md).
 
-## Working CLI (Stage 2A)
+## Working CLI (Stage 2B)
 
 ```bash
 football-analytics --version
 football-analytics info
+football-analytics run-id
+football-analytics config validate --config configs/project/defaults.yaml
+football-analytics config fingerprint --config configs/project/defaults.yaml
+football-analytics environment show
 python -m football_analytics --version
 ```
 
 No `run` / `ingest` / `detect` / `track` / `evaluate` commands yet.
+
+See [docs/development/runtime_foundation.md](docs/development/runtime_foundation.md).
 
 ## Tests and quality
 
@@ -73,6 +79,7 @@ python scripts/check_registries.py --model-registry model_registry.yaml \
   --dataset-registry dataset_registry.yaml --external-lock external_repos.lock.yaml \
   --verify-files --verify-repos
 python scripts/check_secrets.py --root /home/fdoblak/projects/football-analytics
+python scripts/check_runtime_foundation.py --config configs/project/defaults.yaml
 ```
 
 ## Data / models / licenses

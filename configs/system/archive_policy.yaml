@@ -27,7 +27,8 @@ policy:
   # Planned D: archive is inactive until verified.
 
 run_id:
-  pattern: "^run_[0-9]{8}_[0-9]{6}_[a-z0-9]{6,12}$"
+  # Stage 1D fixture format OR Stage 2B canonical UTC+hex format (backward compatible).
+  pattern: "^(run_[0-9]{8}_[0-9]{6}_[a-z0-9]{6,12}|run_[0-9]{8}T[0-9]{12}Z_[a-f0-9]{12})$"
 
 required_source_files:
   - run_manifest.json

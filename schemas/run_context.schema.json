@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/run_context.schema.json",
+  "title": "Run context metadata (Stage 2B) — distinct from archive run_manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "created_at_utc",
+    "project_version",
+    "git_commit",
+    "config_fingerprint",
+    "environment_record_path",
+    "resolved_config_path",
+    "log_path",
+    "status"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "run_id": {
+      "type": "string",
+      "pattern": "^run_[0-9]{8}T[0-9]{12}Z_[a-f0-9]{12}$"
+    },
+    "created_at_utc": { "type": "string", "minLength": 1 },
+    "project_version": { "type": "string", "minLength": 1 },
+    "git_commit": { "type": ["string", "null"] },
+    "config_fingerprint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "canonicalization_version", "digest"],
+      "properties": {
+        "algorithm": { "type": "string", "const": "sha256" },
+        "canonicalization_version": { "type": "integer", "const": 1 },
+        "digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "environment_record_path": { "type": "string", "minLength": 1 },
+    "resolved_config_path": { "type": "string", "minLength": 1 },
+    "log_path": { "type": "string", "minLength": 1 },
+    "status": { "type": "string", "enum": ["initialized"] }
+  }
+}

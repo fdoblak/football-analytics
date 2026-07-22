@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/environment_record.schema.json",
+  "title": "Environment record (Stage 2B)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "recorded_at_utc",
+    "project_version",
+    "python",
+    "platform",
+    "conda",
+    "packages",
+    "git",
+    "gpu_validation",
+    "config_fingerprint"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "recorded_at_utc": { "type": "string", "minLength": 1 },
+    "project_version": { "type": "string", "minLength": 1 },
+    "python": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["executable", "version", "implementation"],
+      "properties": {
+        "executable": { "type": "string" },
+        "version": { "type": "string" },
+        "implementation": { "type": "string" }
+      }
+    },
+    "platform": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["system", "release", "machine", "wsl_detected"],
+      "properties": {
+        "system": { "type": "string" },
+        "release": { "type": "string" },
+        "machine": { "type": "string" },
+        "wsl_detected": { "type": "boolean" }
+      }
+    },
+    "conda": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["environment_name", "prefix_sanitized"],
+      "properties": {
+        "environment_name": { "type": ["string", "null"] },
+        "prefix_sanitized": { "type": ["string", "null"] }
+      }
+    },
+    "packages": {
+      "type": "object",
+      "additionalProperties": { "type": ["string", "null"] }
+    },
+    "git": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["commit", "branch", "dirty", "remote_sanitized"],
+      "properties": {
+        "commit": { "type": ["string", "null"] },
+        "branch": { "type": ["string", "null"] },
+        "dirty": { "type": ["boolean", "null"] },
+        "remote_sanitized": { "type": ["string", "null"] }
+      }
+    },
+    "gpu_validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classification", "torch_imported", "cuda_initialized"],
+      "properties": {
+        "classification": {
+          "type": "string",
+          "const": "AGENT_CONTEXT_GPU_UNVERIFIABLE"
+        },
+        "torch_imported": { "type": "boolean", "const": false },
+        "cuda_initialized": { "type": "boolean", "const": false }
+      }
+    },
+    "config_fingerprint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "canonicalization_version", "digest"],
+      "properties": {
+        "algorithm": { "type": "string", "const": "sha256" },
+        "canonicalization_version": { "type": "integer", "const": 1 },
+        "digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    }
+  }
+}

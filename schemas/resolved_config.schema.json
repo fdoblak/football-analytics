@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/resolved_config.schema.json",
+  "title": "Resolved runtime config (Stage 2B)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project",
+    "runtime",
+    "logging",
+    "hashing",
+    "environment_record",
+    "storage_config"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["foundation_schema_version", "synthetic_root_hint"],
+      "properties": {
+        "foundation_schema_version": { "type": "integer", "const": 1 },
+        "synthetic_root_hint": { "type": "string", "minLength": 1 }
+      }
+    },
+    "logging": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "format", "jsonl_basename", "max_bytes", "backup_count"],
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
+        },
+        "format": { "type": "string", "enum": ["human", "json"] },
+        "jsonl_basename": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+        "max_bytes": { "type": "integer", "minimum": 1024 },
+        "backup_count": { "type": "integer", "minimum": 0, "maximum": 32 }
+      }
+    },
+    "hashing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "chunk_size_bytes", "include_hidden_files"],
+      "properties": {
+        "algorithm": { "type": "string", "const": "sha256" },
+        "chunk_size_bytes": { "type": "integer", "minimum": 4096, "maximum": 16777216 },
+        "include_hidden_files": { "type": "boolean" }
+      }
+    },
+    "environment_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "gpu_classification"],
+      "properties": {
+        "schema_version": { "type": "integer", "const": 1 },
+        "gpu_classification": {
+          "type": "string",
+          "const": "AGENT_CONTEXT_GPU_UNVERIFIABLE"
+        }
+      }
+    },
+    "storage_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["paths_config_rel", "require_paths_validator"],
+      "properties": {
+        "paths_config_rel": { "type": "string", "minLength": 1 },
+        "require_paths_validator": { "type": "boolean" }
+      }
+    }
+  }
+}

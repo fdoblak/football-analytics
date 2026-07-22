@@ -1,6 +1,6 @@
 # Risk Register — football-analytics
 
-**Updated:** 2026-07-22 (Stage 1D)
+**Updated:** 2026-07-22 (Stage 2B)
 
 **Owner default:** Furkan Doblak unless stated otherwise
 
@@ -259,3 +259,87 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | when D: interop verified |
+
+## RISK-019 — Config drift across runs
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-019 |
+| description | Unversioned or mutable configs can make runs unreproducible. |
+| probability | medium |
+| impact | high |
+| mitigation | Stage 2B resolved config + SHA-256 fingerprint; schema_version; immutable resolved mapping; defaults in Git. |
+| trigger | Stage 2B |
+| owner | Furkan Doblak |
+| status | mitigated (foundation) |
+| target_stage | Stage 2B+ |
+
+## RISK-020 — Secret leakage in logs/records
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-020 |
+| description | Tokens/passwords may appear in logs, JSON records, or CLI output. |
+| probability | medium |
+| impact | critical |
+| mitigation | Central redaction; secret keys forbidden in config/records; JSONL redaction; no env dump; check_secrets gate. |
+| trigger | Stage 2B logging/records |
+| owner | Furkan Doblak |
+| status | mitigated (foundation) |
+| target_stage | ongoing |
+
+## RISK-021 — Environment provenance incompleteness
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-021 |
+| description | Allowlisted package snapshot may omit transitive deps; GPU remains unverified in agent context. |
+| probability | medium |
+| impact | medium |
+| mitigation | Document allowlist; GPU=`AGENT_CONTEXT_GPU_UNVERIFIABLE`; expand allowlist deliberately later. |
+| trigger | Stage 2B environment record |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 2B+ |
+
+## RISK-022 — Hash TOCTOU / mid-read mutation
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-022 |
+| description | Files may change while hashing, yielding misleading digests. |
+| probability | low |
+| impact | medium |
+| mitigation | Stat before/after during `sha256_file`; fail closed on mismatch. |
+| trigger | Stage 2B hashing |
+| owner | Furkan Doblak |
+| status | mitigated (foundation) |
+| target_stage | Stage 2B+ |
+
+## RISK-023 — Partial runtime initialization
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-023 |
+| description | Failed mid-init run dirs could leave partial JSON/log artifacts. |
+| probability | medium |
+| impact | medium |
+| mitigation | Transactional init with cleanup on failure; no-overwrite; validator synthetic cleanup. |
+| trigger | Stage 2B run_context |
+| owner | Furkan Doblak |
+| status | mitigated (foundation) |
+| target_stage | Stage 2B+ |
+
+## RISK-024 — GitHub API proxy finding carry-over
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-024 |
+| description | Cursor Agent cannot call `api.github.com` (proxy 403). Visibility/API metadata cannot be independently verified from Agent. |
+| probability | high (observed) |
+| impact | low for Git sync via smart HTTPS; medium for API automation |
+| mitigation | Git smart HTTPS only; user-confirmed private repo; do not claim API visibility proof. |
+| trigger | Stage 2A-GH |
+| owner | Furkan Doblak |
+| status | open — accepted finding |
+| target_stage | operations / tooling |

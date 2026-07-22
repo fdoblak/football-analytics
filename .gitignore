@@ -36,6 +36,7 @@ outputs/
 
 # Environment evidence (never commit)
 environment_checks/
+foundation_checks/
 
 # --- model / data / video / array artifacts (default deny) ---
 *.pt
