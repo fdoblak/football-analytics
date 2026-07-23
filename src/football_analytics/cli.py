@@ -523,6 +523,114 @@ def cmd_video_frames(
     return int(result.exit_code)
 
 
+def cmd_broadcast_shots_detect(
+    *,
+    source: Path,
+    timeline: Path,
+    output_dir: Path,
+    config_path: Path,
+    contain_root: Path | None,
+    run_id: str | None,
+    video_id: str | None,
+) -> int:
+    """Stage 4B: shot boundary detection baseline (lazy imports)."""
+    from football_analytics.broadcast.shot_config import (
+        default_shot_config_path,
+        load_shot_boundary_config,
+    )
+    from football_analytics.broadcast.shot_service import run_shot_boundary_detection
+    from football_analytics.data.registry import default_project_root
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_shot_config_path(repo_root=root)
+    try:
+        config = load_shot_boundary_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    contain = contain_root
+    if contain is None:
+        contain = Path(str(config["runtime_root"]))
+    result = run_shot_boundary_detection(
+        source=str(source),
+        timeline=str(timeline),
+        output_dir=str(output_dir),
+        config=config,
+        contain_root=contain,
+        run_id=run_id,
+        video_id=video_id,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"boundary_count: {summary['boundary_count']}")
+    print(f"segment_count: {summary['segment_count']}")
+    print(f"boundaries_parquet: {summary['boundaries_parquet']}")
+    print(f"segments_parquet: {summary['segments_parquet']}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
+def cmd_broadcast_shots_evaluate(
+    *,
+    predictions: Path,
+    ground_truth: Path,
+    output: Path,
+    config_path: Path,
+    tolerance_us: int | None,
+) -> int:
+    """Stage 4B: evaluate predicted boundaries vs ground truth."""
+    import json
+
+    from football_analytics.broadcast.contracts import load_broadcast_contract
+    from football_analytics.broadcast.shot_config import load_shot_boundary_config
+    from football_analytics.broadcast.shot_evaluation import evaluate_from_rows
+    from football_analytics.core.records import write_json_record
+    from football_analytics.data.parquet import read_contract_parquet
+    from football_analytics.data.registry import default_project_root
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    try:
+        config = load_shot_boundary_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    tol = (
+        int(tolerance_us)
+        if tolerance_us is not None
+        else int(config["evaluation"]["matching_tolerance_us"])
+    )
+    try:
+        pred_table = read_contract_parquet(predictions, load_broadcast_contract("shot_boundaries"))
+        pred_rows = pred_table.to_pylist()
+        gt_path = Path(ground_truth)
+        if gt_path.suffix.lower() == ".json":
+            gt_payload = json.loads(gt_path.read_text(encoding="utf-8"))
+            gt_rows = list(gt_payload.get("boundaries") or gt_payload.get("ground_truth") or [])
+            duration_us = gt_payload.get("duration_us")
+        else:
+            gt_table = read_contract_parquet(gt_path, load_broadcast_contract("shot_boundaries"))
+            gt_rows = gt_table.to_pylist()
+            duration_us = None
+        metrics = evaluate_from_rows(pred_rows, gt_rows, tolerance_us=tol, duration_us=duration_us)
+        write_json_record(output, metrics.to_dict(), overwrite=False)
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
+    print(f"f1: {metrics.f1}")
+    print(f"precision: {metrics.precision}")
+    print(f"recall: {metrics.recall}")
+    print(f"true_positives: {metrics.true_positives}")
+    print(f"false_positives: {metrics.false_positives}")
+    print(f"false_negatives: {metrics.false_negatives}")
+    print(f"output: {output}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="football-analytics",
@@ -688,6 +796,51 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help="Optional Stage 3C normalization receipt JSON",
     )
+
+    p_broadcast = sub.add_parser("broadcast", help="Broadcast shot/camera helpers (Stage 4)")
+    broadcast_sub = p_broadcast.add_subparsers(dest="broadcast_command")
+    p_shots = broadcast_sub.add_parser("shots", help="Shot boundary detection / evaluation")
+    shots_sub = p_shots.add_subparsers(dest="shots_command")
+    p_detect = shots_sub.add_parser("detect", help="Detect shot boundaries (baseline)")
+    p_detect.add_argument("--source", type=Path, required=True, help="Absolute local video path")
+    p_detect.add_argument(
+        "--timeline", type=Path, required=True, help="Absolute frames.parquet path"
+    )
+    p_detect.add_argument("--output-dir", type=Path, required=True, help="Runtime output directory")
+    p_detect.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/broadcast/shot_boundary_baseline.yaml"),
+        help="Shot boundary baseline config YAML",
+    )
+    p_detect.add_argument(
+        "--contain-root",
+        type=Path,
+        default=None,
+        help="Containment root (default: config.runtime_root)",
+    )
+    p_detect.add_argument("--run-id", type=str, default=None, help="Optional run_id")
+    p_detect.add_argument("--video-id", type=str, default=None, help="Optional video_id")
+    p_eval = shots_sub.add_parser("evaluate", help="Evaluate predicted boundaries vs ground truth")
+    p_eval.add_argument(
+        "--predictions", type=Path, required=True, help="Predicted shot_boundaries.parquet"
+    )
+    p_eval.add_argument(
+        "--ground-truth", type=Path, required=True, help="Ground-truth JSON or parquet"
+    )
+    p_eval.add_argument("--output", type=Path, required=True, help="Metrics JSON output path")
+    p_eval.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/broadcast/shot_boundary_baseline.yaml"),
+        help="Config for default matching tolerance",
+    )
+    p_eval.add_argument(
+        "--tolerance-us",
+        type=int,
+        default=None,
+        help="Override matching tolerance microseconds",
+    )
     return parser
 
 
@@ -787,6 +940,30 @@ def main(argv: Sequence[str] | None = None) -> int:
                 normalization_receipt=args.normalization_receipt,
             )
         parser.parse_args(["video", "--help"])
+        return 2
+    if args.command == "broadcast":
+        if args.broadcast_command == "shots":
+            if args.shots_command == "detect":
+                return cmd_broadcast_shots_detect(
+                    source=args.source,
+                    timeline=args.timeline,
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    contain_root=args.contain_root,
+                    run_id=args.run_id,
+                    video_id=args.video_id,
+                )
+            if args.shots_command == "evaluate":
+                return cmd_broadcast_shots_evaluate(
+                    predictions=args.predictions,
+                    ground_truth=args.ground_truth,
+                    output=args.output,
+                    config_path=args.config,
+                    tolerance_us=args.tolerance_us,
+                )
+            parser.parse_args(["broadcast", "shots", "--help"])
+            return 2
+        parser.parse_args(["broadcast", "--help"])
         return 2
     parser.print_help()
     return 2

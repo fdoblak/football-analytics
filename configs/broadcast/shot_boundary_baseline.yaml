@@ -1,0 +1,55 @@
+# Stage 4B shot boundary detection baseline (rule-based, OpenCV streaming).
+# Thresholds are tuned on development fixtures only; evaluation fixtures are frozen.
+config_version: 1
+
+analysis_width: 160
+analysis_height: 90
+
+feature_weights:
+  luma: 0.45
+  hist: 0.35
+  edge: 0.20
+
+hard_cut_threshold: 0.35
+
+gradual:
+  elevated_mean_threshold: 0.05
+  peak_sharpness_max: 0.22
+  window_frames: 10
+  min_elevated_frames: 3
+
+flash_suppression:
+  max_duration_us: 200000
+  intensity_min: 0.35
+  baseline_similarity_max: 0.12
+
+peak_suppression:
+  enabled: true
+
+minimum_shot_duration_us: 200000
+boundary_merge_tolerance_us: 160000
+
+supported_transition_types:
+  - hard_cut
+  - dissolve
+  - fade
+  - unknown
+
+decode:
+  backend: opencv
+  max_frames: 10000
+  timeout_seconds: 120
+
+evaluation:
+  matching_tolerance_us: 200000
+
+deterministic_seed: 42
+
+runtime_root: /home/fdoblak/workspace/shot_boundary_checks
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+resource_limits:
+  max_frames: 10000
+  timeout_seconds: 120

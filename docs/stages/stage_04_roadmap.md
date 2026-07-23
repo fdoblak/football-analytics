@@ -9,18 +9,19 @@ Stage 4 does **not** invent player metrics or claim Opta data.
 
 | Sub-stage | Name | Scope | Status |
 |-----------|------|-------|--------|
-| **4A** | Shot boundaries & camera-view classification contracts | Canonical Arrow contracts, typed models, suitability semantics, validators, synthetic fixtures, docs. | **CLOSED** (this stage) |
-| **4B** | Shot boundary detection baseline & evaluation | Detectors / heuristics / evaluation against labeled fixtures — **not started**. | not started |
+| **4A** | Shot boundaries & camera-view classification contracts | Canonical Arrow contracts, typed models, suitability semantics, validators, synthetic fixtures, docs. | **CLOSED** |
+| **4B** | Shot boundary detection baseline & evaluation | Rule-based OpenCV streaming detector, evaluation, fixtures, CLI, validator. | **CLOSED** |
+| **4C** | Camera-view classification baseline | View/framing/replay/graphics suitability classifiers — **not started**. | not started |
 
 ## Product link
 
 Camera/shot contracts mark which intervals may feed tracking, calibration, ReID,
 and distance metrics — and which must be excluded (replay, crowd, graphics, …).
 
-## Out of scope for Stage 4A
+## Out of scope for Stage 4B
 
-- Real shot detectors / OpenCV / Torch inference
+- Torch / learned shot models
 - SoccerNet download or model execution
-- Real match video evaluation
-- Stage 4B implementation
+- Real match labeling campaigns
+- Stage 4C camera-view classification
 - Continuous automation / Codex supervisor
