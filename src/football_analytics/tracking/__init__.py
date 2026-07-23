@@ -1,4 +1,4 @@
-"""Stage 6 multi-object tracking: contracts (6A), human MOT (6B), ball MOT (6C)."""
+"""Stage 6 multi-object tracking: contracts (6A), human MOT (6B), ball MOT (6C), fusion (6D)."""
 
 from football_analytics.tracking.ball_tracking_evaluation import (
     NOT_EVALUATED_BALL_TRACKING,

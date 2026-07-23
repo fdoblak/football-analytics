@@ -1208,6 +1208,114 @@ def cmd_tracking_contracts_validate(*, keep: bool, as_json: bool) -> int:
     return int(main_fn(argv))
 
 
+def cmd_tracking_integrate(
+    *,
+    detections: Path,
+    detection_attributes: Path,
+    detection_receipt: Path,
+    human_observations: Path,
+    human_summaries: Path,
+    human_lifecycle: Path,
+    human_receipt: Path,
+    ball_observations: Path,
+    ball_summaries: Path,
+    ball_lifecycle: Path,
+    ball_receipt: Path,
+    output_dir: Path,
+    config_path: Path,
+    contain_root: Path | None,
+    frames: Path | None,
+    analysis_windows: Path | None,
+    ball_primary_sidecar: Path | None,
+    run_id: str | None,
+    video_id: str | None,
+    source_sha: str | None,
+    timeline_fingerprint: str | None,
+    detection_fingerprint: str | None,
+    analysis_window_fingerprint: str | None,
+) -> int:
+    """Stage 6D: fuse human/ball tracking artifacts into one bundle."""
+    from football_analytics.data.registry import default_project_root
+    from football_analytics.tracking.tracking_pipeline import run_tracking_integrate
+    from football_analytics.tracking.tracking_pipeline_config import (
+        default_tracking_pipeline_config_path,
+        load_tracking_pipeline_config,
+    )
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_tracking_pipeline_config_path(repo_root=root)
+    try:
+        config = load_tracking_pipeline_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    contain = contain_root
+    if contain is None:
+        contain = Path(str(config["runtime_root"]))
+    result = run_tracking_integrate(
+        detections=str(detections),
+        detection_attributes=str(detection_attributes),
+        detection_receipt=str(detection_receipt),
+        human_observations=str(human_observations),
+        human_summaries=str(human_summaries),
+        human_lifecycle=str(human_lifecycle),
+        human_receipt=str(human_receipt),
+        ball_observations=str(ball_observations),
+        ball_summaries=str(ball_summaries),
+        ball_lifecycle=str(ball_lifecycle),
+        ball_receipt=str(ball_receipt),
+        output_dir=str(output_dir),
+        config=config,
+        contain_root=contain,
+        frames=str(frames) if frames else None,
+        analysis_windows=str(analysis_windows) if analysis_windows else None,
+        ball_primary_sidecar=str(ball_primary_sidecar) if ball_primary_sidecar else None,
+        run_id=run_id,
+        video_id=video_id,
+        expected_source_sha=source_sha,
+        expected_timeline_fp=timeline_fingerprint,
+        expected_detection_fp=detection_fingerprint,
+        expected_analysis_window_fp=analysis_window_fingerprint,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"total_track_count: {summary['total_track_count']}")
+    print(f"quality_status: {summary['quality_status']}")
+    print(f"review_count: {summary['review_count']}")
+    print(f"track_observations_parquet: {summary['track_observations_parquet']}")
+    print(f"pipeline_receipt_json: {summary['pipeline_receipt_json']}")
+    print(f"quality_report_json: {summary['quality_report_json']}")
+    print(f"review_queue_json: {summary['review_queue_json']}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
+def cmd_tracking_validate(*, config_path: Path, frames: int, keep: bool) -> int:
+    """Run Stage 6D synthetic tracking pipeline validator."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_tracking_pipeline.py"
+    argv: list[str] = ["--config", str(config_path), "--frames", str(frames)]
+    if keep:
+        argv.append("--keep")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("tracking pipeline validator missing main()", file=sys.stderr)
+        return 2
+    # Reconstruct argv for argparse inside main.
+    old = sys.argv
+    try:
+        sys.argv = [str(script), *argv]
+        return int(main_fn())
+    finally:
+        sys.argv = old
+
+
 def cmd_tracking_receipt_validate(receipt_path: Path) -> int:
     """Validate tracking_run_receipt JSON against schema (no tracker run)."""
     from football_analytics.tracking.receipt import validate_receipt_payload
@@ -2013,7 +2121,9 @@ def build_parser() -> argparse.ArgumentParser:
     p_p_validate.add_argument("--frames", type=int, default=8, help="Synthetic frames (≤20)")
     p_p_validate.add_argument("--keep", action="store_true", help="Keep validator session dir")
 
-    p_tracking = sub.add_parser("tracking", help="Multi-object tracking helpers (Stage 6A/6B/6C)")
+    p_tracking = sub.add_parser(
+        "tracking", help="Multi-object tracking helpers (Stage 6A/6B/6C/6D)"
+    )
     tracking_sub = p_tracking.add_subparsers(dest="tracking_command")
     p_trk_contracts = tracking_sub.add_parser("contracts", help="Tracking contract helpers")
     trk_contracts_sub = p_trk_contracts.add_subparsers(dest="tracking_contracts_command")
@@ -2076,6 +2186,47 @@ def build_parser() -> argparse.ArgumentParser:
         default=Path("configs/tracking/ball_tracking_baseline.yaml"),
     )
     p_trk_b_eval.add_argument("--ground-truth", type=Path, default=None)
+    p_trk_integrate = tracking_sub.add_parser(
+        "integrate", help="Fuse human/ball tracking artifacts (Stage 6D)"
+    )
+    p_trk_integrate.add_argument("--detections", type=Path, required=True)
+    p_trk_integrate.add_argument("--detection-attributes", type=Path, required=True)
+    p_trk_integrate.add_argument("--detection-receipt", type=Path, required=True)
+    p_trk_integrate.add_argument("--human-observations", type=Path, required=True)
+    p_trk_integrate.add_argument("--human-summaries", type=Path, required=True)
+    p_trk_integrate.add_argument("--human-lifecycle", type=Path, required=True)
+    p_trk_integrate.add_argument("--human-receipt", type=Path, required=True)
+    p_trk_integrate.add_argument("--ball-observations", type=Path, required=True)
+    p_trk_integrate.add_argument("--ball-summaries", type=Path, required=True)
+    p_trk_integrate.add_argument("--ball-lifecycle", type=Path, required=True)
+    p_trk_integrate.add_argument("--ball-receipt", type=Path, required=True)
+    p_trk_integrate.add_argument("--output-dir", type=Path, required=True)
+    p_trk_integrate.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/tracking/tracking_pipeline.yaml"),
+        help="Tracking pipeline config YAML",
+    )
+    p_trk_integrate.add_argument("--frames", type=Path, default=None)
+    p_trk_integrate.add_argument("--analysis-windows", type=Path, default=None)
+    p_trk_integrate.add_argument("--ball-primary-sidecar", type=Path, default=None)
+    p_trk_integrate.add_argument("--contain-root", type=Path, default=None)
+    p_trk_integrate.add_argument("--run-id", type=str, default=None)
+    p_trk_integrate.add_argument("--video-id", type=str, default=None)
+    p_trk_integrate.add_argument("--source-sha", type=str, default=None)
+    p_trk_integrate.add_argument("--timeline-fingerprint", type=str, default=None)
+    p_trk_integrate.add_argument("--detection-fingerprint", type=str, default=None)
+    p_trk_integrate.add_argument("--analysis-window-fingerprint", type=str, default=None)
+    p_trk_validate = tracking_sub.add_parser(
+        "validate", help="Run tracking pipeline validator (Stage 6D)"
+    )
+    p_trk_validate.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/tracking/tracking_pipeline.yaml"),
+    )
+    p_trk_validate.add_argument("--frames", type=int, default=8, help="Synthetic frames (≤20)")
+    p_trk_validate.add_argument("--keep", action="store_true", help="Keep validator session dir")
     return parser
 
 
@@ -2385,6 +2536,38 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
             parser.parse_args(["tracking", "ball", "--help"])
             return 2
+        if args.tracking_command == "integrate":
+            return cmd_tracking_integrate(
+                detections=args.detections,
+                detection_attributes=args.detection_attributes,
+                detection_receipt=args.detection_receipt,
+                human_observations=args.human_observations,
+                human_summaries=args.human_summaries,
+                human_lifecycle=args.human_lifecycle,
+                human_receipt=args.human_receipt,
+                ball_observations=args.ball_observations,
+                ball_summaries=args.ball_summaries,
+                ball_lifecycle=args.ball_lifecycle,
+                ball_receipt=args.ball_receipt,
+                output_dir=args.output_dir,
+                config_path=args.config,
+                contain_root=args.contain_root,
+                frames=args.frames,
+                analysis_windows=args.analysis_windows,
+                ball_primary_sidecar=args.ball_primary_sidecar,
+                run_id=args.run_id,
+                video_id=args.video_id,
+                source_sha=args.source_sha,
+                timeline_fingerprint=args.timeline_fingerprint,
+                detection_fingerprint=args.detection_fingerprint,
+                analysis_window_fingerprint=args.analysis_window_fingerprint,
+            )
+        if args.tracking_command == "validate":
+            return cmd_tracking_validate(
+                config_path=args.config,
+                frames=int(args.frames),
+                keep=bool(args.keep),
+            )
         parser.parse_args(["tracking", "--help"])
         return 2
     parser.print_help()

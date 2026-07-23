@@ -1,0 +1,80 @@
+# Stage 6D human+ball tracking fusion + quality gates.
+# Fingerprinted; strict-loaded. No new tracker/model.
+config_version: 1
+pipeline_id: tracking_fusion_baseline
+pipeline_version: "1.0.0"
+
+alignment:
+  require_run_id_match: true
+  require_video_id_match: true
+  require_source_sha_match: true
+  require_timeline_fingerprint_match: true
+  require_detection_fingerprint_match: true
+  require_analysis_window_fingerprint_match: true
+  fail_on_missing_receipt: true
+
+fusion:
+  # Human track_ids kept; ball remapped after max(human)+1 for compound uniqueness.
+  namespace_ball_tracks: true
+  remap_ball_track_ids: true
+  preserve_predicted_flags: true
+  preserve_unknown_roles: true
+  do_not_upgrade_ambiguous_ball: true
+  reject_cross_cut_continuation: true
+  reject_terminated_reopen: true
+  reject_duplicate_detection_assignment: true
+  no_human_ball_relationship_table: true
+
+quality_thresholds:
+  min_eligible_tracking_coverage: 0.5
+  max_failed_frame_rate: 0.25
+  max_dangling_fk: 0
+  max_duplicate_keys: 0
+  max_invalid_bbox: 0
+  max_receipt_mismatch: 0
+  max_cross_cut_violations: 0
+  max_terminated_reopen: 0
+  max_predicted_ratio: 0.85
+  fragmentation_finding_rate: 0.5
+  role_abstention_finding_rate: 0.95
+  ball_ambiguity_finding_rate: 0.5
+
+review_policy:
+  sample_role_abstention: true
+  max_role_review_items: 5
+  role_sample_stride: 3
+  sample_fragmentation: true
+  max_fragmentation_review_items: 5
+  sample_ball_ambiguity: true
+  max_ambiguity_review_items: 5
+  sample_long_no_ball: true
+  long_no_ball_frames: 8
+  sample_high_predicted: true
+  review_on_receipt_mismatch: true
+  review_on_fk_duplicate: true
+  review_on_cross_cut: true
+  do_not_spam_empty_frames: true
+
+output_policy:
+  atomic_writes: true
+  overwrite_allowed: false
+  write_quality_report: true
+  write_review_queue: true
+  write_pipeline_receipt: true
+  write_bundle_manifest: true
+  emit_primary_sidecar: true
+
+maximum_frames_per_run: 200
+runtime_root: /home/fdoblak/workspace/tracking_pipeline_checks
+
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+notes:
+  - "Stage 6D fuses human+ball tracks; no new tracker/model"
+  - "Track ID is not player identity; no ReID/cross-shot merge"
+  - "Primary ball candidate is not a true-ball guarantee"
+  - "No human-ball possession/relationship table"
+  - "NOT_EVALUATED_NO_REVIEWED_TRACKING_GROUND_TRUTH without reviewed GT"
+  - "Real football tracking accuracy not claimed"

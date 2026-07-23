@@ -62,14 +62,14 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `scripts/check_tracking_contracts.py` (Stage 6A multi-object tracking contracts)
 - `scripts/check_human_tracking_baseline.py` (Stage 6B human MOT baseline)
 - `scripts/check_ball_tracking_baseline.py` (Stage 6C ball tracking baseline)
+- `scripts/check_tracking_pipeline.py` (Stage 6D human+ball tracking fusion + quality gates)
 - `scripts/check_stage_cache.py`, `check_ci_workflow.py`, `check_project.py`
 - Or: `football-analytics project check --profile local --quick`
 
-Stage 5 is closed (`detection-baseline-v0.5.0`): contracts → human/ball/role
-baselines → detection fusion + quality gates. Stage 6A multi-object tracking
-contracts / lifecycle, Stage 6B human MOT baseline, and Stage 6C ball tracking
-baseline are in-tree when merged. Do **not** start Stage 6D (human+ball track
-fusion / Stage 6 close) without an explicit user prompt.
+Stage 5 is closed (`detection-baseline-v0.5.0`). Stage 6 is closed
+(`tracking-baseline-v0.6.0`): contracts → human/ball MOT baselines → tracking
+fusion + quality gates. Do **not** start Stage 7A (ReID / identity evidence /
+target-player contracts) without an explicit user prompt.
 
 ---
 
@@ -154,7 +154,7 @@ Do not change protected packages.
 Do not start a stage without an explicit user prompt.
 Stage 4A–4D broadcast understanding baseline is in-tree when merged.
 Stage 5A–5E detection baseline is in-tree when merged (`detection-baseline-v0.5.0`).
-Stage 5 is **closed**. Stage 6A tracking contracts/lifecycle, Stage 6B human
-MOT baseline, and Stage 6C ball tracking baseline are in-tree when merged.
-Stage 6D is **not** started unless explicitly requested.
+Stage 5 is **closed**. Stage 6A–6D tracking baseline is in-tree when merged
+(`tracking-baseline-v0.6.0`). Stage 6 is **closed**. Stage 7A is **not**
+started unless explicitly requested.
 Manual Cursor flow only — no Codex/background automation.

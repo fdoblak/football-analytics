@@ -1,6 +1,6 @@
 # Risk Register — football-analytics
 
-**Updated:** 2026-07-23 (Stage 6C)
+**Updated:** 2026-07-23 (Stage 6D / Stage 6 close)
 
 **Owner default:** Furkan Doblak unless stated otherwise
 
@@ -777,3 +777,31 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Stage 6C+ |
+
+## RISK-055 — Fused tracking accuracy not validated (Stage 6D / Stage 6 close)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-055 |
+| description | Stage 6D fuses human+ball tracks with operational quality gates. Evaluator returns `NOT_EVALUATED_NO_REVIEWED_TRACKING_GROUND_TRUTH`. Synthetic E2E fixtures must not be claimed as football MOT accuracy. Track IDs remain non-identity; primary ball remains non-guarantee. |
+| probability | high |
+| impact | medium |
+| mitigation | PASS_WITH_FINDINGS Stage 6 close gate; keep human/ball not-evaluated codes in provenance; require reviewed tracking GT before production claims. No ReID/possession/events/physical metrics in 6D. |
+| trigger | Stage 6D / Stage 6 close without reviewed tracking GT |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 6D+ |
+
+## RISK-056 — Human/ball track namespace collision or cross-entity FK corruption
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-056 |
+| description | Merging human and ball tracks without explicit namespace remapping can collide track_ids or bind observations to the wrong entity detections. |
+| probability | medium |
+| impact | high |
+| mitigation | Remap ball track_ids after max(human)+1; hard-fail entity FK mismatch and duplicate detection assignment; no human-ball relationship table. |
+| trigger | Stage 6D tracking fusion |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 6D+ |

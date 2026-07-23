@@ -32,6 +32,9 @@ JSON_SCHEMA_NAMES: tuple[str, ...] = (
     "tracking_request",
     "tracking_run_receipt",
     "tracking_evaluation",
+    "tracking_pipeline_receipt",
+    "tracking_quality_report",
+    "tracking_bundle_manifest",
 )
 
 
