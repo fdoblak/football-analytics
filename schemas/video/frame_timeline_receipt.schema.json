@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/video/frame_timeline_receipt.schema.json",
+  "title": "Frame timeline receipt (Stage 3D)",
+  "description": "Execution receipt for streaming frame timeline mapping and optional materialization. No secrets.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "receipt_id",
+    "run_id",
+    "video_id",
+    "source_path",
+    "source_sha256",
+    "mode",
+    "status",
+    "started_at_utc",
+    "completed_at_utc",
+    "ffprobe_path",
+    "ffprobe_version",
+    "video_stream_index",
+    "time_base",
+    "frame_rate_mode",
+    "frames_parquet",
+    "frames_parquet_sha256",
+    "frame_count",
+    "ok_count",
+    "skipped_count",
+    "failed_count",
+    "unknown_count",
+    "missing_pts_count",
+    "duplicate_pts_count",
+    "non_monotonic_pts_count",
+    "mapping_quality",
+    "materialized",
+    "artifact_manifest",
+    "warnings",
+    "errors",
+    "cleanup",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "receipt_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "source_path": { "type": "string", "minLength": 1 },
+    "source_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "normalization_receipt_path": { "type": ["string", "null"], "minLength": 1 },
+    "mode": {
+      "type": "string",
+      "enum": ["timeline_only", "sampled", "all_frames"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["succeeded", "rejected", "failed"]
+    },
+    "started_at_utc": { "type": "string", "minLength": 20 },
+    "completed_at_utc": { "type": "string", "minLength": 20 },
+    "ffprobe_path": { "type": "string", "minLength": 1 },
+    "ffprobe_version": { "type": "string", "minLength": 1 },
+    "video_stream_index": { "type": "integer", "minimum": 0 },
+    "time_base": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["numerator", "denominator"],
+      "properties": {
+        "numerator": { "type": "integer" },
+        "denominator": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "frame_rate_mode": {
+      "type": "string",
+      "enum": ["cfr", "vfr", "unknown"]
+    },
+    "frames_parquet": { "type": ["string", "null"], "minLength": 1 },
+    "frames_parquet_sha256": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "frame_count": { "type": "integer", "minimum": 0 },
+    "ok_count": { "type": "integer", "minimum": 0 },
+    "skipped_count": { "type": "integer", "minimum": 0 },
+    "failed_count": { "type": "integer", "minimum": 0 },
+    "unknown_count": { "type": "integer", "minimum": 0 },
+    "missing_pts_count": { "type": "integer", "minimum": 0 },
+    "duplicate_pts_count": { "type": "integer", "minimum": 0 },
+    "non_monotonic_pts_count": { "type": "integer", "minimum": 0 },
+    "mapping_quality": {
+      "type": "string",
+      "enum": ["exact", "good", "degraded", "unreliable", "failed"]
+    },
+    "sample_every": { "type": ["integer", "null"], "minimum": 1 },
+    "materialized": { "type": "boolean" },
+    "materialized_frame_count": { "type": ["integer", "null"], "minimum": 0 },
+    "artifact_manifest": { "type": ["string", "null"], "minLength": 1 },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message"],
+        "properties": {
+          "code": { "type": "string", "minLength": 1 },
+          "message": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message"],
+        "properties": {
+          "code": { "type": "string", "minLength": 1 },
+          "message": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["temp_removed"],
+      "properties": {
+        "temp_removed": { "type": "boolean" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "label"],
+      "properties": {
+        "stage": { "type": "string", "const": "3D" },
+        "label": { "type": "string", "minLength": 1 },
+        "notes": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

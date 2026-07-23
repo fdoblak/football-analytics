@@ -34,7 +34,7 @@ class VideoContractTests(unittest.TestCase):
 
     def test_six_schemas_parse(self) -> None:
         self.assertEqual(set(self.schemas), set(SCHEMA_FILES))
-        self.assertEqual(len(SCHEMA_FILES), 6)
+        self.assertEqual(len(SCHEMA_FILES), 8)
         for _name, schema in self.schemas.items():
             self.assertEqual(schema.get("schema_version", {}).get("const", 1), 1)
             self.assertIn("$id", schema)

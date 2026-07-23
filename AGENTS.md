@@ -114,7 +114,7 @@ These remain open until independently verified and closed by policy:
 - Registry license / access warnings
 - GPU host gate unverifiable (`AGENT_CONTEXT_GPU_UNVERIFIABLE`)
 - Same-VHDX local archive ≠ independent backup
-- RISK-029 (large-table validation / pylist memory pressure)
+- RISK-029 (large-table validation / pylist memory pressure; mitigated for Stage 3D frame timeline streaming write path)
 - Cache GC / automatic purge absent
 
 ---

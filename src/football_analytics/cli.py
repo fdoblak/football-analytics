@@ -462,6 +462,67 @@ def cmd_video_normalize(
     return int(result.exit_code)
 
 
+def cmd_video_frames(
+    *,
+    source: Path,
+    output_dir: Path,
+    mode: str,
+    policy_path: Path,
+    contain_root: Path | None,
+    run_id: str | None,
+    video_id: str | None,
+    expected_source_sha256: str | None,
+    execute_materialize: bool,
+    sample_every: int | None,
+    normalization_receipt: Path | None,
+) -> int:
+    """Stage 3D: streaming frame timeline (+ optional materialize)."""
+    from football_analytics.video.contracts import default_repo_root, load_ingest_policy
+    from football_analytics.video.frame_timeline_service import run_frame_timeline
+    from football_analytics.video.types import FrameTimelineMode
+
+    root = default_repo_root()
+    pol = policy_path if policy_path.is_absolute() else root / policy_path
+    try:
+        policy = load_ingest_policy(pol)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    try:
+        timeline_mode = FrameTimelineMode(mode)
+    except ValueError:
+        print(f"error: invalid mode {mode!r}", file=sys.stderr)
+        return 2
+    contain = contain_root
+    if contain is None:
+        contain = Path(str(policy["frame_timeline_policy"]["runtime_root"]))
+    result = run_frame_timeline(
+        source=str(source),
+        output_dir=str(output_dir),
+        policy=policy,
+        mode=timeline_mode,
+        contain_root=contain,
+        run_id=run_id,
+        video_id=video_id,
+        expected_source_sha256=expected_source_sha256,
+        execute_materialize=execute_materialize,
+        sample_every=sample_every,
+        normalization_receipt=(
+            str(normalization_receipt) if normalization_receipt is not None else None
+        ),
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"status: {summary['status']}")
+    print(f"frames_parquet: {summary['frames_parquet']}")
+    print(f"mapping_quality: {summary['mapping_quality']}")
+    print(f"frame_count: {summary['frame_count']}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="football-analytics",
@@ -580,6 +641,53 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help="Optional directory for normalization_receipt.json",
     )
+    p_frames = video_sub.add_parser("frames", help="Frame timeline mapping (Stage 3D)")
+    p_frames.add_argument("--source", type=Path, required=True, help="Absolute local video path")
+    p_frames.add_argument("--output-dir", type=Path, required=True, help="Runtime output directory")
+    p_frames.add_argument(
+        "--mode",
+        choices=("timeline_only", "sampled", "all_frames"),
+        default="timeline_only",
+        help="timeline_only (default) or materialize modes",
+    )
+    p_frames.add_argument(
+        "--policy",
+        type=Path,
+        default=Path("configs/video/ingest_policy.yaml"),
+        help="Ingest/frame_timeline policy YAML",
+    )
+    p_frames.add_argument(
+        "--contain-root",
+        type=Path,
+        default=None,
+        help="Containment root (default: frame_timeline_policy.runtime_root)",
+    )
+    p_frames.add_argument("--run-id", type=str, default=None, help="Optional run_id")
+    p_frames.add_argument("--video-id", type=str, default=None, help="Optional video_id")
+    p_frames.add_argument(
+        "--expected-source-sha256",
+        type=str,
+        default=None,
+        help="Optional expected source SHA-256",
+    )
+    p_frames.add_argument(
+        "--execute-materialize",
+        action="store_true",
+        default=False,
+        help="Required for sampled/all_frames image materialization",
+    )
+    p_frames.add_argument(
+        "--sample-every",
+        type=int,
+        default=None,
+        help="Sample stride for sampled mode (default from policy)",
+    )
+    p_frames.add_argument(
+        "--normalization-receipt",
+        type=Path,
+        default=None,
+        help="Optional Stage 3C normalization receipt JSON",
+    )
     return parser
 
 
@@ -663,6 +771,20 @@ def main(argv: Sequence[str] | None = None) -> int:
                 execute=bool(args.execute),
                 contain_root=args.contain_root,
                 receipt_dir=args.receipt_dir,
+            )
+        if args.video_command == "frames":
+            return cmd_video_frames(
+                source=args.source,
+                output_dir=args.output_dir,
+                mode=str(args.mode),
+                policy_path=args.policy,
+                contain_root=args.contain_root,
+                run_id=args.run_id,
+                video_id=args.video_id,
+                expected_source_sha256=args.expected_source_sha256,
+                execute_materialize=bool(args.execute_materialize),
+                sample_every=args.sample_every,
+                normalization_receipt=args.normalization_receipt,
             )
         parser.parse_args(["video", "--help"])
         return 2

@@ -12,6 +12,7 @@ import yaml
 from football_analytics.core.hashing import hash_canonical_json
 from football_analytics.video.types import (
     SCHEMA_VERSION,
+    FrameTimelineReceipt,
     IngestMode,
     IngestReceipt,
     IngestRequest,
@@ -33,6 +34,8 @@ SCHEMA_FILES = (
     "normalize_plan.schema.json",
     "ingest_receipt.schema.json",
     "normalization_receipt.schema.json",
+    "frame_timeline_receipt.schema.json",
+    "frame_artifact_manifest.schema.json",
 )
 
 DEFAULT_POLICY_REL = Path("configs/video/ingest_policy.yaml")
@@ -105,6 +108,7 @@ def load_ingest_policy(path: Path) -> dict[str, Any]:
         "normalization_defaults",
         "ffprobe_policy",
         "ffmpeg_policy",
+        "frame_timeline_policy",
     }
     missing = sorted(required - set(raw))
     if missing:
@@ -189,6 +193,47 @@ def load_ingest_policy(path: Path) -> dict[str, Any]:
         raise VideoPolicyError("ffmpeg_binary must be /usr/bin/ffmpeg")
     if int(ffmpeg.get("maximum_parallel_normalizations", -1)) != 1:
         raise VideoPolicyError("maximum_parallel_normalizations must be 1")
+    ftp = raw["frame_timeline_policy"]
+    if not isinstance(ftp, dict):
+        raise VideoPolicyError("frame_timeline_policy must be a mapping")
+    ftp_required = {
+        "ffprobe_binary",
+        "allowed_binary_realpaths",
+        "ffmpeg_binary",
+        "allowed_ffmpeg_realpaths",
+        "default_mode",
+        "batch_size",
+        "maximum_line_bytes",
+        "maximum_frames",
+        "timeout_base_seconds",
+        "timeout_per_media_second",
+        "maximum_timeout_seconds",
+        "maximum_stderr_bytes",
+        "materialize_image_format",
+        "sample_every_default",
+        "missing_pts_policy",
+        "duplicate_pts_policy",
+        "non_monotonic_pts_policy",
+        "invent_time_from_index_or_fps",
+        "overwrite_allowed",
+        "protocol_whitelist",
+        "runtime_root",
+    }
+    missing_ft = sorted(ftp_required - set(ftp))
+    if missing_ft:
+        raise VideoPolicyError(f"frame_timeline_policy missing keys: {missing_ft}")
+    if str(ftp.get("ffprobe_binary")) != "/usr/bin/ffprobe":
+        raise VideoPolicyError("frame_timeline_policy.ffprobe_binary must be /usr/bin/ffprobe")
+    if str(ftp.get("ffmpeg_binary")) != "/usr/bin/ffmpeg":
+        raise VideoPolicyError("frame_timeline_policy.ffmpeg_binary must be /usr/bin/ffmpeg")
+    if ftp.get("invent_time_from_index_or_fps") is not False:
+        raise VideoPolicyError("invent_time_from_index_or_fps must be false")
+    if ftp.get("overwrite_allowed") is not False:
+        raise VideoPolicyError("frame_timeline_policy.overwrite_allowed must be false")
+    if str(ftp.get("default_mode")) != "timeline_only":
+        raise VideoPolicyError("default_mode must be timeline_only")
+    if int(ftp.get("batch_size", 0)) < 1:
+        raise VideoPolicyError("batch_size must be >= 1")
     # Enum alignment with Python
     for kind in raw["allowed_source_kinds"]:
         SourceKind(kind)
@@ -287,4 +332,5 @@ __all__ = [
     "NormalizePlan",
     "IngestReceipt",
     "NormalizationReceipt",
+    "FrameTimelineReceipt",
 ]

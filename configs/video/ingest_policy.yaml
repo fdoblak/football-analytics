@@ -159,3 +159,30 @@ ffprobe_policy:
   protocol_whitelist:
     - file
   runtime_root: /home/fdoblak/workspace/video_probe_checks
+
+# Stage 3D — streaming frame timeline + optional materialization
+frame_timeline_policy:
+  ffprobe_binary: /usr/bin/ffprobe
+  allowed_binary_realpaths:
+    - /usr/bin/ffprobe
+  ffmpeg_binary: /usr/bin/ffmpeg
+  allowed_ffmpeg_realpaths:
+    - /usr/bin/ffmpeg
+  default_mode: timeline_only
+  batch_size: 1024
+  maximum_line_bytes: 65536
+  maximum_frames: 10000000
+  timeout_base_seconds: 30
+  timeout_per_media_second: 2
+  maximum_timeout_seconds: 7200
+  maximum_stderr_bytes: 1048576
+  materialize_image_format: png
+  sample_every_default: 25
+  missing_pts_policy: skip_carry_forward
+  duplicate_pts_policy: keep_warn
+  non_monotonic_pts_policy: mark_unknown_carry
+  invent_time_from_index_or_fps: false
+  overwrite_allowed: false
+  protocol_whitelist:
+    - file
+  runtime_root: /home/fdoblak/workspace/frame_timeline_checks

@@ -1493,3 +1493,243 @@ class NormalizationReceipt:
 
     def fingerprint(self) -> str:
         return hash_canonical_json(self.to_dict())
+
+
+class FrameTimelineMode(str, Enum):
+    TIMELINE_ONLY = "timeline_only"
+    SAMPLED = "sampled"
+    ALL_FRAMES = "all_frames"
+
+
+class FrameTimelineStatus(str, Enum):
+    SUCCEEDED = "succeeded"
+    REJECTED = "rejected"
+    FAILED = "failed"
+
+
+class MappingQuality(str, Enum):
+    EXACT = "exact"
+    GOOD = "good"
+    DEGRADED = "degraded"
+    UNRELIABLE = "unreliable"
+    FAILED = "failed"
+
+
+@dataclass(frozen=True)
+class FrameTimelineCleanup:
+    temp_removed: bool
+
+    def to_dict(self) -> dict[str, bool]:
+        return {"temp_removed": self.temp_removed}
+
+    @classmethod
+    def from_dict(cls, data: Mapping[str, Any]) -> FrameTimelineCleanup:
+        return cls(temp_removed=bool(data["temp_removed"]))
+
+
+@dataclass(frozen=True)
+class FrameTimelineProvenance:
+    stage: str
+    label: str
+    notes: str | None = None
+
+    def __post_init__(self) -> None:
+        if self.stage != "3D":
+            raise VideoContractError("FrameTimelineProvenance.stage must be 3D")
+        if not isinstance(self.label, str) or not self.label:
+            raise VideoContractError("provenance.label empty")
+
+    def to_dict(self) -> dict[str, Any]:
+        return {"stage": self.stage, "label": self.label, "notes": self.notes}
+
+    @classmethod
+    def from_dict(cls, data: Mapping[str, Any]) -> FrameTimelineProvenance:
+        return cls(
+            stage=str(data["stage"]),
+            label=str(data["label"]),
+            notes=data.get("notes"),
+        )
+
+
+@dataclass(frozen=True)
+class FrameTimelineReceipt:
+    receipt_id: str
+    run_id: str
+    video_id: str
+    source_path: str
+    source_sha256: str
+    mode: FrameTimelineMode
+    status: FrameTimelineStatus
+    started_at_utc: str
+    completed_at_utc: str
+    ffprobe_path: str
+    ffprobe_version: str
+    video_stream_index: int
+    time_base: Rational
+    frame_rate_mode: FrameRateMode
+    frames_parquet: str | None
+    frames_parquet_sha256: str | None
+    frame_count: int
+    ok_count: int
+    skipped_count: int
+    failed_count: int
+    unknown_count: int
+    missing_pts_count: int
+    duplicate_pts_count: int
+    non_monotonic_pts_count: int
+    mapping_quality: MappingQuality
+    materialized: bool
+    artifact_manifest: str | None
+    warnings: tuple[Issue, ...]
+    errors: tuple[Issue, ...]
+    cleanup: FrameTimelineCleanup
+    provenance: FrameTimelineProvenance
+    normalization_receipt_path: str | None = None
+    sample_every: int | None = None
+    materialized_frame_count: int | None = None
+    schema_version: int = SCHEMA_VERSION
+
+    def __post_init__(self) -> None:
+        if self.schema_version != SCHEMA_VERSION:
+            raise VideoContractError("unsupported FrameTimelineReceipt schema_version")
+        object.__setattr__(
+            self, "receipt_id", require_path_safe_id(self.receipt_id, label="receipt_id")
+        )
+        object.__setattr__(self, "run_id", validate_run_id(self.run_id))
+        object.__setattr__(self, "video_id", require_path_safe_id(self.video_id, label="video_id"))
+        object.__setattr__(
+            self, "source_sha256", require_sha256(self.source_sha256, label="source_sha256")
+        )
+        if not isinstance(self.mode, FrameTimelineMode):
+            raise VideoContractError("mode invalid")
+        if not isinstance(self.status, FrameTimelineStatus):
+            raise VideoContractError("status invalid")
+        if not isinstance(self.mapping_quality, MappingQuality):
+            raise VideoContractError("mapping_quality invalid")
+        if not isinstance(self.frame_rate_mode, FrameRateMode):
+            raise VideoContractError("frame_rate_mode invalid")
+        object.__setattr__(
+            self, "started_at_utc", require_utc_z(self.started_at_utc, label="started_at_utc")
+        )
+        object.__setattr__(
+            self,
+            "completed_at_utc",
+            require_utc_z(self.completed_at_utc, label="completed_at_utc"),
+        )
+        require_non_bool_int(self.video_stream_index, label="video_stream_index", minimum=0)
+        for name in (
+            "frame_count",
+            "ok_count",
+            "skipped_count",
+            "failed_count",
+            "unknown_count",
+            "missing_pts_count",
+            "duplicate_pts_count",
+            "non_monotonic_pts_count",
+        ):
+            require_non_bool_int(getattr(self, name), label=name, minimum=0)
+        if self.frames_parquet_sha256 is not None:
+            object.__setattr__(
+                self,
+                "frames_parquet_sha256",
+                require_sha256(self.frames_parquet_sha256, label="frames_parquet_sha256"),
+            )
+        if self.sample_every is not None:
+            require_non_bool_int(self.sample_every, label="sample_every", minimum=1)
+        if self.materialized_frame_count is not None:
+            require_non_bool_int(
+                self.materialized_frame_count, label="materialized_frame_count", minimum=0
+            )
+        object.__setattr__(self, "warnings", tuple(self.warnings))
+        object.__setattr__(self, "errors", tuple(self.errors))
+        if (
+            self.status in {FrameTimelineStatus.REJECTED, FrameTimelineStatus.FAILED}
+            and not self.errors
+        ):
+            raise VideoContractError(f"{self.status.value} receipt requires errors")
+        if self.status == FrameTimelineStatus.SUCCEEDED and (
+            not self.frames_parquet or not self.frames_parquet_sha256
+        ):
+            raise VideoContractError("succeeded receipt requires frames_parquet and sha256")
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "schema_version": self.schema_version,
+            "receipt_id": self.receipt_id,
+            "run_id": self.run_id,
+            "video_id": self.video_id,
+            "source_path": self.source_path,
+            "source_sha256": self.source_sha256,
+            "normalization_receipt_path": self.normalization_receipt_path,
+            "mode": self.mode.value,
+            "status": self.status.value,
+            "started_at_utc": self.started_at_utc,
+            "completed_at_utc": self.completed_at_utc,
+            "ffprobe_path": self.ffprobe_path,
+            "ffprobe_version": self.ffprobe_version,
+            "video_stream_index": self.video_stream_index,
+            "time_base": self.time_base.to_dict(),
+            "frame_rate_mode": self.frame_rate_mode.value,
+            "frames_parquet": self.frames_parquet,
+            "frames_parquet_sha256": self.frames_parquet_sha256,
+            "frame_count": self.frame_count,
+            "ok_count": self.ok_count,
+            "skipped_count": self.skipped_count,
+            "failed_count": self.failed_count,
+            "unknown_count": self.unknown_count,
+            "missing_pts_count": self.missing_pts_count,
+            "duplicate_pts_count": self.duplicate_pts_count,
+            "non_monotonic_pts_count": self.non_monotonic_pts_count,
+            "mapping_quality": self.mapping_quality.value,
+            "sample_every": self.sample_every,
+            "materialized": self.materialized,
+            "materialized_frame_count": self.materialized_frame_count,
+            "artifact_manifest": self.artifact_manifest,
+            "warnings": [w.to_dict() for w in self.warnings],
+            "errors": [e.to_dict() for e in self.errors],
+            "cleanup": self.cleanup.to_dict(),
+            "provenance": self.provenance.to_dict(),
+        }
+
+    @classmethod
+    def from_dict(cls, data: Mapping[str, Any]) -> FrameTimelineReceipt:
+        return cls(
+            schema_version=int(data.get("schema_version", SCHEMA_VERSION)),
+            receipt_id=str(data["receipt_id"]),
+            run_id=str(data["run_id"]),
+            video_id=str(data["video_id"]),
+            source_path=str(data["source_path"]),
+            source_sha256=str(data["source_sha256"]),
+            normalization_receipt_path=data.get("normalization_receipt_path"),
+            mode=FrameTimelineMode(str(data["mode"])),
+            status=FrameTimelineStatus(str(data["status"])),
+            started_at_utc=str(data["started_at_utc"]),
+            completed_at_utc=str(data["completed_at_utc"]),
+            ffprobe_path=str(data["ffprobe_path"]),
+            ffprobe_version=str(data["ffprobe_version"]),
+            video_stream_index=int(data["video_stream_index"]),
+            time_base=Rational.from_dict(data["time_base"], label="time_base"),
+            frame_rate_mode=FrameRateMode(str(data["frame_rate_mode"])),
+            frames_parquet=data.get("frames_parquet"),
+            frames_parquet_sha256=data.get("frames_parquet_sha256"),
+            frame_count=int(data["frame_count"]),
+            ok_count=int(data["ok_count"]),
+            skipped_count=int(data["skipped_count"]),
+            failed_count=int(data["failed_count"]),
+            unknown_count=int(data["unknown_count"]),
+            missing_pts_count=int(data["missing_pts_count"]),
+            duplicate_pts_count=int(data["duplicate_pts_count"]),
+            non_monotonic_pts_count=int(data["non_monotonic_pts_count"]),
+            mapping_quality=MappingQuality(str(data["mapping_quality"])),
+            sample_every=data.get("sample_every"),
+            materialized=bool(data["materialized"]),
+            materialized_frame_count=data.get("materialized_frame_count"),
+            artifact_manifest=data.get("artifact_manifest"),
+            warnings=tuple(Issue.from_dict(w) for w in data.get("warnings", [])),
+            errors=tuple(Issue.from_dict(e) for e in data.get("errors", [])),
+            cleanup=FrameTimelineCleanup.from_dict(data["cleanup"]),
+            provenance=FrameTimelineProvenance.from_dict(data["provenance"]),
+        )
+
+    def fingerprint(self) -> str:
+        return hash_canonical_json(self.to_dict())

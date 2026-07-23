@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/video/frame_artifact_manifest.schema.json",
+  "title": "Frame artifact manifest header (Stage 3D)",
+  "description": "Header for materialized frame artifacts. Per-frame rows live in a sibling JSONL file referenced by rows_path.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "manifest_id",
+    "run_id",
+    "video_id",
+    "source_sha256",
+    "mode",
+    "image_format",
+    "rows_path",
+    "row_count",
+    "created_at_utc",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "manifest_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "source_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "mode": {
+      "type": "string",
+      "enum": ["sampled", "all_frames"]
+    },
+    "sample_every": { "type": ["integer", "null"], "minimum": 1 },
+    "image_format": {
+      "type": "string",
+      "enum": ["png", "jpg", "jpeg"]
+    },
+    "frames_dir": { "type": "string", "minLength": 1 },
+    "rows_path": { "type": "string", "minLength": 1 },
+    "row_count": { "type": "integer", "minimum": 0 },
+    "created_at_utc": { "type": "string", "minLength": 20 },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "label"],
+      "properties": {
+        "stage": { "type": "string", "const": "3D" },
+        "label": { "type": "string", "minLength": 1 },
+        "notes": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

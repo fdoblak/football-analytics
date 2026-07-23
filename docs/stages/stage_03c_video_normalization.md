@@ -114,7 +114,7 @@ ultralytics 8.4.91 · SoccerNet 0.1.62 · pyarrow 25.0.0.
 
 ## 26. Out of scope / Stage 3D
 
-Frame extraction and time mapping remain Stage 3D (not started).
+Frame extraction and time mapping are Stage 3D (see `stage_03d_frame_timeline.md`).
 
 ## 27. Gate
 
