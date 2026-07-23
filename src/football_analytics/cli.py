@@ -1419,6 +1419,126 @@ def cmd_identity_appearance_validate(*, keep: bool, as_json: bool) -> int:
     return int(main_fn(argv))
 
 
+def cmd_identity_teams_classify(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    contain_root: Path | None,
+    run_id: str | None,
+    video_id: str | None,
+    fixture: str,
+) -> int:
+    """Stage 7C: anonymous team appearance clustering + team_assignments."""
+    from football_analytics.data.registry import default_project_root
+    from football_analytics.identity.team_assignment_config import (
+        default_team_assignment_config_path,
+        load_team_assignment_config,
+    )
+    from football_analytics.identity.team_assignment_fixtures import all_team_fixtures
+    from football_analytics.identity.team_assignment_service import run_team_classify
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_team_assignment_config_path(repo_root=root)
+    try:
+        config = load_team_assignment_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    fixtures = all_team_fixtures()
+    if fixture not in fixtures:
+        print(f"unknown_fixture: {fixture}; choices={sorted(fixtures)}", file=sys.stderr)
+        return 2
+    bundle = fixtures[fixture]()
+    contain = contain_root or Path(str(config["runtime_root"]))
+    result = run_team_classify(
+        output_dir=str(output_dir),
+        config=config,
+        contain_root=contain,
+        run_id=run_id,
+        video_id=video_id,
+        in_memory_bundle=bundle,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"team_assignments_parquet: {summary.get('team_assignments_parquet')}")
+    print(f"evidence_parquet: {summary.get('evidence_parquet')}")
+    print(f"receipt_json: {summary.get('receipt_json')}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
+def cmd_identity_teams_evaluate(
+    *,
+    config_path: Path,
+    assignments: Path | None,
+    ground_truth: Path | None,
+) -> int:
+    """Stage 7C: evaluate team assignments (null without reviewed GT)."""
+    import json
+
+    from football_analytics.data.registry import default_project_root
+    from football_analytics.identity.team_assignment_config import (
+        default_team_assignment_config_path,
+        load_team_assignment_config,
+    )
+    from football_analytics.identity.team_assignment_evaluation import (
+        NOT_EVALUATED_TEAM_ASSIGNMENT,
+    )
+    from football_analytics.identity.team_assignment_service import run_team_evaluate
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_team_assignment_config_path(repo_root=root)
+    try:
+        config = load_team_assignment_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    asn_rows = None
+    if assignments is not None and assignments.is_file():
+        import pyarrow.parquet as pq
+
+        asn_rows = pq.read_table(assignments).to_pylist()
+    gt_rows = None
+    has_gt = False
+    if ground_truth is not None and ground_truth.is_file():
+        gt_rows = json.loads(ground_truth.read_text(encoding="utf-8"))
+        has_gt = bool(gt_rows)
+    payload = run_team_evaluate(
+        config=config,
+        assignments=asn_rows,
+        ground_truth=gt_rows if isinstance(gt_rows, list) else None,
+        has_reviewed_ground_truth=has_gt,
+    )
+    print(f"status: {payload['status']}")
+    print(f"ground_truth_evaluation_status: {payload['ground_truth_evaluation_status']}")
+    print(f"expected_code: {NOT_EVALUATED_TEAM_ASSIGNMENT}")
+    return 0
+
+
+def cmd_identity_teams_validate(*, keep: bool, as_json: bool) -> int:
+    """Run Stage 7C team assignment baseline validator."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_team_assignment_baseline.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("team assignment validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
 def cmd_tracking_contracts_validate(*, keep: bool, as_json: bool) -> int:
     """Run Stage 6A synthetic tracking contract validator (no tracker algorithm)."""
     import runpy
@@ -2457,7 +2577,7 @@ def build_parser() -> argparse.ArgumentParser:
     p_trk_validate.add_argument("--frames", type=int, default=8, help="Synthetic frames (≤20)")
     p_trk_validate.add_argument("--keep", action="store_true", help="Keep validator session dir")
 
-    p_identity = sub.add_parser("identity", help="ReID / identity / target-player (Stage 7A/7B)")
+    p_identity = sub.add_parser("identity", help="ReID / identity / target-player (Stage 7A/7B/7C)")
     identity_sub = p_identity.add_subparsers(dest="identity_command")
     p_id_contracts = identity_sub.add_parser("contracts", help="Identity contract helpers")
     id_contracts_sub = p_id_contracts.add_subparsers(dest="identity_contracts_command")
@@ -2525,6 +2645,42 @@ def build_parser() -> argparse.ArgumentParser:
     p_id_reid_eval.add_argument("--links", type=Path, default=None)
     p_id_reid_eval.add_argument("--profiles", type=Path, default=None)
     p_id_reid_eval.add_argument("--ground-truth", type=Path, default=None)
+
+    p_id_teams = identity_sub.add_parser(
+        "teams", help="Anonymous team appearance clustering (Stage 7C)"
+    )
+    id_teams_sub = p_id_teams.add_subparsers(dest="identity_teams_command")
+    p_id_teams_cls = id_teams_sub.add_parser(
+        "classify", help="Cluster anonymous team_a/team_b and write team_assignments"
+    )
+    p_id_teams_cls.add_argument("--output-dir", type=Path, required=True)
+    p_id_teams_cls.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/identity/team_assignment_baseline.yaml"),
+    )
+    p_id_teams_cls.add_argument("--contain-root", type=Path, default=None)
+    p_id_teams_cls.add_argument("--run-id", type=str, default=None)
+    p_id_teams_cls.add_argument("--video-id", type=str, default=None)
+    p_id_teams_cls.add_argument(
+        "--fixture",
+        type=str,
+        default="two_teams",
+        help="Synthetic fixture name (no real video required)",
+    )
+    p_id_teams_eval = id_teams_sub.add_parser("evaluate", help="Evaluate team assignments")
+    p_id_teams_eval.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/identity/team_assignment_baseline.yaml"),
+    )
+    p_id_teams_eval.add_argument("--assignments", type=Path, default=None)
+    p_id_teams_eval.add_argument("--ground-truth", type=Path, default=None)
+    p_id_teams_val = id_teams_sub.add_parser(
+        "validate", help="Run team assignment baseline validator"
+    )
+    p_id_teams_val.add_argument("--keep", action="store_true")
+    p_id_teams_val.add_argument("--json", action="store_true")
 
     return parser
 
@@ -2921,6 +3077,26 @@ def main(argv: Sequence[str] | None = None) -> int:
                     ground_truth=args.ground_truth,
                 )
             parser.parse_args(["identity", "reid", "--help"])
+            return 2
+        if args.identity_command == "teams":
+            if args.identity_teams_command == "classify":
+                return cmd_identity_teams_classify(
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    contain_root=args.contain_root,
+                    run_id=args.run_id,
+                    video_id=args.video_id,
+                    fixture=str(args.fixture),
+                )
+            if args.identity_teams_command == "evaluate":
+                return cmd_identity_teams_evaluate(
+                    config_path=args.config,
+                    assignments=args.assignments,
+                    ground_truth=args.ground_truth,
+                )
+            if args.identity_teams_command == "validate":
+                return cmd_identity_teams_validate(keep=bool(args.keep), as_json=bool(args.json))
+            parser.parse_args(["identity", "teams", "--help"])
             return 2
         parser.parse_args(["identity", "--help"])
         return 2

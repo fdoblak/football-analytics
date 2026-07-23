@@ -1,0 +1,104 @@
+# Stage 7C anonymous team appearance clustering + team_assignments baseline.
+# Anonymous labels only: team_a | team_b | unknown (NOT club names / home-away).
+# Reuses Stage 7B appearance embeddings; team evidence alone cannot confirm identity.
+config_version: 1
+producer: team_assignment_baseline
+producer_version: "0.1.0"
+method_id: anonymous_2cluster_color_v1
+method_type: appearance_clustering
+
+appearance_reid_config_path: configs/identity/appearance_reid_baseline.yaml
+identity_policy_path: configs/identity/identity_evidence_policy.yaml
+
+eligibility:
+  human_only: true
+  observed_only: true
+  min_coverage: 0.25
+  min_quality: 0.15
+  min_observed_samples: 2
+  seed_roles:
+    - player
+  exclude_roles_from_seed:
+    - referee
+    - staff
+    - goalkeeper
+    - unknown
+  exclude_confirmed_goalkeeper_from_seed: true
+  unknown_role_may_seed: false
+  graphics_replay_forbidden: true
+
+clustering:
+  cluster_count_policy: exactly_two_when_separated
+  n_clusters: 2
+  min_seeds: 4
+  min_cluster_size: 2
+  min_centroid_separation: 0.18
+  max_intra_cluster_spread: 0.55
+  outlier_distance: 0.35
+  assignment_max_distance: 0.42
+  ambiguity_margin: 0.06
+  similar_kit_separation_floor: 0.12
+  color_dims_only: true
+  edge_texture_weight: 0.0
+  init: farthest_pair
+  max_lloyd_iters: 32
+  deterministic_seed: 0
+  label_ordering: centroid_fingerprint_asc
+  cross_shot_alignment_min_similarity: 0.92
+  cross_shot_alignment_enabled: true
+  cross_video_auto_transfer: false
+
+assignment:
+  auto_real_team_naming: false
+  auto_home_away: false
+  auto_target_confirmation: false
+  auto_goalkeeper_team_from_kit: false
+  player_team_role: unknown
+  referee_staff_team_role: official
+  referee_staff_team_id: unknown
+  goalkeeper_default_team_id: unknown
+  unknown_role_max_status: candidate
+  source: model
+
+review:
+  sample_ambiguous: true
+  sample_similar_kit: true
+  sample_outlier: true
+  sample_role_conflict: true
+  max_review_items: 32
+
+output_policy:
+  atomic_writes: true
+  overwrite_allowed: false
+  chmod_mode: 0o600
+  write_cluster_provenance: true
+
+safety_limits:
+  max_tracks_per_video: 512
+  max_assignments_per_run: 512
+  timeout_seconds: 120.0
+
+runtime_root: /home/fdoblak/workspace/team_assignment_checks
+deterministic_seed: 0
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+selection_matrix:
+  - candidate: learned kit classifier / SoccerNet team spotting
+    status: future
+    reason: reference-only; no Stage 7C integration; real team naming deferred
+  - candidate: home/away geometric heuristics
+    status: rejected
+    reason: Stage 7C forbids home/away prediction
+  - candidate: anonymous 2-cluster color appearance (HSV/Lab upper+lower)
+    status: selected
+    reason: deterministic offline clustering into team_a/team_b/unknown
+
+notes:
+  - Anonymous team_a/team_b are NOT club names and NOT home/away.
+  - Team assignment is NOT player identity; alone cannot confirm target.
+  - Goalkeeper is not auto-bound to a team from kit alone.
+  - Referee/staff are not_eligible as team players (team_role=official).
+  - Cross-video auto team-id transfer is forbidden.
+  - Real football team-assignment accuracy is NOT validated without reviewed GT.

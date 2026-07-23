@@ -65,6 +65,7 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `scripts/check_tracking_pipeline.py` (Stage 6D human+ball tracking fusion + quality gates)
 - `scripts/check_identity_contracts.py` (Stage 7A ReID / identity evidence / target-player contracts)
 - `scripts/check_appearance_reid_baseline.py` (Stage 7B appearance embedding + tracklet ReID baseline)
+- `scripts/check_team_assignment_baseline.py` (Stage 7C anonymous team assignment baseline)
 - `scripts/check_stage_cache.py`, `check_ci_workflow.py`, `check_project.py`
 - Or: `football-analytics project check --profile local --quick`
 
@@ -73,8 +74,10 @@ Stage 5 is closed (`detection-baseline-v0.5.0`). Stage 6 is closed
 fusion + quality gates. Stage 7A identity contracts are in-tree when merged.
 Stage 7B appearance ReID baseline is in-tree when merged (handcrafted
 descriptor; appearance alone cannot confirm; real football accuracy not
-validated). Do **not** start Stage 7C (team appearance / team assignment)
-without an explicit user prompt.
+validated). Stage 7C anonymous team appearance clustering + `team_assignments`
+baseline is in-tree when merged (`team_a`/`team_b`/`unknown` only; no home/away
+or club naming; team evidence alone cannot confirm). Do **not** start Stage 7D
+(jersey OCR) without an explicit user prompt.
 
 ---
 
@@ -163,5 +166,6 @@ Stage 5 is **closed**. Stage 6A–6D tracking baseline is in-tree when merged
 (`tracking-baseline-v0.6.0`). Stage 6 is **closed**. Stage 7A identity /
 target-player contracts are in-tree when merged. Stage 7B appearance embedding
 + tracklet ReID baseline is in-tree when merged (handcrafted; no auto-confirm).
-Stage 7C is **not** started unless explicitly requested.
+Stage 7C anonymous team assignment baseline is in-tree when merged. Stage 7D
+is **not** started unless explicitly requested.
 Manual Cursor flow only — no Codex/background automation.

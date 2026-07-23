@@ -1,6 +1,6 @@
 # Risk Register — football-analytics
 
-**Updated:** 2026-07-23 (Stage 7A identity contracts)
+**Updated:** 2026-07-23 (Stage 7C team assignment baseline)
 
 **Owner default:** Furkan Doblak unless stated otherwise
 
@@ -917,3 +917,73 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Stage 7B+ |
+
+## RISK-065 — Similar-kit team cluster collapse / false split
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-065 |
+| description | Near-identical kits yield low centroid separation; forcing two clusters invents false team splits or collapses both sides into one anonymous label. |
+| probability | high |
+| impact | high |
+| mitigation | Min separation + similar-kit abstain; ambiguity margin → unknown/review; anonymous labels only; no home/away invent. |
+| trigger | low inter-centroid separation on player seeds |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7C+ |
+
+## RISK-066 — Lighting / white-balance team drift
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-066 |
+| description | Broadcast grade and shot lighting shifts HSV/Lab kit features enough to flip anonymous team labels or create false team switches. |
+| probability | high |
+| impact | medium |
+| mitigation | Color-focused features; cross-shot alignment only with strong centroid evidence; no silent label swap; review on conflict. |
+| trigger | team_id flip under brightness/camera change |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7C+ |
+
+## RISK-067 — Goalkeeper / referee contamination of team centroids
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-067 |
+| description | Distinct GK kits or referee/staff clothing can seed or pull team centroids, corrupting player team_a/team_b assignments. |
+| probability | medium |
+| impact | high |
+| mitigation | Exclude referee/staff/confirmed GK from seeds; GK never auto-bound from kit; official role → not_eligible. |
+| trigger | non-player role in seed set or GK assigned via kit alone |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7C+ |
+
+## RISK-068 — Anonymous label swap across shots / videos
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-068 |
+| description | Deterministic team_a/team_b ordering can still permute across shots; silent cross-video transfer would corrupt timelines. |
+| probability | medium |
+| impact | high |
+| mitigation | Centroid fingerprint label ordering; cross-shot align only with strong evidence; cross-video auto transfer forbidden. |
+| trigger | silent team_a↔team_b swap or cross-video id reuse |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7C+ |
+
+## RISK-069 — No reviewed team-assignment ground truth
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-069 |
+| description | Without reviewed team-assignment GT, real football team accuracy cannot be claimed; synthetic permutation metrics may be misread as match accuracy. |
+| probability | high |
+| impact | high |
+| mitigation | `NOT_EVALUATED_NO_REVIEWED_TEAM_ASSIGNMENT_GROUND_TRUTH`; null metrics; PASS_WITH_FINDINGS; synthetic diagnostics labeled non-claim. |
+| trigger | accuracy reported without reviewed GT |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7C+ |

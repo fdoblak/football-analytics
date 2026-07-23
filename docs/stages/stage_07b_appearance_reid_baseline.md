@@ -30,7 +30,7 @@ crops, then ReID **candidate** links + `appearance_similarity` evidence.
 - Appearance evidence alone → Stage 7A `candidate` only (`auto_confirm=false`)
 - Temporal-overlap / cross-video / human-ball links forbidden
 - No face recognition; no team/jersey/target confirmation; no track merge
-- No Stage 7C
+- No Stage 7D
 
 ## Limits (explicit)
 
@@ -52,4 +52,5 @@ Runtime: `/home/fdoblak/workspace/appearance_reid_checks/`
 
 ## Next
 
-`Aşama 7C — Takım Görünümü Sınıflandırma ve Team Assignment Baseline`
+`Aşama 7D — Forma Numarası Bölge Çıkarma, OCR Baseline ve Değerlendirme`
+(Stage 7C team assignment baseline is in-tree separately.)
