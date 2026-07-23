@@ -1,0 +1,114 @@
+{
+  "contract_name": "track_identity_assignments",
+  "version": 1,
+  "description": "Stage 7A append-only track↔identity assignments. Track ID ≠ player identity. Revoked assignments are not metric-eligible. Confirmed requires policy-compliant evidence — never a single weak cue.",
+  "fields": [
+    {"name": "run_id", "type": "string", "nullable": false},
+    {"name": "video_id", "type": "string", "nullable": false},
+    {"name": "assignment_id", "type": "string", "nullable": false},
+    {"name": "track_id", "type": "int64", "nullable": false},
+    {"name": "target_player_id", "type": "string", "nullable": false},
+    {"name": "assignment_status", "type": "string", "nullable": false},
+    {"name": "target_scope", "type": "string", "nullable": false},
+    {"name": "evidence_ids", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "supporting_evidence_count", "type": "int32", "nullable": false},
+    {"name": "conflicting_evidence_count", "type": "int32", "nullable": false},
+    {"name": "confidence", "type": "float32", "nullable": true},
+    {"name": "start_frame_index", "type": "int64", "nullable": false},
+    {"name": "end_frame_index", "type": "int64", "nullable": false},
+    {"name": "start_time_us", "type": "int64", "nullable": true},
+    {"name": "end_time_us", "type": "int64", "nullable": true},
+    {"name": "metric_eligibility", "type": "string", "nullable": false},
+    {"name": "manual_review_required", "type": "bool", "nullable": false},
+    {"name": "assignment_version", "type": "int32", "nullable": false},
+    {"name": "supersedes_assignment_id", "type": "string", "nullable": true},
+    {"name": "revoked_by_assignment_id", "type": "string", "nullable": true},
+    {"name": "reason_codes", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "quality_flags", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "producer", "type": "string", "nullable": false},
+    {"name": "producer_version", "type": "string", "nullable": false},
+    {"name": "policy_fingerprint", "type": "string", "nullable": false},
+    {"name": "leakage_class", "type": "string", "nullable": false},
+    {"name": "provenance_json", "type": "string", "nullable": true},
+    {"name": "contract_version", "type": "int32", "nullable": false}
+  ],
+  "primary_key": ["run_id", "video_id", "assignment_id"],
+  "foreign_keys": [],
+  "partition_by": ["run_id", "video_id"],
+  "sort_by": ["run_id", "video_id", "assignment_id"],
+  "semantic_rules": [
+    {"id": "run_id_format", "rule": "run_id_stage2b"},
+    {"id": "video_id_safe", "rule": "safe_identifier", "field": "video_id"},
+    {"id": "assignment_id_safe", "rule": "safe_identifier", "field": "assignment_id"},
+    {"id": "target_player_safe", "rule": "safe_identifier", "field": "target_player_id"},
+    {"id": "track_ge0", "rule": "int_ge", "field": "track_id", "value": 0},
+    {"id": "start_frame_ge0", "rule": "int_ge", "field": "start_frame_index", "value": 0},
+    {"id": "end_frame_ge0", "rule": "int_ge", "field": "end_frame_index", "value": 0},
+    {
+      "id": "interval",
+      "rule": "int_le_pair",
+      "left": "start_frame_index",
+      "right": "end_frame_index"
+    },
+    {
+      "id": "status_enum",
+      "rule": "enum",
+      "field": "assignment_status",
+      "values": [
+        "candidate",
+        "provisional",
+        "confirmed",
+        "rejected",
+        "revoked",
+        "unknown"
+      ]
+    },
+    {
+      "id": "scope_enum",
+      "rule": "enum",
+      "field": "target_scope",
+      "values": ["target", "non_target", "unknown"]
+    },
+    {
+      "id": "eligibility_enum",
+      "rule": "enum",
+      "field": "metric_eligibility",
+      "values": [
+        "eligible",
+        "provisional_only",
+        "not_eligible",
+        "not_evaluable"
+      ]
+    },
+    {
+      "id": "leakage_enum",
+      "rule": "enum",
+      "field": "leakage_class",
+      "values": [
+        "production",
+        "tuning",
+        "manual_label",
+        "evaluation",
+        "synthetic",
+        "unknown"
+      ]
+    },
+    {"id": "support_ge0", "rule": "int_ge", "field": "supporting_evidence_count", "value": 0},
+    {"id": "conflict_ge0", "rule": "int_ge", "field": "conflicting_evidence_count", "value": 0},
+    {"id": "version_ge1", "rule": "int_ge", "field": "assignment_version", "value": 1},
+    {"id": "conf_unit_or_null", "rule": "float_unit_interval_or_null", "field": "confidence"},
+    {"id": "producer_nonempty", "rule": "nonempty_string", "field": "producer"},
+    {"id": "producer_ver_nonempty", "rule": "nonempty_string", "field": "producer_version"},
+    {"id": "policy_fp_nonempty", "rule": "nonempty_string", "field": "policy_fingerprint"},
+    {"id": "evidence_no_null", "rule": "list_no_null_items", "field": "evidence_ids"},
+    {"id": "reason_no_null", "rule": "list_no_null_items", "field": "reason_codes"},
+    {"id": "quality_no_null", "rule": "list_no_null_items", "field": "quality_flags"},
+    {"id": "contract_version_ge1", "rule": "int_ge", "field": "contract_version", "value": 1}
+  ],
+  "table_metadata": {
+    "stage": "7A",
+    "append_only": "true",
+    "track_id_is_not_identity": "true",
+    "face_biometric_forbidden": "true"
+  }
+}

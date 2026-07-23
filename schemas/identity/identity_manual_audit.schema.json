@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/identity/identity_manual_audit.schema.json",
+  "title": "Identity manual audit log entry (Stage 7A)",
+  "description": "Append-only manual audit record for identity decisions. Secrets and unnecessary PII forbidden. Face/biometric identity forbidden.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "audit_id",
+    "run_id",
+    "video_id",
+    "target_player_id",
+    "actor_id",
+    "acted_at_utc",
+    "action",
+    "previous_decision",
+    "new_decision",
+    "reason",
+    "artifact_hashes",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "audit_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "minLength": 1 },
+    "target_player_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "assignment_id": { "type": ["string", "null"], "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "track_id": { "type": ["integer", "null"], "minimum": 0 },
+    "actor_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "acted_at_utc": { "type": "string", "minLength": 10 },
+    "action": {
+      "type": "string",
+      "enum": [
+        "confirm",
+        "reject",
+        "revoke",
+        "supersede",
+        "request_review",
+        "annotate",
+        "unknown"
+      ]
+    },
+    "previous_decision": { "type": ["string", "null"] },
+    "new_decision": { "type": "string", "minLength": 1 },
+    "reason": { "type": "string", "minLength": 1, "maxLength": 1024 },
+    "artifact_hashes": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+    },
+    "linked_evidence_ids": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "append_only"],
+      "properties": {
+        "stage": { "type": "string", "const": "7A" },
+        "append_only": { "type": "boolean", "const": true },
+        "notes": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

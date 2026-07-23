@@ -1,0 +1,65 @@
+{
+  "contract_name": "reid_candidate_links",
+  "version": 1,
+  "description": "Stage 7A ReID candidate links between tracks/tracklets. Links are candidates only — never a physical track merge. Cross-video auto links forbidden.",
+  "fields": [
+    {"name": "run_id", "type": "string", "nullable": false},
+    {"name": "video_id", "type": "string", "nullable": false},
+    {"name": "link_id", "type": "string", "nullable": false},
+    {"name": "source_track_id", "type": "int64", "nullable": false},
+    {"name": "target_track_id", "type": "int64", "nullable": false},
+    {"name": "source_video_id", "type": "string", "nullable": false},
+    {"name": "target_video_id", "type": "string", "nullable": false},
+    {"name": "time_gap_us", "type": "int64", "nullable": false},
+    {"name": "cut_or_window_ref", "type": "string", "nullable": true},
+    {"name": "evidence_ids", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "similarity_score", "type": "float32", "nullable": true},
+    {"name": "decision_status", "type": "string", "nullable": false},
+    {"name": "conflict_flag", "type": "bool", "nullable": false},
+    {"name": "manual_review_required", "type": "bool", "nullable": false},
+    {"name": "producer", "type": "string", "nullable": false},
+    {"name": "config_fingerprint", "type": "string", "nullable": false},
+    {"name": "reason_codes", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "quality_flags", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "provenance_json", "type": "string", "nullable": true},
+    {"name": "contract_version", "type": "int32", "nullable": false}
+  ],
+  "primary_key": ["run_id", "video_id", "link_id"],
+  "foreign_keys": [],
+  "partition_by": ["run_id", "video_id"],
+  "sort_by": ["run_id", "video_id", "link_id"],
+  "semantic_rules": [
+    {"id": "run_id_format", "rule": "run_id_stage2b"},
+    {"id": "video_id_safe", "rule": "safe_identifier", "field": "video_id"},
+    {"id": "link_id_safe", "rule": "safe_identifier", "field": "link_id"},
+    {"id": "src_video_safe", "rule": "safe_identifier", "field": "source_video_id"},
+    {"id": "tgt_video_safe", "rule": "safe_identifier", "field": "target_video_id"},
+    {"id": "src_track_ge0", "rule": "int_ge", "field": "source_track_id", "value": 0},
+    {"id": "tgt_track_ge0", "rule": "int_ge", "field": "target_track_id", "value": 0},
+    {"id": "gap_ge0", "rule": "int_ge", "field": "time_gap_us", "value": 0},
+    {
+      "id": "decision_enum",
+      "rule": "enum",
+      "field": "decision_status",
+      "values": [
+        "candidate",
+        "accepted",
+        "rejected",
+        "review_required",
+        "unknown"
+      ]
+    },
+    {"id": "score_unit_or_null", "rule": "float_unit_interval_or_null", "field": "similarity_score"},
+    {"id": "producer_nonempty", "rule": "nonempty_string", "field": "producer"},
+    {"id": "config_fp_nonempty", "rule": "nonempty_string", "field": "config_fingerprint"},
+    {"id": "evidence_no_null", "rule": "list_no_null_items", "field": "evidence_ids"},
+    {"id": "reason_no_null", "rule": "list_no_null_items", "field": "reason_codes"},
+    {"id": "quality_no_null", "rule": "list_no_null_items", "field": "quality_flags"},
+    {"id": "contract_version_ge1", "rule": "int_ge", "field": "contract_version", "value": 1}
+  ],
+  "table_metadata": {
+    "stage": "7A",
+    "physical_merge_forbidden": "true",
+    "cross_video_auto_link_forbidden": "true"
+  }
+}

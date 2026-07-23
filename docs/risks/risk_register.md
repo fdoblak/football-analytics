@@ -1,6 +1,6 @@
 # Risk Register — football-analytics
 
-**Updated:** 2026-07-23 (Stage 6D / Stage 6 close)
+**Updated:** 2026-07-23 (Stage 7A identity contracts)
 
 **Owner default:** Furkan Doblak unless stated otherwise
 
@@ -805,3 +805,59 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Stage 6D+ |
+
+## RISK-057 — False target attribution
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-057 |
+| description | Wrong track attributed to the paying `target_player` contaminates all downstream customer metrics. Critical product error. |
+| probability | medium |
+| impact | critical |
+| mitigation | Stage 7A contracts: no single-cue confirm; manual scoped anchors; revoke path; metric eligibility gates; review on multi-candidate/conflict. No auto target selection in 7A. |
+| trigger | Confirmed assignment without multi-evidence/manual scope; duplicate confirmed targets |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7A+ |
+
+## RISK-058 — Identity evidence conflict / silent overwrite
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-058 |
+| description | Conflicting jersey/team/appearance/manual evidence, or silent rewrite of prior identity decisions, produces unstable or dishonest attribution. |
+| probability | medium |
+| impact | high |
+| mitigation | Hard conflict → rejected/review; append-only audit; supersede/revoke versioning; no history rewrite. |
+| trigger | Conflicting polarities; duplicate assignment_id rewrite attempts |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7A+ |
+
+## RISK-059 — Privacy / biometric identity misuse
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-059 |
+| description | Face recognition or biometric identity would expand privacy surface and is out of product policy. |
+| probability | low |
+| impact | high |
+| mitigation | Policy + schemas forbid face/biometric; validators reject face evidence strings; docs state FORBIDDEN. |
+| trigger | Evidence type or flag containing face/biometric |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7A+ |
+
+## RISK-060 — Evaluation leakage into identity decisions
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-060 |
+| description | Evaluation/tuning labels reused as production features or frozen GT mislabeled as independent evaluation inflate ReID/identity metrics. |
+| probability | medium |
+| impact | high |
+| mitigation | `leakage_class` on evidence; bundle validator fails evaluation→confirmed production use; synthetic fixtures cannot claim accuracy; NOT_EVALUATED without reviewed GT. |
+| trigger | evaluation leakage_class on confirmed assignment evidence |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7A+ |

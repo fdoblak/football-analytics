@@ -1190,6 +1190,65 @@ def cmd_perception_integrate(
     return int(result.exit_code)
 
 
+
+def cmd_identity_contracts_validate(*, keep: bool, as_json: bool) -> int:
+    """Run Stage 7A synthetic identity contract validator (no ReID inference)."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_identity_contracts.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("identity validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
+def cmd_identity_target_validate(request_path: Path) -> int:
+    """Validate target_player_request JSON against Stage 7A schema."""
+    from football_analytics.identity.target_profile import validate_target_player_request
+
+    if not request_path.is_file() or request_path.is_symlink():
+        print(f"target request missing or symlink: {request_path}", file=sys.stderr)
+        return 2
+    try:
+        payload = json.loads(request_path.read_text(encoding="utf-8"))
+        if not isinstance(payload, dict):
+            print("target request root must be object", file=sys.stderr)
+            return 1
+        validate_target_player_request(payload)
+    except Exception as exc:  # noqa: BLE001
+        print(f"target_invalid: {exc}", file=sys.stderr)
+        return 1
+    print("target_valid: true")
+    return 0
+
+
+def cmd_identity_receipt_validate(receipt_path: Path) -> int:
+    """Validate identity_run_receipt JSON against schema (no identity run)."""
+    from football_analytics.identity.receipt import validate_receipt_payload
+
+    if not receipt_path.is_file() or receipt_path.is_symlink():
+        print(f"receipt missing or symlink: {receipt_path}", file=sys.stderr)
+        return 2
+    try:
+        payload = json.loads(receipt_path.read_text(encoding="utf-8"))
+        if not isinstance(payload, dict):
+            print("receipt root must be object", file=sys.stderr)
+            return 1
+        validate_receipt_payload(payload)
+    except Exception as exc:  # noqa: BLE001
+        print(f"receipt_invalid: {exc}", file=sys.stderr)
+        return 1
+    print("receipt_valid: true")
+    return 0
+
+
 def cmd_tracking_contracts_validate(*, keep: bool, as_json: bool) -> int:
     """Run Stage 6A synthetic tracking contract validator (no tracker algorithm)."""
     import runpy
@@ -2227,6 +2286,31 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p_trk_validate.add_argument("--frames", type=int, default=8, help="Synthetic frames (≤20)")
     p_trk_validate.add_argument("--keep", action="store_true", help="Keep validator session dir")
+
+    p_identity = sub.add_parser(
+        "identity", help="ReID / identity / target-player contracts (Stage 7A)"
+    )
+    identity_sub = p_identity.add_subparsers(dest="identity_command")
+    p_id_contracts = identity_sub.add_parser("contracts", help="Identity contract helpers")
+    id_contracts_sub = p_id_contracts.add_subparsers(dest="identity_contracts_command")
+    p_id_c_val = id_contracts_sub.add_parser(
+        "validate", help="Validate identity contracts (synthetic Stage 7A)"
+    )
+    p_id_c_val.add_argument("--keep", action="store_true", help="Keep validator session dir")
+    p_id_c_val.add_argument("--json", action="store_true", help="Emit JSON report")
+    p_id_target = identity_sub.add_parser("target", help="Target player request helpers")
+    id_target_sub = p_id_target.add_subparsers(dest="identity_target_command")
+    p_id_t_val = id_target_sub.add_parser(
+        "validate", help="Validate a target_player_request JSON file"
+    )
+    p_id_t_val.add_argument("request", type=Path, help="Path to target_player_request JSON")
+    p_id_receipt = identity_sub.add_parser("receipt", help="Identity receipt helpers")
+    id_receipt_sub = p_id_receipt.add_subparsers(dest="identity_receipt_command")
+    p_id_r_val = id_receipt_sub.add_parser(
+        "validate", help="Validate an identity_run_receipt JSON file"
+    )
+    p_id_r_val.add_argument("receipt", type=Path, help="Path to identity_run_receipt JSON")
+
     return parser
 
 
@@ -2569,6 +2653,26 @@ def main(argv: Sequence[str] | None = None) -> int:
                 keep=bool(args.keep),
             )
         parser.parse_args(["tracking", "--help"])
+        return 2
+    if args.command == "identity":
+        if args.identity_command == "contracts":
+            if args.identity_contracts_command == "validate":
+                return cmd_identity_contracts_validate(
+                    keep=bool(args.keep), as_json=bool(args.json)
+                )
+            parser.parse_args(["identity", "contracts", "--help"])
+            return 2
+        if args.identity_command == "target":
+            if args.identity_target_command == "validate":
+                return cmd_identity_target_validate(args.request)
+            parser.parse_args(["identity", "target", "--help"])
+            return 2
+        if args.identity_command == "receipt":
+            if args.identity_receipt_command == "validate":
+                return cmd_identity_receipt_validate(args.receipt)
+            parser.parse_args(["identity", "receipt", "--help"])
+            return 2
+        parser.parse_args(["identity", "--help"])
         return 2
     parser.print_help()
     return 2

@@ -151,3 +151,30 @@ contracts:
       1:
         spec_path: schemas/data/v1/detection_attributes.json
     migration_edges: []
+
+  identity_evidence:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/identity_evidence.json
+    migration_edges: []
+
+  reid_candidate_links:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/reid_candidate_links.json
+    migration_edges: []
+
+  track_identity_assignments:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/track_identity_assignments.json
+    migration_edges: []

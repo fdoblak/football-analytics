@@ -63,13 +63,16 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `scripts/check_human_tracking_baseline.py` (Stage 6B human MOT baseline)
 - `scripts/check_ball_tracking_baseline.py` (Stage 6C ball tracking baseline)
 - `scripts/check_tracking_pipeline.py` (Stage 6D human+ball tracking fusion + quality gates)
+- `scripts/check_identity_contracts.py` (Stage 7A ReID / identity evidence / target-player contracts)
 - `scripts/check_stage_cache.py`, `check_ci_workflow.py`, `check_project.py`
 - Or: `football-analytics project check --profile local --quick`
 
 Stage 5 is closed (`detection-baseline-v0.5.0`). Stage 6 is closed
 (`tracking-baseline-v0.6.0`): contracts → human/ball MOT baselines → tracking
-fusion + quality gates. Do **not** start Stage 7A (ReID / identity evidence /
-target-player contracts) without an explicit user prompt.
+fusion + quality gates. Stage 7A identity contracts are in-tree when merged
+(contracts / policy / validation only — no ReID inference). Do **not** start
+Stage 7B (appearance embedding / tracklet ReID baseline) without an explicit
+user prompt.
 
 ---
 
@@ -155,6 +158,7 @@ Do not start a stage without an explicit user prompt.
 Stage 4A–4D broadcast understanding baseline is in-tree when merged.
 Stage 5A–5E detection baseline is in-tree when merged (`detection-baseline-v0.5.0`).
 Stage 5 is **closed**. Stage 6A–6D tracking baseline is in-tree when merged
-(`tracking-baseline-v0.6.0`). Stage 6 is **closed**. Stage 7A is **not**
-started unless explicitly requested.
+(`tracking-baseline-v0.6.0`). Stage 6 is **closed**. Stage 7A identity /
+target-player contracts are in-tree when merged (no ReID inference). Stage 7B
+is **not** started unless explicitly requested.
 Manual Cursor flow only — no Codex/background automation.

@@ -1,0 +1,130 @@
+{
+  "contract_name": "identity_evidence",
+  "version": 1,
+  "description": "Stage 7A identity evidence records (contracts only). team_assignments and jersey_observations are referenced by artifact fingerprint — not duplicated. No ReID/OCR/face inference in this stage.",
+  "fields": [
+    {"name": "run_id", "type": "string", "nullable": false},
+    {"name": "video_id", "type": "string", "nullable": false},
+    {"name": "evidence_id", "type": "string", "nullable": false},
+    {"name": "track_id", "type": "int64", "nullable": true},
+    {"name": "frame_index", "type": "int64", "nullable": true},
+    {"name": "start_frame_index", "type": "int64", "nullable": true},
+    {"name": "end_frame_index", "type": "int64", "nullable": true},
+    {"name": "start_time_us", "type": "int64", "nullable": true},
+    {"name": "end_time_us", "type": "int64", "nullable": true},
+    {"name": "evidence_type", "type": "string", "nullable": false},
+    {"name": "source_artifact_ref", "type": "string", "nullable": true},
+    {"name": "source_fingerprint", "type": "string", "nullable": true},
+    {"name": "observed_value_ref", "type": "string", "nullable": true},
+    {"name": "score", "type": "float32", "nullable": true},
+    {"name": "reliability_tier", "type": "string", "nullable": false},
+    {"name": "polarity", "type": "string", "nullable": false},
+    {"name": "review_status", "type": "string", "nullable": false},
+    {"name": "producer", "type": "string", "nullable": false},
+    {"name": "producer_version", "type": "string", "nullable": false},
+    {"name": "reason_codes", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "quality_flags", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "leakage_class", "type": "string", "nullable": false},
+    {"name": "provenance_json", "type": "string", "nullable": true},
+    {"name": "contract_version", "type": "int32", "nullable": false}
+  ],
+  "primary_key": ["run_id", "video_id", "evidence_id"],
+  "foreign_keys": [],
+  "partition_by": ["run_id", "video_id"],
+  "sort_by": ["run_id", "video_id", "evidence_id"],
+  "semantic_rules": [
+    {"id": "run_id_format", "rule": "run_id_stage2b"},
+    {"id": "video_id_safe", "rule": "safe_identifier", "field": "video_id"},
+    {"id": "evidence_id_safe", "rule": "safe_identifier", "field": "evidence_id"},
+    {
+      "id": "track_ge0_or_null",
+      "rule": "int_ge_or_null",
+      "field": "track_id",
+      "value": 0
+    },
+    {
+      "id": "frame_ge0_or_null",
+      "rule": "int_ge_or_null",
+      "field": "frame_index",
+      "value": 0
+    },
+    {
+      "id": "start_frame_ge0_or_null",
+      "rule": "int_ge_or_null",
+      "field": "start_frame_index",
+      "value": 0
+    },
+    {
+      "id": "end_frame_ge0_or_null",
+      "rule": "int_ge_or_null",
+      "field": "end_frame_index",
+      "value": 0
+    },
+    {
+      "id": "evidence_type_enum",
+      "rule": "enum",
+      "field": "evidence_type",
+      "values": [
+        "manual_track_anchor",
+        "appearance_similarity",
+        "jersey_number",
+        "team_assignment",
+        "role_consistency",
+        "temporal_continuity",
+        "spatial_motion_continuity",
+        "camera_view_suitability",
+        "negative_exclusion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "reliability_enum",
+      "rule": "enum",
+      "field": "reliability_tier",
+      "values": [
+        "manual_verified",
+        "strong",
+        "supporting",
+        "weak",
+        "conflicting",
+        "unavailable"
+      ]
+    },
+    {
+      "id": "polarity_enum",
+      "rule": "enum",
+      "field": "polarity",
+      "values": ["supports", "conflicts", "neutral"]
+    },
+    {
+      "id": "review_enum",
+      "rule": "enum",
+      "field": "review_status",
+      "values": ["unreviewed", "accepted", "rejected", "needs_review"]
+    },
+    {
+      "id": "leakage_enum",
+      "rule": "enum",
+      "field": "leakage_class",
+      "values": [
+        "production",
+        "tuning",
+        "manual_label",
+        "evaluation",
+        "synthetic",
+        "unknown"
+      ]
+    },
+    {"id": "producer_nonempty", "rule": "nonempty_string", "field": "producer"},
+    {"id": "producer_ver_nonempty", "rule": "nonempty_string", "field": "producer_version"},
+    {"id": "score_unit_or_null", "rule": "float_unit_interval_or_null", "field": "score"},
+    {"id": "reason_no_null", "rule": "list_no_null_items", "field": "reason_codes"},
+    {"id": "quality_no_null", "rule": "list_no_null_items", "field": "quality_flags"},
+    {"id": "contract_version_ge1", "rule": "int_ge", "field": "contract_version", "value": 1}
+  ],
+  "table_metadata": {
+    "stage": "7A",
+    "face_biometric_forbidden": "true",
+    "evidence_sources_by_reference": "team_assignments,jersey_observations"
+  }
+}

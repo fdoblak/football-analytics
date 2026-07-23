@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/identity/target_player_request.schema.json",
+  "title": "Target player request / profile (Stage 7A)",
+  "description": "User target-player profile for a match/video scope. Display name, jersey, team, and role are optional metadata/evidence hints — never sufficient alone for confirmed identity. Face/biometric identity forbidden.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "target_player_id",
+    "run_id",
+    "video_id",
+    "match_scope",
+    "policy_fingerprint",
+    "manual_anchors",
+    "created_at_utc",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "request_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "target_player_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "display_label": { "type": ["string", "null"], "maxLength": 128 },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "minLength": 1 },
+    "match_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["match_id", "video_ids"],
+      "properties": {
+        "match_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+        "video_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "expected_team_id": { "type": ["string", "null"], "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "expected_jersey_number": { "type": ["integer", "null"], "minimum": 0, "maximum": 99 },
+    "expected_role": {
+      "type": ["string", "null"],
+      "enum": ["player", "goalkeeper", "referee", "unknown", null]
+    },
+    "reference_image_hashes": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+      "maxItems": 16
+    },
+    "manual_anchors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "anchor_id",
+          "track_id",
+          "start_frame_index",
+          "end_frame_index",
+          "reviewer_id",
+          "reviewed_at_utc"
+        ],
+        "properties": {
+          "anchor_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+          "track_id": { "type": "integer", "minimum": 0 },
+          "frame_index": { "type": ["integer", "null"], "minimum": 0 },
+          "start_frame_index": { "type": "integer", "minimum": 0 },
+          "end_frame_index": { "type": "integer", "minimum": 0 },
+          "reviewer_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+          "reviewed_at_utc": { "type": "string", "minLength": 10 },
+          "notes": { "type": ["string", "null"], "maxLength": 512 }
+        }
+      }
+    },
+    "policy_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "created_at_utc": { "type": "string", "minLength": 10 },
+    "reviewed_at_utc": { "type": ["string", "null"], "minLength": 10 },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "label"],
+      "properties": {
+        "stage": { "type": "string", "const": "7A" },
+        "label": { "type": "string", "minLength": 1 },
+        "notes": { "type": ["string", "null"] },
+        "face_biometric_forbidden": { "type": "boolean", "const": true }
+      }
+    }
+  }
+}

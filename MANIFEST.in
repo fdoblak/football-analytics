@@ -10,11 +10,13 @@ graft configs/video
 graft configs/broadcast
 graft configs/perception
 graft configs/tracking
+graft configs/identity
 graft schemas/metrics
 graft schemas/video
 graft schemas/broadcast
 graft schemas/perception
 graft schemas/tracking
+graft schemas/identity
 include AGENTS.md
 include LICENSE
 include README.md

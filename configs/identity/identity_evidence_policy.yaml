@@ -1,0 +1,157 @@
+# Stage 7A — identity evidence / target-player policy (contracts only)
+# No ReID embedding inference, jersey OCR, team clustering, face/biometric,
+# auto target selection, or track merge in this stage.
+
+policy_version: 1
+config_version: 1
+id_namespace: football_analytics.identity.v1
+
+safety:
+  track_id_is_not_player_identity: true
+  display_name_is_not_visual_evidence: true
+  jersey_number_alone_insufficient: true
+  team_or_kit_color_alone_insufficient: true
+  role_alone_insufficient: true
+  temporal_spatial_alone_after_cut_insufficient: true
+  appearance_score_alone_cannot_confirm: true
+  single_weak_evidence_cannot_confirm: true
+  face_recognition_forbidden: true
+  biometric_identity_forbidden: true
+  cross_video_auto_link_forbidden: true
+  physical_track_merge_forbidden: true
+  auto_target_selection_forbidden: true
+  unknown_is_valid_safe_result: true
+  revoked_not_metric_eligible: true
+  non_confirmed_target_not_customer_metric_default: true
+  predicted_interpolated_not_customer_metric_eligible: true
+  append_only_manual_audit: true
+  silent_history_rewrite_forbidden: true
+
+# Reliability tiers (machine-readable)
+reliability_tiers:
+  - manual_verified
+  - strong
+  - supporting
+  - weak
+  - conflicting
+  - unavailable
+
+evidence_types:
+  - manual_track_anchor
+  - appearance_similarity
+  - jersey_number
+  - team_assignment
+  - role_consistency
+  - temporal_continuity
+  - spatial_motion_continuity
+  - camera_view_suitability
+  - negative_exclusion
+  - unknown
+
+assignment_statuses:
+  - candidate
+  - provisional
+  - confirmed
+  - rejected
+  - revoked
+  - unknown
+
+target_scopes:
+  - target
+  - non_target
+  - unknown
+
+metric_eligibility:
+  - eligible
+  - provisional_only
+  - not_eligible
+  - not_evaluable
+
+# Decision matrix — automatic status from evidence set (no inference here)
+decision_matrix:
+  # Single weak / alone-insufficient cues
+  single_weak_or_alone_insufficient: candidate_or_unknown
+  jersey_alone_max_status: candidate
+  team_alone_max_status: candidate
+  role_alone_max_status: candidate
+  appearance_alone_max_status: candidate
+  temporal_spatial_after_cut_alone_max_status: candidate
+
+  # Multi-evidence
+  min_independent_supporting_for_provisional: 2
+  min_independent_supporting_for_auto_confirmed: null  # auto confirmed forbidden without manual
+  auto_confirmed_forbidden: true
+
+  # Conflicts
+  hard_conflict_statuses: [rejected, review_required]
+  conflicting_team_jersey_manual: hard_conflict_or_review
+
+  # Manual verified
+  manual_verified_may_confirm_within_scope_only: true
+  manual_verified_out_of_scope_max_status: candidate
+
+  # Coverage
+  insufficient_coverage_status: unknown
+
+  # Revocation
+  strong_conflict_may_revoke_confirmed: true
+
+confidence_policy:
+  uncalibrated_scores_not_probabilities: true
+  store_raw_score_in_provenance_only: true
+
+metric_eligibility_rules:
+  eligible_requires:
+    - assignment_status_confirmed
+    - target_scope_target
+    - valid_time_interval
+    - observed_tracking_evidence
+    - sufficient_coverage
+    - not_revoked
+    - no_unresolved_hard_conflict
+  provisional_only_when:
+    - assignment_status_provisional
+  not_eligible_when:
+    - revoked
+    - rejected
+    - unknown_identity
+    - predicted_or_interpolated_only
+    - ambiguity
+  not_evaluable_when:
+    - insufficient_coverage
+    - missing_tracking_evidence
+
+review_triggers:
+  nearby_target_candidates: true
+  jersey_team_appearance_conflict: true
+  long_gap_or_cut_link: true
+  multiple_confirmed_tracks_same_target: true
+  track_assigned_to_multiple_identities: true
+  assignment_revoked: true
+  low_coverage: true
+  sampling:
+    strategy: deterministic_cap
+    max_review_items_per_run: 32
+    do_not_spam_every_unknown: true
+
+leakage_separation:
+  require_leakage_class_on_evidence: true
+  evaluation_label_must_not_enter_features: true
+  manual_anchor_as_frozen_eval_gt_must_be_flagged: true
+  same_track_frame_not_both_tuning_and_independent_eval: true
+  synthetic_fixtures_not_accuracy_claims: true
+
+reference_contracts:
+  team_assignments_fingerprint_prefix: "759aa9b7"
+  jersey_observations_fingerprint_prefix: "aabc7642"
+  detections_fingerprint_prefix: "04ae8dd7"
+  track_observations_fingerprint_prefix: "9ca2f7af"
+  track_summaries_fingerprint_prefix: "7b04e31d"
+  track_lifecycle_fingerprint_prefix: "613cd81e"
+  reuse_mode: reference_only
+
+notes:
+  - Stage 7A contracts only — no ReID/embedding/team clustering/jersey OCR/face.
+  - False target attribution is the critical product error.
+  - unknown is safe and valid.
+  - Cross-video identity requires explicit manual/provenance only.

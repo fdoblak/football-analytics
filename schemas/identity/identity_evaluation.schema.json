@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/identity/identity_evaluation.schema.json",
+  "title": "Identity / ReID evaluation report (Stage 7A)",
+  "description": "Evaluator interface stub. Without reviewed identity/ReID ground truth use NOT_EVALUATED_NO_REVIEWED_ + IDENTITY_GROUND_TRUTH. Synthetic fixtures must not claim football identity accuracy. False target attribution is the critical product error.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "video_id",
+    "status",
+    "ground_truth_evaluation_status",
+    "metrics",
+    "metric_reasons",
+    "findings",
+    "adapter_notes",
+    "created_at_utc"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "minLength": 1 },
+    "config_fingerprint": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+    "status": {
+      "type": "string",
+      "enum": ["not_evaluated", "partial", "evaluated"]
+    },
+    "ground_truth_evaluation_status": { "type": "string", "minLength": 1 },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pairwise_precision",
+        "pairwise_recall",
+        "pairwise_f1",
+        "cmc",
+        "map",
+        "target_track_precision",
+        "target_track_recall",
+        "target_temporal_coverage",
+        "false_target_attribution",
+        "missed_target_coverage",
+        "identity_switches",
+        "conflict_review_recall",
+        "selective_accuracy",
+        "abstention_rate"
+      ],
+      "properties": {
+        "pairwise_precision": { "type": ["number", "null"] },
+        "pairwise_recall": { "type": ["number", "null"] },
+        "pairwise_f1": { "type": ["number", "null"] },
+        "cmc": { "type": ["number", "null"] },
+        "map": { "type": ["number", "null"] },
+        "target_track_precision": { "type": ["number", "null"] },
+        "target_track_recall": { "type": ["number", "null"] },
+        "target_temporal_coverage": { "type": ["number", "null"] },
+        "false_target_attribution": { "type": ["number", "null"] },
+        "missed_target_coverage": { "type": ["number", "null"] },
+        "identity_switches": { "type": ["number", "null"] },
+        "conflict_review_recall": { "type": ["number", "null"] },
+        "selective_accuracy": { "type": ["number", "null"] },
+        "abstention_rate": { "type": ["number", "null"] }
+      }
+    },
+    "metric_reasons": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "findings": { "type": "array", "items": { "type": "string" } },
+    "adapter_notes": { "type": "string" },
+    "created_at_utc": { "type": "string", "minLength": 10 }
+  }
+}

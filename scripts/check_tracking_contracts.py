@@ -185,8 +185,8 @@ def run_checks(*, keep: bool, strict: bool) -> Result:
         assert_track_contracts_registered()
         names = list_contracts()
         result.extras["contract_count"] = len(names)
-        if len(names) != 16:
-            result.err(f"expected 16 contracts, got {len(names)}", config=True)
+        if len(names) != 19:
+            result.err(f"expected 19 contracts, got {len(names)}", config=True)
         if "track_lifecycle" not in names:
             result.err("track_lifecycle missing from registry", config=True)
 
