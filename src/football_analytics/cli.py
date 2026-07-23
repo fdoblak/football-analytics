@@ -1190,6 +1190,44 @@ def cmd_perception_integrate(
     return int(result.exit_code)
 
 
+def cmd_tracking_contracts_validate(*, keep: bool, as_json: bool) -> int:
+    """Run Stage 6A synthetic tracking contract validator (no tracker algorithm)."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_tracking_contracts.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("tracking validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
+def cmd_tracking_receipt_validate(receipt_path: Path) -> int:
+    """Validate tracking_run_receipt JSON against schema (no tracker run)."""
+    from football_analytics.tracking.receipt import validate_receipt_payload
+
+    if not receipt_path.is_file() or receipt_path.is_symlink():
+        print(f"receipt missing or symlink: {receipt_path}", file=sys.stderr)
+        return 2
+    try:
+        payload = json.loads(receipt_path.read_text(encoding="utf-8"))
+        if not isinstance(payload, dict):
+            print("receipt root must be object", file=sys.stderr)
+            return 1
+        validate_receipt_payload(payload)
+    except Exception as exc:  # noqa: BLE001
+        print(f"receipt_invalid: {exc}", file=sys.stderr)
+        return 1
+    print("receipt_valid: true")
+    return 0
+
+
 def cmd_perception_validate(*, config_path: Path, frames: int, keep: bool) -> int:
     """Stage 5E: run detection pipeline validator script entry."""
     import runpy
@@ -1757,6 +1795,22 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p_p_validate.add_argument("--frames", type=int, default=8, help="Synthetic frames (≤20)")
     p_p_validate.add_argument("--keep", action="store_true", help="Keep validator session dir")
+
+    p_tracking = sub.add_parser("tracking", help="Multi-object tracking helpers (Stage 6A)")
+    tracking_sub = p_tracking.add_subparsers(dest="tracking_command")
+    p_trk_contracts = tracking_sub.add_parser("contracts", help="Tracking contract helpers")
+    trk_contracts_sub = p_trk_contracts.add_subparsers(dest="tracking_contracts_command")
+    p_trk_c_val = trk_contracts_sub.add_parser(
+        "validate", help="Validate tracking contracts (synthetic Stage 6A)"
+    )
+    p_trk_c_val.add_argument("--keep", action="store_true", help="Keep validator session dir")
+    p_trk_c_val.add_argument("--json", action="store_true", help="Emit JSON report")
+    p_trk_receipt = tracking_sub.add_parser("receipt", help="Tracking receipt helpers")
+    trk_receipt_sub = p_trk_receipt.add_subparsers(dest="tracking_receipt_command")
+    p_trk_r_val = trk_receipt_sub.add_parser(
+        "validate", help="Validate a tracking_run_receipt JSON file"
+    )
+    p_trk_r_val.add_argument("receipt", type=Path, help="Path to tracking_run_receipt JSON")
     return parser
 
 
@@ -2010,6 +2064,21 @@ def main(argv: Sequence[str] | None = None) -> int:
                 keep=bool(args.keep),
             )
         parser.parse_args(["perception", "--help"])
+        return 2
+    if args.command == "tracking":
+        if args.tracking_command == "contracts":
+            if args.tracking_contracts_command == "validate":
+                return cmd_tracking_contracts_validate(
+                    keep=bool(args.keep), as_json=bool(args.json)
+                )
+            parser.parse_args(["tracking", "contracts", "--help"])
+            return 2
+        if args.tracking_command == "receipt":
+            if args.tracking_receipt_command == "validate":
+                return cmd_tracking_receipt_validate(args.receipt)
+            parser.parse_args(["tracking", "receipt", "--help"])
+            return 2
+        parser.parse_args(["tracking", "--help"])
         return 2
     parser.print_help()
     return 2

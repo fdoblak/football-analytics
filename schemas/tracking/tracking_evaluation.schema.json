@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/tracking/tracking_evaluation.schema.json",
+  "title": "Tracking evaluation stub (Stage 6A)",
+  "description": "Metric interface stub for future Stage 6B/6C tracking evaluation. Without reviewed tracking GT, metrics are null with NOT_EVALUATED_NO_REVIEWED_TRACKING_GROUND_TRUTH. sn-trackeval is a future adapter candidate only.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "video_id",
+    "status",
+    "ground_truth_evaluation_status",
+    "metrics",
+    "findings",
+    "created_at_utc"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "minLength": 1 },
+    "config_fingerprint": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["not_evaluated", "evaluated", "partial", "failed"]
+    },
+    "ground_truth_evaluation_status": {
+      "type": "string",
+      "enum": [
+        "NOT_EVALUATED_NO_REVIEWED_TRACKING_GROUND_TRUTH",
+        "evaluated",
+        "partial"
+      ]
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "true_positives",
+        "false_positives",
+        "false_negatives",
+        "id_switches",
+        "fragmentations",
+        "mostly_tracked",
+        "mostly_lost",
+        "track_precision",
+        "track_recall",
+        "idf1",
+        "hota",
+        "mota",
+        "entity_type_consistency",
+        "temporal_coverage",
+        "gap_recovery"
+      ],
+      "properties": {
+        "true_positives": { "type": ["number", "null"] },
+        "false_positives": { "type": ["number", "null"] },
+        "false_negatives": { "type": ["number", "null"] },
+        "id_switches": { "type": ["number", "null"] },
+        "fragmentations": { "type": ["number", "null"] },
+        "mostly_tracked": { "type": ["number", "null"] },
+        "mostly_lost": { "type": ["number", "null"] },
+        "track_precision": { "type": ["number", "null"] },
+        "track_recall": { "type": ["number", "null"] },
+        "idf1": { "type": ["number", "null"] },
+        "hota": { "type": ["number", "null"] },
+        "mota": { "type": ["number", "null"] },
+        "entity_type_consistency": { "type": ["number", "null"] },
+        "temporal_coverage": { "type": ["number", "null"] },
+        "gap_recovery": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "properties": {
+            "recoveries": { "type": ["integer", "null"] },
+            "max_gap_us": { "type": ["integer", "null"] },
+            "mean_gap_us": { "type": ["number", "null"] }
+          }
+        }
+      }
+    },
+    "metric_reasons": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "findings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "adapter_notes": {
+      "type": "string",
+      "description": "sn-trackeval mentioned as future adapter only; not executed in Stage 6A."
+    },
+    "created_at_utc": { "type": "string", "minLength": 20 }
+  }
+}

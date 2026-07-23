@@ -98,7 +98,7 @@ class DetectionBundleTests(unittest.TestCase):
         specs = {n: self.reg.load_contract(n, 1) for n in bundle}
         vr = validate_contract_bundle(bundle, specs)
         self.assertEqual(vr.status, "PASS", vr.errors)
-        self.assertEqual(len(list_contracts(registry=self.reg)), 15)
+        self.assertEqual(len(list_contracts(registry=self.reg)), 16)
 
     def test_02_valid_detection_sidecar_bundle(self) -> None:
         base = build_synthetic_bundle(self.run_id)

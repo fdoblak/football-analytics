@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/tracking/tracking_request.schema.json",
+  "title": "Tracking request (Stage 6A)",
+  "description": "Versioned request for a tracking contract run. No tracker algorithm is executed in Stage 6A; synthetic contract fixtures only.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "run_id",
+    "video_id",
+    "detection_bundle_ref",
+    "frames_ref",
+    "analysis_windows_ref",
+    "tracker_config_fingerprint",
+    "policy_fingerprint",
+    "entity_scope",
+    "output_root",
+    "no_overwrite",
+    "cache_policy",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "request_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "minLength": 1 },
+    "detection_bundle_ref": { "type": "string", "minLength": 1 },
+    "frames_ref": { "type": "string", "minLength": 1 },
+    "analysis_windows_ref": { "type": ["string", "null"], "minLength": 1 },
+    "tracker_config_fingerprint": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "policy_fingerprint": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "entity_scope": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "enum": ["human", "ball"] },
+      "uniqueItems": true
+    },
+    "output_root": { "type": "string", "minLength": 1 },
+    "no_overwrite": { "type": "boolean", "const": true },
+    "cache_policy": {
+      "type": "string",
+      "enum": ["disabled", "read_only", "read_write"]
+    },
+    "source_sha256": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "timeline_fingerprint": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "detection_bundle_fingerprint": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "label"],
+      "properties": {
+        "stage": { "type": "string", "minLength": 1 },
+        "label": { "type": "string", "minLength": 1 },
+        "notes": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

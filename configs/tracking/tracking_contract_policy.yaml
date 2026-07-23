@@ -1,0 +1,107 @@
+# Stage 6A tracking contract policy — lifecycle, IDs, observation sources.
+# Fingerprinted; strict-loaded. No tracker algorithm in this stage.
+policy_version: "1"
+config_version: 1
+
+id_namespace:
+  version: 1
+  scope: run_id_video_id
+  reuse_forbidden: true
+  allocation: sequential  # sequential | hash_based
+  track_id_is_player_identity: false
+  track_id_is_jersey_number: false
+  cross_video_identity: false
+
+lifecycle:
+  confirmation_observation_threshold: 3
+  max_lost_gap_us: 800000  # 0.8s integer microseconds; no fps invent
+  allow_birth_confirmed: false  # requires policy threshold evidence
+  reopen_terminated: false
+  merge_allowed: false
+  split_on_routing_boundary: true
+  reid_identity_claim: false
+
+allowed_transitions:
+  # from -> to list (machine-checkable); "null" = birth (no previous state)
+  "null": [tentative]
+  tentative: [confirmed, lost, terminated]
+  confirmed: [lost, terminated]
+  lost: [confirmed, terminated]
+  terminated: []
+
+observation_sources:
+  allowed:
+    - detection_associated
+    - predicted
+    - interpolated
+    - not_observed
+  mapping_to_observation_state:
+    detection_associated: observed
+    predicted: predicted
+    interpolated: interpolated
+    not_observed: prefer_no_row  # absence preferred; do not invent measured row
+  detection_id_required_for:
+    - detection_associated
+  detection_id_forbidden_for:
+    - predicted
+    - interpolated
+  physical_metric_eligible:
+    detection_associated: true
+    predicted: false
+    interpolated: false
+    not_observed: false
+
+entity_scopes:
+  allowed:
+    - human
+    - ball
+  human_ball_merge_forbidden: true
+
+gap_reason_codes:
+  detection_loss: DETECTION_LOSS_GAP
+  routing_ineligible: ROUTING_INELIGIBLE_GAP
+  replay: REPLAY_GAP
+  graphics: GRAPHICS_GAP
+  analysis_window_boundary: ANALYSIS_WINDOW_BOUNDARY_GAP
+
+review_rules:
+  role_conflict_requires_review: true
+  unknown_role_preserved: true
+  majority_vote_identity_forbidden: true
+  quality_flag_role_conflict: role_conflict
+  quality_flag_review_required: review_required
+  quality_flag_physical_metric_ineligible: physical_metric_ineligible
+
+bbox:
+  format: xyxy
+  bounds: half_open
+  coordinate_space: image_pixels
+  reject_nan: true
+  reject_inf: true
+  reject_zero_area: true
+  reject_out_of_frame: true
+  model_space_not_canonical: true
+
+time:
+  source: frames.video_time_us
+  invent_from_fps_forbidden: true
+  vfr_supported: true
+  gap_unit: microseconds
+  require_monotonic: true
+
+safety_limits:
+  max_tracks_per_video: 512
+  max_observations_per_track: 100000
+  max_lifecycle_events_per_track: 10000
+  max_config_bytes: 262144
+
+provenance_requirements:
+  record_policy_fingerprint: true
+  record_tracker_absent: true
+  tracker_algorithm_label: none_stage_6a_contracts_only
+
+notes:
+  - Stage 6A defines contracts and lifecycle only; no ByteTrack/DeepSORT/TrackLab.
+  - Track ID is not a real player identity; camera exit/re-entry identity unproven.
+  - sn-trackeval is a future adapter candidate only.
+  - Predicted/interpolated observations are not physical measurements by default.

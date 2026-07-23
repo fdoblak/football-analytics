@@ -1,0 +1,193 @@
+{
+  "contract_name": "track_lifecycle",
+  "version": 1,
+  "description": "Track lifecycle state events (Stage 6A sidecar). Does not mutate track_observations or track_summaries v1. Lifecycle (tentative|confirmed|lost|terminated) lives here; observation_state on observations remains observed|predicted|interpolated.",
+  "fields": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "video_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "track_id",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "event_index",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "frame_index",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "video_time_us",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "lifecycle_state",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "previous_state",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "entity_type",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "transition_reason",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "observation_source",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "manual_review_required",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "quality_flags",
+      "type": "list",
+      "nullable": false,
+      "value_type": "string"
+    },
+    {
+      "name": "provenance_json",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "contract_version",
+      "type": "int32",
+      "nullable": false
+    }
+  ],
+  "primary_key": [
+    "run_id",
+    "video_id",
+    "track_id",
+    "event_index"
+  ],
+  "foreign_keys": [
+    {
+      "fields": [
+        "run_id",
+        "video_id",
+        "frame_index"
+      ],
+      "ref_contract": "frames",
+      "ref_fields": [
+        "run_id",
+        "video_id",
+        "frame_index"
+      ],
+      "ref_version": 1
+    }
+  ],
+  "partition_by": [
+    "run_id",
+    "video_id"
+  ],
+  "sort_by": [
+    "run_id",
+    "video_id",
+    "track_id",
+    "event_index"
+  ],
+  "semantic_rules": [
+    {
+      "id": "run_id_format",
+      "rule": "run_id_stage2b"
+    },
+    {
+      "id": "video_id_safe",
+      "rule": "safe_identifier",
+      "field": "video_id"
+    },
+    {
+      "id": "track_ge0",
+      "rule": "int_ge",
+      "field": "track_id",
+      "value": 0
+    },
+    {
+      "id": "event_ge0",
+      "rule": "int_ge",
+      "field": "event_index",
+      "value": 0
+    },
+    {
+      "id": "frame_ge0",
+      "rule": "int_ge",
+      "field": "frame_index",
+      "value": 0
+    },
+    {
+      "id": "video_time_ge0",
+      "rule": "int_ge",
+      "field": "video_time_us",
+      "value": 0
+    },
+    {
+      "id": "lifecycle_enum",
+      "rule": "enum",
+      "field": "lifecycle_state",
+      "values": [
+        "tentative",
+        "confirmed",
+        "lost",
+        "terminated"
+      ]
+    },
+    {
+      "id": "entity_enum",
+      "rule": "enum",
+      "field": "entity_type",
+      "values": [
+        "human",
+        "ball"
+      ]
+    },
+    {
+      "id": "reason_nonempty",
+      "rule": "nonempty_string",
+      "field": "transition_reason"
+    },
+    {
+      "id": "quality_no_null_items",
+      "rule": "list_no_null_items",
+      "field": "quality_flags"
+    },
+    {
+      "id": "contract_version_ge1",
+      "rule": "int_ge",
+      "field": "contract_version",
+      "value": 1
+    }
+  ],
+  "table_metadata": {
+    "stage": "6A",
+    "sidecar_for": "track_observations@1,track_summaries@1",
+    "observation_state_mapping": "detection_associated=observed;predicted=predicted;interpolated=interpolated;not_observed=prefer_no_row",
+    "merge_reid": "false",
+    "track_id_is_player_identity": "false"
+  }
+}

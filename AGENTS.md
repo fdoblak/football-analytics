@@ -59,12 +59,14 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `scripts/check_ball_detection_baseline.py` (Stage 5C ball detection baseline)
 - `scripts/check_human_role_baseline.py` (Stage 5D human role classification baseline)
 - `scripts/check_detection_pipeline.py` (Stage 5E detection fusion + quality gates)
+- `scripts/check_tracking_contracts.py` (Stage 6A multi-object tracking contracts)
 - `scripts/check_stage_cache.py`, `check_ci_workflow.py`, `check_project.py`
 - Or: `football-analytics project check --profile local --quick`
 
 Stage 5 is closed (`detection-baseline-v0.5.0`): contracts → human/ball/role
-baselines → detection fusion + quality gates. Do not start Stage 6A (multi-object
-tracking / track lifecycle contracts) without an explicit user prompt.
+baselines → detection fusion + quality gates. Stage 6A multi-object tracking
+contracts / lifecycle are in-tree when merged. Do **not** start Stage 6B
+(human MOT baseline) without an explicit user prompt.
 
 ---
 
@@ -149,5 +151,6 @@ Do not change protected packages.
 Do not start a stage without an explicit user prompt.
 Stage 4A–4D broadcast understanding baseline is in-tree when merged.
 Stage 5A–5E detection baseline is in-tree when merged (`detection-baseline-v0.5.0`).
-Stage 5 is **closed**. Stage 6A is **not** started unless explicitly requested.
+Stage 5 is **closed**. Stage 6A tracking contracts/lifecycle are in-tree when
+merged. Stage 6B is **not** started unless explicitly requested.
 Manual Cursor flow only — no Codex/background automation.

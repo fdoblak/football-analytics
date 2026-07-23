@@ -25,15 +25,16 @@ class RegistryCompilerTests(unittest.TestCase):
     def setUp(self) -> None:
         self.reg = load_schema_registry(default_registry_path(), project_root=ROOT)
 
-    def test_01_list_fifteen_v1(self) -> None:
+    def test_01_list_sixteen_v1(self) -> None:
         names = list_contracts(registry=self.reg)
-        self.assertEqual(len(names), 15)
+        self.assertEqual(len(names), 16)
         for n in (
             "videos",
             "frames",
             "detections",
             "track_observations",
             "track_summaries",
+            "track_lifecycle",
             "calibrations",
             "team_assignments",
             "jersey_observations",

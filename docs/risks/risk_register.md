@@ -1,6 +1,6 @@
 # Risk Register — football-analytics
 
-**Updated:** 2026-07-23 (Stage 5E)
+**Updated:** 2026-07-23 (Stage 6A)
 
 **Owner default:** Furkan Doblak unless stated otherwise
 
@@ -721,3 +721,31 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Stage 5E+ |
+
+## RISK-051 — Tracking accuracy not validated (contracts-only Stage 6A)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-051 |
+| description | Stage 6A ships contracts/lifecycle only. Evaluator returns `NOT_EVALUATED_NO_REVIEWED_TRACKING_GROUND_TRUTH`. No tracker algorithm; synthetic fixtures must not be claimed as football MOT accuracy. |
+| probability | high |
+| impact | medium |
+| mitigation | Null metrics + reason code; gate documents not-evaluated; require reviewed tracking GT and Stage 6B baseline before production claims. sn-trackeval is future adapter only. |
+| trigger | Stage 6A without reviewed tracking GT |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 6A+ |
+
+## RISK-052 — Track ID mistaken for player identity
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-052 |
+| description | Consumers may treat track_id as a real player identity or jersey number; camera exit/re-entry sameness is unproven without ReID. |
+| probability | high |
+| impact | high |
+| mitigation | Policy flags `track_id_is_player_identity=false`; docs/receipt provenance; no ReID merge in 6A; identity stages deferred. |
+| trigger | Downstream identity/metrics consuming track_id |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 6A+ |

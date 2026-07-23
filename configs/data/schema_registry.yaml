@@ -53,6 +53,15 @@ contracts:
         spec_path: schemas/data/v1/track_summaries.json
     migration_edges: []
 
+  track_lifecycle:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/track_lifecycle.json
+    migration_edges: []
+
   calibrations:
     current_version: 1
     supported_versions: [1]
