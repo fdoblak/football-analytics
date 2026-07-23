@@ -1,0 +1,218 @@
+{
+  "contract_name": "detection_attributes",
+  "version": 1,
+  "description": "Sidecar entity/role attributes for detections v1 (Stage 5A). Join on run_id+video_id+frame_index+detection_id.",
+  "fields": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "video_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "frame_index",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "detection_id",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "entity_type",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "role_label",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "role_source",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "role_score",
+      "type": "float32",
+      "nullable": true
+    },
+    {
+      "name": "occlusion",
+      "type": "float32",
+      "nullable": true
+    },
+    {
+      "name": "truncation",
+      "type": "float32",
+      "nullable": true
+    },
+    {
+      "name": "visibility",
+      "type": "float32",
+      "nullable": true
+    },
+    {
+      "name": "review_status",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "attribute_source_ref",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "provenance_json",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "contract_version",
+      "type": "int32",
+      "nullable": false
+    }
+  ],
+  "primary_key": [
+    "run_id",
+    "video_id",
+    "frame_index",
+    "detection_id"
+  ],
+  "foreign_keys": [
+    {
+      "fields": [
+        "run_id",
+        "video_id",
+        "frame_index",
+        "detection_id"
+      ],
+      "ref_contract": "detections",
+      "ref_fields": [
+        "run_id",
+        "video_id",
+        "frame_index",
+        "detection_id"
+      ],
+      "ref_version": 1
+    }
+  ],
+  "partition_by": [
+    "run_id",
+    "video_id"
+  ],
+  "sort_by": [
+    "run_id",
+    "video_id",
+    "frame_index",
+    "detection_id"
+  ],
+  "semantic_rules": [
+    {
+      "id": "run_id_format",
+      "rule": "run_id_stage2b"
+    },
+    {
+      "id": "video_id_safe",
+      "rule": "safe_identifier",
+      "field": "video_id"
+    },
+    {
+      "id": "frame_ge0",
+      "rule": "int_ge",
+      "field": "frame_index",
+      "value": 0
+    },
+    {
+      "id": "det_id_ge0",
+      "rule": "int_ge",
+      "field": "detection_id",
+      "value": 0
+    },
+    {
+      "id": "entity_type_enum",
+      "rule": "enum",
+      "field": "entity_type",
+      "values": [
+        "human",
+        "ball",
+        "unknown"
+      ]
+    },
+    {
+      "id": "role_label_enum",
+      "rule": "enum",
+      "field": "role_label",
+      "values": [
+        "player",
+        "goalkeeper",
+        "referee",
+        "assistant_referee",
+        "staff",
+        "unknown"
+      ]
+    },
+    {
+      "id": "role_source_enum",
+      "rule": "enum",
+      "field": "role_source",
+      "values": [
+        "detector_native",
+        "downstream_classifier",
+        "manual_review",
+        "imported",
+        "unknown"
+      ]
+    },
+    {
+      "id": "role_score_unit_or_null",
+      "rule": "float_unit_interval_or_null",
+      "field": "role_score"
+    },
+    {
+      "id": "occlusion_unit_or_null",
+      "rule": "float_unit_interval_or_null",
+      "field": "occlusion"
+    },
+    {
+      "id": "truncation_unit_or_null",
+      "rule": "float_unit_interval_or_null",
+      "field": "truncation"
+    },
+    {
+      "id": "visibility_unit_or_null",
+      "rule": "float_unit_interval_or_null",
+      "field": "visibility"
+    },
+    {
+      "id": "review_status_enum",
+      "rule": "enum",
+      "field": "review_status",
+      "values": [
+        "unreviewed",
+        "reviewed",
+        "accepted",
+        "rejected",
+        "needs_review"
+      ]
+    },
+    {
+      "id": "contract_version_ge1",
+      "rule": "int_ge",
+      "field": "contract_version",
+      "value": 1
+    }
+  ],
+  "table_metadata": {
+    "stage": "5A",
+    "sidecar_for": "detections@1",
+    "join_key": "run_id,video_id,frame_index,detection_id",
+    "note": "Role score is not calibrated probability; do not present as calibrated confidence."
+  }
+}

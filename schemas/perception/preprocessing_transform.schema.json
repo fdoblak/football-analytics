@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/perception/preprocessing_transform.schema.json",
+  "title": "Detection preprocessing transform (Stage 5A)",
+  "description": "Versioned letterbox/stretch resize parameters for inverse bbox transform. No arbitrary callables.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_width",
+    "source_height",
+    "model_input_width",
+    "model_input_height",
+    "resize_mode",
+    "scale_x",
+    "scale_y",
+    "pad_left",
+    "pad_top",
+    "pad_right",
+    "pad_bottom",
+    "color_space",
+    "channel_order",
+    "normalization",
+    "orientation",
+    "transform_fingerprint"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "source_width": { "type": "integer", "minimum": 1 },
+    "source_height": { "type": "integer", "minimum": 1 },
+    "model_input_width": { "type": "integer", "minimum": 1 },
+    "model_input_height": { "type": "integer", "minimum": 1 },
+    "resize_mode": {
+      "type": "string",
+      "enum": ["letterbox", "stretch"]
+    },
+    "scale_x": { "type": "number", "exclusiveMinimum": 0 },
+    "scale_y": { "type": "number", "exclusiveMinimum": 0 },
+    "pad_left": { "type": "number", "minimum": 0 },
+    "pad_top": { "type": "number", "minimum": 0 },
+    "pad_right": { "type": "number", "minimum": 0 },
+    "pad_bottom": { "type": "number", "minimum": 0 },
+    "color_space": {
+      "type": "string",
+      "enum": ["rgb", "bgr", "gray", "yuv", "unknown"]
+    },
+    "channel_order": {
+      "type": "string",
+      "enum": ["channels_last", "channels_first", "unknown"]
+    },
+    "normalization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["none", "unit_interval", "imagenet", "custom"]
+        },
+        "mean": {
+          "type": ["array", "null"],
+          "items": { "type": "number" },
+          "minItems": 1,
+          "maxItems": 4
+        },
+        "std": {
+          "type": ["array", "null"],
+          "items": { "type": "number", "exclusiveMinimum": 0 },
+          "minItems": 1,
+          "maxItems": 4
+        }
+      }
+    },
+    "orientation": {
+      "type": "string",
+      "enum": ["identity", "rotated_90", "rotated_180", "rotated_270", "unknown"]
+    },
+    "transform_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "roundtrip_tolerance_px": { "type": "number", "minimum": 0 },
+    "notes": { "type": ["string", "null"] }
+  }
+}

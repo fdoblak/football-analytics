@@ -8,9 +8,11 @@ graft configs/product
 graft configs/metrics
 graft configs/video
 graft configs/broadcast
+graft configs/perception
 graft schemas/metrics
 graft schemas/video
 graft schemas/broadcast
+graft schemas/perception
 include AGENTS.md
 include LICENSE
 include README.md

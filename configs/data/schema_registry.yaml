@@ -124,3 +124,21 @@ contracts:
       1:
         spec_path: schemas/data/v1/analysis_windows.json
     migration_edges: []
+
+  detection_frame_status:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/detection_frame_status.json
+    migration_edges: []
+
+  detection_attributes:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/detection_attributes.json
+    migration_edges: []

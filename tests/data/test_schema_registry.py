@@ -25,9 +25,9 @@ class RegistryCompilerTests(unittest.TestCase):
     def setUp(self) -> None:
         self.reg = load_schema_registry(default_registry_path(), project_root=ROOT)
 
-    def test_01_list_thirteen_v1(self) -> None:
+    def test_01_list_fifteen_v1(self) -> None:
         names = list_contracts(registry=self.reg)
-        self.assertEqual(len(names), 13)
+        self.assertEqual(len(names), 15)
         for n in (
             "videos",
             "frames",
@@ -42,6 +42,8 @@ class RegistryCompilerTests(unittest.TestCase):
             "shot_segments",
             "camera_view_segments",
             "analysis_windows",
+            "detection_frame_status",
+            "detection_attributes",
         ):
             self.assertIn(n, names)
 

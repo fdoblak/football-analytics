@@ -1,0 +1,91 @@
+# Stage 5A detection taxonomy — entity/role axes separate from model class ids.
+# Fingerprinted; strict-loaded. Generic person NEVER auto-maps to player.
+taxonomy_version: "1.0.0"
+config_version: 1
+
+entity_types:
+  - human
+  - ball
+  - unknown
+
+role_labels:
+  - player
+  - goalkeeper
+  - referee
+  - assistant_referee
+  - staff
+  - unknown
+
+role_sources:
+  - detector_native
+  - downstream_classifier
+  - manual_review
+  - imported
+  - unknown
+
+# Model-class mapping rules (class_name normalized lower-case; class_id optional).
+# person → human + role unknown (never player).
+# ball → ball entity; role must remain unknown.
+# unmapped → policy-driven reject or unknown.
+model_class_mapping:
+  - class_names: [person, human, pedestrian]
+    class_ids: null
+    entity_type: human
+    role_label: unknown
+    role_source: unknown
+    note: "Generic person detectors must not auto-assign player."
+
+  - class_names: [player, football_player, soccer_player]
+    class_ids: null
+    entity_type: human
+    role_label: player
+    role_source: detector_native
+    note: "Only when detector emits an explicit player class."
+
+  - class_names: [goalkeeper, goalie, keeper]
+    class_ids: null
+    entity_type: human
+    role_label: goalkeeper
+    role_source: detector_native
+    note: "Detector-native GK only; kit color alone is insufficient evidence."
+
+  - class_names: [referee, ref, official]
+    class_ids: null
+    entity_type: human
+    role_label: referee
+    role_source: detector_native
+    note: "Without evidence prefer unknown via review."
+
+  - class_names: [assistant_referee, linesman, assistant_ref]
+    class_ids: null
+    entity_type: human
+    role_label: assistant_referee
+    role_source: detector_native
+    note: null
+
+  - class_names: [staff, coach, manager]
+    class_ids: null
+    entity_type: human
+    role_label: staff
+    role_source: detector_native
+    note: null
+
+  - class_names: [ball, sports_ball, soccer_ball, football]
+    class_ids: null
+    entity_type: ball
+    role_label: unknown
+    role_source: unknown
+    note: "Ball must not carry human role labels."
+
+unmapped_policy: reject
+# reject | unknown — reject raises MODEL_CLASS_UNMAPPED; unknown maps entity/role unknown.
+
+ball_role_policy: forbid_non_unknown
+# Ball entity_type forbids role_label other than unknown.
+
+auto_player_from_person: false
+
+notes:
+  - "class_id remains model-specific; canonical taxonomy is this file."
+  - "Team identity, jersey number, and target_player are out of Stage 5A scope."
+  - "Unsupported classes must not silently map to player."

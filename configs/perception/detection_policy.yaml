@@ -1,0 +1,116 @@
+# Stage 5A detection policy — thresholds, NMS, bbox, preprocessing, routing.
+# Fingerprinted; strict-loaded. No inference in this stage.
+policy_version: "1"
+config_version: 1
+
+thresholds:
+  # Raw detector score gates (not calibrated confidence).
+  default_score_min: 0.25
+  per_class_score_min:
+    person: 0.30
+    player: 0.30
+    goalkeeper: 0.30
+    referee: 0.30
+    assistant_referee: 0.30
+    ball: 0.15
+    sports_ball: 0.15
+  calibrated_confidence_separate: true
+
+nms:
+  iou_threshold: 0.50
+  mode: class_aware  # class_aware | class_agnostic
+  keep_suppressed_in_canonical: false
+  record_pre_post_counts: true
+
+bbox:
+  format: xyxy
+  bounds: half_open
+  coordinate_space: image_pixels
+  reject_nan: true
+  reject_inf: true
+  reject_zero_area: true
+  reject_negative_area: true
+  clip_to_frame: true
+  clip_sets_quality_flag: clipped_to_frame
+  require_inverse_from_model_space: true
+  center_or_foot_not_canonical: true
+
+preprocessing:
+  allowed_resize_modes:
+    - letterbox
+    - stretch
+  default_resize_mode: letterbox
+  default_model_input_width: 640
+  default_model_input_height: 640
+  roundtrip_tolerance_px: 0.5
+  color_space: rgb
+  channel_order: channels_last
+  orientation: identity
+  forbid_arbitrary_callables: true
+
+routing:
+  # Driven by analysis_windows eligibility axes (Stage 4D).
+  human_requires_any_of:
+    - tracking_eligibility: [eligible, conditionally_eligible]
+    - identity_eligibility: [eligible, conditionally_eligible]
+  ball_requires:
+    ball_analysis_eligibility: [eligible, conditionally_eligible]
+  skip_on_playability:
+    - non_playable
+  skip_on_graphics:
+    - full_screen
+    - dominant_overlay
+  identity_only_closeup:
+    allow_human_detection: true
+    mark_downstream_physical_unsafe: true
+  live_event_unknown_blocks_visual_detection: false
+  unknown_or_conflict: skip_or_manual_review
+  record_processing_status: true
+
+empty_frame_semantics:
+  processed_empty_status: processed_no_detections
+  unprocessed_statuses:
+    - skipped
+    - failed
+    - not_eligible
+  zero_counts_only_when_processed: true
+  no_fake_zeros_for_skipped_failed: true
+
+error_codes:
+  - FRAME_NOT_ELIGIBLE
+  - BALL_ANALYSIS_NOT_ELIGIBLE
+  - UNKNOWN_PLAYABILITY
+  - MISSING_FRAME
+  - FRAME_DECODE_FAILED
+  - MODEL_NOT_AVAILABLE
+  - MODEL_CLASS_UNMAPPED
+  - INVALID_MODEL_OUTPUT
+  - INVALID_BBOX
+  - INVERSE_TRANSFORM_FAILED
+  - INFERENCE_FAILED
+  - OUTPUT_INTEGRITY_FAILED
+  - MANUAL_REVIEW_REQUIRED
+
+skip_codes:
+  - FRAME_NOT_ELIGIBLE
+  - BALL_ANALYSIS_NOT_ELIGIBLE
+  - UNKNOWN_PLAYABILITY
+  - MANUAL_REVIEW_REQUIRED
+
+resource_limits:
+  max_detections_per_frame: 256
+  max_frames_per_run: 100000
+  max_receipt_warnings: 1000
+  max_config_bytes: 262144
+
+provenance_requirements:
+  require_detector_id: true
+  require_config_fingerprint: true
+  require_taxonomy_version: true
+  require_transform_fingerprint: true
+  invent_model_sha_when_missing: false
+
+notes:
+  - "Detection request routing starts from analysis_windows only."
+  - "Running detection does not imply target_player presence."
+  - "Suppressed NMS boxes must not enter canonical detections."

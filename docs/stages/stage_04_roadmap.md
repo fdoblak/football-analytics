@@ -30,8 +30,9 @@ tracking, calibration, ReID, and distance metrics — and which must be excluded
 - Real match labeling campaigns
 - Inventing `camera_position` / unsupported view families without evidence
 - Continuous automation / Codex supervisor
-- **Stage 5** (detection contracts) — not started
+
+Stage 5A detection contracts are documented in `docs/stages/stage_05_roadmap.md`.
 
 ## Next stage (name only)
 
-`Stage 5A — Player, goalkeeper, referee, and ball detection contracts`
+`Stage 5A — Player, goalkeeper, referee, and ball detection contracts` (see Stage 5 roadmap; 5A CLOSED when merged)

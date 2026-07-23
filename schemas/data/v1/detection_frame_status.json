@@ -1,0 +1,212 @@
+{
+  "contract_name": "detection_frame_status",
+  "version": 1,
+  "description": "Per-frame detection processing status (processed vs skipped/failed; Stage 5A).",
+  "fields": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "video_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "frame_index",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "video_time_us",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "analysis_window_id",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "processing_status",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "eligibility",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "detector_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "input_artifact_ref",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "detection_count",
+      "type": "int32",
+      "nullable": false
+    },
+    {
+      "name": "human_count",
+      "type": "int32",
+      "nullable": false
+    },
+    {
+      "name": "ball_count",
+      "type": "int32",
+      "nullable": false
+    },
+    {
+      "name": "skip_reason",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "error_code",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "coverage",
+      "type": "float32",
+      "nullable": false
+    },
+    {
+      "name": "provenance_json",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "contract_version",
+      "type": "int32",
+      "nullable": false
+    }
+  ],
+  "primary_key": [
+    "run_id",
+    "video_id",
+    "frame_index"
+  ],
+  "foreign_keys": [
+    {
+      "fields": [
+        "run_id",
+        "video_id",
+        "frame_index"
+      ],
+      "ref_contract": "frames",
+      "ref_fields": [
+        "run_id",
+        "video_id",
+        "frame_index"
+      ],
+      "ref_version": 1
+    }
+  ],
+  "partition_by": [
+    "run_id",
+    "video_id"
+  ],
+  "sort_by": [
+    "run_id",
+    "video_id",
+    "frame_index"
+  ],
+  "semantic_rules": [
+    {
+      "id": "run_id_format",
+      "rule": "run_id_stage2b"
+    },
+    {
+      "id": "video_id_safe",
+      "rule": "safe_identifier",
+      "field": "video_id"
+    },
+    {
+      "id": "frame_ge0",
+      "rule": "int_ge",
+      "field": "frame_index",
+      "value": 0
+    },
+    {
+      "id": "video_time_ge0",
+      "rule": "int_ge",
+      "field": "video_time_us",
+      "value": 0
+    },
+    {
+      "id": "analysis_window_id_safe_or_null",
+      "rule": "safe_identifier_or_null",
+      "field": "analysis_window_id"
+    },
+    {
+      "id": "processing_status_enum",
+      "rule": "enum",
+      "field": "processing_status",
+      "values": [
+        "processed",
+        "processed_no_detections",
+        "skipped",
+        "failed",
+        "not_eligible"
+      ]
+    },
+    {
+      "id": "eligibility_enum",
+      "rule": "enum",
+      "field": "eligibility",
+      "values": [
+        "eligible",
+        "conditionally_eligible",
+        "ineligible",
+        "unknown"
+      ]
+    },
+    {
+      "id": "detector_id_safe",
+      "rule": "safe_identifier",
+      "field": "detector_id"
+    },
+    {
+      "id": "detection_count_ge0",
+      "rule": "int_ge",
+      "field": "detection_count",
+      "value": 0
+    },
+    {
+      "id": "human_count_ge0",
+      "rule": "int_ge",
+      "field": "human_count",
+      "value": 0
+    },
+    {
+      "id": "ball_count_ge0",
+      "rule": "int_ge",
+      "field": "ball_count",
+      "value": 0
+    },
+    {
+      "id": "coverage_unit",
+      "rule": "float_unit_interval",
+      "field": "coverage"
+    },
+    {
+      "id": "contract_version_ge1",
+      "rule": "int_ge",
+      "field": "contract_version",
+      "value": 1
+    }
+  ],
+  "table_metadata": {
+    "stage": "5A",
+    "empty_vs_unprocessed": "separated_by_processing_status",
+    "canonical_detections_contract": "detections@1"
+  }
+}

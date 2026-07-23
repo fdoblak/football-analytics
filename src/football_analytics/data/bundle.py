@@ -163,6 +163,33 @@ def validate_contract_bundle(tables: dict[str, Any], specs: dict[str, Any]) -> V
         # lightweight FK-only path if tables appear without going through broadcast validator
         pass
 
+    # Stage 5A detection sidecars (optional; not required in synthetic 9-table bundle)
+    detection_frame_status = tables.get("detection_frame_status")
+    detection_attributes = tables.get("detection_attributes")
+    analysis_windows = tables.get("analysis_windows")
+    if any(t is not None for t in (detection_frame_status, detection_attributes)):
+        from football_analytics.perception.validation import validate_detection_bundle
+
+        dr = validate_detection_bundle(
+            detections=detections,
+            frame_status=detection_frame_status,
+            attributes=detection_attributes,
+            frames=frames,
+            videos=videos,
+            analysis_windows=analysis_windows,
+            specs=specs,
+        )
+        if dr.status == "FAIL":
+            for e in dr.errors[:10]:
+                result.err(f"perception: {e}")
+        for w in dr.warnings[:5]:
+            result.warn(f"perception: {w}")
+        result.statistics["detection_bundle"] = {
+            "status": dr.status,
+            "errors": len(dr.errors),
+            "warnings": len(dr.warnings),
+        }
+
     # bbox vs video dimensions
     if detections is not None and videos is not None:
         dims = {
