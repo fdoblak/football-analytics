@@ -1,0 +1,91 @@
+# Stage 4D broadcast segment fusion + playability routing policy.
+# Conservative: never invent live-event/physical eligibility under uncertainty.
+policy_version: "1"
+config_version: 1
+
+task_axes:
+  - tracking
+  - calibration
+  - identity
+  - ball_analysis
+  - live_event
+  - physical_metric
+
+eligibility_values:
+  - eligible
+  - conditionally_eligible
+  - ineligible
+  - unknown
+
+decision_codes:
+  - PLAYABLE_WIDE_VIEW
+  - IDENTITY_ONLY_CLOSEUP
+  - GRAPHICS_NON_PLAYABLE
+  - UNKNOWN_VIEW_REVIEW_REQUIRED
+  - LOW_COVERAGE
+  - CONFLICTING_CAMERA_LABELS
+  - CAMERA_GAP
+  - REPLAY_CONFIRMED_EXCLUDE_LIVE
+  - REPLAY_UNKNOWN_BLOCK_LIVE_COUNTING
+  - TIMELINE_MAPPING_INSUFFICIENT
+  - CALIBRATION_UNSUITABLE
+  - TRACKING_UNSUITABLE
+  - PHYSICAL_METRIC_UNSAFE
+  - PARTIALLY_PLAYABLE_REVIEW
+  - NON_PLAYABLE_BLOCK
+
+thresholds:
+  low_coverage_max: 0.50
+  merge_identical_adjacent: true
+
+# MappingQuality values that block automatic physical metrics.
+unsafe_mapping_qualities:
+  - uncertain
+  - not_available
+
+# Graphics statuses that force all pitch/live tasks ineligible.
+blocking_graphics:
+  - full_screen
+  - dominant_overlay
+
+# View families treated as non-playable for pitch/live tasks.
+non_playable_view_families:
+  - crowd
+  - bench
+  - studio
+  - graphics
+
+# Framing that is identity-oriented (not calibration/physical).
+identity_framing:
+  - close_up
+  - extreme_close_up
+
+identity_view_families:
+  - player_isolation
+
+# Wide main-broadcast candidates for tracking/calibration.
+wide_tracking_framing:
+  - wide
+
+wide_tracking_views:
+  - main_broadcast
+  - tactical
+
+replay_confirmed:
+  - replay
+  - replay_transition
+
+evaluation:
+  unsafe_live_event_fp_max: 0.0
+  unsafe_physical_metric_fp_max: 0.0
+  unsafe_calibration_fp_max: 0.0
+  unsafe_tracking_fp_max: 0.0
+  non_playable_eligible_fp_max: 0.0
+  manual_review_recall_min: 1.0
+  overlap_rate_max: 0.0
+  unexplained_gap_rate_max: 0.0
+
+runtime_root: /home/fdoblak/workspace/broadcast_pipeline_checks
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false

@@ -683,6 +683,62 @@ def cmd_broadcast_camera_classify(
     return int(result.exit_code)
 
 
+def cmd_broadcast_integrate(
+    *,
+    timeline: Path,
+    boundaries: Path,
+    shots: Path,
+    camera_views: Path,
+    output_dir: Path,
+    policy_path: Path,
+    contain_root: Path | None,
+    run_id: str | None,
+    video_id: str | None,
+) -> int:
+    """Stage 4D: fuse shot/camera segments and route analysis windows."""
+    from football_analytics.broadcast.broadcast_pipeline import run_broadcast_integrate
+    from football_analytics.broadcast.playability import (
+        default_routing_policy_path,
+        load_routing_policy,
+    )
+    from football_analytics.data.registry import default_project_root
+
+    root = default_project_root()
+    pol_path = policy_path if policy_path.is_absolute() else root / policy_path
+    if not pol_path.is_file():
+        pol_path = default_routing_policy_path(repo_root=root)
+    try:
+        policy = load_routing_policy(pol_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    contain = contain_root
+    if contain is None:
+        contain = Path(str(policy["runtime_root"]))
+    result = run_broadcast_integrate(
+        timeline=str(timeline),
+        boundaries=str(boundaries),
+        shots=str(shots),
+        camera_views=str(camera_views),
+        output_dir=str(output_dir),
+        policy=policy,
+        contain_root=contain,
+        run_id=run_id,
+        video_id=video_id,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"window_count: {summary['window_count']}")
+    print(f"review_count: {summary['review_count']}")
+    print(f"analysis_windows_parquet: {summary['analysis_windows_parquet']}")
+    print(f"review_queue_json: {summary['review_queue_json']}")
+    print(f"pipeline_receipt_json: {summary['pipeline_receipt_json']}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
 def cmd_broadcast_camera_evaluate(
     *,
     predictions: Path,
@@ -1014,6 +1070,41 @@ def build_parser() -> argparse.ArgumentParser:
         default=Path("configs/broadcast/camera_view_baseline.yaml"),
         help="Camera-view baseline config YAML",
     )
+    p_integrate = broadcast_sub.add_parser(
+        "integrate", help="Fuse shot/camera segments and route analysis windows"
+    )
+    p_integrate.add_argument(
+        "--timeline", type=Path, required=True, help="Absolute frames.parquet path"
+    )
+    p_integrate.add_argument(
+        "--boundaries", type=Path, required=True, help="Absolute shot_boundaries.parquet path"
+    )
+    p_integrate.add_argument(
+        "--shots", type=Path, required=True, help="Absolute shot_segments.parquet path"
+    )
+    p_integrate.add_argument(
+        "--camera-views",
+        type=Path,
+        required=True,
+        help="Absolute camera_view_segments.parquet path",
+    )
+    p_integrate.add_argument(
+        "--output-dir", type=Path, required=True, help="Runtime output directory"
+    )
+    p_integrate.add_argument(
+        "--policy",
+        type=Path,
+        default=Path("configs/broadcast/broadcast_routing_policy.yaml"),
+        help="Broadcast routing policy YAML",
+    )
+    p_integrate.add_argument(
+        "--contain-root",
+        type=Path,
+        default=None,
+        help="Containment root (default: policy.runtime_root)",
+    )
+    p_integrate.add_argument("--run-id", type=str, default=None, help="Optional run_id")
+    p_integrate.add_argument("--video-id", type=str, default=None, help="Optional video_id")
     return parser
 
 
@@ -1157,6 +1248,18 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
             parser.parse_args(["broadcast", "camera", "--help"])
             return 2
+        if args.broadcast_command == "integrate":
+            return cmd_broadcast_integrate(
+                timeline=args.timeline,
+                boundaries=args.boundaries,
+                shots=args.shots,
+                camera_views=args.camera_views,
+                output_dir=args.output_dir,
+                policy_path=args.policy,
+                contain_root=args.contain_root,
+                run_id=args.run_id,
+                video_id=args.video_id,
+            )
         parser.parse_args(["broadcast", "--help"])
         return 2
     parser.print_help()

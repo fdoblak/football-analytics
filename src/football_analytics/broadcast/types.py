@@ -126,6 +126,13 @@ class Suitability(str, Enum):
     UNKNOWN = "unknown"
 
 
+class Eligibility(str, Enum):
+    ELIGIBLE = "eligible"
+    CONDITIONALLY_ELIGIBLE = "conditionally_eligible"
+    INELIGIBLE = "ineligible"
+    UNKNOWN = "unknown"
+
+
 class ClassificationSource(str, Enum):
     MODEL = "model"
     RULE = "rule"
@@ -242,6 +249,29 @@ def _require_evidence_refs(value: Any) -> tuple[str, ...]:
             raise BroadcastContractError(f"evidence_refs[{i}] must be a safe identifier")
         out.append(item)
     return tuple(out)
+
+
+def _require_safe_id_list(value: Any, *, label: str) -> tuple[str, ...]:
+    if value is None:
+        raise BroadcastContractError(f"{label} must be a list (may be empty)")
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)):
+        raise BroadcastContractError(f"{label} must be a list of strings")
+    out: list[str] = []
+    for i, item in enumerate(value):
+        if item is None:
+            raise BroadcastContractError(f"{label}[{i}] is null")
+        if not isinstance(item, str) or not item:
+            raise BroadcastContractError(f"{label}[{i}] must be a non-empty string")
+        if not SAFE_ID_RE.fullmatch(item):
+            raise BroadcastContractError(f"{label}[{i}] must be a safe identifier")
+        out.append(item)
+    return tuple(out)
+
+
+def _require_bool(value: Any, *, label: str) -> bool:
+    if not isinstance(value, bool):
+        raise BroadcastContractError(f"{label} must be a bool")
+    return value
 
 
 @dataclass(frozen=True)
@@ -527,6 +557,151 @@ class CameraViewSegment:
         )
 
 
+@dataclass(frozen=True)
+class AnalysisWindow:
+    run_id: str
+    video_id: str
+    analysis_window_id: str
+    start_time_us: int
+    end_time_us: int
+    start_frame_index: int | None
+    end_frame_index_exclusive: int | None
+    shot_id: str | None
+    camera_segment_ids: tuple[str, ...]
+    view_family: ViewFamily
+    framing_scale: FramingScale
+    replay_status: ReplayStatus
+    graphics_status: GraphicsStatus
+    playability: Playability
+    tracking_eligibility: Eligibility
+    calibration_eligibility: Eligibility
+    identity_eligibility: Eligibility
+    ball_analysis_eligibility: Eligibility
+    live_event_eligibility: Eligibility
+    physical_metric_eligibility: Eligibility
+    decision_codes: tuple[str, ...]
+    manual_review_required: bool
+    coverage: float
+    confidence: float | None
+    timeline_mapping_quality: MappingQuality
+    source_refs: tuple[str, ...]
+    policy_version: str
+    provenance_json: str | None
+    contract_version: int = CONTRACT_VERSION
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "run_id": self.run_id,
+            "video_id": self.video_id,
+            "analysis_window_id": self.analysis_window_id,
+            "start_time_us": self.start_time_us,
+            "end_time_us": self.end_time_us,
+            "start_frame_index": self.start_frame_index,
+            "end_frame_index_exclusive": self.end_frame_index_exclusive,
+            "shot_id": self.shot_id,
+            "camera_segment_ids": list(self.camera_segment_ids),
+            "view_family": self.view_family.value,
+            "framing_scale": self.framing_scale.value,
+            "replay_status": self.replay_status.value,
+            "graphics_status": self.graphics_status.value,
+            "playability": self.playability.value,
+            "tracking_eligibility": self.tracking_eligibility.value,
+            "calibration_eligibility": self.calibration_eligibility.value,
+            "identity_eligibility": self.identity_eligibility.value,
+            "ball_analysis_eligibility": self.ball_analysis_eligibility.value,
+            "live_event_eligibility": self.live_event_eligibility.value,
+            "physical_metric_eligibility": self.physical_metric_eligibility.value,
+            "decision_codes": list(self.decision_codes),
+            "manual_review_required": self.manual_review_required,
+            "coverage": self.coverage,
+            "confidence": self.confidence,
+            "timeline_mapping_quality": self.timeline_mapping_quality.value,
+            "source_refs": list(self.source_refs),
+            "policy_version": self.policy_version,
+            "provenance_json": self.provenance_json,
+            "contract_version": self.contract_version,
+        }
+
+    @classmethod
+    def from_dict(cls, data: Mapping[str, Any]) -> AnalysisWindow:
+        validate_run_id(data["run_id"])
+        start = _require_int(data["start_time_us"], label="start_time_us", minimum=0) or 0
+        end = _require_int(data["end_time_us"], label="end_time_us", minimum=0) or 0
+        if end <= start:
+            raise BroadcastContractError("end_time_us must be > start_time_us")
+        coverage = _require_float_unit(data["coverage"], label="coverage")
+        assert coverage is not None
+        policy_version = _require_str(data["policy_version"], label="policy_version")
+        return cls(
+            run_id=str(data["run_id"]),
+            video_id=_require_safe_id(data["video_id"], label="video_id"),
+            analysis_window_id=_require_safe_id(
+                data["analysis_window_id"], label="analysis_window_id"
+            ),
+            start_time_us=start,
+            end_time_us=end,
+            start_frame_index=_require_int(
+                data.get("start_frame_index"), label="start_frame_index", minimum=0, allow_none=True
+            ),
+            end_frame_index_exclusive=_require_int(
+                data.get("end_frame_index_exclusive"),
+                label="end_frame_index_exclusive",
+                minimum=0,
+                allow_none=True,
+            ),
+            shot_id=_require_safe_id_or_none(data.get("shot_id"), label="shot_id"),
+            camera_segment_ids=_require_safe_id_list(
+                data.get("camera_segment_ids", []), label="camera_segment_ids"
+            ),
+            view_family=_require_enum(ViewFamily, data["view_family"], label="view_family"),
+            framing_scale=_require_enum(FramingScale, data["framing_scale"], label="framing_scale"),
+            replay_status=_require_enum(ReplayStatus, data["replay_status"], label="replay_status"),
+            graphics_status=_require_enum(
+                GraphicsStatus, data["graphics_status"], label="graphics_status"
+            ),
+            playability=_require_enum(Playability, data["playability"], label="playability"),
+            tracking_eligibility=_require_enum(
+                Eligibility, data["tracking_eligibility"], label="tracking_eligibility"
+            ),
+            calibration_eligibility=_require_enum(
+                Eligibility, data["calibration_eligibility"], label="calibration_eligibility"
+            ),
+            identity_eligibility=_require_enum(
+                Eligibility, data["identity_eligibility"], label="identity_eligibility"
+            ),
+            ball_analysis_eligibility=_require_enum(
+                Eligibility, data["ball_analysis_eligibility"], label="ball_analysis_eligibility"
+            ),
+            live_event_eligibility=_require_enum(
+                Eligibility, data["live_event_eligibility"], label="live_event_eligibility"
+            ),
+            physical_metric_eligibility=_require_enum(
+                Eligibility,
+                data["physical_metric_eligibility"],
+                label="physical_metric_eligibility",
+            ),
+            decision_codes=_require_safe_id_list(
+                data.get("decision_codes", []), label="decision_codes"
+            ),
+            manual_review_required=_require_bool(
+                data["manual_review_required"], label="manual_review_required"
+            ),
+            coverage=coverage,
+            confidence=_require_float_unit(
+                data.get("confidence"), label="confidence", allow_none=True
+            ),
+            timeline_mapping_quality=_require_enum(
+                MappingQuality, data["timeline_mapping_quality"], label="timeline_mapping_quality"
+            ),
+            source_refs=_require_safe_id_list(data.get("source_refs", []), label="source_refs"),
+            policy_version=policy_version,
+            provenance_json=_require_provenance(data.get("provenance_json")),
+            contract_version=_require_contract_version(
+                data.get("contract_version", CONTRACT_VERSION)
+            ),
+        )
+
+
 __all__ = [
     "CONTRACT_VERSION",
     "BroadcastError",
@@ -543,10 +718,12 @@ __all__ = [
     "GraphicsStatus",
     "Playability",
     "Suitability",
+    "Eligibility",
     "ClassificationSource",
     "NON_PLAYABLE_VIEW_FAMILIES",
     "MappingQuality",
     "ShotBoundary",
     "ShotSegment",
     "CameraViewSegment",
+    "AnalysisWindow",
 ]

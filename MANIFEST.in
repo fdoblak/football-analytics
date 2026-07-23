@@ -7,8 +7,10 @@ graft schemas/cache
 graft configs/product
 graft configs/metrics
 graft configs/video
+graft configs/broadcast
 graft schemas/metrics
 graft schemas/video
+graft schemas/broadcast
 include AGENTS.md
 include LICENSE
 include README.md

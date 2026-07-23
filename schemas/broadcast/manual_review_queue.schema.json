@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "football-analytics/broadcast/manual_review_queue.schema.json",
+  "title": "ManualReviewQueue",
+  "description": "Stage 4D manual review queue for uncertain/conflict analysis windows (non-canonical receipt).",
+  "type": "object",
+  "required": ["schema_version", "policy_version", "items"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "policy_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "video_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/review_item"
+      }
+    }
+  },
+  "definitions": {
+    "review_item": {
+      "type": "object",
+      "required": [
+        "window_id",
+        "reason_codes",
+        "priority",
+        "suggested_evidence_times",
+        "source_refs",
+        "status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "window_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "priority": {
+          "type": "string",
+          "enum": ["high", "medium", "low"]
+        },
+        "suggested_evidence_times": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "in_review", "resolved", "deferred"]
+        }
+      }
+    }
+  }
+}

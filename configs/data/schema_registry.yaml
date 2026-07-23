@@ -115,3 +115,12 @@ contracts:
       1:
         spec_path: schemas/data/v1/camera_view_segments.json
     migration_edges: []
+
+  analysis_windows:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/analysis_windows.json
+    migration_edges: []

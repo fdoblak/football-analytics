@@ -390,4 +390,162 @@ def validate_broadcast_bundle(
     return result.finalize()
 
 
-__all__ = ["validate_broadcast_bundle"]
+def validate_analysis_windows_bundle(
+    windows: Any | None,
+    *,
+    shots: Any | None = None,
+    cameras: Any | None = None,
+    videos: Any | None = None,
+    frames: Any | None = None,
+    check_table_semantics: bool = True,
+) -> ValidationResult:
+    """Validate analysis_windows against shot/camera temporal + FK rules."""
+    from football_analytics.data.compiler import get_contract
+
+    result = ValidationResult(contract="analysis_windows_bundle", version=1)
+    if windows is None:
+        result.warn("analysis_windows table missing")
+        return result.finalize()
+
+    spec = get_contract("analysis_windows", 1)
+    vr = validate_table(windows, spec, check_semantics=check_table_semantics)
+    if vr.status == "FAIL":
+        for e in vr.errors[:10]:
+            result.err(f"analysis_windows: {e}")
+    for w in vr.warnings[:5]:
+        result.warn(f"analysis_windows: {w}")
+    result.statistics["analysis_windows"] = {"rows": windows.num_rows, "status": vr.status}
+
+    video_keys = _keys(videos, ["run_id", "video_id"]) if videos is not None else None
+    if video_keys is not None:
+        for key in _keys(windows, ["run_id", "video_id"]):
+            if key not in video_keys:
+                result.err(f"analysis_windows FK missing parent video {key}")
+                break
+
+    shot_lookup: dict[tuple[str, str, str], dict[str, Any]] = {}
+    if shots is not None:
+        for r in shots.to_pylist():
+            shot_lookup[(r["run_id"], r["video_id"], r["shot_id"])] = r
+
+    camera_ids: set[tuple[str, str, str]] = set()
+    if cameras is not None:
+        for r in cameras.to_pylist():
+            camera_ids.add((r["run_id"], r["video_id"], r["camera_segment_id"]))
+
+    frame_map = _frame_time_map(frames)
+    rows = windows.to_pylist()
+    by_video: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for i, r in enumerate(rows):
+        if int(r["contract_version"]) != CONTRACT_VERSION:
+            result.err(f"analysis_windows contract_version != {CONTRACT_VERSION} at row {i}")
+        start, end = int(r["start_time_us"]), int(r["end_time_us"])
+        if end <= start:
+            result.err(f"analysis_windows end_time_us must be > start_time_us at row {i}")
+        if not _finite_unit(r.get("coverage")):
+            result.err(f"analysis_windows coverage out of range at row {i}")
+        if not _finite_unit_or_null(r.get("confidence")):
+            result.err(f"analysis_windows confidence out of range at row {i}")
+        if not isinstance(r.get("manual_review_required"), bool):
+            result.err(f"analysis_windows manual_review_required must be bool at row {i}")
+        if not isinstance(r.get("decision_codes"), list) or any(
+            x is None for x in (r.get("decision_codes") or [])
+        ):
+            result.err(f"analysis_windows decision_codes invalid at row {i}")
+        if not isinstance(r.get("camera_segment_ids"), list) or any(
+            x is None for x in (r.get("camera_segment_ids") or [])
+        ):
+            result.err(f"analysis_windows camera_segment_ids invalid at row {i}")
+        if not isinstance(r.get("source_refs"), list) or any(
+            x is None for x in (r.get("source_refs") or [])
+        ):
+            result.err(f"analysis_windows source_refs invalid at row {i}")
+
+        try:
+            MappingQuality(r["timeline_mapping_quality"])
+        except ValueError:
+            result.err(f"analysis_windows invalid timeline_mapping_quality at row {i}")
+
+        # Replay unknown must never be live_event eligible.
+        if (
+            str(r["replay_status"]) == ReplayStatus.UNKNOWN.value
+            and str(r["live_event_eligibility"]) == "eligible"
+        ):
+            result.err(
+                "analysis_windows replay unknown cannot have live_event eligible " f"at row {i}"
+            )
+        if str(r["replay_status"]) in {
+            ReplayStatus.REPLAY.value,
+            ReplayStatus.REPLAY_TRANSITION.value,
+        }:
+            if str(r["live_event_eligibility"]) == "eligible":
+                result.err(
+                    "analysis_windows confirmed replay cannot have live_event eligible "
+                    f"at row {i}"
+                )
+            if str(r["physical_metric_eligibility"]) == "eligible":
+                result.err(
+                    "analysis_windows confirmed replay cannot have physical_metric eligible "
+                    f"at row {i}"
+                )
+
+        if str(r["playability"]) == Playability.NON_PLAYABLE.value:
+            for axis in (
+                "tracking_eligibility",
+                "calibration_eligibility",
+                "ball_analysis_eligibility",
+                "live_event_eligibility",
+                "physical_metric_eligibility",
+            ):
+                if str(r[axis]) == "eligible":
+                    result.err(
+                        f"analysis_windows non_playable cannot have {axis}=eligible at row {i}"
+                    )
+
+        shot_id = r.get("shot_id")
+        if shot_id is not None:
+            skey = (r["run_id"], r["video_id"], shot_id)
+            if shots is not None and skey not in shot_lookup:
+                result.err(f"analysis_windows shot_id FK missing at row {i}")
+            elif skey in shot_lookup:
+                shot = shot_lookup[skey]
+                if start < int(shot["start_time_us"]) or end > int(shot["end_time_us"]):
+                    result.err(f"analysis_windows not contained in shot {shot_id} at row {i}")
+
+        for cid in r.get("camera_segment_ids") or []:
+            ckey = (r["run_id"], r["video_id"], cid)
+            if cameras is not None and ckey not in camera_ids:
+                result.err(f"analysis_windows camera_segment_id FK missing {cid} at row {i}")
+                break
+
+        sf, ef = r.get("start_frame_index"), r.get("end_frame_index_exclusive")
+        if sf is not None and ef is not None and int(ef) <= int(sf):
+            result.err(f"analysis_windows frame interval invalid at row {i}")
+        _check_frame_time_consistency(
+            r,
+            frame_map=frame_map,
+            start_key="start_frame_index",
+            end_key="end_frame_index_exclusive",
+            result=result,
+            label="analysis_windows",
+        )
+        by_video.setdefault((r["run_id"], r["video_id"]), []).append(r)
+
+    for vkey, items in by_video.items():
+        ordered = sorted(
+            items, key=lambda row: (int(row["start_time_us"]), str(row["analysis_window_id"]))
+        )
+        for a, b in zip(ordered, ordered[1:], strict=False):
+            if _intervals_overlap(
+                int(a["start_time_us"]),
+                int(a["end_time_us"]),
+                int(b["start_time_us"]),
+                int(b["end_time_us"]),
+            ):
+                result.err(f"analysis_windows overlap for {vkey}")
+                break
+
+    return result.finalize()
+
+
+__all__ = ["validate_broadcast_bundle", "validate_analysis_windows_bundle"]

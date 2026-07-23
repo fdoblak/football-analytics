@@ -1,6 +1,6 @@
 # Risk Register — football-analytics
 
-**Updated:** 2026-07-22 (Stage 2D)
+**Updated:** 2026-07-23 (Stage 4D)
 
 **Owner default:** Furkan Doblak unless stated otherwise
 
@@ -408,11 +408,25 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | description | Large tables validated via pylist conversion may use excess memory. |
 | probability | medium |
 | impact | medium |
-| mitigation | Bounded error lists; document complexity; future Arrow-compute paths. Stage 3D adds streaming `write_contract_parquet_streaming` for the frame timeline write path (batched ParquetWriter; no full-frame pylist on timeline write). Stage 4B adds streaming OpenCV decode for shot features (no full-res frame buffer); Stage 4C adds seek-by-index sample decode for camera features (not full-video materialization). Neither closes general pylist / materialize-join pressure in `validate_broadcast_bundle`. Stage 3D-F1 taxonomy work does **not** close general pylist / materialize-join pressure. |
+| mitigation | Bounded error lists; document complexity; future Arrow-compute paths. Stage 3D adds streaming `write_contract_parquet_streaming` for the frame timeline write path (batched ParquetWriter; no full-frame pylist on timeline write). Stage 4B adds streaming OpenCV decode for shot features (no full-res frame buffer); Stage 4C adds seek-by-index sample decode for camera features (not full-video materialization). Stage 4D analysis_windows validation still uses pylist joins against shots/cameras. Neither closes general pylist / materialize-join pressure in `validate_broadcast_bundle` / `validate_analysis_windows_bundle`. Stage 3D-F1 taxonomy work does **not** close general pylist / materialize-join pressure. |
 | trigger | Stage 2C |
 | owner | Furkan Doblak |
-| status | mitigated (frame timeline streaming write path; shot-feature streaming decode; camera sample decode); open (general semantic validation pylist + materialize metadata join) |
-| target_stage | Stage 2C+/2D/3D |
+| status | mitigated (frame timeline streaming write path; shot-feature streaming decode; camera sample decode); open (general semantic validation pylist + materialize metadata join + analysis_windows bundle) |
+| target_stage | Stage 2C+/2D/3D/4D |
+
+## RISK-043 — Broadcast routing over-abstention / live-eligibility drift
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-043 |
+| description | Conservative Stage 4D routing may over-mark windows unknown/ineligible on real footage, or future policy edits may accidentally allow live_event/physical eligibility under replay-unknown or non-playable conditions. |
+| probability | medium |
+| impact | high |
+| mitigation | Frozen synthetic safety gates (unsafe live/physical/calibration FP = 0); contract validator rejects replay-unknown + live eligible; policy fingerprint in receipts; never auto-accept review queue. Recalibrate only with reviewed labels. |
+| trigger | Stage 4D routing |
+| owner | Furkan Doblak |
+| status | open (mitigated on synthetic; unproven on real match video) |
+| target_stage | Stage 4D+ |
 
 ## RISK-030 — Cross-table orphan data
 

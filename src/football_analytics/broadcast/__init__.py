@@ -1,4 +1,4 @@
-"""Public Stage 4A broadcast contract API (no OpenCV/Torch/video inference)."""
+"""Public Stage 4 broadcast contract + routing API."""
 
 from football_analytics.broadcast.contracts import (
     CONTRACT_NAMES,
@@ -11,6 +11,7 @@ from football_analytics.broadcast.contracts import (
 from football_analytics.broadcast.types import (
     CONTRACT_VERSION,
     NON_PLAYABLE_VIEW_FAMILIES,
+    AnalysisWindow,
     BroadcastContractError,
     BroadcastError,
     CameraMotion,
@@ -18,6 +19,7 @@ from football_analytics.broadcast.types import (
     CameraViewSegment,
     ClassificationSource,
     DetectionSource,
+    Eligibility,
     FramingScale,
     GraphicsStatus,
     MappingQuality,
@@ -31,7 +33,10 @@ from football_analytics.broadcast.types import (
     TransitionType,
     ViewFamily,
 )
-from football_analytics.broadcast.validation import validate_broadcast_bundle
+from football_analytics.broadcast.validation import (
+    validate_analysis_windows_bundle,
+    validate_broadcast_bundle,
+)
 
 __all__ = [
     "CONTRACT_VERSION",
@@ -50,16 +55,19 @@ __all__ = [
     "GraphicsStatus",
     "Playability",
     "Suitability",
+    "Eligibility",
     "ClassificationSource",
     "NON_PLAYABLE_VIEW_FAMILIES",
     "MappingQuality",
     "ShotBoundary",
     "ShotSegment",
     "CameraViewSegment",
+    "AnalysisWindow",
     "load_broadcast_contract",
     "load_all_broadcast_contracts",
     "broadcast_schema_fingerprints",
     "compile_broadcast_schemas",
     "assert_broadcast_contracts_registered",
     "validate_broadcast_bundle",
+    "validate_analysis_windows_bundle",
 ]
