@@ -12,7 +12,8 @@ metrics never silently report the wrong athlete.
 | **7A** | Identity evidence, ReID candidate links, track identity assignments, target-player request/receipt, policy, metric eligibility, review/audit, eval stubs | **in-tree / contracts** |
 | **7B** | Appearance embedding + tracklet ReID baseline (handcrafted) | **in-tree / baseline** |
 | **7C** | Anonymous team appearance clustering + `team_assignments` baseline | **in-tree / baseline** |
-| **7D+** | Jersey OCR baseline; confirmation UX; production identity run | **not started** |
+| **7D** | Jersey region extraction + OpenCV template OCR baseline | **in-tree / baseline** |
+| **7E** | Target-player evidence merge, manual confirm, Stage 7 closure | **not started** |
 
 ## Explicit non-goals (until later stages)
 
@@ -29,6 +30,6 @@ metrics never silently report the wrong athlete.
 - `team_assignments` / `jersey_observations` as **reference-only** evidence sources
 - Manual review queue + append-only audit
 
-## Next after 7C
+## Next after 7D
 
-`Aşama 7D — Forma Numarası Bölge Çıkarma, OCR Baseline ve Değerlendirme`
+`Aşama 7E — Hedef Futbolcu Kanıt Birleştirme, Manuel Onay ve Aşama 7 Kapanışı`

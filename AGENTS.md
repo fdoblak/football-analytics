@@ -66,6 +66,7 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `scripts/check_identity_contracts.py` (Stage 7A ReID / identity evidence / target-player contracts)
 - `scripts/check_appearance_reid_baseline.py` (Stage 7B appearance embedding + tracklet ReID baseline)
 - `scripts/check_team_assignment_baseline.py` (Stage 7C anonymous team assignment baseline)
+- `scripts/check_jersey_ocr_baseline.py` (Stage 7D jersey region + OpenCV template OCR baseline)
 - `scripts/check_stage_cache.py`, `check_ci_workflow.py`, `check_project.py`
 - Or: `football-analytics project check --profile local --quick`
 
@@ -76,8 +77,10 @@ Stage 7B appearance ReID baseline is in-tree when merged (handcrafted
 descriptor; appearance alone cannot confirm; real football accuracy not
 validated). Stage 7C anonymous team appearance clustering + `team_assignments`
 baseline is in-tree when merged (`team_a`/`team_b`/`unknown` only; no home/away
-or club naming; team evidence alone cannot confirm). Do **not** start Stage 7D
-(jersey OCR) without an explicit user prompt.
+or club naming; team evidence alone cannot confirm). Stage 7D jersey region +
+OpenCV template OCR baseline is in-tree when merged (jersey alone cannot
+confirm; real football OCR accuracy not validated). Do **not** start Stage 7E
+without an explicit user prompt.
 
 ---
 
@@ -167,5 +170,6 @@ Stage 5 is **closed**. Stage 6A–6D tracking baseline is in-tree when merged
 target-player contracts are in-tree when merged. Stage 7B appearance embedding
 + tracklet ReID baseline is in-tree when merged (handcrafted; no auto-confirm).
 Stage 7C anonymous team assignment baseline is in-tree when merged. Stage 7D
+jersey region + OpenCV template OCR baseline is in-tree when merged. Stage 7E
 is **not** started unless explicitly requested.
 Manual Cursor flow only — no Codex/background automation.

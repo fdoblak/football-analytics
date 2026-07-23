@@ -1539,6 +1539,123 @@ def cmd_identity_teams_validate(*, keep: bool, as_json: bool) -> int:
     return int(main_fn(argv))
 
 
+def cmd_identity_jersey_observe(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    contain_root: Path | None,
+    run_id: str | None,
+    video_id: str | None,
+    fixture: str,
+) -> int:
+    """Stage 7D: jersey region + template OCR observe (synthetic fixtures)."""
+    from football_analytics.data.registry import default_project_root
+    from football_analytics.identity.jersey_ocr_config import (
+        default_jersey_ocr_config_path,
+        load_jersey_ocr_config,
+    )
+    from football_analytics.identity.jersey_ocr_fixtures import FIXTURE_REGISTRY
+    from football_analytics.identity.jersey_ocr_service import run_jersey_observe
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_jersey_ocr_config_path(repo_root=root)
+    try:
+        config = load_jersey_ocr_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    if fixture not in FIXTURE_REGISTRY:
+        print(f"unknown_fixture: {fixture}; choices={sorted(FIXTURE_REGISTRY)}", file=sys.stderr)
+        return 2
+    bundle = FIXTURE_REGISTRY[fixture]()
+    contain = contain_root or Path(str(config["runtime_root"]))
+    result = run_jersey_observe(
+        output_dir=str(output_dir),
+        config=config,
+        contain_root=contain,
+        run_id=run_id,
+        video_id=video_id,
+        in_memory_bundle=bundle,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"jersey_observations_parquet: {summary.get('jersey_observations_parquet')}")
+    print(f"evidence_parquet: {summary.get('evidence_parquet')}")
+    print(f"receipt_json: {summary.get('receipt_json')}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
+def cmd_identity_jersey_evaluate(
+    *,
+    config_path: Path,
+    observations: Path | None,
+    ground_truth: Path | None,
+) -> int:
+    """Stage 7D: evaluate jersey OCR (null without reviewed GT)."""
+    import json
+
+    from football_analytics.data.registry import default_project_root
+    from football_analytics.identity.jersey_ocr_config import (
+        default_jersey_ocr_config_path,
+        load_jersey_ocr_config,
+    )
+    from football_analytics.identity.jersey_ocr_evaluation import NOT_EVALUATED_JERSEY_OCR
+    from football_analytics.identity.jersey_ocr_service import run_jersey_evaluate
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_jersey_ocr_config_path(repo_root=root)
+    try:
+        config = load_jersey_ocr_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    obs_rows = None
+    if observations is not None and observations.is_file():
+        import pyarrow.parquet as pq
+
+        obs_rows = pq.read_table(observations).to_pylist()
+    gt_rows = None
+    has_gt = False
+    if ground_truth is not None and ground_truth.is_file():
+        gt_rows = json.loads(ground_truth.read_text(encoding="utf-8"))
+        has_gt = bool(gt_rows)
+    payload = run_jersey_evaluate(
+        config=config,
+        observations=obs_rows,
+        ground_truth=gt_rows if isinstance(gt_rows, list) else None,
+        has_reviewed_ground_truth=has_gt,
+    )
+    print(f"status: {payload['status']}")
+    print(f"ground_truth_evaluation_status: {payload['ground_truth_evaluation_status']}")
+    print(f"expected_code: {NOT_EVALUATED_JERSEY_OCR}")
+    return 0
+
+
+def cmd_identity_jersey_validate(*, keep: bool, as_json: bool) -> int:
+    """Run Stage 7D jersey OCR baseline validator."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_jersey_ocr_baseline.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("jersey OCR validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
 def cmd_tracking_contracts_validate(*, keep: bool, as_json: bool) -> int:
     """Run Stage 6A synthetic tracking contract validator (no tracker algorithm)."""
     import runpy
@@ -2577,7 +2694,9 @@ def build_parser() -> argparse.ArgumentParser:
     p_trk_validate.add_argument("--frames", type=int, default=8, help="Synthetic frames (≤20)")
     p_trk_validate.add_argument("--keep", action="store_true", help="Keep validator session dir")
 
-    p_identity = sub.add_parser("identity", help="ReID / identity / target-player (Stage 7A/7B/7C)")
+    p_identity = sub.add_parser(
+        "identity", help="ReID / identity / target-player (Stage 7A/7B/7C/7D)"
+    )
     identity_sub = p_identity.add_subparsers(dest="identity_command")
     p_id_contracts = identity_sub.add_parser("contracts", help="Identity contract helpers")
     id_contracts_sub = p_id_contracts.add_subparsers(dest="identity_contracts_command")
@@ -2681,6 +2800,38 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p_id_teams_val.add_argument("--keep", action="store_true")
     p_id_teams_val.add_argument("--json", action="store_true")
+
+    p_id_jersey = identity_sub.add_parser("jersey", help="Jersey region + template OCR (Stage 7D)")
+    id_jersey_sub = p_id_jersey.add_subparsers(dest="identity_jersey_command")
+    p_id_jersey_obs = id_jersey_sub.add_parser(
+        "observe", help="Extract jersey regions and run template OCR"
+    )
+    p_id_jersey_obs.add_argument("--output-dir", type=Path, required=True)
+    p_id_jersey_obs.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/identity/jersey_ocr_baseline.yaml"),
+    )
+    p_id_jersey_obs.add_argument("--contain-root", type=Path, default=None)
+    p_id_jersey_obs.add_argument("--run-id", type=str, default=None)
+    p_id_jersey_obs.add_argument("--video-id", type=str, default=None)
+    p_id_jersey_obs.add_argument(
+        "--fixture",
+        type=str,
+        default="two_digit",
+        help="Synthetic fixture name (no real video required)",
+    )
+    p_id_jersey_eval = id_jersey_sub.add_parser("evaluate", help="Evaluate jersey OCR")
+    p_id_jersey_eval.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/identity/jersey_ocr_baseline.yaml"),
+    )
+    p_id_jersey_eval.add_argument("--observations", type=Path, default=None)
+    p_id_jersey_eval.add_argument("--ground-truth", type=Path, default=None)
+    p_id_jersey_val = id_jersey_sub.add_parser("validate", help="Run jersey OCR baseline validator")
+    p_id_jersey_val.add_argument("--keep", action="store_true")
+    p_id_jersey_val.add_argument("--json", action="store_true")
 
     return parser
 
@@ -3097,6 +3248,26 @@ def main(argv: Sequence[str] | None = None) -> int:
             if args.identity_teams_command == "validate":
                 return cmd_identity_teams_validate(keep=bool(args.keep), as_json=bool(args.json))
             parser.parse_args(["identity", "teams", "--help"])
+            return 2
+        if args.identity_command == "jersey":
+            if args.identity_jersey_command == "observe":
+                return cmd_identity_jersey_observe(
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    contain_root=args.contain_root,
+                    run_id=args.run_id,
+                    video_id=args.video_id,
+                    fixture=str(args.fixture),
+                )
+            if args.identity_jersey_command == "evaluate":
+                return cmd_identity_jersey_evaluate(
+                    config_path=args.config,
+                    observations=args.observations,
+                    ground_truth=args.ground_truth,
+                )
+            if args.identity_jersey_command == "validate":
+                return cmd_identity_jersey_validate(keep=bool(args.keep), as_json=bool(args.json))
+            parser.parse_args(["identity", "jersey", "--help"])
             return 2
         parser.parse_args(["identity", "--help"])
         return 2

@@ -1,0 +1,133 @@
+# Stage 7D jersey region extraction + OpenCV template OCR baseline.
+# Selected: deterministic OpenCV template/shape digit matcher (0-9).
+# sn-jersey / tesseract / easyocr / mmocr: future adapter or rejected (no install).
+# Jersey evidence alone cannot confirm target identity; auto_confirm=false.
+# confidence stays null; raw scores live in quality_flags / sidecar.
+config_version: 1
+producer: jersey_ocr_baseline
+producer_version: "0.1.0"
+method_id: opencv_template_digit_v1
+method_type: template_ocr
+
+identity_policy_path: configs/identity/identity_evidence_policy.yaml
+
+eligibility:
+  human_only: true
+  observed_only: true
+  exclude_predicted: true
+  exclude_ball: true
+  exclude_roles:
+    - referee
+    - staff
+  allow_roles:
+    - player
+    - goalkeeper
+  unknown_role_conservative: true
+  graphics_replay_forbidden: true
+  min_bbox_width: 24
+  min_bbox_height: 48
+  min_bbox_area: 1200
+  min_coverage: 0.20
+  max_samples_per_track: 8
+  sample_stride: 1
+
+region:
+  torso_y0_frac: 0.18
+  torso_y1_frac: 0.58
+  torso_x0_frac: 0.18
+  torso_x1_frac: 0.82
+  min_region_width: 12
+  min_region_height: 14
+  min_region_area: 180
+  min_contrast: 8.0
+  max_blur_laplacian_var: 10000.0
+  min_blur_laplacian_var: 12.0
+  orientation_claim: candidate
+  persist_crops: false
+
+preprocessing:
+  grayscale: true
+  clahe: true
+  clahe_clip: 2.0
+  clahe_tile: 8
+  threshold_mode: otsu
+  morph_open_ksize: 1
+  morph_close_ksize: 1
+  min_component_area: 12
+  max_component_area_frac: 0.55
+  min_aspect: 0.25
+  max_aspect: 1.35
+  max_digits: 2
+  min_digits: 1
+
+ocr:
+  template_version: synthetic_stroke_v1
+  digit_match_size: [28, 40]
+  min_digit_score: 0.36
+  min_number_score: 0.40
+  ambiguity_margin: 0.06
+  similar_digit_margin: 0.04
+  allow_leading_zero: true
+  max_normalized_number: 99
+  source: model
+
+consensus:
+  min_observations: 2
+  min_temporal_spread_frames: 1
+  min_winning_margin: 0.15
+  quality_weight_power: 1.0
+  conflict_on_switch: true
+  cross_track_forbidden: true
+
+review:
+  sample_ambiguous: true
+  sample_conflict: true
+  sample_low_quality: true
+  max_review_items: 32
+
+assignment:
+  auto_confirm_identity: false
+  auto_target_confirmation: false
+  persist_crops: false
+
+output_policy:
+  atomic_writes: true
+  overwrite_allowed: false
+  chmod_mode: 0o600
+  write_consensus_sidecar: true
+  write_region_provenance: true
+
+safety_limits:
+  max_tracks_per_video: 512
+  max_observations_per_run: 4096
+  timeout_seconds: 120.0
+
+runtime_root: /home/fdoblak/workspace/jersey_ocr_checks
+deterministic_seed: 0
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+selection_matrix:
+  - candidate: tesseract / pytesseract
+    status: rejected
+    reason: external OCR install; not deterministic offline baseline for Stage 7D
+  - candidate: EasyOCR
+    status: rejected
+    reason: heavy DL dependency; download/model risk; not selected
+  - candidate: MMOCR
+    status: rejected
+    reason: heavy framework; not installed; deferred
+  - candidate: SoccerNet sn-jersey
+    status: future
+    reason: reference-only future adapter; no Stage 7D install or download
+  - candidate: OpenCV deterministic template/shape digit matcher (synthetic 0-9 masks)
+    status: selected
+    reason: offline, no new packages, deterministic, abstain-friendly; synthetic templates generated in-code
+
+notes:
+  - Jersey number is supporting identity evidence only; alone cannot confirm target.
+  - Abstain over inventing numbers; false number emission is a critical negative.
+  - confidence field remains null; raw template scores go to quality_flags/sidecar.
+  - Crops are not persisted by default; no face recognition; no Stage 7E.
+  - Template/synthetic success is NOT real broadcast jersey OCR accuracy.

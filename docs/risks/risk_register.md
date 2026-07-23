@@ -1,6 +1,6 @@
 # Risk Register — football-analytics
 
-**Updated:** 2026-07-23 (Stage 7C team assignment baseline)
+**Updated:** 2026-07-23 (Stage 7D jersey OCR baseline)
 
 **Owner default:** Furkan Doblak unless stated otherwise
 
@@ -987,3 +987,73 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Stage 7C+ |
+
+## RISK-070 — False jersey number emission
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-070 |
+| description | OCR invents a jersey number on no-number / sponsor / front crops; false numbers poison identity evidence. |
+| probability | high |
+| impact | critical |
+| mitigation | Abstain on no_digits/ambiguous; partial multi-component decode rejects; negative synthetic controls; confidence=null; jersey alone → candidate only. |
+| trigger | raw_text/normalized_number on no-number negative |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7D+ |
+
+## RISK-071 — No jersey region / missed digits
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-071 |
+| description | Torso region misses the number area or components fail thresholds, yielding no_region/no_digits and lost supporting evidence. |
+| probability | high |
+| impact | medium |
+| mitigation | Multi-candidate torso ranking; quality gates; consensus requires min observations; do not invent fillers. |
+| trigger | systematic no_region on readable jerseys |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7D+ |
+
+## RISK-072 — Similar digit confusion (1/7, 0/8, …)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-072 |
+| description | Template scores confuse similar digits under blur/perspective, flipping numbers. |
+| probability | high |
+| impact | high |
+| mitigation | Per-digit margin + similar-digit pairs → ambiguous; number margin threshold; review sampling. |
+| trigger | low margin between similar digit templates |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7D+ |
+
+## RISK-073 — Motion blur / low-contrast jersey OCR failure
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-073 |
+| description | Broadcast blur and kit/number contrast collapse template scores into illegible or wrong reads. |
+| probability | high |
+| impact | high |
+| mitigation | Blur/contrast region quality → low_quality abstain; CLAHE bounded; no calibrated confidence claims. |
+| trigger | blurry/low-contrast crops emitting numbers |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7D+ |
+
+## RISK-074 — Jersey evaluation leakage into OCR features
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-074 |
+| description | Reviewed/evaluation jersey labels entering OCR features or production evidence inflate accuracy. |
+| probability | medium |
+| impact | high |
+| mitigation | leakage_class checks; reject evaluation_label bundles; NOT_EVALUATED without reviewed GT; synthetic diagnostics only. |
+| trigger | evaluation labels in observe feature path |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7D+ |
