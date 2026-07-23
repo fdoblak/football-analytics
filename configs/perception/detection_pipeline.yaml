@@ -1,0 +1,63 @@
+# Stage 5E detection fusion + quality gates.
+# Fingerprinted; strict-loaded. No new detector/classifier.
+config_version: 1
+pipeline_id: detection_fusion_baseline
+pipeline_version: "1.0.0"
+
+alignment:
+  require_run_id_match: true
+  require_video_id_match: true
+  require_frames_ref_match: true
+  require_source_sha_match: true
+  fail_on_missing_receipt: true
+
+fusion:
+  remap_ball_detection_ids: true
+  cross_class_nms: false
+  # Frame status: prefer processed* over skipped when either ran;
+  # preserve not_eligible; never invent zero-as-processed for unprocessed.
+  prefer_processed_over_skipped: true
+  preserve_not_eligible: true
+  eligibility_conflict_fails: true
+
+quality_thresholds:
+  max_failed_frame_rate: 0.25
+  max_dangling_fk: 0
+  max_duplicate_detection_keys: 0
+  max_invalid_bbox: 0
+  max_receipt_mismatch: 0
+  min_eligible_processing_coverage: 0.5
+  # Findings (not hard fail) when role abstention exceeds this.
+  role_abstention_finding_rate: 0.95
+
+review_policy:
+  sample_unknown_roles: true
+  max_unknown_review_items: 5
+  unknown_sample_stride: 3
+  review_on_receipt_mismatch: true
+  review_on_invalid_bbox: true
+  review_on_duplicate: true
+  review_on_long_no_detection: true
+  long_no_detection_frames: 8
+  do_not_spam_every_unknown: true
+
+output_policy:
+  atomic_writes: true
+  overwrite_allowed: false
+  write_quality_report: true
+  write_review_queue: true
+  write_pipeline_receipt: true
+
+maximum_frames_per_run: 200
+runtime_root: /home/fdoblak/workspace/detection_pipeline_checks
+
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+notes:
+  - "Stage 5E fuses human+ball+role artifacts; no new model"
+  - "No cross-class NMS between human and ball"
+  - "Ball role must remain unknown"
+  - "NOT_EVALUATED_NO_REVIEWED_DETECTION_GROUND_TRUTH without reviewed GT"
+  - "Real football accuracy not claimed"

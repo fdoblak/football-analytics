@@ -1,0 +1,131 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/perception/detection_pipeline_receipt.schema.json",
+  "title": "Detection pipeline receipt (Stage 5E)",
+  "description": "Fusion pipeline receipt for human+ball+role detection bundle. Operational provenance only — not football accuracy.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "receipt_id",
+    "run_id",
+    "video_id",
+    "pipeline_id",
+    "pipeline_version",
+    "config_fingerprint",
+    "source_video_sha256",
+    "timeline_fingerprint",
+    "started_at_utc",
+    "completed_at_utc",
+    "status",
+    "quality_gate_status",
+    "ground_truth_evaluation_status",
+    "eligible_frame_count",
+    "processed_frame_count",
+    "skipped_frame_count",
+    "failed_frame_count",
+    "processed_no_detection_count",
+    "total_detection_count",
+    "human_detection_count",
+    "ball_detection_count",
+    "role_counts",
+    "role_abstention_count",
+    "review_required_count",
+    "inputs",
+    "outputs",
+    "output_hashes",
+    "warnings",
+    "errors",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "receipt_id": { "type": "string", "minLength": 4 },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "minLength": 1 },
+    "pipeline_id": { "type": "string", "minLength": 1 },
+    "pipeline_version": { "type": "string", "minLength": 1 },
+    "config_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "source_video_sha256": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "timeline_fingerprint": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "human_config_fingerprint": { "type": ["string", "null"] },
+    "ball_config_fingerprint": { "type": ["string", "null"] },
+    "role_config_fingerprint": { "type": ["string", "null"] },
+    "started_at_utc": { "type": "string", "minLength": 20 },
+    "completed_at_utc": { "type": "string", "minLength": 20 },
+    "status": {
+      "type": "string",
+      "enum": ["succeeded", "rejected", "failed", "partial"]
+    },
+    "quality_gate_status": {
+      "type": "string",
+      "enum": ["pass", "pass_with_findings", "fail", "not_evaluated"]
+    },
+    "ground_truth_evaluation_status": { "type": "string", "minLength": 1 },
+    "eligible_frame_count": { "type": "integer", "minimum": 0 },
+    "processed_frame_count": { "type": "integer", "minimum": 0 },
+    "skipped_frame_count": { "type": "integer", "minimum": 0 },
+    "failed_frame_count": { "type": "integer", "minimum": 0 },
+    "processed_no_detection_count": { "type": "integer", "minimum": 0 },
+    "total_detection_count": { "type": "integer", "minimum": 0 },
+    "human_detection_count": { "type": "integer", "minimum": 0 },
+    "ball_detection_count": { "type": "integer", "minimum": 0 },
+    "role_counts": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "role_abstention_count": { "type": "integer", "minimum": 0 },
+    "review_required_count": { "type": "integer", "minimum": 0 },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": { "type": ["string", "null", "object"] }
+    },
+    "outputs": {
+      "type": "object",
+      "additionalProperties": { "type": ["string", "null"] }
+    },
+    "output_hashes": {
+      "type": "object",
+      "additionalProperties": { "type": ["string", "null"] }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message"],
+        "properties": {
+          "code": { "type": "string" },
+          "message": { "type": "string" }
+        }
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message"],
+        "properties": {
+          "code": { "type": "string" },
+          "message": { "type": "string" }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["stage", "label"],
+      "properties": {
+        "stage": { "type": "string", "const": "5E" },
+        "label": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

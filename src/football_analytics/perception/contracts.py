@@ -23,6 +23,8 @@ DETECTIONS_VERSION = 1
 JSON_SCHEMA_NAMES: tuple[str, ...] = (
     "detection_run_receipt",
     "preprocessing_transform",
+    "detection_pipeline_receipt",
+    "detection_quality_report",
 )
 
 

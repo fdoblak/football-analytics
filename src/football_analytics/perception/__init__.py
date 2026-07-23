@@ -1,6 +1,6 @@
-"""Public Stage 5A/5B/5C/5D perception detection API (adapters are lazy)."""
+"""Public Stage 5A/5B/5C/5D/5E perception detection API (adapters are lazy)."""
 
-# Stage 5B/5C/5D pure modules (no Ultralytics side effects).
+# Stage 5B/5C/5D/5E pure modules (no Ultralytics side effects).
 from football_analytics.perception.ball_detector_config import (  # noqa: E402
     ball_detector_config_fingerprint,
     default_ball_detector_config_path,
@@ -24,6 +24,15 @@ from football_analytics.perception.contracts import (
 )
 from football_analytics.perception.detection_evaluation import (  # noqa: E402
     evaluate_from_rows as evaluate_human_detections_from_rows,
+)
+from football_analytics.perception.detection_pipeline_config import (  # noqa: E402
+    default_detection_pipeline_config_path,
+    detection_pipeline_config_fingerprint,
+    load_detection_pipeline_config,
+)
+from football_analytics.perception.detection_quality import (  # noqa: E402
+    NOT_EVALUATED_DETECTION,
+    evaluate_detection_quality,
 )
 from football_analytics.perception.human_detector_config import (  # noqa: E402
     default_human_detector_config_path,
@@ -91,6 +100,7 @@ __all__ = [
     "ERROR_CODES",
     "PROCESSED_STATUSES",
     "UNPROCESSED_STATUSES",
+    "NOT_EVALUATED_DETECTION",
     "PerceptionError",
     "PerceptionContractError",
     "EntityType",
@@ -141,9 +151,14 @@ __all__ = [
     "human_role_config_fingerprint",
     "default_human_role_config_path",
     "evaluate_roles_from_rows",
+    "load_detection_pipeline_config",
+    "detection_pipeline_config_fingerprint",
+    "default_detection_pipeline_config_path",
+    "evaluate_detection_quality",
     "run_human_detection",
     "run_ball_detection",
     "run_human_role_classification",
+    "run_detection_integrate",
 ]
 
 
@@ -161,4 +176,8 @@ def __getattr__(name: str):
         from football_analytics.perception.role_service import run_human_role_classification
 
         return run_human_role_classification
+    if name == "run_detection_integrate":
+        from football_analytics.perception.detection_pipeline import run_detection_integrate
+
+        return run_detection_integrate
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

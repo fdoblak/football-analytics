@@ -1112,6 +1112,114 @@ def cmd_perception_roles_classify(
     return int(result.exit_code)
 
 
+def cmd_perception_integrate(
+    *,
+    human_detections: Path,
+    human_frame_status: Path,
+    human_attributes: Path,
+    human_receipt: Path,
+    ball_detections: Path,
+    ball_frame_status: Path,
+    ball_attributes: Path,
+    ball_receipt: Path,
+    role_attributes: Path,
+    role_receipt: Path,
+    output_dir: Path,
+    config_path: Path,
+    contain_root: Path | None,
+    analysis_windows: Path | None,
+    frames: Path | None,
+    run_id: str | None,
+    video_id: str | None,
+    source_sha: str | None,
+    timeline_fingerprint: str | None,
+) -> int:
+    """Stage 5E: fuse human/ball/role detection artifacts into one bundle."""
+    from football_analytics.data.registry import default_project_root
+    from football_analytics.perception.detection_pipeline import run_detection_integrate
+    from football_analytics.perception.detection_pipeline_config import (
+        default_detection_pipeline_config_path,
+        load_detection_pipeline_config,
+    )
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_detection_pipeline_config_path(repo_root=root)
+    try:
+        config = load_detection_pipeline_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    contain = contain_root
+    if contain is None:
+        contain = Path(str(config["runtime_root"]))
+    result = run_detection_integrate(
+        human_detections=str(human_detections),
+        human_frame_status=str(human_frame_status),
+        human_attributes=str(human_attributes),
+        human_receipt=str(human_receipt),
+        ball_detections=str(ball_detections),
+        ball_frame_status=str(ball_frame_status),
+        ball_attributes=str(ball_attributes),
+        ball_receipt=str(ball_receipt),
+        role_attributes=str(role_attributes),
+        role_receipt=str(role_receipt),
+        output_dir=str(output_dir),
+        config=config,
+        contain_root=contain,
+        analysis_windows=str(analysis_windows) if analysis_windows else None,
+        frames=str(frames) if frames else None,
+        run_id=run_id,
+        video_id=video_id,
+        expected_source_sha=source_sha,
+        expected_timeline_fp=timeline_fingerprint,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"total_detection_count: {summary['total_detection_count']}")
+    print(f"quality_status: {summary['quality_status']}")
+    print(f"review_count: {summary['review_count']}")
+    print(f"detections_parquet: {summary['detections_parquet']}")
+    print(f"pipeline_receipt_json: {summary['pipeline_receipt_json']}")
+    print(f"quality_report_json: {summary['quality_report_json']}")
+    print(f"review_queue_json: {summary['review_queue_json']}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
+def cmd_perception_validate(*, config_path: Path, frames: int, keep: bool) -> int:
+    """Stage 5E: run detection pipeline validator script entry."""
+    import runpy
+
+    from football_analytics.data.registry import default_project_root
+
+    root = default_project_root()
+    script = root / "scripts" / "check_detection_pipeline.py"
+    cfg = config_path if config_path.is_absolute() else root / config_path
+    argv = [
+        str(script),
+        "--config",
+        str(cfg),
+        "--frames",
+        str(frames),
+    ]
+    if keep:
+        argv.append("--keep")
+    old = sys.argv
+    try:
+        sys.argv = argv
+        runpy.run_path(str(script), run_name="__main__")
+    except SystemExit as exc:
+        code = exc.code
+        return int(code) if isinstance(code, int) else 1
+    finally:
+        sys.argv = old
+    return 0
+
+
 def cmd_perception_roles_evaluate(
     *,
     predictions: Path,
@@ -1612,6 +1720,43 @@ def build_parser() -> argparse.ArgumentParser:
         default=Path("configs/perception/human_role_baseline.yaml"),
         help="Human role baseline config YAML",
     )
+    p_integrate = perception_sub.add_parser(
+        "integrate", help="Fuse human/ball/role detection artifacts (Stage 5E)"
+    )
+    p_integrate.add_argument("--human-detections", type=Path, required=True)
+    p_integrate.add_argument("--human-frame-status", type=Path, required=True)
+    p_integrate.add_argument("--human-attributes", type=Path, required=True)
+    p_integrate.add_argument("--human-receipt", type=Path, required=True)
+    p_integrate.add_argument("--ball-detections", type=Path, required=True)
+    p_integrate.add_argument("--ball-frame-status", type=Path, required=True)
+    p_integrate.add_argument("--ball-attributes", type=Path, required=True)
+    p_integrate.add_argument("--ball-receipt", type=Path, required=True)
+    p_integrate.add_argument("--role-attributes", type=Path, required=True)
+    p_integrate.add_argument("--role-receipt", type=Path, required=True)
+    p_integrate.add_argument("--output-dir", type=Path, required=True)
+    p_integrate.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/perception/detection_pipeline.yaml"),
+        help="Detection pipeline config YAML",
+    )
+    p_integrate.add_argument("--analysis-windows", type=Path, default=None)
+    p_integrate.add_argument("--frames", type=Path, default=None)
+    p_integrate.add_argument("--contain-root", type=Path, default=None)
+    p_integrate.add_argument("--run-id", type=str, default=None)
+    p_integrate.add_argument("--video-id", type=str, default=None)
+    p_integrate.add_argument("--source-sha", type=str, default=None)
+    p_integrate.add_argument("--timeline-fingerprint", type=str, default=None)
+    p_p_validate = perception_sub.add_parser(
+        "validate", help="Run detection pipeline validator (Stage 5E)"
+    )
+    p_p_validate.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/perception/detection_pipeline.yaml"),
+    )
+    p_p_validate.add_argument("--frames", type=int, default=8, help="Synthetic frames (≤20)")
+    p_p_validate.add_argument("--keep", action="store_true", help="Keep validator session dir")
     return parser
 
 
@@ -1836,6 +1981,34 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
             parser.parse_args(["perception", "roles", "--help"])
             return 2
+        if args.perception_command == "integrate":
+            return cmd_perception_integrate(
+                human_detections=args.human_detections,
+                human_frame_status=args.human_frame_status,
+                human_attributes=args.human_attributes,
+                human_receipt=args.human_receipt,
+                ball_detections=args.ball_detections,
+                ball_frame_status=args.ball_frame_status,
+                ball_attributes=args.ball_attributes,
+                ball_receipt=args.ball_receipt,
+                role_attributes=args.role_attributes,
+                role_receipt=args.role_receipt,
+                output_dir=args.output_dir,
+                config_path=args.config,
+                contain_root=args.contain_root,
+                analysis_windows=args.analysis_windows,
+                frames=args.frames,
+                run_id=args.run_id,
+                video_id=args.video_id,
+                source_sha=args.source_sha,
+                timeline_fingerprint=args.timeline_fingerprint,
+            )
+        if args.perception_command == "validate":
+            return cmd_perception_validate(
+                config_path=args.config,
+                frames=int(args.frames),
+                keep=bool(args.keep),
+            )
         parser.parse_args(["perception", "--help"])
         return 2
     parser.print_help()

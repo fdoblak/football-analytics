@@ -1,6 +1,6 @@
 # Risk Register — football-analytics
 
-**Updated:** 2026-07-23 (Stage 5D)
+**Updated:** 2026-07-23 (Stage 5E)
 
 **Owner default:** Furkan Doblak unless stated otherwise
 
@@ -693,3 +693,31 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Stage 5D+ |
+
+## RISK-049 — Fused detection accuracy not validated on reviewed football GT
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-049 |
+| description | Stage 5E fusion quality gates are operational only; evaluator returns `NOT_EVALUATED_NO_REVIEWED_DETECTION_GROUND_TRUTH`. Real match detection/role/ball accuracy must not be claimed from synthetic fixtures. |
+| probability | high |
+| impact | medium |
+| mitigation | PASS_WITH_FINDINGS gate; separate operational quality from football accuracy; require reviewed GT before production claims. |
+| trigger | Stage 5E / Stage 5 close without reviewed detection GT |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 5E+ |
+
+## RISK-050 — Upstream human/ball receipt mismatch silently breaks fusion consumers
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-050 |
+| description | Divergent run_id/video_id/source SHA/timeline fingerprints across human/ball/role artifacts can corrupt fused bundles if alignment is skipped. |
+| probability | medium |
+| impact | high |
+| mitigation | Hard-fail alignment in `detection_fusion.align_upstream_receipts`; no silent fill; receipt counts recalculated from tables. |
+| trigger | Stage 5E detection fusion |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 5E+ |

@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/perception/detection_quality_report.schema.json",
+  "title": "Detection quality report (Stage 5E)",
+  "description": "Operational detection-pipeline quality metrics only. Not football detection accuracy.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "video_id",
+    "config_fingerprint",
+    "status",
+    "ground_truth_evaluation_status",
+    "metrics",
+    "findings",
+    "created_at_utc"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "minLength": 1 },
+    "config_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "status": {
+      "type": "string",
+      "enum": ["pass", "pass_with_findings", "fail", "not_evaluated"]
+    },
+    "ground_truth_evaluation_status": { "type": "string", "minLength": 1 },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "findings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "created_at_utc": { "type": "string", "minLength": 20 }
+  }
+}
