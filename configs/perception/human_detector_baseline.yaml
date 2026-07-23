@@ -1,0 +1,62 @@
+# Stage 5B human detection baseline — Ultralytics YOLO11n COCO person only.
+# Fingerprinted; strict-loaded. No ball emission. No role upgrade to player.
+config_version: 1
+
+model_registry_id: ultralytics_yolo11n_coco_person
+adapter_id: ultralytics_person
+adapter_version: "1.0.0"
+
+person_class:
+  class_ids: [0]
+  class_names: [person]
+
+# 640 default; smoke may override via maximum_frames_per_run / smaller imgsz in tests.
+input_size: 640
+
+device_policy: prefer_cuda_else_cpu
+precision_policy: fp16_on_cuda_else_fp32
+batch_size: 1
+
+# Raw detector score gate (not calibrated confidence).
+confidence_threshold: 0.25
+nms_iou: 0.50
+class_aware_nms: true
+
+minimum_bbox_area: 64.0
+maximum_aspect_ratio: 8.0
+
+routing:
+  detect_ball: false
+  policy_ref: configs/perception/detection_policy.yaml
+
+maximum_frames_per_run: 20
+timeout_seconds: 300.0
+
+resource_limits:
+  max_detections_per_frame: 256
+  decode_timeout_seconds: 60.0
+
+output_policy:
+  atomic_writes: true
+  overwrite_allowed: false
+  emit_ball_detections: false
+  write_evaluation_json: true
+
+evaluation_iou_thresholds: [0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95]
+
+runtime_root: /home/fdoblak/workspace/human_detection_checks
+taxonomy_path: configs/perception/detection_taxonomy.yaml
+policy_path: configs/perception/detection_policy.yaml
+
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+# Ultralytics predict() on the original BGR image returns boxes.xyxy already in
+# source-frame coordinates. We record letterbox transform fingerprints for
+# provenance but do NOT apply inverse_bbox (would double-transform).
+coordinate_space_note: >
+  Ultralytics YOLO maps boxes back to original image space when predict is run
+  on the source image. Stage 5B treats raw adapter boxes as source-space and
+  applies clip/area/aspect filters only; inverse letterbox is reserved for
+  adapters that emit model-input-space boxes.

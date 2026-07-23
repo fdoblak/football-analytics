@@ -55,11 +55,13 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `scripts/check_shot_boundary_baseline.py` / `check_camera_view_baseline.py` (4B/4C)
 - `scripts/check_broadcast_pipeline.py` (Stage 4D fusion + routing)
 - `scripts/check_detection_contracts.py` (Stage 5A player/official/ball detection contracts)
+- `scripts/check_human_detection_baseline.py` (Stage 5B human detection baseline)
 - `scripts/check_stage_cache.py`, `check_ci_workflow.py`, `check_project.py`
 - Or: `football-analytics project check --profile local --quick`
 
-Stage 5A detection contracts are in-tree when merged; do not start Stage 5B
-(model selection / inference baseline) without an explicit user prompt.
+Stage 5B human detection baseline is in-tree when merged (YOLO11n person →
+human/unknown; evaluation_only / AGPL finding). Do not start Stage 5C (ball)
+without an explicit user prompt.
 
 ---
 

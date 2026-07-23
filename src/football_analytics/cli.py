@@ -817,6 +817,122 @@ def cmd_broadcast_camera_evaluate(
     return 0
 
 
+def cmd_perception_humans_detect(
+    *,
+    source: Path,
+    timeline: Path,
+    analysis_windows: Path,
+    output_dir: Path,
+    config_path: Path,
+    contain_root: Path | None,
+    run_id: str | None,
+    video_id: str | None,
+) -> int:
+    """Stage 5B: human detection baseline (lazy imports)."""
+    from football_analytics.data.registry import default_project_root
+    from football_analytics.perception.detection_service import run_human_detection
+    from football_analytics.perception.human_detector_config import (
+        default_human_detector_config_path,
+        load_human_detector_config,
+    )
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_human_detector_config_path(repo_root=root)
+    try:
+        config = load_human_detector_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    contain = contain_root
+    if contain is None:
+        contain = Path(str(config["runtime_root"]))
+    result = run_human_detection(
+        source=str(source),
+        timeline=str(timeline),
+        analysis_windows=str(analysis_windows),
+        output_dir=str(output_dir),
+        config=config,
+        contain_root=contain,
+        run_id=run_id,
+        video_id=video_id,
+        project_root=root,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"detection_count: {summary['detection_count']}")
+    print(f"human_detection_count: {summary['human_detection_count']}")
+    print(f"ball_detection_count: {summary['ball_detection_count']}")
+    print(f"detections_parquet: {summary['detections_parquet']}")
+    print(f"frame_status_parquet: {summary['frame_status_parquet']}")
+    print(f"attributes_parquet: {summary['attributes_parquet']}")
+    print(f"receipt_json: {summary['receipt_json']}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
+def cmd_perception_humans_evaluate(
+    *,
+    predictions: Path,
+    ground_truth: Path,
+    output: Path,
+    config_path: Path,
+) -> int:
+    """Stage 5B: evaluate predicted human boxes vs ground truth."""
+    import json
+
+    from football_analytics.core.records import write_json_record
+    from football_analytics.data.compiler import get_contract
+    from football_analytics.data.parquet import read_contract_parquet
+    from football_analytics.data.registry import default_project_root
+    from football_analytics.perception.detection_evaluation import evaluate_from_rows
+    from football_analytics.perception.human_detector_config import load_human_detector_config
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    try:
+        config = load_human_detector_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    try:
+        pred_table = read_contract_parquet(predictions, get_contract("detections", 1))
+        pred_rows = pred_table.to_pylist()
+        # Attach entity_type=human for Stage 5B preds when attributes absent.
+        for r in pred_rows:
+            r.setdefault("entity_type", "human")
+        gt_path = Path(ground_truth)
+        if gt_path.suffix.lower() == ".json":
+            gt_payload = json.loads(gt_path.read_text(encoding="utf-8"))
+            gt_rows = list(gt_payload.get("detections") or gt_payload.get("ground_truth") or [])
+        else:
+            gt_table = read_contract_parquet(gt_path, get_contract("detections", 1))
+            gt_rows = gt_table.to_pylist()
+            for r in gt_rows:
+                r.setdefault("entity_type", "human")
+                r.setdefault("is_reviewed_ground_truth", True)
+        metrics = evaluate_from_rows(
+            pred_rows,
+            gt_rows,
+            iou_threshold=0.5,
+            iou_thresholds=list(config["evaluation_iou_thresholds"]),
+        )
+        write_json_record(output, metrics.to_dict(), overwrite=False)
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
+    print(f"status: {metrics.status}")
+    print(f"f1: {metrics.f1}")
+    print(f"precision: {metrics.precision}")
+    print(f"recall: {metrics.recall}")
+    print(f"ap50: {metrics.ap50}")
+    print(f"output: {output}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="football-analytics",
@@ -1105,6 +1221,53 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p_integrate.add_argument("--run-id", type=str, default=None, help="Optional run_id")
     p_integrate.add_argument("--video-id", type=str, default=None, help="Optional video_id")
+
+    p_perception = sub.add_parser("perception", help="Perception detection helpers (Stage 5)")
+    perception_sub = p_perception.add_subparsers(dest="perception_command")
+    p_humans = perception_sub.add_parser("humans", help="Human detection / evaluation (Stage 5B)")
+    humans_sub = p_humans.add_subparsers(dest="humans_command")
+    p_h_detect = humans_sub.add_parser("detect", help="Detect humans (baseline)")
+    p_h_detect.add_argument("--source", type=Path, required=True, help="Absolute source video path")
+    p_h_detect.add_argument(
+        "--timeline", type=Path, required=True, help="Absolute frames.parquet path"
+    )
+    p_h_detect.add_argument(
+        "--analysis-windows",
+        type=Path,
+        required=True,
+        help="Absolute analysis_windows.parquet path",
+    )
+    p_h_detect.add_argument(
+        "--output-dir", type=Path, required=True, help="Runtime output directory"
+    )
+    p_h_detect.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/perception/human_detector_baseline.yaml"),
+        help="Human detector baseline config YAML",
+    )
+    p_h_detect.add_argument(
+        "--contain-root",
+        type=Path,
+        default=None,
+        help="Containment root (default: config.runtime_root)",
+    )
+    p_h_detect.add_argument("--run-id", type=str, default=None, help="Optional run_id")
+    p_h_detect.add_argument("--video-id", type=str, default=None, help="Optional video_id")
+    p_h_eval = humans_sub.add_parser("evaluate", help="Evaluate predicted humans vs ground truth")
+    p_h_eval.add_argument(
+        "--predictions", type=Path, required=True, help="Predicted detections.parquet"
+    )
+    p_h_eval.add_argument(
+        "--ground-truth", type=Path, required=True, help="Ground-truth JSON or parquet"
+    )
+    p_h_eval.add_argument("--output", type=Path, required=True, help="evaluation.json output path")
+    p_h_eval.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/perception/human_detector_baseline.yaml"),
+        help="Human detector baseline config YAML",
+    )
     return parser
 
 
@@ -1261,6 +1424,30 @@ def main(argv: Sequence[str] | None = None) -> int:
                 video_id=args.video_id,
             )
         parser.parse_args(["broadcast", "--help"])
+        return 2
+    if args.command == "perception":
+        if args.perception_command == "humans":
+            if args.humans_command == "detect":
+                return cmd_perception_humans_detect(
+                    source=args.source,
+                    timeline=args.timeline,
+                    analysis_windows=args.analysis_windows,
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    contain_root=args.contain_root,
+                    run_id=args.run_id,
+                    video_id=args.video_id,
+                )
+            if args.humans_command == "evaluate":
+                return cmd_perception_humans_evaluate(
+                    predictions=args.predictions,
+                    ground_truth=args.ground_truth,
+                    output=args.output,
+                    config_path=args.config,
+                )
+            parser.parse_args(["perception", "humans", "--help"])
+            return 2
+        parser.parse_args(["perception", "--help"])
         return 2
     parser.print_help()
     return 2

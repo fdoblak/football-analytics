@@ -1,6 +1,6 @@
 # Risk Register — football-analytics
 
-**Updated:** 2026-07-23 (Stage 4D)
+**Updated:** 2026-07-23 (Stage 5B)
 
 **Owner default:** Furkan Doblak unless stated otherwise
 
@@ -609,3 +609,31 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Stage 2D+ |
+
+## RISK-043 — Ultralytics AGPL-3.0 distribution / copyleft
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-043 |
+| description | Stage 5B uses Ultralytics YOLO11n weights/runtime under AGPL-3.0. Redistribution or network service use may trigger copyleft obligations. |
+| probability | high |
+| impact | high |
+| mitigation | `evaluation_only`; `production_approved=false`; document in model_registry; do not ship weights in Git; revisit license before any production product path. |
+| trigger | Stage 5B human detection baseline |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 5B+ |
+
+## RISK-044 — Human detection accuracy not validated on reviewed football GT
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-044 |
+| description | No reviewed football-match ground truth exists for person boxes; evaluator correctly returns `NOT_EVALUATED_NO_REVIEWED_GROUND_TRUTH`. Real mAP/F1 must not be claimed. |
+| probability | high |
+| impact | medium |
+| mitigation | Synthetic frozen IoU fixtures for unit tests only; gate is PASS_WITH_FINDINGS; label campaigns required before production accuracy claims. |
+| trigger | Stage 5B evaluation without reviewed GT |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 5B+ |

@@ -1,4 +1,4 @@
-"""Public Stage 5A perception detection-contract API."""
+"""Public Stage 5A/5B perception detection API (adapters are lazy)."""
 
 from football_analytics.perception.contracts import (
     CONTRACT_NAMES,
@@ -12,6 +12,16 @@ from football_analytics.perception.contracts import (
     load_detection_contract,
     load_perception_json_schema,
     validate_against_json_schema,
+)
+
+# Stage 5B pure modules (no Ultralytics side effects).
+from football_analytics.perception.detection_evaluation import (  # noqa: E402
+    evaluate_from_rows as evaluate_human_detections_from_rows,
+)
+from football_analytics.perception.human_detector_config import (  # noqa: E402
+    default_human_detector_config_path,
+    human_detector_config_fingerprint,
+    load_human_detector_config,
 )
 from football_analytics.perception.policy import (
     load_detection_policy,
@@ -104,4 +114,18 @@ __all__ = [
     "inverse_bbox",
     "roundtrip_bbox",
     "validate_detection_bundle",
+    "load_human_detector_config",
+    "human_detector_config_fingerprint",
+    "default_human_detector_config_path",
+    "evaluate_human_detections_from_rows",
+    "run_human_detection",
 ]
+
+
+def __getattr__(name: str):
+    """Lazy export for service entrypoint (avoids pulling adapters at import)."""
+    if name == "run_human_detection":
+        from football_analytics.perception.detection_service import run_human_detection
+
+        return run_human_detection
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

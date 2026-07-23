@@ -1,9 +1,9 @@
 schema_version: 1
-updated_at: "2026-07-22T17:20:00+03:00"
+updated_at: "2026-07-23T14:41:00+03:00"
 notes: >
-  Stage 1C model registry. File presence and hashes verified locally.
+  Stage 1C model registry extended in Stage 5B with Ultralytics YOLO11n COCO person.
+  File presence and hashes verified locally.
   Code license of source repos is recorded separately from weight redistribution terms.
-  No inference was executed in Stage 1C.
 
 models:
   - id: sn_banner_sv_kp
@@ -63,3 +63,47 @@ models:
       Weight file present on disk. SHA-256 recomputed in Stage 1C and matches prior Stage 0 short prefix.
       Weight redistribution/license is NOT assumed from repo LICENSE; review_required.
       No model inference performed.
+
+  - id: ultralytics_yolo11n_coco_person
+    display_name: Ultralytics YOLO11n COCO person (Stage 5B)
+    task: person_object_detection
+    status: available
+    file_path: /home/fdoblak/football_data/model_archive/yolo11n.pt
+    size_bytes: 5613764
+    sha256: 0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1
+    framework: ultralytics
+    source_type: official_release_asset
+    source_repo: ultralytics
+    source_commit: null
+    source_url: https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n.pt
+    related_soccernet_repo: null
+    related_soccernet_commit: null
+    license: AGPL-3.0
+    license_status: restricted
+    input_spec: {imgsz: 640, color: bgr}
+    output_spec: {bbox: xyxy, classes: coco80}
+    classes:
+      person:
+        class_id: 0
+        class_name: person
+        maps_to_entity: human
+        maps_to_role: unknown
+      sports_ball:
+        class_id: 32
+        class_name: sports ball
+        stage_5b: rejected
+        deferred_to: stage_5c
+    precision: fp16_on_cuda_else_fp32
+    device_requirements: {min_vram_mb: 512, notes: "Nano model; batch=1; RTX 3050 4GB smoke-safe"}
+    tested: false
+    test_scope: stage_5b_human_detection_baseline
+    last_verified: "2026-07-23"
+    approval: evaluation_only
+    production_approved: false
+    notes: >
+      Official Ultralytics yolo11n.pt selected for Stage 5B after local inventory found no suitable YOLO .pt.
+      COCO person class id 0 → entity_type=human, role_label=unknown (never player).
+      Ball/sports-ball deferred to Stage 5C; Stage 5B must not emit ball detections.
+      AGPL-3.0 distribution/copyleft risk → evaluation_only; production_approved=false.
+      Provenance sibling: /home/fdoblak/football_data/model_archive/yolo11n.pt.provenance.json
+      Network must remain OFF at inference; weights are local-only.
