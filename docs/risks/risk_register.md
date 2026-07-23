@@ -1,6 +1,6 @@
 # Risk Register — football-analytics
 
-**Updated:** 2026-07-23 (Stage 5C)
+**Updated:** 2026-07-23 (Stage 5D)
 
 **Owner default:** Furkan Doblak unless stated otherwise
 
@@ -665,3 +665,31 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Stage 5C+ |
+
+## RISK-047 — Human role accuracy not validated on reviewed football GT
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-047 |
+| description | No reviewed football-match ground truth exists for human roles; Stage 5D evaluator returns `NOT_EVALUATED_NO_REVIEWED_HUMAN_ROLE_GROUND_TRUTH`. Real role precision/recall/F1 must not be claimed. |
+| probability | high |
+| impact | medium |
+| mitigation | Conservative abstention; synthetic frozen fixtures only; gate PASS_WITH_FINDINGS; reviewed role labels required before production claims. |
+| trigger | Stage 5D evaluation without reviewed human-role GT |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 5D+ |
+
+## RISK-048 — Kit-color role heuristics mislabel under broadcast variance
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-048 |
+| description | Weightless HSV/kit clustering can confuse GK/ref/staff when kits are similar, lighting shifts, or crops are poor; color-alone shortcuts are forbidden but residual errors remain. |
+| probability | high |
+| impact | medium |
+| mitigation | Require extra evidence for GK/ref; abstain on low margin/conflict; never auto-player from generic human; no team_id. |
+| trigger | Stage 5D human role baseline |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 5D+ |

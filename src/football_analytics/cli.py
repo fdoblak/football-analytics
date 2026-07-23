@@ -1048,6 +1048,122 @@ def cmd_perception_ball_evaluate(
     return 0
 
 
+def cmd_perception_roles_classify(
+    *,
+    detections: Path,
+    detection_attributes: Path,
+    output_dir: Path,
+    config_path: Path,
+    detection_frame_status: Path | None,
+    analysis_windows: Path | None,
+    source: Path | None,
+    contain_root: Path | None,
+    run_id: str | None,
+    video_id: str | None,
+    ground_truth: Path | None,
+) -> int:
+    """Stage 5D: conservative human role classification (lazy imports)."""
+    from football_analytics.data.registry import default_project_root
+    from football_analytics.perception.role_config import (
+        default_human_role_config_path,
+        load_human_role_config,
+    )
+    from football_analytics.perception.role_service import run_human_role_classification
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_human_role_config_path(repo_root=root)
+    try:
+        config = load_human_role_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    contain = contain_root
+    if contain is None:
+        contain = Path(str(config["runtime_root"]))
+    result = run_human_role_classification(
+        detections=str(detections),
+        detection_attributes=str(detection_attributes),
+        detection_frame_status=(
+            None if detection_frame_status is None else str(detection_frame_status)
+        ),
+        analysis_windows=None if analysis_windows is None else str(analysis_windows),
+        source=None if source is None else str(source),
+        output_dir=str(output_dir),
+        config=config,
+        contain_root=contain,
+        run_id=run_id,
+        video_id=video_id,
+        ground_truth=None if ground_truth is None else str(ground_truth),
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"config_fingerprint: {summary['config_fingerprint']}")
+    if summary.get("attributes_parquet"):
+        print(f"attributes_parquet: {summary['attributes_parquet']}")
+    if summary.get("receipt_json"):
+        print(f"receipt_json: {summary['receipt_json']}")
+    if summary.get("evaluation_json"):
+        print(f"evaluation_json: {summary['evaluation_json']}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
+def cmd_perception_roles_evaluate(
+    *,
+    predictions: Path,
+    ground_truth: Path,
+    output: Path,
+    config_path: Path,
+) -> int:
+    """Stage 5D: evaluate predicted roles vs reviewed ground truth."""
+    import json
+
+    from football_analytics.core.records import write_json_record
+    from football_analytics.data.compiler import get_contract
+    from football_analytics.data.parquet import read_contract_parquet
+    from football_analytics.data.registry import default_project_root
+    from football_analytics.perception.role_config import load_human_role_config
+    from football_analytics.perception.role_evaluation import evaluate_roles_from_rows
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    try:
+        load_human_role_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    try:
+        pred_path = Path(predictions)
+        if pred_path.suffix.lower() == ".json":
+            pred_payload = json.loads(pred_path.read_text(encoding="utf-8"))
+            pred_rows = list(pred_payload.get("roles") or pred_payload.get("predictions") or [])
+        else:
+            pred_table = read_contract_parquet(pred_path, get_contract("detection_attributes", 1))
+            pred_rows = pred_table.to_pylist()
+            for r in pred_rows:
+                r.setdefault("assignment_status", "classified")
+        gt_path = Path(ground_truth)
+        if gt_path.suffix.lower() == ".json":
+            gt_payload = json.loads(gt_path.read_text(encoding="utf-8"))
+            gt_rows = list(gt_payload.get("roles") or gt_payload.get("ground_truth") or [])
+        else:
+            gt_table = read_contract_parquet(gt_path, get_contract("detection_attributes", 1))
+            gt_rows = gt_table.to_pylist()
+        metrics = evaluate_roles_from_rows(pred_rows, gt_rows)
+        write_json_record(output, metrics.to_dict(), overwrite=False)
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
+    print(f"status: {metrics.status}")
+    print(f"macro_f1: {metrics.macro_f1}")
+    print(f"output: {output}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="football-analytics",
@@ -1427,6 +1543,75 @@ def build_parser() -> argparse.ArgumentParser:
         default=Path("configs/perception/ball_detector_baseline.yaml"),
         help="Ball detector baseline config YAML",
     )
+    p_roles = perception_sub.add_parser(
+        "roles", help="Human role classification / evaluation (Stage 5D)"
+    )
+    roles_sub = p_roles.add_subparsers(dest="roles_command")
+    p_r_classify = roles_sub.add_parser("classify", help="Classify human roles (baseline)")
+    p_r_classify.add_argument(
+        "--detections", type=Path, required=True, help="Absolute detections.parquet path"
+    )
+    p_r_classify.add_argument(
+        "--detection-attributes",
+        type=Path,
+        required=True,
+        help="Absolute detection_attributes.parquet path",
+    )
+    p_r_classify.add_argument(
+        "--output-dir", type=Path, required=True, help="Runtime output directory"
+    )
+    p_r_classify.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/perception/human_role_baseline.yaml"),
+        help="Human role baseline config YAML",
+    )
+    p_r_classify.add_argument(
+        "--detection-frame-status",
+        type=Path,
+        default=None,
+        help="Optional detection_frame_status.parquet",
+    )
+    p_r_classify.add_argument(
+        "--analysis-windows",
+        type=Path,
+        default=None,
+        help="Optional analysis_windows.parquet",
+    )
+    p_r_classify.add_argument(
+        "--source",
+        type=Path,
+        default=None,
+        help="Optional source video for crops (crops not persisted)",
+    )
+    p_r_classify.add_argument(
+        "--contain-root",
+        type=Path,
+        default=None,
+        help="Containment root (default: config.runtime_root)",
+    )
+    p_r_classify.add_argument("--run-id", type=str, default=None, help="Optional run_id")
+    p_r_classify.add_argument("--video-id", type=str, default=None, help="Optional video_id")
+    p_r_classify.add_argument(
+        "--ground-truth", type=Path, default=None, help="Optional reviewed role GT"
+    )
+    p_r_eval = roles_sub.add_parser("evaluate", help="Evaluate predicted roles vs ground truth")
+    p_r_eval.add_argument(
+        "--predictions",
+        type=Path,
+        required=True,
+        help="Predicted roles JSON or detection_attributes.parquet",
+    )
+    p_r_eval.add_argument(
+        "--ground-truth", type=Path, required=True, help="Ground-truth JSON or parquet"
+    )
+    p_r_eval.add_argument("--output", type=Path, required=True, help="role_evaluation.json output")
+    p_r_eval.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/perception/human_role_baseline.yaml"),
+        help="Human role baseline config YAML",
+    )
     return parser
 
 
@@ -1626,6 +1811,30 @@ def main(argv: Sequence[str] | None = None) -> int:
                     config_path=args.config,
                 )
             parser.parse_args(["perception", "ball", "--help"])
+            return 2
+        if args.perception_command == "roles":
+            if args.roles_command == "classify":
+                return cmd_perception_roles_classify(
+                    detections=args.detections,
+                    detection_attributes=args.detection_attributes,
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    detection_frame_status=args.detection_frame_status,
+                    analysis_windows=args.analysis_windows,
+                    source=args.source,
+                    contain_root=args.contain_root,
+                    run_id=args.run_id,
+                    video_id=args.video_id,
+                    ground_truth=args.ground_truth,
+                )
+            if args.roles_command == "evaluate":
+                return cmd_perception_roles_evaluate(
+                    predictions=args.predictions,
+                    ground_truth=args.ground_truth,
+                    output=args.output,
+                    config_path=args.config,
+                )
+            parser.parse_args(["perception", "roles", "--help"])
             return 2
         parser.parse_args(["perception", "--help"])
         return 2

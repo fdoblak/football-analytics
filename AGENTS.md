@@ -57,12 +57,13 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `scripts/check_detection_contracts.py` (Stage 5A player/official/ball detection contracts)
 - `scripts/check_human_detection_baseline.py` (Stage 5B human detection baseline)
 - `scripts/check_ball_detection_baseline.py` (Stage 5C ball detection baseline)
+- `scripts/check_human_role_baseline.py` (Stage 5D human role classification baseline)
 - `scripts/check_stage_cache.py`, `check_ci_workflow.py`, `check_project.py`
 - Or: `football-analytics project check --profile local --quick`
 
-Stage 5C ball detection baseline is in-tree when merged (YOLO11n sports ball →
-ball/unknown; tiling/hybrid; evaluation_only / AGPL finding). Do not start
-Stage 5D (role classification) without an explicit user prompt.
+Stage 5D human role classification baseline is in-tree when merged (weightless
+HSV/kit clustering → roles via `detection_attributes`; abstention-first). Do not
+start Stage 5E (detection fusion / Stage 5 closure) without an explicit user prompt.
 
 ---
 
@@ -149,5 +150,6 @@ Stage 4A–4D broadcast understanding baseline is in-tree when merged.
 Stage 5A detection contracts are in-tree when merged.
 Stage 5B human detection baseline is in-tree when merged.
 Stage 5C ball detection baseline is in-tree when merged.
-Stage 5D is **not** started unless explicitly requested.
+Stage 5D human role classification baseline is in-tree when merged.
+Stage 5E is **not** started unless explicitly requested.
 Manual Cursor flow only — no Codex/background automation.

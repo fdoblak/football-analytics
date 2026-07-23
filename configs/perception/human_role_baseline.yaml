@@ -1,0 +1,72 @@
+# Stage 5D conservative human role classification baseline.
+# Weightless OpenCV/NumPy only. Fingerprinted; strict-loaded.
+# Canonical RoleLabel uses staff (not "other"); user "other" maps → staff.
+config_version: 1
+classifier_id: human_role_baseline_hsv
+classifier_version: "1.0.0"
+
+eligibility:
+  entity_types: [human]
+  require_processed_frames: true
+  require_analysis_window: true
+  playability_allowed: [playable]
+  tracking_eligibility_allowed: [eligible, conditionally_eligible]
+  min_crop_area_px: 400.0
+  min_crop_width: 12.0
+  min_crop_height: 24.0
+  min_aspect_ratio: 0.25
+  max_aspect_ratio: 6.0
+  min_crop_quality: 0.15
+
+features:
+  hsv_h_bins: 16
+  hsv_s_bins: 8
+  hsv_v_bins: 8
+  upper_body_fraction: 0.55
+  lower_body_fraction: 0.45
+  persist_crops: false
+
+clustering:
+  max_outfield_clusters: 2
+  min_cluster_size: 2
+  color_distance_threshold: 0.18
+  min_cluster_stability: 0.55
+
+thresholds:
+  # Color-diff alone is NEVER enough for goalkeeper or referee.
+  player_cluster_margin: 0.18
+  player_min_quality: 0.25
+  goalkeeper_color_margin: 0.18
+  goalkeeper_require_extra_evidence: true
+  goalkeeper_lateral_edge: 0.12
+  goalkeeper_size_zscore: 1.75
+  referee_max_saturation: 0.28
+  referee_max_value: 0.45
+  referee_color_margin: 0.15
+  referee_require_non_outfield: true
+  staff_max_fraction: 0.15
+  abstain_margin: 0.12
+  conflict_margin: 0.08
+
+output_policy:
+  atomic_writes: true
+  overwrite_allowed: false
+  write_evaluation_json: true
+  role_score_null: true
+  role_source: downstream_classifier
+  persist_crops: false
+
+maximum_frames_per_run: 200
+runtime_root: /home/fdoblak/workspace/human_role_checks
+taxonomy_path: configs/perception/detection_taxonomy.yaml
+policy_path: configs/perception/detection_policy.yaml
+
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+notes:
+  - "other maps to canonical RoleLabel staff"
+  - "human detection != player"
+  - "color alone never assigns goalkeeper or referee"
+  - "no team_id / tracking / ReID / jersey OCR / events"
