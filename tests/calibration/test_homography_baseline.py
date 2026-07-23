@@ -48,7 +48,7 @@ from football_analytics.calibration.homography_segments import (
     projection_distance,
     select_medoid_candidate,
 )
-from football_analytics.calibration.homography_service import run_homography_solve
+from football_analytics.calibration.homography_service import run_homography_solve, run_segments_build
 from football_analytics.calibration.homography_solve import (
     HomographyQuality,
     normalized_dlt,
@@ -56,6 +56,8 @@ from football_analytics.calibration.homography_solve import (
 )
 from football_analytics.calibration.pitch_template import build_pitch_template
 from football_analytics.core.run_id import generate_run_id
+from football_analytics.data.compiler import get_contract
+from football_analytics.data.parquet import read_contract_parquet
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 CONFIG_PATH = REPO_ROOT / "configs" / "calibration" / "homography_baseline.yaml"
@@ -313,6 +315,80 @@ class HomographyBaselineTests(unittest.TestCase):
             from football_analytics.calibration.segments import find_segment_overlaps
 
             self.assertTrue(find_segment_overlaps(built2.segments) or True)
+
+    def test_segments_build_from_solve_fills_inverse(self) -> None:
+        """segments build from calibrations.parquet must succeed (inverse filled)."""
+        H = known_perspective_H()
+        rid, vid = generate_run_id(), "video_seg_from_cal"
+        rows = multi_frame_stable_features(H, run_id=rid, video_id=vid, n_frames=3)
+        session = Path(tempfile.mkdtemp(prefix="h8c_segb_", dir=str(RUNTIME_ROOT)))
+        try:
+            solve = run_homography_solve(
+                output_dir=session / "solve",
+                config=self.config,
+                contain_root=RUNTIME_ROOT,
+                features_rows=rows,
+                correspondence_mode="keypoint_only",
+                build_segments=False,
+            )
+            self.assertTrue(solve.accepted, msg=solve.error_code)
+            self.assertIsNotNone(solve.calibrations_parquet)
+            # Missing inverse on candidates must still serialize (defensive path).
+            built_local = build_calibration_segments(
+                [
+                    FrameCalibrationCandidate(
+                        frame_index=i,
+                        video_time_us=i * 40_000,
+                        calibration_id=i,
+                        quality="valid",
+                        H_row_major=tuple(float(x) for x in H.reshape(9)),
+                        H_inv_row_major=None,
+                        correspondence_count=4,
+                        inlier_count=4,
+                        inlier_ratio=1.0,
+                        mean_reprojection_error_px=0.1,
+                        condition_number=10.0,
+                        determinant=1.0,
+                        coverage_hull_fraction=0.1,
+                        solver_method="dlt_normalized",
+                        solver_version="1",
+                        physical_mapping_eligible=True,
+                    )
+                    for i in range(3)
+                ],
+                run_id=rid,
+                video_id=vid,
+                config=self.config,
+                pitch_template_fingerprint=self.meta["fingerprint"],
+                pitch_length_m=105.0,
+                pitch_width_m=68.0,
+            )
+            self.assertGreaterEqual(len(built_local.segments), 1)
+            for s in built_local.segments:
+                self.assertIsNotNone(s["homography_image_to_pitch"])
+                self.assertIsNotNone(s["homography_pitch_to_image"])
+                self.assertEqual(len(s["homography_pitch_to_image"]), 9)
+
+            result = run_segments_build(
+                output_dir=session / "segments",
+                config=self.config,
+                contain_root=RUNTIME_ROOT,
+                calibrations_path=solve.calibrations_parquet,
+            )
+            self.assertTrue(result.accepted, msg=result.error_code)
+            self.assertIsNotNone(result.segments_parquet)
+            segs = read_contract_parquet(
+                Path(result.segments_parquet), get_contract("calibration_segments", 1)
+            ).to_pylist()
+            self.assertGreaterEqual(len(segs), 1)
+            for s in segs:
+                if s["homography_image_to_pitch"] is not None:
+                    inv = s["homography_pitch_to_image"]
+                    self.assertIsNotNone(inv)
+                    self.assertEqual(len(inv), 9)
+                    self.assertTrue(all(x is not None for x in inv))
+        finally:
+            shutil.rmtree(session, ignore_errors=True)
 
     def test_service_determinism_no_overwrite_cleanup(self) -> None:
         H = known_perspective_H()

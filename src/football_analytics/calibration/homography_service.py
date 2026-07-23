@@ -24,6 +24,7 @@ from football_analytics.calibration.homography_segments import (
     FrameCalibrationCandidate,
     build_calibration_segments,
     pitch_test_points,
+    row_major_with_inverse,
 )
 from football_analytics.calibration.homography_solve import (
     HomographyQuality,
@@ -647,14 +648,18 @@ def run_segments_build(
         H = row.get("homography_image_to_pitch")
         fi = int(row["frame_index"])
         vt = int((frame_times_us or {}).get(fi, fi * 40_000))
+        # Calibrations parquet stores only image→pitch; always recover inverse.
+        h_list, hinv_list = row_major_with_inverse(
+            tuple(float(x) for x in H) if H is not None else None
+        )
         candidates.append(
             FrameCalibrationCandidate(
                 frame_index=fi,
                 video_time_us=vt,
                 calibration_id=int(row["calibration_id"]),
                 quality=quality,
-                H_row_major=tuple(float(x) for x in H) if H is not None else None,
-                H_inv_row_major=None,
+                H_row_major=tuple(h_list) if h_list is not None else None,
+                H_inv_row_major=tuple(hinv_list) if hinv_list is not None else None,
                 correspondence_count=4,
                 inlier_count=4,
                 inlier_ratio=1.0,

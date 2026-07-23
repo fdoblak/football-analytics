@@ -9,7 +9,11 @@ from typing import Any
 
 import numpy as np
 
-from football_analytics.calibration.homography import apply_homography, matrix_from_row_major
+from football_analytics.calibration.homography import (
+    apply_homography,
+    invert_homography,
+    matrix_from_row_major,
+)
 from football_analytics.calibration.homography_solve import HomographyQuality
 from football_analytics.calibration.pitch_template import PitchTemplate
 from football_analytics.calibration.segments import (
@@ -80,6 +84,30 @@ def pitch_test_points(template: PitchTemplate | None = None) -> list[tuple[float
         (11.0, W / 2.0),
         (L - 11.0, W / 2.0),
     ]
+
+
+def row_major_with_inverse(
+    H_row_major: Sequence[float] | None,
+    H_inv_row_major: Sequence[float] | None = None,
+) -> tuple[list[float] | None, list[float] | None]:
+    """Return (H, H_inv) as 9-float lists.
+
+    When H is present, always fill a valid inverse (never None into Arrow
+    fixed_size_list fields — cast fails on null list values). Prefer a
+    provided inverse; otherwise compute via invert_homography.
+    """
+    if H_row_major is None:
+        return None, None
+    h_list = [float(x) for x in H_row_major]
+    if len(h_list) != 9:
+        raise CalibrationContractError("homography must have 9 values")
+    if H_inv_row_major is not None:
+        inv_list = [float(x) for x in H_inv_row_major]
+        if len(inv_list) != 9:
+            raise CalibrationContractError("inverse homography must have 9 values")
+        return h_list, inv_list
+    H_inv = invert_homography(matrix_from_row_major(h_list))
+    return h_list, [float(x) for x in H_inv.reshape(9)]
 
 
 def projection_distance(
@@ -301,6 +329,9 @@ def build_calibration_segments(
             if boundary != "none":
                 reasons.append(boundary)
 
+            h_list, hinv_list = row_major_with_inverse(
+                medoid.H_row_major, medoid.H_inv_row_major
+            )
             row = segment_row(
                 run_id=run_id,
                 video_id=video_id,
@@ -311,10 +342,8 @@ def build_calibration_segments(
                 source_frame_index=int(medoid.frame_index),
                 start_frame_index=int(buck[0].frame_index),
                 end_frame_index=int(buck[-1].frame_index),
-                homography_image_to_pitch=list(medoid.H_row_major) if medoid.H_row_major else None,
-                homography_pitch_to_image=(
-                    list(medoid.H_inv_row_major) if medoid.H_inv_row_major else None
-                ),
+                homography_image_to_pitch=h_list,
+                homography_pitch_to_image=hinv_list,
                 pitch_length_m=pitch_length_m,
                 pitch_width_m=pitch_width_m,
                 pitch_template_fingerprint=pitch_template_fingerprint,
@@ -421,6 +450,7 @@ __all__ = [
     "FrameCalibrationCandidate",
     "SegmentBuildResult",
     "pitch_test_points",
+    "row_major_with_inverse",
     "projection_distance",
     "select_medoid_candidate",
     "build_calibration_segments",
