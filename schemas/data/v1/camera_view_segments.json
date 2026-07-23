@@ -1,0 +1,386 @@
+{
+  "contract_name": "camera_view_segments",
+  "version": 1,
+  "description": "Camera-view classification segments for broadcast playability/suitability (contracts only).",
+  "fields": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "video_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "camera_segment_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "shot_id",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "start_time_us",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "end_time_us",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "start_frame_index",
+      "type": "int64",
+      "nullable": true
+    },
+    {
+      "name": "end_frame_index_exclusive",
+      "type": "int64",
+      "nullable": true
+    },
+    {
+      "name": "view_family",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "framing_scale",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "camera_position",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "camera_motion",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "replay_status",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "graphics_status",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "playability",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "calibration_suitability",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "tracking_suitability",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "target_identity_suitability",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "classification_source",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "confidence",
+      "type": "float32",
+      "nullable": true
+    },
+    {
+      "name": "coverage",
+      "type": "float32",
+      "nullable": false
+    },
+    {
+      "name": "review_status",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "evidence_refs",
+      "type": "list",
+      "nullable": false,
+      "value_type": "string"
+    },
+    {
+      "name": "provenance_json",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "contract_version",
+      "type": "int32",
+      "nullable": false
+    }
+  ],
+  "primary_key": [
+    "run_id",
+    "video_id",
+    "camera_segment_id"
+  ],
+  "foreign_keys": [
+    {
+      "fields": [
+        "run_id",
+        "video_id"
+      ],
+      "ref_contract": "videos",
+      "ref_fields": [
+        "run_id",
+        "video_id"
+      ],
+      "ref_version": 1
+    }
+  ],
+  "partition_by": [
+    "run_id",
+    "video_id"
+  ],
+  "sort_by": [
+    "run_id",
+    "video_id",
+    "start_time_us",
+    "camera_segment_id"
+  ],
+  "semantic_rules": [
+    {
+      "id": "run_id_format",
+      "rule": "run_id_stage2b"
+    },
+    {
+      "id": "video_id_safe",
+      "rule": "safe_identifier",
+      "field": "video_id"
+    },
+    {
+      "id": "camera_segment_id_safe",
+      "rule": "safe_identifier",
+      "field": "camera_segment_id"
+    },
+    {
+      "id": "shot_id_safe_or_null",
+      "rule": "safe_identifier_or_null",
+      "field": "shot_id"
+    },
+    {
+      "id": "start_time_ge0",
+      "rule": "int_ge",
+      "field": "start_time_us",
+      "value": 0
+    },
+    {
+      "id": "end_time_ge0",
+      "rule": "int_ge",
+      "field": "end_time_us",
+      "value": 0
+    },
+    {
+      "id": "start_frame_ge0_or_null",
+      "rule": "int_ge_or_null",
+      "field": "start_frame_index",
+      "value": 0
+    },
+    {
+      "id": "end_frame_ge0_or_null",
+      "rule": "int_ge_or_null",
+      "field": "end_frame_index_exclusive",
+      "value": 0
+    },
+    {
+      "id": "view_family_enum",
+      "rule": "enum",
+      "field": "view_family",
+      "values": [
+        "main_broadcast",
+        "tactical",
+        "goal_view",
+        "reverse_angle",
+        "aerial",
+        "player_isolation",
+        "crowd",
+        "bench",
+        "studio",
+        "graphics",
+        "unknown"
+      ]
+    },
+    {
+      "id": "framing_scale_enum",
+      "rule": "enum",
+      "field": "framing_scale",
+      "values": [
+        "wide",
+        "medium",
+        "close_up",
+        "extreme_close_up",
+        "unknown"
+      ]
+    },
+    {
+      "id": "camera_position_enum",
+      "rule": "enum",
+      "field": "camera_position",
+      "values": [
+        "sideline",
+        "behind_goal",
+        "corner",
+        "overhead",
+        "field_level",
+        "unknown"
+      ]
+    },
+    {
+      "id": "camera_motion_enum",
+      "rule": "enum",
+      "field": "camera_motion",
+      "values": [
+        "static",
+        "pan",
+        "tilt",
+        "zoom",
+        "compound",
+        "unstable",
+        "unknown"
+      ]
+    },
+    {
+      "id": "replay_status_enum",
+      "rule": "enum",
+      "field": "replay_status",
+      "values": [
+        "live",
+        "replay",
+        "replay_transition",
+        "unknown"
+      ]
+    },
+    {
+      "id": "graphics_status_enum",
+      "rule": "enum",
+      "field": "graphics_status",
+      "values": [
+        "none",
+        "partial_overlay",
+        "dominant_overlay",
+        "full_screen",
+        "unknown"
+      ]
+    },
+    {
+      "id": "playability_enum",
+      "rule": "enum",
+      "field": "playability",
+      "values": [
+        "playable",
+        "partially_playable",
+        "non_playable",
+        "uncertain"
+      ]
+    },
+    {
+      "id": "calibration_suitability_enum",
+      "rule": "enum",
+      "field": "calibration_suitability",
+      "values": [
+        "suitable",
+        "conditionally_suitable",
+        "unsuitable",
+        "unknown"
+      ]
+    },
+    {
+      "id": "tracking_suitability_enum",
+      "rule": "enum",
+      "field": "tracking_suitability",
+      "values": [
+        "suitable",
+        "conditionally_suitable",
+        "unsuitable",
+        "unknown"
+      ]
+    },
+    {
+      "id": "target_identity_suitability_enum",
+      "rule": "enum",
+      "field": "target_identity_suitability",
+      "values": [
+        "suitable",
+        "conditionally_suitable",
+        "unsuitable",
+        "unknown"
+      ]
+    },
+    {
+      "id": "classification_source_enum",
+      "rule": "enum",
+      "field": "classification_source",
+      "values": [
+        "model",
+        "rule",
+        "manual",
+        "imported"
+      ]
+    },
+    {
+      "id": "conf_unit_or_null",
+      "rule": "float_unit_interval_or_null",
+      "field": "confidence"
+    },
+    {
+      "id": "coverage_unit",
+      "rule": "float_unit_interval",
+      "field": "coverage"
+    },
+    {
+      "id": "review_status_enum",
+      "rule": "enum",
+      "field": "review_status",
+      "values": [
+        "unreviewed",
+        "reviewed",
+        "accepted",
+        "rejected",
+        "needs_review"
+      ]
+    },
+    {
+      "id": "evidence_refs_no_null",
+      "rule": "list_no_null_items",
+      "field": "evidence_refs"
+    },
+    {
+      "id": "provenance_json",
+      "rule": "canonical_json_object_or_null",
+      "field": "provenance_json"
+    },
+    {
+      "id": "contract_version_ge1",
+      "rule": "int_ge",
+      "field": "contract_version",
+      "value": 1
+    }
+  ],
+  "table_metadata": {
+    "time_unit": "microseconds",
+    "time_domain": "video_relative",
+    "interval_semantics": "half_open_start_inclusive_end_exclusive",
+    "coverage_denominator": "classified_duration_over_segment_duration"
+  }
+}

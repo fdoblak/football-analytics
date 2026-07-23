@@ -135,6 +135,34 @@ def validate_contract_bundle(tables: dict[str, Any], specs: dict[str, Any]) -> V
                     result.err(f"event actor missing track {key}")
                     break
 
+    # Stage 4A broadcast tables (optional; not required in synthetic 9-table bundle)
+    shot_boundaries = tables.get("shot_boundaries")
+    shot_segments = tables.get("shot_segments")
+    camera_view_segments = tables.get("camera_view_segments")
+    if any(t is not None for t in (shot_boundaries, shot_segments, camera_view_segments)):
+        from football_analytics.broadcast.validation import validate_broadcast_bundle
+
+        br = validate_broadcast_bundle(
+            shot_boundaries,
+            shot_segments,
+            camera_view_segments,
+            videos=videos,
+            frames=frames,
+        )
+        if br.status == "FAIL":
+            for e in br.errors[:10]:
+                result.err(f"broadcast: {e}")
+        for w in br.warnings[:5]:
+            result.warn(f"broadcast: {w}")
+        result.statistics["broadcast_bundle"] = {
+            "status": br.status,
+            "errors": len(br.errors),
+            "warnings": len(br.warnings),
+        }
+    elif videos is not None:
+        # lightweight FK-only path if tables appear without going through broadcast validator
+        pass
+
     # bbox vs video dimensions
     if detections is not None and videos is not None:
         dims = {

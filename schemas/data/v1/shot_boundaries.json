@@ -1,0 +1,208 @@
+{
+  "contract_name": "shot_boundaries",
+  "version": 1,
+  "description": "Detected or labeled shot transition boundaries (contracts only; no detector).",
+  "fields": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "video_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "boundary_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "boundary_time_us",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "left_frame_index",
+      "type": "int64",
+      "nullable": true
+    },
+    {
+      "name": "right_frame_index",
+      "type": "int64",
+      "nullable": true
+    },
+    {
+      "name": "transition_type",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "transition_duration_us",
+      "type": "int64",
+      "nullable": true
+    },
+    {
+      "name": "confidence",
+      "type": "float32",
+      "nullable": true
+    },
+    {
+      "name": "detection_source",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "evidence_ref",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "review_status",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "provenance_json",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "contract_version",
+      "type": "int32",
+      "nullable": false
+    }
+  ],
+  "primary_key": [
+    "run_id",
+    "video_id",
+    "boundary_id"
+  ],
+  "foreign_keys": [
+    {
+      "fields": [
+        "run_id",
+        "video_id"
+      ],
+      "ref_contract": "videos",
+      "ref_fields": [
+        "run_id",
+        "video_id"
+      ],
+      "ref_version": 1
+    }
+  ],
+  "partition_by": [
+    "run_id",
+    "video_id"
+  ],
+  "sort_by": [
+    "run_id",
+    "video_id",
+    "boundary_time_us",
+    "boundary_id"
+  ],
+  "semantic_rules": [
+    {
+      "id": "run_id_format",
+      "rule": "run_id_stage2b"
+    },
+    {
+      "id": "video_id_safe",
+      "rule": "safe_identifier",
+      "field": "video_id"
+    },
+    {
+      "id": "boundary_id_safe",
+      "rule": "safe_identifier",
+      "field": "boundary_id"
+    },
+    {
+      "id": "boundary_time_ge0",
+      "rule": "int_ge",
+      "field": "boundary_time_us",
+      "value": 0
+    },
+    {
+      "id": "left_frame_ge0_or_null",
+      "rule": "int_ge_or_null",
+      "field": "left_frame_index",
+      "value": 0
+    },
+    {
+      "id": "right_frame_ge0_or_null",
+      "rule": "int_ge_or_null",
+      "field": "right_frame_index",
+      "value": 0
+    },
+    {
+      "id": "transition_type_enum",
+      "rule": "enum",
+      "field": "transition_type",
+      "values": [
+        "hard_cut",
+        "dissolve",
+        "fade",
+        "wipe",
+        "flash",
+        "unknown"
+      ]
+    },
+    {
+      "id": "transition_duration_ge0_or_null",
+      "rule": "int_ge_or_null",
+      "field": "transition_duration_us",
+      "value": 0
+    },
+    {
+      "id": "conf_unit_or_null",
+      "rule": "float_unit_interval_or_null",
+      "field": "confidence"
+    },
+    {
+      "id": "detection_source_enum",
+      "rule": "enum",
+      "field": "detection_source",
+      "values": [
+        "model",
+        "rule",
+        "manual",
+        "imported"
+      ]
+    },
+    {
+      "id": "evidence_ref_safe_or_null",
+      "rule": "safe_identifier_or_null",
+      "field": "evidence_ref"
+    },
+    {
+      "id": "review_status_enum",
+      "rule": "enum",
+      "field": "review_status",
+      "values": [
+        "unreviewed",
+        "reviewed",
+        "accepted",
+        "rejected",
+        "needs_review"
+      ]
+    },
+    {
+      "id": "provenance_json",
+      "rule": "canonical_json_object_or_null",
+      "field": "provenance_json"
+    },
+    {
+      "id": "contract_version_ge1",
+      "rule": "int_ge",
+      "field": "contract_version",
+      "value": 1
+    }
+  ],
+  "table_metadata": {
+    "time_unit": "microseconds",
+    "time_domain": "video_relative",
+    "interval_semantics": "instant"
+  }
+}

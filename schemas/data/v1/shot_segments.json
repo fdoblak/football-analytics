@@ -1,0 +1,214 @@
+{
+  "contract_name": "shot_segments",
+  "version": 1,
+  "description": "Half-open shot intervals derived from boundaries (contracts only).",
+  "fields": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "video_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "shot_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "start_time_us",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "end_time_us",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "start_frame_index",
+      "type": "int64",
+      "nullable": true
+    },
+    {
+      "name": "end_frame_index_exclusive",
+      "type": "int64",
+      "nullable": true
+    },
+    {
+      "name": "start_boundary_id",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "end_boundary_id",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "duration_us",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "frame_count",
+      "type": "int64",
+      "nullable": true
+    },
+    {
+      "name": "timeline_mapping_quality",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "segment_status",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "provenance_json",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "contract_version",
+      "type": "int32",
+      "nullable": false
+    }
+  ],
+  "primary_key": [
+    "run_id",
+    "video_id",
+    "shot_id"
+  ],
+  "foreign_keys": [
+    {
+      "fields": [
+        "run_id",
+        "video_id"
+      ],
+      "ref_contract": "videos",
+      "ref_fields": [
+        "run_id",
+        "video_id"
+      ],
+      "ref_version": 1
+    }
+  ],
+  "partition_by": [
+    "run_id",
+    "video_id"
+  ],
+  "sort_by": [
+    "run_id",
+    "video_id",
+    "start_time_us",
+    "shot_id"
+  ],
+  "semantic_rules": [
+    {
+      "id": "run_id_format",
+      "rule": "run_id_stage2b"
+    },
+    {
+      "id": "video_id_safe",
+      "rule": "safe_identifier",
+      "field": "video_id"
+    },
+    {
+      "id": "shot_id_safe",
+      "rule": "safe_identifier",
+      "field": "shot_id"
+    },
+    {
+      "id": "start_time_ge0",
+      "rule": "int_ge",
+      "field": "start_time_us",
+      "value": 0
+    },
+    {
+      "id": "end_time_ge0",
+      "rule": "int_ge",
+      "field": "end_time_us",
+      "value": 0
+    },
+    {
+      "id": "start_frame_ge0_or_null",
+      "rule": "int_ge_or_null",
+      "field": "start_frame_index",
+      "value": 0
+    },
+    {
+      "id": "end_frame_ge0_or_null",
+      "rule": "int_ge_or_null",
+      "field": "end_frame_index_exclusive",
+      "value": 0
+    },
+    {
+      "id": "start_boundary_safe_or_null",
+      "rule": "safe_identifier_or_null",
+      "field": "start_boundary_id"
+    },
+    {
+      "id": "end_boundary_safe_or_null",
+      "rule": "safe_identifier_or_null",
+      "field": "end_boundary_id"
+    },
+    {
+      "id": "duration_positive",
+      "rule": "int_gt",
+      "field": "duration_us",
+      "value": 0
+    },
+    {
+      "id": "frame_count_gt0_or_null",
+      "rule": "int_gt_or_null",
+      "field": "frame_count",
+      "value": 0
+    },
+    {
+      "id": "mapping_quality_enum",
+      "rule": "enum",
+      "field": "timeline_mapping_quality",
+      "values": [
+        "exact_identity",
+        "timestamp_preserved",
+        "derived_with_constant_offset",
+        "derived_with_resampling",
+        "uncertain",
+        "not_available"
+      ]
+    },
+    {
+      "id": "segment_status_enum",
+      "rule": "enum",
+      "field": "segment_status",
+      "values": [
+        "active",
+        "gap_coverage",
+        "incomplete",
+        "rejected",
+        "unknown"
+      ]
+    },
+    {
+      "id": "provenance_json",
+      "rule": "canonical_json_object_or_null",
+      "field": "provenance_json"
+    },
+    {
+      "id": "contract_version_ge1",
+      "rule": "int_ge",
+      "field": "contract_version",
+      "value": 1
+    }
+  ],
+  "table_metadata": {
+    "time_unit": "microseconds",
+    "time_domain": "video_relative",
+    "interval_semantics": "half_open_start_inclusive_end_exclusive"
+  }
+}

@@ -88,3 +88,30 @@ contracts:
       1:
         spec_path: schemas/data/v1/events.json
     migration_edges: []
+
+  shot_boundaries:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/shot_boundaries.json
+    migration_edges: []
+
+  shot_segments:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/shot_segments.json
+    migration_edges: []
+
+  camera_view_segments:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/camera_view_segments.json
+    migration_edges: []
