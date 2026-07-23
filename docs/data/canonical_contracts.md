@@ -14,6 +14,9 @@ contracts are **not** duplicated as hand-written Python field lists.
 | track_observations | run_id, video_id, frame_index, track_id | → frames; nullable → detections |
 | track_summaries | run_id, video_id, track_id | — |
 | calibrations | run_id, video_id, frame_index, calibration_id | → frames |
+| calibration_features | run_id, video_id, frame_index, feature_id | → frames |
+| calibration_segments | run_id, video_id, segment_id | — (time-scoped H) |
+| projected_positions | run_id, video_id, frame_index, projection_id | → frames |
 | team_assignments | run_id, video_id, assignment_id | → track_summaries |
 | jersey_observations | run_id, video_id, frame_index, observation_id | → track_summaries |
 | events | run_id, video_id, event_id | actor tracks → track_summaries (bundle) |

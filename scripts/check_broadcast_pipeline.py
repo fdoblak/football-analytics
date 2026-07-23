@@ -469,7 +469,7 @@ def run_checks(*, keep: bool = False) -> Result:
     try:
         reg = load_schema_registry(default_registry_path(), project_root=root)
         names = list_contracts(registry=reg)
-        if len(names) != 20 or "analysis_windows" not in names:
+        if len(names) != 23 or "analysis_windows" not in names:
             result.err(f"registry contract count unexpected: {len(names)}", config=True)
         policy = load_routing_policy(root / "configs/broadcast/broadcast_routing_policy.yaml")
         result.extras["policy_fingerprint"] = routing_policy_fingerprint(policy)

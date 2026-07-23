@@ -68,6 +68,7 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `scripts/check_team_assignment_baseline.py` (Stage 7C anonymous team assignment baseline)
 - `scripts/check_jersey_ocr_baseline.py` (Stage 7D jersey region + OpenCV template OCR baseline)
 - `scripts/check_target_identity_pipeline.py` (Stage 7E target evidence fusion + manual approval)
+- `scripts/check_calibration_contracts.py` (Stage 8A pitch calibration / homography / coordinate contracts)
 - `scripts/check_stage_cache.py`, `check_ci_workflow.py`, `check_project.py`
 - Or: `football-analytics project check --profile local --quick`
 
@@ -78,7 +79,9 @@ fusion + quality gates. Stage 7 is closed (`identity-baseline-v0.7.0`):
 7D jersey OCR → 7E evidence fusion + manual target workflow. Appearance / team /
 jersey alone cannot confirm; confirmed requires scoped manual decision;
 `auto_confirm=false`; face forbidden; real football identity accuracy not
-validated. Do **not** start Stage 8A without an explicit user prompt.
+validated. Stage 8A pitch calibration / homography / coordinate **contracts**
+are in-tree when merged. Do **not** start Stage 8B without an explicit user
+prompt.
 
 ---
 
@@ -166,6 +169,8 @@ Stage 5A–5E detection baseline is in-tree when merged (`detection-baseline-v0.
 Stage 5 is **closed**. Stage 6A–6D tracking baseline is in-tree when merged
 (`tracking-baseline-v0.6.0`). Stage 6 is **closed**. Stage 7A–7E identity /
 target-player baseline is in-tree when merged (`identity-baseline-v0.7.0`).
-Stage 7 is **closed**. Stage 8A (pitch calibration / homography / coordinate
-contracts) is **not** started unless explicitly requested.
+Stage 7 is **closed**. Stage 8A pitch calibration / homography / coordinate
+contracts are in-tree when merged (contracts only; no SV inference). Stage 8B
+(keypoint/line detection baseline) is **not** started unless explicitly
+requested.
 Manual Cursor flow only — no Codex/background automation.

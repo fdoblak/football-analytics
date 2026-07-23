@@ -1773,6 +1773,86 @@ def cmd_identity_jersey_validate(*, keep: bool, as_json: bool) -> int:
     return int(main_fn(argv))
 
 
+def cmd_calibration_contracts_validate(*, keep: bool, as_json: bool) -> int:
+    """Run Stage 8A synthetic calibration contract validator (no SV inference)."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_calibration_contracts.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("calibration validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
+def cmd_calibration_homography_validate() -> int:
+    """Validate synthetic known-H solve / reject degenerates (contracts only)."""
+    from football_analytics.calibration.fixtures import (
+        correspondences_for_H,
+        known_perspective_H,
+        mirrored_homography,
+        singular_matrix_row_major,
+    )
+    from football_analytics.calibration.homography import solve_homography, validate_homography_matrix
+    from football_analytics.calibration.types import HomographyError
+
+    img, pitch = correspondences_for_H(known_perspective_H(), n=4)
+    solved = solve_homography(img, pitch)
+    print(f"homography_status: {solved.status}")
+    print(f"condition_number: {solved.condition_number}")
+    print(f"mean_reprojection_error_px: {solved.mean_reprojection_error_px}")
+    rejected = 0
+    for label, fn in (
+        ("singular", lambda: validate_homography_matrix(singular_matrix_row_major())),
+        ("mirrored", lambda: validate_homography_matrix(list(mirrored_homography().reshape(9)))),
+    ):
+        try:
+            fn()
+            print(f"reject_{label}: FAIL_ACCEPTED")
+            return 1
+        except HomographyError:
+            rejected += 1
+            print(f"reject_{label}: PASS")
+    print(f"rejected_negatives: {rejected}")
+    return 0
+
+
+def cmd_calibration_project_validate() -> int:
+    """Validate synthetic projection + physical-metric eligibility rules."""
+    from football_analytics.calibration.fixtures import e2e_bundle, projected_from_track
+
+    bundle = e2e_bundle()
+    Hrm = bundle["H"].matrix_row_major()
+    human = next(p for p in bundle["projections"] if p["entity_type"] == "human")
+    ball = next(p for p in bundle["projections"] if p["entity_type"] == "ball")
+    pred = projected_from_track(
+        bundle["run_id"],
+        bundle["video_id"],
+        entity_type="human",
+        bbox=(100.0, 100.0, 140.0, 200.0),
+        H_row_major=Hrm,
+        observation_source="predicted",
+        projection_id="proj_pred_cli",
+    )
+    print(f"human_source_point: {human['source_point_type']}")
+    print(f"ball_source_point: {ball['source_point_type']}")
+    print(f"predicted_eligibility: {pred['physical_metric_eligibility']}")
+    if human["source_point_type"] != "bbox_bottom_centre":
+        return 1
+    if ball["source_point_type"] != "bbox_centre":
+        return 1
+    if pred["physical_metric_eligibility"] == "eligible":
+        return 1
+    print("project_validate: PASS")
+    return 0
+
+
 def cmd_tracking_contracts_validate(*, keep: bool, as_json: bool) -> int:
     """Run Stage 6A synthetic tracking contract validator (no tracker algorithm)."""
     import runpy
@@ -2987,6 +3067,24 @@ def build_parser() -> argparse.ArgumentParser:
     p_id_jersey_val.add_argument("--keep", action="store_true")
     p_id_jersey_val.add_argument("--json", action="store_true")
 
+    p_calibration = sub.add_parser(
+        "calibration", help="Pitch calibration / homography / coordinates (Stage 8A)"
+    )
+    cal_sub = p_calibration.add_subparsers(dest="calibration_command")
+    p_cal_contracts = cal_sub.add_parser("contracts", help="Calibration contract helpers")
+    cal_contracts_sub = p_cal_contracts.add_subparsers(dest="calibration_contracts_command")
+    p_cal_c_val = cal_contracts_sub.add_parser(
+        "validate", help="Validate calibration contracts (synthetic Stage 8A)"
+    )
+    p_cal_c_val.add_argument("--keep", action="store_true", help="Keep validator session dir")
+    p_cal_c_val.add_argument("--json", action="store_true", help="Emit JSON report")
+    p_cal_h = cal_sub.add_parser("homography", help="Homography geometry helpers")
+    cal_h_sub = p_cal_h.add_subparsers(dest="calibration_homography_command")
+    cal_h_sub.add_parser("validate", help="Solve/validate synthetic homography cases")
+    p_cal_p = cal_sub.add_parser("project", help="Projected position helpers")
+    cal_p_sub = p_cal_p.add_subparsers(dest="calibration_project_command")
+    cal_p_sub.add_parser("validate", help="Validate synthetic projection eligibility rules")
+
     return parser
 
 
@@ -3450,6 +3548,26 @@ def main(argv: Sequence[str] | None = None) -> int:
             parser.parse_args(["identity", "jersey", "--help"])
             return 2
         parser.parse_args(["identity", "--help"])
+        return 2
+    if args.command == "calibration":
+        if args.calibration_command == "contracts":
+            if args.calibration_contracts_command == "validate":
+                return cmd_calibration_contracts_validate(
+                    keep=bool(args.keep), as_json=bool(args.json)
+                )
+            parser.parse_args(["calibration", "contracts", "--help"])
+            return 2
+        if args.calibration_command == "homography":
+            if args.calibration_homography_command == "validate":
+                return cmd_calibration_homography_validate()
+            parser.parse_args(["calibration", "homography", "--help"])
+            return 2
+        if args.calibration_command == "project":
+            if args.calibration_project_command == "validate":
+                return cmd_calibration_project_validate()
+            parser.parse_args(["calibration", "project", "--help"])
+            return 2
+        parser.parse_args(["calibration", "--help"])
         return 2
     parser.print_help()
     return 2

@@ -1,0 +1,77 @@
+# Stage 8A calibration / homography / projected-position policy.
+# Fingerprinted; strict-loaded. No SV_kp/SV_lines inference in this stage.
+policy_version: "1"
+config_version: 1
+
+homography:
+  direction: image_to_pitch
+  min_correspondences: 4
+  min_inliers: 4
+  reject_collinear: true
+  reject_duplicates: true
+  reject_singular: true
+  reject_ill_conditioned: true
+  max_condition_number: 1.0e8
+  min_abs_determinant: 1.0e-12
+  round_trip_tolerance_px: 1.0
+  round_trip_tolerance_m: 0.05
+  max_mean_reprojection_error_px: 5.0
+  reject_mirrored: true
+  normalize_by_h22: true
+  solver: dlt_numpy
+  solver_version: "1"
+
+coverage:
+  min_hull_area_fraction: 0.05
+  pitch_bound_tolerance_m: 0.5
+
+segments:
+  shot_cut_terminates: true
+  pan_zoom_requires_new_or_invalid: true
+  replay_non_playable: not_eligible
+  unknown_camera_view: abstain_review
+  overlapping_intervals: conflict
+  silent_gap_fill: false
+  interpolated_homography_physical_metric_eligible: false
+
+projection:
+  human_source_point: bbox_bottom_centre
+  ball_source_point: bbox_centre
+  mapping_statuses:
+    - mapped
+    - outside_pitch
+    - extrapolated
+    - uncertain
+    - not_calibrated
+    - not_eligible
+    - failed
+  predicted_observation_physical_metric_eligible: false
+  interpolated_observation_physical_metric_eligible: false
+  extrapolated_physical_metric_eligible: false
+  outside_pitch_physical_metric_eligible: false
+  airborne_ball_physical_metric_eligible: false
+  uncertain_calibration_physical_metric_eligible: false
+
+attack_direction:
+  default: unknown
+  invent_team_side: false
+
+safety:
+  no_sv_kp_inference: true
+  no_sv_lines_inference: true
+  no_real_keypoint_detection: true
+  no_physical_metric_computation: true
+  synthetic_fixtures_only: true
+
+leakage_separation:
+  evaluation_labels_forbidden_in_features: true
+
+reference_contracts:
+  calibrations: v1
+  track_observations: v1
+  frames: v1
+
+notes:
+  - Homography is planar pitch only; airborne ball is not a guaranteed pitch point.
+  - Old H must not auto-transfer across pan/zoom/cut.
+  - Stage 8A contracts only.

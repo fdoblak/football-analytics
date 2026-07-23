@@ -187,3 +187,30 @@ contracts:
       1:
         spec_path: schemas/data/v1/tracklet_appearance_profiles.json
     migration_edges: []
+
+  calibration_features:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/calibration_features.json
+    migration_edges: []
+
+  calibration_segments:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/calibration_segments.json
+    migration_edges: []
+
+  projected_positions:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/projected_positions.json
+    migration_edges: []

@@ -1,0 +1,138 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/calibration/calibration_run_receipt.schema.json",
+  "title": "Calibration run receipt (Stage 8A)",
+  "description": "Receipt for calibration contract fixtures / future calibration runs. Stage 8A produces synthetic contract receipts only.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "receipt_id",
+    "run_id",
+    "video_id",
+    "request_id",
+    "config_fingerprint",
+    "policy_fingerprint",
+    "coordinate_system_fingerprint",
+    "pitch_template_fingerprint",
+    "pitch_length_m",
+    "pitch_width_m",
+    "feature_counts",
+    "correspondence_counts",
+    "calibration_counts",
+    "segment_coverage",
+    "homography_quality",
+    "projection_counts",
+    "physical_metric_eligible_count",
+    "review_count",
+    "ground_truth_evaluation_status",
+    "output_artifacts",
+    "started_at_utc",
+    "completed_at_utc",
+    "status",
+    "warnings",
+    "errors",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "receipt_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "minLength": 1 },
+    "request_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "config_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "policy_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "coordinate_system_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "pitch_template_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "pitch_length_m": { "type": "number", "exclusiveMinimum": 0 },
+    "pitch_width_m": { "type": "number", "exclusiveMinimum": 0 },
+    "real_pitch_size_known": { "type": "boolean" },
+    "feature_counts": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "correspondence_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["accepted", "rejected", "total"],
+      "properties": {
+        "accepted": { "type": "integer", "minimum": 0 },
+        "rejected": { "type": "integer", "minimum": 0 },
+        "total": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "calibration_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["solved", "failed", "invalid", "total"],
+      "properties": {
+        "solved": { "type": "integer", "minimum": 0 },
+        "failed": { "type": "integer", "minimum": 0 },
+        "invalid": { "type": "integer", "minimum": 0 },
+        "total": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "segment_coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["valid_us", "gap_us", "overlap_conflicts"],
+      "properties": {
+        "valid_us": { "type": "integer", "minimum": 0 },
+        "gap_us": { "type": "integer", "minimum": 0 },
+        "overlap_conflicts": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "homography_quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["degenerate", "singular", "ill_conditioned", "mirrored", "mean_reprojection_error_px"],
+      "properties": {
+        "degenerate": { "type": "integer", "minimum": 0 },
+        "singular": { "type": "integer", "minimum": 0 },
+        "ill_conditioned": { "type": "integer", "minimum": 0 },
+        "mirrored": { "type": "integer", "minimum": 0 },
+        "mean_reprojection_error_px": { "type": ["number", "null"] }
+      }
+    },
+    "projection_counts": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "physical_metric_eligible_count": { "type": "integer", "minimum": 0 },
+    "review_count": { "type": "integer", "minimum": 0 },
+    "ground_truth_evaluation_status": { "type": "string", "minLength": 1 },
+    "output_artifacts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256", "size_bytes"],
+        "properties": {
+          "path": { "type": "string" },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "size_bytes": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "started_at_utc": { "type": "string", "minLength": 10 },
+    "completed_at_utc": { "type": "string", "minLength": 10 },
+    "status": {
+      "type": "string",
+      "enum": ["succeeded", "rejected", "failed", "partial"]
+    },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "errors": { "type": "array", "items": { "type": "string" } },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["stage", "label"],
+      "properties": {
+        "stage": { "type": "string" },
+        "label": { "type": "string" },
+        "notes": { "type": "string" },
+        "no_sv_inference": { "type": "boolean" },
+        "attack_direction": { "type": "string" }
+      }
+    }
+  }
+}

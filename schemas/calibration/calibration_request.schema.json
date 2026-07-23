@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/calibration/calibration_request.schema.json",
+  "title": "Calibration request (Stage 8A)",
+  "description": "Request for calibration contract fixtures / future calibration runs. Stage 8A is contracts-only — no SV_kp/SV_lines inference.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "run_id",
+    "video_id",
+    "pitch_template_fingerprint",
+    "policy_fingerprint",
+    "coordinate_system_fingerprint",
+    "output_root",
+    "no_overwrite",
+    "created_at_utc",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "request_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "minLength": 1 },
+    "analysis_window_id": { "type": ["string", "null"] },
+    "timeline_ref": { "type": ["string", "null"] },
+    "pitch_length_m": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+    "pitch_width_m": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+    "pitch_template_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "feature_source_ref": { "type": ["string", "null"] },
+    "model_ref": { "type": ["string", "null"] },
+    "policy_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "coordinate_system_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "output_root": { "type": "string", "minLength": 1 },
+    "no_overwrite": { "type": "boolean", "const": true },
+    "cache_enabled": { "type": "boolean" },
+    "created_at_utc": { "type": "string", "minLength": 10 },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["stage", "label"],
+      "properties": {
+        "stage": { "type": "string" },
+        "label": { "type": "string" },
+        "notes": { "type": "string" },
+        "no_sv_inference": { "type": "boolean" }
+      }
+    }
+  }
+}

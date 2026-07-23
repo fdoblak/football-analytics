@@ -1,0 +1,60 @@
+# Stage 8A — canonical pitch + image coordinate systems.
+# Default template is 105m × 68m but configurable; not claimed as official pitch size.
+config_version: 1
+coordinate_system_version: "1"
+
+image:
+  frame_id: source_image
+  origin: top_left
+  x_axis: right
+  y_axis: down
+  units: pixels
+  coordinate_space: source_frame  # not crop/model-space
+  reject_nan: true
+  reject_inf: true
+
+pitch:
+  frame_id: canonical_pitch
+  origin: corner_goal_a_touchline_left  # looking toward goal B along +x
+  x_axis: length_toward_goal_b
+  y_axis: width_toward_right_touchline
+  units: metres
+  # Default example dimensions — override when real size known.
+  default_length_m: 105.0
+  default_width_m: 68.0
+  # FIFA/IFAB permissive ranges for validation only (not official claim).
+  fifa_length_m_min: 90.0
+  fifa_length_m_max: 120.0
+  fifa_width_m_min: 45.0
+  fifa_width_m_max: 90.0
+  # Standard markings relative to length×width (metres).
+  centre_circle_radius_m: 9.15
+  penalty_area_depth_m: 16.5
+  penalty_area_width_m: 40.32
+  goal_area_depth_m: 5.5
+  goal_area_width_m: 18.32
+  penalty_spot_distance_m: 11.0
+  corner_arc_radius_m: 1.0
+  goal_width_m: 7.32
+
+attack_direction:
+  default: unknown
+  auto_flip_on_half: false
+  invent_team_side: false
+  distinct_from_pitch_axes: true
+
+coordinate_frames:
+  allowed:
+    - source_image
+    - normalized_image
+    - model_space
+    - canonical_pitch
+    - attack_relative
+  mixing_forbidden: true
+  every_artifact_requires_frame_id: true
+
+notes:
+  - Pitch axes are NOT attack direction or team side.
+  - Goal A / Goal B labels are neutral template sides.
+  - Unknown real pitch size must be recorded as provenance finding.
+  - Stage 8A defines contracts only; no real calibration inference.

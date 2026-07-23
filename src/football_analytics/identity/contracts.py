@@ -50,7 +50,7 @@ JSON_SCHEMA_NAMES: tuple[str, ...] = (
     "target_fusion_receipt",
 )
 
-EXPECTED_REGISTRY_CONTRACT_COUNT = 20
+EXPECTED_REGISTRY_CONTRACT_COUNT = 23
 
 
 def load_identity_contract(name: str, version: int = 1, *, registry: Any = None) -> ContractSpec:

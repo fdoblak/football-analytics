@@ -21,3 +21,6 @@ include AGENTS.md
 include LICENSE
 include README.md
 global-exclude *.pyc __pycache__ .DS_Store
+
+graft configs/calibration
+graft schemas/calibration

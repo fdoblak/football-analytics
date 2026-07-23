@@ -1,0 +1,114 @@
+{
+  "contract_name": "projected_positions",
+  "version": 1,
+  "description": "Stage 8A image-to-pitch projected positions for tracks/detections. Contracts only; no real physical metrics.",
+  "fields": [
+    {"name": "run_id", "type": "string", "nullable": false},
+    {"name": "video_id", "type": "string", "nullable": false},
+    {"name": "frame_index", "type": "int64", "nullable": false},
+    {"name": "video_time_us", "type": "int64", "nullable": false},
+    {"name": "projection_id", "type": "string", "nullable": false},
+    {"name": "entity_type", "type": "string", "nullable": false},
+    {"name": "track_id", "type": "int64", "nullable": true},
+    {"name": "detection_id", "type": "int64", "nullable": true},
+    {"name": "observation_source", "type": "string", "nullable": false},
+    {"name": "source_point_type", "type": "string", "nullable": false},
+    {"name": "image_x", "type": "float64", "nullable": false},
+    {"name": "image_y", "type": "float64", "nullable": false},
+    {"name": "coordinate_frame_id", "type": "string", "nullable": false},
+    {"name": "pitch_x_m", "type": "float64", "nullable": true},
+    {"name": "pitch_y_m", "type": "float64", "nullable": true},
+    {"name": "pitch_coordinate_frame_id", "type": "string", "nullable": false},
+    {"name": "calibration_id", "type": "int64", "nullable": true},
+    {"name": "segment_id", "type": "string", "nullable": true},
+    {"name": "mapping_status", "type": "string", "nullable": false},
+    {"name": "in_bounds", "type": "bool", "nullable": true},
+    {"name": "is_extrapolated", "type": "bool", "nullable": false},
+    {"name": "calibration_quality", "type": "string", "nullable": false},
+    {"name": "uncertainty_m", "type": "float32", "nullable": true},
+    {"name": "physical_metric_eligibility", "type": "string", "nullable": false},
+    {"name": "manual_review_required", "type": "bool", "nullable": false},
+    {"name": "reason_codes", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "quality_flags", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "provenance_json", "type": "string", "nullable": true},
+    {"name": "contract_version", "type": "int32", "nullable": false}
+  ],
+  "primary_key": ["run_id", "video_id", "frame_index", "projection_id"],
+  "foreign_keys": [
+    {
+      "fields": ["run_id", "video_id", "frame_index"],
+      "ref_contract": "frames",
+      "ref_fields": ["run_id", "video_id", "frame_index"],
+      "ref_version": 1
+    }
+  ],
+  "partition_by": ["run_id", "video_id"],
+  "sort_by": ["run_id", "video_id", "frame_index", "projection_id"],
+  "semantic_rules": [
+    {"id": "run_id_format", "rule": "run_id_stage2b"},
+    {"id": "video_id_safe", "rule": "safe_identifier", "field": "video_id"},
+    {"id": "projection_id_safe", "rule": "safe_identifier", "field": "projection_id"},
+    {"id": "frame_ge0", "rule": "int_ge", "field": "frame_index", "value": 0},
+    {"id": "time_ge0", "rule": "int_ge", "field": "video_time_us", "value": 0},
+    {"id": "track_ge0_or_null", "rule": "int_ge_or_null", "field": "track_id", "value": 0},
+    {"id": "det_ge0_or_null", "rule": "int_ge_or_null", "field": "detection_id", "value": 0},
+    {"id": "cal_ge0_or_null", "rule": "int_ge_or_null", "field": "calibration_id", "value": 0},
+    {
+      "id": "entity_enum",
+      "rule": "enum",
+      "field": "entity_type",
+      "values": ["human", "ball", "unknown"]
+    },
+    {
+      "id": "obs_source_enum",
+      "rule": "enum",
+      "field": "observation_source",
+      "values": ["detection_associated", "predicted", "interpolated", "not_observed", "synthetic"]
+    },
+    {
+      "id": "source_point_enum",
+      "rule": "enum",
+      "field": "source_point_type",
+      "values": ["bbox_bottom_centre", "bbox_centre", "keypoint", "manual", "unknown"]
+    },
+    {
+      "id": "mapping_status_enum",
+      "rule": "enum",
+      "field": "mapping_status",
+      "values": ["mapped", "outside_pitch", "extrapolated", "uncertain", "not_calibrated", "not_eligible", "failed"]
+    },
+    {
+      "id": "cal_quality_enum",
+      "rule": "enum",
+      "field": "calibration_quality",
+      "values": ["good", "marginal", "poor", "invalid", "unknown", "missing"]
+    },
+    {
+      "id": "eligibility_enum",
+      "rule": "enum",
+      "field": "physical_metric_eligibility",
+      "values": ["eligible", "provisional_only", "not_eligible", "not_evaluable"]
+    },
+    {
+      "id": "image_frame_enum",
+      "rule": "enum",
+      "field": "coordinate_frame_id",
+      "values": ["source_image", "normalized_image", "model_space", "canonical_pitch", "attack_relative"]
+    },
+    {
+      "id": "pitch_frame_enum",
+      "rule": "enum",
+      "field": "pitch_coordinate_frame_id",
+      "values": ["canonical_pitch", "attack_relative", "unknown"]
+    },
+    {"id": "uncertainty_ge0_or_null", "rule": "float_ge_or_null", "field": "uncertainty_m", "value": 0},
+    {"id": "reason_no_null", "rule": "list_no_null_items", "field": "reason_codes"},
+    {"id": "quality_no_null", "rule": "list_no_null_items", "field": "quality_flags"},
+    {"id": "contract_version_ge1", "rule": "int_ge", "field": "contract_version", "value": 1}
+  ],
+  "table_metadata": {
+    "stage": "8A",
+    "no_physical_metrics": "true",
+    "homography_planar_only": "true"
+  }
+}

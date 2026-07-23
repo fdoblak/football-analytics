@@ -1113,3 +1113,73 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Stage 7E+ |
+
+## RISK-079 — Bad / mirrored / ill-conditioned homography
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-079 |
+| description | Degenerate, singular, ill-conditioned, or mirrored image→pitch H silently accepted and pollutes projected positions / future metrics. |
+| probability | high |
+| impact | critical |
+| mitigation | Stage 8A reject collinear/duplicate/singular/ill-conditioned/mirrored; round-trip required; interpolated H not metric-eligible. |
+| trigger | valid segment with det≈0, condition≫limit, or mirrored winding |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 8A+ |
+
+## RISK-080 — Camera motion / shot-cut stale calibration reuse
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-080 |
+| description | Pan/zoom/cut after calibration silently reuses old H across unsuitable frames. |
+| probability | high |
+| impact | high |
+| mitigation | Shot cut terminates segment; pan/zoom requires new or invalid; no auto-transfer; gaps not silently filled. |
+| trigger | hold H across shot boundary or camera motion change |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 8A+ |
+
+## RISK-081 — Pitch-size uncertainty treated as official
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-081 |
+| description | Default 105×68 template treated as true pitch size, biasing metre-scale metrics. |
+| probability | medium |
+| impact | high |
+| mitigation | Configurable template; receipt records used size + real_pitch_size_known; FIFA range validate without official claim. |
+| trigger | metrics claimed from default template as official |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 8A+ |
+
+## RISK-082 — Extrapolated / outside-pitch projections as metrics
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-082 |
+| description | Points outside coverage hull or pitch bounds marked physical-metric eligible. |
+| probability | high |
+| impact | high |
+| mitigation | mapping_status extrapolated/outside_pitch → not_eligible; policy flags extrapolated_physical_metric_eligible=false. |
+| trigger | eligible projected_position with is_extrapolated=true |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 8A+ |
+
+## RISK-083 — Airborne ball treated as pitch-plane truth
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-083 |
+| description | Homography projects airborne ball centre to pitch metres as if on the ground plane. |
+| probability | high |
+| impact | high |
+| mitigation | Homography planar-only; airborne_ball → not physical-metric eligible; ball source point is image-plane observation only. |
+| trigger | eligible ball projection while airborne |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 8A+ |
