@@ -1,0 +1,68 @@
+# Stage 6B human multi-object tracking baseline (IoU + constant-velocity).
+# No ReID, ByteTrack, DeepSORT, or cross-shot identity merge.
+config_version: 1
+tracker_id: human_iou_cv_v1
+tracker_version: "0.1.0"
+tracker_algorithm: iou_constant_velocity_v1
+association_method: iou_constant_velocity
+association_version: "1"
+
+association:
+  iou_gate: 0.2
+  motion_center_gate_px: 120.0
+  cost_iou_weight: 0.7
+  cost_motion_weight: 0.3
+  min_confidence: 0.05
+  tie_break: track_id_then_detection_id
+
+lifecycle:
+  confirmation_observation_threshold: 3
+  max_lost_gap_us: 800000
+  max_prediction_gap_us: 200000
+  emit_predicted_observations: true
+  reopen_terminated: false
+  tentative_miss_terminate_us: 200000
+
+boundaries:
+  terminate_on_shot_cut: true
+  terminate_on_non_playable: true
+  terminate_on_window_boundary: true
+  terminate_on_ineligible_tracking: true
+  no_cross_shot_continuation: true
+
+role:
+  soft_consistency: true
+  unknown_not_punished: true
+  conflict_requires_review: true
+
+entity_filter:
+  allowed_entity_types: [human]
+  reject_entity_types: [ball]
+  human_class_names: [person, human, player]
+  reject_class_names: [ball, sports ball]
+
+output_policy:
+  atomic_writes: true
+  overwrite_allowed: false
+  emit_predicted: true
+  emit_interpolated: false
+
+safety_limits:
+  max_tracks_per_video: 512
+  max_observations_per_track: 100000
+  max_frames_per_run: 100000
+  timeout_seconds: 120.0
+
+runtime_root: /home/fdoblak/workspace/human_tracking_checks
+policy_path: configs/tracking/tracking_contract_policy.yaml
+deterministic_seed: 0
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+notes:
+  - In-repo IoU + constant-velocity greedy assignment (SELECTED).
+  - filterpy/scipy unused for simplicity; supervision ByteTrack REJECTED (AGPL/determinism).
+  - Ultralytics trackers REJECTED; sn-tracking read-only future adapter.
+  - Track ID is not player identity; no ReID across camera/shot cuts.
+  - Predicted observations are physical_metric_ineligible.

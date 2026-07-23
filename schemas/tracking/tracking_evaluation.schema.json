@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://football-analytics.local/schemas/tracking/tracking_evaluation.schema.json",
   "title": "Tracking evaluation stub (Stage 6A)",
-  "description": "Metric interface stub for future Stage 6B/6C tracking evaluation. Without reviewed tracking GT, metrics are null with NOT_EVALUATED_NO_REVIEWED_TRACKING_GROUND_TRUTH. sn-trackeval is a future adapter candidate only.",
+  "description": "Tracking evaluation report (Stage 6A stub + Stage 6B human baseline). Without reviewed human tracking GT, metrics are null with NOT_EVALUATED_NO_REVIEWED_HUMAN_TRACKING_GROUND_TRUTH (or Stage 6A TRACKING variant). sn-trackeval is a future adapter candidate only.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -31,6 +31,7 @@
       "type": "string",
       "enum": [
         "NOT_EVALUATED_NO_REVIEWED_TRACKING_GROUND_TRUTH",
+        "NOT_EVALUATED_NO_REVIEWED_HUMAN_TRACKING_GROUND_TRUTH",
         "evaluated",
         "partial"
       ]

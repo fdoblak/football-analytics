@@ -1,6 +1,6 @@
 # Risk Register — football-analytics
 
-**Updated:** 2026-07-23 (Stage 6A)
+**Updated:** 2026-07-23 (Stage 6B)
 
 **Owner default:** Furkan Doblak unless stated otherwise
 
@@ -744,8 +744,22 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | description | Consumers may treat track_id as a real player identity or jersey number; camera exit/re-entry sameness is unproven without ReID. |
 | probability | high |
 | impact | high |
-| mitigation | Policy flags `track_id_is_player_identity=false`; docs/receipt provenance; no ReID merge in 6A; identity stages deferred. |
+| mitigation | Policy flags `track_id_is_player_identity=false`; docs/receipt provenance; no ReID merge in 6A/6B; identity stages deferred. |
 | trigger | Downstream identity/metrics consuming track_id |
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Stage 6A+ |
+
+## RISK-053 — Human MOT accuracy not validated (Stage 6B)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-053 |
+| description | Stage 6B ships an in-repo IoU+CV human tracker. Evaluator returns `NOT_EVALUATED_NO_REVIEWED_HUMAN_TRACKING_GROUND_TRUTH`. Synthetic fixtures must not be claimed as football MOT accuracy. |
+| probability | high |
+| impact | medium |
+| mitigation | Null real-GT metrics + reason code; gate PASS_WITH_FINDINGS; require reviewed human tracking GT before production claims. No ReID/cross-shot merge. |
+| trigger | Stage 6B without reviewed human tracking GT |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 6B+ |
