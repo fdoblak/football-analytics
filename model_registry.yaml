@@ -65,7 +65,7 @@ models:
       No model inference performed.
 
   - id: ultralytics_yolo11n_coco_person
-    display_name: Ultralytics YOLO11n COCO person (Stage 5B)
+    display_name: Ultralytics YOLO11n COCO person + sports ball (Stage 5B/5C)
     task: person_object_detection
     status: available
     file_path: /home/fdoblak/football_data/model_archive/yolo11n.pt
@@ -82,6 +82,20 @@ models:
     license_status: restricted
     input_spec: {imgsz: 640, color: bgr}
     output_spec: {bbox: xyxy, classes: coco80}
+    inference_profile: ball_detection_baseline
+    capabilities:
+      person:
+        class_id: 0
+        class_name: person
+        stage: 5b
+        maps_to_entity: human
+        maps_to_role: unknown
+      sports_ball:
+        class_id: 32
+        class_name: "sports ball"
+        stage: 5c
+        maps_to_entity: ball
+        maps_to_role: unknown
     classes:
       person:
         class_id: 0
@@ -91,19 +105,23 @@ models:
       sports_ball:
         class_id: 32
         class_name: sports ball
-        stage_5b: rejected
-        deferred_to: stage_5c
+        stage: 5c
+        maps_to_entity: ball
+        maps_to_role: unknown
     precision: fp16_on_cuda_else_fp32
     device_requirements: {min_vram_mb: 512, notes: "Nano model; batch=1; RTX 3050 4GB smoke-safe"}
     tested: false
-    test_scope: stage_5b_human_detection_baseline
+    test_scope: stage_5b_human_detection_baseline;stage_5c_ball_detection_baseline
     last_verified: "2026-07-23"
     approval: evaluation_only
     production_approved: false
     notes: >
-      Official Ultralytics yolo11n.pt selected for Stage 5B after local inventory found no suitable YOLO .pt.
+      Official Ultralytics yolo11n.pt reused for Stage 5B (person) and Stage 5C (sports ball).
+      Same physical artifact; no second .pt copy. Registry id unchanged for backwards compat.
       COCO person class id 0 → entity_type=human, role_label=unknown (never player).
-      Ball/sports-ball deferred to Stage 5C; Stage 5B must not emit ball detections.
+      COCO sports ball class id 32 → entity_type=ball, role_label=unknown (no ownership).
+      Stage 5B person adapter still rejects ball; Stage 5C ball adapter rejects person.
       AGPL-3.0 distribution/copyleft risk → evaluation_only; production_approved=false.
       Provenance sibling: /home/fdoblak/football_data/model_archive/yolo11n.pt.provenance.json
       Network must remain OFF at inference; weights are local-only.
+      Logical profile note: inference_profile=ball_detection_baseline (no weight duplication).

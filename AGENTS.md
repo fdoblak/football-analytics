@@ -56,12 +56,13 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `scripts/check_broadcast_pipeline.py` (Stage 4D fusion + routing)
 - `scripts/check_detection_contracts.py` (Stage 5A player/official/ball detection contracts)
 - `scripts/check_human_detection_baseline.py` (Stage 5B human detection baseline)
+- `scripts/check_ball_detection_baseline.py` (Stage 5C ball detection baseline)
 - `scripts/check_stage_cache.py`, `check_ci_workflow.py`, `check_project.py`
 - Or: `football-analytics project check --profile local --quick`
 
-Stage 5B human detection baseline is in-tree when merged (YOLO11n person →
-human/unknown; evaluation_only / AGPL finding). Do not start Stage 5C (ball)
-without an explicit user prompt.
+Stage 5C ball detection baseline is in-tree when merged (YOLO11n sports ball →
+ball/unknown; tiling/hybrid; evaluation_only / AGPL finding). Do not start
+Stage 5D (role classification) without an explicit user prompt.
 
 ---
 
@@ -145,5 +146,7 @@ Do not modify SoccerNet repos.
 Do not change protected packages.
 Do not start a stage without an explicit user prompt.
 Stage 4A–4D broadcast understanding baseline is in-tree when merged.
-Stage 5A detection contracts are in-tree when merged; Stage 5B is **not**
-started unless explicitly requested.
+Stage 5A detection contracts are in-tree when merged.
+Stage 5B human detection baseline is in-tree when merged.
+Stage 5C is **not** started unless explicitly requested.
+Manual Cursor flow only — no Codex/background automation.

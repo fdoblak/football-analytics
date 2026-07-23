@@ -1,6 +1,6 @@
 # Risk Register — football-analytics
 
-**Updated:** 2026-07-23 (Stage 5B)
+**Updated:** 2026-07-23 (Stage 5C)
 
 **Owner default:** Furkan Doblak unless stated otherwise
 
@@ -637,3 +637,31 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Stage 5B+ |
+
+## RISK-045 — Ball detection accuracy not validated on reviewed football GT
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-045 |
+| description | No reviewed football-match ground truth exists for ball boxes; Stage 5C evaluator returns `NOT_EVALUATED_NO_REVIEWED_BALL_GROUND_TRUTH`. Real ball mAP/F1/small-object recall must not be claimed. |
+| probability | high |
+| impact | medium |
+| mitigation | Synthetic frozen IoU fixtures; tiling/hybrid for recall strategy only; gate PASS_WITH_FINDINGS; reviewed ball labels required before production claims. |
+| trigger | Stage 5C evaluation without reviewed ball GT |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 5C+ |
+
+## RISK-046 — AGPL Ultralytics reuse for ball baseline
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-046 |
+| description | Stage 5C reuses the same AGPL-3.0 YOLO11n weights/runtime as Stage 5B for sports-ball class. Copyleft/distribution risk remains. |
+| probability | high |
+| impact | high |
+| mitigation | Keep `evaluation_only` / `production_approved=false`; no weight in Git; no second download; document registry capabilities. |
+| trigger | Stage 5C ball detection baseline |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 5C+ |

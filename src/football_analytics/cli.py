@@ -933,6 +933,121 @@ def cmd_perception_humans_evaluate(
     return 0
 
 
+def cmd_perception_ball_detect(
+    *,
+    source: Path,
+    timeline: Path,
+    analysis_windows: Path,
+    output_dir: Path,
+    config_path: Path,
+    contain_root: Path | None,
+    run_id: str | None,
+    video_id: str | None,
+) -> int:
+    """Stage 5C: ball detection baseline (lazy imports)."""
+    from football_analytics.data.registry import default_project_root
+    from football_analytics.perception.ball_detector_config import (
+        default_ball_detector_config_path,
+        load_ball_detector_config,
+    )
+    from football_analytics.perception.ball_service import run_ball_detection
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_ball_detector_config_path(repo_root=root)
+    try:
+        config = load_ball_detector_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    contain = contain_root
+    if contain is None:
+        contain = Path(str(config["runtime_root"]))
+    result = run_ball_detection(
+        source=str(source),
+        timeline=str(timeline),
+        analysis_windows=str(analysis_windows),
+        output_dir=str(output_dir),
+        config=config,
+        contain_root=contain,
+        run_id=run_id,
+        video_id=video_id,
+        project_root=root,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"detection_count: {summary['detection_count']}")
+    print(f"human_detection_count: {summary['human_detection_count']}")
+    print(f"ball_detection_count: {summary['ball_detection_count']}")
+    print(f"detections_parquet: {summary['detections_parquet']}")
+    print(f"frame_status_parquet: {summary['frame_status_parquet']}")
+    print(f"attributes_parquet: {summary['attributes_parquet']}")
+    print(f"receipt_json: {summary['receipt_json']}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
+def cmd_perception_ball_evaluate(
+    *,
+    predictions: Path,
+    ground_truth: Path,
+    output: Path,
+    config_path: Path,
+) -> int:
+    """Stage 5C: evaluate predicted ball boxes vs ground truth."""
+    import json
+
+    from football_analytics.core.records import write_json_record
+    from football_analytics.data.compiler import get_contract
+    from football_analytics.data.parquet import read_contract_parquet
+    from football_analytics.data.registry import default_project_root
+    from football_analytics.perception.ball_detector_config import load_ball_detector_config
+    from football_analytics.perception.ball_evaluation import evaluate_ball_from_rows
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    try:
+        config = load_ball_detector_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    try:
+        pred_table = read_contract_parquet(predictions, get_contract("detections", 1))
+        pred_rows = pred_table.to_pylist()
+        for r in pred_rows:
+            r.setdefault("entity_type", "ball")
+        gt_path = Path(ground_truth)
+        if gt_path.suffix.lower() == ".json":
+            gt_payload = json.loads(gt_path.read_text(encoding="utf-8"))
+            gt_rows = list(gt_payload.get("detections") or gt_payload.get("ground_truth") or [])
+        else:
+            gt_table = read_contract_parquet(gt_path, get_contract("detections", 1))
+            gt_rows = gt_table.to_pylist()
+            for r in gt_rows:
+                r.setdefault("entity_type", "ball")
+                r.setdefault("is_reviewed_ground_truth", True)
+        metrics = evaluate_ball_from_rows(
+            pred_rows,
+            gt_rows,
+            iou_threshold=0.5,
+            iou_thresholds=list(config["evaluation_iou_thresholds"]),
+        )
+        write_json_record(output, metrics.to_dict(), overwrite=False)
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
+    print(f"status: {metrics.status}")
+    print(f"f1: {metrics.f1}")
+    print(f"precision: {metrics.precision}")
+    print(f"recall: {metrics.recall}")
+    print(f"ap50: {metrics.ap50}")
+    print(f"output: {output}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="football-analytics",
@@ -1268,6 +1383,50 @@ def build_parser() -> argparse.ArgumentParser:
         default=Path("configs/perception/human_detector_baseline.yaml"),
         help="Human detector baseline config YAML",
     )
+    p_ball = perception_sub.add_parser("ball", help="Ball detection / evaluation (Stage 5C)")
+    ball_sub = p_ball.add_subparsers(dest="ball_command")
+    p_b_detect = ball_sub.add_parser("detect", help="Detect balls (baseline)")
+    p_b_detect.add_argument("--source", type=Path, required=True, help="Absolute source video path")
+    p_b_detect.add_argument(
+        "--timeline", type=Path, required=True, help="Absolute frames.parquet path"
+    )
+    p_b_detect.add_argument(
+        "--analysis-windows",
+        type=Path,
+        required=True,
+        help="Absolute analysis_windows.parquet path",
+    )
+    p_b_detect.add_argument(
+        "--output-dir", type=Path, required=True, help="Runtime output directory"
+    )
+    p_b_detect.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/perception/ball_detector_baseline.yaml"),
+        help="Ball detector baseline config YAML",
+    )
+    p_b_detect.add_argument(
+        "--contain-root",
+        type=Path,
+        default=None,
+        help="Containment root (default: config.runtime_root)",
+    )
+    p_b_detect.add_argument("--run-id", type=str, default=None, help="Optional run_id")
+    p_b_detect.add_argument("--video-id", type=str, default=None, help="Optional video_id")
+    p_b_eval = ball_sub.add_parser("evaluate", help="Evaluate predicted balls vs ground truth")
+    p_b_eval.add_argument(
+        "--predictions", type=Path, required=True, help="Predicted detections.parquet"
+    )
+    p_b_eval.add_argument(
+        "--ground-truth", type=Path, required=True, help="Ground-truth JSON or parquet"
+    )
+    p_b_eval.add_argument("--output", type=Path, required=True, help="ball_evaluation.json output")
+    p_b_eval.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/perception/ball_detector_baseline.yaml"),
+        help="Ball detector baseline config YAML",
+    )
     return parser
 
 
@@ -1446,6 +1605,27 @@ def main(argv: Sequence[str] | None = None) -> int:
                     config_path=args.config,
                 )
             parser.parse_args(["perception", "humans", "--help"])
+            return 2
+        if args.perception_command == "ball":
+            if args.ball_command == "detect":
+                return cmd_perception_ball_detect(
+                    source=args.source,
+                    timeline=args.timeline,
+                    analysis_windows=args.analysis_windows,
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    contain_root=args.contain_root,
+                    run_id=args.run_id,
+                    video_id=args.video_id,
+                )
+            if args.ball_command == "evaluate":
+                return cmd_perception_ball_evaluate(
+                    predictions=args.predictions,
+                    ground_truth=args.ground_truth,
+                    output=args.output,
+                    config_path=args.config,
+                )
+            parser.parse_args(["perception", "ball", "--help"])
             return 2
         parser.parse_args(["perception", "--help"])
         return 2

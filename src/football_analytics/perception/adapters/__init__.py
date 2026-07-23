@@ -6,16 +6,21 @@ from typing import Any
 
 __all__ = [
     "PersonDetectorAdapter",
+    "BallDetectorAdapter",
+    "RawDetectionBox",
+    "RawPersonBox",
     "UltralyticsPersonAdapter",
+    "UltralyticsBallAdapter",
     "get_person_adapter",
+    "get_ball_adapter",
 ]
 
 
 def __getattr__(name: str) -> Any:
-    if name == "PersonDetectorAdapter":
-        from football_analytics.perception.adapters.base import PersonDetectorAdapter
+    if name in {"PersonDetectorAdapter", "BallDetectorAdapter", "RawDetectionBox", "RawPersonBox"}:
+        from football_analytics.perception.adapters import base as _base
 
-        return PersonDetectorAdapter
+        return getattr(_base, name)
     if name == "UltralyticsPersonAdapter":
         from football_analytics.perception.adapters.ultralytics_person import (
             UltralyticsPersonAdapter,
@@ -26,4 +31,12 @@ def __getattr__(name: str) -> Any:
         from football_analytics.perception.adapters.ultralytics_person import get_person_adapter
 
         return get_person_adapter
+    if name == "UltralyticsBallAdapter":
+        from football_analytics.perception.adapters.ultralytics_ball import UltralyticsBallAdapter
+
+        return UltralyticsBallAdapter
+    if name == "get_ball_adapter":
+        from football_analytics.perception.adapters.ultralytics_ball import get_ball_adapter
+
+        return get_ball_adapter
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

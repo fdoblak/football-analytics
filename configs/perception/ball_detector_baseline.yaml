@@ -1,0 +1,79 @@
+# Stage 5C ball detection baseline — Ultralytics YOLO11n COCO sports ball only.
+# Fingerprinted; strict-loaded. No human emission. No player ownership claims.
+config_version: 1
+
+model_registry_id: ultralytics_yolo11n_coco_person
+adapter_id: ultralytics_sports_ball
+adapter_version: "1.0.0"
+
+sports_ball_class:
+  class_ids: [32]
+  class_names: ["sports ball"]
+
+inference_mode: hybrid
+
+# 640 default; smoke may override via smaller imgsz in tests.
+input_size: 640
+
+tiling:
+  tile_width: 320
+  tile_height: 320
+  overlap_x: 64
+  overlap_y: 64
+  max_tiles: 16
+
+device_policy: prefer_cuda_else_cpu
+precision_policy: fp16_on_cuda_else_fp32
+batch_size: 1
+
+# Raw detector score gate (not calibrated confidence); ball-specific lower threshold.
+confidence_threshold: 0.15
+nms_iou: 0.50
+merge_iou: 0.50
+class_aware_nms: true
+
+filters:
+  min_width: 2.0
+  max_width: 128.0
+  min_height: 2.0
+  max_height: 128.0
+  min_area_fraction: 0.000001
+  max_area_fraction: 0.05
+  max_aspect_ratio: 3.0
+
+routing:
+  detect_ball: true
+  emit_human: false
+  skip_identity_only: true
+  ball_requires: [eligible, conditionally_eligible]
+  policy_ref: configs/perception/detection_policy.yaml
+
+maximum_frames_per_run: 20
+timeout_seconds: 300.0
+
+resource_limits:
+  max_detections_per_frame: 64
+  decode_timeout_seconds: 60.0
+
+output_policy:
+  atomic_writes: true
+  overwrite_allowed: false
+  emit_human_detections: false
+  write_evaluation_json: true
+
+evaluation_iou_thresholds: [0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95]
+
+runtime_root: /home/fdoblak/workspace/ball_detection_checks
+taxonomy_path: configs/perception/detection_taxonomy.yaml
+policy_path: configs/perception/detection_policy.yaml
+
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+# Ultralytics predict() on the original BGR image returns boxes.xyxy in source-frame
+# coordinates. Tile crops return tile-local xyxy → add tile origin (see tiling.py).
+coordinate_space_note: >
+  Full-frame Ultralytics YOLO boxes are source-space. Tile-crop predictions are
+  tile-local and mapped via map_tile_bbox_to_source before merge/filters.
+  Stage 5C does not apply inverse letterbox on Ultralytics outputs.

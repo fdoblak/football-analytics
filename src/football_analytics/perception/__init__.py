@@ -1,5 +1,14 @@
-"""Public Stage 5A/5B perception detection API (adapters are lazy)."""
+"""Public Stage 5A/5B/5C perception detection API (adapters are lazy)."""
 
+# Stage 5B/5C pure modules (no Ultralytics side effects).
+from football_analytics.perception.ball_detector_config import (  # noqa: E402
+    ball_detector_config_fingerprint,
+    default_ball_detector_config_path,
+    load_ball_detector_config,
+)
+from football_analytics.perception.ball_evaluation import (  # noqa: E402
+    evaluate_ball_from_rows,
+)
 from football_analytics.perception.contracts import (
     CONTRACT_NAMES,
     DETECTIONS_CONTRACT,
@@ -13,8 +22,6 @@ from football_analytics.perception.contracts import (
     load_perception_json_schema,
     validate_against_json_schema,
 )
-
-# Stage 5B pure modules (no Ultralytics side effects).
 from football_analytics.perception.detection_evaluation import (  # noqa: E402
     evaluate_from_rows as evaluate_human_detections_from_rows,
 )
@@ -118,14 +125,23 @@ __all__ = [
     "human_detector_config_fingerprint",
     "default_human_detector_config_path",
     "evaluate_human_detections_from_rows",
+    "load_ball_detector_config",
+    "ball_detector_config_fingerprint",
+    "default_ball_detector_config_path",
+    "evaluate_ball_from_rows",
     "run_human_detection",
+    "run_ball_detection",
 ]
 
 
 def __getattr__(name: str):
-    """Lazy export for service entrypoint (avoids pulling adapters at import)."""
+    """Lazy export for service entrypoints (avoids pulling adapters at import)."""
     if name == "run_human_detection":
         from football_analytics.perception.detection_service import run_human_detection
 
         return run_human_detection
+    if name == "run_ball_detection":
+        from football_analytics.perception.ball_service import run_ball_detection
+
+        return run_ball_detection
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
