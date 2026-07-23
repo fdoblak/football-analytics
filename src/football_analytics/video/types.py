@@ -1124,3 +1124,372 @@ class IngestReceipt:
 
     def fingerprint(self) -> str:
         return hash_canonical_json(self.to_dict())
+
+
+class NormalizationStatus(str, Enum):
+    PLANNED = "planned"
+    SKIPPED = "skipped"
+    SUCCEEDED = "succeeded"
+    REJECTED = "rejected"
+    FAILED = "failed"
+    CANCELLED = "cancelled"
+
+
+@dataclass(frozen=True)
+class NormalizationSelectedStreams:
+    video_stream_index: int
+    audio_stream_index: int | None
+
+    def __post_init__(self) -> None:
+        require_non_bool_int(self.video_stream_index, label="video_stream_index", minimum=0)
+        if self.audio_stream_index is not None:
+            require_non_bool_int(self.audio_stream_index, label="audio_stream_index", minimum=0)
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "video_stream_index": self.video_stream_index,
+            "audio_stream_index": self.audio_stream_index,
+        }
+
+    @classmethod
+    def from_dict(cls, data: Mapping[str, Any]) -> NormalizationSelectedStreams:
+        return cls(
+            video_stream_index=int(data["video_stream_index"]),
+            audio_stream_index=data.get("audio_stream_index"),
+        )
+
+
+@dataclass(frozen=True)
+class FrameRateConversionInfo:
+    performed: bool
+    source_mode: str
+    target_mode: str
+    notes: str
+    requires_stage3d_mapping: bool
+
+    def __post_init__(self) -> None:
+        if self.source_mode not in {"cfr", "vfr", "unknown"}:
+            raise VideoContractError("frame_rate_conversion.source_mode invalid")
+        if self.target_mode not in {"cfr", "vfr", "unknown", "unchanged"}:
+            raise VideoContractError("frame_rate_conversion.target_mode invalid")
+        if not isinstance(self.notes, str):
+            raise VideoContractError("frame_rate_conversion.notes must be str")
+        if not isinstance(self.performed, bool) or not isinstance(
+            self.requires_stage3d_mapping, bool
+        ):
+            raise VideoContractError("frame_rate_conversion booleans invalid")
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "performed": self.performed,
+            "source_mode": self.source_mode,
+            "target_mode": self.target_mode,
+            "notes": self.notes,
+            "requires_stage3d_mapping": self.requires_stage3d_mapping,
+        }
+
+    @classmethod
+    def from_dict(cls, data: Mapping[str, Any]) -> FrameRateConversionInfo:
+        return cls(
+            performed=bool(data["performed"]),
+            source_mode=str(data["source_mode"]),
+            target_mode=str(data["target_mode"]),
+            notes=str(data["notes"]),
+            requires_stage3d_mapping=bool(data["requires_stage3d_mapping"]),
+        )
+
+
+@dataclass(frozen=True)
+class RotationTransformInfo:
+    performed: bool
+    source_degrees: int
+    output_degrees: int
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "performed": bool(self.performed),
+            "source_degrees": int(self.source_degrees),
+            "output_degrees": int(self.output_degrees),
+        }
+
+    @classmethod
+    def from_dict(cls, data: Mapping[str, Any]) -> RotationTransformInfo:
+        return cls(
+            performed=bool(data["performed"]),
+            source_degrees=int(data["source_degrees"]),
+            output_degrees=int(data["output_degrees"]),
+        )
+
+
+@dataclass(frozen=True)
+class ResizeTransformInfo:
+    performed: bool
+    source_width: int
+    source_height: int
+    target_width: int | None
+    target_height: int | None
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "performed": bool(self.performed),
+            "source_width": int(self.source_width),
+            "source_height": int(self.source_height),
+            "target_width": self.target_width,
+            "target_height": self.target_height,
+        }
+
+    @classmethod
+    def from_dict(cls, data: Mapping[str, Any]) -> ResizeTransformInfo:
+        return cls(
+            performed=bool(data["performed"]),
+            source_width=int(data["source_width"]),
+            source_height=int(data["source_height"]),
+            target_width=data.get("target_width"),
+            target_height=data.get("target_height"),
+        )
+
+
+@dataclass(frozen=True)
+class AudioTransformInfo:
+    policy: str
+    action: str
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.policy, str) or not self.policy:
+            raise VideoContractError("audio_transform.policy empty")
+        if self.action not in {"none", "copy", "transcode", "drop", "absent"}:
+            raise VideoContractError("audio_transform.action invalid")
+
+    def to_dict(self) -> dict[str, str]:
+        return {"policy": self.policy, "action": self.action}
+
+    @classmethod
+    def from_dict(cls, data: Mapping[str, Any]) -> AudioTransformInfo:
+        return cls(policy=str(data["policy"]), action=str(data["action"]))
+
+
+@dataclass(frozen=True)
+class NormalizationCleanup:
+    temp_removed: bool
+    lock_released: bool
+
+    def to_dict(self) -> dict[str, bool]:
+        return {
+            "temp_removed": bool(self.temp_removed),
+            "lock_released": bool(self.lock_released),
+        }
+
+    @classmethod
+    def from_dict(cls, data: Mapping[str, Any]) -> NormalizationCleanup:
+        return cls(
+            temp_removed=bool(data["temp_removed"]),
+            lock_released=bool(data["lock_released"]),
+        )
+
+
+@dataclass(frozen=True)
+class NormalizationProvenance:
+    stage: str
+    label: str
+    notes: str | None = None
+    sanitized_argv_summary: str | None = None
+
+    def __post_init__(self) -> None:
+        if self.stage != "3C":
+            raise VideoContractError("normalization provenance.stage must be 3C")
+        if not isinstance(self.label, str) or not self.label:
+            raise VideoContractError("normalization provenance.label empty")
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "stage": self.stage,
+            "label": self.label,
+            "notes": self.notes,
+            "sanitized_argv_summary": self.sanitized_argv_summary,
+        }
+
+    @classmethod
+    def from_dict(cls, data: Mapping[str, Any]) -> NormalizationProvenance:
+        return cls(
+            stage=str(data["stage"]),
+            label=str(data["label"]),
+            notes=data.get("notes"),
+            sanitized_argv_summary=data.get("sanitized_argv_summary"),
+        )
+
+
+@dataclass(frozen=True)
+class NormalizationReceipt:
+    receipt_id: str
+    run_id: str
+    plan_id: str
+    plan_fingerprint: str
+    source_id: str
+    source_sha256: str
+    source_probe_fingerprint: str | None
+    output_artifact: str | None
+    output_sha256: str | None
+    output_size_bytes: int | None
+    output_probe_fingerprint: str | None
+    status: NormalizationStatus
+    started_at_utc: str
+    completed_at_utc: str
+    ffmpeg_path: str
+    ffmpeg_version: str
+    execution_profile: str
+    selected_streams: NormalizationSelectedStreams
+    applied_transforms: tuple[str, ...]
+    frame_rate_conversion: FrameRateConversionInfo
+    rotation_transform: RotationTransformInfo
+    resize_transform: ResizeTransformInfo
+    audio_transform: AudioTransformInfo
+    duration_drift_us: int | None
+    warnings: tuple[Issue, ...]
+    errors: tuple[Issue, ...]
+    cleanup: NormalizationCleanup
+    provenance: NormalizationProvenance
+    schema_version: int = SCHEMA_VERSION
+
+    def __post_init__(self) -> None:
+        if self.schema_version != SCHEMA_VERSION:
+            raise VideoContractError("unsupported NormalizationReceipt schema_version")
+        object.__setattr__(
+            self, "receipt_id", require_path_safe_id(self.receipt_id, label="receipt_id")
+        )
+        object.__setattr__(self, "run_id", validate_run_id(self.run_id))
+        object.__setattr__(self, "plan_id", require_path_safe_id(self.plan_id, label="plan_id"))
+        object.__setattr__(
+            self, "source_id", require_path_safe_id(self.source_id, label="source_id")
+        )
+        object.__setattr__(
+            self, "source_sha256", require_sha256(self.source_sha256, label="source_sha256")
+        )
+        object.__setattr__(
+            self,
+            "plan_fingerprint",
+            require_sha256(self.plan_fingerprint, label="plan_fingerprint"),
+        )
+        if self.source_probe_fingerprint is not None:
+            object.__setattr__(
+                self,
+                "source_probe_fingerprint",
+                require_sha256(self.source_probe_fingerprint, label="source_probe_fingerprint"),
+            )
+        if self.output_sha256 is not None:
+            object.__setattr__(
+                self,
+                "output_sha256",
+                require_sha256(self.output_sha256, label="output_sha256"),
+            )
+        if self.output_probe_fingerprint is not None:
+            object.__setattr__(
+                self,
+                "output_probe_fingerprint",
+                require_sha256(self.output_probe_fingerprint, label="output_probe_fingerprint"),
+            )
+        if not isinstance(self.status, NormalizationStatus):
+            raise VideoContractError("status invalid")
+        if self.status == NormalizationStatus.SUCCEEDED and (
+            not self.output_artifact or not self.output_sha256
+        ):
+            raise VideoContractError("succeeded receipt requires output_artifact and output_sha256")
+        if self.status == NormalizationStatus.SKIPPED and self.output_artifact is not None:
+            raise VideoContractError("skipped receipt requires output_artifact is None")
+        if self.output_size_bytes is not None:
+            require_non_bool_int(self.output_size_bytes, label="output_size_bytes", minimum=0)
+        object.__setattr__(
+            self, "started_at_utc", require_utc_z(self.started_at_utc, label="started_at_utc")
+        )
+        object.__setattr__(
+            self,
+            "completed_at_utc",
+            require_utc_z(self.completed_at_utc, label="completed_at_utc"),
+        )
+        if not isinstance(self.ffmpeg_path, str) or not self.ffmpeg_path:
+            raise VideoContractError("ffmpeg_path empty")
+        if not isinstance(self.ffmpeg_version, str) or not self.ffmpeg_version:
+            raise VideoContractError("ffmpeg_version empty")
+        if not isinstance(self.execution_profile, str) or not self.execution_profile:
+            raise VideoContractError("execution_profile empty")
+        object.__setattr__(self, "applied_transforms", tuple(self.applied_transforms))
+        object.__setattr__(self, "warnings", tuple(self.warnings))
+        object.__setattr__(self, "errors", tuple(self.errors))
+        if (
+            self.status
+            in {
+                NormalizationStatus.REJECTED,
+                NormalizationStatus.FAILED,
+            }
+            and not self.errors
+        ):
+            raise VideoContractError(f"{self.status.value} receipt requires errors")
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "schema_version": self.schema_version,
+            "receipt_id": self.receipt_id,
+            "run_id": self.run_id,
+            "plan_id": self.plan_id,
+            "plan_fingerprint": self.plan_fingerprint,
+            "source_id": self.source_id,
+            "source_sha256": self.source_sha256,
+            "source_probe_fingerprint": self.source_probe_fingerprint,
+            "output_artifact": self.output_artifact,
+            "output_sha256": self.output_sha256,
+            "output_size_bytes": self.output_size_bytes,
+            "output_probe_fingerprint": self.output_probe_fingerprint,
+            "status": self.status.value,
+            "started_at_utc": self.started_at_utc,
+            "completed_at_utc": self.completed_at_utc,
+            "ffmpeg_path": self.ffmpeg_path,
+            "ffmpeg_version": self.ffmpeg_version,
+            "execution_profile": self.execution_profile,
+            "selected_streams": self.selected_streams.to_dict(),
+            "applied_transforms": list(self.applied_transforms),
+            "frame_rate_conversion": self.frame_rate_conversion.to_dict(),
+            "rotation_transform": self.rotation_transform.to_dict(),
+            "resize_transform": self.resize_transform.to_dict(),
+            "audio_transform": self.audio_transform.to_dict(),
+            "duration_drift_us": self.duration_drift_us,
+            "warnings": [w.to_dict() for w in self.warnings],
+            "errors": [e.to_dict() for e in self.errors],
+            "cleanup": self.cleanup.to_dict(),
+            "provenance": self.provenance.to_dict(),
+        }
+
+    @classmethod
+    def from_dict(cls, data: Mapping[str, Any]) -> NormalizationReceipt:
+        return cls(
+            schema_version=int(data.get("schema_version", SCHEMA_VERSION)),
+            receipt_id=str(data["receipt_id"]),
+            run_id=str(data["run_id"]),
+            plan_id=str(data["plan_id"]),
+            plan_fingerprint=str(data["plan_fingerprint"]),
+            source_id=str(data["source_id"]),
+            source_sha256=str(data["source_sha256"]),
+            source_probe_fingerprint=data.get("source_probe_fingerprint"),
+            output_artifact=data.get("output_artifact"),
+            output_sha256=data.get("output_sha256"),
+            output_size_bytes=data.get("output_size_bytes"),
+            output_probe_fingerprint=data.get("output_probe_fingerprint"),
+            status=NormalizationStatus(str(data["status"])),
+            started_at_utc=str(data["started_at_utc"]),
+            completed_at_utc=str(data["completed_at_utc"]),
+            ffmpeg_path=str(data["ffmpeg_path"]),
+            ffmpeg_version=str(data["ffmpeg_version"]),
+            execution_profile=str(data["execution_profile"]),
+            selected_streams=NormalizationSelectedStreams.from_dict(data["selected_streams"]),
+            applied_transforms=tuple(data.get("applied_transforms", [])),
+            frame_rate_conversion=FrameRateConversionInfo.from_dict(data["frame_rate_conversion"]),
+            rotation_transform=RotationTransformInfo.from_dict(data["rotation_transform"]),
+            resize_transform=ResizeTransformInfo.from_dict(data["resize_transform"]),
+            audio_transform=AudioTransformInfo.from_dict(data["audio_transform"]),
+            duration_drift_us=data.get("duration_drift_us"),
+            warnings=tuple(Issue.from_dict(w) for w in data.get("warnings", [])),
+            errors=tuple(Issue.from_dict(e) for e in data.get("errors", [])),
+            cleanup=NormalizationCleanup.from_dict(data["cleanup"]),
+            provenance=NormalizationProvenance.from_dict(data["provenance"]),
+        )
+
+    def fingerprint(self) -> str:
+        return hash_canonical_json(self.to_dict())

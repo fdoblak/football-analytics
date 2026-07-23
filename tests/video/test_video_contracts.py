@@ -32,8 +32,9 @@ class VideoContractTests(unittest.TestCase):
         cls.schemas = load_all_video_schemas(REPO / "schemas/video")
         cls.policy = load_ingest_policy(REPO / "configs/video/ingest_policy.yaml")
 
-    def test_five_schemas_parse(self) -> None:
+    def test_six_schemas_parse(self) -> None:
         self.assertEqual(set(self.schemas), set(SCHEMA_FILES))
+        self.assertEqual(len(SCHEMA_FILES), 6)
         for _name, schema in self.schemas.items():
             self.assertEqual(schema.get("schema_version", {}).get("const", 1), 1)
             self.assertIn("$id", schema)

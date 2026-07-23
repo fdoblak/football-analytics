@@ -34,6 +34,7 @@ CS = load_check_storage()
 REQUIRED_DIRS = [
     "videos/raw_matches",
     "videos/test_clips",
+    "videos/normalized",
     "datasets",
     "results",
     "rendered_outputs",
@@ -58,6 +59,7 @@ def write_config(path: Path, active_root: Path, **overrides) -> None:
         "ssd_root": str(active_root),
         "raw_matches": str(active_root / "videos" / "raw_matches"),
         "test_clips": str(active_root / "videos" / "test_clips"),
+        "normalized": str(active_root / "videos" / "normalized"),
         "datasets": str(active_root / "datasets"),
         "results": str(active_root / "results"),
         "rendered_outputs": str(active_root / "rendered_outputs"),

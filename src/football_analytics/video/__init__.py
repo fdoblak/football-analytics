@@ -1,4 +1,4 @@
-"""Public Stage 3A video contract API (import side-effect free; no FFmpeg/CV/torch)."""
+"""Public Stage 3 video contract API (import side-effect free; no FFmpeg/CV/torch)."""
 
 from football_analytics.video.contracts import (
     SCHEMA_FILES,
@@ -15,6 +15,8 @@ from football_analytics.video.types import (
     IngestMode,
     IngestReceipt,
     IngestRequest,
+    NormalizationReceipt,
+    NormalizationStatus,
     NormalizePlan,
     ProvenanceInfo,
     Rational,
@@ -33,6 +35,7 @@ __all__ = [
     "SourceKind",
     "IngestMode",
     "ReceiptStatus",
+    "NormalizationStatus",
     "FrameRateMode",
     "FrameCountSource",
     "ProvenanceInfo",
@@ -43,6 +46,7 @@ __all__ = [
     "VideoProbe",
     "NormalizePlan",
     "IngestReceipt",
+    "NormalizationReceipt",
     "select_primary_video_stream",
     "load_ingest_policy",
     "load_all_video_schemas",

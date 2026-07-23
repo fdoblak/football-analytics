@@ -36,6 +36,7 @@ SUPPORTED_BACKENDS = frozenset({"wsl_local", "windows_drvfs"})
 REQUIRED_PATH_KEYS = (
     "raw_matches",
     "test_clips",
+    "normalized",
     "datasets",
     "results",
     "rendered_outputs",

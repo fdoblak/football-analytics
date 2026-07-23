@@ -416,6 +416,52 @@ def cmd_video_probe(
     return int(result.exit_code)
 
 
+def cmd_video_normalize(
+    *,
+    source: Path,
+    output: Path,
+    policy_path: Path,
+    expected_source_sha256: str | None,
+    execute: bool,
+    contain_root: Path | None,
+    receipt_dir: Path | None,
+) -> int:
+    """Stage 3C: safe local FFmpeg normalization (default dry-run)."""
+    from football_analytics.video.contracts import default_repo_root, load_ingest_policy
+    from football_analytics.video.normalization_service import run_video_normalization
+
+    root = default_repo_root()
+    pol = policy_path if policy_path.is_absolute() else root / policy_path
+    try:
+        policy = load_ingest_policy(pol)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    if execute and not expected_source_sha256:
+        print("error: --execute requires --expected-source-sha256", file=sys.stderr)
+        return 2
+    contain = contain_root
+    if contain is None:
+        contain = Path(str(policy["ffmpeg_policy"]["runtime_root"]))
+    result = run_video_normalization(
+        source=str(source),
+        output=str(output),
+        policy=policy,
+        expected_source_sha256=expected_source_sha256,
+        execute=execute,
+        contain_root=contain,
+        receipt_dir=str(receipt_dir) if receipt_dir is not None else None,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"status: {summary['status']}")
+    print(f"output_path: {summary['output_path']}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="football-analytics",
@@ -496,6 +542,44 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help="Containment root (default: ffprobe_policy.runtime_root)",
     )
+    p_norm = video_sub.add_parser("normalize", help="Safe local FFmpeg video normalization")
+    p_norm.add_argument("--source", type=Path, required=True, help="Absolute local video path")
+    p_norm.add_argument(
+        "--output",
+        type=Path,
+        required=True,
+        help="Absolute normalized output path",
+    )
+    p_norm.add_argument(
+        "--policy",
+        type=Path,
+        default=Path("configs/video/ingest_policy.yaml"),
+        help="Ingest/ffmpeg policy YAML",
+    )
+    p_norm.add_argument(
+        "--expected-source-sha256",
+        type=str,
+        default=None,
+        help="Expected source SHA-256 (required with --execute)",
+    )
+    p_norm.add_argument(
+        "--execute",
+        action="store_true",
+        default=False,
+        help="Execute normalization (default: dry-run plan/skip receipt only)",
+    )
+    p_norm.add_argument(
+        "--contain-root",
+        type=Path,
+        default=None,
+        help="Containment root (default: ffmpeg_policy.runtime_root)",
+    )
+    p_norm.add_argument(
+        "--receipt-dir",
+        type=Path,
+        default=None,
+        help="Optional directory for normalization_receipt.json",
+    )
     return parser
 
 
@@ -569,6 +653,16 @@ def main(argv: Sequence[str] | None = None) -> int:
                 output_dir=args.output_dir,
                 policy_path=args.policy,
                 contain_root=args.contain_root,
+            )
+        if args.video_command == "normalize":
+            return cmd_video_normalize(
+                source=args.source,
+                output=args.output,
+                policy_path=args.policy,
+                expected_source_sha256=args.expected_source_sha256,
+                execute=bool(args.execute),
+                contain_root=args.contain_root,
+                receipt_dir=args.receipt_dir,
             )
         parser.parse_args(["video", "--help"])
         return 2

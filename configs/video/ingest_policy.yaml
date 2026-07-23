@@ -91,12 +91,55 @@ normalization_defaults:
   target_video_codec: h264
   target_pixel_format: yuv420p
   target_audio_policy: copy_if_present_else_drop
+  target_audio_codec: aac
+  target_audio_sample_rate_hz: 48000
+  target_audio_channels: 2
   resize_policy: fit_within_keep_aspect
   frame_rate_policy: preserve_unless_explicit_cfr
   rotation_policy: apply_metadata_once
-  sar_policy: preserve
+  sar_policy: force_1_1
+  copy_metadata_policy: strip_all
   overwrite_policy: false
   inplace_forbidden: true
+  upscaling_allowed: false
+  maximum_target_width: 1920
+  maximum_target_height: 1080
+  require_even_dimensions: true
+  movflags_faststart: true
+  hardware_acceleration: disabled
+  execution_profile: cpu_libx264_crf23
+  maximum_duration_drift_us: 100000
+  force_cfr_target_frame_rate:
+    numerator: 25
+    denominator: 1
+
+# Stage 3C — safe FFmpeg normalization limits (local file only, CPU)
+ffmpeg_policy:
+  ffmpeg_binary: /usr/bin/ffmpeg
+  allowed_binary_realpaths:
+    - /usr/bin/ffmpeg
+  required_encoders:
+    - libx264
+  required_filters:
+    - scale
+    - setsar
+    - transpose
+  timeout_base_seconds: 30
+  timeout_per_media_second: 5
+  maximum_timeout_seconds: 7200
+  maximum_stderr_bytes: 1048576
+  maximum_progress_bytes: 65536
+  maximum_parallel_normalizations: 1
+  ffmpeg_threads: 2
+  minimum_free_space_bytes: 107374182400
+  minimum_free_space_after_estimate_bytes: 21474836480
+  output_size_estimation_policy: bitrate_or_source_times_two
+  size_estimate_multiplier: 2.0
+  video_crf: 23
+  video_preset: veryfast
+  runtime_root: /home/fdoblak/workspace/video_normalization_checks
+  protocol_whitelist:
+    - file
 
 # Stage 3B — safe FFprobe execution limits (local file only)
 ffprobe_policy:

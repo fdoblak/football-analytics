@@ -1,0 +1,175 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/video/normalization_receipt.schema.json",
+  "title": "Video normalization receipt (Stage 3C)",
+  "description": "Execution receipt for safe deterministic video normalization. No secrets or temp paths as final provenance.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "receipt_id",
+    "run_id",
+    "plan_id",
+    "plan_fingerprint",
+    "source_id",
+    "source_sha256",
+    "source_probe_fingerprint",
+    "output_artifact",
+    "output_sha256",
+    "output_size_bytes",
+    "output_probe_fingerprint",
+    "status",
+    "started_at_utc",
+    "completed_at_utc",
+    "ffmpeg_path",
+    "ffmpeg_version",
+    "execution_profile",
+    "selected_streams",
+    "applied_transforms",
+    "frame_rate_conversion",
+    "rotation_transform",
+    "resize_transform",
+    "audio_transform",
+    "duration_drift_us",
+    "warnings",
+    "errors",
+    "cleanup",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "receipt_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "run_id": { "type": "string", "minLength": 8 },
+    "plan_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "plan_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "source_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "source_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "source_probe_fingerprint": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "output_artifact": { "type": ["string", "null"], "minLength": 1 },
+    "output_sha256": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "output_size_bytes": { "type": ["integer", "null"], "minimum": 0 },
+    "output_probe_fingerprint": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["planned", "skipped", "succeeded", "rejected", "failed", "cancelled"]
+    },
+    "started_at_utc": { "type": "string", "minLength": 20 },
+    "completed_at_utc": { "type": "string", "minLength": 20 },
+    "ffmpeg_path": { "type": "string", "minLength": 1 },
+    "ffmpeg_version": { "type": "string", "minLength": 1 },
+    "execution_profile": { "type": "string", "minLength": 1 },
+    "selected_streams": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["video_stream_index", "audio_stream_index"],
+      "properties": {
+        "video_stream_index": { "type": "integer", "minimum": 0 },
+        "audio_stream_index": { "type": ["integer", "null"], "minimum": 0 }
+      }
+    },
+    "applied_transforms": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "frame_rate_conversion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["performed", "source_mode", "target_mode", "notes", "requires_stage3d_mapping"],
+      "properties": {
+        "performed": { "type": "boolean" },
+        "source_mode": { "type": "string", "enum": ["cfr", "vfr", "unknown"] },
+        "target_mode": { "type": "string", "enum": ["cfr", "vfr", "unknown", "unchanged"] },
+        "notes": { "type": "string" },
+        "requires_stage3d_mapping": { "type": "boolean" }
+      }
+    },
+    "rotation_transform": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["performed", "source_degrees", "output_degrees"],
+      "properties": {
+        "performed": { "type": "boolean" },
+        "source_degrees": { "type": "integer" },
+        "output_degrees": { "type": "integer" }
+      }
+    },
+    "resize_transform": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["performed", "source_width", "source_height", "target_width", "target_height"],
+      "properties": {
+        "performed": { "type": "boolean" },
+        "source_width": { "type": "integer", "minimum": 1 },
+        "source_height": { "type": "integer", "minimum": 1 },
+        "target_width": { "type": ["integer", "null"], "minimum": 1 },
+        "target_height": { "type": ["integer", "null"], "minimum": 1 }
+      }
+    },
+    "audio_transform": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy", "action"],
+      "properties": {
+        "policy": { "type": "string", "minLength": 1 },
+        "action": {
+          "type": "string",
+          "enum": ["none", "copy", "transcode", "drop", "absent"]
+        }
+      }
+    },
+    "duration_drift_us": { "type": ["integer", "null"] },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message"],
+        "properties": {
+          "code": { "type": "string", "minLength": 1 },
+          "message": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message"],
+        "properties": {
+          "code": { "type": "string", "minLength": 1 },
+          "message": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["temp_removed", "lock_released"],
+      "properties": {
+        "temp_removed": { "type": "boolean" },
+        "lock_released": { "type": "boolean" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "label"],
+      "properties": {
+        "stage": { "type": "string", "const": "3C" },
+        "label": { "type": "string", "minLength": 1 },
+        "notes": { "type": ["string", "null"] },
+        "sanitized_argv_summary": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

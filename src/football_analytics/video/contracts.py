@@ -15,6 +15,7 @@ from football_analytics.video.types import (
     IngestMode,
     IngestReceipt,
     IngestRequest,
+    NormalizationReceipt,
     NormalizePlan,
     Rational,
     ReceiptStatus,
@@ -31,6 +32,7 @@ SCHEMA_FILES = (
     "video_probe.schema.json",
     "normalize_plan.schema.json",
     "ingest_receipt.schema.json",
+    "normalization_receipt.schema.json",
 )
 
 DEFAULT_POLICY_REL = Path("configs/video/ingest_policy.yaml")
@@ -102,6 +104,7 @@ def load_ingest_policy(path: Path) -> dict[str, Any]:
         "fixture_policy",
         "normalization_defaults",
         "ffprobe_policy",
+        "ffmpeg_policy",
     }
     missing = sorted(required - set(raw))
     if missing:
@@ -118,6 +121,15 @@ def load_ingest_policy(path: Path) -> dict[str, Any]:
         raise VideoPolicyError("hash_algorithm must be sha256")
     if raw["canonical_time_unit"] != "microseconds":
         raise VideoPolicyError("canonical_time_unit must be microseconds")
+    norms = raw["normalization_defaults"]
+    if not isinstance(norms, dict):
+        raise VideoPolicyError("normalization_defaults must be a mapping")
+    if str(norms.get("hardware_acceleration", "")) != "disabled":
+        raise VideoPolicyError("hardware_acceleration must be disabled")
+    if norms.get("overwrite_policy") is not False:
+        raise VideoPolicyError("normalization_defaults.overwrite_policy must be false")
+    if norms.get("inplace_forbidden") is not True:
+        raise VideoPolicyError("inplace_forbidden must be true")
     ffprobe = raw["ffprobe_policy"]
     if not isinstance(ffprobe, dict):
         raise VideoPolicyError("ffprobe_policy must be a mapping")
@@ -146,6 +158,37 @@ def load_ingest_policy(path: Path) -> dict[str, Any]:
         raise VideoPolicyError("persist_raw_ffprobe_json must be false by default")
     if str(ffprobe.get("ffprobe_binary")) != "/usr/bin/ffprobe":
         raise VideoPolicyError("ffprobe_binary must be /usr/bin/ffprobe")
+    ffmpeg = raw["ffmpeg_policy"]
+    if not isinstance(ffmpeg, dict):
+        raise VideoPolicyError("ffmpeg_policy must be a mapping")
+    ffmpeg_required = {
+        "ffmpeg_binary",
+        "allowed_binary_realpaths",
+        "required_encoders",
+        "required_filters",
+        "timeout_base_seconds",
+        "timeout_per_media_second",
+        "maximum_timeout_seconds",
+        "maximum_stderr_bytes",
+        "maximum_progress_bytes",
+        "maximum_parallel_normalizations",
+        "ffmpeg_threads",
+        "minimum_free_space_bytes",
+        "minimum_free_space_after_estimate_bytes",
+        "output_size_estimation_policy",
+        "size_estimate_multiplier",
+        "video_crf",
+        "video_preset",
+        "runtime_root",
+        "protocol_whitelist",
+    }
+    missing_fm = sorted(ffmpeg_required - set(ffmpeg))
+    if missing_fm:
+        raise VideoPolicyError(f"ffmpeg_policy missing keys: {missing_fm}")
+    if str(ffmpeg.get("ffmpeg_binary")) != "/usr/bin/ffmpeg":
+        raise VideoPolicyError("ffmpeg_binary must be /usr/bin/ffmpeg")
+    if int(ffmpeg.get("maximum_parallel_normalizations", -1)) != 1:
+        raise VideoPolicyError("maximum_parallel_normalizations must be 1")
     # Enum alignment with Python
     for kind in raw["allowed_source_kinds"]:
         SourceKind(kind)
@@ -243,4 +286,5 @@ __all__ = [
     "VideoProbe",
     "NormalizePlan",
     "IngestReceipt",
+    "NormalizationReceipt",
 ]

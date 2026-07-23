@@ -21,6 +21,7 @@ storage:
   ssd_root: /home/fdoblak/football_data
   raw_matches: /home/fdoblak/football_data/videos/raw_matches
   test_clips: /home/fdoblak/football_data/videos/test_clips
+  normalized: /home/fdoblak/football_data/videos/normalized
   datasets: /home/fdoblak/football_data/datasets
   results: /home/fdoblak/football_data/results
   rendered_outputs: /home/fdoblak/football_data/rendered_outputs
