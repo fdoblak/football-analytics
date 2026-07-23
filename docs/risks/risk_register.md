@@ -1,6 +1,6 @@
 # Risk Register — football-analytics
 
-**Updated:** 2026-07-23 (Stage 6B)
+**Updated:** 2026-07-23 (Stage 6C)
 
 **Owner default:** Furkan Doblak unless stated otherwise
 
@@ -763,3 +763,17 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Stage 6B+ |
+
+## RISK-054 — Ball tracking accuracy not validated (Stage 6C)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-054 |
+| description | Stage 6C ships motion-first ball tracking with primary/ambiguity sidecar. Evaluator returns `NOT_EVALUATED_NO_REVIEWED_BALL_TRACKING_GROUND_TRUTH`. Primary candidate is not true-ball identity; synthetic fixtures must not be claimed as football ball-tracking accuracy. |
+| probability | high |
+| impact | medium |
+| mitigation | Null real-GT metrics + reason code; gate PASS_WITH_FINDINGS; require reviewed ball tracking GT before production claims. No ReID/possession/events/physical km/h. |
+| trigger | Stage 6C without reviewed ball tracking GT |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 6C+ |

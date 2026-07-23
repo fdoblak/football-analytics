@@ -115,6 +115,7 @@
       "enum": [
         "NOT_EVALUATED_NO_REVIEWED_TRACKING_GROUND_TRUTH",
         "NOT_EVALUATED_NO_REVIEWED_HUMAN_TRACKING_GROUND_TRUTH",
+        "NOT_EVALUATED_NO_REVIEWED_BALL_TRACKING_GROUND_TRUTH",
         "evaluated",
         "partial"
       ]
@@ -162,7 +163,8 @@
           "type": "string",
           "enum": [
             "none_stage_6a_contracts_only",
-            "iou_constant_velocity_v1"
+            "iou_constant_velocity_v1",
+            "motion_constant_velocity_v1"
           ]
         },
         "merge_reid": { "type": "boolean", "const": false },

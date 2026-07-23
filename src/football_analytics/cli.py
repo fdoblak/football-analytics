@@ -1336,6 +1336,115 @@ def cmd_tracking_humans_evaluate(
     return 0
 
 
+def cmd_tracking_ball_run(
+    *,
+    detections: Path,
+    frames: Path,
+    analysis_windows: Path,
+    output_dir: Path,
+    config_path: Path,
+    detection_attributes: Path | None,
+    contain_root: Path | None,
+    run_id: str | None,
+    video_id: str | None,
+) -> int:
+    """Stage 6C: ball tracking baseline."""
+    from football_analytics.data.registry import default_project_root
+    from football_analytics.tracking.ball_tracking_config import (
+        default_ball_tracking_config_path,
+        load_ball_tracking_config,
+    )
+    from football_analytics.tracking.ball_tracking_service import run_ball_tracking
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_ball_tracking_config_path(repo_root=root)
+    try:
+        config = load_ball_tracking_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    contain = contain_root or Path(str(config["runtime_root"]))
+    result = run_ball_tracking(
+        detections=str(detections),
+        frames=str(frames),
+        analysis_windows=str(analysis_windows),
+        output_dir=str(output_dir),
+        config=config,
+        detection_attributes=str(detection_attributes) if detection_attributes else None,
+        contain_root=contain,
+        run_id=run_id,
+        video_id=video_id,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"observations_parquet: {summary['observations_parquet']}")
+    print(f"summaries_parquet: {summary['summaries_parquet']}")
+    print(f"lifecycle_parquet: {summary['lifecycle_parquet']}")
+    print(f"receipt_json: {summary['receipt_json']}")
+    print(f"evaluation_json: {summary['evaluation_json']}")
+    print(f"primary_sidecar_json: {summary.get('primary_sidecar_json')}")
+    print(f"evaluation_status: {summary.get('evaluation_status')}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
+def cmd_tracking_ball_evaluate(
+    *,
+    observations: Path,
+    config_path: Path,
+    ground_truth: Path | None,
+) -> int:
+    """Stage 6C: evaluate ball tracks (not_evaluated without reviewed GT)."""
+    import pyarrow.parquet as pq
+
+    from football_analytics.data.registry import default_project_root
+    from football_analytics.tracking.ball_tracking_config import (
+        ball_tracking_config_fingerprint,
+        default_ball_tracking_config_path,
+        load_ball_tracking_config,
+    )
+    from football_analytics.tracking.ball_tracking_evaluation import evaluate_ball_tracking
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_ball_tracking_config_path(repo_root=root)
+    try:
+        config = load_ball_tracking_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    if not observations.is_file() or observations.is_symlink():
+        print("observations missing or symlink", file=sys.stderr)
+        return 2
+    obs_rows = pq.read_table(observations).to_pylist()
+    gt_rows = None
+    reviewed = False
+    if ground_truth is not None and ground_truth.is_file():
+        payload = json.loads(ground_truth.read_text(encoding="utf-8"))
+        if isinstance(payload, dict) and payload.get("reviewed") is True:
+            gt_rows = list(payload.get("tracks") or payload.get("ground_truth") or [])
+            reviewed = True
+    report = evaluate_ball_tracking(
+        track_observations=obs_rows,
+        ground_truth=gt_rows,
+        has_reviewed_ground_truth=reviewed,
+    )
+    run_id = str(obs_rows[0]["run_id"]) if obs_rows else "run_unknown"
+    video_id = str(obs_rows[0]["video_id"]) if obs_rows else "video_unknown"
+    body = report.to_dict(
+        run_id=run_id,
+        video_id=video_id,
+        config_fingerprint=ball_tracking_config_fingerprint(config),
+    )
+    print(json.dumps(body, indent=2, sort_keys=True))
+    return 0
+
+
 def cmd_perception_validate(*, config_path: Path, frames: int, keep: bool) -> int:
     """Stage 5E: run detection pipeline validator script entry."""
     import runpy
@@ -1904,7 +2013,7 @@ def build_parser() -> argparse.ArgumentParser:
     p_p_validate.add_argument("--frames", type=int, default=8, help="Synthetic frames (≤20)")
     p_p_validate.add_argument("--keep", action="store_true", help="Keep validator session dir")
 
-    p_tracking = sub.add_parser("tracking", help="Multi-object tracking helpers (Stage 6A/6B)")
+    p_tracking = sub.add_parser("tracking", help="Multi-object tracking helpers (Stage 6A/6B/6C)")
     tracking_sub = p_tracking.add_subparsers(dest="tracking_command")
     p_trk_contracts = tracking_sub.add_parser("contracts", help="Tracking contract helpers")
     trk_contracts_sub = p_trk_contracts.add_subparsers(dest="tracking_contracts_command")
@@ -1943,6 +2052,30 @@ def build_parser() -> argparse.ArgumentParser:
         default=Path("configs/tracking/human_tracking_baseline.yaml"),
     )
     p_trk_h_eval.add_argument("--ground-truth", type=Path, default=None)
+    p_trk_ball = tracking_sub.add_parser("ball", help="Ball tracking baseline (Stage 6C)")
+    trk_ball_sub = p_trk_ball.add_subparsers(dest="tracking_ball_command")
+    p_trk_b_run = trk_ball_sub.add_parser("run", help="Run ball tracking")
+    p_trk_b_run.add_argument("--detections", type=Path, required=True)
+    p_trk_b_run.add_argument("--frames", type=Path, required=True)
+    p_trk_b_run.add_argument("--analysis-windows", type=Path, required=True)
+    p_trk_b_run.add_argument("--output-dir", type=Path, required=True)
+    p_trk_b_run.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/tracking/ball_tracking_baseline.yaml"),
+    )
+    p_trk_b_run.add_argument("--detection-attributes", type=Path, default=None)
+    p_trk_b_run.add_argument("--contain-root", type=Path, default=None)
+    p_trk_b_run.add_argument("--run-id", type=str, default=None)
+    p_trk_b_run.add_argument("--video-id", type=str, default=None)
+    p_trk_b_eval = trk_ball_sub.add_parser("evaluate", help="Evaluate ball tracks")
+    p_trk_b_eval.add_argument("--observations", type=Path, required=True)
+    p_trk_b_eval.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/tracking/ball_tracking_baseline.yaml"),
+    )
+    p_trk_b_eval.add_argument("--ground-truth", type=Path, default=None)
     return parser
 
 
@@ -2230,6 +2363,27 @@ def main(argv: Sequence[str] | None = None) -> int:
                     ground_truth=args.ground_truth,
                 )
             parser.parse_args(["tracking", "humans", "--help"])
+            return 2
+        if args.tracking_command == "ball":
+            if args.tracking_ball_command == "run":
+                return cmd_tracking_ball_run(
+                    detections=args.detections,
+                    frames=args.frames,
+                    analysis_windows=args.analysis_windows,
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    detection_attributes=args.detection_attributes,
+                    contain_root=args.contain_root,
+                    run_id=args.run_id,
+                    video_id=args.video_id,
+                )
+            if args.tracking_ball_command == "evaluate":
+                return cmd_tracking_ball_evaluate(
+                    observations=args.observations,
+                    config_path=args.config,
+                    ground_truth=args.ground_truth,
+                )
+            parser.parse_args(["tracking", "ball", "--help"])
             return 2
         parser.parse_args(["tracking", "--help"])
         return 2

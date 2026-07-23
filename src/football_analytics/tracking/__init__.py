@@ -1,5 +1,9 @@
-"""Stage 6 multi-object tracking contracts (6A) and human MOT baseline (6B)."""
+"""Stage 6 multi-object tracking: contracts (6A), human MOT (6B), ball MOT (6C)."""
 
+from football_analytics.tracking.ball_tracking_evaluation import (
+    NOT_EVALUATED_BALL_TRACKING,
+    evaluate_ball_tracking,
+)
 from football_analytics.tracking.bbox_rules import validate_track_bbox
 from football_analytics.tracking.contracts import (
     EXPECTED_DETECTIONS_FP,
@@ -70,6 +74,7 @@ __all__ = [
     "EXPECTED_TRACK_OBSERVATIONS_FP",
     "EXPECTED_TRACK_SUMMARIES_FP",
     "JSON_SCHEMA_NAMES",
+    "NOT_EVALUATED_BALL_TRACKING",
     "NOT_EVALUATED_HUMAN_TRACKING",
     "NOT_EVALUATED_TRACKING",
     "OBSERVATION_STATE_MAP",
@@ -92,6 +97,7 @@ __all__ = [
     "build_synthetic_request",
     "compile_tracking_schemas",
     "default_tracking_policy_path",
+    "evaluate_ball_tracking",
     "evaluate_human_tracking",
     "evaluate_tracking",
     "gap_us",

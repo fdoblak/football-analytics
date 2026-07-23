@@ -12,15 +12,17 @@ physical metrics.
 | Sub-stage | Name | Scope | Status |
 |-----------|------|-------|--------|
 | **6A** | Multi-object tracking & track lifecycle contracts | Arrow sidecars, lifecycle transitions, ID/time/bbox rules, request/receipt JSON, evaluator stubs, synthetic validators. **No tracker algorithm.** | **IN TREE** |
-| **6B** | Human multi-object tracking baseline & evaluation | In-repo IoU + constant-velocity greedy MOT; association eval; no ReID identity claims. | **IN TREE** (this stage) |
-| **6C** | Ball tracking baseline / lost-ball handling | Deferred; named only when prompted. | **NOT STARTED** |
+| **6B** | Human multi-object tracking baseline & evaluation | In-repo IoU + constant-velocity greedy MOT; association eval; no ReID identity claims. | **IN TREE** |
+| **6C** | Ball tracking baseline / lost-ball handling | Motion-first association; primary/ambiguity sidecar; short-gap prediction; long-gap new track; no ReID. | **IN TREE** (this stage) |
+| **6D** | Human+ball track fusion, quality gates, Stage 6 close | Named only; not started. | **NOT STARTED** |
 
 ## Product link
 
 Tracking consumes Stage 5 detection bundles and Stage 4 analysis windows.
-Track IDs are **not** player identities. Camera exit/re-entry sameness is
+Track IDs are **not** player/ball identities. Camera exit/re-entry sameness is
 unproven until later ReID stages. Predicted/interpolated points are not
-physical measurements by default.
+physical measurements by default. Primary ball candidate is not a true-ball
+guarantee.
 
 ## SoccerNet note
 
@@ -29,4 +31,4 @@ physical measurements by default.
 
 ## Next stage (name only)
 
-`Aşama 6C — Top Takibi Baseline, Kayıp Top Yönetimi ve Değerlendirme`
+`Aşama 6D — İnsan ve Top Takip Birleştirme, Kalite Kapıları ve Aşama 6 Kapanışı`

@@ -7,20 +7,11 @@ Greedy one-to-one assignment with stable tie-break:
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
-from dataclasses import dataclass
 from typing import Any
 
 from football_analytics.perception.detection_evaluation import bbox_iou, center_l2
+from football_analytics.tracking.association_common import AssociationPair, greedy_select_pairs
 from football_analytics.tracking.human_motion import BBox
-
-
-@dataclass(frozen=True)
-class AssociationPair:
-    track_id: int
-    detection_id: int
-    cost: float
-    iou: float
-    center_dist: float
 
 
 def association_cost(
@@ -72,13 +63,13 @@ def greedy_associate(
     ``detections`` entries need ``detection_id`` and bbox fields.
     Returns (matches, unmatched_track_ids, unmatched_detection_ids).
     """
-    candidates: list[tuple[float, int, int, int, int]] = []
-    for ti, tr in enumerate(tracks):
+    candidates: list[tuple[float, int, int, float, float]] = []
+    for tr in tracks:
         tid = int(tr["track_id"])
         pred = predicted_bboxes.get(tid)
         if pred is None:
             continue
-        for di, det in enumerate(detections):
+        for det in detections:
             did = int(det["detection_id"])
             det_bbox = (
                 float(det["bbox_x1"]),
@@ -100,51 +91,17 @@ def greedy_associate(
                 motion_center_gate_px=motion_center_gate_px,
             ):
                 continue
-            candidates.append((cost, tid, did, ti, di))
+            candidates.append((cost, tid, did, iou, dist))
 
-    # Deterministic order: cost, track_id, detection_id.
-    candidates.sort(key=lambda c: (c[0], c[1], c[2]))
-
-    used_tracks: set[int] = set()
-    used_dets: set[int] = set()
-    matches: list[AssociationPair] = []
-    for cost, tid, did, _ti, _di in candidates:
-        if tid in used_tracks or did in used_dets:
-            continue
-        pred = predicted_bboxes[tid]
-        det = next(d for d in detections if int(d["detection_id"]) == did)
-        det_bbox = (
-            float(det["bbox_x1"]),
-            float(det["bbox_y1"]),
-            float(det["bbox_x2"]),
-            float(det["bbox_y2"]),
-        )
-        _, iou, dist = association_cost(
-            pred,
-            det_bbox,
-            iou_weight=iou_weight,
-            motion_weight=motion_weight,
-            motion_center_gate_px=motion_center_gate_px,
-        )
-        matches.append(
-            AssociationPair(
-                track_id=tid,
-                detection_id=did,
-                cost=cost,
-                iou=iou,
-                center_dist=dist,
-            )
-        )
-        used_tracks.add(tid)
-        used_dets.add(did)
-
+    matches = greedy_select_pairs(candidates)
+    used_tracks = {m.track_id for m in matches}
+    used_dets = {m.detection_id for m in matches}
     unmatched_tracks = [int(t["track_id"]) for t in tracks if int(t["track_id"]) not in used_tracks]
     unmatched_dets = [
         int(d["detection_id"]) for d in detections if int(d["detection_id"]) not in used_dets
     ]
     unmatched_tracks.sort()
     unmatched_dets.sort()
-    matches.sort(key=lambda m: (m.track_id, m.detection_id))
     return matches, unmatched_tracks, unmatched_dets
 
 

@@ -1,0 +1,101 @@
+# Stage 6C ball tracking baseline (motion-first + constant-velocity).
+# No ReID, no possession/events, no physical km/h claims.
+config_version: 1
+tracker_id: ball_motion_cv_v1
+tracker_version: "0.1.0"
+tracker_algorithm: motion_constant_velocity_v1
+association_method: motion_first_constant_velocity
+association_version: "1"
+
+association:
+  # Image-space gates only (not physical impossibility claims).
+  motion_center_gate_px: 180.0
+  motion_gate_scale_per_us: 0.00025
+  size_ratio_gate: 3.0
+  iou_support_min: 0.0
+  cost_motion_weight: 0.55
+  cost_size_weight: 0.20
+  cost_confidence_weight: 0.15
+  cost_iou_weight: 0.10
+  min_confidence: 0.05
+  # IoU alone is never sufficient — motion gate must pass.
+  require_motion_gate: true
+  tie_break: track_id_then_detection_id
+
+primary_candidate:
+  max_primary_per_frame: 1
+  score_margin: 0.08
+  ambiguity_margin: 0.08
+  prefer_confirmed: true
+  # Highest confidence alone is never decisive (motion/size required).
+
+lifecycle:
+  confirmation_observation_threshold: 2
+  max_lost_gap_us: 600000
+  max_prediction_gap_us: 160000
+  emit_predicted_observations: true
+  reopen_terminated: false
+  tentative_miss_terminate_us: 160000
+  weak_candidate_terminate_us: 400000
+
+boundaries:
+  terminate_on_shot_cut: true
+  terminate_on_non_playable: true
+  terminate_on_window_boundary: true
+  terminate_on_ineligible_tracking: true
+  no_cross_shot_continuation: true
+  no_cross_cut_prediction: true
+
+role:
+  always_unknown: true
+
+entity_filter:
+  allowed_entity_types: [ball]
+  reject_entity_types: [human]
+  ball_class_names: [ball, sports ball, sports_ball]
+  reject_class_names: [person, human, player]
+
+prediction:
+  physical_metric_eligible: false
+  event_eligible: false
+  uncertainty_grows_with_gap: true
+
+output_policy:
+  atomic_writes: true
+  overwrite_allowed: false
+  emit_predicted: true
+  emit_interpolated: false
+  emit_primary_sidecar: true
+
+review:
+  sample_ambiguous: true
+  sample_invalid_jump: true
+  max_review_samples_per_run: 32
+  no_spam_empty_frames: true
+
+frame_geometry:
+  frame_width: 1280
+  frame_height: 720
+  edge_margin_px: 8.0
+  invalid_jump_px: 400.0
+
+safety_limits:
+  max_tracks_per_video: 128
+  max_observations_per_track: 100000
+  max_frames_per_run: 100000
+  timeout_seconds: 120.0
+
+runtime_root: /home/fdoblak/workspace/ball_tracking_checks
+policy_path: configs/tracking/tracking_contract_policy.yaml
+deterministic_seed: 0
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+notes:
+  - Motion-first association (center displacement + CV predict + size + conf; IoU support only).
+  - Primary ball candidate ≤1 per frame; ambiguity when score margin insufficient.
+  - Short gap → predicted (physical/event ineligible); long gap → terminate + new track.
+  - No ReID stitch; shot cut / replay / non-playable terminate; no cross-cut prediction.
+  - Primary candidate is not a guarantee of true ball identity.
+  - Pixel motion is not physical speed; no possession/events.
