@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/identity/target_decision.schema.json",
+  "title": "Target identity manual decision (Stage 7E)",
+  "description": "Schema-validated manual decision. Runtime-only; never git. Compare-and-set version + audit chain required.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "decision_id",
+    "manifest_id",
+    "manifest_hash",
+    "run_id",
+    "video_id",
+    "target_player_id",
+    "track_id",
+    "start_frame_index",
+    "end_frame_index",
+    "decision",
+    "reviewer_id",
+    "decided_at_utc",
+    "expected_assignment_version",
+    "expected_previous_status",
+    "new_status",
+    "reason",
+    "evidence_fingerprints",
+    "previous_audit_hash",
+    "record_hash",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "decision_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "manifest_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "manifest_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "minLength": 1 },
+    "target_player_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "track_id": { "type": "integer", "minimum": 0 },
+    "candidate_id": { "type": ["string", "null"], "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "start_frame_index": { "type": "integer", "minimum": 0 },
+    "end_frame_index": { "type": "integer", "minimum": 0 },
+    "decision": {
+      "type": "string",
+      "enum": ["confirm", "reject", "keep_provisional", "revoke", "unknown"]
+    },
+    "reviewer_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "decided_at_utc": { "type": "string", "minLength": 10 },
+    "expected_assignment_version": { "type": "integer", "minimum": 1 },
+    "expected_previous_status": {
+      "type": ["string", "null"],
+      "enum": [
+        "candidate",
+        "provisional",
+        "confirmed",
+        "rejected",
+        "revoked",
+        "unknown",
+        null
+      ]
+    },
+    "new_status": {
+      "type": "string",
+      "enum": ["candidate", "provisional", "confirmed", "rejected", "revoked", "unknown"]
+    },
+    "reason": { "type": "string", "minLength": 1, "maxLength": 1024 },
+    "evidence_fingerprints": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+    },
+    "linked_evidence_ids": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" }
+    },
+    "previous_audit_hash": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "record_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "supersedes_decision_id": {
+      "type": ["string", "null"],
+      "pattern": "^[a-z][a-z0-9_]{1,63}$"
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stage",
+        "append_only",
+        "runtime_only",
+        "synthetic_fixture",
+        "face_biometric_forbidden"
+      ],
+      "properties": {
+        "stage": { "type": "string", "const": "7E" },
+        "append_only": { "type": "boolean", "const": true },
+        "runtime_only": { "type": "boolean", "const": true },
+        "synthetic_fixture": { "type": "boolean" },
+        "face_biometric_forbidden": { "type": "boolean", "const": true },
+        "notes": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

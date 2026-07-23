@@ -1,0 +1,110 @@
+# Stage 7E — target-player evidence fusion + manual approval.
+# Fuses 7B/7C/7D outputs as evidence only. Manual-only confirmation.
+# auto_confirm=false; face=false; cross-video auto-link=false.
+config_version: 1
+producer: target_identity_fusion
+producer_version: "0.1.0"
+method_id: target_evidence_fusion_v1
+method_type: evidence_fusion_manual_confirm
+
+identity_policy_path: configs/identity/identity_evidence_policy.yaml
+
+safety:
+  face_recognition: false
+  biometric_identity: false
+  cross_video_auto_link: false
+  physical_track_merge: false
+  auto_confirm: false
+  manual_only_confirmation: true
+  appearance_alone_cannot_confirm: true
+  jersey_alone_cannot_confirm: true
+  team_alone_cannot_confirm: true
+  two_auto_cues_max_provisional: true
+  evaluation_label_must_not_enter_decisions: true
+  synthetic_fixtures_not_accuracy_claims: true
+
+evidence_reliability:
+  manual_track_anchor: manual_verified
+  appearance_similarity: supporting
+  jersey_number: supporting
+  team_assignment: supporting
+  role_consistency: supporting
+  temporal_continuity: weak
+  spatial_motion_continuity: weak
+  camera_view_suitability: weak
+  negative_exclusion: conflicting
+  unknown: unavailable
+
+candidate_rules:
+  alone_insufficient_max_status: candidate
+  min_independent_auto_supporting_for_provisional: 2
+  provisional_max_without_manual: true
+  confirmed_requires_scoped_manual_decision: true
+  linked_tracklets_after_confirm_remain_candidate_or_provisional: true
+  long_gap_new_tracklet_max_status: candidate
+  ambiguity_score_margin: 0.05
+  max_candidates_per_run: 64
+  ranking_is_review_aid_only: true
+
+conflict_rules:
+  overlapping_confirmed_targets: hard_fail_and_review
+  track_multi_identity_same_interval: hard_fail_and_review
+  duplicate_assignment: hard_fail
+  jersey_team_mismatch: hard_conflict_or_review
+  silent_majority_resolution: false
+  overlap_tolerance_frames: 0
+
+review:
+  max_review_items: 32
+  sampling_strategy: deterministic_cap
+  allowed_decisions:
+    - confirm
+    - reject
+    - keep_provisional
+    - revoke
+    - unknown
+  require_expected_assignment_version: true
+  require_manifest_hash: true
+  stale_manifest_rejected: true
+  duplicate_decision_rejected: true
+  append_only_audit: true
+  compare_and_set_version: true
+
+metric_eligibility:
+  eligible_requires_confirmed_observed_sufficient_coverage_no_conflict: true
+  provisional_only_for_provisional: true
+  predicted_interpolated_not_eligible: true
+  revoked_rejected_not_eligible: true
+  insufficient_coverage_not_evaluable: true
+  min_confirmed_coverage_frames: 1
+
+audit:
+  hash_chain: true
+  version_policy: compare_and_set
+  decisions_runtime_only: true
+  chmod_mode: 0o600
+
+output_policy:
+  atomic_writes: true
+  overwrite_allowed: false
+  chmod_mode: 0o600
+
+safety_limits:
+  max_tracks_per_video: 512
+  max_assignments_per_run: 512
+  max_evidence_per_run: 4096
+  timeout_seconds: 120.0
+
+runtime_root: /home/fdoblak/workspace/target_identity_checks
+deterministic_seed: 0
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+notes:
+  - Appearance/jersey/team alone never confirm.
+  - Two automatic supporting cues → at most provisional.
+  - Confirmed only via scoped manual decision.
+  - Manual decisions stay runtime-only (not git).
+  - No face, no physical track merge, no real customer metrics in Stage 7E.
+  - false_target_attribution must be 0 on synthetic tests.

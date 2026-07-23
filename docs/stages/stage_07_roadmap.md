@@ -9,11 +9,16 @@ metrics never silently report the wrong athlete.
 
 | Stage | Scope | Status |
 |-------|--------|--------|
-| **7A** | Identity evidence, ReID candidate links, track identity assignments, target-player request/receipt, policy, metric eligibility, review/audit, eval stubs | **in-tree / contracts** |
-| **7B** | Appearance embedding + tracklet ReID baseline (handcrafted) | **in-tree / baseline** |
-| **7C** | Anonymous team appearance clustering + `team_assignments` baseline | **in-tree / baseline** |
-| **7D** | Jersey region extraction + OpenCV template OCR baseline | **in-tree / baseline** |
-| **7E** | Target-player evidence merge, manual confirm, Stage 7 closure | **not started** |
+| **7A** | Identity evidence, ReID candidate links, track identity assignments, target-player request/receipt, policy, metric eligibility, review/audit, eval stubs | **CLOSED** |
+| **7B** | Appearance embedding + tracklet ReID baseline (handcrafted) | **CLOSED** (with findings) |
+| **7C** | Anonymous team appearance clustering + `team_assignments` baseline | **CLOSED** (with findings) |
+| **7D** | Jersey region extraction + OpenCV template OCR baseline | **CLOSED** (with findings) |
+| **7E** | Target-player evidence merge, manual confirm, Stage 7 closure | **CLOSED** (with findings) |
+
+## Stage 7 status
+
+**CLOSED** as technical identity workflow baseline (`identity-baseline-v0.7.0`).
+Real football ReID / team / jersey / identity accuracy is **not** validated.
 
 ## Explicit non-goals (until later stages)
 
@@ -30,6 +35,6 @@ metrics never silently report the wrong athlete.
 - `team_assignments` / `jersey_observations` as **reference-only** evidence sources
 - Manual review queue + append-only audit
 
-## Next after 7D
+## Next after Stage 7
 
-`Aşama 7E — Hedef Futbolcu Kanıt Birleştirme, Manuel Onay ve Aşama 7 Kapanışı`
+`Aşama 8A — Saha Kalibrasyonu, Homografi ve Koordinat Sözleşmeleri`

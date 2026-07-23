@@ -1057,3 +1057,59 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Stage 7D+ |
+
+## RISK-075 — False target attribution after evidence fusion
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-075 |
+| description | Fused appearance/team/jersey cues or stale manual decisions confirm the wrong track as target_player. |
+| probability | high |
+| impact | critical |
+| mitigation | Manual-only confirm; alone cues never confirm; two auto cues max provisional; overlapping confirmed hard-fail; false_target_attribution=0 on synthetic; CAS + append-only audit. |
+| trigger | auto-confirmed target or silent conflict resolution |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7E+ |
+
+## RISK-076 — Identity evidence conflict / silent majority resolution
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-076 |
+| description | Conflicting jersey/team/appearance evidence resolved by score majority instead of review. |
+| probability | medium |
+| impact | high |
+| mitigation | hard_conflict → rejected/review; silent_majority_resolution=false; review manifest conflict flags. |
+| trigger | conflicting polarity ignored in fusion |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7E+ |
+
+## RISK-077 — Stale or replayed manual identity decision
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-077 |
+| description | Out-of-date review manifest or duplicate decision silently mutates assignments. |
+| probability | medium |
+| impact | high |
+| mitigation | Compare-and-set assignment version + manifest hash; reject stale/duplicate; append-only audit chain. |
+| trigger | decide with mismatched expected_assignment_version / manifest_hash |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7E+ |
+
+## RISK-078 — Evaluation leakage into target identity decisions
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-078 |
+| description | Evaluation/GT labels enter fusion features or decision evidence and inflate accuracy. |
+| probability | medium |
+| impact | high |
+| mitigation | leakage_class checks; LEAKAGE_SEPARATION_VIOLATION hard-fail; NOT_EVALUATED without reviewed GT; synthetic fixtures not accuracy claims. |
+| trigger | evaluation leakage_class on decision-facing evidence |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7E+ |

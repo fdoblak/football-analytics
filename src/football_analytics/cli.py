@@ -1208,7 +1208,7 @@ def cmd_identity_contracts_validate(*, keep: bool, as_json: bool) -> int:
     return int(main_fn(argv))
 
 
-def cmd_identity_target_validate(request_path: Path) -> int:
+def cmd_identity_target_validate_request(request_path: Path) -> int:
     """Validate target_player_request JSON against Stage 7A schema."""
     from football_analytics.identity.target_profile import validate_target_player_request
 
@@ -1226,6 +1226,123 @@ def cmd_identity_target_validate(request_path: Path) -> int:
         return 1
     print("target_valid: true")
     return 0
+
+
+def cmd_identity_target_prepare_review(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    contain_root: Path | None,
+    run_id: str | None,
+    video_id: str | None,
+    fixture: str,
+) -> int:
+    """Stage 7E: fuse evidence and write review manifest (synthetic fixture path)."""
+    from football_analytics.identity.target_fusion_config import (
+        default_target_fusion_config_path,
+        load_target_fusion_config,
+    )
+    from football_analytics.identity.target_fusion_service import prepare_review
+
+    root = _project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_target_fusion_config_path(project_root=root)
+    config = load_target_fusion_config(cfg_path)
+    result = prepare_review(
+        output_dir=output_dir,
+        config=config,
+        contain_root=contain_root,
+        run_id=run_id,
+        video_id=video_id,
+        fixture_name=fixture,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary.get('accepted')}")
+    print(f"manifest_json: {summary.get('manifest_json')}")
+    print(f"error_code: {summary.get('error_code')}")
+    return 0 if result.accepted else int(result.exit_code or 1)
+
+
+def cmd_identity_target_decide(
+    *,
+    output_dir: Path,
+    decision: Path,
+    config_path: Path,
+    contain_root: Path | None,
+) -> int:
+    """Stage 7E: apply schema-validated manual decision + append-only audit."""
+    from football_analytics.identity.target_fusion_config import (
+        default_target_fusion_config_path,
+        load_target_fusion_config,
+    )
+    from football_analytics.identity.target_fusion_service import apply_decision
+
+    root = _project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_target_fusion_config_path(project_root=root)
+    config = load_target_fusion_config(cfg_path)
+    result = apply_decision(
+        output_dir=output_dir,
+        decision_path=decision,
+        config=config,
+        contain_root=contain_root,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary.get('accepted')}")
+    print(f"decision_json: {summary.get('decision_json')}")
+    print(f"error_code: {summary.get('error_code')}")
+    return 0 if result.accepted else int(result.exit_code or 1)
+
+
+def cmd_identity_target_resolve(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    contain_root: Path | None,
+) -> int:
+    """Stage 7E: apply assignments + eligibility timeline + receipt/quality."""
+    from football_analytics.identity.target_fusion_config import (
+        default_target_fusion_config_path,
+        load_target_fusion_config,
+    )
+    from football_analytics.identity.target_fusion_service import resolve_fusion
+
+    root = _project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_target_fusion_config_path(project_root=root)
+    config = load_target_fusion_config(cfg_path)
+    result = resolve_fusion(
+        output_dir=output_dir,
+        config=config,
+        contain_root=contain_root,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary.get('accepted')}")
+    print(f"assignments_parquet: {summary.get('assignments_parquet')}")
+    print(f"receipt_json: {summary.get('receipt_json')}")
+    print(f"error_code: {summary.get('error_code')}")
+    return 0 if result.accepted else int(result.exit_code or 1)
+
+
+def cmd_identity_target_pipeline_validate(*, keep: bool, as_json: bool) -> int:
+    """Run Stage 7E target identity pipeline validator."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_target_identity_pipeline.py"
+    argv = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script))
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("target identity validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
 
 
 def cmd_identity_receipt_validate(receipt_path: Path) -> int:
@@ -2694,9 +2811,7 @@ def build_parser() -> argparse.ArgumentParser:
     p_trk_validate.add_argument("--frames", type=int, default=8, help="Synthetic frames (≤20)")
     p_trk_validate.add_argument("--keep", action="store_true", help="Keep validator session dir")
 
-    p_identity = sub.add_parser(
-        "identity", help="ReID / identity / target-player (Stage 7A/7B/7C/7D)"
-    )
+    p_identity = sub.add_parser("identity", help="ReID / identity / target-player (Stage 7A–7E)")
     identity_sub = p_identity.add_subparsers(dest="identity_command")
     p_id_contracts = identity_sub.add_parser("contracts", help="Identity contract helpers")
     id_contracts_sub = p_id_contracts.add_subparsers(dest="identity_contracts_command")
@@ -2705,12 +2820,51 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p_id_c_val.add_argument("--keep", action="store_true", help="Keep validator session dir")
     p_id_c_val.add_argument("--json", action="store_true", help="Emit JSON report")
-    p_id_target = identity_sub.add_parser("target", help="Target player request helpers")
-    id_target_sub = p_id_target.add_subparsers(dest="identity_target_command")
-    p_id_t_val = id_target_sub.add_parser(
-        "validate", help="Validate a target_player_request JSON file"
+    p_id_target = identity_sub.add_parser(
+        "target", help="Target identity fusion + manual approval (Stage 7E)"
     )
-    p_id_t_val.add_argument("request", type=Path, help="Path to target_player_request JSON")
+    id_target_sub = p_id_target.add_subparsers(dest="identity_target_command")
+    p_id_t_prep = id_target_sub.add_parser(
+        "prepare-review", help="Fuse evidence and write review manifest"
+    )
+    p_id_t_prep.add_argument("--output-dir", type=Path, required=True)
+    p_id_t_prep.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/identity/target_identity_fusion.yaml"),
+    )
+    p_id_t_prep.add_argument("--contain-root", type=Path, default=None)
+    p_id_t_prep.add_argument("--run-id", type=str, default=None)
+    p_id_t_prep.add_argument("--video-id", type=str, default=None)
+    p_id_t_prep.add_argument("--fixture", type=str, default="e2e_bundle")
+    p_id_t_dec = id_target_sub.add_parser(
+        "decide", help="Apply schema-validated manual decision file"
+    )
+    p_id_t_dec.add_argument("--output-dir", type=Path, required=True)
+    p_id_t_dec.add_argument("--decision", type=Path, required=True)
+    p_id_t_dec.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/identity/target_identity_fusion.yaml"),
+    )
+    p_id_t_dec.add_argument("--contain-root", type=Path, default=None)
+    p_id_t_res = id_target_sub.add_parser(
+        "resolve", help="Write assignments, eligibility timeline, receipt"
+    )
+    p_id_t_res.add_argument("--output-dir", type=Path, required=True)
+    p_id_t_res.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/identity/target_identity_fusion.yaml"),
+    )
+    p_id_t_res.add_argument("--contain-root", type=Path, default=None)
+    p_id_t_val = id_target_sub.add_parser("validate", help="Run target identity pipeline validator")
+    p_id_t_val.add_argument("--keep", action="store_true")
+    p_id_t_val.add_argument("--json", action="store_true")
+    p_id_t_val_req = id_target_sub.add_parser(
+        "validate-request", help="Validate a target_player_request JSON file"
+    )
+    p_id_t_val_req.add_argument("request", type=Path, help="Path to target_player_request JSON")
     p_id_receipt = identity_sub.add_parser("receipt", help="Identity receipt helpers")
     id_receipt_sub = p_id_receipt.add_subparsers(dest="identity_receipt_command")
     p_id_r_val = id_receipt_sub.add_parser(
@@ -3185,8 +3339,34 @@ def main(argv: Sequence[str] | None = None) -> int:
             parser.parse_args(["identity", "contracts", "--help"])
             return 2
         if args.identity_command == "target":
+            if args.identity_target_command == "prepare-review":
+                return cmd_identity_target_prepare_review(
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    contain_root=args.contain_root,
+                    run_id=args.run_id,
+                    video_id=args.video_id,
+                    fixture=args.fixture,
+                )
+            if args.identity_target_command == "decide":
+                return cmd_identity_target_decide(
+                    output_dir=args.output_dir,
+                    decision=args.decision,
+                    config_path=args.config,
+                    contain_root=args.contain_root,
+                )
+            if args.identity_target_command == "resolve":
+                return cmd_identity_target_resolve(
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    contain_root=args.contain_root,
+                )
             if args.identity_target_command == "validate":
-                return cmd_identity_target_validate(args.request)
+                return cmd_identity_target_pipeline_validate(
+                    keep=bool(args.keep), as_json=bool(args.json)
+                )
+            if args.identity_target_command == "validate-request":
+                return cmd_identity_target_validate_request(args.request)
             parser.parse_args(["identity", "target", "--help"])
             return 2
         if args.identity_command == "receipt":

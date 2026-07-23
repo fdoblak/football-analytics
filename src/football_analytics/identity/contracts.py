@@ -44,6 +44,10 @@ JSON_SCHEMA_NAMES: tuple[str, ...] = (
     "identity_manual_audit",
     "identity_run_receipt",
     "identity_evaluation",
+    "target_review_manifest",
+    "target_decision",
+    "metric_eligibility_timeline",
+    "target_fusion_receipt",
 )
 
 EXPECTED_REGISTRY_CONTRACT_COUNT = 20

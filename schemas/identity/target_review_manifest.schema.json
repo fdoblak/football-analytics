@@ -1,0 +1,126 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/identity/target_review_manifest.schema.json",
+  "title": "Target identity review manifest (Stage 7E)",
+  "description": "Machine-readable review package for target-player candidates. Ranking is a review aid only; never auto-confirms.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "manifest_id",
+    "run_id",
+    "video_id",
+    "request_id",
+    "target_player_id",
+    "config_fingerprint",
+    "policy_fingerprint",
+    "manifest_hash",
+    "expected_assignment_version",
+    "candidates",
+    "allowed_decisions",
+    "artifact_refs",
+    "created_at_utc",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "manifest_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "minLength": 1 },
+    "request_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "target_player_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "config_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "policy_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "manifest_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "expected_assignment_version": { "type": "integer", "minimum": 1 },
+    "candidates": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "candidate_id",
+          "track_id",
+          "start_frame_index",
+          "end_frame_index",
+          "proposed_status",
+          "rank",
+          "rank_score",
+          "reason_codes",
+          "supporting_evidence_ids",
+          "conflicting_evidence_ids",
+          "ambiguous",
+          "manual_review_required"
+        ],
+        "properties": {
+          "candidate_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+          "track_id": { "type": "integer", "minimum": 0 },
+          "start_frame_index": { "type": "integer", "minimum": 0 },
+          "end_frame_index": { "type": "integer", "minimum": 0 },
+          "proposed_status": {
+            "type": "string",
+            "enum": ["candidate", "provisional", "rejected", "unknown"]
+          },
+          "rank": { "type": "integer", "minimum": 1 },
+          "rank_score": { "type": "number" },
+          "reason_codes": { "type": "array", "items": { "type": "string" } },
+          "supporting_evidence_ids": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" }
+          },
+          "conflicting_evidence_ids": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" }
+          },
+          "ambiguous": { "type": "boolean" },
+          "manual_review_required": { "type": "boolean" },
+          "coverage_frames": { "type": ["integer", "null"], "minimum": 0 },
+          "conflict_summary": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "allowed_decisions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": ["confirm", "reject", "keep_provisional", "revoke", "unknown"]
+      }
+    },
+    "artifact_refs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": { "type": "string" },
+          "sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" }
+        }
+      }
+    },
+    "conflict_flags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "created_at_utc": { "type": "string", "minLength": 10 },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stage",
+        "face_biometric_forbidden",
+        "auto_confirm_forbidden",
+        "ranking_is_review_aid_only"
+      ],
+      "properties": {
+        "stage": { "type": "string", "const": "7E" },
+        "face_biometric_forbidden": { "type": "boolean", "const": true },
+        "auto_confirm_forbidden": { "type": "boolean", "const": true },
+        "ranking_is_review_aid_only": { "type": "boolean", "const": true },
+        "notes": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

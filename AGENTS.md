@@ -67,20 +67,18 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `scripts/check_appearance_reid_baseline.py` (Stage 7B appearance embedding + tracklet ReID baseline)
 - `scripts/check_team_assignment_baseline.py` (Stage 7C anonymous team assignment baseline)
 - `scripts/check_jersey_ocr_baseline.py` (Stage 7D jersey region + OpenCV template OCR baseline)
+- `scripts/check_target_identity_pipeline.py` (Stage 7E target evidence fusion + manual approval)
 - `scripts/check_stage_cache.py`, `check_ci_workflow.py`, `check_project.py`
 - Or: `football-analytics project check --profile local --quick`
 
 Stage 5 is closed (`detection-baseline-v0.5.0`). Stage 6 is closed
 (`tracking-baseline-v0.6.0`): contracts → human/ball MOT baselines → tracking
-fusion + quality gates. Stage 7A identity contracts are in-tree when merged.
-Stage 7B appearance ReID baseline is in-tree when merged (handcrafted
-descriptor; appearance alone cannot confirm; real football accuracy not
-validated). Stage 7C anonymous team appearance clustering + `team_assignments`
-baseline is in-tree when merged (`team_a`/`team_b`/`unknown` only; no home/away
-or club naming; team evidence alone cannot confirm). Stage 7D jersey region +
-OpenCV template OCR baseline is in-tree when merged (jersey alone cannot
-confirm; real football OCR accuracy not validated). Do **not** start Stage 7E
-without an explicit user prompt.
+fusion + quality gates. Stage 7 is closed (`identity-baseline-v0.7.0`):
+7A identity contracts → 7B appearance ReID → 7C anonymous team assignment →
+7D jersey OCR → 7E evidence fusion + manual target workflow. Appearance / team /
+jersey alone cannot confirm; confirmed requires scoped manual decision;
+`auto_confirm=false`; face forbidden; real football identity accuracy not
+validated. Do **not** start Stage 8A without an explicit user prompt.
 
 ---
 
@@ -166,10 +164,8 @@ Do not start a stage without an explicit user prompt.
 Stage 4A–4D broadcast understanding baseline is in-tree when merged.
 Stage 5A–5E detection baseline is in-tree when merged (`detection-baseline-v0.5.0`).
 Stage 5 is **closed**. Stage 6A–6D tracking baseline is in-tree when merged
-(`tracking-baseline-v0.6.0`). Stage 6 is **closed**. Stage 7A identity /
-target-player contracts are in-tree when merged. Stage 7B appearance embedding
-+ tracklet ReID baseline is in-tree when merged (handcrafted; no auto-confirm).
-Stage 7C anonymous team assignment baseline is in-tree when merged. Stage 7D
-jersey region + OpenCV template OCR baseline is in-tree when merged. Stage 7E
-is **not** started unless explicitly requested.
+(`tracking-baseline-v0.6.0`). Stage 6 is **closed**. Stage 7A–7E identity /
+target-player baseline is in-tree when merged (`identity-baseline-v0.7.0`).
+Stage 7 is **closed**. Stage 8A (pitch calibration / homography / coordinate
+contracts) is **not** started unless explicitly requested.
 Manual Cursor flow only — no Codex/background automation.

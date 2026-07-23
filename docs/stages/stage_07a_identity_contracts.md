@@ -86,7 +86,7 @@ customer-metric eligible.
 CLI (contract-safe only — **no** `identity run`):
 
 - `football-analytics identity contracts validate`
-- `football-analytics identity target validate`
+- `football-analytics identity target validate-request`
 - `football-analytics identity receipt validate`
 
 ## 9. Evaluator

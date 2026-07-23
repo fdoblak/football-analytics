@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/identity/metric_eligibility_timeline.schema.json",
+  "title": "Metric eligibility timeline (Stage 7E)",
+  "description": "Per-interval metric eligibility for a target player. No real metric computation — eligibility contract only.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "timeline_id",
+    "run_id",
+    "video_id",
+    "target_player_id",
+    "intervals",
+    "summary",
+    "created_at_utc",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "timeline_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "minLength": 1 },
+    "target_player_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "intervals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "start_frame_index",
+          "end_frame_index",
+          "track_id",
+          "assignment_id",
+          "assignment_status",
+          "eligibility",
+          "observation_state",
+          "reason_codes"
+        ],
+        "properties": {
+          "start_frame_index": { "type": "integer", "minimum": 0 },
+          "end_frame_index": { "type": "integer", "minimum": 0 },
+          "track_id": { "type": "integer", "minimum": 0 },
+          "assignment_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+          "assignment_status": {
+            "type": "string",
+            "enum": [
+              "candidate",
+              "provisional",
+              "confirmed",
+              "rejected",
+              "revoked",
+              "unknown"
+            ]
+          },
+          "eligibility": {
+            "type": "string",
+            "enum": ["eligible", "provisional_only", "not_eligible", "not_evaluable"]
+          },
+          "observation_state": {
+            "type": "string",
+            "enum": ["observed", "predicted", "interpolated", "unknown"]
+          },
+          "reason_codes": { "type": "array", "items": { "type": "string" } },
+          "sufficient_coverage": { "type": "boolean" },
+          "unresolved_hard_conflict": { "type": "boolean" }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eligible_frame_count",
+        "provisional_only_frame_count",
+        "not_eligible_frame_count",
+        "not_evaluable_frame_count"
+      ],
+      "properties": {
+        "eligible_frame_count": { "type": "integer", "minimum": 0 },
+        "provisional_only_frame_count": { "type": "integer", "minimum": 0 },
+        "not_eligible_frame_count": { "type": "integer", "minimum": 0 },
+        "not_evaluable_frame_count": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "created_at_utc": { "type": "string", "minLength": 10 },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "no_real_metrics"],
+      "properties": {
+        "stage": { "type": "string", "const": "7E" },
+        "no_real_metrics": { "type": "boolean", "const": true },
+        "notes": { "type": ["string", "null"] }
+      }
+    }
+  }
+}
