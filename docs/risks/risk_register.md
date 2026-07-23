@@ -1,6 +1,6 @@
 # Risk Register — football-analytics
 
-**Updated:** 2026-07-23 (Stage 7D jersey OCR baseline)
+**Updated:** 2026-07-24 (Stage 8C homography / calibration segments)
 
 **Owner default:** Furkan Doblak unless stated otherwise
 
@@ -1239,3 +1239,45 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Stage 8B+ |
+
+## RISK-088 — False / mirrored / sparse-coverage homography (8C)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-088 |
+| description | Homography from sparse or wrong correspondences yields false, mirrored, or poorly conditioned pitch maps; downstream metrics would be wrong. |
+| probability | high |
+| impact | high |
+| mitigation | Mirror/condition/reproj/coverage gates; physical eligibility only for `valid`; degraded/uncertain/interpolated not metric-eligible; NOT_EVALUATED without reviewed GT. |
+| trigger | high reprojection; mirrored det; low hull coverage |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 8C+ |
+
+## RISK-089 — Homography drift / shot-cut silent reuse (8C)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-089 |
+| description | Carrying a stale H across shot cuts, pan/zoom, or large drift corrupts pitch mapping. |
+| probability | high |
+| impact | high |
+| mitigation | Shot-cut terminate; drift/pan-zoom new segments; no silent gap fill; overlap → conflict/review. |
+| trigger | cut without segment end; large test-point projection drift |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 8C+ |
+
+## RISK-090 — Homography accuracy claimed without reviewed GT (8C)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-090 |
+| description | Synthetic known-H or operational smoke treated as real football calibration accuracy. |
+| probability | high |
+| impact | high |
+| mitigation | NOT_EVALUATED_NO_REVIEWED_HOMOGRAPHY_GROUND_TRUTH; PASS_WITH_FINDINGS gate; no projected positions in 8C. |
+| trigger | customer metrics using unvalidated H |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 8C+ |

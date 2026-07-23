@@ -1826,6 +1826,206 @@ def cmd_calibration_homography_validate() -> int:
     return 0
 
 
+def cmd_calibration_homography_solve(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    contain_root: Path | None,
+    features: Path | None,
+    run_id: str | None,
+    video_id: str | None,
+    timeline: Path | None,
+    analysis_windows: Path | None,
+    fixture_smoke: bool,
+) -> int:
+    """Stage 8C: solve calibrations (+ segments) from calibration_features."""
+    from football_analytics.calibration.homography_config import (
+        default_homography_config_path,
+        load_homography_config,
+    )
+    from football_analytics.calibration.homography_fixtures import (
+        known_perspective_H,
+        multi_frame_stable_features,
+    )
+    from football_analytics.calibration.homography_service import run_homography_solve
+    from football_analytics.core.run_id import generate_run_id
+    from football_analytics.data.registry import default_project_root
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_homography_config_path(repo_root=root)
+    try:
+        config = load_homography_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    contain = contain_root if contain_root is not None else Path(str(config["runtime_root"]))
+    rows = None
+    feat_path = features
+    if fixture_smoke:
+        rid = run_id or generate_run_id()
+        vid = video_id or "video_homo_fixture"
+        rows = multi_frame_stable_features(
+            known_perspective_H(), run_id=rid, video_id=vid, n_frames=3
+        )
+        feat_path = None
+    elif features is None:
+        print("error: --features required unless --fixture-smoke", file=sys.stderr)
+        return 2
+    result = run_homography_solve(
+        output_dir=str(output_dir),
+        config=config,
+        contain_root=contain,
+        run_id=run_id,
+        video_id=video_id,
+        features_path=str(feat_path) if feat_path else None,
+        features_rows=rows,
+        timeline_path=str(timeline) if timeline else None,
+        analysis_windows_path=str(analysis_windows) if analysis_windows else None,
+        correspondence_mode="keypoint_only" if fixture_smoke else "hybrid",
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"calibrations_parquet: {summary.get('calibrations_parquet')}")
+    print(f"segments_parquet: {summary.get('segments_parquet')}")
+    print(f"receipt_json: {summary.get('receipt_json')}")
+    print(f"evaluation_status: {summary.get('evaluation_status')}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
+def cmd_calibration_homography_evaluate(
+    *,
+    calibrations: Path | None,
+    segments: Path | None,
+    ground_truth: Path | None,
+    output: Path,
+    config_path: Path,
+) -> int:
+    """Stage 8C: evaluate homography (NOT_EVALUATED without reviewed GT)."""
+    from football_analytics.calibration.homography_config import (
+        homography_config_fingerprint,
+        load_homography_config,
+    )
+    from football_analytics.calibration.homography_evaluation import evaluate_homography
+    from football_analytics.core.records import write_json_record
+    from football_analytics.data.compiler import get_contract
+    from football_analytics.data.parquet import read_contract_parquet
+    from football_analytics.data.registry import default_project_root
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    try:
+        config = load_homography_config(cfg_path)
+        cfg_fp = homography_config_fingerprint(config)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    try:
+        cal_rows = None
+        seg_rows = None
+        if calibrations is not None:
+            cal_rows = read_contract_parquet(
+                calibrations, get_contract("calibrations", 1)
+            ).to_pylist()
+        if segments is not None:
+            seg_rows = read_contract_parquet(
+                segments, get_contract("calibration_segments", 1)
+            ).to_pylist()
+        gt_rows = None
+        has_gt = False
+        if ground_truth is not None:
+            import json as _json
+
+            payload = _json.loads(Path(ground_truth).read_text(encoding="utf-8"))
+            gt_rows = list(payload.get("homographies") or payload.get("ground_truth") or [])
+            has_gt = bool(payload.get("is_reviewed_ground_truth"))
+        report = evaluate_homography(
+            calibrations=cal_rows,
+            segments=seg_rows,
+            ground_truth=gt_rows,
+            has_reviewed_ground_truth=has_gt,
+        )
+        write_json_record(
+            output,
+            report.to_dict(run_id="eval", video_id="eval", config_fingerprint=cfg_fp),
+            overwrite=False,
+        )
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
+    print(f"status: {report.status}")
+    print(f"ground_truth_evaluation_status: {report.ground_truth_evaluation_status}")
+    print(f"output: {output}")
+    return 0
+
+
+def cmd_calibration_segments_build(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    contain_root: Path | None,
+    calibrations: Path,
+    run_id: str | None,
+    video_id: str | None,
+) -> int:
+    """Stage 8C: build calibration_segments from calibrations parquet."""
+    from football_analytics.calibration.homography_config import (
+        default_homography_config_path,
+        load_homography_config,
+    )
+    from football_analytics.calibration.homography_service import run_segments_build
+    from football_analytics.data.registry import default_project_root
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_homography_config_path(repo_root=root)
+    try:
+        config = load_homography_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    contain = contain_root if contain_root is not None else Path(str(config["runtime_root"]))
+    result = run_segments_build(
+        output_dir=str(output_dir),
+        config=config,
+        contain_root=contain,
+        calibrations_path=calibrations,
+        run_id=run_id,
+        video_id=video_id,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"segments_parquet: {summary.get('segments_parquet')}")
+    print(f"evaluation_status: {summary.get('evaluation_status')}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
+def cmd_calibration_homography_baseline_validate(*, keep: bool, as_json: bool) -> int:
+    """Run Stage 8C homography baseline validator."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_homography_baseline.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("homography baseline validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
 def cmd_calibration_project_validate() -> int:
     """Validate synthetic projection + physical-metric eligibility rules."""
     from football_analytics.calibration.fixtures import e2e_bundle, projected_from_track
@@ -3217,7 +3417,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     p_calibration = sub.add_parser(
         "calibration",
-        help="Pitch calibration / features / homography / coordinates (Stage 8A–8B)",
+        help="Pitch calibration / features / homography / segments (Stage 8A–8C)",
     )
     cal_sub = p_calibration.add_subparsers(dest="calibration_command")
     p_cal_contracts = cal_sub.add_parser("contracts", help="Calibration contract helpers")
@@ -3263,9 +3463,55 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p_cal_feat_val.add_argument("--keep", action="store_true")
     p_cal_feat_val.add_argument("--json", action="store_true")
-    p_cal_h = cal_sub.add_parser("homography", help="Homography geometry helpers")
+    p_cal_h = cal_sub.add_parser("homography", help="Homography solve / evaluate (8C)")
     cal_h_sub = p_cal_h.add_subparsers(dest="calibration_homography_command")
-    cal_h_sub.add_parser("validate", help="Solve/validate synthetic homography cases")
+    cal_h_sub.add_parser("validate", help="Solve/validate synthetic homography cases (8A)")
+    p_cal_h_solve = cal_h_sub.add_parser("solve", help="Solve calibrations from features (8C)")
+    p_cal_h_solve.add_argument("--output-dir", type=Path, required=True)
+    p_cal_h_solve.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/calibration/homography_baseline.yaml"),
+    )
+    p_cal_h_solve.add_argument("--contain-root", type=Path, default=None)
+    p_cal_h_solve.add_argument("--features", type=Path, default=None)
+    p_cal_h_solve.add_argument("--run-id", type=str, default=None)
+    p_cal_h_solve.add_argument("--video-id", type=str, default=None)
+    p_cal_h_solve.add_argument("--timeline", type=Path, default=None)
+    p_cal_h_solve.add_argument("--analysis-windows", type=Path, default=None)
+    p_cal_h_solve.add_argument(
+        "--fixture-smoke",
+        action="store_true",
+        help="Synthetic known-H features (no SV inference)",
+    )
+    p_cal_h_eval = cal_h_sub.add_parser("evaluate", help="Evaluate homography outputs (8C)")
+    p_cal_h_eval.add_argument("--calibrations", type=Path, default=None)
+    p_cal_h_eval.add_argument("--segments", type=Path, default=None)
+    p_cal_h_eval.add_argument("--ground-truth", type=Path, default=None)
+    p_cal_h_eval.add_argument("--output", type=Path, required=True)
+    p_cal_h_eval.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/calibration/homography_baseline.yaml"),
+    )
+    p_cal_h_base = cal_h_sub.add_parser(
+        "baseline-validate", help="Run Stage 8C homography baseline validator"
+    )
+    p_cal_h_base.add_argument("--keep", action="store_true")
+    p_cal_h_base.add_argument("--json", action="store_true")
+    p_cal_seg = cal_sub.add_parser("segments", help="Calibration segments (8C)")
+    cal_seg_sub = p_cal_seg.add_subparsers(dest="calibration_segments_command")
+    p_cal_seg_build = cal_seg_sub.add_parser("build", help="Build segments from calibrations")
+    p_cal_seg_build.add_argument("--output-dir", type=Path, required=True)
+    p_cal_seg_build.add_argument("--calibrations", type=Path, required=True)
+    p_cal_seg_build.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/calibration/homography_baseline.yaml"),
+    )
+    p_cal_seg_build.add_argument("--contain-root", type=Path, default=None)
+    p_cal_seg_build.add_argument("--run-id", type=str, default=None)
+    p_cal_seg_build.add_argument("--video-id", type=str, default=None)
     p_cal_p = cal_sub.add_parser("project", help="Projected position helpers")
     cal_p_sub = p_cal_p.add_subparsers(dest="calibration_project_command")
     cal_p_sub.add_parser("validate", help="Validate synthetic projection eligibility rules")
@@ -3771,7 +4017,43 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.calibration_command == "homography":
             if args.calibration_homography_command == "validate":
                 return cmd_calibration_homography_validate()
+            if args.calibration_homography_command == "solve":
+                return cmd_calibration_homography_solve(
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    contain_root=args.contain_root,
+                    features=args.features,
+                    run_id=args.run_id,
+                    video_id=args.video_id,
+                    timeline=args.timeline,
+                    analysis_windows=args.analysis_windows,
+                    fixture_smoke=bool(args.fixture_smoke),
+                )
+            if args.calibration_homography_command == "evaluate":
+                return cmd_calibration_homography_evaluate(
+                    calibrations=args.calibrations,
+                    segments=args.segments,
+                    ground_truth=args.ground_truth,
+                    output=args.output,
+                    config_path=args.config,
+                )
+            if args.calibration_homography_command == "baseline-validate":
+                return cmd_calibration_homography_baseline_validate(
+                    keep=bool(args.keep), as_json=bool(args.json)
+                )
             parser.parse_args(["calibration", "homography", "--help"])
+            return 2
+        if args.calibration_command == "segments":
+            if args.calibration_segments_command == "build":
+                return cmd_calibration_segments_build(
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    contain_root=args.contain_root,
+                    calibrations=args.calibrations,
+                    run_id=args.run_id,
+                    video_id=args.video_id,
+                )
+            parser.parse_args(["calibration", "segments", "--help"])
             return 2
         if args.calibration_command == "project":
             if args.calibration_project_command == "validate":

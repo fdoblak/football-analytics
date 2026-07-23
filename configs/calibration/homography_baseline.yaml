@@ -1,0 +1,119 @@
+# Stage 8C homography solve + calibration segments baseline.
+# Input: calibration_features (+ optional timeline/windows). Output: calibrations +
+# calibration_segments + receipt/quality/eval. NO projected_positions (Stage 8D).
+# Attack direction remains unknown. Degraded/uncertain/interpolated are NOT
+# physical-metric eligible. GPL SV adapter stays evaluation_only (unchanged).
+config_version: 1
+
+solver_id: homography_baseline
+solver_version: "1.0.0"
+method: ransac_opencv  # dlt_normalized | ransac_opencv
+direction: image_to_pitch
+
+correspondence:
+  min_keypoint_score: 0.15
+  min_line_score: 0.30
+  min_intersection_score: 0.20
+  reject_unknown_canonical: true
+  reject_unsuitable: true
+  allow_marginal: true
+  duplicate_image_distance_px: 3.0
+  duplicate_pitch_distance_m: 0.25
+  max_correspondences_per_frame: 64
+  min_feature_diversity: 2
+  line_intersection:
+    enabled: true
+    min_abs_sin_angle: 0.25   # reject near-parallel
+    min_segment_length_px: 12.0
+    max_endpoint_gap_px: 40.0
+    require_both_mapped: true
+
+solver:
+  min_correspondences: 4
+  ransac_reproj_threshold_px: 3.0
+  ransac_max_iters: 2000
+  ransac_confidence: 0.995
+  ransac_seed: 7
+  use_normalized_dlt: true
+  max_condition_number: 100000000.0
+  min_abs_determinant: 0.000000000001
+  max_mean_reprojection_error_px: 5.0
+  max_median_reprojection_error_px: 4.0
+  max_max_reprojection_error_px: 12.0
+  max_mean_pitch_error_m: 1.5
+  round_trip_tolerance_px: 1.0
+  round_trip_tolerance_m: 0.05
+  min_inlier_count: 4
+  min_inlier_ratio: 0.6
+  min_coverage_hull_fraction: 0.02
+  reject_mirrored: true
+  pitch_bound_tolerance_m: 2.0
+  max_extrapolation_ratio: 0.35
+
+quality:
+  # Only `valid` may be physical-mapping eligible under this policy.
+  physical_eligible_qualities: ["valid"]
+  degraded_physical_eligible: false
+  uncertain_physical_eligible: false
+  interpolated_physical_eligible: false
+  valid:
+    max_mean_reproj_px: 3.0
+    min_inlier_ratio: 0.75
+    min_coverage: 0.04
+    max_condition: 1000000.0
+  degraded:
+    max_mean_reproj_px: 5.0
+    min_inlier_ratio: 0.6
+    min_coverage: 0.02
+    max_condition: 100000000.0
+  uncertain:
+    max_mean_reproj_px: 8.0
+    min_inlier_ratio: 0.5
+    min_coverage: 0.01
+    max_condition: 500000000.0
+
+segments:
+  silent_gap_fill: false
+  min_support_frames: 1
+  min_duration_us: 1
+  drift_mean_test_point_m: 1.5
+  drift_max_test_point_m: 3.0
+  terminate_on_shot_cut: true
+  new_segment_on_pan_zoom: true
+  allow_interpolated: false
+  interpolation_physical_eligible: false
+  overlap_is_hard_conflict: true
+  medoid_by_pitch_test_points: true
+  representative_selection: medoid
+  max_gap_us_within_segment: 500000
+
+pitch:
+  length_m: 105.0
+  width_m: 68.0
+  real_size_known: false
+
+attack_direction: unknown
+
+output_policy:
+  atomic_writes: true
+  overwrite_allowed: false
+  write_calibrations: true
+  write_segments: true
+  write_evaluation_json: true
+  write_quality_json: true
+  write_projected_positions: false
+
+review_sampling:
+  enabled: false
+  max_samples: 0
+
+runtime_root: /home/fdoblak/workspace/homography_checks
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+auto_project_positions: false
+
+notes: >
+  Synthetic known-H and operational smoke are not football match accuracy.
+  Homography is pitch-plane only. Feature detection does not guarantee correct H.
+  NBJW/SV adapter remains evaluation_only / GPL linking risk (Stage 8B).

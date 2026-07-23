@@ -70,6 +70,7 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `scripts/check_target_identity_pipeline.py` (Stage 7E target evidence fusion + manual approval)
 - `scripts/check_calibration_contracts.py` (Stage 8A pitch calibration / homography / coordinate contracts)
 - `scripts/check_pitch_feature_baseline.py` (Stage 8B pitch keypoint / line detection baseline)
+- `scripts/check_homography_baseline.py` (Stage 8C homography solve + calibration segments)
 - `scripts/check_stage_cache.py`, `check_ci_workflow.py`, `check_project.py`
 - Or: `football-analytics project check --profile local --quick`
 
@@ -81,9 +82,11 @@ fusion + quality gates. Stage 7 is closed (`identity-baseline-v0.7.0`):
 jersey alone cannot confirm; confirmed requires scoped manual decision;
 `auto_confirm=false`; face forbidden; real football identity accuracy not
 validated. Stage 8A pitch calibration / homography / coordinate **contracts**
-are in-tree. Stage 8B pitch keypoint/line detection baseline is in-tree when
-merged (evaluation_only; real football pitch-feature accuracy not validated).
-Do **not** start Stage 8C without an explicit user prompt.
+are in-tree. Stage 8B pitch keypoint/line detection baseline is in-tree
+(evaluation_only; real football pitch-feature accuracy not validated). Stage 8C
+homography solve + calibration segments baseline is in-tree when merged
+(synthetic known-H; real football homography accuracy not validated; no
+projected positions). Do **not** start Stage 8D without an explicit user prompt.
 
 ---
 
@@ -174,6 +177,7 @@ target-player baseline is in-tree when merged (`identity-baseline-v0.7.0`).
 Stage 7 is **closed**. Stage 8A pitch calibration / homography / coordinate
 contracts are in-tree when merged (contracts only). Stage 8B pitch keypoint /
 line detection baseline is in-tree when merged (SV_kp/SV_lines evaluation_only
-smoke; no Stage 8C homography pipeline). Stage 8C is **not** started unless
-explicitly requested.
+smoke). Stage 8C homography solve + calibration segments baseline is in-tree
+when merged (no projected positions; accuracy not validated). Stage 8D is
+**not** started unless explicitly requested.
 Manual Cursor flow only — no Codex/background automation.
