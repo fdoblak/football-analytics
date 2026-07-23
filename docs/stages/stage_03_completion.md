@@ -12,6 +12,7 @@ Opta claims.
 | **3B** Safe FFprobe & media validation | **CLOSED** | `PASS — SAFE MEDIA PROBE ACTIVE` |
 | **3C** Safe FFmpeg normalization | **CLOSED** | `PASS — SAFE VIDEO NORMALIZATION ACTIVE` |
 | **3D** Frame timeline / time mapping & Stage 3 close | **CLOSED** | `PASS — DETERMINISTIC FRAME TIMELINE ACTIVE; STAGE 3 CLOSED` |
+| **3D-F1** Mapping quality taxonomy alignment | **CLOSED** | `PASS — FRAME TIME MAPPING TAXONOMY ALIGNED` |
 
 ## Starting checkpoint (3D)
 
@@ -25,7 +26,7 @@ Opta claims.
 - Frame timeline: `docs/stages/stage_03d_frame_timeline.md`
 - Operator docs: `docs/video/`
 
-## Final counts (Phase C)
+## Final counts (Phase C / 3D)
 
 - Baseline → final: **549 → 572** pytest PASS (**+23** Stage 3D)
 - validators: video contracts/probe/normalization/frame_timeline PASS;
@@ -35,13 +36,31 @@ Opta claims.
 - Runtime report:
   `/home/fdoblak/workspace/frame_timeline_checks/frame_timeline_validation_20260723T074303Z.json`
 
-## Tag planned
+## Finding close — 3D-F1 taxonomy
 
-Annotated `video-ingest-v0.3.0` (Stage 2 convention: `foundation-v0.1.0`).
+Closed: ambiguous `exact|good|degraded|unreliable|failed` mapping qualities replaced by
+evidence-based taxonomy (`exact_identity`, `timestamp_preserved`,
+`derived_with_constant_offset`, `derived_with_resampling`, `uncertain`,
+`not_available`); receipt schema_version 2; legacy v0.3.0 reader coercion without
+blind identity upgrades.
+
+## Open findings (remain open)
+
+- **RISK-029** — still open for general contract semantic validation pylist paths and
+  post-write materialize metadata join (`to_pylist`); timeline write path remains
+  mitigated only.
+- **Real-match / real-video validation** — not performed in Stage 3; remains an open
+  finding before trusting production broadcast media.
+
+## Tag
+
+- Annotated `video-ingest-v0.3.0` (Stage 3D close)
+- Corrected taxonomy patch expected as `video-ingest-v0.3.1` after 3D-F1 gates
 
 ## Gate
 
 `PASS — DETERMINISTIC FRAME TIMELINE ACTIVE; STAGE 3 CLOSED`
+(plus 3D-F1: `PASS — FRAME TIME MAPPING TAXONOMY ALIGNED`)
 
 ## Next stage (name only)
 

@@ -68,6 +68,7 @@ class FrameTimelineServiceTests(unittest.TestCase):
             )
             self.assertFalse(res.accepted)
             self.assertEqual(res.error_code, "MATERIALIZE_FLAG_REQUIRED")
+            self.assertEqual(res.receipt.mapping_quality.value, "not_available")
         finally:
             shutil.rmtree(session, ignore_errors=True)
 

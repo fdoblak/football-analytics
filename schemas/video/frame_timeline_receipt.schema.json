@@ -40,7 +40,7 @@
     "provenance"
   ],
   "properties": {
-    "schema_version": { "type": "integer", "const": 1 },
+    "schema_version": { "type": "integer", "const": 2 },
     "receipt_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
     "run_id": { "type": "string", "minLength": 8 },
     "video_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
@@ -88,7 +88,14 @@
     "non_monotonic_pts_count": { "type": "integer", "minimum": 0 },
     "mapping_quality": {
       "type": "string",
-      "enum": ["exact", "good", "degraded", "unreliable", "failed"]
+      "enum": [
+        "exact_identity",
+        "timestamp_preserved",
+        "derived_with_constant_offset",
+        "derived_with_resampling",
+        "uncertain",
+        "not_available"
+      ]
     },
     "sample_every": { "type": ["integer", "null"], "minimum": 1 },
     "materialized": { "type": "boolean" },

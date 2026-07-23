@@ -35,8 +35,10 @@ class VideoContractTests(unittest.TestCase):
     def test_six_schemas_parse(self) -> None:
         self.assertEqual(set(self.schemas), set(SCHEMA_FILES))
         self.assertEqual(len(SCHEMA_FILES), 8)
-        for _name, schema in self.schemas.items():
-            self.assertEqual(schema.get("schema_version", {}).get("const", 1), 1)
+        for name, schema in self.schemas.items():
+            expected = 2 if name == "frame_timeline_receipt.schema.json" else 1
+            sv = schema.get("properties", {}).get("schema_version", {})
+            self.assertEqual(sv.get("const", 1), expected)
             self.assertIn("$id", schema)
             self.assertFalse(schema.get("additionalProperties", True))
 

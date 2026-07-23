@@ -1508,11 +1508,57 @@ class FrameTimelineStatus(str, Enum):
 
 
 class MappingQuality(str, Enum):
-    EXACT = "exact"
-    GOOD = "good"
-    DEGRADED = "degraded"
-    UNRELIABLE = "unreliable"
-    FAILED = "failed"
+    EXACT_IDENTITY = "exact_identity"
+    TIMESTAMP_PRESERVED = "timestamp_preserved"
+    DERIVED_WITH_CONSTANT_OFFSET = "derived_with_constant_offset"
+    DERIVED_WITH_RESAMPLING = "derived_with_resampling"
+    UNCERTAIN = "uncertain"
+    NOT_AVAILABLE = "not_available"
+
+
+LEGACY_MAPPING_QUALITY = frozenset({"exact", "good", "degraded", "unreliable", "failed"})
+FRAME_TIMELINE_RECEIPT_SCHEMA_VERSION = 2
+
+
+def coerce_mapping_quality(
+    raw: str,
+    *,
+    schema_version: int,
+    evidence_available: bool = False,
+) -> MappingQuality:
+    """Map receipt mapping_quality strings onto the v2 taxonomy.
+
+    schema_version >= 2 accepts only the new enum.
+    schema_version == 1 legacy values are not blind-mapped to identity/preserved;
+    without provenance they become UNCERTAIN (FAILED → NOT_AVAILABLE).
+    """
+    del evidence_available  # reserved; never blind-upgrade legacy without provenance
+    if schema_version >= 2:
+        try:
+            return MappingQuality(raw)
+        except ValueError as exc:
+            raise VideoContractError(f"unknown mapping_quality: {raw}") from exc
+    if schema_version == 1:
+        if raw == "failed":
+            return MappingQuality.NOT_AVAILABLE
+        if raw in LEGACY_MAPPING_QUALITY:
+            return MappingQuality.UNCERTAIN
+        try:
+            return MappingQuality(raw)
+        except ValueError as exc:
+            raise VideoContractError(f"unknown mapping_quality: {raw}") from exc
+    raise VideoContractError(f"unsupported FrameTimelineReceipt schema_version: {schema_version}")
+
+
+def normalize_legacy_receipt_payload(data: Mapping[str, Any]) -> dict[str, Any]:
+    """Return a v2-compatible frame timeline receipt dict for validators/readers."""
+    out = dict(data)
+    raw_sv = int(out.get("schema_version", 1))
+    if "mapping_quality" in out:
+        quality = coerce_mapping_quality(str(out["mapping_quality"]), schema_version=raw_sv)
+        out["mapping_quality"] = quality.value
+    out["schema_version"] = FRAME_TIMELINE_RECEIPT_SCHEMA_VERSION
+    return out
 
 
 @dataclass(frozen=True)
@@ -1587,10 +1633,10 @@ class FrameTimelineReceipt:
     normalization_receipt_path: str | None = None
     sample_every: int | None = None
     materialized_frame_count: int | None = None
-    schema_version: int = SCHEMA_VERSION
+    schema_version: int = FRAME_TIMELINE_RECEIPT_SCHEMA_VERSION
 
     def __post_init__(self) -> None:
-        if self.schema_version != SCHEMA_VERSION:
+        if self.schema_version != FRAME_TIMELINE_RECEIPT_SCHEMA_VERSION:
             raise VideoContractError("unsupported FrameTimelineReceipt schema_version")
         object.__setattr__(
             self, "receipt_id", require_path_safe_id(self.receipt_id, label="receipt_id")
@@ -1693,8 +1739,10 @@ class FrameTimelineReceipt:
 
     @classmethod
     def from_dict(cls, data: Mapping[str, Any]) -> FrameTimelineReceipt:
+        raw_sv = int(data.get("schema_version", FRAME_TIMELINE_RECEIPT_SCHEMA_VERSION))
+        quality = coerce_mapping_quality(str(data["mapping_quality"]), schema_version=raw_sv)
         return cls(
-            schema_version=int(data.get("schema_version", SCHEMA_VERSION)),
+            schema_version=FRAME_TIMELINE_RECEIPT_SCHEMA_VERSION,
             receipt_id=str(data["receipt_id"]),
             run_id=str(data["run_id"]),
             video_id=str(data["video_id"]),
@@ -1720,7 +1768,7 @@ class FrameTimelineReceipt:
             missing_pts_count=int(data["missing_pts_count"]),
             duplicate_pts_count=int(data["duplicate_pts_count"]),
             non_monotonic_pts_count=int(data["non_monotonic_pts_count"]),
-            mapping_quality=MappingQuality(str(data["mapping_quality"])),
+            mapping_quality=quality,
             sample_every=data.get("sample_every"),
             materialized=bool(data["materialized"]),
             materialized_frame_count=data.get("materialized_frame_count"),

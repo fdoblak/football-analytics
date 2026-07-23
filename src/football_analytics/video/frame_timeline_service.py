@@ -38,8 +38,10 @@ from football_analytics.video.frame_timeline import (
 from football_analytics.video.probe_parser import map_ffprobe_json_to_video_probe
 from football_analytics.video.probe_service import snapshot_source
 from football_analytics.video.time_mapping import (
+    MappingEvidence,
     assert_no_index_fps_invention,
     classify_mapping_quality,
+    empty_mapping_evidence,
 )
 from football_analytics.video.types import (
     FrameRateMode,
@@ -62,6 +64,8 @@ from football_analytics.video.validation import (
     reject_unsafe_path_string,
     require_absolute_path,
 )
+
+_TIME_REWRITE_TRANSFORMS = frozenset({"force_cfr"})
 
 
 @dataclass
@@ -146,11 +150,41 @@ def _selected_video_stream(probe: VideoProbe) -> VideoStreamInfo:
     raise FrameTimelineError("NO_VIDEO_STREAM", "selected video stream missing")
 
 
+def _evidence_from_norm_data(data: Mapping[str, Any]) -> MappingEvidence:
+    status = data.get("status")
+    status_s = str(status) if status is not None else None
+    fr_raw = data.get("frame_rate_conversion")
+    fr = fr_raw if isinstance(fr_raw, dict) else {}
+    transforms = tuple(str(t) for t in (data.get("applied_transforms") or ()))
+    performed = fr.get("performed")
+    performed_b = bool(performed) if isinstance(performed, bool) else None
+    requires = fr.get("requires_stage3d_mapping")
+    requires_b = bool(requires) if isinstance(requires, bool) else None
+    src_mode = fr.get("source_mode")
+    tgt_mode = fr.get("target_mode")
+    drift = data.get("duration_drift_us")
+    drift_i = int(drift) if isinstance(drift, int) and not isinstance(drift, bool) else None
+    time_rewrite = performed_b is True or any(t in _TIME_REWRITE_TRANSFORMS for t in transforms)
+    identity = status_s == "skipped" and not time_rewrite and requires_b is not True
+    return MappingEvidence(
+        has_normalization_receipt=True,
+        normalization_status=status_s,
+        frame_rate_conversion_performed=performed_b,
+        frame_rate_conversion_source_mode=str(src_mode) if src_mode is not None else None,
+        frame_rate_conversion_target_mode=str(tgt_mode) if tgt_mode is not None else None,
+        requires_stage3d_mapping=requires_b,
+        duration_drift_us=drift_i,
+        applied_transforms=transforms,
+        constant_offset_us=None,
+        identity_proven=identity,
+    )
+
+
 def _load_normalization_hints(
     path: str | None,
-) -> tuple[str | None, int | None, FrameRateMode | None]:
+) -> tuple[str | None, int | None, FrameRateMode | None, MappingEvidence]:
     if path is None:
-        return None, None, None
+        return None, None, None, empty_mapping_evidence()
     reject_unsafe_path_string(path, label="normalization_receipt")
     p = require_absolute_path(path, label="normalization_receipt")
     if p.is_symlink() or not p.is_file():
@@ -166,7 +200,7 @@ def _load_normalization_hints(
     fr = data.get("frame_rate_conversion")
     if isinstance(fr, dict) and fr.get("target_mode") in {"cfr", "vfr", "unknown"}:
         fr_mode = FrameRateMode(str(fr["target_mode"]))
-    return str(p), stream_idx, fr_mode
+    return str(p), stream_idx, fr_mode, _evidence_from_norm_data(data)
 
 
 def _fail_receipt(
@@ -212,7 +246,7 @@ def _fail_receipt(
         missing_pts_count=0,
         duplicate_pts_count=0,
         non_monotonic_pts_count=0,
-        mapping_quality=MappingQuality.FAILED,
+        mapping_quality=MappingQuality.NOT_AVAILABLE,
         sample_every=sample_every,
         materialized=False,
         materialized_frame_count=None,
@@ -252,6 +286,7 @@ def run_frame_timeline(
     ff_path = str(ftp["ffprobe_binary"])
     ff_ver = "unknown"
     norm_path, norm_stream, norm_mode = None, None, None
+    mapping_evidence = empty_mapping_evidence()
 
     try:
         if mode != FrameTimelineMode.TIMELINE_ONLY and not execute_materialize:
@@ -293,7 +328,9 @@ def run_frame_timeline(
         ff_path = version.path
         ff_ver = version.version_token
 
-        norm_path, norm_stream, norm_mode = _load_normalization_hints(normalization_receipt)
+        norm_path, norm_stream, norm_mode, mapping_evidence = _load_normalization_hints(
+            normalization_receipt
+        )
         probe = _probe_for_timeline(
             src,
             policy=policy,
@@ -352,7 +389,9 @@ def run_frame_timeline(
             warnings.append(Issue(code=code, message=_sanitize_message(msg)))
 
         stats = parse_result.stats
-        quality = classify_mapping_quality(stats, frame_rate_mode=frame_rate_mode)
+        quality = classify_mapping_quality(
+            stats, frame_rate_mode=frame_rate_mode, evidence=mapping_evidence
+        )
         parquet_sha = sha256_file(frames_path)
 
         artifact_path: str | None = None

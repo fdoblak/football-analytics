@@ -20,6 +20,26 @@ exact rationals. Optional image materialization is explicit and off by default.
 - Non-monotonic PTS → `decode_status=unknown`, carry prior mapped time
 - VFR: never invent CFR index timeline
 
+## Mapping quality taxonomy (receipt `schema_version=2`)
+
+Quality is derived from frame stats **plus** normalization-receipt evidence.
+Execution failure uses receipt `status` (`failed`/`rejected`); it is **not** a
+`mapping_quality` value. Failed/rejected receipts use `mapping_quality=not_available`.
+
+| Value | Meaning |
+|-------|---------|
+| `exact_identity` | Proven identity (e.g. normalize skipped / already canonical; no time rewrite) |
+| `timestamp_preserved` | Transcode may have occurred; PTS preserved; no frame-rate resampling |
+| `derived_with_constant_offset` | Mapping uses a **proven** constant offset (µs); never invent offset |
+| `derived_with_resampling` | CFR force / VFR→CFR / drop-dup / significant non-monotonic / stage-3D remap required |
+| `uncertain` | Missing norm receipt, conflicting metadata, incomplete PTS, or insufficient evidence |
+| `not_available` | Invented index/fps mapping, no usable frames, or execution did not produce a mapping |
+
+Legacy v0.3.0 values (`exact`/`good`/`degraded`/`unreliable`/`failed`) are read via
+`coerce_mapping_quality` / `normalize_legacy_receipt_payload`: without provenance,
+legacy qualities become `uncertain` (`failed` → `not_available`). No blind map
+`exact` → `exact_identity`.
+
 ## Streaming I/O
 
 FFprobe compact line stream → Arrow batches → `write_contract_parquet_streaming`
@@ -41,7 +61,7 @@ football-analytics video frames \
 ## Outputs
 
 - `frames.parquet` — canonical `frames` v1 contract
-- `frame_timeline_receipt.json` — Stage 3D receipt
+- `frame_timeline_receipt.json` — Stage 3D receipt (`schema_version=2`)
 - optional `frame_artifact_manifest.json` + `frame_artifacts.jsonl` + `frames/`
 
 ## Validator

@@ -8,6 +8,7 @@ from football_analytics.video.contracts import (
     validate_payload_against_schema,
 )
 from football_analytics.video.types import (
+    FRAME_TIMELINE_RECEIPT_SCHEMA_VERSION,
     SCHEMA_VERSION,
     AudioStreamInfo,
     FrameCountSource,
@@ -29,11 +30,14 @@ from football_analytics.video.types import (
     VideoProbe,
     VideoSource,
     VideoStreamInfo,
+    coerce_mapping_quality,
+    normalize_legacy_receipt_payload,
     select_primary_video_stream,
 )
 
 __all__ = [
     "SCHEMA_VERSION",
+    "FRAME_TIMELINE_RECEIPT_SCHEMA_VERSION",
     "SCHEMA_FILES",
     "Rational",
     "SourceKind",
@@ -55,6 +59,8 @@ __all__ = [
     "IngestReceipt",
     "NormalizationReceipt",
     "FrameTimelineReceipt",
+    "coerce_mapping_quality",
+    "normalize_legacy_receipt_payload",
     "select_primary_video_stream",
     "load_ingest_policy",
     "load_all_video_schemas",

@@ -45,8 +45,10 @@ Line-oriented compact dump on FFmpeg 4.4.2:
 
 ## 9. Time mapping
 
-`time_mapping.py` — Decimal/rational PTS mapping; quality
-`exact|good|degraded|unreliable|failed`. Never invent from index/fps.
+`time_mapping.py` — Decimal/rational PTS mapping; evidence-based quality taxonomy
+(Stage 3D-F1):
+`exact_identity|timestamp_preserved|derived_with_constant_offset|derived_with_resampling|uncertain|not_available`.
+Never invent from index/fps. Receipt `schema_version=2`.
 
 ## 10. Materialization
 
