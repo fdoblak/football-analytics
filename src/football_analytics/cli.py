@@ -1799,7 +1799,10 @@ def cmd_calibration_homography_validate() -> int:
         mirrored_homography,
         singular_matrix_row_major,
     )
-    from football_analytics.calibration.homography import solve_homography, validate_homography_matrix
+    from football_analytics.calibration.homography import (
+        solve_homography,
+        validate_homography_matrix,
+    )
     from football_analytics.calibration.types import HomographyError
 
     img, pitch = correspondences_for_H(known_perspective_H(), n=4)
@@ -1851,6 +1854,151 @@ def cmd_calibration_project_validate() -> int:
         return 1
     print("project_validate: PASS")
     return 0
+
+
+def cmd_calibration_features_detect(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    contain_root: Path | None,
+    run_id: str | None,
+    video_id: str | None,
+    source: Path | None,
+    timeline: Path | None,
+    analysis_windows: Path | None,
+    fixture_smoke: bool,
+) -> int:
+    """Stage 8B: pitch keypoint/line detection baseline (lazy HRNet adapter)."""
+    from football_analytics.calibration.pitch_feature_config import (
+        default_pitch_feature_config_path,
+        load_pitch_feature_config,
+        unfreeze_pitch_feature_config,
+    )
+    from football_analytics.calibration.pitch_feature_fixtures import fixture_image_bundle
+    from football_analytics.calibration.pitch_feature_service import run_pitch_feature_detect
+    from football_analytics.data.registry import default_project_root
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_pitch_feature_config_path(repo_root=root)
+    try:
+        config = load_pitch_feature_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    contain = contain_root
+    if contain is None:
+        contain = Path(str(config["runtime_root"]))
+    bundle = fixture_image_bundle() if fixture_smoke else None
+    if fixture_smoke:
+        cfg = unfreeze_pitch_feature_config(config)
+        cfg["device_policy"] = "cpu_only"
+        cfg["maximum_frames_per_run"] = 1
+        config = cfg
+    result = run_pitch_feature_detect(
+        output_dir=str(output_dir),
+        config=config,
+        contain_root=contain,
+        run_id=run_id,
+        video_id=video_id,
+        project_root=root,
+        in_memory_bundle=bundle,
+        source=str(source) if source else None,
+        timeline=str(timeline) if timeline else None,
+        analysis_windows=str(analysis_windows) if analysis_windows else None,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"features_parquet: {summary.get('features_parquet')}")
+    print(f"receipt_json: {summary.get('receipt_json')}")
+    print(f"evaluation_json: {summary.get('evaluation_json')}")
+    print(f"evaluation_status: {summary.get('evaluation_status')}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
+def cmd_calibration_features_evaluate(
+    *,
+    predictions: Path,
+    ground_truth: Path | None,
+    output: Path,
+    config_path: Path,
+) -> int:
+    """Stage 8B: evaluate pitch features (NOT_EVALUATED without reviewed GT)."""
+    from football_analytics.calibration.pitch_feature_config import load_pitch_feature_config
+    from football_analytics.calibration.pitch_feature_evaluation import evaluate_pitch_features
+    from football_analytics.core.records import write_json_record
+    from football_analytics.data.compiler import get_contract
+    from football_analytics.data.parquet import read_contract_parquet
+    from football_analytics.data.registry import default_project_root
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    try:
+        config = load_pitch_feature_config(cfg_path)
+        cfg_fp = __import__(
+            "football_analytics.calibration.pitch_feature_config",
+            fromlist=["pitch_feature_config_fingerprint"],
+        ).pitch_feature_config_fingerprint(config)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    try:
+        pred_table = read_contract_parquet(predictions, get_contract("calibration_features", 1))
+        pred_rows = pred_table.to_pylist()
+        gt_rows = None
+        has_gt = False
+        if ground_truth is not None:
+            gt_path = Path(ground_truth)
+            if gt_path.suffix.lower() == ".json":
+                import json as _json
+
+                payload = _json.loads(gt_path.read_text(encoding="utf-8"))
+                gt_rows = list(payload.get("features") or payload.get("ground_truth") or [])
+                has_gt = bool(payload.get("is_reviewed_ground_truth"))
+            else:
+                gt_rows = read_contract_parquet(
+                    gt_path, get_contract("calibration_features", 1)
+                ).to_pylist()
+                has_gt = False
+        report = evaluate_pitch_features(
+            predictions=pred_rows,
+            ground_truth=gt_rows,
+            has_reviewed_ground_truth=has_gt,
+        )
+        write_json_record(
+            output,
+            report.to_dict(run_id="eval", video_id="eval", config_fingerprint=cfg_fp),
+            overwrite=False,
+        )
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
+    print(f"status: {report.status}")
+    print(f"ground_truth_evaluation_status: {report.ground_truth_evaluation_status}")
+    print(f"output: {output}")
+    return 0
+
+
+def cmd_calibration_features_validate(*, keep: bool, as_json: bool) -> int:
+    """Run Stage 8B pitch feature baseline validator."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_pitch_feature_baseline.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("pitch feature validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
 
 
 def cmd_tracking_contracts_validate(*, keep: bool, as_json: bool) -> int:
@@ -3068,7 +3216,8 @@ def build_parser() -> argparse.ArgumentParser:
     p_id_jersey_val.add_argument("--json", action="store_true")
 
     p_calibration = sub.add_parser(
-        "calibration", help="Pitch calibration / homography / coordinates (Stage 8A)"
+        "calibration",
+        help="Pitch calibration / features / homography / coordinates (Stage 8A–8B)",
     )
     cal_sub = p_calibration.add_subparsers(dest="calibration_command")
     p_cal_contracts = cal_sub.add_parser("contracts", help="Calibration contract helpers")
@@ -3078,6 +3227,42 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p_cal_c_val.add_argument("--keep", action="store_true", help="Keep validator session dir")
     p_cal_c_val.add_argument("--json", action="store_true", help="Emit JSON report")
+    p_cal_features = cal_sub.add_parser(
+        "features", help="Pitch keypoint/line feature detection (8B)"
+    )
+    cal_feat_sub = p_cal_features.add_subparsers(dest="calibration_features_command")
+    p_cal_feat_detect = cal_feat_sub.add_parser("detect", help="Detect pitch keypoints/lines")
+    p_cal_feat_detect.add_argument("--output-dir", type=Path, required=True)
+    p_cal_feat_detect.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/calibration/pitch_feature_baseline.yaml"),
+    )
+    p_cal_feat_detect.add_argument("--contain-root", type=Path, default=None)
+    p_cal_feat_detect.add_argument("--run-id", type=str, default=None)
+    p_cal_feat_detect.add_argument("--video-id", type=str, default=None)
+    p_cal_feat_detect.add_argument("--source", type=Path, default=None)
+    p_cal_feat_detect.add_argument("--timeline", type=Path, default=None)
+    p_cal_feat_detect.add_argument("--analysis-windows", type=Path, default=None)
+    p_cal_feat_detect.add_argument(
+        "--fixture-smoke",
+        action="store_true",
+        help="Run bounded in-memory RGB fixture smoke (no video)",
+    )
+    p_cal_feat_eval = cal_feat_sub.add_parser("evaluate", help="Evaluate pitch feature predictions")
+    p_cal_feat_eval.add_argument("--predictions", type=Path, required=True)
+    p_cal_feat_eval.add_argument("--ground-truth", type=Path, default=None)
+    p_cal_feat_eval.add_argument("--output", type=Path, required=True)
+    p_cal_feat_eval.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/calibration/pitch_feature_baseline.yaml"),
+    )
+    p_cal_feat_val = cal_feat_sub.add_parser(
+        "validate", help="Run pitch feature baseline validator"
+    )
+    p_cal_feat_val.add_argument("--keep", action="store_true")
+    p_cal_feat_val.add_argument("--json", action="store_true")
     p_cal_h = cal_sub.add_parser("homography", help="Homography geometry helpers")
     cal_h_sub = p_cal_h.add_subparsers(dest="calibration_homography_command")
     cal_h_sub.add_parser("validate", help="Solve/validate synthetic homography cases")
@@ -3556,6 +3741,32 @@ def main(argv: Sequence[str] | None = None) -> int:
                     keep=bool(args.keep), as_json=bool(args.json)
                 )
             parser.parse_args(["calibration", "contracts", "--help"])
+            return 2
+        if args.calibration_command == "features":
+            if args.calibration_features_command == "detect":
+                return cmd_calibration_features_detect(
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    contain_root=args.contain_root,
+                    run_id=args.run_id,
+                    video_id=args.video_id,
+                    source=args.source,
+                    timeline=args.timeline,
+                    analysis_windows=args.analysis_windows,
+                    fixture_smoke=bool(args.fixture_smoke),
+                )
+            if args.calibration_features_command == "evaluate":
+                return cmd_calibration_features_evaluate(
+                    predictions=args.predictions,
+                    ground_truth=args.ground_truth,
+                    output=args.output,
+                    config_path=args.config,
+                )
+            if args.calibration_features_command == "validate":
+                return cmd_calibration_features_validate(
+                    keep=bool(args.keep), as_json=bool(args.json)
+                )
+            parser.parse_args(["calibration", "features", "--help"])
             return 2
         if args.calibration_command == "homography":
             if args.calibration_homography_command == "validate":

@@ -1183,3 +1183,59 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Stage 8A+ |
+
+## RISK-084 — GPL-2.0 NBJW architecture linking
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-084 |
+| description | Lazy importlib load of NBJW cls_hrnet*.py (GPL-2.0) into ai-dev creates copyleft linking risk if redistributed as a combined work. |
+| probability | high |
+| impact | high |
+| mitigation | Do not vendor NBJW source; evaluation_only; production_approved=false; document locked absolute paths; prefer future reimplementation or isolated env for production. |
+| trigger | shipping product binary that dynamically links GPL HRNet without license review |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 8B+ |
+
+## RISK-085 — SV weight license unresolved
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-085 |
+| description | SV_kp/SV_lines weight redistribution/license not assumed from repo GPL; still review_required. |
+| probability | medium |
+| impact | high |
+| mitigation | Local locked paths only; no download/redistribution; registry license_status=review_required; evaluation_only. |
+| trigger | publishing or redistributing .pth weights |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 8B+ |
+
+## RISK-086 — Pitch feature accuracy without reviewed GT
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-086 |
+| description | Synthetic/model smoke treated as real football keypoint/line accuracy. |
+| probability | high |
+| impact | high |
+| mitigation | NOT_EVALUATED_NO_REVIEWED_PITCH_FEATURE_GROUND_TRUTH; PASS_WITH_FINDINGS gate; confidence=null; no accuracy claims. |
+| trigger | customer metrics using unvalidated SV features |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 8B+ |
+
+## RISK-087 — Agent GPU unverifiable during calibration smoke
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-087 |
+| description | Agent context cannot verify host GPU; false NO-GO if CUDA appears unavailable. |
+| probability | medium |
+| impact | medium |
+| mitigation | AGENT_CONTEXT_GPU_UNVERIFIABLE; prefer_cuda_else_cpu with CPU smoke; do not declare host GPU broken. |
+| trigger | cuda.is_available() false inside agent sandbox |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 8B+ |

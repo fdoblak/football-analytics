@@ -22,18 +22,22 @@ models:
     related_soccernet_commit: f6d50b24a33d6705d4c04dc4d4d93ecd12b08e74
     license: null
     license_status: review_required
-    input_spec: null
-    output_spec: null
+    input_spec: {imgsz: [960, 540], color: rgb, normalize: none}
+    output_spec: {heatmap_channels: 58, used_channels: 57, drop_background: true}
     classes: null
-    precision: null
-    device_requirements: {min_vram_mb: null, notes: "Not inference-tested in Stage 1C"}
-    tested: false
-    test_scope: file_integrity_only
-    last_verified: "2026-07-22"
+    precision: fp32
+    device_requirements: {min_vram_mb: 2048, notes: "batch=1; CPU fallback supported; Stage 8B smoke"}
+    tested: true
+    test_scope: stage_8b_pitch_feature_baseline_smoke
+    last_verified: "2026-07-23"
+    approval: evaluation_only
+    production_approved: false
     notes: >
-      Weight file present on disk. SHA-256 recomputed in Stage 1C and matches prior Stage 0 short prefix.
-      Weight redistribution/license is NOT assumed from GPL-2.0 repo LICENSE; review_required.
-      No model inference performed.
+      Stage 8B evaluation_only smoke via lazy importlib HRNet (cls_hrnet.py) from locked
+      NBJW absolute path. GPL-2.0 architecture linking risk → evaluation_only;
+      production_approved=false. Do NOT vendor NBJW source into football-analytics.
+      Weight redistribution/license is NOT assumed from repo LICENSE; review_required.
+      Homography solve deferred to Stage 8C. Smoke ≠ football accuracy.
 
   - id: sn_banner_sv_lines
     display_name: SoccerNet Banner / NBJW SV lines
@@ -51,18 +55,21 @@ models:
     related_soccernet_commit: f6d50b24a33d6705d4c04dc4d4d93ecd12b08e74
     license: null
     license_status: review_required
-    input_spec: null
-    output_spec: null
+    input_spec: {imgsz: [960, 540], color: rgb, normalize: none}
+    output_spec: {heatmap_channels: 24, used_channels: 23, drop_background: true}
     classes: null
-    precision: null
-    device_requirements: {min_vram_mb: null, notes: "Not inference-tested in Stage 1C"}
-    tested: false
-    test_scope: file_integrity_only
-    last_verified: "2026-07-22"
+    precision: fp32
+    device_requirements: {min_vram_mb: 2048, notes: "batch=1; CPU fallback supported; Stage 8B smoke"}
+    tested: true
+    test_scope: stage_8b_pitch_feature_baseline_smoke
+    last_verified: "2026-07-23"
+    approval: evaluation_only
+    production_approved: false
     notes: >
-      Weight file present on disk. SHA-256 recomputed in Stage 1C and matches prior Stage 0 short prefix.
-      Weight redistribution/license is NOT assumed from repo LICENSE; review_required.
-      No model inference performed.
+      Stage 8B evaluation_only smoke via lazy importlib HRNet (cls_hrnet_l.py) from locked
+      NBJW absolute path. GPL-2.0 architecture linking risk → evaluation_only;
+      production_approved=false. Do NOT vendor NBJW source. lines_list has trailing space
+      on "Goal left post left ". Weight license review_required. Homography deferred to 8C.
 
   - id: ultralytics_yolo11n_coco_person
     display_name: Ultralytics YOLO11n COCO person + sports ball (Stage 5B/5C)

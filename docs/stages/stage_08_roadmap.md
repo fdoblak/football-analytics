@@ -11,17 +11,20 @@ reviewable calibration basis.
 | Stage | Scope | Status |
 |-------|--------|--------|
 | **8A** | Pitch template, coordinate systems, calibration features, homography rules, calibration segments, projected positions, request/receipt/eval stubs | **IN TREE** (contracts only) |
-| **8B** | Pitch keypoint / line detection baseline (SV_kp / SV_lines adapters) | **not started** |
-| **8C+** | Real calibration solve on match video, temporal stability, physical metrics | **not started** |
+| **8B** | Pitch keypoint / line detection baseline (SV_kp / SV_lines adapters) | **IN TREE** (evaluation_only; accuracy not validated) |
+| **8C+** | Homography solve, calibration segments on match video, temporal stability, physical metrics | **not started** |
 
-## Stage 8A status
+## Stage 8B status
 
-Contracts, synthetic geometry, and validators are in-tree. **No** SV_kp /
-SV_lines inference, **no** real video calibration, **no** physical metrics.
+SV_kp / SV_lines lazy importlib HRNet adapter, stretch preprocess, peak/line
+postprocess, `calibration_features` outputs, and bounded smoke are in-tree.
+**No** Stage 8C homography product pipeline, **no** physical metrics, **no**
+reviewed GT accuracy claim. GPL-2.0 architecture linking → evaluation_only;
+`production_approved=false`.
 
 ## Explicit non-goals (until later stages)
 
-- Real keypoint / line detection
+- Homography solve as production pipeline (8C)
 - Attack direction / team-side invention
 - Running distance / sprint / heatmap production
 - Claiming projected positions as physical truth for airborne ball
@@ -32,6 +35,6 @@ SV_lines inference, **no** real video calibration, **no** physical metrics.
 - `track_observations`, `frames`, camera-view / shot segments
 - Stage 7 identity eligibility when target metrics require confirmed identity
 
-## Next after Stage 8A
+## Next after Stage 8B
 
-`Aşama 8B — Saha Anahtar Noktası ve Çizgi Algılama Baseline`
+`Aşama 8C — Homografi Çözümü, Kalibrasyon Segmentleri ve Değerlendirme`

@@ -1,0 +1,83 @@
+# Stage 8B pitch keypoint / line detection baseline (SV_kp + SV_lines).
+# evaluation_only; production_approved=false. Homography solve deferred to 8C.
+config_version: 1
+
+adapter_id: nbjw_hrnet_lazy_importlib
+adapter_version: "1.0.0"
+adapter_choice: ai_dev_lazy_importlib_hrnet
+
+kp_model_registry_id: sn_banner_sv_kp
+lines_model_registry_id: sn_banner_sv_lines
+
+# Locked absolute architecture paths (GPL-2.0; do NOT vendor into this tree).
+hrnet_kp_module_path: /home/fdoblak/projects/soccernet/sn-banner/camera_calibration/No_Bells_Just_Whistles/model/cls_hrnet.py
+hrnet_lines_module_path: /home/fdoblak/projects/soccernet/sn-banner/camera_calibration/No_Bells_Just_Whistles/model/cls_hrnet_l.py
+hrnet_kp_config_path: /home/fdoblak/projects/soccernet/sn-banner/camera_calibration/No_Bells_Just_Whistles/config/hrnetv2_w48.yaml
+hrnet_lines_config_path: /home/fdoblak/projects/soccernet/sn-banner/camera_calibration/No_Bells_Just_Whistles/config/hrnetv2_w48_l.yaml
+
+image_size: [960, 540]  # width, height — stretch resize; NO letterbox; NO mean/std
+color_order: rgb
+normalize_mean: null
+normalize_std: null
+tensor_dtype: float32
+to_tensor_range: [0.0, 1.0]
+
+num_joints_kp: 58
+num_joints_lines: 24
+kp_channels_used: 57
+lines_channels_used: 23
+drop_background_channel: true
+
+peak_decode_scale: 2
+kp_max_peaks: 1
+kp_min_peak_distance: 15
+lines_max_peaks: 2
+lines_min_peak_distance: 10
+
+# Raw heatmap peak scores (not calibrated confidence).
+kp_score_threshold: 0.1486
+line_score_threshold: 0.3880
+
+minimum_line_length_px: 8.0
+duplicate_keypoint_distance_px: 6.0
+duplicate_line_endpoint_distance_px: 8.0
+max_features_per_frame: 128
+
+device_policy: prefer_cuda_else_cpu
+precision_policy: fp32_only
+batch_size: 1
+maximum_frames_per_run: 4
+timeout_seconds: 600.0
+
+resource_limits:
+  decode_timeout_seconds: 60.0
+  max_concurrency: 1
+
+routing:
+  require_calibration_eligible: true
+  reject_graphics_replay_closeup: true
+  auto_homography: false
+
+output_policy:
+  atomic_writes: true
+  overwrite_allowed: false
+  write_evaluation_json: true
+  write_quality_json: true
+  confidence_always_null: true
+
+review_sampling:
+  enabled: false
+  max_samples: 0
+
+runtime_root: /home/fdoblak/workspace/pitch_feature_checks
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+auto_homography: false
+
+license_note: >
+  Architecture loaded via importlib from locked NBJW paths (GPL-2.0 linking risk).
+  Weights license remains review_required; evaluation_only; production_approved=false.
+coordinate_space_note: >
+  Stretch resize to 960x540 RGB ToTensor [0,1], no mean/std. Heatmap peaks decoded
+  with scale=2 into model space then inverse-stretched to source WxH pixels.
