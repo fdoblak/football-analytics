@@ -49,7 +49,7 @@ Streaming decode path for features is in place. Do **not** mark RISK-029 closed:
 
 ## 8. Next stage (name only)
 
-`Aşama 4C — Camera-view classification baseline` (not started)
+`Aşama 4C — Camera-view classification baseline` (**CLOSED** in Stage 4C doc)
 
 ## 9. Out of scope
 

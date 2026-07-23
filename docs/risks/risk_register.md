@@ -408,10 +408,10 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | description | Large tables validated via pylist conversion may use excess memory. |
 | probability | medium |
 | impact | medium |
-| mitigation | Bounded error lists; document complexity; future Arrow-compute paths. Stage 3D adds streaming `write_contract_parquet_streaming` for the frame timeline write path (batched ParquetWriter; no full-frame pylist on timeline write). Stage 4B adds streaming OpenCV decode for shot features (no full-res frame buffer); this does **not** close general pylist / materialize-join pressure in `validate_broadcast_bundle`. Stage 3D-F1 taxonomy work does **not** close general pylist / materialize-join pressure. |
+| mitigation | Bounded error lists; document complexity; future Arrow-compute paths. Stage 3D adds streaming `write_contract_parquet_streaming` for the frame timeline write path (batched ParquetWriter; no full-frame pylist on timeline write). Stage 4B adds streaming OpenCV decode for shot features (no full-res frame buffer); Stage 4C adds seek-by-index sample decode for camera features (not full-video materialization). Neither closes general pylist / materialize-join pressure in `validate_broadcast_bundle`. Stage 3D-F1 taxonomy work does **not** close general pylist / materialize-join pressure. |
 | trigger | Stage 2C |
 | owner | Furkan Doblak |
-| status | mitigated (frame timeline streaming write path; shot-feature streaming decode); open (general semantic validation pylist + materialize metadata join) |
+| status | mitigated (frame timeline streaming write path; shot-feature streaming decode; camera sample decode); open (general semantic validation pylist + materialize metadata join) |
 | target_stage | Stage 2C+/2D/3D |
 
 ## RISK-030 — Cross-table orphan data

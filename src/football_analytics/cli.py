@@ -631,6 +631,136 @@ def cmd_broadcast_shots_evaluate(
     return 0
 
 
+def cmd_broadcast_camera_classify(
+    *,
+    source: Path,
+    timeline: Path,
+    shots: Path,
+    output_dir: Path,
+    config_path: Path,
+    contain_root: Path | None,
+    run_id: str | None,
+    video_id: str | None,
+) -> int:
+    """Stage 4C: camera-view classification baseline (lazy imports)."""
+    from football_analytics.broadcast.camera_config import (
+        default_camera_config_path,
+        load_camera_view_config,
+    )
+    from football_analytics.broadcast.camera_service import run_camera_view_classification
+    from football_analytics.data.registry import default_project_root
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_camera_config_path(repo_root=root)
+    try:
+        config = load_camera_view_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    contain = contain_root
+    if contain is None:
+        contain = Path(str(config["runtime_root"]))
+    result = run_camera_view_classification(
+        source=str(source),
+        timeline=str(timeline),
+        shots=str(shots),
+        output_dir=str(output_dir),
+        config=config,
+        contain_root=contain,
+        run_id=run_id,
+        video_id=video_id,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"segment_count: {summary['segment_count']}")
+    print(f"cameras_parquet: {summary['cameras_parquet']}")
+    print(f"classification_receipt: {summary['classification_receipt']}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
+def cmd_broadcast_camera_evaluate(
+    *,
+    predictions: Path,
+    ground_truth: Path,
+    output: Path,
+    config_path: Path,
+) -> int:
+    """Stage 4C: evaluate predicted camera views vs ground truth."""
+    import json
+
+    from football_analytics.broadcast.camera_config import load_camera_view_config
+    from football_analytics.broadcast.camera_evaluation import (
+        combined_view_framing_macro_f1,
+        evaluate_camera_predictions,
+    )
+    from football_analytics.broadcast.contracts import load_broadcast_contract
+    from football_analytics.core.records import write_json_record
+    from football_analytics.data.parquet import read_contract_parquet
+    from football_analytics.data.registry import default_project_root
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    try:
+        config = load_camera_view_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    try:
+        pred_table = read_contract_parquet(
+            predictions, load_broadcast_contract("camera_view_segments")
+        )
+        pred_rows = pred_table.to_pylist()
+        gt_path = Path(ground_truth)
+        if gt_path.suffix.lower() == ".json":
+            gt_payload = json.loads(gt_path.read_text(encoding="utf-8"))
+            if isinstance(gt_payload, list):
+                gt_rows = list(gt_payload)
+            else:
+                gt_rows = list(
+                    gt_payload.get("segments")
+                    or gt_payload.get("ground_truth")
+                    or gt_payload.get("labels")
+                    or []
+                )
+                if not gt_rows and any(
+                    k in gt_payload for k in ("view_family", "fixture_id", "name")
+                ):
+                    gt_rows = [gt_payload]
+        else:
+            gt_table = read_contract_parquet(
+                gt_path, load_broadcast_contract("camera_view_segments")
+            )
+            gt_rows = gt_table.to_pylist()
+        supported = {
+            "view_family": list(config["supported_axes"]["view_family"]),
+            "framing_scale": list(config["supported_axes"]["framing_scale"]),
+            "camera_motion": list(config["supported_axes"]["camera_motion"]),
+            "graphics_status": list(config["supported_axes"]["graphics_status"]),
+            "playability": list(config["supported_axes"]["playability"]),
+        }
+        report = evaluate_camera_predictions(pred_rows, gt_rows, supported_labels=supported)
+        payload = report.to_dict()
+        payload["view_framing_macro_f1"] = combined_view_framing_macro_f1(report)
+        write_json_record(output, payload, overwrite=False)
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
+    print(f"status: {report.status}")
+    print(f"n_pairs: {report.n_pairs}")
+    print(f"view_framing_macro_f1: {payload.get('view_framing_macro_f1')}")
+    print(f"graphics_macro_f1: {report.axes['graphics_status'].macro_f1}")
+    print(f"motion_macro_f1: {report.axes['camera_motion'].macro_f1}")
+    print(f"playability_macro_f1: {report.axes['playability'].macro_f1}")
+    print(f"unsafe_playable_fp_rate: {report.unsafe_playable_false_positive_rate}")
+    print(f"output: {output}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="football-analytics",
@@ -841,6 +971,49 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help="Override matching tolerance microseconds",
     )
+    p_camera = broadcast_sub.add_parser("camera", help="Camera-view classification / evaluation")
+    camera_sub = p_camera.add_subparsers(dest="camera_command")
+    p_classify = camera_sub.add_parser("classify", help="Classify camera views (baseline)")
+    p_classify.add_argument("--source", type=Path, required=True, help="Absolute local video path")
+    p_classify.add_argument(
+        "--timeline", type=Path, required=True, help="Absolute frames.parquet path"
+    )
+    p_classify.add_argument(
+        "--shots", type=Path, required=True, help="Absolute shot_segments.parquet path"
+    )
+    p_classify.add_argument(
+        "--output-dir", type=Path, required=True, help="Runtime output directory"
+    )
+    p_classify.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/broadcast/camera_view_baseline.yaml"),
+        help="Camera-view baseline config YAML",
+    )
+    p_classify.add_argument(
+        "--contain-root",
+        type=Path,
+        default=None,
+        help="Containment root (default: config.runtime_root)",
+    )
+    p_classify.add_argument("--run-id", type=str, default=None, help="Optional run_id")
+    p_classify.add_argument("--video-id", type=str, default=None, help="Optional video_id")
+    p_cam_eval = camera_sub.add_parser(
+        "evaluate", help="Evaluate predicted camera views vs ground truth"
+    )
+    p_cam_eval.add_argument(
+        "--predictions", type=Path, required=True, help="Predicted camera_view_segments.parquet"
+    )
+    p_cam_eval.add_argument(
+        "--ground-truth", type=Path, required=True, help="Ground-truth JSON or parquet"
+    )
+    p_cam_eval.add_argument("--output", type=Path, required=True, help="Metrics JSON output path")
+    p_cam_eval.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/broadcast/camera_view_baseline.yaml"),
+        help="Camera-view baseline config YAML",
+    )
     return parser
 
 
@@ -962,6 +1135,27 @@ def main(argv: Sequence[str] | None = None) -> int:
                     tolerance_us=args.tolerance_us,
                 )
             parser.parse_args(["broadcast", "shots", "--help"])
+            return 2
+        if args.broadcast_command == "camera":
+            if args.camera_command == "classify":
+                return cmd_broadcast_camera_classify(
+                    source=args.source,
+                    timeline=args.timeline,
+                    shots=args.shots,
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    contain_root=args.contain_root,
+                    run_id=args.run_id,
+                    video_id=args.video_id,
+                )
+            if args.camera_command == "evaluate":
+                return cmd_broadcast_camera_evaluate(
+                    predictions=args.predictions,
+                    ground_truth=args.ground_truth,
+                    output=args.output,
+                    config_path=args.config,
+                )
+            parser.parse_args(["broadcast", "camera", "--help"])
             return 2
         parser.parse_args(["broadcast", "--help"])
         return 2

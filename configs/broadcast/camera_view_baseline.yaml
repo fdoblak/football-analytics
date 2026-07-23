@@ -1,0 +1,173 @@
+# Stage 4C camera-view classification baseline (rule-based, OpenCV sample decode).
+# Thresholds are tuned on development fixtures only; frozen_evaluation is frozen.
+# Pitch HSV ranges are heuristic broadcast greens — not stadium ground truth.
+config_version: 1
+
+sampling:
+  samples_per_shot: 5
+  edge_exclude_fraction: 0.08
+  min_samples: 3
+  max_samples: 9
+
+analysis_width: 160
+analysis_height: 90
+feature_version: 1
+
+# Heuristic pitch greens (broadcast encoding), NOT measured stadium truth.
+pitch_hsv:
+  # OpenCV H in [0,180], S/V in [0,255]
+  h_min: 35
+  h_max: 95
+  s_min: 40
+  v_min: 40
+  alt_h_min: 28
+  alt_h_max: 100
+  alt_s_min: 25
+  alt_v_min: 25
+
+# Skin-like blob heuristic for player_isolation (conservative).
+skin_hsv:
+  h_min: 0
+  h_max: 25
+  s_min: 40
+  v_min: 50
+  v_max: 230
+
+thresholds:
+  view:
+    main_broadcast_pitch_min: 0.28
+    main_broadcast_spread_min: 0.18
+    player_isolation_skin_min: 0.04
+    player_isolation_pitch_max: 0.12
+    graphics_overlay_min: 0.35
+    graphics_pitch_max: 0.10
+    abstain_margin: 0.06
+  framing:
+    wide_pitch_min: 0.42
+    medium_pitch_min: 0.18
+    close_up_pitch_max: 0.12
+    close_up_skin_min: 0.03
+    abstain_margin: 0.05
+  motion:
+    static_diff_max: 0.035
+    static_flow_max: 0.6
+    pan_flow_min: 1.2
+    pan_horizontal_ratio_min: 0.55
+    zoom_radial_min: 0.45
+    zoom_flow_min: 1.0
+    unstable_diff_min: 0.12
+    unstable_flow_std_min: 2.5
+    compound_flow_min: 1.5
+    abstain_margin: 0.08
+  graphics:
+    none_overlay_max: 0.08
+    partial_overlay_max: 0.22
+    dominant_overlay_max: 0.55
+    full_screen_overlay_min: 0.60
+    full_screen_pitch_max: 0.18
+    abstain_margin: 0.04
+  aggregation:
+    min_label_fraction: 0.55
+    max_disagreement: 0.45
+  abstention:
+    min_heuristic_score: 0.55
+    ood_pitch_max: 0.12
+    ood_entropy_min: 1.8
+    ood_edge_min: 0.12
+
+weights:
+  view:
+    pitch: 0.45
+    spread: 0.20
+    overlay: 0.20
+    skin: 0.15
+  framing:
+    pitch: 0.70
+    skin: 0.30
+  motion:
+    diff: 0.35
+    flow: 0.45
+    structure: 0.20
+  graphics:
+    overlay: 0.75
+    pitch: 0.25
+
+optical_flow:
+  enabled: true
+  pyr_scale: 0.5
+  levels: 2
+  winsize: 15
+  iterations: 2
+  poly_n: 5
+  poly_sigma: 1.1
+
+min_coverage: 0.50
+
+supported_axes:
+  view_family:
+    - main_broadcast
+    - player_isolation
+    - graphics
+    - unknown
+  framing_scale:
+    - wide
+    - medium
+    - close_up
+    - unknown
+  camera_motion:
+    - static
+    - pan
+    - zoom
+    - compound
+    - unstable
+    - unknown
+  graphics_status:
+    - none
+    - partial_overlay
+    - dominant_overlay
+    - full_screen
+    - unknown
+  playability:
+    - playable
+    - partially_playable
+    - non_playable
+    - uncertain
+
+# Always left unknown by this baseline (do not invent):
+always_unknown_axes:
+  - camera_position
+  - replay_status
+
+suitability_rule_ids:
+  - S4C-CAL-WIDE-MAIN
+  - S4C-TRK-WIDE-MAIN
+  - S4C-ID-CLOSE-ISO
+  - S4C-UNSUIT-GRAPHICS
+  - S4C-UNSUIT-UNKNOWN
+  - S4C-UNSUIT-ISO-TRACK-CAL
+
+decode:
+  backend: opencv
+  max_frames: 10000
+  timeout_seconds: 120
+
+evaluation:
+  # Frozen gate thresholds (must match validator / brief)
+  view_framing_macro_f1_min: 0.85
+  graphics_macro_f1_min: 0.90
+  motion_macro_f1_min: 0.80
+  playability_macro_f1_min: 0.90
+  unsafe_playable_fp_rate_max: 0.0
+  ood_abstention_rate_min: 0.80
+
+deterministic_seed: 42
+
+runtime_root: /home/fdoblak/workspace/camera_view_checks
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+resource_limits:
+  max_frames: 10000
+  timeout_seconds: 120
+  max_shots: 500
