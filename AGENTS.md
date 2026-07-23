@@ -51,6 +51,7 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `ruff` / `black --check` / `isort --check-only` / `mypy src/football_analytics` as applicable
 - `scripts/check_storage.py`, `check_registries.py`, `check_secrets.py`
 - `scripts/check_runtime_foundation.py`, `check_data_contracts.py`
+- `scripts/check_broadcast_contracts.py` (Stage 4A shot/camera contracts)
 - `scripts/check_stage_cache.py`, `check_ci_workflow.py`, `check_project.py`
 - Or: `football-analytics project check --profile local --quick`
 
@@ -131,11 +132,11 @@ Network defaults: `network_video_download_allowed: false`,
 
 ---
 
-## 10. Stage bootstrap vs Stage 3
+## 10. Stage bootstrap vs later stages
 
 Product-scope docs/configs/schemas on `main` are accepted.
-Stage 3A ingest contracts are **not** complete on `main` unless an explicit
-user prompt implements and merges them.
 Do not modify SoccerNet repos.
 Do not change protected packages.
-Do not start Stage 3 without an explicit user prompt.
+Do not start a stage without an explicit user prompt.
+Stage 4A shot/camera contracts are in-tree when merged; Stage 4B detection is
+**not** started unless explicitly requested.
