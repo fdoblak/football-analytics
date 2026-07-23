@@ -148,5 +148,6 @@ Do not start a stage without an explicit user prompt.
 Stage 4A–4D broadcast understanding baseline is in-tree when merged.
 Stage 5A detection contracts are in-tree when merged.
 Stage 5B human detection baseline is in-tree when merged.
-Stage 5C is **not** started unless explicitly requested.
+Stage 5C ball detection baseline is in-tree when merged.
+Stage 5D is **not** started unless explicitly requested.
 Manual Cursor flow only — no Codex/background automation.
