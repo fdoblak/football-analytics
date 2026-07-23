@@ -1190,7 +1190,6 @@ def cmd_perception_integrate(
     return int(result.exit_code)
 
 
-
 def cmd_identity_contracts_validate(*, keep: bool, as_json: bool) -> int:
     """Run Stage 7A synthetic identity contract validator (no ReID inference)."""
     import runpy
@@ -1238,15 +1237,186 @@ def cmd_identity_receipt_validate(receipt_path: Path) -> int:
         return 2
     try:
         payload = json.loads(receipt_path.read_text(encoding="utf-8"))
-        if not isinstance(payload, dict):
-            print("receipt root must be object", file=sys.stderr)
-            return 1
         validate_receipt_payload(payload)
     except Exception as exc:  # noqa: BLE001
         print(f"receipt_invalid: {exc}", file=sys.stderr)
         return 1
     print("receipt_valid: true")
     return 0
+
+
+def cmd_identity_appearance_extract(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    contain_root: Path | None,
+    run_id: str | None,
+    video_id: str | None,
+    fixture: str,
+) -> int:
+    """Stage 7B: extract tracklet appearance profiles (synthetic fixture path)."""
+    from football_analytics.data.registry import default_project_root
+    from football_analytics.identity.appearance_reid_config import (
+        default_appearance_reid_config_path,
+        load_appearance_reid_config,
+    )
+    from football_analytics.identity.appearance_reid_fixtures import all_core_fixtures
+    from football_analytics.identity.appearance_reid_service import run_appearance_extract
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_appearance_reid_config_path(repo_root=root)
+    try:
+        config = load_appearance_reid_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    fixtures = all_core_fixtures()
+    if fixture not in fixtures:
+        print(f"unknown_fixture: {fixture}; choices={sorted(fixtures)}", file=sys.stderr)
+        return 2
+    bundle = fixtures[fixture]()
+    contain = contain_root or Path(str(config["runtime_root"]))
+    result = run_appearance_extract(
+        output_dir=str(output_dir),
+        config=config,
+        contain_root=contain,
+        run_id=run_id,
+        video_id=video_id,
+        in_memory_bundle=bundle,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"profiles_parquet: {summary.get('profiles_parquet')}")
+    print(f"receipt_json: {summary.get('receipt_json')}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
+def cmd_identity_reid_candidates(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    contain_root: Path | None,
+    run_id: str | None,
+    video_id: str | None,
+    fixture: str,
+) -> int:
+    """Stage 7B: propose ReID candidate links + appearance evidence."""
+    from football_analytics.data.registry import default_project_root
+    from football_analytics.identity.appearance_reid_config import (
+        default_appearance_reid_config_path,
+        load_appearance_reid_config,
+    )
+    from football_analytics.identity.appearance_reid_fixtures import all_core_fixtures
+    from football_analytics.identity.appearance_reid_service import run_reid_candidates
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_appearance_reid_config_path(repo_root=root)
+    try:
+        config = load_appearance_reid_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    fixtures = all_core_fixtures()
+    if fixture not in fixtures:
+        print(f"unknown_fixture: {fixture}; choices={sorted(fixtures)}", file=sys.stderr)
+        return 2
+    bundle = fixtures[fixture]()
+    contain = contain_root or Path(str(config["runtime_root"]))
+    result = run_reid_candidates(
+        output_dir=str(output_dir),
+        config=config,
+        contain_root=contain,
+        run_id=run_id,
+        video_id=video_id,
+        in_memory_bundle=bundle,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"evidence_parquet: {summary.get('evidence_parquet')}")
+    print(f"links_parquet: {summary.get('links_parquet')}")
+    print(f"evaluation_json: {summary.get('evaluation_json')}")
+    print(f"evaluation_status: {summary.get('evaluation_status')}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
+def cmd_identity_reid_evaluate(
+    *,
+    config_path: Path,
+    links: Path | None,
+    profiles: Path | None,
+    ground_truth: Path | None,
+) -> int:
+    """Stage 7B: evaluate appearance ReID (NOT_EVALUATED without reviewed GT)."""
+    import pyarrow.parquet as pq
+
+    from football_analytics.data.registry import default_project_root
+    from football_analytics.identity.appearance_reid_config import (
+        appearance_reid_config_fingerprint,
+        default_appearance_reid_config_path,
+        load_appearance_reid_config,
+    )
+    from football_analytics.identity.appearance_reid_evaluation import NOT_EVALUATED_APPEARANCE_REID
+    from football_analytics.identity.appearance_reid_service import run_reid_evaluate
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_appearance_reid_config_path(repo_root=root)
+    try:
+        config = load_appearance_reid_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    link_rows = None
+    profile_rows = None
+    if links is not None and links.is_file():
+        link_rows = pq.read_table(links).to_pylist()
+    if profiles is not None and profiles.is_file():
+        profile_rows = pq.read_table(profiles).to_pylist()
+    gt_rows = None
+    has_gt = False
+    if ground_truth is not None and ground_truth.is_file():
+        gt_rows = json.loads(ground_truth.read_text(encoding="utf-8"))
+        has_gt = bool(gt_rows)
+    payload = run_reid_evaluate(
+        links=link_rows,
+        profiles=profile_rows,
+        ground_truth=gt_rows if isinstance(gt_rows, list) else None,
+        has_reviewed_ground_truth=has_gt,
+        config_fingerprint=appearance_reid_config_fingerprint(config),
+    )
+    print(f"status: {payload['status']}")
+    print(f"ground_truth_evaluation_status: {payload['ground_truth_evaluation_status']}")
+    print(f"expected_code: {NOT_EVALUATED_APPEARANCE_REID}")
+    return 0
+
+
+def cmd_identity_appearance_validate(*, keep: bool, as_json: bool) -> int:
+    """Run Stage 7B appearance ReID baseline validator."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_appearance_reid_baseline.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("appearance reid validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
 
 
 def cmd_tracking_contracts_validate(*, keep: bool, as_json: bool) -> int:
@@ -2287,9 +2457,7 @@ def build_parser() -> argparse.ArgumentParser:
     p_trk_validate.add_argument("--frames", type=int, default=8, help="Synthetic frames (≤20)")
     p_trk_validate.add_argument("--keep", action="store_true", help="Keep validator session dir")
 
-    p_identity = sub.add_parser(
-        "identity", help="ReID / identity / target-player contracts (Stage 7A)"
-    )
+    p_identity = sub.add_parser("identity", help="ReID / identity / target-player (Stage 7A/7B)")
     identity_sub = p_identity.add_subparsers(dest="identity_command")
     p_id_contracts = identity_sub.add_parser("contracts", help="Identity contract helpers")
     id_contracts_sub = p_id_contracts.add_subparsers(dest="identity_contracts_command")
@@ -2310,6 +2478,53 @@ def build_parser() -> argparse.ArgumentParser:
         "validate", help="Validate an identity_run_receipt JSON file"
     )
     p_id_r_val.add_argument("receipt", type=Path, help="Path to identity_run_receipt JSON")
+
+    p_id_appearance = identity_sub.add_parser(
+        "appearance", help="Appearance embedding extract (Stage 7B)"
+    )
+    id_app_sub = p_id_appearance.add_subparsers(dest="identity_appearance_command")
+    p_id_app_ext = id_app_sub.add_parser("extract", help="Extract tracklet appearance profiles")
+    p_id_app_ext.add_argument("--output-dir", type=Path, required=True)
+    p_id_app_ext.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/identity/appearance_reid_baseline.yaml"),
+    )
+    p_id_app_ext.add_argument("--contain-root", type=Path, default=None)
+    p_id_app_ext.add_argument("--run-id", type=str, default=None)
+    p_id_app_ext.add_argument("--video-id", type=str, default=None)
+    p_id_app_ext.add_argument(
+        "--fixture",
+        type=str,
+        default="same_appearance",
+        help="Synthetic fixture name (no real video required)",
+    )
+    p_id_app_val = id_app_sub.add_parser("validate", help="Run appearance ReID baseline validator")
+    p_id_app_val.add_argument("--keep", action="store_true")
+    p_id_app_val.add_argument("--json", action="store_true")
+
+    p_id_reid = identity_sub.add_parser("reid", help="Tracklet ReID candidates/evaluate (Stage 7B)")
+    id_reid_sub = p_id_reid.add_subparsers(dest="identity_reid_command")
+    p_id_reid_cand = id_reid_sub.add_parser("candidates", help="Propose ReID candidate links")
+    p_id_reid_cand.add_argument("--output-dir", type=Path, required=True)
+    p_id_reid_cand.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/identity/appearance_reid_baseline.yaml"),
+    )
+    p_id_reid_cand.add_argument("--contain-root", type=Path, default=None)
+    p_id_reid_cand.add_argument("--run-id", type=str, default=None)
+    p_id_reid_cand.add_argument("--video-id", type=str, default=None)
+    p_id_reid_cand.add_argument("--fixture", type=str, default="same_appearance")
+    p_id_reid_eval = id_reid_sub.add_parser("evaluate", help="Evaluate appearance ReID")
+    p_id_reid_eval.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/identity/appearance_reid_baseline.yaml"),
+    )
+    p_id_reid_eval.add_argument("--links", type=Path, default=None)
+    p_id_reid_eval.add_argument("--profiles", type=Path, default=None)
+    p_id_reid_eval.add_argument("--ground-truth", type=Path, default=None)
 
     return parser
 
@@ -2671,6 +2886,41 @@ def main(argv: Sequence[str] | None = None) -> int:
             if args.identity_receipt_command == "validate":
                 return cmd_identity_receipt_validate(args.receipt)
             parser.parse_args(["identity", "receipt", "--help"])
+            return 2
+        if args.identity_command == "appearance":
+            if args.identity_appearance_command == "extract":
+                return cmd_identity_appearance_extract(
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    contain_root=args.contain_root,
+                    run_id=args.run_id,
+                    video_id=args.video_id,
+                    fixture=str(args.fixture),
+                )
+            if args.identity_appearance_command == "validate":
+                return cmd_identity_appearance_validate(
+                    keep=bool(args.keep), as_json=bool(args.json)
+                )
+            parser.parse_args(["identity", "appearance", "--help"])
+            return 2
+        if args.identity_command == "reid":
+            if args.identity_reid_command == "candidates":
+                return cmd_identity_reid_candidates(
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    contain_root=args.contain_root,
+                    run_id=args.run_id,
+                    video_id=args.video_id,
+                    fixture=str(args.fixture),
+                )
+            if args.identity_reid_command == "evaluate":
+                return cmd_identity_reid_evaluate(
+                    config_path=args.config,
+                    links=args.links,
+                    profiles=args.profiles,
+                    ground_truth=args.ground_truth,
+                )
+            parser.parse_args(["identity", "reid", "--help"])
             return 2
         parser.parse_args(["identity", "--help"])
         return 2

@@ -1,0 +1,96 @@
+# Stage 7B appearance embedding + tracklet ReID baseline.
+# SELECTED: handcrafted HSV/Lab spatial hist + upper/lower + bounded edge/texture.
+# REJECTED this stage: sn-reid/TrackLab (future adapter); local learned ReID weights (none);
+# torchvision feature extractor (unused — no verified football ReID weights).
+config_version: 1
+extractor_id: handcrafted_hsv_lab_edge_v1
+extractor_version: "0.1.0"
+extractor_type: handcrafted
+
+descriptor:
+  hsv_h_bins: 8
+  hsv_s_bins: 4
+  hsv_v_bins: 4
+  lab_l_bins: 8
+  lab_a_bins: 4
+  lab_b_bins: 4
+  edge_bins: 16
+  texture_bins: 8
+  upper_body_fraction: 0.5
+  embedding_dim: 88
+
+sampling:
+  max_samples_per_track: 8
+  min_samples_for_profile: 2
+  min_bbox_area_px: 400.0
+  min_crop_side_px: 16
+  min_crop_quality: 0.15
+  temporal_stride_frames: 1
+  max_samples_per_temporal_bin: 2
+  temporal_bin_count: 4
+  observed_only: true
+  human_only: true
+  persist_crops: false
+  debug_crop_output: false
+
+aggregation:
+  method: quality_weighted_mean
+  outlier_cosine_reject: 0.35
+  min_coverage: 0.25
+  single_crop_strong_forbidden: true
+
+matching:
+  similarity_threshold: 0.72
+  ambiguity_margin: 0.05
+  reject_below: 0.55
+  candidate_cap_per_track: 5
+  mutual_nearest: true
+  temporal_overlap_forbidden: true
+  cross_video_forbidden: true
+  human_ball_forbidden: true
+  auto_confirm: false
+  face_regions_use: false
+
+review:
+  sample_ambiguous: true
+  sample_same_kit_flag: true
+  max_review_items: 32
+
+output_policy:
+  atomic_writes: true
+  overwrite_allowed: false
+  chmod_mode: 0o600
+
+safety_limits:
+  max_tracks_per_video: 512
+  max_profiles_per_run: 512
+  max_candidates_per_run: 2048
+  timeout_seconds: 120.0
+
+runtime_root: /home/fdoblak/workspace/appearance_reid_checks
+identity_policy_path: configs/identity/identity_evidence_policy.yaml
+deterministic_seed: 0
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+selection_matrix:
+  - candidate: sn-reid / TrackLab adapter
+    status: future
+    reason: reference-only SoccerNet clone; no Stage 7B integration; GPL/adapter ADR pending
+  - candidate: local pretrained ReID weights
+    status: rejected
+    reason: no verified licensed weights in model archive
+  - candidate: torchvision feature extractor
+    status: rejected
+    reason: unused; no football-tuned ReID head; would imply unverified accuracy
+  - candidate: handcrafted HSV/Lab + edge/texture L2
+    status: selected
+    reason: deterministic, offline, no download; appearance alone cannot confirm
+
+notes:
+  - Appearance profile is not face/biometric recognition.
+  - Appearance similarity alone → at most Stage 7A candidate (auto_confirm=false).
+  - Same-kit players are hard-negatives; real football ReID accuracy not validated.
+  - Crops not persisted by default; embeddings under local runtime 0600, Git-outside.
+  - Physical track merge forbidden; cross-video auto link forbidden; human-ball forbidden.

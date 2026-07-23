@@ -178,3 +178,12 @@ contracts:
       1:
         spec_path: schemas/data/v1/track_identity_assignments.json
     migration_edges: []
+
+  tracklet_appearance_profiles:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/tracklet_appearance_profiles.json
+    migration_edges: []

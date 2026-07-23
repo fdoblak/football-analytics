@@ -9,9 +9,9 @@ metrics never silently report the wrong athlete.
 
 | Stage | Scope | Status |
 |-------|--------|--------|
-| **7A** | Identity evidence, ReID candidate links, track identity assignments, target-player request/receipt, policy, metric eligibility, review/audit, eval stubs | **in progress / contracts** |
-| **7B** | Appearance embedding + tracklet ReID baseline | not started |
-| **7C+** | Team/jersey evidence producers, confirmation UX, production identity run | later |
+| **7A** | Identity evidence, ReID candidate links, track identity assignments, target-player request/receipt, policy, metric eligibility, review/audit, eval stubs | **in-tree / contracts** |
+| **7B** | Appearance embedding + tracklet ReID baseline (handcrafted) | **in-tree / baseline** |
+| **7C+** | Team appearance classification + team assignment baseline; jersey/confirmation UX; production identity run | **not started** |
 
 ## Explicit non-goals (until later stages)
 
@@ -26,6 +26,6 @@ metrics never silently report the wrong athlete.
 - `team_assignments` / `jersey_observations` as **reference-only** evidence sources
 - Manual review queue + append-only audit
 
-## Next after 7A
+## Next after 7B
 
-`Aşama 7B — Görünüş Embedding ve Tracklet ReID Baseline`
+`Aşama 7C — Takım Görünümü Sınıflandırma ve Team Assignment Baseline`

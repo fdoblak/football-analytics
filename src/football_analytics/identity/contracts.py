@@ -15,6 +15,7 @@ from football_analytics.identity.types import IdentityContractError
 IDENTITY_EVIDENCE_CONTRACT = "identity_evidence"
 REID_CANDIDATE_LINKS_CONTRACT = "reid_candidate_links"
 TRACK_IDENTITY_ASSIGNMENTS_CONTRACT = "track_identity_assignments"
+TRACKLET_APPEARANCE_PROFILES_CONTRACT = "tracklet_appearance_profiles"
 
 # Frozen upstream contracts — must not change.
 TEAM_ASSIGNMENTS_CONTRACT = "team_assignments"
@@ -35,6 +36,7 @@ IDENTITY_ARROW_CONTRACTS: tuple[str, ...] = (
     IDENTITY_EVIDENCE_CONTRACT,
     REID_CANDIDATE_LINKS_CONTRACT,
     TRACK_IDENTITY_ASSIGNMENTS_CONTRACT,
+    TRACKLET_APPEARANCE_PROFILES_CONTRACT,
 )
 
 JSON_SCHEMA_NAMES: tuple[str, ...] = (
@@ -44,7 +46,7 @@ JSON_SCHEMA_NAMES: tuple[str, ...] = (
     "identity_evaluation",
 )
 
-EXPECTED_REGISTRY_CONTRACT_COUNT = 19
+EXPECTED_REGISTRY_CONTRACT_COUNT = 20
 
 
 def load_identity_contract(name: str, version: int = 1, *, registry: Any = None) -> ContractSpec:
@@ -142,6 +144,7 @@ __all__ = [
     "IDENTITY_EVIDENCE_CONTRACT",
     "REID_CANDIDATE_LINKS_CONTRACT",
     "TRACK_IDENTITY_ASSIGNMENTS_CONTRACT",
+    "TRACKLET_APPEARANCE_PROFILES_CONTRACT",
     "TEAM_ASSIGNMENTS_CONTRACT",
     "JERSEY_OBSERVATIONS_CONTRACT",
     "DETECTIONS_CONTRACT",

@@ -861,3 +861,59 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Stage 7A+ |
+
+## RISK-061 — Same-kit false match (appearance ReID)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-061 |
+| description | Players wearing the same team kit produce high handcrafted appearance similarity and may generate false ReID candidate links. |
+| probability | high |
+| impact | high |
+| mitigation | quality flag `same_kit_false_match_risk`; appearance alone → candidate only; ambiguity margin → review; team/jersey evidence deferred to later stages. |
+| trigger | high similarity between distinct same-kit tracklets |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7B+ |
+
+## RISK-062 — Appearance drift across lighting / cameras
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-062 |
+| description | Brightness, camera view, and broadcast grade shifts change HSV/Lab histograms enough to miss true links or create false ones. |
+| probability | high |
+| impact | medium |
+| mitigation | quality-weighted aggregation; brightness fixture checks; review on ambiguity; do not claim real-match accuracy without reviewed GT. |
+| trigger | profile similarity collapse under lighting shift |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7B+ |
+
+## RISK-063 — Appearance embedding privacy / crop misuse
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-063 |
+| description | Tracklet embeddings and crops are identity-adjacent artifacts; persisting crops or committing embeddings risks privacy exposure. |
+| probability | medium |
+| impact | high |
+| mitigation | crops not persisted by default; embeddings under local runtime `0600`; Git-outside; face/biometric forbidden; atomic no-overwrite. |
+| trigger | crop/image or embedding artifact staged into Git |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7B+ |
+
+## RISK-064 — No reviewed appearance ReID ground truth
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-064 |
+| description | Without reviewed appearance/ReID GT, precision/recall/CMC/mAP cannot be claimed; synthetic fixtures may be mistaken for football accuracy. |
+| probability | high |
+| impact | high |
+| mitigation | `NOT_EVALUATED_NO_REVIEWED_APPEARANCE_REID_GROUND_TRUTH`; null metrics; PASS_WITH_FINDINGS gate; docs forbid accuracy claims. |
+| trigger | metrics reported without reviewed GT |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 7B+ |

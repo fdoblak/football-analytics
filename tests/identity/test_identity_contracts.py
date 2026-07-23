@@ -82,6 +82,7 @@ class IdentityContractTests(unittest.TestCase):
             "identity_evidence",
             "reid_candidate_links",
             "track_identity_assignments",
+            "tracklet_appearance_profiles",
         ):
             self.assertEqual(
                 contract_fingerprint(get_contract(name, 1, registry=self.reg)),

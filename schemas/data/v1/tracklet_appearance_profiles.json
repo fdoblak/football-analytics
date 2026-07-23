@@ -1,0 +1,98 @@
+{
+  "contract_name": "tracklet_appearance_profiles",
+  "version": 1,
+  "description": "Stage 7B tracklet appearance profiles (handcrafted or verified learned adapter). Embeddings are sensitive artifacts — runtime-local, 0600, no crop/image payloads. Not biometric face identity.",
+  "fields": [
+    {"name": "run_id", "type": "string", "nullable": false},
+    {"name": "video_id", "type": "string", "nullable": false},
+    {"name": "track_id", "type": "int64", "nullable": false},
+    {"name": "profile_id", "type": "string", "nullable": false},
+    {"name": "extractor_id", "type": "string", "nullable": false},
+    {"name": "extractor_version", "type": "string", "nullable": false},
+    {"name": "extractor_type", "type": "string", "nullable": false},
+    {"name": "vector_dimension", "type": "int32", "nullable": false},
+    {"name": "embedding", "type": "list", "nullable": false, "value_type": "float32"},
+    {"name": "aggregation_method", "type": "string", "nullable": false},
+    {"name": "observed_sample_count", "type": "int32", "nullable": false},
+    {"name": "rejected_sample_count", "type": "int32", "nullable": false},
+    {"name": "coverage_score", "type": "float32", "nullable": true},
+    {"name": "quality_score", "type": "float32", "nullable": true},
+    {"name": "start_frame_index", "type": "int64", "nullable": true},
+    {"name": "end_frame_index", "type": "int64", "nullable": true},
+    {"name": "start_time_us", "type": "int64", "nullable": true},
+    {"name": "end_time_us", "type": "int64", "nullable": true},
+    {"name": "source_track_fingerprint", "type": "string", "nullable": true},
+    {"name": "source_frames_fingerprint", "type": "string", "nullable": true},
+    {"name": "config_fingerprint", "type": "string", "nullable": false},
+    {"name": "profile_fingerprint", "type": "string", "nullable": false},
+    {"name": "status", "type": "string", "nullable": false},
+    {"name": "reason_codes", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "quality_flags", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "review_required", "type": "bool", "nullable": false},
+    {"name": "producer", "type": "string", "nullable": false},
+    {"name": "producer_version", "type": "string", "nullable": false},
+    {"name": "leakage_class", "type": "string", "nullable": false},
+    {"name": "provenance_json", "type": "string", "nullable": true},
+    {"name": "contract_version", "type": "int32", "nullable": false}
+  ],
+  "primary_key": ["run_id", "video_id", "profile_id"],
+  "foreign_keys": [],
+  "partition_by": ["run_id", "video_id"],
+  "sort_by": ["run_id", "video_id", "track_id", "profile_id"],
+  "semantic_rules": [
+    {"id": "run_id_format", "rule": "run_id_stage2b"},
+    {"id": "video_id_safe", "rule": "safe_identifier", "field": "video_id"},
+    {"id": "profile_id_safe", "rule": "safe_identifier", "field": "profile_id"},
+    {"id": "track_ge0", "rule": "int_ge", "field": "track_id", "value": 0},
+    {"id": "dim_ge1", "rule": "int_ge", "field": "vector_dimension", "value": 1},
+    {"id": "obs_ge0", "rule": "int_ge", "field": "observed_sample_count", "value": 0},
+    {"id": "rej_ge0", "rule": "int_ge", "field": "rejected_sample_count", "value": 0},
+    {
+      "id": "extractor_type_enum",
+      "rule": "enum",
+      "field": "extractor_type",
+      "values": ["handcrafted", "learned_adapter"]
+    },
+    {
+      "id": "status_enum",
+      "rule": "enum",
+      "field": "status",
+      "values": [
+        "ok",
+        "insufficient_appearance_evidence",
+        "rejected",
+        "review_required",
+        "unknown"
+      ]
+    },
+    {
+      "id": "leakage_enum",
+      "rule": "enum",
+      "field": "leakage_class",
+      "values": [
+        "production",
+        "tuning",
+        "manual_label",
+        "evaluation",
+        "synthetic",
+        "unknown"
+      ]
+    },
+    {"id": "coverage_unit_or_null", "rule": "float_unit_interval_or_null", "field": "coverage_score"},
+    {"id": "quality_unit_or_null", "rule": "float_unit_interval_or_null", "field": "quality_score"},
+    {"id": "config_fp_nonempty", "rule": "nonempty_string", "field": "config_fingerprint"},
+    {"id": "profile_fp_nonempty", "rule": "nonempty_string", "field": "profile_fingerprint"},
+    {"id": "producer_nonempty", "rule": "nonempty_string", "field": "producer"},
+    {"id": "producer_ver_nonempty", "rule": "nonempty_string", "field": "producer_version"},
+    {"id": "embedding_no_null", "rule": "list_no_null_items", "field": "embedding"},
+    {"id": "reason_no_null", "rule": "list_no_null_items", "field": "reason_codes"},
+    {"id": "quality_no_null", "rule": "list_no_null_items", "field": "quality_flags"},
+    {"id": "contract_version_ge1", "rule": "int_ge", "field": "contract_version", "value": 1}
+  ],
+  "table_metadata": {
+    "stage": "7B",
+    "face_biometric_forbidden": "true",
+    "crops_not_embedded": "true",
+    "physical_merge_forbidden": "true"
+  }
+}

@@ -1,7 +1,8 @@
-"""Stage 7A ReID / identity / target-player contracts (no inference)."""
+"""Stage 7A/7B ReID / identity / target-player contracts + appearance baseline."""
 
 from __future__ import annotations
 
+from football_analytics.identity.appearance_reid_evaluation import NOT_EVALUATED_APPEARANCE_REID
 from football_analytics.identity.assignments import (
     build_revocation,
     build_supersede,
@@ -17,6 +18,7 @@ from football_analytics.identity.contracts import (
     EXPECTED_TRACK_OBSERVATIONS_FP,
     EXPECTED_TRACK_SUMMARIES_FP,
     IDENTITY_ARROW_CONTRACTS,
+    TRACKLET_APPEARANCE_PROFILES_CONTRACT,
     assert_frozen_upstream_fingerprints,
     assert_identity_contracts_registered,
     compile_identity_schemas,
@@ -86,11 +88,13 @@ __all__ = [
     "EXPECTED_TRACK_OBSERVATIONS_FP",
     "EXPECTED_TRACK_SUMMARIES_FP",
     "IDENTITY_ARROW_CONTRACTS",
+    "TRACKLET_APPEARANCE_PROFILES_CONTRACT",
     "IdentityContractError",
     "IdentityEvaluationReport",
     "IdentityValidationResult",
     "LeakageClass",
     "MetricEligibility",
+    "NOT_EVALUATED_APPEARANCE_REID",
     "NOT_EVALUATED_IDENTITY",
     "NULL_METRICS",
     "ReliabilityTier",
