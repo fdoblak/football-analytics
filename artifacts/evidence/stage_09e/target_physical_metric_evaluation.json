@@ -1,0 +1,38 @@
+{
+  "adapter_notes": "stage_9e_fusion_synthetic_only",
+  "config_fingerprint": "79ecf1f9e7b28f8cd64f07375b7634b1f5bc2575c574ec40bfd6c6a1be4154e9",
+  "created_at_utc": "2026-07-24T11:00:05.211190Z",
+  "findings": [
+    "No reviewed target physical-metric ground truth available.",
+    "Synthetic E2E proves fusion integrity only — not real football accuracy.",
+    "Official Opta data was not used.",
+    "Stage 9 closed without customer final visual."
+  ],
+  "ground_truth_evaluation_status": "NOT_EVALUATED_NO_REVIEWED_TARGET_PHYSICAL_METRIC_GROUND_TRUTH",
+  "metric_reasons": {
+    "activity_class_accuracy": "NOT_EVALUATED_NO_REVIEWED_TARGET_PHYSICAL_METRIC_GROUND_TRUTH",
+    "coverage_calibration": "NOT_EVALUATED_NO_REVIEWED_TARGET_PHYSICAL_METRIC_GROUND_TRUTH",
+    "distance_absolute_relative_error": "NOT_EVALUATED_NO_REVIEWED_TARGET_PHYSICAL_METRIC_GROUND_TRUTH",
+    "fusion_integrity_correctness": "NOT_EVALUATED_NO_REVIEWED_TARGET_PHYSICAL_METRIC_GROUND_TRUTH",
+    "heatmap_similarity": "NOT_EVALUATED_NO_REVIEWED_TARGET_PHYSICAL_METRIC_GROUND_TRUTH",
+    "peak_speed_error": "NOT_EVALUATED_NO_REVIEWED_TARGET_PHYSICAL_METRIC_GROUND_TRUTH",
+    "speed_mae_rmse": "NOT_EVALUATED_NO_REVIEWED_TARGET_PHYSICAL_METRIC_GROUND_TRUTH",
+    "sprint_event_precision_recall_f1": "NOT_EVALUATED_NO_REVIEWED_TARGET_PHYSICAL_METRIC_GROUND_TRUTH",
+    "zone_dwell_error": "NOT_EVALUATED_NO_REVIEWED_TARGET_PHYSICAL_METRIC_GROUND_TRUTH"
+  },
+  "metrics": {
+    "activity_class_accuracy": null,
+    "coverage_calibration": null,
+    "distance_absolute_relative_error": null,
+    "fusion_integrity_correctness": null,
+    "heatmap_similarity": null,
+    "peak_speed_error": null,
+    "speed_mae_rmse": null,
+    "sprint_event_precision_recall_f1": null,
+    "zone_dwell_error": null
+  },
+  "run_id": "run_20260724T110003001537Z_29b82eb875d2",
+  "schema_version": 1,
+  "status": "not_evaluated",
+  "video_id": "video_synth_01"
+}

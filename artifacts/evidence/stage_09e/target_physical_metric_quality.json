@@ -1,0 +1,21 @@
+{
+  "config_fingerprint": "79ecf1f9e7b28f8cd64f07375b7634b1f5bc2575c574ec40bfd6c6a1be4154e9",
+  "created_at_utc": "2026-07-24T11:00:05.211149Z",
+  "document": "target_physical_metric_quality",
+  "findings": [],
+  "gates": {
+    "confirmed_identity_required": true,
+    "no_full_match_extrapolation": true,
+    "no_silent_repair": true,
+    "zero_distinct_from_null": true
+  },
+  "identity_ok": true,
+  "inconsistency_codes": [],
+  "metric_status_counts": {
+    "evaluable": 11
+  },
+  "overall_status": "succeeded",
+  "schema_version": 1,
+  "stage": "9E",
+  "warnings": []
+}

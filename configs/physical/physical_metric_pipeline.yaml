@@ -1,0 +1,94 @@
+# Stage 9E physical metric fusion / quality gates / Stage 9 close.
+# Reuses 9B–9D outputs; does not invent new distance/speed/heatmap math.
+
+schema_version: 1
+config_version: 1
+pipeline_id: physical_metric_pipeline
+pipeline_version: 1
+stage: "9E"
+
+metric_origin: project_generated
+definition_style: opta_style_metric_definition
+
+primary_sample_layer: filtered
+require_confirmed_identity: true
+forbid_revoked_identity: true
+forbid_provisional_identity: true
+attack_direction: unknown
+
+integrity:
+  require_matching_run_video_target: true
+  require_matching_trajectory_fingerprint: true
+  require_fresh_receipts: true
+  require_finite_non_negative_durations: true
+  fail_on_source_mix: true
+  fail_on_stale_receipt: true
+  fail_on_fingerprint_mismatch: true
+  silent_repair_forbidden: true
+
+quality_gate:
+  metric_statuses:
+    - evaluable
+    - not_evaluable
+    - not_observed
+    - insufficient_coverage
+    - identity_unconfirmed
+    - calibration_unavailable
+    - source_inconsistent
+    - failed
+  zero_distinct_from_null_and_not_evaluable: true
+  no_coverage_extrapolation: true
+  missing_coverage_not_inactive: true
+  no_hard_gap_bridge: true
+  no_official_opta_claim: true
+  penalty_not_touch: true
+  attack_relative_rename_forbidden: true
+
+coverage:
+  min_coverage_ratio_for_overall_evaluable: 0.15
+  partial_not_full_match: true
+
+overall_status_rules:
+  all_critical_evaluable: succeeded
+  any_critical_failed_or_inconsistent: failed
+  partial_evaluable_with_findings: partial
+  identity_unconfirmed: not_evaluable
+  critical_metrics:
+    - trajectory_coverage
+    - measured_distance
+    - robust_mean_speed
+    - sprint_count
+    - heatmap_dwell
+    - zone_occupancy
+    - activity_distribution
+
+output_policy:
+  write_summary: true
+  write_quality: true
+  write_receipt: true
+  write_evaluation: true
+  write_visuals_to_git: false
+  write_final_customer_visual: false
+  no_overwrite: true
+  atomic: true
+
+forbidden:
+  events: true
+  possession: true
+  box_touch: true
+  full_match_extrapolation: true
+  auto_confirm_identity: true
+  official_opta_claim: true
+  final_customer_visual: true
+  real_accuracy_claim: true
+
+runtime_root: /home/fdoblak/workspace/physical_metric_pipeline_checks
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+notes:
+  - "Stage 9E fuses 9B–9D; does not recompute core metric math."
+  - "Customer results require confirmed identity and sufficient coverage."
+  - "No official Opta data; no real-match accuracy claim."
+  - "No multi-visual or final customer visual in Stage 9E."

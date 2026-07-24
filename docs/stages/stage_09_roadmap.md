@@ -7,8 +7,12 @@
 | **9A** Trajectory + physical metric **contracts** | CLOSED |
 | **9B** Trajectory cleaning / resampling / quality baseline | CLOSED |
 | **9C** Distance / speed / sprint computation | CLOSED |
-| **9D** Heatmap / activity / coverage | **ACTIVE (this stage)** |
-| 9E Physical metric fusion + Stage 9 close | NOT STARTED |
+| **9D** Heatmap / activity / coverage | CLOSED |
+| **9E** Physical metric fusion + Stage 9 close | **CLOSED** |
+
+**Stage 9 status: CLOSED** (`physical-metrics-baseline-v0.9.0`)
+
+**Stage 10 status: NOT STARTED**
 
 ## 9A scope
 

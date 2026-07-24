@@ -92,9 +92,10 @@ football coordinate accuracy not validated. Stage 9A added target trajectory and
 physical metric **contracts only**. Stage 9B prepares raw/filtered/resampled
 trajectories. Stage 9C computes measured distance / robust speed / project
 sprint bouts. Stage 9D adds time-weighted heatmap, neutral zones, and
-trajectory activity profiles (synthetic math validated; real football accuracy
-not claimed; no multi-visual git commits). Do **not** start Stage 9E without an
-explicit user prompt.
+trajectory activity profiles. Stage 9E fuses 9B–9D with quality gates and
+**closes Stage 9** (`physical-metrics-baseline-v0.9.0`). Real football accuracy
+is not validated; official Opta data was not used; final customer visual is
+deferred. Do **not** start Stage 10 without an explicit user prompt.
 
 ---
 

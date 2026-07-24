@@ -1,0 +1,33 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "config_fingerprint": "79ecf1f9e7b28f8cd64f07375b7634b1f5bc2575c574ec40bfd6c6a1be4154e9",
+    "overall": "succeeded"
+  },
+  "scenarios": {
+    "00_metadata": "PASS",
+    "01_consistent_success_package": "PASS",
+    "02_target_mix_hard_fail": "PASS",
+    "03_revoked_identity": "PASS",
+    "04_low_coverage_partial": "PASS",
+    "05_zero_vs_null": "PASS",
+    "06_no_extrapolation_flags": "PASS",
+    "07_stale_receipt_fail": "PASS",
+    "08_distance_recount_mismatch": "PASS",
+    "09_sprint_metric_present": "PASS",
+    "10_heatmap_mass_mismatch": "PASS",
+    "11_activity_duration_mismatch": "PASS",
+    "12_attack_direction_unknown": "PASS",
+    "13_penalty_not_touch": "PASS",
+    "14_deterministic_repeat": "PASS",
+    "15_no_overwrite": "PASS",
+    "16_partial_metric_independence": "PASS",
+    "17_receipt_quality_required": "PASS",
+    "18_missing_not_inactive": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-24T11:00:34.490744Z",
+  "warnings": []
+}

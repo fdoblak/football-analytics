@@ -1,0 +1,44 @@
+{
+  "artifact_hashes": {
+    "evaluation": {
+      "sha256": "2ec74d44a4186e733eb1609811cb27cad67fe5c0be4cb75eae467c17aa2f0567",
+      "size": 1926
+    },
+    "quality": {
+      "sha256": "99cdd291e3f3274a4351e3a579d3400e7b65da98a90773600c9ad7599b34620d",
+      "size": 574
+    },
+    "summary": {
+      "sha256": "7c695097e19936d67fc0ec5b8950d98051fde8d9590ce7481cd194f6df4cc4d2",
+      "size": 7593
+    }
+  },
+  "completion_status": "succeeded",
+  "config_fingerprint": "79ecf1f9e7b28f8cd64f07375b7634b1f5bc2575c574ec40bfd6c6a1be4154e9",
+  "created_at_utc": "2026-07-24T11:00:05.258333Z",
+  "document": "target_physical_metric_receipt",
+  "evaluation_status": "NOT_EVALUATED_NO_REVIEWED_TARGET_PHYSICAL_METRIC_GROUND_TRUTH",
+  "input_fingerprints": {
+    "physical_metric_results": "aa705bb819e10e49acb71be4d54b6bf65345b9795611b909676d2f5b596dc55b"
+  },
+  "overall_physical_analysis_status": "succeeded",
+  "provenance": {
+    "final_visual": false,
+    "fused_from": [
+      "9B",
+      "9C",
+      "9D"
+    ],
+    "label": "physical_metric_fusion",
+    "not_official_opta": true,
+    "stage": "9E"
+  },
+  "quality_validated": true,
+  "receipt_id": "physical_pipeline_receipt_01",
+  "request_id": "physical_pipeline_req_01",
+  "run_id": "run_20260724T110003001537Z_29b82eb875d2",
+  "schema_version": 1,
+  "status": "succeeded",
+  "target_player_id": "target_player_01",
+  "video_id": "video_synth_01"
+}

@@ -1,0 +1,16 @@
+{
+  "evaluation_status": "NOT_EVALUATED_NO_REVIEWED_TARGET_PHYSICAL_METRIC_GROUND_TRUTH",
+  "final_customer_visual_created": false,
+  "official_opta_used": false,
+  "real_football_accuracy_validated": false,
+  "stage": "9",
+  "status": "CLOSED",
+  "substages": [
+    "9A",
+    "9B",
+    "9C",
+    "9D",
+    "9E"
+  ],
+  "tag": "physical-metrics-baseline-v0.9.0"
+}

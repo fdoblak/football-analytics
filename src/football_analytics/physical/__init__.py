@@ -1,7 +1,7 @@
-"""Target trajectory and physical metric contracts / baselines (Stages 9A–9D).
+"""Target trajectory and physical metric contracts / baselines (Stages 9A–9E).
 
 Importing this package must NOT load models/videos. Explicit compute entrypoints:
-`motion_service.compute_physical_motion`, `spatial_service.compute_spatial_metrics`.
+`motion_service`, `spatial_service`, `pipeline_service.integrate_physical_metrics`.
 """
 
 from __future__ import annotations
