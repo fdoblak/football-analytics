@@ -1,0 +1,19 @@
+{
+  "status": "deprecated_invalid",
+  "deprecated_at_utc": "2026-07-24T18:15:00+00:00",
+  "reason": "Late Stage-16 background target-selection jobs overwrote evidence with an incorrect selection; not an authorized Stage-16 target.",
+  "invalid_selection": {
+    "match_id": "128057",
+    "jersey": 11,
+    "player_id": "506466"
+  },
+  "authoritative_soccertrack_v2_target": {
+    "match_id": "128057",
+    "team": "left",
+    "jersey": 24,
+    "player_id": "506469",
+    "display_name": "SoccerTrack v2 Match 128057 / Team left / Jersey 24",
+    "receipt": "artifacts/evidence/stage_16/selected_target_receipt.json"
+  },
+  "policy": "Do not reuse jersey 11 / player_id 506466 in registry, config, receipts, or Stage-16 evidence."
+}

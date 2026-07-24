@@ -1,0 +1,69 @@
+{
+  "dataset_id": "teamtrack_soccer_side_pilot",
+  "kaggle_slug": "atomscott/teamtrack",
+  "kaggle_version": 6,
+  "license_name": "MIT",
+  "license_source": "kaggle_api_licenseNameNullable",
+  "commercial_use": "permitted_under_MIT_with_copyright_notice",
+  "attribution_required": true,
+  "video_use_scope": "official_TeamTrack_benchmark_dataset_files",
+  "owner": "Atom Scott et al.",
+  "official_urls": {
+    "project": "https://atomscott.github.io/TeamTrack/",
+    "repo": "https://github.com/AtomScott/TeamTrack",
+    "kaggle": "https://www.kaggle.com/datasets/atomscott/teamtrack",
+    "drive_mirror": "https://drive.google.com/drive/folders/1D3jxrEWgWke0l1TWC_052OhYVs2IwDVZ"
+  },
+  "selected_sequence": {
+    "sport_view": "soccer_side",
+    "split": "train",
+    "sequence_id": "F_20200220_1_0330_0360",
+    "priority": "soccer_side_over_soccer_top",
+    "selection_reason": "smallest_complete_mp4_plus_gt_under_15GiB"
+  },
+  "download_method": "official_google_drive_mirror_individual_files",
+  "kaggle_auth": "absent_skipped_to_official_drive",
+  "files": [
+    {
+      "relative_path": "source/soccer_side/F_20200220_1_0330_0360/img1.mp4",
+      "size_bytes": 13086969,
+      "sha256": "fd42dbe6df8b85946d6ee82fc11863ea94dd2735b3b126e9bfca3972a3149db1",
+      "license": "MIT",
+      "source_url": "https://drive.google.com/drive/folders/1D3jxrEWgWke0l1TWC_052OhYVs2IwDVZ",
+      "match_or_sequence": "soccer_side/F_20200220_1_0330_0360"
+    },
+    {
+      "relative_path": "source/soccer_side/F_20200220_1_0330_0360/seqinfo.ini",
+      "size_bytes": 132,
+      "sha256": "aa39f018e451bb260f831cd930855e5894539bfb40f10d452e62af0888793f10",
+      "license": "MIT",
+      "source_url": "https://drive.google.com/drive/folders/1D3jxrEWgWke0l1TWC_052OhYVs2IwDVZ",
+      "match_or_sequence": "soccer_side/F_20200220_1_0330_0360"
+    },
+    {
+      "relative_path": "source/soccer_side/F_20200220_1_0330_0360/gt/gt.txt",
+      "size_bytes": 558062,
+      "sha256": "80fd710824a4f006528aa0bb0207ae34c1869e469373cdb276800260d96a7ff4",
+      "license": "MIT",
+      "source_url": "https://drive.google.com/drive/folders/1D3jxrEWgWke0l1TWC_052OhYVs2IwDVZ",
+      "match_or_sequence": "soccer_side/F_20200220_1_0330_0360"
+    },
+    {
+      "relative_path": "license/LICENSE-MIT.txt",
+      "size_bytes": 1067,
+      "sha256": "88dd38a9a2a924db96dbf7d171f583a49f99e5c78f8fde76caaeaa8959678050",
+      "license": "MIT",
+      "source_url": "https://drive.google.com/drive/folders/1D3jxrEWgWke0l1TWC_052OhYVs2IwDVZ",
+      "match_or_sequence": "soccer_side/F_20200220_1_0330_0360"
+    },
+    {
+      "relative_path": "license/ATTRIBUTION.txt",
+      "size_bytes": 367,
+      "sha256": "c93d5a277fbc494f4f9a696c18ae309c4ee6cd67e0ffadedc5792eee8bffe343",
+      "license": "MIT",
+      "source_url": "https://drive.google.com/drive/folders/1D3jxrEWgWke0l1TWC_052OhYVs2IwDVZ",
+      "match_or_sequence": "soccer_side/F_20200220_1_0330_0360"
+    }
+  ],
+  "written_at_utc": "2026-07-24T18:33:53.269355+00:00"
+}

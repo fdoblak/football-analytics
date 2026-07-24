@@ -1,0 +1,53 @@
+{
+  "stage": "16-R2",
+  "source": "teamtrack_official_google_drive_mirror",
+  "kaggle_auth_present": false,
+  "files": [
+    {
+      "relative_path": "source/soccer_side/F_20200220_1_0330_0360/img1.mp4",
+      "size_bytes": 13086969,
+      "sha256": "fd42dbe6df8b85946d6ee82fc11863ea94dd2735b3b126e9bfca3972a3149db1",
+      "license": "MIT",
+      "source_url": "https://drive.google.com/drive/folders/1D3jxrEWgWke0l1TWC_052OhYVs2IwDVZ",
+      "match_or_sequence": "soccer_side/F_20200220_1_0330_0360"
+    },
+    {
+      "relative_path": "source/soccer_side/F_20200220_1_0330_0360/seqinfo.ini",
+      "size_bytes": 132,
+      "sha256": "aa39f018e451bb260f831cd930855e5894539bfb40f10d452e62af0888793f10",
+      "license": "MIT",
+      "source_url": "https://drive.google.com/drive/folders/1D3jxrEWgWke0l1TWC_052OhYVs2IwDVZ",
+      "match_or_sequence": "soccer_side/F_20200220_1_0330_0360"
+    },
+    {
+      "relative_path": "source/soccer_side/F_20200220_1_0330_0360/gt/gt.txt",
+      "size_bytes": 558062,
+      "sha256": "80fd710824a4f006528aa0bb0207ae34c1869e469373cdb276800260d96a7ff4",
+      "license": "MIT",
+      "source_url": "https://drive.google.com/drive/folders/1D3jxrEWgWke0l1TWC_052OhYVs2IwDVZ",
+      "match_or_sequence": "soccer_side/F_20200220_1_0330_0360"
+    },
+    {
+      "relative_path": "license/LICENSE-MIT.txt",
+      "size_bytes": 1067,
+      "sha256": "88dd38a9a2a924db96dbf7d171f583a49f99e5c78f8fde76caaeaa8959678050",
+      "license": "MIT",
+      "source_url": "https://drive.google.com/drive/folders/1D3jxrEWgWke0l1TWC_052OhYVs2IwDVZ",
+      "match_or_sequence": "soccer_side/F_20200220_1_0330_0360"
+    },
+    {
+      "relative_path": "license/ATTRIBUTION.txt",
+      "size_bytes": 367,
+      "sha256": "c93d5a277fbc494f4f9a696c18ae309c4ee6cd67e0ffadedc5792eee8bffe343",
+      "license": "MIT",
+      "source_url": "https://drive.google.com/drive/folders/1D3jxrEWgWke0l1TWC_052OhYVs2IwDVZ",
+      "match_or_sequence": "soccer_side/F_20200220_1_0330_0360"
+    }
+  ],
+  "drive_file_ids": {
+    "img1.mp4": "1R3t04im2hsp52_G_JCAwB4dPbxyA062z",
+    "seqinfo.ini": "1fc7zG4lBdhj2Fno-LlvVhpAzSbSt1T25",
+    "gt/gt.txt": "1AkxsUeo_Hfg6T4CjEY8iESefQ7wQE3It"
+  },
+  "written_at_utc": "2026-07-24T18:37:37.149142+00:00"
+}

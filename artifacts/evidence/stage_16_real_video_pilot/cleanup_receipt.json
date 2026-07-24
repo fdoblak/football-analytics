@@ -1,0 +1,46 @@
+{
+  "cleaned": [
+    {
+      "path": "/home/fdoblak/football_data/datasets/teamtrack/source/soccer_side/F_20200220_1_0330_0360/img1.mp4",
+      "size_bytes": 13086969,
+      "sha256": "fd42dbe6df8b85946d6ee82fc11863ea94dd2735b3b126e9bfca3972a3149db1",
+      "deleted": true
+    },
+    {
+      "path": "/home/fdoblak/football_data/datasets/teamtrack/staging/soccer_side/F_20200220_1_0330_0360/img1.mp4",
+      "size_bytes": 13086969,
+      "sha256": "fd42dbe6df8b85946d6ee82fc11863ea94dd2735b3b126e9bfca3972a3149db1",
+      "deleted": true
+    },
+    {
+      "path": "/home/fdoblak/football_data/datasets/teamtrack/runs/soccer_side_F_20200220_1_0330_0360/predictions/normalized_preview.mp4",
+      "size_bytes": 99002,
+      "sha256": "06551bb9216e6a3a1304a005de5825ffd99ab72d831a7cf4d3d4e5c13536c6f7",
+      "deleted": true
+    },
+    {
+      "path": "/home/fdoblak/football_data/datasets/teamtrack/runs/soccer_side_F_20200220_1_0330_0360/predictions/normalized_pilot.mp4",
+      "size_bytes": 99002,
+      "sha256": "06551bb9216e6a3a1304a005de5825ffd99ab72d831a7cf4d3d4e5c13536c6f7",
+      "deleted": true
+    }
+  ],
+  "retained": [
+    {
+      "path": "/home/fdoblak/football_data/datasets/teamtrack/source/soccer_side/F_20200220_1_0330_0360/gt/gt.txt",
+      "present": true,
+      "size_bytes": 558062
+    },
+    {
+      "path": "/home/fdoblak/football_data/datasets/teamtrack/source/soccer_side/F_20200220_1_0330_0360/seqinfo.ini",
+      "present": true,
+      "size_bytes": 132
+    },
+    {
+      "path": "/home/fdoblak/football_data/datasets/soccertrack_v2/source/gsr/128057/128057_1st.json",
+      "present": true,
+      "size_bytes": 2712325392
+    }
+  ],
+  "written_at_utc": "2026-07-24T18:38:21.827639+00:00"
+}

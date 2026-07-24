@@ -1,0 +1,7 @@
+TeamTrack dataset (Atom Scott et al.)
+Official project: https://atomscott.github.io/TeamTrack/
+Kaggle: https://www.kaggle.com/datasets/atomscott/teamtrack (version 6)
+Dataset license (Kaggle metadata): MIT
+Repository: https://github.com/AtomScott/TeamTrack
+Sequence: soccer_side / train / F_20200220_1_0330_0360
+Source used: official Google Drive mirror of TeamTrack

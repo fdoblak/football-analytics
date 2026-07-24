@@ -1,0 +1,198 @@
+{
+  "candidates": [
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 600.9013333333334,
+      "track_id": 0
+    },
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 471.69866666666667,
+      "track_id": 1
+    },
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 540.0506666666666,
+      "track_id": 2
+    },
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 649.6826666666667,
+      "track_id": 3
+    },
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 296.70933333333335,
+      "track_id": 4
+    },
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 342.012,
+      "track_id": 5
+    },
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 483.436,
+      "track_id": 6
+    },
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 3029.736,
+      "track_id": 7
+    },
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 783.6746666666667,
+      "track_id": 8
+    },
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 1516.8026666666667,
+      "track_id": 9
+    },
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 2600.829333333333,
+      "track_id": 10
+    },
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 464.00266666666664,
+      "track_id": 11
+    },
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 624.1933333333334,
+      "track_id": 12
+    },
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 1000.0,
+      "track_id": 13
+    },
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 281.31466666666665,
+      "track_id": 14
+    },
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 882.6453333333334,
+      "track_id": 15
+    },
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 450.096,
+      "track_id": 16
+    },
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 1119.4506666666666,
+      "track_id": 17
+    },
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 1201.1866666666667,
+      "track_id": 18
+    },
+    {
+      "continuous": true,
+      "coverage_ratio": 1.0,
+      "frame_end": 750,
+      "frame_start": 1,
+      "frames_covered": 750,
+      "mean_bbox_area": 1138.54,
+      "track_id": 19
+    }
+  ],
+  "confirmation_source": "reviewed_ground_truth_target_selection",
+  "continuous": true,
+  "coverage_ratio": 1.0,
+  "dataset_id": "teamtrack",
+  "display_name": "Target Player \u2014 TeamTrack soccer_side / Track 7",
+  "frames_covered": 750,
+  "mean_bbox_area": 3029.736,
+  "persistent_track_id": 7,
+  "selection_rule": "full_coverage_continuous_outfield_proxy_mean_bbox_area_top_quartile;tie_break_numeric_track_id; no_jersey_invented",
+  "seq_length": 750,
+  "sequence_id": "F_20200220_1_0330_0360",
+  "split": "train",
+  "sport_view": "soccer_side",
+  "written_at_utc": "2026-07-24T18:33:13.663337+00:00"
+}

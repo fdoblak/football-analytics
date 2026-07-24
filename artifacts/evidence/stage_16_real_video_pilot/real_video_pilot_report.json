@@ -1,0 +1,336 @@
+{
+  "attribution": "TeamTrack \u00a9 Atom Scott et al.; dataset license MIT (Kaggle metadata). Project-generated pilot analysis; not official Opta data.",
+  "dataset": {
+    "id": "teamtrack",
+    "license": "MIT",
+    "license_source": "kaggle_metadata_licenseNameNullable",
+    "official_urls": {
+      "kaggle": "https://www.kaggle.com/datasets/atomscott/teamtrack",
+      "project": "https://atomscott.github.io/TeamTrack/",
+      "repo": "https://github.com/AtomScott/TeamTrack"
+    },
+    "sequence_id": "F_20200220_1_0330_0360",
+    "split": "train",
+    "sport_view": "soccer_side",
+    "version": 6
+  },
+  "evaluation": {
+    "detection": {
+      "f1": 0.6196559575006324,
+      "fn": 7452,
+      "fp": 4576,
+      "iou_thresh": 0.5,
+      "note": "framewise greedy IoU matching; not COCO mAP",
+      "precision": 0.6816474189508835,
+      "recall": 0.568,
+      "tp": 9798
+    },
+    "hota_mota_idf1": "not_evaluable",
+    "pitch_trajectory_error": "not_evaluable",
+    "target_tracking": {
+      "gt_frames": 750,
+      "hota_mota_idf1": "not_evaluable_lightweight_pilot_evaluator",
+      "id_switches": "not_evaluable_without_full_mot_tracker_ids",
+      "iou_thresh": 0.3,
+      "matched_frames_iou_ge_thresh": 750,
+      "mean_center_error_px": 3.955655885292195,
+      "mean_iou": 0.6752426397328349,
+      "target_coverage_ratio": 1.0
+    }
+  },
+  "gate_candidate": "PASS_WITH_FINDINGS \u2014 REAL-VIDEO TRACKING PILOT COMPLETE; FULL EVENT ACCEPTANCE BLOCKED",
+  "physical_metrics": {
+    "heatmap": "image_plane_only",
+    "mean_speed_px_s": 24.54941426748898,
+    "measured_distance_px": 735.50045145397,
+    "note": "No teamtrack-trajectory file downloaded for this sequence; pitch metrics not_evaluable",
+    "peak_speed_px_s": 278.3372504158204,
+    "pitch_distance_m": "not_evaluable",
+    "pitch_speed_m_s": "not_evaluable",
+    "sprint_count": "not_evaluable"
+  },
+  "pilot": {
+    "device": "cuda:0",
+    "duration_s": 30.0,
+    "elapsed_s": 246.63376379013062,
+    "false_success": false,
+    "gt_leakage_into_prediction": false,
+    "human_detections": 14374,
+    "oom": false,
+    "seq_length_frames": 750,
+    "tracks_observed": 383
+  },
+  "product_event_metrics": {
+    "aerial_duels": "not_evaluable",
+    "clearances": "not_evaluable",
+    "dribbles": "not_evaluable",
+    "duels": "not_evaluable",
+    "long_passes": "not_evaluable",
+    "pass_accuracy": "not_evaluable",
+    "passes": "not_evaluable",
+    "penalty_area_touches": "not_evaluable",
+    "recoveries": "not_evaluable",
+    "tackles": "not_evaluable",
+    "take_ons": "not_evaluable",
+    "turnovers": "not_evaluable",
+    "zone_transition_passes": "not_evaluable"
+  },
+  "schema": "real_video_pilot_report",
+  "soccertrack_v2_isolation": {
+    "bas_gsr_not_applied_to_teamtrack": true,
+    "deprecated_invalid_target_not_used": {
+      "jersey": 11,
+      "player_id": "506466"
+    },
+    "soccertrack_v2_target_preserved": {
+      "jersey": 24,
+      "player_id": "506469",
+      "team": "left"
+    }
+  },
+  "stage": "16-R2",
+  "target": {
+    "candidates": [
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 600.9013333333334,
+        "track_id": 0
+      },
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 471.69866666666667,
+        "track_id": 1
+      },
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 540.0506666666666,
+        "track_id": 2
+      },
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 649.6826666666667,
+        "track_id": 3
+      },
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 296.70933333333335,
+        "track_id": 4
+      },
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 342.012,
+        "track_id": 5
+      },
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 483.436,
+        "track_id": 6
+      },
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 3029.736,
+        "track_id": 7
+      },
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 783.6746666666667,
+        "track_id": 8
+      },
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 1516.8026666666667,
+        "track_id": 9
+      },
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 2600.829333333333,
+        "track_id": 10
+      },
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 464.00266666666664,
+        "track_id": 11
+      },
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 624.1933333333334,
+        "track_id": 12
+      },
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 1000.0,
+        "track_id": 13
+      },
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 281.31466666666665,
+        "track_id": 14
+      },
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 882.6453333333334,
+        "track_id": 15
+      },
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 450.096,
+        "track_id": 16
+      },
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 1119.4506666666666,
+        "track_id": 17
+      },
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 1201.1866666666667,
+        "track_id": 18
+      },
+      {
+        "continuous": true,
+        "coverage_ratio": 1.0,
+        "frame_end": 750,
+        "frame_start": 1,
+        "frames_covered": 750,
+        "mean_bbox_area": 1138.54,
+        "track_id": 19
+      }
+    ],
+    "confirmation_source": "reviewed_ground_truth_target_selection",
+    "continuous": true,
+    "coverage_ratio": 1.0,
+    "dataset_id": "teamtrack",
+    "display_name": "Target Player \u2014 TeamTrack soccer_side / Track 7",
+    "frames_covered": 750,
+    "mean_bbox_area": 3029.736,
+    "persistent_track_id": 7,
+    "selection_rule": "full_coverage_continuous_outfield_proxy_mean_bbox_area_top_quartile;tie_break_numeric_track_id; no_jersey_invented",
+    "seq_length": 750,
+    "sequence_id": "F_20200220_1_0330_0360",
+    "split": "train",
+    "sport_view": "soccer_side"
+  },
+  "title": "REAL-VIDEO PILOT \u2014 NOT FULL STAGE-16 ACCEPTANCE",
+  "video": {
+    "normalized": {
+      "cached": false,
+      "elapsed_s": 16.147182941436768,
+      "fps": null,
+      "max_width": 1280,
+      "path": "/home/fdoblak/football_data/datasets/teamtrack/runs/soccer_side_F_20200220_1_0330_0360/predictions/normalized_preview.mp4",
+      "sha256": "06551bb9216e6a3a1304a005de5825ffd99ab72d831a7cf4d3d4e5c13536c6f7"
+    },
+    "normalized_probe": {
+      "format": {
+        "duration": "30.000000",
+        "size": "99002"
+      },
+      "programs": [],
+      "streams": [
+        {
+          "avg_frame_rate": "25/1",
+          "codec_name": "h264",
+          "height": 196,
+          "nb_frames": "750",
+          "width": 1280
+        }
+      ]
+    },
+    "probe": {
+      "format": {
+        "duration": "30.000000",
+        "size": "13086969"
+      },
+      "programs": [],
+      "streams": [
+        {
+          "avg_frame_rate": "25/1",
+          "codec_name": "h264",
+          "height": 1000,
+          "nb_frames": "750",
+          "width": 6500
+        }
+      ]
+    },
+    "source_path": "/home/fdoblak/football_data/datasets/teamtrack/source/soccer_side/F_20200220_1_0330_0360/img1.mp4",
+    "source_sha256": "fd42dbe6df8b85946d6ee82fc11863ea94dd2735b3b126e9bfca3972a3149db1",
+    "source_size_bytes": 13086969
+  },
+  "written_at_utc": "2026-07-24T18:37:20.120704+00:00"
+}

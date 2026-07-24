@@ -4,11 +4,12 @@
 
 `NO-GO — REAL-MATCH ACCEPTANCE FAILURE`
 
-## Stage 16-R1 resume gate
+## Stage 16-R2 resume gate
 
-`NO-GO — OFFICIAL SOCCERTRACK VIDEO UNAVAILABLE`
+`PASS_WITH_FINDINGS — REAL-VIDEO TRACKING PILOT COMPLETE; FULL EVENT ACCEPTANCE BLOCKED`
 
-See `STAGE16_R1_COMPLETION.md` and `video_download_recovery_r1.json`. Prior Drive-quota NO-GO history retained in `source_manifest.json` revision_history.
+See `artifacts/evidence/stage_16_real_video_pilot/STAGE16_R2_COMPLETION.md`. SoccerTrack v2 panoramic MP4 still blocked; TeamTrack official `soccer_side` sequence used for tracking pilot only. Tag `real-video-pilot-v0.16.0` — **not** `single-player-analytics-v1.0.0`.
+
 
 ## Why
 
