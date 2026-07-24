@@ -97,7 +97,7 @@ class TrackingContractTests(unittest.TestCase):
 
     def test_01_registry_and_fingerprints(self) -> None:
         assert_track_contracts_registered(registry=self.reg)
-        self.assertEqual(len(list_contracts(registry=self.reg)), 23)
+        self.assertEqual(len(list_contracts(registry=self.reg)), 27)
         assert_v1_track_fingerprints_unchanged(registry=self.reg)
         fps = tracking_schema_fingerprints(registry=self.reg)
         self.assertEqual(fps["track_observations"], EXPECTED_TRACK_OBSERVATIONS_FP)

@@ -1,0 +1,117 @@
+{
+  "contract_name": "target_trajectory_segments",
+  "version": 1,
+  "description": "Stage 9A continuous confirmed-target trajectory segments. Single-sample segments are not physical-metric sufficient.",
+  "fields": [
+    {"name": "run_id", "type": "string", "nullable": false},
+    {"name": "video_id", "type": "string", "nullable": false},
+    {"name": "target_player_id", "type": "string", "nullable": false},
+    {"name": "trajectory_segment_id", "type": "string", "nullable": false},
+    {"name": "identity_assignment_id", "type": "string", "nullable": false},
+    {"name": "track_id", "type": "int64", "nullable": false},
+    {"name": "start_time_us", "type": "int64", "nullable": false},
+    {"name": "end_time_us", "type": "int64", "nullable": false},
+    {"name": "raw_sample_count", "type": "int64", "nullable": false},
+    {"name": "eligible_sample_count", "type": "int64", "nullable": false},
+    {"name": "duration_us", "type": "int64", "nullable": false},
+    {"name": "calibration_segment_ids", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "start_boundary_reason", "type": "string", "nullable": false},
+    {"name": "end_boundary_reason", "type": "string", "nullable": false},
+    {"name": "coverage_ratio", "type": "float32", "nullable": true},
+    {"name": "max_sample_interval_us", "type": "int64", "nullable": true},
+    {"name": "uncertainty_summary_m", "type": "float32", "nullable": true},
+    {"name": "segment_status", "type": "string", "nullable": false},
+    {"name": "metric_eligibility", "type": "string", "nullable": false},
+    {"name": "manual_review_required", "type": "bool", "nullable": false},
+    {"name": "pitch_coordinate_frame_id", "type": "string", "nullable": false},
+    {"name": "input_fingerprint", "type": "string", "nullable": true},
+    {"name": "output_fingerprint", "type": "string", "nullable": true},
+    {"name": "policy_fingerprint", "type": "string", "nullable": false},
+    {"name": "reason_codes", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "quality_flags", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "provenance_json", "type": "string", "nullable": true},
+    {"name": "contract_version", "type": "int32", "nullable": false}
+  ],
+  "primary_key": ["run_id", "video_id", "target_player_id", "trajectory_segment_id"],
+  "foreign_keys": [],
+  "partition_by": ["run_id", "video_id"],
+  "sort_by": ["run_id", "video_id", "target_player_id", "start_time_us", "trajectory_segment_id"],
+  "semantic_rules": [
+    {"id": "run_id_format", "rule": "run_id_stage2b"},
+    {"id": "video_id_safe", "rule": "safe_identifier", "field": "video_id"},
+    {"id": "target_safe", "rule": "safe_identifier", "field": "target_player_id"},
+    {"id": "seg_safe", "rule": "safe_identifier", "field": "trajectory_segment_id"},
+    {"id": "assignment_safe", "rule": "safe_identifier", "field": "identity_assignment_id"},
+    {"id": "track_ge0", "rule": "int_ge", "field": "track_id", "value": 0},
+    {"id": "start_ge0", "rule": "int_ge", "field": "start_time_us", "value": 0},
+    {"id": "end_ge0", "rule": "int_ge", "field": "end_time_us", "value": 0},
+    {"id": "raw_ge0", "rule": "int_ge", "field": "raw_sample_count", "value": 0},
+    {"id": "eligible_ge0", "rule": "int_ge", "field": "eligible_sample_count", "value": 0},
+    {"id": "duration_ge0", "rule": "int_ge", "field": "duration_us", "value": 0},
+    {
+      "id": "boundary_start_enum",
+      "rule": "enum",
+      "field": "start_boundary_reason",
+      "values": [
+        "none",
+        "detection_gap",
+        "tracking_gap",
+        "identity_gap",
+        "calibration_gap",
+        "non_playable_gap",
+        "shot_boundary",
+        "track_boundary",
+        "manual_exclusion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "boundary_end_enum",
+      "rule": "enum",
+      "field": "end_boundary_reason",
+      "values": [
+        "none",
+        "detection_gap",
+        "tracking_gap",
+        "identity_gap",
+        "calibration_gap",
+        "non_playable_gap",
+        "shot_boundary",
+        "track_boundary",
+        "manual_exclusion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "segment_status_enum",
+      "rule": "enum",
+      "field": "segment_status",
+      "values": ["continuous", "insufficient", "conflicted", "not_evaluable", "failed"]
+    },
+    {
+      "id": "metric_eligibility_enum",
+      "rule": "enum",
+      "field": "metric_eligibility",
+      "values": ["eligible", "provisional_only", "not_eligible", "not_evaluable"]
+    },
+    {
+      "id": "pitch_frame_enum",
+      "rule": "enum",
+      "field": "pitch_coordinate_frame_id",
+      "values": ["canonical_pitch", "stadium_absolute", "attack_relative", "unknown"]
+    },
+    {"id": "coverage_ge0_or_null", "rule": "float_ge_or_null", "field": "coverage_ratio", "value": 0},
+    {"id": "max_interval_ge0_or_null", "rule": "int_ge_or_null", "field": "max_sample_interval_us", "value": 0},
+    {"id": "unc_ge0_or_null", "rule": "float_ge_or_null", "field": "uncertainty_summary_m", "value": 0},
+    {"id": "cal_seg_no_null", "rule": "list_no_null_items", "field": "calibration_segment_ids"},
+    {"id": "reason_no_null", "rule": "list_no_null_items", "field": "reason_codes"},
+    {"id": "quality_no_null", "rule": "list_no_null_items", "field": "quality_flags"},
+    {"id": "contract_version_ge1", "rule": "int_ge", "field": "contract_version", "value": 1}
+  ],
+  "table_metadata": {
+    "stage": "9A",
+    "interval_semantics": "half_open_start_end",
+    "single_sample_insufficient": "true",
+    "no_physical_metrics_computed": "true"
+  }
+}

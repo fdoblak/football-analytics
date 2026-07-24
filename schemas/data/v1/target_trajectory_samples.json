@@ -1,0 +1,148 @@
+{
+  "contract_name": "target_trajectory_samples",
+  "version": 1,
+  "description": "Stage 9A confirmed-target pitch trajectory samples. Contracts only; no real distance/speed/sprint computation.",
+  "fields": [
+    {"name": "run_id", "type": "string", "nullable": false},
+    {"name": "video_id", "type": "string", "nullable": false},
+    {"name": "target_player_id", "type": "string", "nullable": false},
+    {"name": "identity_assignment_id", "type": "string", "nullable": false},
+    {"name": "sample_id", "type": "string", "nullable": false},
+    {"name": "track_id", "type": "int64", "nullable": false},
+    {"name": "observation_id", "type": "string", "nullable": true},
+    {"name": "detection_id", "type": "int64", "nullable": true},
+    {"name": "projection_id", "type": "string", "nullable": true},
+    {"name": "frame_index", "type": "int64", "nullable": false},
+    {"name": "video_time_us", "type": "int64", "nullable": false},
+    {"name": "pitch_x_m", "type": "float64", "nullable": false},
+    {"name": "pitch_y_m", "type": "float64", "nullable": false},
+    {"name": "pitch_coordinate_frame_id", "type": "string", "nullable": false},
+    {"name": "pitch_template_fingerprint", "type": "string", "nullable": false},
+    {"name": "calibration_id", "type": "int64", "nullable": true},
+    {"name": "segment_id", "type": "string", "nullable": true},
+    {"name": "source_point_type", "type": "string", "nullable": false},
+    {"name": "sample_source", "type": "string", "nullable": false},
+    {"name": "derived_from_sample_ids", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "mapping_status", "type": "string", "nullable": false},
+    {"name": "calibration_quality", "type": "string", "nullable": false},
+    {"name": "identity_quality", "type": "string", "nullable": false},
+    {"name": "uncertainty_m", "type": "float32", "nullable": true},
+    {"name": "uncertainty_x_m", "type": "float32", "nullable": true},
+    {"name": "uncertainty_y_m", "type": "float32", "nullable": true},
+    {"name": "eligibility_status", "type": "string", "nullable": false},
+    {"name": "gap_boundary_reason", "type": "string", "nullable": false},
+    {"name": "metric_eligibility", "type": "string", "nullable": false},
+    {"name": "trajectory_segment_id", "type": "string", "nullable": true},
+    {"name": "manual_review_required", "type": "bool", "nullable": false},
+    {"name": "reason_codes", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "quality_flags", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "evidence_fingerprint", "type": "string", "nullable": true},
+    {"name": "projected_positions_fingerprint", "type": "string", "nullable": true},
+    {"name": "identity_artifact_fingerprint", "type": "string", "nullable": true},
+    {"name": "calibration_artifact_fingerprint", "type": "string", "nullable": true},
+    {"name": "policy_fingerprint", "type": "string", "nullable": false},
+    {"name": "provenance_json", "type": "string", "nullable": true},
+    {"name": "contract_version", "type": "int32", "nullable": false}
+  ],
+  "primary_key": ["run_id", "video_id", "target_player_id", "sample_id"],
+  "foreign_keys": [
+    {
+      "fields": ["run_id", "video_id", "frame_index"],
+      "ref_contract": "frames",
+      "ref_fields": ["run_id", "video_id", "frame_index"],
+      "ref_version": 1
+    }
+  ],
+  "partition_by": ["run_id", "video_id"],
+  "sort_by": ["run_id", "video_id", "target_player_id", "video_time_us", "sample_id"],
+  "semantic_rules": [
+    {"id": "run_id_format", "rule": "run_id_stage2b"},
+    {"id": "video_id_safe", "rule": "safe_identifier", "field": "video_id"},
+    {"id": "target_safe", "rule": "safe_identifier", "field": "target_player_id"},
+    {"id": "assignment_safe", "rule": "safe_identifier", "field": "identity_assignment_id"},
+    {"id": "sample_safe", "rule": "safe_identifier", "field": "sample_id"},
+    {"id": "frame_ge0", "rule": "int_ge", "field": "frame_index", "value": 0},
+    {"id": "time_ge0", "rule": "int_ge", "field": "video_time_us", "value": 0},
+    {"id": "track_ge0", "rule": "int_ge", "field": "track_id", "value": 0},
+    {"id": "det_ge0_or_null", "rule": "int_ge_or_null", "field": "detection_id", "value": 0},
+    {"id": "cal_ge0_or_null", "rule": "int_ge_or_null", "field": "calibration_id", "value": 0},
+    {
+      "id": "source_point_enum",
+      "rule": "enum",
+      "field": "source_point_type",
+      "values": ["bbox_bottom_centre", "bbox_centre", "keypoint", "manual", "unknown"]
+    },
+    {
+      "id": "sample_source_enum",
+      "rule": "enum",
+      "field": "sample_source",
+      "values": ["raw_observed", "filtered", "resampled"]
+    },
+    {
+      "id": "mapping_status_enum",
+      "rule": "enum",
+      "field": "mapping_status",
+      "values": ["mapped", "outside_pitch", "extrapolated", "uncertain", "not_calibrated", "not_eligible", "failed"]
+    },
+    {
+      "id": "cal_quality_enum",
+      "rule": "enum",
+      "field": "calibration_quality",
+      "values": ["good", "marginal", "poor", "invalid", "unknown", "missing"]
+    },
+    {
+      "id": "identity_quality_enum",
+      "rule": "enum",
+      "field": "identity_quality",
+      "values": ["confirmed", "provisional", "candidate", "revoked", "conflicted", "unknown"]
+    },
+    {
+      "id": "eligibility_status_enum",
+      "rule": "enum",
+      "field": "eligibility_status",
+      "values": ["eligible", "ineligible", "gap", "boundary", "not_evaluable"]
+    },
+    {
+      "id": "gap_boundary_enum",
+      "rule": "enum",
+      "field": "gap_boundary_reason",
+      "values": [
+        "none",
+        "detection_gap",
+        "tracking_gap",
+        "identity_gap",
+        "calibration_gap",
+        "non_playable_gap",
+        "shot_boundary",
+        "track_boundary",
+        "manual_exclusion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "metric_eligibility_enum",
+      "rule": "enum",
+      "field": "metric_eligibility",
+      "values": ["eligible", "provisional_only", "not_eligible", "not_evaluable"]
+    },
+    {
+      "id": "pitch_frame_enum",
+      "rule": "enum",
+      "field": "pitch_coordinate_frame_id",
+      "values": ["canonical_pitch", "stadium_absolute", "attack_relative", "unknown"]
+    },
+    {"id": "uncertainty_ge0_or_null", "rule": "float_ge_or_null", "field": "uncertainty_m", "value": 0},
+    {"id": "uncertainty_x_ge0_or_null", "rule": "float_ge_or_null", "field": "uncertainty_x_m", "value": 0},
+    {"id": "uncertainty_y_ge0_or_null", "rule": "float_ge_or_null", "field": "uncertainty_y_m", "value": 0},
+    {"id": "derived_no_null", "rule": "list_no_null_items", "field": "derived_from_sample_ids"},
+    {"id": "reason_no_null", "rule": "list_no_null_items", "field": "reason_codes"},
+    {"id": "quality_no_null", "rule": "list_no_null_items", "field": "quality_flags"},
+    {"id": "contract_version_ge1", "rule": "int_ge", "field": "contract_version", "value": 1}
+  ],
+  "table_metadata": {
+    "stage": "9A",
+    "no_physical_metrics_computed": "true",
+    "attack_relative_forbidden": "true",
+    "raw_immutable": "true"
+  }
+}

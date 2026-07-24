@@ -17,6 +17,10 @@ contracts are **not** duplicated as hand-written Python field lists.
 | calibration_features | run_id, video_id, frame_index, feature_id | → frames |
 | calibration_segments | run_id, video_id, segment_id | — (time-scoped H) |
 | projected_positions | run_id, video_id, frame_index, projection_id | → frames |
+| target_trajectory_samples | run_id, video_id, target_player_id, sample_id | → frames |
+| target_trajectory_segments | run_id, video_id, target_player_id, trajectory_segment_id | — |
+| trajectory_gaps | run_id, video_id, target_player_id, gap_id | — |
+| physical_metric_results | run_id, video_id, target_player_id, metric_result_id | — |
 | team_assignments | run_id, video_id, assignment_id | → track_summaries |
 | jersey_observations | run_id, video_id, frame_index, observation_id | → track_summaries |
 | events | run_id, video_id, event_id | actor tracks → track_summaries (bundle) |

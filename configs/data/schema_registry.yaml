@@ -214,3 +214,39 @@ contracts:
       1:
         spec_path: schemas/data/v1/projected_positions.json
     migration_edges: []
+
+  target_trajectory_samples:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/target_trajectory_samples.json
+    migration_edges: []
+
+  target_trajectory_segments:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/target_trajectory_segments.json
+    migration_edges: []
+
+  trajectory_gaps:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/trajectory_gaps.json
+    migration_edges: []
+
+  physical_metric_results:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/physical_metric_results.json
+    migration_edges: []

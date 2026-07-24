@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/physical/physical_metric_run_receipt.schema.json",
+  "title": "Physical metric run receipt (Stage 9A)",
+  "description": "Receipt for trajectory/physical-metric contract fixtures. Counts must be recountable from canonical artifacts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "receipt_id",
+    "request_id",
+    "run_id",
+    "video_id",
+    "target_player_id",
+    "status",
+    "trajectory_policy_fingerprint",
+    "metrics_policy_fingerprint",
+    "input_fingerprints",
+    "output_fingerprints",
+    "eligible_sample_count",
+    "rejected_sample_count",
+    "segment_count",
+    "gap_count",
+    "raw_sample_count",
+    "filtered_sample_count",
+    "resampled_sample_count",
+    "metric_status_counts",
+    "eligible_duration_us",
+    "excluded_duration_us",
+    "coverage_summary",
+    "outlier_count",
+    "review_count",
+    "evaluation_status",
+    "artifact_hashes",
+    "warning_codes",
+    "error_codes",
+    "created_at_utc",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "receipt_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "request_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "minLength": 1 },
+    "target_player_id": { "type": "string", "minLength": 1 },
+    "status": {
+      "type": "string",
+      "enum": ["succeeded", "partial", "failed", "contract_stub"]
+    },
+    "trajectory_policy_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "metrics_policy_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "input_fingerprints": {
+      "type": "object",
+      "additionalProperties": { "type": ["string", "null"] }
+    },
+    "output_fingerprints": {
+      "type": "object",
+      "additionalProperties": { "type": ["string", "null"] }
+    },
+    "eligible_sample_count": { "type": "integer", "minimum": 0 },
+    "rejected_sample_count": { "type": "integer", "minimum": 0 },
+    "segment_count": { "type": "integer", "minimum": 0 },
+    "gap_count": { "type": "integer", "minimum": 0 },
+    "raw_sample_count": { "type": "integer", "minimum": 0 },
+    "filtered_sample_count": { "type": "integer", "minimum": 0 },
+    "resampled_sample_count": { "type": "integer", "minimum": 0 },
+    "metric_status_counts": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "eligible_duration_us": { "type": "integer", "minimum": 0 },
+    "excluded_duration_us": { "type": "integer", "minimum": 0 },
+    "coverage_summary": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "outlier_count": { "type": "integer", "minimum": 0 },
+    "review_count": { "type": "integer", "minimum": 0 },
+    "evaluation_status": { "type": "string", "minLength": 1 },
+    "artifact_hashes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "warning_codes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "error_codes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "created_at_utc": { "type": "string", "minLength": 10 },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["stage", "label"],
+      "properties": {
+        "stage": { "type": "string" },
+        "label": { "type": "string" },
+        "notes": { "type": "string" },
+        "no_real_metric_computation": { "type": "boolean" }
+      }
+    }
+  }
+}

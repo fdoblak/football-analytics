@@ -1,0 +1,123 @@
+# Physical metrics policy — Stage 9A contracts only.
+# Values are configurable placeholders; not official Opta or universal sprint standards.
+
+schema_version: 1
+policy_version: 1
+config_version: 1
+stage: "9A"
+
+manual_target_confirmation_required: true
+predicted_interpolated_eligibility: false
+attack_direction_requirement: "unknown_or_evidence_backed"
+attack_relative_progression_enabled: false
+
+distance:
+  unit: "m"
+  method: "euclidean_2d_pitch"
+  same_continuous_eligible_segment_only: true
+  gap_bridge_forbidden: true
+  sample_layer_default: "raw_observed"
+  min_delta_time_us: 1000
+  max_delta_time_us: 500000
+  statuses: ["computed", "partial", "not_evaluable", "insufficient_coverage", "failed", "contract_stub"]
+  notes: "Not 3D body motion, energy, or invisible-time estimation."
+
+speed:
+  canonical_unit: "m_s"
+  display_unit_optional: "km_h"
+  time_source: "video_time_us"
+  forbid_frame_fps_time: true
+  sample_layer_default: "raw_observed"
+  min_delta_time_us: 1000
+  max_delta_time_us: 500000
+  instantaneous_vs_rolling_vs_episode: true
+  peak_speed_min_support_samples: 3
+  peak_speed_min_support_duration_us: 300000
+  single_two_point_spike_not_peak: true
+  gap_restart_forbidden: true
+  outlier_impossible_speed_mps: 12.0
+  statuses: ["computed", "partial", "not_evaluable", "contract_stub"]
+  notes: "Thresholds are policy placeholders — not universal sports-science truth."
+
+sprint:
+  profile_version: 1
+  entry_speed_mps: 7.0
+  exit_speed_mps: 6.0
+  hysteresis: true
+  min_duration_us: 1000000
+  min_distance_m: 5.0
+  max_internal_sample_gap_us: 400000
+  single_frame_spike_not_sprint: true
+  gap_or_boundary_terminates: true
+  not_universal_standard: true
+  statuses: ["computed", "partial", "not_evaluable", "contract_stub"]
+
+heatmap:
+  coordinate_frame: "canonical_pitch"
+  method_options: ["grid_bin", "kernel"]
+  default_method: "grid_bin"
+  cell_size_m: 2.0
+  kernel_bandwidth_m: 3.0
+  weighting: "time_weighted"
+  sample_count_distinct_from_dwell: true
+  normalization: "per_eligible_duration"
+  unseen_time_not_zero_activity: true
+  attack_flip_forbidden_when_unknown: true
+  png_not_canonical: true
+  statuses: ["computed", "partial", "not_evaluable", "contract_stub"]
+
+activity_coverage:
+  composite_score_enabled: false
+  components_separate:
+    - eligible_observed_time
+    - playable_target_visible_time
+    - moving_time
+    - stationary_time
+    - distance_coverage
+    - high_speed_sprint_time
+    - data_coverage
+    - identity_calibration_tracking_coverage
+    - excluded_unknown_time
+  low_coverage_is_not_low_activity: true
+  missing_data_behavior: "not_evaluable"
+
+zones:
+  attack_relative_names_forbidden: true
+  neutral_geometric_zones_allowed:
+    - goal_a_third
+    - middle_third
+    - goal_b_third
+  penalty_areas: ["goal_a_penalty", "goal_b_penalty"]
+  progression_metrics_enabled: false
+
+coverage_thresholds:
+  min_eligible_samples_for_distance: 2
+  min_eligible_duration_us_for_speed: 500000
+  min_coverage_ratio_for_computed: 0.5
+
+review:
+  sampling_rate: 0.05
+  max_review_items: 50
+
+evaluation_future_metrics:
+  - position_error_m
+  - distance_absolute_relative_error
+  - speed_mae_rmse
+  - peak_speed_error
+  - sprint_event_precision_recall_f1
+  - sprint_timing_error
+  - heatmap_similarity
+  - coverage_calibration
+  - false_sprint_rate
+  - not_evaluable_correctness
+
+safety:
+  no_real_metric_computation: true
+  no_event_possession_pass_dribble: true
+  not_official_opta: true
+  zero_null_not_evaluable_not_observed_distinct: true
+
+notes:
+  - "Stage 9A does not compute real physical metrics."
+  - "Sprint thresholds are configurable policy — not claimed Opta/official standards."
+  - "Low coverage must not be interpreted as low activity."

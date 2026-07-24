@@ -27,7 +27,7 @@ class RegistryCompilerTests(unittest.TestCase):
 
     def test_01_list_nineteen_v1(self) -> None:
         names = list_contracts(registry=self.reg)
-        self.assertEqual(len(names), 23)
+        self.assertEqual(len(names), 27)
         for n in (
             "videos",
             "frames",
@@ -51,6 +51,10 @@ class RegistryCompilerTests(unittest.TestCase):
             "calibration_features",
             "calibration_segments",
             "projected_positions",
+            "target_trajectory_samples",
+            "target_trajectory_segments",
+            "trajectory_gaps",
+            "physical_metric_results",
         ):
             self.assertIn(n, names)
 

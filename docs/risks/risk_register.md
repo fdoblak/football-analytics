@@ -1,6 +1,6 @@
 # Risk Register — football-analytics
 
-**Updated:** 2026-07-24 (Stage 8D pitch projection / Stage 8 close)
+**Updated:** 2026-07-24 (Stage 9A trajectory / physical metric contracts)
 
 **Owner default:** Furkan Doblak unless stated otherwise
 
@@ -1351,3 +1351,73 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Stage 8D+ |
+
+## RISK-096 — Calibration error propagation into physical metrics (9A+)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-096 |
+| description | Homography / projection error compounds into distance, speed, sprint, and heatmap once metrics are computed. |
+| probability | high |
+| impact | high |
+| mitigation | Trajectory eligibility requires mapped + physical-eligible projections; uncertainty thresholds; gap/coverage reporting; Stage 9A contracts-only until quality baseline. |
+| trigger | eligible trajectory from extrapolated/uncertain/degraded calibration |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 9A+ |
+
+## RISK-097 — Coverage bias mistaken for low activity (9A+)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-097 |
+| description | Missing identity/calibration/tracking coverage interpreted as the player being inactive. |
+| probability | high |
+| impact | high |
+| mitigation | Separate coverage vs activity components; `low_coverage_is_not_low_activity=true`; `not_evaluable` / `not_observed` distinct from zero. |
+| trigger | activity score falls when coverage falls without motion evidence |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 9A+ |
+
+## RISK-098 — Speed spikes and false sprints (9A+)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-098 |
+| description | Calibration jumps, ID switches, or two-point spikes produce impossible speeds / false sprint episodes. |
+| probability | high |
+| impact | high |
+| mitigation | Gap terminates sprint; single-frame spike ≠ sprint; peak-speed min support samples/duration; configurable thresholds not claimed as universal standards. |
+| trigger | sprint from single spike or across calibration/identity gap |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 9A+ |
+
+## RISK-099 — Attack-relative zones without known attack direction (9A+)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-099 |
+| description | `first_third` / `final_third` / progression computed while attack direction is unknown. |
+| probability | medium |
+| impact | high |
+| mitigation | Attack direction default `unknown`; attack-relative names forbidden; only neutral Goal A/B geometric zones; progression disabled. |
+| trigger | attack-relative metric with unknown direction |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 9A+ |
+
+## RISK-100 — Physical metric accuracy claimed without reviewed GT (9A)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-100 |
+| description | Contract stubs or synthetic fixtures presented as validated distance/speed/sprint/heatmap accuracy. |
+| probability | high |
+| impact | high |
+| mitigation | NOT_EVALUATED_NO_REVIEWED_PHYSICAL_METRIC_GROUND_TRUTH; `no_real_metric_computation=true`; metric results status `contract_stub` / `not_evaluable`. |
+| trigger | customer report claiming Opta-grade or validated physical metrics from Stage 9A |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 9A+ |

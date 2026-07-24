@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/physical/physical_metric_request.schema.json",
+  "title": "Physical metric request (Stage 9A)",
+  "description": "Request for trajectory/physical-metric contract fixtures. Stage 9A is contracts-only — no real distance/speed/sprint/heatmap computation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "run_id",
+    "video_id",
+    "target_player_id",
+    "identity_artifact_ref",
+    "projected_positions_ref",
+    "pitch_template_fingerprint",
+    "trajectory_policy_fingerprint",
+    "metrics_policy_fingerprint",
+    "metric_selection",
+    "output_root",
+    "no_overwrite",
+    "created_at_utc",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "request_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "minLength": 1 },
+    "target_player_id": { "type": "string", "minLength": 1 },
+    "identity_artifact_ref": { "type": "string", "minLength": 1 },
+    "projected_positions_ref": { "type": "string", "minLength": 1 },
+    "pitch_template_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "trajectory_policy_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "metrics_policy_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "metric_selection": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["distance", "speed", "sprint", "heatmap", "activity", "coverage"]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "filter_resample_policy_ref": { "type": ["string", "null"] },
+    "output_root": { "type": "string", "minLength": 1 },
+    "no_overwrite": { "type": "boolean", "const": true },
+    "cache_enabled": { "type": "boolean" },
+    "created_at_utc": { "type": "string", "minLength": 10 },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["stage", "label"],
+      "properties": {
+        "stage": { "type": "string" },
+        "label": { "type": "string" },
+        "notes": { "type": "string" },
+        "no_real_metric_computation": { "type": "boolean" }
+      }
+    }
+  }
+}

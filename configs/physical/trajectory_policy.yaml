@@ -1,0 +1,105 @@
+# Trajectory eligibility and gap policy — Stage 9A contracts only.
+# Thresholds are configurable project policy, not official Opta / sports-science standards.
+
+schema_version: 1
+policy_version: 1
+config_version: 1
+stage: "9A"
+
+input_eligibility:
+  require_confirmed_target: true
+  require_human_entity: true
+  require_observed_track_observation: true
+  require_mapping_status: ["mapped"]
+  require_physical_metric_eligible: true
+  require_valid_calibration_segment: true
+  forbid_extrapolation: true
+  require_uncertainty_below_threshold: true
+  uncertainty_max_m: 2.5
+  require_playable_non_replay_window: true
+  forbid_revoked_or_conflicted_assignment: true
+  require_fingerprint_match: true
+  predicted_interpolated_eligible: false
+  provisional_candidate_eligible: false
+  ball_points_eligible: false
+
+gap_types:
+  - detection_gap
+  - tracking_gap
+  - identity_gap
+  - calibration_gap
+  - non_playable_gap
+  - shot_boundary
+  - track_boundary
+  - manual_exclusion
+  - unknown
+
+gap_policy:
+  silent_fill_forbidden: true
+  distance_bridge_forbidden: true
+  default_allows_distance_bridge: false
+  default_allows_interpolation: false
+  short_gap_max_us: 400000
+  long_gap_new_segment_us: 1000000
+  short_gap_interpolation_if_enabled:
+    derived: true
+    metric_eligible_by_default: false
+  interval_semantics: "[start_us,end_us)"
+
+segment_rules:
+  half_open_interval: true
+  single_sample_metric_insufficient: true
+  overlapping_confirmed_target_hard_conflict: true
+  cross_track_confirmed_transition_requires_boundary: true
+  max_sample_interval_us: 500000
+  time_source: video_time_us
+  forbid_frame_fps_duration: true
+
+sample_layers:
+  raw_observed:
+    immutable: true
+    may_look_like_raw: true
+  filtered:
+    immutable_raw_preserved: true
+    may_look_like_raw: false
+    requires_rejection_reason: true
+  resampled:
+    may_look_like_raw: false
+    requires_source_interval: true
+    requires_interpolation_method: true
+    cannot_fill_calibration_or_identity_gap: true
+    cannot_inflate_raw_observation_count: true
+
+filter_resample_placeholders:
+  enabled: false
+  filter:
+    method: "placeholder_not_run"
+    causal: true
+    endpoint_policy: "leave_unchanged"
+    config_fingerprint_required: true
+  resample:
+    method: "placeholder_not_run"
+    grid_us: 100000
+    causal: false
+    endpoint_policy: "no_extrapolate"
+    config_fingerprint_required: true
+
+coordinate_frame:
+  allowed: ["canonical_pitch", "stadium_absolute"]
+  forbidden_for_metrics: ["attack_relative"]
+  attack_direction_default: "unknown"
+  attack_relative_zones_forbidden: true
+
+review:
+  sampling_rate: 0.05
+  max_review_items: 50
+
+safety:
+  no_real_metric_computation: true
+  no_event_extraction: true
+  no_ball_metrics: true
+  not_official_opta: true
+
+notes:
+  - "Stage 9A defines contracts only; algorithms are not executed on production video."
+  - "Thresholds are project policy placeholders — not claimed sports-science standards."

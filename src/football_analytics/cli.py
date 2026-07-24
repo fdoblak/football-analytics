@@ -1791,6 +1791,66 @@ def cmd_calibration_contracts_validate(*, keep: bool, as_json: bool) -> int:
     return int(main_fn(argv))
 
 
+def cmd_physical_contracts_validate(*, keep: bool, as_json: bool) -> int:
+    """Run Stage 9A synthetic physical/trajectory contract validator (no real metrics)."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_physical_metric_contracts.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("physical contract validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
+def cmd_physical_request_validate(request_path: Path) -> int:
+    """Validate a physical metric request JSON against Stage 9A schema."""
+    from football_analytics.physical.receipt import validate_request_payload
+    from football_analytics.physical.types import PhysicalContractError
+
+    if not request_path.is_file() or request_path.is_symlink():
+        print(f"request missing or symlink: {request_path}", file=sys.stderr)
+        return 2
+    try:
+        payload = json.loads(request_path.read_text(encoding="utf-8"))
+        if not isinstance(payload, dict):
+            print("physical request root must be object", file=sys.stderr)
+            return 1
+        validate_request_payload(payload)
+    except (OSError, PhysicalContractError, ValueError, json.JSONDecodeError) as exc:
+        print(f"physical request invalid: {exc}", file=sys.stderr)
+        return 1
+    print("physical request: OK")
+    return 0
+
+
+def cmd_physical_receipt_validate(receipt_path: Path) -> int:
+    """Validate a physical metric receipt JSON against Stage 9A schema."""
+    from football_analytics.physical.receipt import validate_receipt_payload
+    from football_analytics.physical.types import PhysicalContractError
+
+    if not receipt_path.is_file() or receipt_path.is_symlink():
+        print(f"receipt missing or symlink: {receipt_path}", file=sys.stderr)
+        return 2
+    try:
+        payload = json.loads(receipt_path.read_text(encoding="utf-8"))
+        if not isinstance(payload, dict):
+            print("physical receipt root must be object", file=sys.stderr)
+            return 1
+        validate_receipt_payload(payload)
+    except (OSError, PhysicalContractError, ValueError, json.JSONDecodeError) as exc:
+        print(f"physical receipt invalid: {exc}", file=sys.stderr)
+        return 1
+    print("physical receipt: OK")
+    return 0
+
+
 def cmd_calibration_homography_validate() -> int:
     """Validate synthetic known-H solve / reject degenerates (contracts only)."""
     from football_analytics.calibration.fixtures import (
@@ -3581,6 +3641,28 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p_cal_c_val.add_argument("--keep", action="store_true", help="Keep validator session dir")
     p_cal_c_val.add_argument("--json", action="store_true", help="Emit JSON report")
+
+    p_physical = sub.add_parser(
+        "physical",
+        help="Target trajectory / physical metric contracts (Stage 9A)",
+    )
+    phys_sub = p_physical.add_subparsers(dest="physical_command")
+    p_phys_contracts = phys_sub.add_parser("contracts", help="Physical contract helpers")
+    phys_contracts_sub = p_phys_contracts.add_subparsers(dest="physical_contracts_command")
+    p_phys_c_val = phys_contracts_sub.add_parser(
+        "validate", help="Validate physical/trajectory contracts (synthetic Stage 9A)"
+    )
+    p_phys_c_val.add_argument("--keep", action="store_true", help="Keep validator session dir")
+    p_phys_c_val.add_argument("--json", action="store_true", help="Emit JSON report")
+    p_phys_request = phys_sub.add_parser("request", help="Physical metric request helpers")
+    phys_request_sub = p_phys_request.add_subparsers(dest="physical_request_command")
+    p_phys_req_val = phys_request_sub.add_parser("validate", help="Validate request JSON")
+    p_phys_req_val.add_argument("request", type=Path)
+    p_phys_receipt = phys_sub.add_parser("receipt", help="Physical metric receipt helpers")
+    phys_receipt_sub = p_phys_receipt.add_subparsers(dest="physical_receipt_command")
+    p_phys_rec_val = phys_receipt_sub.add_parser("validate", help="Validate receipt JSON")
+    p_phys_rec_val.add_argument("receipt", type=Path)
+
     p_cal_features = cal_sub.add_parser(
         "features", help="Pitch keypoint/line feature detection (8B)"
     )
@@ -4273,6 +4355,26 @@ def main(argv: Sequence[str] | None = None) -> int:
             parser.parse_args(["calibration", "projection", "--help"])
             return 2
         parser.parse_args(["calibration", "--help"])
+        return 2
+    if args.command == "physical":
+        if args.physical_command == "contracts":
+            if args.physical_contracts_command == "validate":
+                return cmd_physical_contracts_validate(
+                    keep=bool(args.keep), as_json=bool(args.json)
+                )
+            parser.parse_args(["physical", "contracts", "--help"])
+            return 2
+        if args.physical_command == "request":
+            if args.physical_request_command == "validate":
+                return cmd_physical_request_validate(args.request)
+            parser.parse_args(["physical", "request", "--help"])
+            return 2
+        if args.physical_command == "receipt":
+            if args.physical_receipt_command == "validate":
+                return cmd_physical_receipt_validate(args.receipt)
+            parser.parse_args(["physical", "receipt", "--help"])
+            return 2
+        parser.parse_args(["physical", "--help"])
         return 2
     parser.print_help()
     return 2
