@@ -1,0 +1,44 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "class_durations_us": {
+      "jogging": 500000,
+      "running": 500000,
+      "sprinting": 500000,
+      "stationary": 500000,
+      "walking": 500000
+    },
+    "config_fingerprint": "379badd378e899fd02f4fd63ec40d59178e88da36061a5bff9ff8fa766dd29a5",
+    "e2e": {
+      "activity_index": 0.0,
+      "dwell_s": 2.0000000000000004,
+      "eval": "NOT_EVALUATED_NO_REVIEWED_HEATMAP_ZONE_ACTIVITY_GROUND_TRUTH"
+    }
+  },
+  "scenarios": {
+    "00_metadata": "PASS",
+    "01_stationary_zone_dwell": "PASS",
+    "02_pitch_crossing_thirds": "PASS",
+    "03_vfr_timestamps": "PASS",
+    "04_single_point_not_evaluable": "PASS",
+    "05_hard_gap_no_bridge": "PASS",
+    "06_zone_boundary_edge": "PASS",
+    "07_out_of_pitch": "PASS",
+    "08_smoothing_mass_conservation": "PASS",
+    "09_observed_derived_split": "PASS",
+    "10_low_coverage_not_evaluable": "PASS",
+    "11_speed_class_ladder": "PASS",
+    "12_uncertain_not_evaluable": "PASS",
+    "13_coverage_not_inactive": "PASS",
+    "14_neutral_goal_labels": "PASS",
+    "15_penalty_not_touch": "PASS",
+    "16_percent_sum_tolerance": "PASS",
+    "17_deterministic_e2e": "PASS",
+    "18_activity_index_metadata": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-24T10:36:45.793666Z",
+  "warnings": []
+}

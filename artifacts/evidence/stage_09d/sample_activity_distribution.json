@@ -1,0 +1,63 @@
+{
+  "classes": [
+    {
+      "class": "stationary",
+      "duration_seconds": 2.0,
+      "duration_us": 2000000,
+      "eligible_percent": 100.0
+    },
+    {
+      "class": "walking",
+      "duration_seconds": 0.0,
+      "duration_us": 0,
+      "eligible_percent": 0.0
+    },
+    {
+      "class": "jogging",
+      "duration_seconds": 0.0,
+      "duration_us": 0,
+      "eligible_percent": 0.0
+    },
+    {
+      "class": "running",
+      "duration_seconds": 0.0,
+      "duration_us": 0,
+      "eligible_percent": 0.0
+    },
+    {
+      "class": "sprinting",
+      "duration_seconds": 0.0,
+      "duration_us": 0,
+      "eligible_percent": 0.0
+    },
+    {
+      "class": "unknown",
+      "duration_seconds": 0.0,
+      "duration_us": 0,
+      "eligible_percent": 0.0
+    },
+    {
+      "class": "not_evaluable",
+      "duration_seconds": 0.0,
+      "duration_us": 0,
+      "eligible_percent": 0.0
+    }
+  ],
+  "missing_coverage_counted_as_inactive": false,
+  "movement_activity_index": {
+    "formula": "sum(class_duration_s * weight) / eligible_duration_s",
+    "metric_origin": "project_generated",
+    "not_official_opta": true,
+    "not_possession_or_tactical": true,
+    "status": "computed",
+    "value": 0.0,
+    "weights": {
+      "jogging": 2.0,
+      "running": 3.5,
+      "sprinting": 5.0,
+      "stationary": 0.0,
+      "walking": 1.0
+    }
+  },
+  "status": "computed"
+}

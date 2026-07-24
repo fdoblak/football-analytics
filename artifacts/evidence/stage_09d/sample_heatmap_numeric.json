@@ -1,0 +1,26 @@
+{
+  "cell_size_m": 5.0,
+  "dwell_seconds_top_left_3x3": [
+    [
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "n_x": 21,
+  "n_y": 14,
+  "percent_sum": 100.0,
+  "status": "computed",
+  "total_dwell_seconds": 2.0000000000000004,
+  "weighting": "time_weighted"
+}

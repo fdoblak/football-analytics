@@ -2006,6 +2006,112 @@ def cmd_physical_motion_validate(*, keep: bool = False, as_json: bool = False) -
     return int(main_fn(argv))
 
 
+def cmd_physical_spatial_compute(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    fixture_smoke: bool = False,
+) -> int:
+    """Stage 9D: heatmap / zones / activity from eligible trajectory (synthetic smoke)."""
+    from football_analytics.physical.spatial_config import (
+        load_spatial_baseline_config,
+        spatial_baseline_config_fingerprint,
+    )
+    from football_analytics.physical.spatial_fixtures import stationary_zone_dwell
+    from football_analytics.physical.spatial_service import compute_spatial_metrics
+
+    try:
+        cfg = load_spatial_baseline_config(config_path)
+        fp = spatial_baseline_config_fingerprint(cfg)
+        if not fixture_smoke:
+            print(
+                "error: provide --fixture-smoke for Stage 9D synthetic compute "
+                "(refuses silent user-data overwrite)",
+                file=sys.stderr,
+            )
+            return 2
+        points = stationary_zone_dwell(fp)
+        result = compute_spatial_metrics(primary_points=points, output_dir=output_dir, config=cfg)
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
+    if not result.accepted or not result.receipt_json:
+        print(f"accepted: {result.accepted}", file=sys.stderr)
+        print(f"error_code: {result.error_code}", file=sys.stderr)
+        return int(result.exit_code or 1)
+    print(f"accepted: {result.accepted}")
+    print(f"config_fingerprint: {result.config_fingerprint}")
+    print(f"receipt: {result.receipt_json}")
+    for k in (
+        "heatmap_status",
+        "zone_status",
+        "activity_status",
+        "total_dwell_seconds",
+        "movement_activity_index",
+        "evaluation_status",
+        "visuals_committed_to_git",
+    ):
+        if k in result.summary:
+            print(f"{k}: {result.summary[k]}")
+    return int(result.exit_code)
+
+
+def cmd_physical_spatial_evaluate(
+    *,
+    summary_path: Path | None,
+    output: Path,
+    fixture_smoke: bool = False,
+) -> int:
+    """Stage 9D: write evaluation JSON (NOT_EVALUATED without reviewed GT)."""
+    from football_analytics.core.records import write_json_record
+    from football_analytics.physical.spatial_evaluation import evaluate_spatial_metrics
+
+    if not fixture_smoke and summary_path is None:
+        print(
+            "error: provide --fixture-smoke or --summary for Stage 9D evaluate",
+            file=sys.stderr,
+        )
+        return 2
+    run_id = "run_synth_spatial"
+    video_id = "video_synth_01"
+    if summary_path is not None:
+        if not summary_path.is_file() or summary_path.is_symlink():
+            print(f"summary missing or symlink: {summary_path}", file=sys.stderr)
+            return 2
+        payload = json.loads(summary_path.read_text(encoding="utf-8"))
+        if isinstance(payload, dict):
+            run_id = str(payload.get("run_id") or run_id)
+            video_id = str(payload.get("video_id") or video_id)
+    report = evaluate_spatial_metrics(has_reviewed_ground_truth=False)
+    out = report.to_dict(run_id=run_id, video_id=video_id)
+    try:
+        write_json_record(output, out, overwrite=False)
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
+    print(f"evaluation_status: {out['ground_truth_evaluation_status']}")
+    print(f"wrote: {output}")
+    return 0
+
+
+def cmd_physical_spatial_validate(*, keep: bool = False, as_json: bool = False) -> int:
+    """Run Stage 9D heatmap/zones/activity baseline validator."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_heatmap_activity_baseline.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("spatial validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
 def cmd_calibration_homography_validate() -> int:
     """Validate synthetic known-H solve / reject degenerates (contracts only)."""
     from football_analytics.calibration.fixtures import (
@@ -3859,6 +3965,31 @@ def build_parser() -> argparse.ArgumentParser:
     p_phys_motion_val = phys_motion_sub.add_parser("validate", help="Run Stage 9C validator")
     p_phys_motion_val.add_argument("--keep", action="store_true")
     p_phys_motion_val.add_argument("--json", action="store_true")
+    p_phys_spatial = phys_sub.add_parser("spatial", help="Heatmap / zones / activity metrics (9D)")
+    phys_spatial_sub = p_phys_spatial.add_subparsers(dest="physical_spatial_command")
+    p_phys_spatial_compute = phys_spatial_sub.add_parser(
+        "compute", help="Compute time-weighted heatmap, zones, activity"
+    )
+    p_phys_spatial_compute.add_argument("--output-dir", type=Path, required=True)
+    p_phys_spatial_compute.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/physical/heatmap_activity_baseline.yaml"),
+    )
+    p_phys_spatial_compute.add_argument(
+        "--fixture-smoke",
+        action="store_true",
+        help="Use synthetic dwell fixture (no video; no user-data overwrite)",
+    )
+    p_phys_spatial_eval = phys_spatial_sub.add_parser(
+        "evaluate", help="Write spatial evaluation JSON (no reviewed GT → NOT_EVALUATED)"
+    )
+    p_phys_spatial_eval.add_argument("--summary", type=Path, default=None)
+    p_phys_spatial_eval.add_argument("--output", type=Path, required=True)
+    p_phys_spatial_eval.add_argument("--fixture-smoke", action="store_true")
+    p_phys_spatial_val = phys_spatial_sub.add_parser("validate", help="Run Stage 9D validator")
+    p_phys_spatial_val.add_argument("--keep", action="store_true")
+    p_phys_spatial_val.add_argument("--json", action="store_true")
 
     p_cal_features = cal_sub.add_parser(
         "features", help="Pitch keypoint/line feature detection (8B)"
@@ -4600,6 +4731,23 @@ def main(argv: Sequence[str] | None = None) -> int:
             if args.physical_motion_command == "validate":
                 return cmd_physical_motion_validate(keep=bool(args.keep), as_json=bool(args.json))
             parser.parse_args(["physical", "motion", "--help"])
+            return 2
+        if args.physical_command == "spatial":
+            if args.physical_spatial_command == "compute":
+                return cmd_physical_spatial_compute(
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    fixture_smoke=bool(args.fixture_smoke),
+                )
+            if args.physical_spatial_command == "evaluate":
+                return cmd_physical_spatial_evaluate(
+                    summary_path=args.summary,
+                    output=args.output,
+                    fixture_smoke=bool(args.fixture_smoke),
+                )
+            if args.physical_spatial_command == "validate":
+                return cmd_physical_spatial_validate(keep=bool(args.keep), as_json=bool(args.json))
+            parser.parse_args(["physical", "spatial", "--help"])
             return 2
         parser.parse_args(["physical", "--help"])
         return 2

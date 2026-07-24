@@ -1,0 +1,77 @@
+{
+  "artifact_hashes": {
+    "activity": {
+      "sha256": "88df40a260e65b1abbb0e4fb4e990f0801f403caecd878246f095dae96e01bf8",
+      "size": 2118
+    },
+    "evaluation": {
+      "sha256": "ea29e0e22141776b85adb2452fa58c8eea6aab9c04fd8188d19a83073d01561c",
+      "size": 1403
+    },
+    "heatmap": {
+      "sha256": "5b6a12a2ea5b35a494ee8a444782202c770ad8b89f872595fab02890eb88f486",
+      "size": 8315
+    },
+    "metric_results": {
+      "sha256": "afff45febda70508a6d3b09a935694a3400803c0730daf7f85b5f19f602b88de",
+      "size": 12293
+    },
+    "quality": {
+      "sha256": "6faf320e5c18aba31afa12b8452b680e3e82cd3cbd4030abe0e0f4fd94d47329",
+      "size": 740
+    },
+    "summary": {
+      "sha256": "11a98994c96e4d8a47f05bd90c935811fdec05b9b821cdd3682456bb846fc611",
+      "size": 959
+    },
+    "zones": {
+      "sha256": "048155e392e59fdbb98607e2d0b8211e0f54de27e350a4a694f70ec9132c2410",
+      "size": 1489
+    }
+  },
+  "completion_status": "succeeded",
+  "config_fingerprint": "379badd378e899fd02f4fd63ec40d59178e88da36061a5bff9ff8fa766dd29a5",
+  "coverage_summary": {
+    "derived_coverage_us": 0,
+    "missing_coverage_counted_as_inactive": false,
+    "observed_coverage_us": 2000000
+  },
+  "created_at_utc": "2026-07-24T10:36:42.630053Z",
+  "eligible_duration_us": 2000000,
+  "eligible_sample_count": 21,
+  "error_codes": [],
+  "evaluation_status": "NOT_EVALUATED_NO_REVIEWED_HEATMAP_ZONE_ACTIVITY_GROUND_TRUTH",
+  "excluded_duration_us": 0,
+  "gap_count": 0,
+  "input_fingerprints": {
+    "physical_metric_results": "aa705bb819e10e49acb71be4d54b6bf65345b9795611b909676d2f5b596dc55b"
+  },
+  "metric_status_counts": {
+    "computed": 2
+  },
+  "metrics_policy_fingerprint": "379badd378e899fd02f4fd63ec40d59178e88da36061a5bff9ff8fa766dd29a5",
+  "outlier_count": 0,
+  "output_fingerprints": {
+    "physical_metric_results": "aa705bb819e10e49acb71be4d54b6bf65345b9795611b909676d2f5b596dc55b"
+  },
+  "provenance": {
+    "attack_direction": "unknown",
+    "label": "heatmap_zones_activity_baseline",
+    "metric_origin": "project_generated",
+    "not_official_opta": true,
+    "stage": "9D",
+    "visuals_to_git": false
+  },
+  "reason_code_distribution": {},
+  "receipt_id": "spatial_receipt_01",
+  "rejected_sample_count": 0,
+  "request_id": "spatial_req_01",
+  "review_count": 0,
+  "run_id": "run_20260724T103641319213Z_b71b66004550",
+  "schema_version": 1,
+  "segment_count": 1,
+  "status": "succeeded",
+  "target_player_id": "target_player_01",
+  "video_id": "video_synth_01",
+  "warning_codes": []
+}

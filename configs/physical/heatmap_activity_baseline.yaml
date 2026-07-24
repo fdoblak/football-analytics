@@ -1,0 +1,147 @@
+# Stage 9D heatmap / neutral zones / physical activity baseline.
+# Project-generated metrics — NOT official Opta. Attack direction remains unknown.
+
+schema_version: 1
+config_version: 1
+pipeline_id: heatmap_activity_baseline
+pipeline_version: 1
+stage: "9D"
+
+metric_origin: project_generated
+definition_style: opta_style_metric_definition
+
+primary_sample_layer: filtered
+diagnostic_sample_layers:
+  - raw_observed
+  - resampled
+
+input_eligibility:
+  require_confirmed_target: true
+  require_mapping_status: mapped
+  require_physical_metric_eligible: true
+  uncertainty_max_m: 2.5
+  forbid_revoked: true
+  forbid_predicted_interpolated: true
+  forbid_provisional: true
+  forbid_ball: true
+  require_playable_non_replay: true
+  require_video_time_us: true
+
+pitch:
+  length_m: 105.0
+  width_m: 68.0
+
+heatmap:
+  coordinate_frame: canonical_pitch
+  method: grid_bin
+  cell_size_m: 5.0
+  weighting: time_weighted
+  min_points_for_dwell: 2
+  max_support_interval_us: 500000
+  min_delta_time_us: 1000
+  normalization: per_eligible_duration
+  min_coverage_ratio_for_computed: 0.15
+  smoothing:
+    enabled: true
+    method: bounded_gaussian
+    sigma_cells: 1.0
+    radius_cells: 2
+    conserve_mass: true
+  out_of_pitch_policy: reject
+  sample_count_distinct_from_dwell: true
+  unseen_time_not_zero_activity: true
+
+zones:
+  attack_direction: unknown
+  attack_relative_names_forbidden: true
+  thirds:
+    - goal_a_third
+    - middle_third
+    - goal_b_third
+  corridors:
+    enabled: true
+    names: [left_corridor, centre_corridor, right_corridor]
+    # half-open y bands as fractions of pitch width
+    left_frac: [0.0, 0.3333333333]
+    centre_frac: [0.3333333333, 0.6666666667]
+    right_frac: [0.6666666667, 1.0000000001]
+  penalty:
+    enabled: true
+    depth_m: 16.5
+    width_m: 40.32
+    # Physical presence only — NOT ball touch / possession / event
+    semantics: physical_presence_only
+    forbid_touch_possession_claim: true
+  interval_semantics: "[start,end)"
+  min_points_for_dwell: 2
+
+activity:
+  # Aligned with Stage 9C sprint entry 7.0 m/s (sprinting >= entry)
+  classes:
+    stationary: {min_mps: 0.0, max_mps: 0.5}
+    walking: {min_mps: 0.5, max_mps: 2.0}
+    jogging: {min_mps: 2.0, max_mps: 4.0}
+    running: {min_mps: 4.0, max_mps: 7.0}
+    sprinting: {min_mps: 7.0, max_mps: 100.0}
+  high_intensity_classes: [running, sprinting]
+  moving_classes: [walking, jogging, running, sprinting]
+  sprint_entry_mps_align: 7.0
+  outlier_impossible_speed_mps: 12.0
+  min_delta_time_us: 1000
+  max_delta_time_us: 500000
+  min_coverage_ratio_for_computed: 0.15
+  min_eligible_duration_us: 500000
+  movement_activity_index:
+    enabled: true
+    # index = sum(class_duration_s * weight) / eligible_duration_s
+    weights:
+      stationary: 0.0
+      walking: 1.0
+      jogging: 2.0
+      running: 3.5
+      sprinting: 5.0
+    not_official_opta: true
+    not_possession_or_tactical: true
+
+coverage:
+  extrapolate_uncovered_time: false
+  missing_coverage_is_not_inactive: true
+  low_coverage_is_not_low_activity: true
+
+output_policy:
+  write_heatmap_grid: true
+  write_zone_occupancy: true
+  write_activity_distribution: true
+  write_metric_results: true
+  write_summary: true
+  write_receipt: true
+  write_quality: true
+  write_evaluation: true
+  write_visuals_to_git: false
+  no_overwrite: true
+  atomic: true
+
+forbidden:
+  events: true
+  pass_dribble_duel: true
+  ball_touch_in_penalty: true
+  possession: true
+  attack_direction_invention: true
+  coverage_as_inactive: true
+  coverage_extrapolation: true
+  official_opta_claim: true
+  final_customer_visual: true
+
+runtime_root: /home/fdoblak/workspace/heatmap_activity_checks
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+attack_direction: unknown
+
+notes:
+  - "Heatmap is time-weighted dwell, not frame/point counts."
+  - "Zones are neutral Goal A/B geometry; attack direction stays unknown."
+  - "Penalty presence is physical location duration only — not touch/possession."
+  - "Activity index is project_generated trajectory motion profile only."
+  - "No Stage 9D SVG/PNG committed to GitHub; visuals are temporary workspace only."

@@ -1416,7 +1416,7 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | description | Contract stubs or synthetic fixtures presented as validated distance/speed/sprint/heatmap accuracy. |
 | probability | high |
 | impact | high |
-| mitigation | NOT_EVALUATED_NO_REVIEWED_PHYSICAL_METRIC_GROUND_TRUTH (9A); NOT_EVALUATED_NO_REVIEWED_DISTANCE_SPEED_SPRINT_GROUND_TRUTH (9C); sprint marked project_generated / not official Opta; no coverage extrapolation. |
+| mitigation | NOT_EVALUATED_NO_REVIEWED_PHYSICAL_METRIC_GROUND_TRUTH (9A); NOT_EVALUATED_NO_REVIEWED_DISTANCE_SPEED_SPRINT_GROUND_TRUTH (9C); NOT_EVALUATED_NO_REVIEWED_HEATMAP_ZONE_ACTIVITY_GROUND_TRUTH (9D); sprint/activity marked project_generated / not official Opta; no coverage extrapolation; missing coverage ≠ inactive. |
 | trigger | customer report claiming Opta-grade or validated physical metrics from Stage 9 |
 | owner | Furkan Doblak |
 | status | open |

@@ -1,0 +1,30 @@
+{
+  "adapter_notes": "stage_9d_synthetic_math_only",
+  "config_fingerprint": "379badd378e899fd02f4fd63ec40d59178e88da36061a5bff9ff8fa766dd29a5",
+  "created_at_utc": "2026-07-24T10:36:42.470932Z",
+  "findings": [
+    "No reviewed heatmap/zone/activity ground truth available.",
+    "Synthetic fixtures prove math/pipeline only — not real football accuracy.",
+    "Activity index is project_generated; not official Opta.",
+    "Penalty presence is not ball touch or possession."
+  ],
+  "ground_truth_evaluation_status": "NOT_EVALUATED_NO_REVIEWED_HEATMAP_ZONE_ACTIVITY_GROUND_TRUTH",
+  "metric_reasons": {
+    "activity_class_accuracy": "NOT_EVALUATED_NO_REVIEWED_HEATMAP_ZONE_ACTIVITY_GROUND_TRUTH",
+    "coverage_calibration": "NOT_EVALUATED_NO_REVIEWED_HEATMAP_ZONE_ACTIVITY_GROUND_TRUTH",
+    "heatmap_similarity": "NOT_EVALUATED_NO_REVIEWED_HEATMAP_ZONE_ACTIVITY_GROUND_TRUTH",
+    "not_evaluable_correctness": "NOT_EVALUATED_NO_REVIEWED_HEATMAP_ZONE_ACTIVITY_GROUND_TRUTH",
+    "zone_dwell_error": "NOT_EVALUATED_NO_REVIEWED_HEATMAP_ZONE_ACTIVITY_GROUND_TRUTH"
+  },
+  "metrics": {
+    "activity_class_accuracy": null,
+    "coverage_calibration": null,
+    "heatmap_similarity": null,
+    "not_evaluable_correctness": null,
+    "zone_dwell_error": null
+  },
+  "run_id": "run_20260724T103641319213Z_b71b66004550",
+  "schema_version": 1,
+  "status": "not_evaluated",
+  "video_id": "video_synth_01"
+}

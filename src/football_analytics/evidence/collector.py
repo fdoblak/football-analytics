@@ -54,6 +54,7 @@ WORKSPACE_STAGE_MAP: dict[str, str] = {
     "physical_metric_contract_checks": "stage_09a",
     "target_trajectory_checks": "stage_09b",
     "distance_speed_sprint_checks": "stage_09c",
+    "heatmap_activity_checks": "stage_09d",
 }
 
 

@@ -91,8 +91,10 @@ direction remains unknown; ball never physical/event metric-eligible; real
 football coordinate accuracy not validated. Stage 9A added target trajectory and
 physical metric **contracts only**. Stage 9B prepares raw/filtered/resampled
 trajectories. Stage 9C computes measured distance / robust speed / project
-sprint bouts (synthetic math validated; real football accuracy not claimed).
-Do **not** start Stage 9D without an explicit user prompt.
+sprint bouts. Stage 9D adds time-weighted heatmap, neutral zones, and
+trajectory activity profiles (synthetic math validated; real football accuracy
+not claimed; no multi-visual git commits). Do **not** start Stage 9E without an
+explicit user prompt.
 
 ---
 

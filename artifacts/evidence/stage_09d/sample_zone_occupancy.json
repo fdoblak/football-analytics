@@ -1,0 +1,40 @@
+{
+  "attack_direction": "unknown",
+  "penalty_semantics": "physical_presence_only_not_ball_touch",
+  "status": "computed",
+  "zones": [
+    {
+      "dwell_seconds": 2.0,
+      "dwell_us": 2000000,
+      "eligible_percent": 100.0,
+      "entry_count": 0,
+      "not_touch_or_possession": false,
+      "sample_visits": 20,
+      "semantics": "neutral_geometric_zone",
+      "uncertainty_m": 0.4,
+      "zone_id": "centre_corridor"
+    },
+    {
+      "dwell_seconds": 2.0,
+      "dwell_us": 2000000,
+      "eligible_percent": 100.0,
+      "entry_count": 0,
+      "not_touch_or_possession": true,
+      "sample_visits": 20,
+      "semantics": "physical_presence_only",
+      "uncertainty_m": 0.4,
+      "zone_id": "goal_a_penalty"
+    },
+    {
+      "dwell_seconds": 2.0,
+      "dwell_us": 2000000,
+      "eligible_percent": 100.0,
+      "entry_count": 1,
+      "not_touch_or_possession": false,
+      "sample_visits": 20,
+      "semantics": "neutral_geometric_zone",
+      "uncertainty_m": 0.4,
+      "zone_id": "goal_a_third"
+    }
+  ]
+}
