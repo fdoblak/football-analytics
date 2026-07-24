@@ -1,0 +1,38 @@
+{
+  "info": {
+    "version": "1.3",
+    "name": "mini-999001-h2",
+    "frame_rate": 25,
+    "seq_length": 5
+  },
+  "images": [],
+  "annotations": [
+    {
+      "id": "10",
+      "image_id": "3000001",
+      "track_id": 7,
+      "supercategory": "object",
+      "category_id": 1,
+      "attributes": {"role": "player", "jersey": "9", "team": "left", "player_id": 1001},
+      "bbox_pitch": {"x_bottom_middle": 3.0, "y_bottom_middle": 1.0}
+    },
+    {
+      "id": "11",
+      "image_id": "3000002",
+      "track_id": 7,
+      "supercategory": "object",
+      "category_id": 1,
+      "attributes": {"role": "player", "jersey": "9", "team": "left", "player_id": 1001},
+      "bbox_pitch": {"x_bottom_middle": 3.2, "y_bottom_middle": 1.1}
+    },
+    {
+      "id": "12",
+      "image_id": "3000001",
+      "track_id": 8,
+      "supercategory": "object",
+      "category_id": 1,
+      "attributes": {"role": "player", "jersey": "10", "team": "right", "player_id": 2002},
+      "bbox_pitch": {"x_bottom_middle": -1.0, "y_bottom_middle": 0.0}
+    }
+  ]
+}

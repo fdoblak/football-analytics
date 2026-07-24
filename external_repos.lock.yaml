@@ -186,3 +186,13 @@ third_party_repositories:
     integration: model_source_and_reference
     validation_status: locked_stage_1c
     dirty: false
+  soccertrack_v2:
+    path: /home/fdoblak/projects/third-party/SoccerTrack-v2
+    remote: https://github.com/AtomScott/SoccerTrack-v2.git
+    branch: main
+    tag: null
+    describe: null
+    commit: 3ee38e481aab9de0f1d099c1cdde15302eb63f49
+    integration: format_reference_readonly
+    validation_status: locked_stage_16
+    dirty: false

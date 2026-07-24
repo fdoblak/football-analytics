@@ -23,4 +23,11 @@ When a gated model is unavailable or license-blocked:
 ## Authoritative inventory
 
 See `docs/legal/license_inventory.md` and root `model_registry.yaml`.
-Legal clearance remains a **Stage 16** external item.
+
+## SoccerTrack v2 (Stage 16)
+
+- Dataset: SoccerTrack v2 (CC BY 4.0) — Atom Scott, Ikuma Uchida, Kento Kuroda, Yufi Kim, Keisuke Fujii
+- https://atomscott.github.io/SoccerTrack-v2/ · https://creativecommons.org/licenses/by/4.0/
+- Code reference clone (MIT): `/home/fdoblak/projects/third-party/SoccerTrack-v2` @ `3ee38e481aab9de0f1d099c1cdde15302eb63f49`
+- Acceptance match only: `128057` (panoramic full-pitch). Not official Opta data.
+

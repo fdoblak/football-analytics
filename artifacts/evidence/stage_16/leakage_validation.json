@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "run_dir": "/home/fdoblak/football_data/datasets/soccertrack_v2/runs/128057",
+  "checked": [
+    "predictions",
+    "reference_ground_truth",
+    "evaluation"
+  ]
+}

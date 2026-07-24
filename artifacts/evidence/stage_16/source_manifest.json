@@ -1,0 +1,111 @@
+{
+  "dataset_id": "soccertrack_v2_single_match_acceptance",
+  "external_repo_sha": "3ee38e481aab9de0f1d099c1cdde15302eb63f49",
+  "files": [
+    {
+      "half": null,
+      "license": "CC-BY-4.0",
+      "match_id": "128057",
+      "media_type": "application/json",
+      "modification_or_normalization": "source_immutable",
+      "relative_path": "bas/128057/128057_12_class_events.json",
+      "sha256": "6ae462cf44b6e50ddfa558aaeac10174d665a35ddb81d9197134a5fad92c9848",
+      "size_bytes": 357892,
+      "source_url": "https://drive.google.com/drive/folders/1N2Qx2qkFgRtpbHitl2Vh6sLVYGgqkWwn"
+    },
+    {
+      "half": 1,
+      "license": "CC-BY-4.0",
+      "match_id": "128057",
+      "media_type": "application/json",
+      "modification_or_normalization": "source_immutable",
+      "relative_path": "gsr/128057/128057_1st.json",
+      "sha256": "4d3c3451f7af6aa243e47b4047966c8b7162023c4c8df9216c6d61eaaa07cfb7",
+      "size_bytes": 2712325392,
+      "source_url": "https://drive.google.com/drive/folders/1N2Qx2qkFgRtpbHitl2Vh6sLVYGgqkWwn"
+    },
+    {
+      "half": 2,
+      "license": "CC-BY-4.0",
+      "match_id": "128057",
+      "media_type": "application/json",
+      "modification_or_normalization": "source_immutable",
+      "relative_path": "gsr/128057/128057_2nd.json",
+      "sha256": "96929ccbc80c37a661c49456335b99425b73ea138450ddc0ba943b68a0f74e4a",
+      "size_bytes": 2820551374,
+      "source_url": "https://drive.google.com/drive/folders/1N2Qx2qkFgRtpbHitl2Vh6sLVYGgqkWwn"
+    },
+    {
+      "half": null,
+      "license": "CC-BY-4.0",
+      "match_id": "128057",
+      "media_type": "application/json",
+      "modification_or_normalization": "source_immutable",
+      "relative_path": "raw/128057/128057_keypoints.json",
+      "sha256": "1856d7906084f89f56bfa68b2e09eb45e20bff892c50f0ecb445e1509b6b4e28",
+      "size_bytes": 3604,
+      "source_url": "https://drive.google.com/drive/folders/1N2Qx2qkFgRtpbHitl2Vh6sLVYGgqkWwn"
+    },
+    {
+      "half": null,
+      "license": "CC-BY-4.0",
+      "match_id": "128057",
+      "media_type": "application/octet-stream",
+      "modification_or_normalization": "source_immutable",
+      "relative_path": "raw/128057/128057_homography.npy",
+      "sha256": "2ecc862dac9ff818155091d4b624ce65ac5cbdd00da2c4611770a72b478c9d0f",
+      "size_bytes": 200,
+      "source_url": "https://drive.google.com/drive/folders/1N2Qx2qkFgRtpbHitl2Vh6sLVYGgqkWwn"
+    },
+    {
+      "half": null,
+      "license": "CC-BY-4.0",
+      "match_id": "128057",
+      "media_type": "application/octet-stream",
+      "modification_or_normalization": "source_immutable",
+      "relative_path": "raw/128057/128057_camera_intrinsics.npz",
+      "sha256": "1ad3071516e4993969512f0da57f81c7ddc1a2f5293cb1a4d37bc5f82f96977a",
+      "size_bytes": 1996,
+      "source_url": "https://drive.google.com/drive/folders/1N2Qx2qkFgRtpbHitl2Vh6sLVYGgqkWwn"
+    },
+    {
+      "half": null,
+      "license": "CC-BY-4.0",
+      "match_id": "128057",
+      "media_type": "application/octet-stream",
+      "modification_or_normalization": "source_immutable",
+      "relative_path": "raw/128057/128057_padding_info.csv",
+      "sha256": "fdd5a82c6042ec035eadb2ebc1f1e5f3b983c9f0135bca91db15c0b12fcc184a",
+      "size_bytes": 154,
+      "source_url": "https://drive.google.com/drive/folders/1N2Qx2qkFgRtpbHitl2Vh6sLVYGgqkWwn"
+    },
+    {
+      "half": null,
+      "license": "CC-BY-4.0",
+      "match_id": "128057",
+      "media_type": "text/plain",
+      "modification_or_normalization": "source_immutable",
+      "relative_path": "license/LICENSE-DATA",
+      "sha256": "35a20f5f925dcd821c3d002976a6b2758132227ac2d2440ddbd05edc99848711",
+      "size_bytes": 1686,
+      "source_url": "https://drive.google.com/drive/folders/1N2Qx2qkFgRtpbHitl2Vh6sLVYGgqkWwn"
+    },
+    {
+      "half": null,
+      "license": "CC-BY-4.0",
+      "match_id": "128057",
+      "media_type": "text/plain",
+      "modification_or_normalization": "source_immutable",
+      "relative_path": "license/ATTRIBUTION.txt",
+      "sha256": "b36c7e651089403d48f0c01cb863ae2b5514d91bb9dfaa0c9c29806b68e0b0e2",
+      "size_bytes": 454,
+      "source_url": "https://drive.google.com/drive/folders/1N2Qx2qkFgRtpbHitl2Vh6sLVYGgqkWwn"
+    }
+  ],
+  "hf_status": "401_at_access_time",
+  "license": "CC-BY-4.0",
+  "selected_match_id": "128057",
+  "source": "official_google_drive_mirror",
+  "videos_status": "pending_drive_rate_limit",
+  "written_at_utc": "2026-07-24T17:10:43.849761+00:00"
+}

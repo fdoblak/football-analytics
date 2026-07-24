@@ -1,0 +1,19 @@
+"""Stage 16 real-match acceptance: SoccerTrack v2 GT adapters and evaluation."""
+
+from football_analytics.acceptance.contracts import (
+    CAMERA_DOMAIN_PANORAMIC,
+    EXTERNAL_CC_BY_REFERENCE_GT,
+    EXTERNAL_REFERENCE_CONFIRMATION,
+    NAMESPACE_EVALUATION,
+    NAMESPACE_PREDICTIONS,
+    NAMESPACE_REFERENCE_GT,
+)
+
+__all__ = [
+    "CAMERA_DOMAIN_PANORAMIC",
+    "EXTERNAL_CC_BY_REFERENCE_GT",
+    "EXTERNAL_REFERENCE_CONFIRMATION",
+    "NAMESPACE_EVALUATION",
+    "NAMESPACE_PREDICTIONS",
+    "NAMESPACE_REFERENCE_GT",
+]

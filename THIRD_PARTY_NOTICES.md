@@ -37,3 +37,18 @@ LICENSE paths and `review_required` gaps (missing LICENSE files).
 Until compliance review completes for copyleft components, treat GPL-licensed trees as
 **isolated reference or subprocess** candidates; do not casually merge their source into
 this project's distribution boundary.
+
+## SoccerTrack v2 (Stage 16 acceptance dataset)
+
+| Name | Source | Pin / revision | Data license | Code license | Notes |
+|---|---|---|---|---|---|
+| SoccerTrack v2 | https://atomscott.github.io/SoccerTrack-v2/ | external repo commit `3ee38e481aab9de0f1d099c1cdde15302eb63f49` | **CC BY 4.0** (`LICENSE-DATA`) | MIT (`LICENSE`) | Official HF dataset URL returned 401 at Stage 16 access time; official Google Drive mirror `1N2Qx2qkFgRtpbHitl2Vh6sLVYGgqkWwn` used for match `128057` only |
+
+**Attribution (required by CC BY 4.0):**
+
+SoccerTrack v2 — Atom Scott, Ikuma Uchida, Kento Kuroda, Yufi Kim, Keisuke Fujii — CC BY 4.0 —
+https://atomscott.github.io/SoccerTrack-v2/ — https://creativecommons.org/licenses/by/4.0/ —
+Paper: https://arxiv.org/abs/2508.01802
+
+Dataset is university-level amateur matches with informed consent; no player names; jersey-number identification only. Project-generated analysis is **not** official Opta data.
+

@@ -1,0 +1,86 @@
+{
+  "tolerance_ms": 1000,
+  "tp": 0,
+  "fp": 0,
+  "fn": 37,
+  "precision": null,
+  "recall": 0.0,
+  "mean_abs_timing_error_ms": null,
+  "target_attribution_accuracy": null,
+  "per_label": {
+    "Ball Player Block": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    "Cross": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 2,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    "Drive": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 14,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    "Free Kick": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    "High Pass": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    "Out": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 2,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    "Pass": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 12,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    "Player Successful Tackle": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 4,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    }
+  },
+  "not_evaluable_outcomes": [
+    "pass_accuracy",
+    "duel_win_rate",
+    "clearance_outcome",
+    "recovery_turnover_outcome"
+  ],
+  "partition": "held_out_half2",
+  "n_reference_target_events": 37,
+  "n_tuning_target_events": 38,
+  "note": "Predictions empty until panoramic video pipeline completes; metrics reflect FN until then"
+}

@@ -1,8 +1,8 @@
 schema_version: 1
-updated_at: "2026-07-22T17:20:00+03:00"
+updated_at: "2026-07-24T19:00:00+03:00"
 notes: >
-  Stage 1C dataset registry. No datasets were downloaded in this stage.
-  Demo MP4s inside cloned repos are NOT registered as project datasets.
+  Stage 1C dataset registry extended in Stage 16 with SoccerTrack v2 single-match
+  acceptance entry. Demo MP4s inside cloned repos are NOT registered as project datasets.
   Broadcast SoccerNet video access must not be generalized to all SoccerNet tasks.
 
 datasets:
@@ -191,3 +191,30 @@ datasets:
     last_verified: "2026-07-22"
     planned_stage: MVP-3
     notes: "sn-teamspotting reference. Not downloaded; HF/GD checkpoints previously noted as external."
+
+  - id: soccertrack_v2_single_match_acceptance
+    display_name: SoccerTrack v2 single-match acceptance (128057)
+    task: real_match_acceptance
+    status: available
+    local_path: /home/fdoblak/football_data/datasets/soccertrack_v2/source
+    source: official SoccerTrack v2
+    source_url: https://huggingface.co/datasets/atomscott/soccertrack-v2
+    version: "v2"
+    modalities: [video, gsr, bas, calibration]
+    splits: [match_128057_half1_tuning, match_128057_half2_held_out]
+    annotation_format: soccertrack_v2_coco_gsr_and_bas_actions
+    license: CC-BY-4.0
+    license_status: approved
+    access_level: public
+    nda_required: false
+    credentials_required: false
+    redistribution_allowed: true
+    checksum: null
+    size_bytes: null
+    last_verified: "2026-07-24"
+    planned_stage: Stage-16
+    notes: >
+      purpose: Stage 16 real-match acceptance; production_input: false; acceptance_dataset: true;
+      selected_match_id: 128057; official mirror used when HF returned 401 at access time
+      (Google Drive folder 1N2Qx2qkFgRtpbHitl2Vh6sLVYGgqkWwn); camera_domain panoramic_full_pitch;
+      held-out secret test matches 117099/117100 were not selected.

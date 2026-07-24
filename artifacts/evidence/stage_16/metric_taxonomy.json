@@ -1,0 +1,86 @@
+[
+  {
+    "metric": "broadcast_shot_segmentation",
+    "evaluability": "not_evaluable"
+  },
+  {
+    "metric": "clearance_outcome",
+    "evaluability": "not_evaluable"
+  },
+  {
+    "metric": "detection_map",
+    "evaluability": "not_evaluable"
+  },
+  {
+    "metric": "drive_events",
+    "evaluability": "evaluated_against_external_gt"
+  },
+  {
+    "metric": "duel_win_rate",
+    "evaluability": "not_evaluable"
+  },
+  {
+    "metric": "header_events",
+    "evaluability": "evaluated_against_external_gt"
+  },
+  {
+    "metric": "heatmap",
+    "evaluability": "pipeline_derived_not_directly_gt_supported"
+  },
+  {
+    "metric": "high_pass_events",
+    "evaluability": "evaluated_against_external_gt"
+  },
+  {
+    "metric": "identity_confidence",
+    "evaluability": "manual_review_required"
+  },
+  {
+    "metric": "measured_distance",
+    "evaluability": "pipeline_derived_not_directly_gt_supported"
+  },
+  {
+    "metric": "pass_accuracy",
+    "evaluability": "not_evaluable"
+  },
+  {
+    "metric": "pass_events",
+    "evaluability": "evaluated_against_external_gt"
+  },
+  {
+    "metric": "pitch_coordinate_error",
+    "evaluability": "evaluated_against_external_gt"
+  },
+  {
+    "metric": "recovery_turnover_outcome",
+    "evaluability": "not_evaluable"
+  },
+  {
+    "metric": "role_team_jersey_agreement",
+    "evaluability": "evaluated_against_external_gt"
+  },
+  {
+    "metric": "speed_distribution_error",
+    "evaluability": "pipeline_derived_not_directly_gt_supported"
+  },
+  {
+    "metric": "sprint_count",
+    "evaluability": "pipeline_derived_not_directly_gt_supported"
+  },
+  {
+    "metric": "tackle_events",
+    "evaluability": "evaluated_against_external_gt"
+  },
+  {
+    "metric": "track_continuity",
+    "evaluability": "evaluated_against_external_gt"
+  },
+  {
+    "metric": "trajectory_distance_error",
+    "evaluability": "evaluated_against_external_gt"
+  },
+  {
+    "metric": "visibility_coverage",
+    "evaluability": "evaluated_against_external_gt"
+  }
+]

@@ -1,0 +1,6 @@
+{
+  "camera_domain": "panoramic_full_pitch",
+  "broadcast_acceptance": "not_covered_by_this_dataset",
+  "full_pitch_tracking_acceptance": "covered",
+  "finding": "SoccerTrack v2 provides panoramic full-pitch video, not classic TV broadcast. Shot/camera/replay broadcast modules are not validated by this dataset; do not invent broadcast cuts from continuous panorama."
+}

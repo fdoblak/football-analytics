@@ -1,0 +1,19 @@
+{
+  "annotation_provenance": "external_cc_by_reference_gt",
+  "match_id": "128057",
+  "n_events": 1932,
+  "label_counts": {
+    "Pass": 846,
+    "High Pass": 100,
+    "Out": 74,
+    "Throw In": 31,
+    "Drive": 750,
+    "Player Successful Tackle": 27,
+    "Cross": 29,
+    "Ball Player Block": 25,
+    "Free Kick": 22,
+    "Header": 1,
+    "Shot": 22,
+    "Goal": 5
+  }
+}

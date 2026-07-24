@@ -1,0 +1,440 @@
+{
+  "match_id": "128057",
+  "selected_player_id": "506469",
+  "team_side": "left",
+  "jersey_number": 24,
+  "display_name": "SoccerTrack v2 Match 128057 / Team left / Jersey 24",
+  "confirmation_source": "external_reference_confirmation",
+  "reason": "Deterministic outfield selection via sampled GSR attribute scan + BAS activity; tie-break player_id",
+  "candidates": [
+    {
+      "player_id": "506469",
+      "role": "player",
+      "jersey": "24",
+      "team": "left",
+      "frames_sampled": 7243,
+      "bas": 75,
+      "h1": 3126,
+      "h2": 4117
+    },
+    {
+      "player_id": "506459",
+      "role": "player",
+      "jersey": "15",
+      "team": "left",
+      "frames_sampled": 7241,
+      "bas": 71,
+      "h1": 3126,
+      "h2": 4115
+    },
+    {
+      "player_id": "506465",
+      "role": "player",
+      "jersey": "13",
+      "team": "left",
+      "frames_sampled": 7240,
+      "bas": 88,
+      "h1": 3125,
+      "h2": 4115
+    },
+    {
+      "player_id": "506461",
+      "role": "player",
+      "jersey": "8",
+      "team": "left",
+      "frames_sampled": 7238,
+      "bas": 64,
+      "h1": 3123,
+      "h2": 4115
+    },
+    {
+      "player_id": "506463",
+      "role": "player",
+      "jersey": "9",
+      "team": "left",
+      "frames_sampled": 7235,
+      "bas": 48,
+      "h1": 3122,
+      "h2": 4113
+    },
+    {
+      "player_id": "506464",
+      "role": "player",
+      "jersey": "14",
+      "team": "right",
+      "frames_sampled": 6565,
+      "bas": 79,
+      "h1": 3641,
+      "h2": 2924
+    },
+    {
+      "player_id": "506462",
+      "role": "player",
+      "jersey": "43",
+      "team": "right",
+      "frames_sampled": 6563,
+      "bas": 88,
+      "h1": 3642,
+      "h2": 2921
+    },
+    {
+      "player_id": "506460",
+      "role": "player",
+      "jersey": "17",
+      "team": "right",
+      "frames_sampled": 6563,
+      "bas": 79,
+      "h1": 3641,
+      "h2": 2922
+    },
+    {
+      "player_id": "506466",
+      "role": "player",
+      "jersey": "11",
+      "team": "right",
+      "frames_sampled": 6560,
+      "bas": 88,
+      "h1": 3639,
+      "h2": 2921
+    },
+    {
+      "player_id": "506468",
+      "role": "player",
+      "jersey": "38",
+      "team": "right",
+      "frames_sampled": 6560,
+      "bas": 44,
+      "h1": 3638,
+      "h2": 2922
+    },
+    {
+      "player_id": "506479",
+      "role": "player",
+      "jersey": "52",
+      "team": "right",
+      "frames_sampled": 2827,
+      "bas": 24,
+      "h1": 845,
+      "h2": 1982
+    }
+  ],
+  "excluded": [
+    {
+      "player_id": "506489",
+      "role": "player",
+      "jersey": "77",
+      "team": "left",
+      "frames_sampled": 3638,
+      "bas": 71,
+      "h1": 3638,
+      "h2": 0,
+      "reasons": [
+        "half"
+      ]
+    },
+    {
+      "player_id": "506485",
+      "role": "player",
+      "jersey": "99",
+      "team": "left",
+      "frames_sampled": 3643,
+      "bas": 56,
+      "h1": 3643,
+      "h2": 0,
+      "reasons": [
+        "half"
+      ]
+    },
+    {
+      "player_id": "506482",
+      "role": "player",
+      "jersey": "76",
+      "team": "left",
+      "frames_sampled": 3641,
+      "bas": 18,
+      "h1": 3641,
+      "h2": 0,
+      "reasons": [
+        "half"
+      ]
+    },
+    {
+      "player_id": "506475",
+      "role": "player",
+      "jersey": "45",
+      "team": "left",
+      "frames_sampled": 3640,
+      "bas": 28,
+      "h1": 3640,
+      "h2": 0,
+      "reasons": [
+        "half"
+      ]
+    },
+    {
+      "player_id": "506470",
+      "role": "player",
+      "jersey": "64",
+      "team": "left",
+      "frames_sampled": 3641,
+      "bas": 31,
+      "h1": 3641,
+      "h2": 0,
+      "reasons": [
+        "half"
+      ]
+    },
+    {
+      "player_id": "506492",
+      "role": "player",
+      "jersey": "98",
+      "team": "left",
+      "frames_sampled": 3635,
+      "bas": 97,
+      "h1": 3635,
+      "h2": 0,
+      "reasons": [
+        "half"
+      ]
+    },
+    {
+      "player_id": "506491",
+      "role": "player",
+      "jersey": "68",
+      "team": "left",
+      "frames_sampled": 3129,
+      "bas": 86,
+      "h1": 3129,
+      "h2": 0,
+      "reasons": [
+        "half"
+      ]
+    },
+    {
+      "player_id": "506487",
+      "role": "player",
+      "jersey": "26",
+      "team": "left",
+      "frames_sampled": 3124,
+      "bas": 44,
+      "h1": 3124,
+      "h2": 0,
+      "reasons": [
+        "half"
+      ]
+    },
+    {
+      "player_id": "506483",
+      "role": "goalkeeper",
+      "jersey": "1",
+      "team": "left",
+      "frames_sampled": 3125,
+      "bas": 57,
+      "h1": 3125,
+      "h2": 0,
+      "reasons": [
+        "role",
+        "half"
+      ]
+    },
+    {
+      "player_id": "506478",
+      "role": "player",
+      "jersey": "30",
+      "team": "left",
+      "frames_sampled": 2280,
+      "bas": 23,
+      "h1": 2280,
+      "h2": 0,
+      "reasons": [
+        "half"
+      ]
+    },
+    {
+      "player_id": "506474",
+      "role": "player",
+      "jersey": "57",
+      "team": "left",
+      "frames_sampled": 3125,
+      "bas": 50,
+      "h1": 3125,
+      "h2": 0,
+      "reasons": [
+        "half"
+      ]
+    },
+    {
+      "player_id": "506467",
+      "role": "goalkeeper",
+      "jersey": "99",
+      "team": "left",
+      "frames_sampled": 7245,
+      "bas": 90,
+      "h1": 3128,
+      "h2": 4117,
+      "reasons": [
+        "role"
+      ]
+    },
+    {
+      "player_id": "50647",
+      "role": "player",
+      "jersey": "30",
+      "team": "left",
+      "frames_sampled": 1,
+      "bas": 0,
+      "h1": 1,
+      "h2": 0,
+      "reasons": [
+        "half",
+        "coverage"
+      ]
+    },
+    {
+      "player_id": "506486",
+      "role": "player",
+      "jersey": "90",
+      "team": "right",
+      "frames_sampled": 4118,
+      "bas": 60,
+      "h1": 0,
+      "h2": 4118,
+      "reasons": [
+        "half"
+      ]
+    },
+    {
+      "player_id": "506481",
+      "role": "goalkeeper",
+      "jersey": "44",
+      "team": "right",
+      "frames_sampled": 4117,
+      "bas": 67,
+      "h1": 0,
+      "h2": 4117,
+      "reasons": [
+        "role",
+        "half"
+      ]
+    },
+    {
+      "player_id": "506473",
+      "role": "player",
+      "jersey": "41",
+      "team": "right",
+      "frames_sampled": 3654,
+      "bas": 53,
+      "h1": 0,
+      "h2": 3654,
+      "reasons": [
+        "half"
+      ]
+    },
+    {
+      "player_id": "506490",
+      "role": "player",
+      "jersey": "78",
+      "team": "right",
+      "frames_sampled": 4117,
+      "bas": 68,
+      "h1": 0,
+      "h2": 4117,
+      "reasons": [
+        "half"
+      ]
+    },
+    {
+      "player_id": "231441",
+      "role": "player",
+      "jersey": "66",
+      "team": "right",
+      "frames_sampled": 2920,
+      "bas": 40,
+      "h1": 0,
+      "h2": 2920,
+      "reasons": [
+        "half"
+      ]
+    },
+    {
+      "player_id": "506488",
+      "role": "player",
+      "jersey": "16",
+      "team": "right",
+      "frames_sampled": 2920,
+      "bas": 62,
+      "h1": 0,
+      "h2": 2920,
+      "reasons": [
+        "half"
+      ]
+    },
+    {
+      "player_id": "506484",
+      "role": "player",
+      "jersey": "53",
+      "team": "right",
+      "frames_sampled": 2922,
+      "bas": 16,
+      "h1": 0,
+      "h2": 2922,
+      "reasons": [
+        "half"
+      ]
+    },
+    {
+      "player_id": "506480",
+      "role": "player",
+      "jersey": "95",
+      "team": "right",
+      "frames_sampled": 2923,
+      "bas": 85,
+      "h1": 0,
+      "h2": 2923,
+      "reasons": [
+        "half"
+      ]
+    },
+    {
+      "player_id": "506476",
+      "role": "player",
+      "jersey": "81",
+      "team": "right",
+      "frames_sampled": 3386,
+      "bas": 31,
+      "h1": 0,
+      "h2": 3386,
+      "reasons": [
+        "half"
+      ]
+    },
+    {
+      "player_id": "506471",
+      "role": "player",
+      "jersey": "63",
+      "team": "right",
+      "frames_sampled": 2921,
+      "bas": 28,
+      "h1": 0,
+      "h2": 2921,
+      "reasons": [
+        "half"
+      ]
+    },
+    {
+      "player_id": "506472",
+      "role": "player",
+      "jersey": "88",
+      "team": "right",
+      "frames_sampled": 2133,
+      "bas": 14,
+      "h1": 0,
+      "h2": 2133,
+      "reasons": [
+        "half"
+      ]
+    }
+  ],
+  "partition_note": "half1=tuning; half2=held_out",
+  "selection_method": "regex_attribute_sample_stride_20"
+}

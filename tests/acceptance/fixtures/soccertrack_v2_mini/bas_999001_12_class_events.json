@@ -1,0 +1,10 @@
+{
+  "match_id": "999001",
+  "fps": 25.0,
+  "actions": [
+    {"gameTime": "1 - 0:02", "label": "PASS", "position": "2000", "team": "left", "player_id": "1001"},
+    {"gameTime": "1 - 0:10", "label": "DRIVE", "position": "10000", "team": "left", "player_id": "1001"},
+    {"gameTime": "2 - 1:00", "label": "PASS", "position": "60000", "team": "left", "player_id": "1001"},
+    {"gameTime": "1 - 0:05", "label": "SHOT", "position": "5000", "team": "right", "player_id": "2002"}
+  ]
+}

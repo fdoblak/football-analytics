@@ -1,0 +1,27 @@
+{
+  "match_id": "128057",
+  "halves": [
+    {
+      "half": 1,
+      "path": "/home/fdoblak/football_data/datasets/soccertrack_v2/source/gsr/128057/128057_1st.json",
+      "size_bytes": 2712325392,
+      "info": {
+        "seq_length": 67650,
+        "frame_rate": 25,
+        "name": "CLPD-128057"
+      },
+      "annotation_provenance": "external_cc_by_reference_gt"
+    },
+    {
+      "half": 2,
+      "path": "/home/fdoblak/football_data/datasets/soccertrack_v2/source/gsr/128057/128057_2nd.json",
+      "size_bytes": 2820551374,
+      "info": {
+        "seq_length": 70375,
+        "frame_rate": 25,
+        "name": "CLPD-128057"
+      },
+      "annotation_provenance": "external_cc_by_reference_gt"
+    }
+  ]
+}

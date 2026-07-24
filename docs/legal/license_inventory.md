@@ -54,3 +54,12 @@ Exact commits for every row are authoritative in `external_repos.lock.yaml` (`re
 ## Dataset licenses
 
 SoccerNet task datasets are **not** covered by the code LICENSE rows above. See `docs/data/data_access_matrix.md`.
+
+### SoccerTrack v2 (Stage 16 acceptance)
+
+| Dataset | License | Source | Selected match | Notes |
+|---|---|---|---|---|
+| SoccerTrack v2 | CC BY 4.0 | Official project + Drive mirror; HF URL 401 at access time | `128057` | Attribution required; panoramic domain; not Opta |
+
+Attribution: Atom Scott, Ikuma Uchida, Kento Kuroda, Yufi Kim, Keisuke Fujii — https://atomscott.github.io/SoccerTrack-v2/ — https://creativecommons.org/licenses/by/4.0/
+
