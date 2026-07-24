@@ -196,3 +196,13 @@ third_party_repositories:
     integration: format_reference_readonly
     validation_status: locked_stage_16
     dirty: false
+  teamtrack:
+    path: /home/fdoblak/projects/third-party/TeamTrack
+    remote: https://github.com/AtomScott/TeamTrack.git
+    branch: main
+    tag: null
+    describe: null
+    commit: 748a77db7d631818b9736d3af456e65346c466e5
+    integration: format_reference_readonly
+    validation_status: locked_stage_16_r2
+    dirty: false

@@ -52,3 +52,13 @@ Paper: https://arxiv.org/abs/2508.01802
 
 Dataset is university-level amateur matches with informed consent; no player names; jersey-number identification only. Project-generated analysis is **not** official Opta data.
 
+## TeamTrack (Stage 16-R2 real-video pilot dataset)
+
+| Name | Source | Pin / revision | Data license | Code license | Notes |
+|---|---|---|---|---|---|
+| TeamTrack | https://atomscott.github.io/TeamTrack/ | external repo commit `748a77db7d631818b9736d3af456e65346c466e5`; Kaggle dataset version 6 | **MIT** (Kaggle `licenseNameNullable`) | MIT (`LICENSE`) | Official Drive mirror used for single `soccer_side` sequence `F_20200220_1_0330_0360` after Kaggle CLI auth absent |
+
+**Attribution (MIT):** TeamTrack — Atom Scott et al. — MIT — https://www.kaggle.com/datasets/atomscott/teamtrack — https://atomscott.github.io/TeamTrack/
+
+Isolated from SoccerTrack v2 namespaces; anonymous track IDs only (no jersey invention). Project-generated pilot analysis is **not** official Opta data.
+

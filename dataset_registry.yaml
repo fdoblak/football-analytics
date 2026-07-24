@@ -218,3 +218,31 @@ datasets:
       selected_match_id: 128057; official mirror used when HF returned 401 at access time
       (Google Drive folder 1N2Qx2qkFgRtpbHitl2Vh6sLVYGgqkWwn); camera_domain panoramic_full_pitch;
       held-out secret test matches 117099/117100 were not selected.
+      Stage 16-R2: panoramic MP4 still unavailable (HF 401 / Drive quota); see teamtrack_soccer_side_pilot.
+
+  - id: teamtrack_soccer_side_pilot
+    display_name: TeamTrack soccer_side real-video pilot (F_20200220_1_0330_0360)
+    task: real_video_tracking_pilot
+    status: available
+    local_path: /home/fdoblak/football_data/datasets/teamtrack/source
+    source: official TeamTrack
+    source_url: https://www.kaggle.com/datasets/atomscott/teamtrack
+    version: "6"
+    modalities: [video, mot_gt]
+    splits: [soccer_side_train_F_20200220_1_0330_0360]
+    annotation_format: mot_challenge_gt_txt
+    license: MIT
+    license_status: approved
+    access_level: public
+    nda_required: false
+    credentials_required: false
+    redistribution_allowed: true
+    checksum: null
+    size_bytes: 13645163
+    last_verified: "2026-07-24"
+    planned_stage: Stage-16-R2
+    notes: >
+      purpose: Stage 16-R2 licensed real-video tracking pilot after SoccerTrack v2 video quota block;
+      production_input: false; acceptance_dataset: pilot_only; full event acceptance: not_covered;
+      anonymous track target only (no jersey invention); isolated from soccertrack_v2 namespaces;
+      downloaded via official Google Drive mirror (Kaggle CLI auth absent).
