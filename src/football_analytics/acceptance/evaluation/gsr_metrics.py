@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import math
-from typing import Any, Iterable, Optional
+from collections.abc import Iterable
+from typing import Any
 
 
 def _dist(ax: float, ay: float, bx: float, by: float) -> float:
@@ -65,10 +66,10 @@ def compare_trajectories(
 
 def jersey_team_agreement(
     *,
-    predicted_jersey: Optional[int],
-    predicted_team: Optional[str],
-    reference_jersey: Optional[int],
-    reference_team: Optional[str],
+    predicted_jersey: int | None,
+    predicted_team: str | None,
+    reference_jersey: int | None,
+    reference_team: str | None,
 ) -> dict[str, Any]:
     return {
         "jersey_agree": (

@@ -5,8 +5,7 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Optional
-
+from typing import Any
 
 ATTRIBUTION_FOOTER = (
     "Source: SoccerTrack v2 — CC BY 4.0\n"

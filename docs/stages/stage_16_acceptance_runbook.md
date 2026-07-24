@@ -1,6 +1,8 @@
 # Stage 16 acceptance runbook — Real-match validation
 
-**Status:** NOT STARTED — wait for an explicit user prompt.
+**Status:** NO-GO — video download blocked by official Drive quota (annotations retained).
+
+See `artifacts/evidence/stage_16/STAGE16_COMPLETION.md`.
 
 This runbook is documentation only. Stage 15 closed all implementation stages.
 Do **not** invent Opta accuracy, legal clearance, `/mnt/d` readiness, or green remote CI.

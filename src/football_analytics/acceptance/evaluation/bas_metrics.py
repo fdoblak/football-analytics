@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from typing import Any, Iterable, Optional
+from collections.abc import Iterable
+from typing import Any
 
 
 def _key(label: str, half: int, t_ms: int) -> tuple[str, int, int]:
@@ -15,7 +16,7 @@ def match_events(
     predicted: Iterable[dict[str, Any]],
     reference: Iterable[dict[str, Any]],
     tolerance_ms: int = 1000,
-    label_whitelist: Optional[set[str]] = None,
+    label_whitelist: set[str] | None = None,
 ) -> dict[str, Any]:
     """Greedy temporal matching per label within tolerance_ms."""
     refs = [dict(r) for r in reference]

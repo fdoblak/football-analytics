@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Optional
+from typing import Any
 
 
 @dataclass(frozen=True)
@@ -16,11 +16,11 @@ class GsrPlayerObservation:
     track_id: int
     player_id: str
     role: str
-    jersey_number: Optional[int]
-    team_side: Optional[str]
+    jersey_number: int | None
+    team_side: str | None
     x_m: float
     y_m: float
-    bbox_image: Optional[tuple[float, float, float, float]] = None
+    bbox_image: tuple[float, float, float, float] | None = None
 
 
 @dataclass(frozen=True)
@@ -31,9 +31,9 @@ class BasEvent:
     clock: str
     t_ms: int
     label: str
-    team: Optional[str]
-    player_id: Optional[str]
-    visibility: Optional[str] = None
+    team: str | None
+    player_id: str | None
+    visibility: str | None = None
 
 
 @dataclass(frozen=True)
@@ -41,14 +41,14 @@ class VideoHalfMeta:
     match_id: str
     half: int
     path: str
-    width: Optional[int]
-    height: Optional[int]
-    fps: Optional[float]
-    duration_s: Optional[float]
-    frame_count: Optional[int]
+    width: int | None
+    height: int | None
+    fps: float | None
+    duration_s: float | None
+    frame_count: int | None
 
 
-def maybe_int(value: Any) -> Optional[int]:
+def maybe_int(value: Any) -> int | None:
     if value is None or value == "":
         return None
     try:
@@ -57,7 +57,7 @@ def maybe_int(value: Any) -> Optional[int]:
         return None
 
 
-def maybe_str(value: Any) -> Optional[str]:
+def maybe_str(value: Any) -> str | None:
     if value is None:
         return None
     text = str(value).strip()

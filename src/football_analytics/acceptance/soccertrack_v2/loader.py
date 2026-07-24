@@ -6,7 +6,7 @@ import json
 import subprocess
 from collections.abc import Iterator
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 from football_analytics.acceptance.contracts import FPS_DEFAULT, normalize_bas_label
 from football_analytics.acceptance.soccertrack_v2.formats import (
@@ -52,14 +52,14 @@ def _image_id_to_frame_index(image_id: str | int) -> int:
 
 def _iter_json_array_after_key(path: Path, key: str) -> Iterator[Any]:
     """Yield objects from a top-level JSON array field without loading the file."""
-    needle = f'"{key}"'.encode("utf-8")
+    needle = f'"{key}"'.encode()
     with path.open("rb") as handle:
         # locate key
         chunk_size = 8 * 1024 * 1024
         overlap = len(needle) + 8
         prev = b""
         offset = 0
-        key_at: Optional[int] = None
+        key_at: int | None = None
         while True:
             data = handle.read(chunk_size)
             if not data:

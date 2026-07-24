@@ -6,7 +6,7 @@ import hashlib
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 
 def sha256_file(path: Path, *, chunk: int = 1024 * 1024) -> str:
@@ -27,7 +27,7 @@ def file_record(
     source_url: str,
     license_id: str,
     match_id: str,
-    half: Optional[int],
+    half: int | None,
     media_type: str,
     normalization_status: str = "source_immutable",
 ) -> dict[str, Any]:

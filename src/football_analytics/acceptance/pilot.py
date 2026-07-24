@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import subprocess
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 from football_analytics.acceptance.download_manifest import sha256_file
 
@@ -33,7 +33,7 @@ def extract_pilot_clip(
     output_path: Path,
     start_s: float,
     duration_s: float,
-    receipt_path: Optional[Path] = None,
+    receipt_path: Path | None = None,
 ) -> dict[str, Any]:
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)

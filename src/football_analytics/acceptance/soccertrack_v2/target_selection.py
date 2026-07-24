@@ -6,7 +6,7 @@ import json
 from collections import defaultdict
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 from football_analytics.acceptance.contracts import (
     EXTERNAL_REFERENCE_CONFIRMATION,
@@ -42,7 +42,7 @@ class PlayerCoverageStats:
         return max(self.role_counts.items(), key=lambda kv: (kv[1], kv[0]))[0]
 
     @property
-    def dominant_jersey(self) -> Optional[int]:
+    def dominant_jersey(self) -> int | None:
         usable = {k: v for k, v in self.jersey_counts.items() if k not in ("None", "")}
         if not usable:
             return None
@@ -50,7 +50,7 @@ class PlayerCoverageStats:
         return int(key)
 
     @property
-    def dominant_team(self) -> Optional[str]:
+    def dominant_team(self) -> str | None:
         usable = {k: v for k, v in self.team_counts.items() if k not in ("None", "")}
         if not usable:
             return None
