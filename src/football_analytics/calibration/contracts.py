@@ -32,7 +32,7 @@ JSON_SCHEMA_NAMES: tuple[str, ...] = (
     "calibration_evaluation",
 )
 
-EXPECTED_REGISTRY_CONTRACT_COUNT = 27
+EXPECTED_REGISTRY_CONTRACT_COUNT = 30
 
 
 def load_calibration_contract(name: str, version: int = 1, *, registry: Any = None) -> ContractSpec:

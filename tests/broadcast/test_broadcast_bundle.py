@@ -38,7 +38,7 @@ class BroadcastBundleTests(unittest.TestCase):
         self.assertEqual(vr.status, "PASS", vr.errors)
 
     def test_02_registry_has_fifteen(self) -> None:
-        self.assertEqual(len(list_contracts(registry=self.reg)), 27)
+        self.assertEqual(len(list_contracts(registry=self.reg)), 30)
 
     def test_03_bundle_with_broadcast_tables(self) -> None:
         base = build_synthetic_bundle(self.run_id)

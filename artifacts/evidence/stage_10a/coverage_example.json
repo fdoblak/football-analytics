@@ -1,0 +1,17 @@
+{
+  "coverage": {
+    "ambiguous_ball_us": 100000,
+    "ball_observed_us": 800000,
+    "calibration_valid_us": 900000,
+    "contested_us": 50000,
+    "human_observed_us": 1000000,
+    "joint_coverage_ratio": 0.5,
+    "joint_observed_us": 500000,
+    "low_joint_coverage_is_not_evaluable": true,
+    "missing_ball_is_not_no_possession": true,
+    "not_observed_us": 200000,
+    "playable_us": 950000,
+    "target_confirmed_us": 700000
+  },
+  "schema_version": 1
+}

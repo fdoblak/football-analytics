@@ -1,0 +1,104 @@
+schema_version: 1
+policy_version: 1
+config_version: 1
+
+stage: "10A"
+contracts_only: true
+no_real_interaction_inference: true
+
+result_levels:
+  - candidate
+  - provisional
+  - confirmed
+  - contested
+  - unknown
+  - not_evaluable
+  - rejected
+
+automatic_baseline:
+  max_state: provisional
+  confirmed_requires: [strong_multi_evidence, scoped_manual_review]
+  nearest_player_is_not_possession: true
+  single_frame_proximity_is_not_contact: true
+  proximity_is_not_event: true
+  contact_is_not_controlled_possession: true
+  possession_transition_is_not_completed_pass: true
+  ball_leaving_is_not_ball_loss: true
+  approaching_opponent_is_not_duel: true
+  penalty_presence_is_not_box_touch: true
+  ball_near_head_is_not_aerial_duel: true
+  direction_change_is_not_dribble: true
+
+eligibility:
+  require_video_time_us: true
+  interval_semantics: half_open_start_end
+  distinguish:
+    - observed_vs_predicted_interpolated
+    - image_space_vs_pitch_space
+    - grounded_vs_airborne_vs_unknown
+    - primary_vs_ambiguous_vs_missing_ball
+    - confirmed_vs_candidate_target
+    - playable_vs_replay_vs_non_playable
+    - valid_vs_invalid_calibration
+  pitch_distance_requires:
+    calibration_valid: true
+    ball_air_state_known_grounded: true
+  unknown_air_state_blocks_pitch_contact_evidence: true
+  missing_ball_is_not_no_possession: true
+  predicted_human_ineligible_as_sole_evidence: true
+  predicted_ball_ineligible_as_sole_evidence: true
+
+lifecycle:
+  terminate_on:
+    - shot_cut
+    - replay
+    - non_playable
+    - ball_loss_signal
+    - hard_gap
+    - track_termination
+  hard_gap_no_possession_carry: true
+  multi_owner_same_time: contested_or_ambiguous
+  owner_change_requires_evidence: true
+  source_observations_immutable: true
+  state_transitions_auditable: true
+  revocation_append_only: true
+  cross_run_video_scope_hard_fail: true
+
+coverage:
+  components:
+    - human_observed
+    - ball_observed
+    - joint_observed
+    - calibration
+    - playable
+    - target_confirmed
+    - ambiguous_ball
+    - contested
+    - not_observed
+  low_joint_coverage_status: not_evaluable
+
+forbidden_outputs:
+  pass_count: true
+  dribble_count: true
+  duel_count: true
+  aerial_duel_count: true
+  turnover_count: true
+  recovery_count: true
+  box_touch_count: true
+  real_possession_inference: true
+  automatic_confirmed_possession: true
+  opta_or_accuracy_claim: true
+
+review:
+  manual_review_queue_enabled: true
+  confirmed_via_manual_review_only_when_policy_allows: true
+
+safety:
+  no_real_interaction_inference: true
+  no_event_metric_computation: true
+  no_visual_commit: true
+  runtime_root: /home/fdoblak/workspace/human_ball_contract_checks
+
+notes:
+  - Stage 10A defines contracts/semantics/validators only.
+  - Stage 10B proximity/contact baseline is NOT started by this policy.

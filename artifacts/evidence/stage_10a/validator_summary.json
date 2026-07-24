@@ -1,0 +1,50 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "evaluation_status": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH",
+    "gate": "PASS — HUMAN BALL INTERACTION CONTRACTS ACTIVE",
+    "interaction_policy_fp": "2e8eeeed5e3869bce59f285d90896d9ea67380ae4cf75ec75591b93cb935e620",
+    "schema_fps": {
+      "ball_contact_candidates": "962e1566de124f1e34f72df09c91b2768cafaebffcfc7669bb73ccef153be058",
+      "calibration_segments": "9ce13ae0d771d92a66b72ec5818943f29e96ff4ac71ebf5603fb7fc9c8ab5037",
+      "calibrations": "41360b19ae034f361949a75d8e773c265f0792b2603b69f612ab5863662ac871",
+      "detections": "04ae8dd7a7e92bf7bd468db7a263e5e28258a30887d43c8f603c69d56f5c18b6",
+      "human_ball_proximity": "a8f6bf8a36402bbdb065263c24870c6ba4cc2ed37061fe7575bb472209852ebd",
+      "physical_metric_results": "aa705bb819e10e49acb71be4d54b6bf65345b9795611b909676d2f5b596dc55b",
+      "possession_hypotheses": "ab6f816a93b188841d42fe45531463ae7dd97b7842dbbdd599ee34d2a8e6f927",
+      "projected_positions": "1860638e13c101a2c4b52ecb86e31c264f1b09ee8f255b3813fb9da8325055ba",
+      "track_identity_assignments": "235e7888e13b3e1435eddc8b2c7aa0fcdcbbd2505b3e3c8b00bd51fdf09e74c0",
+      "track_lifecycle": "613cd81e4359e780c19ba6d709999963a9f528bed25245ea2236ca84027fa40d",
+      "track_observations": "9ca2f7af56e69b47ec8db8d644164c84aa7fe3a62da40e247ed6db4f2c4c5f01",
+      "track_summaries": "7b04e31d641c49e66ad06baec53e1075e2bc286b9f08f1497aa0571bf7c1c168"
+    }
+  },
+  "scenarios": {
+    "01_single_player_proximity": "PASS",
+    "02_nearest_not_possession": "PASS",
+    "03_single_frame_proximity": "PASS",
+    "04_multi_frame_candidate": "PASS",
+    "05_two_player_contested": "PASS",
+    "06_ambiguous_primary_ball": "PASS",
+    "07_missing_predicted_ball": "PASS",
+    "08_predicted_human": "PASS",
+    "09_shot_cut_replay_non_playable": "PASS",
+    "10_hard_gap": "PASS",
+    "11_airborne_unknown": "PASS",
+    "12_calibration_valid_invalid": "PASS",
+    "13_target_confirmed_provisional_revoked": "PASS",
+    "14_overlapping_possession": "PASS",
+    "15_owner_transition": "PASS",
+    "16_cross_run_video_fk": "PASS",
+    "17_penalty_not_box_touch": "PASS",
+    "18_proximity_not_pass_dribble_duel": "PASS",
+    "19_coverage_not_evaluable": "PASS",
+    "20_deterministic_fingerprint": "PASS",
+    "21_atomic_no_overwrite": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-24T11:25:40.906605Z",
+  "warnings": []
+}

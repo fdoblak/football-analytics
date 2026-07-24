@@ -1,0 +1,18 @@
+{
+  "created_at_utc": "2026-07-24T11:25:42.130224Z",
+  "entries": [
+    {
+      "append_only": true,
+      "created_at_utc": "2026-07-24T11:25:42.130216Z",
+      "current_state": "candidate",
+      "entry_id": "rev_01",
+      "requested_action": "confirm",
+      "subject_id": "poss_01",
+      "subject_type": "possession_hypothesis"
+    }
+  ],
+  "queue_id": "hbi_queue_01",
+  "run_id": "run_20260724T112541933382Z_dfb16ad55764",
+  "schema_version": 1,
+  "video_id": "video_synth_01"
+}

@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/interaction/human_ball_interaction_run_receipt.schema.json",
+  "title": "Human-ball interaction run receipt (Stage 10A)",
+  "description": "Receipt for interaction contract fixtures. Counts must be recountable; no event metrics are produced.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "receipt_id",
+    "request_id",
+    "run_id",
+    "video_id",
+    "status",
+    "interaction_policy_fingerprint",
+    "input_fingerprints",
+    "output_fingerprints",
+    "proximity_row_count",
+    "contact_candidate_count",
+    "possession_hypothesis_count",
+    "state_counts",
+    "coverage_summary",
+    "review_count",
+    "evaluation_status",
+    "event_metrics_produced",
+    "artifact_hashes",
+    "warning_codes",
+    "error_codes",
+    "created_at_utc",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "receipt_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "request_id": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "minLength": 1 },
+    "target_player_id": { "type": ["string", "null"] },
+    "status": {
+      "type": "string",
+      "enum": ["succeeded", "partial", "failed", "contract_stub"]
+    },
+    "interaction_policy_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "input_fingerprints": {
+      "type": "object",
+      "additionalProperties": { "type": ["string", "null"] }
+    },
+    "output_fingerprints": {
+      "type": "object",
+      "additionalProperties": { "type": ["string", "null"] }
+    },
+    "proximity_row_count": { "type": "integer", "minimum": 0 },
+    "contact_candidate_count": { "type": "integer", "minimum": 0 },
+    "possession_hypothesis_count": { "type": "integer", "minimum": 0 },
+    "state_counts": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "coverage_summary": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "review_count": { "type": "integer", "minimum": 0 },
+    "evaluation_status": { "type": "string", "minLength": 1 },
+    "event_metrics_produced": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pass", "dribble", "duel", "aerial", "turnover", "box_touch"],
+      "properties": {
+        "pass": { "type": "boolean", "const": false },
+        "dribble": { "type": "boolean", "const": false },
+        "duel": { "type": "boolean", "const": false },
+        "aerial": { "type": "boolean", "const": false },
+        "turnover": { "type": "boolean", "const": false },
+        "box_touch": { "type": "boolean", "const": false }
+      }
+    },
+    "artifact_hashes": {
+      "type": "object",
+      "additionalProperties": { "type": ["string", "null"] }
+    },
+    "warning_codes": { "type": "array", "items": { "type": "string" } },
+    "error_codes": { "type": "array", "items": { "type": "string" } },
+    "created_at_utc": { "type": "string", "minLength": 10 },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["stage", "label", "no_real_interaction_inference"],
+      "properties": {
+        "stage": { "type": "string" },
+        "label": { "type": "string" },
+        "notes": { "type": "string" },
+        "no_real_interaction_inference": { "type": "boolean", "const": true }
+      }
+    }
+  }
+}

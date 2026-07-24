@@ -1,0 +1,25 @@
+{
+  "analysis_windows_ref": "synthetic://analysis_windows",
+  "ball_tracks_ref": "synthetic://tracks/ball",
+  "cache_enabled": false,
+  "calibration_artifact_ref": "synthetic://calibration",
+  "created_at_utc": "2026-07-24T11:25:42.130124Z",
+  "detections_ref": "synthetic://detections",
+  "human_tracks_ref": "synthetic://tracks/human",
+  "identity_artifact_ref": "synthetic://identity",
+  "interaction_policy_fingerprint": "2e8eeeed5e3869bce59f285d90896d9ea67380ae4cf75ec75591b93cb935e620",
+  "no_overwrite": true,
+  "output_root": "/home/fdoblak/workspace/human_ball_contract_checks",
+  "projected_positions_ref": "synthetic://projected_positions",
+  "provenance": {
+    "label": "synthetic_contract_fixture",
+    "no_real_interaction_inference": true,
+    "notes": "no_real_interaction_inference",
+    "stage": "10A"
+  },
+  "request_id": "hbi_req_01",
+  "run_id": "run_20260724T112541933382Z_dfb16ad55764",
+  "schema_version": 1,
+  "target_player_id": "target_player_01",
+  "video_id": "video_synth_01"
+}

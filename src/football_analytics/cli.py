@@ -1851,6 +1851,24 @@ def cmd_physical_receipt_validate(receipt_path: Path) -> int:
     return 0
 
 
+def cmd_interaction_contracts_validate(*, keep: bool, as_json: bool) -> int:
+    """Run Stage 10A synthetic human-ball interaction contract validator."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_human_ball_interaction_contracts.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("interaction contract validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
 def cmd_physical_trajectory_prepare(
     *,
     output_dir: Path,
@@ -4146,6 +4164,19 @@ def build_parser() -> argparse.ArgumentParser:
     p_phys_pipe_val.add_argument("--keep", action="store_true")
     p_phys_pipe_val.add_argument("--json", action="store_true")
 
+    p_interaction = sub.add_parser(
+        "interaction",
+        help="Human-ball interaction / possession contracts (Stage 10A)",
+    )
+    interaction_sub = p_interaction.add_subparsers(dest="interaction_command")
+    p_int_contracts = interaction_sub.add_parser("contracts", help="Interaction contract helpers")
+    int_contracts_sub = p_int_contracts.add_subparsers(dest="interaction_contracts_command")
+    p_int_c_val = int_contracts_sub.add_parser(
+        "validate", help="Validate human-ball interaction contracts (synthetic Stage 10A)"
+    )
+    p_int_c_val.add_argument("--keep", action="store_true", help="Keep validator session dir")
+    p_int_c_val.add_argument("--json", action="store_true", help="Emit JSON report")
+
     p_cal_features = cal_sub.add_parser(
         "features", help="Pitch keypoint/line feature detection (8B)"
     )
@@ -4919,6 +4950,16 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.physical_command == "pipeline-validate":
             return cmd_physical_pipeline_validate(keep=bool(args.keep), as_json=bool(args.json))
         parser.parse_args(["physical", "--help"])
+        return 2
+    if args.command == "interaction":
+        if args.interaction_command == "contracts":
+            if args.interaction_contracts_command == "validate":
+                return cmd_interaction_contracts_validate(
+                    keep=bool(args.keep), as_json=bool(args.json)
+                )
+            parser.parse_args(["interaction", "contracts", "--help"])
+            return 2
+        parser.parse_args(["interaction", "--help"])
         return 2
     parser.print_help()
     return 2

@@ -506,8 +506,8 @@ def main(argv: list[str] | None = None) -> int:
         assert_detection_contracts_registered()
         names = list_contracts()
         result.extras["contract_count"] = len(names)
-        if len(names) != 27:
-            result.err(f"expected 27 contracts, got {len(names)}", config=True)
+        if len(names) != 30:
+            result.err(f"expected 30 contracts, got {len(names)}", config=True)
 
         schemas = compile_detection_schemas()
         fps = detection_schema_fingerprints()

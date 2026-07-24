@@ -1,0 +1,62 @@
+{
+  "artifact_hashes": {},
+  "contact_candidate_count": 1,
+  "coverage_summary": {
+    "ambiguous_ball_us": 100000,
+    "ball_observed_us": 800000,
+    "calibration_valid_us": 900000,
+    "contested_us": 50000,
+    "human_observed_us": 1000000,
+    "joint_coverage_ratio": 0.5,
+    "joint_observed_us": 500000,
+    "low_joint_coverage_is_not_evaluable": true,
+    "missing_ball_is_not_no_possession": true,
+    "not_observed_us": 200000,
+    "playable_us": 950000,
+    "target_confirmed_us": 700000
+  },
+  "created_at_utc": "2026-07-24T11:25:42.130176Z",
+  "error_codes": [],
+  "evaluation_status": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH",
+  "event_metrics_produced": {
+    "aerial": false,
+    "box_touch": false,
+    "dribble": false,
+    "duel": false,
+    "pass": false,
+    "turnover": false
+  },
+  "input_fingerprints": {
+    "calibration": null,
+    "detections": null,
+    "identity": null,
+    "projected_positions": null,
+    "tracks": null
+  },
+  "interaction_policy_fingerprint": "2e8eeeed5e3869bce59f285d90896d9ea67380ae4cf75ec75591b93cb935e620",
+  "output_fingerprints": {
+    "ball_contact_candidates": null,
+    "human_ball_proximity": null,
+    "possession_hypotheses": null
+  },
+  "possession_hypothesis_count": 1,
+  "provenance": {
+    "label": "synthetic_contract_fixture",
+    "no_real_interaction_inference": true,
+    "notes": "no_real_interaction_inference",
+    "stage": "10A"
+  },
+  "proximity_row_count": 2,
+  "receipt_id": "hbi_receipt_01",
+  "request_id": "hbi_req_01",
+  "review_count": 0,
+  "run_id": "run_20260724T112541933382Z_dfb16ad55764",
+  "schema_version": 1,
+  "state_counts": {
+    "candidate": 4
+  },
+  "status": "contract_stub",
+  "target_player_id": "target_player_01",
+  "video_id": "video_synth_01",
+  "warning_codes": []
+}

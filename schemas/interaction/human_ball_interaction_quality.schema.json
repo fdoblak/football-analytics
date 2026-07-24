@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/interaction/human_ball_interaction_quality.schema.json",
+  "title": "Human-ball interaction quality / coverage (Stage 10A)",
+  "description": "Coverage and quality summary for interaction contracts. Missing ball observation is not possession=false.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "video_id",
+    "coverage",
+    "quality_flags",
+    "not_evaluable_reasons",
+    "created_at_utc"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "minLength": 1 },
+    "interaction_policy_fingerprint": { "type": ["string", "null"] },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "human_observed_us",
+        "ball_observed_us",
+        "joint_observed_us",
+        "calibration_valid_us",
+        "playable_us",
+        "target_confirmed_us",
+        "ambiguous_ball_us",
+        "contested_us",
+        "not_observed_us"
+      ],
+      "properties": {
+        "human_observed_us": { "type": "integer", "minimum": 0 },
+        "ball_observed_us": { "type": "integer", "minimum": 0 },
+        "joint_observed_us": { "type": "integer", "minimum": 0 },
+        "calibration_valid_us": { "type": "integer", "minimum": 0 },
+        "playable_us": { "type": "integer", "minimum": 0 },
+        "target_confirmed_us": { "type": "integer", "minimum": 0 },
+        "ambiguous_ball_us": { "type": "integer", "minimum": 0 },
+        "contested_us": { "type": "integer", "minimum": 0 },
+        "not_observed_us": { "type": "integer", "minimum": 0 },
+        "joint_coverage_ratio": { "type": ["number", "null"] },
+        "low_joint_coverage_is_not_evaluable": { "type": "boolean" },
+        "missing_ball_is_not_no_possession": { "type": "boolean", "const": true }
+      }
+    },
+    "quality_flags": { "type": "array", "items": { "type": "string" } },
+    "not_evaluable_reasons": { "type": "array", "items": { "type": "string" } },
+    "created_at_utc": { "type": "string", "minLength": 10 }
+  }
+}

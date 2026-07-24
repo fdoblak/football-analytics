@@ -1,0 +1,33 @@
+{
+  "adapter_notes": "contracts_only_stage_10a",
+  "config_fingerprint": "2e8eeeed5e3869bce59f285d90896d9ea67380ae4cf75ec75591b93cb935e620",
+  "created_at_utc": "2026-07-24T11:25:42.130200Z",
+  "findings": [
+    "No reviewed human-ball interaction ground truth available.",
+    "Stage 10A is contracts-only; synthetic fixtures are not real accuracy.",
+    "No Opta or official event accuracy claim is made."
+  ],
+  "ground_truth_evaluation_status": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH",
+  "metric_reasons": {
+    "contact_candidate_precision_recall": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH",
+    "contested_agreement": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH",
+    "coverage_calibration": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH",
+    "false_possession_rate": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH",
+    "not_evaluable_correctness": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH",
+    "possession_precision_recall": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH",
+    "proximity_timing_error": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH"
+  },
+  "metrics": {
+    "contact_candidate_precision_recall": null,
+    "contested_agreement": null,
+    "coverage_calibration": null,
+    "false_possession_rate": null,
+    "not_evaluable_correctness": null,
+    "possession_precision_recall": null,
+    "proximity_timing_error": null
+  },
+  "run_id": "run_20260724T112541933382Z_dfb16ad55764",
+  "schema_version": 1,
+  "status": "not_evaluated",
+  "video_id": "video_synth_01"
+}

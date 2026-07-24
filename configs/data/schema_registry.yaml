@@ -250,3 +250,30 @@ contracts:
       1:
         spec_path: schemas/data/v1/physical_metric_results.json
     migration_edges: []
+
+  human_ball_proximity:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/human_ball_proximity.json
+    migration_edges: []
+
+  ball_contact_candidates:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/ball_contact_candidates.json
+    migration_edges: []
+
+  possession_hypotheses:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/possession_hypotheses.json
+    migration_edges: []

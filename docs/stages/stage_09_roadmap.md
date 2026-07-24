@@ -12,7 +12,7 @@
 
 **Stage 9 status: CLOSED** (`physical-metrics-baseline-v0.9.0`)
 
-**Stage 10 status: NOT STARTED**
+**Stage 10 status:** 10A contracts ACTIVE — see `docs/stages/stage_10_roadmap.md`
 
 ## 9A scope
 

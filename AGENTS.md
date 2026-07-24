@@ -74,6 +74,7 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `scripts/check_pitch_projection_pipeline.py` (Stage 8D pitch projection + Stage 8 close)
 - `scripts/check_physical_metric_contracts.py` (Stage 9A trajectory / physical metric contracts)
 - `scripts/check_target_trajectory_baseline.py` (Stage 9B trajectory prepare + quality baseline)
+- `scripts/check_human_ball_interaction_contracts.py` (Stage 10A human-ball interaction contracts)
 - `scripts/collect_evidence.py` (small safe evidence backfill into `artifacts/evidence/`)
 - `scripts/check_stage_cache.py`, `check_ci_workflow.py`, `check_project.py`
 - Or: `football-analytics project check --profile local --quick`
@@ -88,14 +89,13 @@ jersey alone cannot confirm; confirmed requires scoped manual decision;
 validated. Stage 8 is closed (`calibration-baseline-v0.8.0`): 8A contracts →
 8B pitch features → 8C homography/segments → 8D projected positions. Attack
 direction remains unknown; ball never physical/event metric-eligible; real
-football coordinate accuracy not validated. Stage 9A added target trajectory and
-physical metric **contracts only**. Stage 9B prepares raw/filtered/resampled
-trajectories. Stage 9C computes measured distance / robust speed / project
-sprint bouts. Stage 9D adds time-weighted heatmap, neutral zones, and
-trajectory activity profiles. Stage 9E fuses 9B–9D with quality gates and
-**closes Stage 9** (`physical-metrics-baseline-v0.9.0`). Real football accuracy
-is not validated; official Opta data was not used; final customer visual is
-deferred. Do **not** start Stage 10 without an explicit user prompt.
+football coordinate accuracy not validated. Stage 9 is closed
+(`physical-metrics-baseline-v0.9.0`): 9A contracts → 9B trajectory → 9C
+distance/speed/sprint → 9D heatmap/zones/activity → 9E fusion. Real football
+accuracy is not validated; official Opta data was not used; final customer
+visual is deferred. Stage 10A adds human-ball interaction / possession /
+contact-candidate **contracts only**. Do **not** start Stage 10B without an
+explicit user prompt.
 
 ---
 
@@ -185,6 +185,8 @@ Stage 5 is **closed**. Stage 6A–6D tracking baseline is in-tree when merged
 target-player baseline is in-tree when merged (`identity-baseline-v0.7.0`).
 Stage 7 is **closed**. Stage 8A–8D pitch calibration / projection baseline is
 in-tree when merged (`calibration-baseline-v0.8.0`). Stage 8 is **closed**.
-Stage 9A (target player pitch time-series / physical metric contracts) is
-**not** started unless explicitly requested.
+Stage 9A–9E target-player physical metrics baseline is in-tree when merged
+(`physical-metrics-baseline-v0.9.0`). Stage 9 is **closed**. Stage 10A
+(human-ball interaction / possession contracts) is in-tree when merged.
+Do **not** start Stage 10B without an explicit user prompt.
 Manual Cursor flow only — no Codex/background automation.
