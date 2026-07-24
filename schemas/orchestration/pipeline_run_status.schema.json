@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/orchestration/pipeline_run_status.schema.json",
+  "title": "Single-player pipeline run status (Stage 14A)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "request_id",
+    "overall_status",
+    "stages",
+    "config_fingerprint",
+    "updated_at_utc",
+    "status_fingerprint"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "run_id": { "type": "string", "minLength": 8 },
+    "request_id": { "type": "string", "minLength": 4 },
+    "overall_status": {
+      "type": "string",
+      "enum": [
+        "planned",
+        "running",
+        "succeeded",
+        "partial",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "config_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "updated_at_utc": { "type": "string", "minLength": 10 },
+    "status_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "stages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "status", "cache_key"],
+        "properties": {
+          "name": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "running",
+              "succeeded",
+              "failed",
+              "skipped",
+              "cancelled",
+              "stale_rejected"
+            ]
+          },
+          "cache_key": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "artifact_path": { "type": ["string", "null"] },
+          "error_code": { "type": ["string", "null"] },
+          "warnings": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "partial": { "type": "boolean" },
+    "cancellation_receipt_path": { "type": ["string", "null"] },
+    "report_json_path": { "type": ["string", "null"] },
+    "gate_hint": { "type": ["string", "null"] },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

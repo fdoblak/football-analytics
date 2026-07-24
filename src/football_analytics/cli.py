@@ -2379,6 +2379,198 @@ def cmd_events_pipeline_validate(*, keep: bool = False, as_json: bool = False) -
     return int(main_fn(argv))
 
 
+def cmd_pipeline_plan(*, output_dir: Path, as_json: bool = False) -> int:
+    """Stage 14A: write deterministic single-player pipeline plan (synthetic)."""
+    from football_analytics.core.records import write_json_record
+    from football_analytics.orchestration.fixtures import synthetic_pipeline_request
+    from football_analytics.orchestration.planner import plan_pipeline
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    req = synthetic_pipeline_request(output_directory=str(output_dir), force_restart=True)
+    plan = plan_pipeline(req)
+    path = output_dir / "pipeline_plan.json"
+    write_json_record(path, plan, overwrite=True)
+    write_json_record(output_dir / "pipeline_request.json", req, overwrite=True)
+    if as_json:
+        print(json.dumps(plan, indent=2, sort_keys=True))
+    else:
+        print(f"plan_json: {path}")
+        print(f"stages: {len(plan['stages'])}")
+        print(f"plan_fingerprint: {plan['plan_fingerprint']}")
+    return 0
+
+
+def cmd_pipeline_run(
+    *,
+    output_dir: Path,
+    light: bool = True,
+    force_restart: bool = True,
+    cancel: bool = False,
+) -> int:
+    """Stage 14A: run synthetic single-player orchestration chain."""
+    from football_analytics.orchestration.fixtures import synthetic_pipeline_request
+    from football_analytics.orchestration.runner import run_pipeline
+
+    req = synthetic_pipeline_request(
+        output_directory=str(output_dir),
+        force_restart=force_restart,
+        cancel_requested=cancel,
+    )
+    result = run_pipeline(req, light_stubs_only=light)
+    print(f"accepted: {result.accepted}")
+    print(f"overall_status: {result.overall_status}")
+    print(f"status_json: {result.status_path}")
+    print(f"report_json: {result.report_json_path}")
+    print(f"gate_hint: {result.summary.get('gate_hint')}")
+    return 0 if result.accepted or result.overall_status == "cancelled" else 1
+
+
+def cmd_pipeline_resume(*, output_dir: Path, light: bool = True) -> int:
+    """Stage 14A: resume a prior synthetic run (stale fingerprint protected)."""
+    from football_analytics.orchestration.fixtures import synthetic_pipeline_request
+    from football_analytics.orchestration.runner import resume_pipeline
+
+    req = synthetic_pipeline_request(
+        output_directory=str(output_dir),
+        force_restart=False,
+        request_id="req_stage14_resume_cli",
+    )
+    # Keep run identity aligned with existing status when present.
+    status_path = output_dir / "pipeline_run_status.json"
+    if status_path.is_file():
+        prior = json.loads(status_path.read_text(encoding="utf-8"))
+        req["run_id"] = prior.get("run_id", req["run_id"])
+        req["request_id"] = prior.get("request_id", req["request_id"])
+        req["config_fingerprint"] = prior.get("config_fingerprint", req["config_fingerprint"])
+    result = resume_pipeline(req, light_stubs_only=light)
+    print(f"accepted: {result.accepted}")
+    print(f"overall_status: {result.overall_status}")
+    print(f"status_json: {result.status_path}")
+    return 0 if result.accepted or result.overall_status == "cancelled" else 1
+
+
+def cmd_pipeline_validate(*, keep: bool = False, as_json: bool = False, full: bool = False) -> int:
+    """Run Stage 14 single-player pipeline validator (Stage 14 close)."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_single_player_pipeline.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    if full:
+        argv.append("--full-fixtures")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("single-player pipeline validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
+def cmd_review_prepare(*, output_dir: Path, as_json: bool = False) -> int:
+    """Stage 14B: prepare unified manual review package (synthetic)."""
+    from football_analytics.orchestration.review.hub import prepare_review_package
+
+    pkg = prepare_review_package(
+        package_id="pkg_cli_stage14",
+        run_id="run_stage14_review_cli",
+        video_id="vid_stage14_synth",
+        target_player_id="target_player_a",
+        output_dir=output_dir,
+    )
+    if as_json:
+        print(json.dumps(pkg, indent=2, sort_keys=True))
+    else:
+        print(f"package_id: {pkg['package_id']}")
+        print(f"package_hash: {pkg['package_hash']}")
+        print(f"domains: {len(pkg['domains'])}")
+        print(f"output_dir: {output_dir}")
+    return 0
+
+
+def cmd_review_apply(
+    *,
+    output_dir: Path,
+    domain: str,
+    item_id: str,
+    decision: str,
+    reviewer_id: str,
+    reason: str,
+) -> int:
+    """Stage 14B: apply append-only CAS review decision."""
+    from football_analytics.orchestration.review.hub import (
+        apply_decision,
+        build_decision,
+    )
+
+    pkg_path = output_dir / "unified_review_package.json"
+    if not pkg_path.is_file():
+        print("unified_review_package.json missing; run review prepare first", file=sys.stderr)
+        return 2
+    pkg = json.loads(pkg_path.read_text(encoding="utf-8"))
+    dec = build_decision(
+        decision_id=f"dec_{domain}_{item_id}_{decision}"[:64],
+        package=pkg,
+        domain=domain,
+        item_id=item_id,
+        decision=decision,
+        reviewer_id=reviewer_id,
+        reason=reason,
+    )
+    apply_decision(decision=dec, package=pkg, output_dir=output_dir)
+    print(f"decision_id: {dec['decision_id']}")
+    print(f"new_status: {dec['new_status']}")
+    print(f"record_hash: {dec['record_hash']}")
+    return 0
+
+
+def cmd_report_data(*, output: Path, as_json: bool = False) -> int:
+    """Stage 14C: write canonical single-player report JSON (synthetic)."""
+    import subprocess
+
+    from football_analytics.core.records import write_json_record
+    from football_analytics.orchestration.report.builder import build_single_player_report
+
+    try:
+        git_commit = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=str(_project_root()), text=True
+        ).strip()
+    except Exception:  # noqa: BLE001
+        git_commit = "0" * 40
+    if len(git_commit) != 40:
+        git_commit = "0" * 40
+    report = build_single_player_report(
+        run_id="run_stage14_report_cli",
+        git_commit=git_commit,
+        target_player_id="target_player_a",
+        display_name="Target Player A",
+        match_id="match_stage14_synth",
+        video_id="vid_stage14_synth",
+    )
+    write_json_record(output, report, overwrite=True)
+    if as_json:
+        print(json.dumps(report, indent=2, sort_keys=True))
+    else:
+        print(f"report_json: {output}")
+        print(f"metrics: {len(report['metrics'])}")
+        print(f"reproducibility_fingerprint: {report['reproducibility_fingerprint']}")
+        print("team_summary: forbidden")
+    return 0
+
+
+def cmd_report_render(*, report_json: Path, output: Path) -> int:
+    """Stage 14D: render consolidated summary PNG (workspace test; not Stage 16 final)."""
+    from football_analytics.visualization.report_renderer import render_single_player_summary_png
+
+    report = json.loads(report_json.read_text(encoding="utf-8"))
+    path = render_single_player_summary_png(report, output)
+    print(f"render_png: {path}")
+    print("note: Stage 16 reserved finals must not be used as customer finals here")
+    return 0
+
+
 def cmd_physical_trajectory_prepare(
     *,
     output_dir: Path,
@@ -4861,6 +5053,53 @@ def build_parser() -> argparse.ArgumentParser:
     p_events_pipe_val.add_argument("--keep", action="store_true")
     p_events_pipe_val.add_argument("--json", action="store_true")
 
+    p_pipeline = sub.add_parser(
+        "pipeline",
+        help="Single-player E2E orchestration (Stage 14A/14E)",
+    )
+    pipeline_sub = p_pipeline.add_subparsers(dest="pipeline_command")
+    p_pipe_plan = pipeline_sub.add_parser("plan", help="Write deterministic pipeline plan")
+    p_pipe_plan.add_argument("--output-dir", type=Path, required=True)
+    p_pipe_plan.add_argument("--json", action="store_true")
+    p_pipe_run = pipeline_sub.add_parser("run", help="Run synthetic single-player chain")
+    p_pipe_run.add_argument("--output-dir", type=Path, required=True)
+    p_pipe_run.add_argument("--full-fixtures", action="store_true")
+    p_pipe_run.add_argument("--force-restart", action="store_true", default=True)
+    p_pipe_run.add_argument("--cancel", action="store_true")
+    p_pipe_resume = pipeline_sub.add_parser("resume", help="Resume prior synthetic run")
+    p_pipe_resume.add_argument("--output-dir", type=Path, required=True)
+    p_pipe_resume.add_argument("--full-fixtures", action="store_true")
+    p_pipe_val = pipeline_sub.add_parser(
+        "validate", help="Run Stage 14 single-player pipeline validator"
+    )
+    p_pipe_val.add_argument("--keep", action="store_true")
+    p_pipe_val.add_argument("--json", action="store_true")
+    p_pipe_val.add_argument("--full-fixtures", action="store_true")
+
+    p_review = sub.add_parser("review", help="Unified manual review hub (Stage 14B)")
+    review_sub = p_review.add_subparsers(dest="review_command")
+    p_rev_prep = review_sub.add_parser("prepare", help="Prepare unified review package")
+    p_rev_prep.add_argument("--output-dir", type=Path, required=True)
+    p_rev_prep.add_argument("--json", action="store_true")
+    p_rev_apply = review_sub.add_parser("apply", help="Apply CAS append-only decision")
+    p_rev_apply.add_argument("--output-dir", type=Path, required=True)
+    p_rev_apply.add_argument("--domain", type=str, required=True)
+    p_rev_apply.add_argument("--item-id", type=str, required=True)
+    p_rev_apply.add_argument("--decision", type=str, required=True)
+    p_rev_apply.add_argument("--reviewer-id", type=str, required=True)
+    p_rev_apply.add_argument("--reason", type=str, required=True)
+
+    p_report = sub.add_parser("report", help="Single-player report data/render (Stage 14C/14D)")
+    report_sub = p_report.add_subparsers(dest="report_command")
+    p_rep_data = report_sub.add_parser("data", help="Build canonical report JSON")
+    p_rep_data.add_argument("--output", type=Path, required=True)
+    p_rep_data.add_argument("--json", action="store_true")
+    p_rep_render = report_sub.add_parser(
+        "render", help="Render consolidated summary PNG (not Stage 16 final)"
+    )
+    p_rep_render.add_argument("--report-json", type=Path, required=True)
+    p_rep_render.add_argument("--output", type=Path, required=True)
+
     p_cal_features = cal_sub.add_parser(
         "features", help="Pitch keypoint/line feature detection (8B)"
     )
@@ -5744,6 +5983,50 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.events_command == "pipeline-validate":
             return cmd_events_pipeline_validate(keep=bool(args.keep), as_json=bool(args.json))
         parser.parse_args(["events", "--help"])
+        return 2
+    if args.command == "pipeline":
+        if args.pipeline_command == "plan":
+            return cmd_pipeline_plan(output_dir=args.output_dir, as_json=bool(args.json))
+        if args.pipeline_command == "run":
+            return cmd_pipeline_run(
+                output_dir=args.output_dir,
+                light=not bool(args.full_fixtures),
+                force_restart=bool(args.force_restart),
+                cancel=bool(args.cancel),
+            )
+        if args.pipeline_command == "resume":
+            return cmd_pipeline_resume(
+                output_dir=args.output_dir,
+                light=not bool(args.full_fixtures),
+            )
+        if args.pipeline_command == "validate":
+            return cmd_pipeline_validate(
+                keep=bool(args.keep),
+                as_json=bool(args.json),
+                full=bool(args.full_fixtures),
+            )
+        parser.parse_args(["pipeline", "--help"])
+        return 2
+    if args.command == "review":
+        if args.review_command == "prepare":
+            return cmd_review_prepare(output_dir=args.output_dir, as_json=bool(args.json))
+        if args.review_command == "apply":
+            return cmd_review_apply(
+                output_dir=args.output_dir,
+                domain=str(args.domain),
+                item_id=str(args.item_id),
+                decision=str(args.decision),
+                reviewer_id=str(args.reviewer_id),
+                reason=str(args.reason),
+            )
+        parser.parse_args(["review", "--help"])
+        return 2
+    if args.command == "report":
+        if args.report_command == "data":
+            return cmd_report_data(output=args.output, as_json=bool(args.json))
+        if args.report_command == "render":
+            return cmd_report_render(report_json=args.report_json, output=args.output)
+        parser.parse_args(["report", "--help"])
         return 2
     parser.print_help()
     return 2

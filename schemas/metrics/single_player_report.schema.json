@@ -146,6 +146,36 @@
     "warnings": {
       "type": "array",
       "items": { "type": "string" }
+    },
+    "reproducibility_fingerprint": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "Canonical fingerprint of report inputs + metric payloads (Stage 14C)"
+    },
+    "source_artifact_index": {
+      "type": "array",
+      "description": "Provenance index of upstream stage artifacts used to build the report",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["logical_name", "sha256"],
+        "properties": {
+          "logical_name": { "type": "string", "minLength": 1 },
+          "relative_path": { "type": ["string", "null"] },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "stage": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "not_evaluable_metric_ids": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Metric ids with non-ok / null status for quick QA"
+    },
+    "team_summary_forbidden": {
+      "type": "boolean",
+      "const": true,
+      "description": "Single-player report must not include a team summary product section"
     }
   },
   "definitions": {

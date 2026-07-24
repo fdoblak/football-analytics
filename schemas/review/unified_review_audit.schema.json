@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/review/unified_review_audit.schema.json",
+  "title": "Unified manual review audit entry (Stage 14B)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "audit_id",
+    "run_id",
+    "package_id",
+    "domain",
+    "item_id",
+    "actor_id",
+    "acted_at_utc",
+    "action",
+    "reason",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "audit_id": { "type": "string", "minLength": 4 },
+    "run_id": { "type": "string", "minLength": 8 },
+    "package_id": { "type": "string", "minLength": 4 },
+    "domain": { "type": "string", "minLength": 1 },
+    "item_id": { "type": "string", "minLength": 1 },
+    "decision_id": { "type": ["string", "null"] },
+    "actor_id": { "type": "string", "minLength": 1 },
+    "acted_at_utc": { "type": "string", "minLength": 10 },
+    "action": {
+      "type": "string",
+      "enum": [
+        "prepare",
+        "confirm",
+        "reject",
+        "keep_provisional",
+        "revoke",
+        "unknown",
+        "request_review",
+        "stale_rejected"
+      ]
+    },
+    "previous_decision": { "type": ["string", "null"] },
+    "new_decision": { "type": ["string", "null"] },
+    "reason": { "type": "string", "minLength": 1 },
+    "artifact_hashes": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["append_only"],
+      "properties": {
+        "append_only": { "type": "boolean", "const": true },
+        "notes": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

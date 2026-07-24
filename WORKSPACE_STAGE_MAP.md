@@ -15,14 +15,16 @@ Quick orientation for which stage owns which runtime/workspace roots and close s
 | 10 | CLOSED | Human–ball interaction | interaction checks | `stage_10/` |
 | 11 | CLOSED | Passing / reception / progression | `passing_*_checks` | `stage_11/` |
 | 12 | CLOSED | Duels / take-on / tackle / recovery / turnover / aerial / clearance | `duels_*_checks` | `stage_12/` |
-| **13** | **CLOSED** | **Target event ledger / metrics aggregation** | `events_contract_checks`, `replay_candidate_checks`, `attack_direction_checks`, `target_event_ledger_checks`, `target_event_metrics_checks`, `events_pipeline_checks` | `stage_13/` |
+| 13 | CLOSED | Target event ledger / metrics aggregation | `events_*_checks` | `stage_13/` |
+| **14** | **CLOSED** | **Single-player E2E orchestration / review / report / render** | `single_player_pipeline_checks` | `stage_14/` |
 
-## Stage 13 close gate
+## Stage 14 close gate
 
-`PASS_WITH_FINDINGS — TARGET EVENTS PIPELINE ACTIVE; STAGE 13 CLOSED; REAL FOOTBALL ACCURACY NOT YET VALIDATED`
+`PASS_WITH_FINDINGS — SINGLE PLAYER PIPELINE ACTIVE; STAGE 14 CLOSED; REAL FOOTBALL ACCURACY NOT YET VALIDATED`
 
 ## Notes
 
-- Registry contract count after Stage 13: **45**
-- Do not start Stage 14 without an explicit user prompt
+- Registry Arrow contract count remains **45** (Stage 14 uses JSON schemas)
+- Do not start Stage 15 without an explicit user prompt
 - Real football / Opta accuracy is not validated
+- Stage 16 reserved finals: `/home/fdoblak/football_data/rendered_outputs/final/single_player_analysis_summary.png` and `artifacts/final/single_player_analysis_summary.png`

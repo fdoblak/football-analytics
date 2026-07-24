@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/review/unified_review_decision.schema.json",
+  "title": "Unified manual review decision (Stage 14B)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "decision_id",
+    "package_id",
+    "package_hash",
+    "run_id",
+    "domain",
+    "item_id",
+    "decision",
+    "reviewer_id",
+    "decided_at_utc",
+    "expected_package_hash",
+    "new_status",
+    "reason",
+    "record_hash",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "decision_id": { "type": "string", "minLength": 4 },
+    "package_id": { "type": "string", "minLength": 4 },
+    "package_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "expected_package_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "run_id": { "type": "string", "minLength": 8 },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "identity",
+        "ball_ambiguity",
+        "possession_contact",
+        "pass",
+        "dribble_duel",
+        "attack_direction",
+        "calibration"
+      ]
+    },
+    "item_id": { "type": "string", "minLength": 1 },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "confirm",
+        "reject",
+        "keep_provisional",
+        "revoke",
+        "unknown",
+        "request_review"
+      ]
+    },
+    "reviewer_id": { "type": "string", "minLength": 1 },
+    "decided_at_utc": { "type": "string", "minLength": 10 },
+    "new_status": { "type": "string", "minLength": 1 },
+    "reason": { "type": "string", "minLength": 1 },
+    "supersedes_decision_id": { "type": ["string", "null"] },
+    "previous_audit_hash": { "type": ["string", "null"] },
+    "record_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["append_only", "runtime_only", "cas"],
+      "properties": {
+        "append_only": { "type": "boolean", "const": true },
+        "runtime_only": { "type": "boolean", "const": true },
+        "cas": { "type": "boolean", "const": true },
+        "synthetic_fixture": { "type": "boolean" },
+        "notes": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

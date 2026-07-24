@@ -1,0 +1,32 @@
+# Stage 14B — unified manual review hub
+schema_version: 1
+hub_version: 1
+name: unified_manual_review
+
+domains:
+  - identity
+  - ball_ambiguity
+  - possession_contact
+  - pass
+  - dribble_duel
+  - attack_direction
+  - calibration
+
+rules:
+  append_only_cas: true
+  audit_required: true
+  revoke_supported: true
+  stale_decision_rejection: true
+  confirmed_requires_review: true
+  auto_confirm_forbidden: true
+  face_biometric_forbidden: true
+
+allowed_decisions:
+  - confirm
+  - reject
+  - keep_provisional
+  - revoke
+  - unknown
+  - request_review
+
+max_items_per_domain: 32

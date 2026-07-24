@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/orchestration/cancellation_receipt.schema.json",
+  "title": "Pipeline cancellation receipt (Stage 14A)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "request_id",
+    "cancelled_at_utc",
+    "cancelled_after_stage",
+    "reason",
+    "receipt_fingerprint"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "run_id": { "type": "string", "minLength": 8 },
+    "request_id": { "type": "string", "minLength": 4 },
+    "cancelled_at_utc": { "type": "string", "minLength": 10 },
+    "cancelled_after_stage": { "type": ["string", "null"] },
+    "reason": { "type": "string", "minLength": 1 },
+    "receipt_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "stages_completed": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "user_video_mutated": { "type": "boolean", "const": false }
+  }
+}

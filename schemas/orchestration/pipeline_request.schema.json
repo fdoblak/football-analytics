@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/orchestration/pipeline_request.schema.json",
+  "title": "Single-player pipeline request (Stage 14A)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "run_id",
+    "video_id",
+    "target_player_id",
+    "mode",
+    "config_fingerprint",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "request_id": { "type": "string", "minLength": 4, "maxLength": 128 },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "minLength": 1 },
+    "target_player_id": { "type": "string", "minLength": 1 },
+    "match_id": { "type": ["string", "null"] },
+    "mode": {
+      "type": "string",
+      "enum": ["synthetic_fixture", "resume", "validate_only"]
+    },
+    "video_path": {
+      "type": ["string", "null"],
+      "description": "User video path — never mutated; may be null for synthetic E2E"
+    },
+    "video_fingerprint": { "type": ["string", "null"], "pattern": "^([a-f0-9]{64})?$" },
+    "config_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "resume_from_stage": { "type": ["string", "null"] },
+    "force_restart": { "type": "boolean", "default": false },
+    "cancel_requested": { "type": "boolean", "default": false },
+    "output_directory": { "type": "string", "minLength": 1 },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "synthetic_fixture",
+        "never_mutate_user_video",
+        "real_football_accuracy_validated"
+      ],
+      "properties": {
+        "synthetic_fixture": { "type": "boolean" },
+        "never_mutate_user_video": { "type": "boolean", "const": true },
+        "real_football_accuracy_validated": { "type": "boolean", "const": false },
+        "notes": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

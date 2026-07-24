@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/review/unified_review_package.schema.json",
+  "title": "Unified manual review package (Stage 14B)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "package_id",
+    "run_id",
+    "video_id",
+    "target_player_id",
+    "config_fingerprint",
+    "domains",
+    "created_at_utc",
+    "package_hash",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "package_id": { "type": "string", "minLength": 4 },
+    "run_id": { "type": "string", "minLength": 8 },
+    "video_id": { "type": "string", "minLength": 1 },
+    "target_player_id": { "type": "string", "minLength": 1 },
+    "config_fingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "created_at_utc": { "type": "string", "minLength": 10 },
+    "package_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "domains": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["domain", "items", "review_required_for_confirmed"],
+        "properties": {
+          "domain": {
+            "type": "string",
+            "enum": [
+              "identity",
+              "ball_ambiguity",
+              "possession_contact",
+              "pass",
+              "dribble_duel",
+              "attack_direction",
+              "calibration"
+            ]
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "required": ["item_id", "proposed_status", "manual_review_required"],
+              "properties": {
+                "item_id": { "type": "string", "minLength": 1 },
+                "proposed_status": { "type": "string", "minLength": 1 },
+                "manual_review_required": { "type": "boolean" },
+                "summary": { "type": ["string", "null"] },
+                "artifact_refs": { "type": "object" }
+              }
+            }
+          },
+          "review_required_for_confirmed": { "type": "boolean", "const": true }
+        }
+      }
+    },
+    "allowed_decisions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "append_only",
+        "auto_confirm_forbidden",
+        "confirmed_requires_review",
+        "synthetic_fixture"
+      ],
+      "properties": {
+        "append_only": { "type": "boolean", "const": true },
+        "auto_confirm_forbidden": { "type": "boolean", "const": true },
+        "confirmed_requires_review": { "type": "boolean", "const": true },
+        "synthetic_fixture": { "type": "boolean" },
+        "notes": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

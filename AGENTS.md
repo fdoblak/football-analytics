@@ -126,7 +126,10 @@ real football duels/events accuracy is not validated. Stage 13 is closed:
 append-only target event ledger → 13D coverage-aware metrics → 13E fusion.
 Never invent live when replay uncertain; conflict/unknown attack direction →
 directional metrics not_evaluable; no invented team names; real football
-target-event accuracy is not validated. Do **not** start Stage 14
+target-event accuracy is not validated. Stage 14 is closed:
+14A orchestration → 14B unified review hub → 14C report data → 14D renderer →
+14E CLI/close. Synthetic E2E only; final customer visual reserved for Stage 16;
+real football accuracy is not validated. Do **not** start Stage 15
 without an explicit user prompt.
 
 ---
@@ -226,6 +229,7 @@ fusion). Stage 11 is **closed**. Stage 12A–12E duels / competitive-events base
 in-tree when merged (contracts → take-on → ground family → aerial/clearance → fusion).
 Stage 12 is **closed**. Stage 13A–13E target-events baseline is in-tree when
 merged (replay/live context → attack direction → ledger → metrics → fusion).
-Stage 13 is **closed**. Do **not** start Stage 14 without an explicit
-user prompt.
+Stage 13 is **closed**. Stage 14A–14E single-player orchestration / review /
+report / renderer baseline is in-tree when merged. Stage 14 is **closed**.
+Do **not** start Stage 15 without an explicit user prompt.
 Manual Cursor flow only — no Codex/background automation.

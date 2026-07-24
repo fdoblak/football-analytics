@@ -4511,8 +4511,56 @@
       "source_path": "/home/fdoblak/projects/football-analytics/artifacts/evidence/stage_13/stage_13e_pipeline_summary.json",
       "stage_id": "stage_13",
       "status": "present"
+    },
+    {
+      "artifact_id": "stage_14_31e6608e350ab591",
+      "artifact_type": "stage_14_close_summary",
+      "commit_sha": null,
+      "data_classification": "safe_small_evidence",
+      "git_tracked": true,
+      "license_class": "synthetic_or_project",
+      "notes": "stage_14_single_player_pipeline",
+      "reason_not_git": null,
+      "relative_path": "artifacts/evidence/stage_14/stage_14_close_summary.json",
+      "sha256": "31e6608e350ab591d06d08ded765c3454d0f0a02ca1de3ac1415f77ed7f794fa",
+      "size_bytes": 699,
+      "source_path": "/home/fdoblak/projects/football-analytics/artifacts/evidence/stage_14/stage_14_close_summary.json",
+      "stage_id": "stage_14",
+      "status": "present"
+    },
+    {
+      "artifact_id": "stage_14_f82df74c77cbf691",
+      "artifact_type": "stage_14_schema_inventory",
+      "commit_sha": null,
+      "data_classification": "safe_small_evidence",
+      "git_tracked": true,
+      "license_class": "synthetic_or_project",
+      "notes": "stage_14_single_player_pipeline",
+      "reason_not_git": null,
+      "relative_path": "artifacts/evidence/stage_14/stage_14_schema_inventory.json",
+      "sha256": "f82df74c77cbf691af75d043b05ea07375d0b1bbf2c024e85d2bb1e32f2ded1e",
+      "size_bytes": 763,
+      "source_path": "/home/fdoblak/projects/football-analytics/artifacts/evidence/stage_14/stage_14_schema_inventory.json",
+      "stage_id": "stage_14",
+      "status": "present"
+    },
+    {
+      "artifact_id": "stage_14_a43bc9aa2772eb99",
+      "artifact_type": "stage_14_validator_summary",
+      "commit_sha": null,
+      "data_classification": "safe_small_evidence",
+      "git_tracked": true,
+      "license_class": "synthetic_or_project",
+      "notes": "stage_14_single_player_pipeline",
+      "reason_not_git": null,
+      "relative_path": "artifacts/evidence/stage_14/stage_14_validator_summary.json",
+      "sha256": "a43bc9aa2772eb994d10fa572c8594a8a5218d5b23a0f389becd1d636b4a6851",
+      "size_bytes": 1177,
+      "source_path": "/home/fdoblak/projects/football-analytics/artifacts/evidence/stage_14/stage_14_validator_summary.json",
+      "stage_id": "stage_14",
+      "status": "present"
     }
   ],
   "schema_version": 1,
-  "updated_at_utc": "2026-07-24T13:25:43.891824Z"
+  "updated_at_utc": "2026-07-24T13:45:46.371552Z"
 }

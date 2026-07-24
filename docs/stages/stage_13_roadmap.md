@@ -27,6 +27,6 @@
 - Invented real team names
 - Automatic `confirmed` events without review
 
-## Next (do not start without explicit prompt)
+## Next
 
-Stage 14+ — wait for explicit user prompt.
+Stage 14 is closed; do not start Stage 15 without an explicit user prompt.
