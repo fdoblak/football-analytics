@@ -127,7 +127,13 @@ def render_acceptance_summary_png(
         f"Drive: {_fmt(metrics.get('drive_events'))}",
         f"İkili mücadele kazanma: {_fmt(metrics.get('duel_win_rate'))}",
         f"GSR mean err (m): {gsr.get('mean_pitch_error_m', '—')}",
-        f"BAS held-out F1: {(bas.get('precision') and bas.get('recall') and 'see report') or bas.get('note', '—')}",
+        (
+            "BAS held-out F1: "
+            + str(
+                (bas.get("precision") and bas.get("recall") and "see report")
+                or bas.get("note", "—")
+            )
+        ),
         f"Kamera: {report.get('camera_domain', {}).get('camera_domain', '—')}",
     ]
     ax_m.text(

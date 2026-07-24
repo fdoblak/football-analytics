@@ -91,13 +91,15 @@ def derive_trajectory_metrics(points: list[dict[str, Any]]) -> dict[str, Any]:
     ordered = sorted(points, key=lambda p: (int(p["half"]), int(p["t_ms"])))
     dist = 0.0
     speeds: list[float] = []
-    for a, b in zip(ordered, ordered[1:]):
+    for a, b in zip(ordered, ordered[1:], strict=False):
         if int(a["half"]) != int(b["half"]):
             continue
         dt = (int(b["t_ms"]) - int(a["t_ms"])) / 1000.0
         if dt <= 0:
             continue
-        step = ((float(b["x_m"]) - float(a["x_m"])) ** 2 + (float(b["y_m"]) - float(a["y_m"])) ** 2) ** 0.5
+        dx = float(b["x_m"]) - float(a["x_m"])
+        dy = float(b["y_m"]) - float(a["y_m"])
+        step = (dx * dx + dy * dy) ** 0.5
         dist += step
         speeds.append(step / dt)
     speeds_sorted = sorted(speeds)
@@ -168,11 +170,14 @@ def finalize_acceptance_artifacts(
     ref_traj = json.loads(
         (run_dir / NAMESPACE_REFERENCE_GT / "target_trajectory_reference.json").read_text()
     )
-    ref_bas = json.loads((run_dir / NAMESPACE_REFERENCE_GT / "bas_reference_events.json").read_text())
+    bas_path = run_dir / NAMESPACE_REFERENCE_GT / "bas_reference_events.json"
+    ref_bas = json.loads(bas_path.read_text())
     pid = str(receipt["selected_player_id"])
     held_ref = [e for e in ref_bas["events"] if e.get("player_id") == pid and e.get("half") == 2]
     held_pred = [e for e in predicted_events if int(e.get("half") or 0) == 2]
-    gsr_eval = compare_trajectories(predicted=predicted_points, reference=ref_traj.get("points") or [])
+    gsr_eval = compare_trajectories(
+        predicted=predicted_points, reference=ref_traj.get("points") or []
+    )
     bas_eval = match_events(predicted=held_pred, reference=held_ref, tolerance_ms=1000)
     bas_eval["partition"] = "held_out_half2"
     pipeline_metrics = derive_trajectory_metrics(predicted_points)
@@ -201,7 +206,11 @@ def finalize_acceptance_artifacts(
         findings=findings,
         identity_source=EXTERNAL_REFERENCE_CONFIRMATION,
     )
-    report["heatmap_points"] = predicted_points[:: max(1, len(predicted_points) // 400)] if predicted_points else []
+    if predicted_points:
+        heat_step = max(1, len(predicted_points) // 400)
+        report["heatmap_points"] = predicted_points[::heat_step]
+    else:
+        report["heatmap_points"] = []
     write_report(report, report_path)
     png = render_acceptance_summary_png(
         report=report, output_local=local_png, output_github=github_png

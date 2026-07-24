@@ -40,8 +40,11 @@ def match_events(
 
     labels = sorted(set(by_label_ref) | set(by_label_pred))
     for label in labels:
-        rlist = sorted(by_label_ref.get(label, []), key=lambda x: (int(x.get("half") or 0), int(x.get("t_ms") or 0)))
-        plist = sorted(by_label_pred.get(label, []), key=lambda x: (int(x.get("half") or 0), int(x.get("t_ms") or 0)))
+        def _tkey(x: dict[str, Any]) -> tuple[int, int]:
+            return (int(x.get("half") or 0), int(x.get("t_ms") or 0))
+
+        rlist = sorted(by_label_ref.get(label, []), key=_tkey)
+        plist = sorted(by_label_pred.get(label, []), key=_tkey)
         used = [False] * len(rlist)
         tp = fp = 0
         for p in plist:

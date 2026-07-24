@@ -61,7 +61,9 @@ def build_acceptance_report(
             "team_side": team_side,
             "jersey_number": jersey_number,
             "identity_source": identity_source,
-            "identity_confidence": pipeline_metrics.get("identity_confidence", "external_reference_confirmation"),
+            "identity_confidence": pipeline_metrics.get(
+                "identity_confidence", "external_reference_confirmation"
+            ),
         },
         "camera_domain": camera_domain,
         "coverage": coverage,
