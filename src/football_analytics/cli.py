@@ -2046,6 +2046,117 @@ def cmd_interaction_pipeline_validate(*, keep: bool = False, as_json: bool = Fal
     return int(main_fn(argv))
 
 
+def cmd_passing_contracts_validate(*, keep: bool = False, as_json: bool = False) -> int:
+    """Run Stage 11A synthetic passing contract validator."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_passing_contracts.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("passing contract validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
+def cmd_passing_compute(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    fixture_smoke: bool = False,
+) -> int:
+    """Compute Stage 11B pass/reception baseline (synthetic fixtures)."""
+    from football_analytics.passing.pass_config import (
+        load_pass_reception_config,
+        pass_reception_config_fingerprint,
+    )
+    from football_analytics.passing.pass_fixtures import load_fixture
+    from football_analytics.passing.pass_service import compute_pass_reception
+
+    try:
+        cfg = load_pass_reception_config(config_path)
+        _ = pass_reception_config_fingerprint(cfg)
+        if not fixture_smoke:
+            print("passing compute requires --fixture-smoke in Stage 11", file=sys.stderr)
+            return 2
+        fx = load_fixture("completed_pass")
+        result = compute_pass_reception(
+            output_dir=output_dir,
+            transitions=fx["transitions"],
+            run_id=fx.get("run_id"),
+            video_id=fx.get("video_id"),
+            config_path=config_path,
+        )
+    except Exception as exc:  # noqa: BLE001
+        print(f"passing compute failed: {exc}", file=sys.stderr)
+        return 1
+    print(f"accepted: {result.accepted}")
+    print(f"summary_json: {result.summary_json}")
+    print(f"pass_parquet: {result.pass_parquet}")
+    return 0 if result.accepted else 1
+
+
+def cmd_passing_integrate(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    fixture_smoke: bool = False,
+) -> int:
+    """Fuse Stage 11B+11C into Stage 11D passing package (synthetic)."""
+    from football_analytics.passing.pipeline_config import (
+        load_passing_pipeline_config,
+        passing_pipeline_config_fingerprint,
+    )
+    from football_analytics.passing.pipeline_fixtures import load_pipeline_fixture
+    from football_analytics.passing.pipeline_service import integrate_passing
+
+    try:
+        cfg = load_passing_pipeline_config(config_path)
+        _ = passing_pipeline_config_fingerprint(cfg)
+        if not fixture_smoke:
+            print("passing integrate requires --fixture-smoke in Stage 11", file=sys.stderr)
+            return 2
+        fx = load_pipeline_fixture("completed_with_box")
+        result = integrate_passing(
+            output_dir=output_dir,
+            transitions=fx["transitions"],
+            touch_inputs=fx.get("touch_inputs"),
+            run_id=fx.get("run_id"),
+            video_id=fx.get("video_id"),
+            config_path=config_path,
+        )
+    except Exception as exc:  # noqa: BLE001
+        print(f"passing integrate failed: {exc}", file=sys.stderr)
+        return 1
+    print(f"accepted: {result.accepted}")
+    print(f"summary_json: {result.summary_json}")
+    print(f"gate_hint: {result.summary.get('gate_hint')}")
+    return 0 if result.accepted else 1
+
+
+def cmd_passing_pipeline_validate(*, keep: bool = False, as_json: bool = False) -> int:
+    """Run Stage 11D passing fusion validator (Stage 11 close)."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_passing_pipeline.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("passing pipeline validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
 def cmd_physical_trajectory_prepare(
     *,
     output_dir: Path,
@@ -4405,6 +4516,47 @@ def build_parser() -> argparse.ArgumentParser:
     p_int_pipe_val.add_argument("--keep", action="store_true")
     p_int_pipe_val.add_argument("--json", action="store_true")
 
+    p_passing = sub.add_parser(
+        "passing",
+        help="Passing / reception / progression (Stage 11A–11D)",
+    )
+    passing_sub = p_passing.add_subparsers(dest="passing_command")
+    p_pass_contracts = passing_sub.add_parser("contracts", help="Passing contract helpers")
+    pass_contracts_sub = p_pass_contracts.add_subparsers(dest="passing_contracts_command")
+    p_pass_c_val = pass_contracts_sub.add_parser(
+        "validate", help="Validate passing contracts (synthetic Stage 11A)"
+    )
+    p_pass_c_val.add_argument("--keep", action="store_true")
+    p_pass_c_val.add_argument("--json", action="store_true")
+
+    p_pass_compute = passing_sub.add_parser(
+        "compute", help="Pass/reception baseline compute (11B synthetic)"
+    )
+    p_pass_compute.add_argument("--output-dir", type=Path, required=True)
+    p_pass_compute.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/passing/pass_reception_baseline.yaml"),
+    )
+    p_pass_compute.add_argument("--fixture-smoke", action="store_true")
+
+    p_pass_integrate = passing_sub.add_parser(
+        "integrate", help="Fuse 11B+11C passing package (11D synthetic)"
+    )
+    p_pass_integrate.add_argument("--output-dir", type=Path, required=True)
+    p_pass_integrate.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/passing/passing_pipeline.yaml"),
+    )
+    p_pass_integrate.add_argument("--fixture-smoke", action="store_true")
+
+    p_pass_pipe_val = passing_sub.add_parser(
+        "pipeline-validate", help="Run Stage 11D fusion validator (Stage 11 close)"
+    )
+    p_pass_pipe_val.add_argument("--keep", action="store_true")
+    p_pass_pipe_val.add_argument("--json", action="store_true")
+
     p_cal_features = cal_sub.add_parser(
         "features", help="Pitch keypoint/line feature detection (8B)"
     )
@@ -5222,6 +5374,30 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.interaction_command == "pipeline-validate":
             return cmd_interaction_pipeline_validate(keep=bool(args.keep), as_json=bool(args.json))
         parser.parse_args(["interaction", "--help"])
+        return 2
+    if args.command == "passing":
+        if args.passing_command == "contracts":
+            if args.passing_contracts_command == "validate":
+                return cmd_passing_contracts_validate(
+                    keep=bool(args.keep), as_json=bool(args.json)
+                )
+            parser.parse_args(["passing", "contracts", "--help"])
+            return 2
+        if args.passing_command == "compute":
+            return cmd_passing_compute(
+                output_dir=args.output_dir,
+                config_path=args.config,
+                fixture_smoke=bool(args.fixture_smoke),
+            )
+        if args.passing_command == "integrate":
+            return cmd_passing_integrate(
+                output_dir=args.output_dir,
+                config_path=args.config,
+                fixture_smoke=bool(args.fixture_smoke),
+            )
+        if args.passing_command == "pipeline-validate":
+            return cmd_passing_pipeline_validate(keep=bool(args.keep), as_json=bool(args.json))
+        parser.parse_args(["passing", "--help"])
         return 2
     parser.print_help()
     return 2

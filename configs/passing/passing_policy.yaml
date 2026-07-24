@@ -1,0 +1,84 @@
+# Stage 11A passing / reception / progression contracts policy.
+# Contracts-only semantics. Project-generated Opta-style definitions — NOT official Opta.
+
+schema_version: 1
+policy_version: 1
+config_version: 1
+
+stage: "11A"
+contracts_only: true
+no_real_passing_inference: true
+metric_origin: project_generated
+definition_style: opta_style_metric_definition
+
+result_levels:
+  - candidate
+  - provisional
+  - confirmed
+  - contested
+  - unknown
+  - not_evaluable
+  - rejected
+
+automatic_baseline:
+  max_state: provisional
+  confirmed_requires: [scoped_manual_review]
+  owner_change_alone_is_not_completed_pass: true
+  cut_replay_gap_no_pass: true
+  attack_direction_unknown_blocks_directional: true
+  penalty_presence_is_not_box_touch: true
+  proximity_alone_is_not_reception: true
+  automatic_ceiling: provisional
+
+eligibility:
+  require_video_time_us: true
+  interval_semantics: half_open_start_end
+  box_touch_requires:
+    possession_or_contact: true
+    pitch_mapping: true
+    playable: true
+  long_pass_requires_calibration: true
+
+lifecycle:
+  terminate_on:
+    - shot_cut
+    - replay
+    - non_playable
+    - hard_gap
+  cut_replay_gap_no_pass: true
+  source_observations_immutable: true
+  state_transitions_auditable: true
+  revocation_append_only: true
+  cross_run_video_scope_hard_fail: true
+
+coverage:
+  components:
+    - target_confirmed
+    - possession_or_contact
+    - calibration
+    - playable
+    - attack_direction_resolved
+    - not_observed
+  low_coverage_status: not_evaluable
+
+forbidden_outputs:
+  opta_accuracy_claim: true
+  real_football_accuracy_claim: true
+  automatic_confirmed_pass: true
+  invented_attack_direction: true
+
+review:
+  manual_review_queue_enabled: true
+  confirmed_via_manual_review_only_when_policy_allows: true
+
+safety:
+  no_real_passing_inference: true
+  no_opta_claim: true
+  no_real_video: true
+  no_downloads: true
+  runtime_root: /home/fdoblak/workspace/passing_contract_checks
+
+notes:
+  - Stage 11A defines contracts/semantics/validators.
+  - Stage 11B pass/reception baseline consumes synthetic possession transitions.
+  - Attack direction is never invented; conflict yields unknown.

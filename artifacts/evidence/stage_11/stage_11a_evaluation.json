@@ -1,0 +1,35 @@
+{
+  "adapter_notes": "contracts_and_synthetic_baseline_stage_11",
+  "config_fingerprint": null,
+  "created_at_utc": "2026-07-24T12:32:50.419702Z",
+  "findings": [
+    "No reviewed passing ground truth available.",
+    "Stage 11 synthetic fixtures are not real accuracy.",
+    "No Opta or official event accuracy claim is made."
+  ],
+  "ground_truth_evaluation_status": "NOT_EVALUATED_NO_REVIEWED_PASSING_GROUND_TRUTH",
+  "metric_reasons": {
+    "box_touch_precision_recall": "NOT_EVALUATED_NO_REVIEWED_PASSING_GROUND_TRUTH",
+    "coverage_calibration": "NOT_EVALUATED_NO_REVIEWED_PASSING_GROUND_TRUTH",
+    "long_pass_ratio": "NOT_EVALUATED_NO_REVIEWED_PASSING_GROUND_TRUTH",
+    "not_evaluable_correctness": "NOT_EVALUATED_NO_REVIEWED_PASSING_GROUND_TRUTH",
+    "pass_accuracy": "NOT_EVALUATED_NO_REVIEWED_PASSING_GROUND_TRUTH",
+    "pass_completion_rate": "NOT_EVALUATED_NO_REVIEWED_PASSING_GROUND_TRUTH",
+    "progression_agreement": "NOT_EVALUATED_NO_REVIEWED_PASSING_GROUND_TRUTH",
+    "reception_precision_recall": "NOT_EVALUATED_NO_REVIEWED_PASSING_GROUND_TRUTH"
+  },
+  "metrics": {
+    "box_touch_precision_recall": null,
+    "coverage_calibration": null,
+    "long_pass_ratio": null,
+    "not_evaluable_correctness": null,
+    "pass_accuracy": null,
+    "pass_completion_rate": null,
+    "progression_agreement": null,
+    "reception_precision_recall": null
+  },
+  "run_id": "run_20260724T123246840074Z_920506e15272",
+  "schema_version": 1,
+  "status": "not_evaluated",
+  "video_id": "video_synth_01"
+}

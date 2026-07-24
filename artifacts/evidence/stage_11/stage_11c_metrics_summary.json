@@ -1,0 +1,21 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "config_fp": "bb06e09cc4e211b4b34673148894378367d1054686c381d1d27e565e3820e367"
+  },
+  "scenarios": {
+    "00_deterministic_config": "PASS",
+    "01_attack_direction_conflict_unknown": "PASS",
+    "02_pass_accuracy_and_directional_not_evaluable": "PASS",
+    "03_box_touch_eligible": "PASS",
+    "04_not_evaluated": "PASS",
+    "05_penalty_presence_not_box_touch": "PASS",
+    "06_directional_when_resolved": "PASS",
+    "07_long_pass_metrics": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-24T12:32:57.913161Z",
+  "warnings": []
+}

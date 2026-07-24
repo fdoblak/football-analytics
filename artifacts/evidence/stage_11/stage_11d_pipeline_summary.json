@@ -1,0 +1,24 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "config_fp": "75e526ff562cca2270611f5dd281b6bff26230e7486af1941a815e33bbeccfdf"
+  },
+  "scenarios": {
+    "00_deterministic_config": "PASS",
+    "scenario_completed_with_box": "PASS",
+    "scenario_cut_replay": "PASS",
+    "scenario_hard_gap": "PASS",
+    "scenario_incomplete_pass": "PASS",
+    "scenario_long_pass": "PASS",
+    "scenario_multi_transition": "PASS",
+    "scenario_owner_change_alone": "PASS",
+    "scenario_presence_only_box": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-24T12:33:10.028442Z",
+  "warnings": [
+    "real_football_accuracy_not_yet_validated"
+  ]
+}

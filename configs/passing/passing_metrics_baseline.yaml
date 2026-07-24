@@ -1,0 +1,46 @@
+# Stage 11C target passing metrics baseline.
+# Coverage-aware. Attack direction never invented.
+# Project-generated — NOT official Opta. Real football accuracy not validated.
+
+schema_version: 1
+config_version: 1
+pipeline_id: passing_metrics_baseline
+pipeline_version: 1
+stage: "11C"
+
+metric_origin: project_generated
+definition_style: opta_style_metric_definition
+
+automatic_ceiling: provisional
+no_automatic_confirmed: true
+no_opta_claim: true
+
+thresholds:
+  long_pass_distance_m: 30.0
+  min_evaluable_passes: 1
+  min_joint_coverage_ratio: 0.1
+
+attack_direction:
+  default: unknown
+  allow_manual: true
+  allow_config: true
+  invent_forbidden: true
+  conflict_yields: unknown
+
+metrics_enabled:
+  pass_attempts: true
+  pass_completed: true
+  pass_incomplete: true
+  pass_accuracy: true
+  receptions: true
+  neutral_zone_transitions: true
+  long_pass_attempts: true
+  long_pass_completions: true
+  long_pass_ratio: true
+  box_contact_candidates: true
+  progression_1_to_2: true
+  progression_2_to_3: true
+
+safety:
+  runtime_root: /home/fdoblak/workspace/passing_metrics_checks
+  no_overwrite: true

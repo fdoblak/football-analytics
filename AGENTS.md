@@ -78,6 +78,10 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `scripts/check_human_ball_proximity_contact_baseline.py` (Stage 10B proximity / contact baseline)
 - `scripts/check_possession_control_baseline.py` (Stage 10C possession / control baseline)
 - `scripts/check_human_ball_interaction_pipeline.py` (Stage 10D fusion + Stage 10 close)
+- `scripts/check_passing_contracts.py` (Stage 11A pass / reception / progression contracts)
+- `scripts/check_pass_reception_baseline.py` (Stage 11B pass / reception baseline)
+- `scripts/check_passing_metrics_baseline.py` (Stage 11C target passing metrics baseline)
+- `scripts/check_passing_pipeline.py` (Stage 11D fusion + Stage 11 close)
 - `scripts/collect_evidence.py` (small safe evidence backfill into `artifacts/evidence/`)
 - `scripts/check_stage_cache.py`, `check_ci_workflow.py`, `check_project.py`
 - Or: `football-analytics project check --profile local --quick`
@@ -99,8 +103,11 @@ accuracy is not validated; official Opta data was not used; final customer
 visual is deferred. Stage 10 is closed: 10A contracts → 10B proximity/contact →
 10C possession/control → 10D fusion. Automatic ceiling remains provisional;
 nearest ≠ owner; missing ball ≠ loose/no-possession; real football interaction
-accuracy is not validated. Do **not** start Stage 11 without an explicit user
-prompt.
+accuracy is not validated. Stage 11 is closed: 11A contracts → 11B pass/reception →
+11C metrics → 11D fusion. Owner change alone ≠ completed pass; cut/replay/gap → no
+pass; attack direction unknown → directional metrics not_evaluable; penalty presence
+≠ box touch; real football passing accuracy is not validated. Do **not** start
+Stage 12 without an explicit user prompt.
 
 ---
 
@@ -193,6 +200,8 @@ in-tree when merged (`calibration-baseline-v0.8.0`). Stage 8 is **closed**.
 Stage 9A–9E target-player physical metrics baseline is in-tree when merged
 (`physical-metrics-baseline-v0.9.0`). Stage 9 is **closed**. Stage 10A–10D
 human-ball interaction baseline is in-tree when merged (contracts → proximity →
-possession → fusion). Stage 10 is **closed**. Do **not** start Stage 11 without
-an explicit user prompt.
+possession → fusion). Stage 10 is **closed**. Stage 11A–11D passing / reception /
+progression baseline is in-tree when merged (contracts → pass/reception → metrics →
+fusion). Stage 11 is **closed**. Do **not** start Stage 12 without an explicit
+user prompt.
 Manual Cursor flow only — no Codex/background automation.

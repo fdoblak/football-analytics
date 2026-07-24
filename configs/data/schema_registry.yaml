@@ -277,3 +277,48 @@ contracts:
       1:
         spec_path: schemas/data/v1/possession_hypotheses.json
     migration_edges: []
+
+  pass_candidates:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/pass_candidates.json
+    migration_edges: []
+
+  reception_candidates:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/reception_candidates.json
+    migration_edges: []
+
+  pass_outcomes:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/pass_outcomes.json
+    migration_edges: []
+
+  ball_progression_segments:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/ball_progression_segments.json
+    migration_edges: []
+
+  target_ball_touches:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/target_ball_touches.json
+    migration_edges: []

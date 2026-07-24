@@ -49,7 +49,7 @@ class DetectionContractTests(unittest.TestCase):
     def test_01_contracts_registered(self) -> None:
         assert_detection_contracts_registered(registry=self.reg)
         names = load_all_detection_contracts(registry=self.reg)
-        self.assertEqual(len(list_contracts(registry=self.reg)), 30)
+        self.assertEqual(len(list_contracts(registry=self.reg)), 35)
         for n in CONTRACT_NAMES:
             self.assertIn(n, names)
 

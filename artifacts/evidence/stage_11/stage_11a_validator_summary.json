@@ -1,0 +1,36 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "passing_policy_fp": "5421bbe71b0bfeb21308baa8eaeb2636ce72c71e429a4f49646e03e7a11dd8cd",
+    "schema_fps": {
+      "ball_contact_candidates": "962e1566de124f1e34f72df09c91b2768cafaebffcfc7669bb73ccef153be058",
+      "ball_progression_segments": "a3e427ab5bdc34c6efe1babd72eb23790d570d4f0268ad09cced7c287d463479",
+      "human_ball_proximity": "a8f6bf8a36402bbdb065263c24870c6ba4cc2ed37061fe7575bb472209852ebd",
+      "pass_candidates": "923f16283c45eca74d32bae4570d00935952628640a295334ad09600e8d55053",
+      "pass_outcomes": "bc65b9e3079f388854aa2b962c04b03900ec030313e89844f54012ab789584b8",
+      "physical_metric_results": "aa705bb819e10e49acb71be4d54b6bf65345b9795611b909676d2f5b596dc55b",
+      "possession_hypotheses": "ab6f816a93b188841d42fe45531463ae7dd97b7842dbbdd599ee34d2a8e6f927",
+      "projected_positions": "1860638e13c101a2c4b52ecb86e31c264f1b09ee8f255b3813fb9da8325055ba",
+      "reception_candidates": "ceb755b8cc2de05e87f48bbc645e70f2fed46b772b33ed628bb3983eef03336f",
+      "target_ball_touches": "89c3a9f24b7d01345bc59a4b54c8f2a62603dd66f49bd1f6e3f560fc595a77d3"
+    }
+  },
+  "scenarios": {
+    "01_single_target_pass_bundle": "PASS",
+    "02_owner_change_alone_not_pass": "PASS",
+    "03_cut_replay_no_pass": "PASS",
+    "04_attack_direction_unknown_blocks": "PASS",
+    "05_penalty_presence_not_box_touch": "PASS",
+    "06_box_touch_requires_contact_pitch_playable": "PASS",
+    "07_request_receipt_quality_schemas": "PASS",
+    "08_receipt_recount": "PASS",
+    "09_not_evaluated_without_gt": "PASS",
+    "10_json_schemas_load": "PASS",
+    "11_no_overwrite": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-24T12:32:50.483192Z",
+  "warnings": []
+}

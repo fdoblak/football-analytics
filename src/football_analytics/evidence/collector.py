@@ -60,6 +60,10 @@ WORKSPACE_STAGE_MAP: dict[str, str] = {
     "human_ball_proximity_contact_checks": "stage_10b",
     "possession_control_checks": "stage_10c",
     "human_ball_interaction_pipeline_checks": "stage_10d",
+    "passing_contract_checks": "stage_11a",
+    "passing_reception_checks": "stage_11b",
+    "passing_metrics_checks": "stage_11c",
+    "passing_pipeline_checks": "stage_11d",
 }
 
 

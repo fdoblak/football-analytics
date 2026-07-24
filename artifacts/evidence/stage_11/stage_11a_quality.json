@@ -1,0 +1,21 @@
+{
+  "coverage": {
+    "attack_direction_resolved_us": 0,
+    "attack_direction_unknown_blocks_directional": true,
+    "calibration_valid_us": 9000000,
+    "joint_coverage_ratio": 0.8,
+    "not_observed_us": 1000000,
+    "owner_change_alone_is_not_completed_pass": true,
+    "penalty_presence_is_not_box_touch": true,
+    "playable_us": 9500000,
+    "possession_or_contact_us": 8000000,
+    "target_confirmed_us": 10000000
+  },
+  "created_at_utc": "2026-07-24T12:32:47.631050Z",
+  "not_evaluable_reasons": [],
+  "passing_policy_fingerprint": "5421bbe71b0bfeb21308baa8eaeb2636ce72c71e429a4f49646e03e7a11dd8cd",
+  "quality_flags": [],
+  "run_id": "run_20260724T123246840074Z_920506e15272",
+  "schema_version": 1,
+  "video_id": "video_synth_01"
+}

@@ -1,0 +1,34 @@
+# Stage 11D passing fusion + Stage 11 close.
+# Runs 11B pass/reception then 11C metrics; fuses lineage/quality.
+# Project-generated — NOT official Opta. Real football accuracy not validated.
+
+schema_version: 1
+config_version: 1
+pipeline_id: passing_pipeline
+pipeline_version: 1
+stage: "11D"
+
+metric_origin: project_generated
+definition_style: opta_style_metric_definition
+
+automatic_ceiling: provisional
+no_automatic_confirmed: true
+no_opta_claim: true
+real_football_accuracy_validated: false
+
+inputs:
+  pass_reception_config: configs/passing/pass_reception_baseline.yaml
+  metrics_config: configs/passing/passing_metrics_baseline.yaml
+  policy: configs/passing/passing_policy.yaml
+
+integrity:
+  fail_on_source_mix: true
+  no_overwrite: true
+
+gate:
+  include_real_football_accuracy_not_yet_validated: true
+
+safety:
+  runtime_root: /home/fdoblak/workspace/passing_pipeline_checks
+  no_real_video: true
+  no_downloads: true

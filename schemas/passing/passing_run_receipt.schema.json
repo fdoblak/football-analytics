@@ -1,0 +1,199 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/passing/passing_run_receipt.schema.json",
+  "title": "Passing run receipt (Stage 11A)",
+  "description": "Receipt for passing contract fixtures. No Opta/accuracy claims.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "receipt_id",
+    "request_id",
+    "run_id",
+    "video_id",
+    "status",
+    "passing_policy_fingerprint",
+    "input_fingerprints",
+    "output_fingerprints",
+    "pass_candidate_count",
+    "reception_candidate_count",
+    "pass_outcome_count",
+    "progression_segment_count",
+    "target_ball_touch_count",
+    "state_counts",
+    "coverage_summary",
+    "review_count",
+    "evaluation_status",
+    "accuracy_claims",
+    "artifact_hashes",
+    "warning_codes",
+    "error_codes",
+    "created_at_utc",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "receipt_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{1,63}$"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{1,63}$"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "video_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_player_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "succeeded",
+        "partial",
+        "failed",
+        "contract_stub"
+      ]
+    },
+    "passing_policy_fingerprint": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "input_fingerprints": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "output_fingerprints": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "pass_candidate_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "reception_candidate_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "pass_outcome_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "progression_segment_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "target_ball_touch_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "state_counts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "coverage_summary": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "review_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "evaluation_status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "accuracy_claims": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "opta_accuracy_validated",
+        "real_football_accuracy_validated"
+      ],
+      "properties": {
+        "opta_accuracy_validated": {
+          "type": "boolean",
+          "const": false
+        },
+        "real_football_accuracy_validated": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "artifact_hashes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "warning_codes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "error_codes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "created_at_utc": {
+      "type": "string",
+      "minLength": 10
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "stage",
+        "label",
+        "no_real_passing_inference"
+      ],
+      "properties": {
+        "stage": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "no_real_passing_inference": {
+          "type": "boolean",
+          "const": true
+        }
+      }
+    }
+  }
+}

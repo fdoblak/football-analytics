@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/passing/manual_review_queue.schema.json",
+  "title": "Passing manual review queue (Stage 11A)",
+  "description": "Append-only review queue for pass/reception/outcome/box-touch confirmation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "queue_id",
+    "run_id",
+    "video_id",
+    "entries",
+    "created_at_utc"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "queue_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{1,63}$"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "video_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "entry_id",
+          "subject_type",
+          "subject_id",
+          "requested_action",
+          "current_state",
+          "append_only",
+          "created_at_utc"
+        ],
+        "properties": {
+          "entry_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "subject_type": {
+            "type": "string",
+            "enum": [
+              "pass_candidate",
+              "reception_candidate",
+              "pass_outcome",
+              "progression_segment",
+              "target_ball_touch"
+            ]
+          },
+          "subject_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "requested_action": {
+            "type": "string",
+            "enum": [
+              "confirm",
+              "reject",
+              "revoke",
+              "mark_contested",
+              "request_more_evidence"
+            ]
+          },
+          "current_state": {
+            "type": "string",
+            "enum": [
+              "candidate",
+              "provisional",
+              "confirmed",
+              "contested",
+              "unknown",
+              "not_evaluable",
+              "rejected"
+            ]
+          },
+          "append_only": {
+            "type": "boolean",
+            "const": true
+          },
+          "notes": {
+            "type": "string"
+          },
+          "created_at_utc": {
+            "type": "string",
+            "minLength": 10
+          }
+        }
+      }
+    },
+    "created_at_utc": {
+      "type": "string",
+      "minLength": 10
+    }
+  }
+}

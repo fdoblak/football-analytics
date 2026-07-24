@@ -1,0 +1,20 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "config_fp": "bc046795afd01b85544453db1421a1af00a366e170801bf1425de976693d334f"
+  },
+  "scenarios": {
+    "00_deterministic_config": "PASS",
+    "01_completed_pass": "PASS",
+    "02_incomplete_pass": "PASS",
+    "03_owner_change_alone": "PASS",
+    "04_cut_replay": "PASS",
+    "05_long_pass": "PASS",
+    "06_hard_gap": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-24T12:32:53.820219Z",
+  "warnings": []
+}

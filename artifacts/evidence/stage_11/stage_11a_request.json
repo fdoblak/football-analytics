@@ -1,0 +1,23 @@
+{
+  "cache_enabled": false,
+  "calibration_artifact_ref": "synthetic://calibration",
+  "contact_candidates_ref": "synthetic://ball_contact_candidates",
+  "created_at_utc": "2026-07-24T12:32:47.631028Z",
+  "identity_artifact_ref": "synthetic://identity",
+  "no_overwrite": true,
+  "output_root": "/home/fdoblak/workspace/passing_contract_checks",
+  "passing_policy_fingerprint": "5421bbe71b0bfeb21308baa8eaeb2636ce72c71e429a4f49646e03e7a11dd8cd",
+  "possession_hypotheses_ref": "synthetic://possession_hypotheses",
+  "projected_positions_ref": "synthetic://projected_positions",
+  "provenance": {
+    "label": "synthetic_contract_fixture",
+    "no_real_passing_inference": true,
+    "notes": "no_real_passing_inference",
+    "stage": "11A"
+  },
+  "request_id": "pass_req_01",
+  "run_id": "run_20260724T123246840074Z_920506e15272",
+  "schema_version": 1,
+  "target_player_id": "target_player_01",
+  "video_id": "video_synth_01"
+}

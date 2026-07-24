@@ -57,7 +57,7 @@ JSON_SCHEMA_NAMES: tuple[str, ...] = (
     "human_ball_interaction_manual_review_queue",
 )
 
-EXPECTED_REGISTRY_CONTRACT_COUNT = 30
+EXPECTED_REGISTRY_CONTRACT_COUNT = 35
 
 
 def load_interaction_contract(name: str, version: int = 1, *, registry: Any = None) -> ContractSpec:

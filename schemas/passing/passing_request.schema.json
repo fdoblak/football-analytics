@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/passing/passing_request.schema.json",
+  "title": "Passing request (Stage 11A)",
+  "description": "Request for passing/reception/progression contract fixtures. Synthetic only.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "run_id",
+    "video_id",
+    "possession_hypotheses_ref",
+    "contact_candidates_ref",
+    "projected_positions_ref",
+    "calibration_artifact_ref",
+    "identity_artifact_ref",
+    "passing_policy_fingerprint",
+    "output_root",
+    "no_overwrite",
+    "created_at_utc",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{1,63}$"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "video_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_player_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "possession_hypotheses_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contact_candidates_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "projected_positions_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "calibration_artifact_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "identity_artifact_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "passing_policy_fingerprint": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "output_root": {
+      "type": "string",
+      "minLength": 1
+    },
+    "no_overwrite": {
+      "type": "boolean",
+      "const": true
+    },
+    "cache_enabled": {
+      "type": "boolean"
+    },
+    "created_at_utc": {
+      "type": "string",
+      "minLength": 10
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "stage",
+        "label",
+        "no_real_passing_inference"
+      ],
+      "properties": {
+        "stage": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "no_real_passing_inference": {
+          "type": "boolean",
+          "const": true
+        }
+      }
+    }
+  }
+}
