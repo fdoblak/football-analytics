@@ -57,4 +57,4 @@ JSON-only under `artifacts/evidence/stage_12/`.
 
 ## Next
 
-Do not start Stage 13 without an explicit user prompt. Do not invent Opta or real-match accuracy claims.
+Stage 13 is closed; do not start Stage 14 without an explicit user prompt. Do not invent Opta or real-match accuracy claims.

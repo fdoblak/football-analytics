@@ -1,0 +1,15 @@
+# Stage 13E target events fusion pipeline.
+schema_version: 1
+config_version: 1
+stage: "13E"
+inputs:
+  replay_config: configs/events/replay_candidate_baseline.yaml
+  attack_config: configs/events/attack_direction_resolver.yaml
+  ledger_config: configs/events/ledger_baseline.yaml
+  metrics_config: configs/events/target_metrics_baseline.yaml
+  policy: configs/events/events_policy.yaml
+gate_hint: "PASS_WITH_FINDINGS — TARGET EVENTS PIPELINE ACTIVE; STAGE 13 CLOSED; REAL FOOTBALL ACCURACY NOT YET VALIDATED"
+runtime_root: /home/fdoblak/workspace/events_pipeline_checks
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false

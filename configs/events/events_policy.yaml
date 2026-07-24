@@ -1,0 +1,81 @@
+# Stage 13 target-events policy.
+schema_version: 1
+policy_version: 1
+config_version: 1
+stage: "13"
+contracts_only: true
+no_real_events_inference: true
+metric_origin: project_generated
+definition_style: opta_style_metric_definition
+
+result_levels:
+  - candidate
+  - provisional
+  - confirmed
+  - contested
+  - unknown
+  - not_evaluable
+  - rejected
+
+automatic_baseline:
+  max_state: provisional
+  confirmed_requires: [scoped_manual_review]
+  never_invent_live_when_replay_uncertain: true
+  never_invent_team_names: true
+  conflict_yields_unknown: true
+  append_only_ledger: true
+  no_destructive_merge: true
+  evaluation_leakage_guard: true
+
+eligibility:
+  require_video_time_us: true
+  interval_semantics: half_open_start_end
+  live_event_requires:
+    replay_status_live: true
+    not_unknown_replay: true
+  replay_uncertain_blocks_live: true
+
+lifecycle:
+  terminate_on:
+    - shot_cut
+    - replay
+    - non_playable
+    - hard_gap
+  cut_replay_gap_no_event: true
+  source_observations_immutable: true
+  state_transitions_auditable: true
+  revocation_append_only: true
+  cross_run_video_scope_hard_fail: true
+
+coverage:
+  components:
+    - target_confirmed
+    - live_eligible
+    - attack_direction
+    - not_observed
+  low_coverage_status: not_evaluable
+
+forbidden_outputs:
+  opta_accuracy_claim: true
+  real_football_accuracy_claim: true
+  automatic_confirmed_event: true
+  invented_live_from_uncertain_replay: true
+  invented_team_names: true
+
+review:
+  manual_review_queue_enabled: true
+  confirmed_via_manual_review_only_when_policy_allows: true
+
+safety:
+  no_real_events_inference: true
+  no_opta_claim: true
+  no_real_video: true
+  no_downloads: true
+  runtime_root: /home/fdoblak/workspace/events_contract_checks
+
+notes:
+  - Stage 13A replay candidate baseline + live eligibility helpers.
+  - Stage 13B period-scoped attack direction resolver.
+  - Stage 13C append-only target event ledger.
+  - Stage 13D coverage-aware target event metrics.
+  - Stage 13E fusion close.

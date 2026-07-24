@@ -1,0 +1,21 @@
+# Stage 13B explainable attack-direction resolver.
+schema_version: 1
+config_version: 1
+stage: "13B"
+invent_forbidden: true
+conflict_yields: unknown
+never_invent_team_names: true
+period_scoped: true
+half_scoped: true
+half_boundary_direction_change: true
+anonymous_team_only: true
+manual_override_precedence: true
+default_direction: unknown
+allowed_directions:
+  - toward_goal_a
+  - toward_goal_b
+  - unknown
+runtime_root: /home/fdoblak/workspace/attack_direction_checks
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false

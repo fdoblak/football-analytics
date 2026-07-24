@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/events/attack_direction_evidence.schema.json",
+  "title": "Period-scoped attack direction evidence (Stage 13B)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "video_id",
+    "period_id",
+    "half_id",
+    "attack_direction",
+    "evidence_source",
+    "evidence_refs",
+    "conflict",
+    "invented",
+    "half_boundary_flipped",
+    "manual_override",
+    "created_at_utc"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "video_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "period_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "half_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "anonymous_team_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "attack_direction": {
+      "type": "string",
+      "enum": [
+        "toward_goal_a",
+        "toward_goal_b",
+        "unknown"
+      ]
+    },
+    "evidence_source": {
+      "type": "string",
+      "enum": [
+        "manual",
+        "config",
+        "none",
+        "conflict",
+        "half_boundary"
+      ]
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "conflict": {
+      "type": "boolean"
+    },
+    "invented": {
+      "type": "boolean",
+      "const": false
+    },
+    "half_boundary_flipped": {
+      "type": "boolean"
+    },
+    "manual_override": {
+      "type": "boolean"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_at_utc": {
+      "type": "string",
+      "minLength": 10
+    }
+  }
+}

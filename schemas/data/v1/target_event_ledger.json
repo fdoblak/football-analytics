@@ -1,0 +1,141 @@
+{
+  "contract_name": "target_event_ledger",
+  "version": 1,
+  "description": "Stage 13C append-only canonical target-player event ledger merging Stage 10-12 sources. No destructive merge. Project-generated Opta-style — not official Opta.",
+  "fields": [
+    {"name": "run_id", "type": "string", "nullable": false},
+    {"name": "video_id", "type": "string", "nullable": false},
+    {"name": "ledger_event_id", "type": "string", "nullable": false},
+    {"name": "event_family", "type": "string", "nullable": false},
+    {"name": "event_type", "type": "string", "nullable": false},
+    {"name": "source_contract", "type": "string", "nullable": false},
+    {"name": "source_event_id", "type": "string", "nullable": false},
+    {"name": "source_refs", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "lineage_json", "type": "string", "nullable": true},
+    {"name": "start_time_us", "type": "int64", "nullable": false},
+    {"name": "end_time_us", "type": "int64", "nullable": false},
+    {"name": "period_id", "type": "string", "nullable": false},
+    {"name": "half_id", "type": "string", "nullable": false},
+    {"name": "anonymous_team_id", "type": "string", "nullable": true},
+    {"name": "target_relationship", "type": "string", "nullable": false},
+    {"name": "target_human_track_id", "type": "int64", "nullable": true},
+    {"name": "outcome", "type": "string", "nullable": false},
+    {"name": "event_state", "type": "string", "nullable": false},
+    {"name": "replay_status", "type": "string", "nullable": false},
+    {"name": "live_event_eligible", "type": "bool", "nullable": false},
+    {"name": "suppressed_duplicate", "type": "bool", "nullable": false},
+    {"name": "suppressed_by_id", "type": "string", "nullable": true},
+    {"name": "overlap_group_id", "type": "string", "nullable": true},
+    {"name": "revision_status", "type": "string", "nullable": false},
+    {"name": "current_revision_id", "type": "string", "nullable": true},
+    {"name": "review_status", "type": "string", "nullable": false},
+    {"name": "manual_review_required", "type": "bool", "nullable": false},
+    {"name": "automatic_ceiling", "type": "string", "nullable": false},
+    {"name": "confidence", "type": "float32", "nullable": true},
+    {"name": "coverage", "type": "float32", "nullable": true},
+    {"name": "evidence_refs", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "reason_codes", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "quality_flags", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "metric_origin", "type": "string", "nullable": false},
+    {"name": "definition_style", "type": "string", "nullable": false},
+    {"name": "policy_fingerprint", "type": "string", "nullable": false},
+    {"name": "attributes_json", "type": "string", "nullable": true},
+    {"name": "provenance_json", "type": "string", "nullable": true},
+    {"name": "contract_version", "type": "int32", "nullable": false}
+  ],
+  "primary_key": ["run_id", "video_id", "ledger_event_id"],
+  "foreign_keys": [],
+  "partition_by": ["run_id", "video_id"],
+  "sort_by": ["run_id", "video_id", "start_time_us", "ledger_event_id"],
+  "semantic_rules": [
+    {"id": "run_id_format", "rule": "run_id_stage2b"},
+    {"id": "video_id_safe", "rule": "safe_identifier", "field": "video_id"},
+    {"id": "ledger_id_safe", "rule": "safe_identifier", "field": "ledger_event_id"},
+    {"id": "start_ge0", "rule": "int_ge", "field": "start_time_us", "value": 0},
+    {"id": "end_ge0", "rule": "int_ge", "field": "end_time_us", "value": 0},
+    {
+      "id": "event_family_enum",
+      "rule": "enum",
+      "field": "event_family",
+      "values": [
+        "pass",
+        "reception",
+        "progression",
+        "touch",
+        "take_on",
+        "ground_duel",
+        "aerial_duel",
+        "tackle",
+        "recovery",
+        "turnover",
+        "clearance",
+        "possession",
+        "contact",
+        "other"
+      ]
+    },
+    {
+      "id": "target_rel_enum",
+      "rule": "enum",
+      "field": "target_relationship",
+      "values": ["confirmed_target", "candidate_target", "non_target", "anonymous", "unknown"]
+    },
+    {
+      "id": "event_state_enum",
+      "rule": "enum",
+      "field": "event_state",
+      "values": ["candidate", "provisional", "confirmed", "contested", "unknown", "not_evaluable", "rejected"]
+    },
+    {
+      "id": "replay_status_enum",
+      "rule": "enum",
+      "field": "replay_status",
+      "values": ["live", "replay", "replay_transition", "unknown"]
+    },
+    {
+      "id": "revision_status_enum",
+      "rule": "enum",
+      "field": "revision_status",
+      "values": ["active", "revised", "revoked", "superseded"]
+    },
+    {
+      "id": "ceiling_enum",
+      "rule": "enum",
+      "field": "automatic_ceiling",
+      "values": ["candidate", "provisional"]
+    },
+    {
+      "id": "review_enum",
+      "rule": "enum",
+      "field": "review_status",
+      "values": ["unreviewed", "reviewed", "rejected", "not_required", "revoked"]
+    },
+    {
+      "id": "metric_origin_enum",
+      "rule": "enum",
+      "field": "metric_origin",
+      "values": ["project_generated"]
+    },
+    {
+      "id": "definition_style_enum",
+      "rule": "enum",
+      "field": "definition_style",
+      "values": ["opta_style_metric_definition"]
+    },
+    {"id": "source_refs_no_null", "rule": "list_no_null_items", "field": "source_refs"},
+    {"id": "evidence_no_null", "rule": "list_no_null_items", "field": "evidence_refs"},
+    {"id": "reason_no_null", "rule": "list_no_null_items", "field": "reason_codes"},
+    {"id": "quality_no_null", "rule": "list_no_null_items", "field": "quality_flags"},
+    {"id": "contract_version_ge1", "rule": "int_ge", "field": "contract_version", "value": 1}
+  ],
+  "table_metadata": {
+    "stage": "13C",
+    "append_only": "true",
+    "no_destructive_merge": "true",
+    "evaluation_leakage_guard": "true",
+    "metric_origin": "project_generated",
+    "definition_style": "opta_style_metric_definition",
+    "interval_semantics": "half_open_start_end",
+    "time_base": "video_time_us"
+  }
+}

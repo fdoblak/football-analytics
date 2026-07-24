@@ -1,0 +1,73 @@
+{
+  "contract_name": "event_revisions",
+  "version": 1,
+  "description": "Stage 13C append-only revision/revocation records for target_event_ledger entries. Never mutates prior ledger rows in place.",
+  "fields": [
+    {"name": "run_id", "type": "string", "nullable": false},
+    {"name": "video_id", "type": "string", "nullable": false},
+    {"name": "revision_id", "type": "string", "nullable": false},
+    {"name": "ledger_event_id", "type": "string", "nullable": false},
+    {"name": "revision_action", "type": "string", "nullable": false},
+    {"name": "previous_revision_id", "type": "string", "nullable": true},
+    {"name": "reason_codes", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "review_status", "type": "string", "nullable": false},
+    {"name": "actor", "type": "string", "nullable": false},
+    {"name": "created_at_utc", "type": "string", "nullable": false},
+    {"name": "payload_json", "type": "string", "nullable": true},
+    {"name": "evidence_refs", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "metric_origin", "type": "string", "nullable": false},
+    {"name": "definition_style", "type": "string", "nullable": false},
+    {"name": "policy_fingerprint", "type": "string", "nullable": false},
+    {"name": "contract_version", "type": "int32", "nullable": false}
+  ],
+  "primary_key": ["run_id", "video_id", "revision_id"],
+  "foreign_keys": [],
+  "partition_by": ["run_id", "video_id"],
+  "sort_by": ["run_id", "video_id", "created_at_utc", "revision_id"],
+  "semantic_rules": [
+    {"id": "run_id_format", "rule": "run_id_stage2b"},
+    {"id": "video_id_safe", "rule": "safe_identifier", "field": "video_id"},
+    {"id": "revision_id_safe", "rule": "safe_identifier", "field": "revision_id"},
+    {"id": "ledger_id_safe", "rule": "safe_identifier", "field": "ledger_event_id"},
+    {
+      "id": "revision_action_enum",
+      "rule": "enum",
+      "field": "revision_action",
+      "values": ["revise", "revoke", "reinstate", "suppress_duplicate", "manual_override"]
+    },
+    {
+      "id": "actor_enum",
+      "rule": "enum",
+      "field": "actor",
+      "values": ["system", "manual_review", "pipeline"]
+    },
+    {
+      "id": "review_enum",
+      "rule": "enum",
+      "field": "review_status",
+      "values": ["unreviewed", "reviewed", "rejected", "not_required", "revoked"]
+    },
+    {
+      "id": "metric_origin_enum",
+      "rule": "enum",
+      "field": "metric_origin",
+      "values": ["project_generated"]
+    },
+    {
+      "id": "definition_style_enum",
+      "rule": "enum",
+      "field": "definition_style",
+      "values": ["opta_style_metric_definition"]
+    },
+    {"id": "reason_no_null", "rule": "list_no_null_items", "field": "reason_codes"},
+    {"id": "evidence_no_null", "rule": "list_no_null_items", "field": "evidence_refs"},
+    {"id": "contract_version_ge1", "rule": "int_ge", "field": "contract_version", "value": 1}
+  ],
+  "table_metadata": {
+    "stage": "13C",
+    "append_only": "true",
+    "no_in_place_mutation": "true",
+    "metric_origin": "project_generated",
+    "definition_style": "opta_style_metric_definition"
+  }
+}

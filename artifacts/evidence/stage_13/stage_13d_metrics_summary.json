@@ -1,0 +1,16 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {},
+  "gate": "PASS \u2014 TARGET EVENT METRICS ACTIVE",
+  "scenarios": {
+    "01_requested_metrics": "PASS",
+    "02_metric_fields": "PASS",
+    "03_attack_unknown_blocks": "PASS",
+    "04_pass_attempts": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-24T13:15:28.166689Z",
+  "warnings": []
+}

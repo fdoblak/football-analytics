@@ -1,0 +1,17 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {},
+  "gate": "PASS \u2014 TARGET EVENT LEDGER ACTIVE",
+  "scenarios": {
+    "01_full": "PASS",
+    "02_dedup": "PASS",
+    "03_source_preservation": "PASS",
+    "04_append_only": "PASS",
+    "05_replay_blocks_live": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-24T13:15:26.610779Z",
+  "warnings": []
+}

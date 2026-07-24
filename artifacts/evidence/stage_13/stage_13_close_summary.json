@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "stage": "13",
+  "status": "CLOSED",
+  "gate": "PASS_WITH_FINDINGS \u2014 TARGET EVENTS PIPELINE ACTIVE; STAGE 13 CLOSED; REAL FOOTBALL ACCURACY NOT YET VALIDATED",
+  "registry_contract_count": 45,
+  "new_contracts": [
+    "replay_candidates",
+    "target_event_ledger",
+    "event_revisions"
+  ],
+  "real_football_accuracy_validated": false,
+  "opta_accuracy_validated": false,
+  "created_at_utc": "2026-07-24T13:15:31.033870Z"
+}

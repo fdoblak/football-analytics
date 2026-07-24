@@ -1,0 +1,99 @@
+{
+  "contract_name": "replay_candidates",
+  "version": 1,
+  "description": "Stage 13A conservative replay candidate segments. Uncertain replay never implies live. Project-generated — not official Opta.",
+  "fields": [
+    {"name": "run_id", "type": "string", "nullable": false},
+    {"name": "video_id", "type": "string", "nullable": false},
+    {"name": "replay_candidate_id", "type": "string", "nullable": false},
+    {"name": "start_time_us", "type": "int64", "nullable": false},
+    {"name": "end_time_us", "type": "int64", "nullable": false},
+    {"name": "start_frame_index", "type": "int64", "nullable": true},
+    {"name": "end_frame_index_exclusive", "type": "int64", "nullable": true},
+    {"name": "replay_status", "type": "string", "nullable": false},
+    {"name": "implies_live", "type": "bool", "nullable": false},
+    {"name": "live_event_eligible", "type": "bool", "nullable": false},
+    {"name": "camera_position", "type": "string", "nullable": false},
+    {"name": "view_family", "type": "string", "nullable": false},
+    {"name": "graphics_status", "type": "string", "nullable": false},
+    {"name": "scoreboard_interruption", "type": "bool", "nullable": false},
+    {"name": "transition_hint", "type": "string", "nullable": false},
+    {"name": "confidence", "type": "float32", "nullable": true},
+    {"name": "evidence_refs", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "reason_codes", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "quality_flags", "type": "list", "nullable": false, "value_type": "string"},
+    {"name": "review_status", "type": "string", "nullable": false},
+    {"name": "manual_review_required", "type": "bool", "nullable": false},
+    {"name": "automatic_ceiling", "type": "string", "nullable": false},
+    {"name": "metric_origin", "type": "string", "nullable": false},
+    {"name": "definition_style", "type": "string", "nullable": false},
+    {"name": "policy_fingerprint", "type": "string", "nullable": false},
+    {"name": "provenance_json", "type": "string", "nullable": true},
+    {"name": "contract_version", "type": "int32", "nullable": false}
+  ],
+  "primary_key": ["run_id", "video_id", "replay_candidate_id"],
+  "foreign_keys": [],
+  "partition_by": ["run_id", "video_id"],
+  "sort_by": ["run_id", "video_id", "start_time_us", "replay_candidate_id"],
+  "semantic_rules": [
+    {"id": "run_id_format", "rule": "run_id_stage2b"},
+    {"id": "video_id_safe", "rule": "safe_identifier", "field": "video_id"},
+    {"id": "replay_id_safe", "rule": "safe_identifier", "field": "replay_candidate_id"},
+    {"id": "start_ge0", "rule": "int_ge", "field": "start_time_us", "value": 0},
+    {"id": "end_ge0", "rule": "int_ge", "field": "end_time_us", "value": 0},
+    {
+      "id": "replay_status_enum",
+      "rule": "enum",
+      "field": "replay_status",
+      "values": ["live", "replay", "replay_transition", "unknown"]
+    },
+    {
+      "id": "camera_position_enum",
+      "rule": "enum",
+      "field": "camera_position",
+      "values": ["sideline", "behind_goal", "corner", "overhead", "field_level", "unknown"]
+    },
+    {
+      "id": "transition_enum",
+      "rule": "enum",
+      "field": "transition_hint",
+      "values": ["hard_cut", "dissolve", "fade", "wipe", "flash", "scoreboard", "none", "unknown"]
+    },
+    {
+      "id": "ceiling_enum",
+      "rule": "enum",
+      "field": "automatic_ceiling",
+      "values": ["candidate", "provisional"]
+    },
+    {
+      "id": "review_enum",
+      "rule": "enum",
+      "field": "review_status",
+      "values": ["unreviewed", "reviewed", "rejected", "not_required", "revoked"]
+    },
+    {
+      "id": "metric_origin_enum",
+      "rule": "enum",
+      "field": "metric_origin",
+      "values": ["project_generated"]
+    },
+    {
+      "id": "definition_style_enum",
+      "rule": "enum",
+      "field": "definition_style",
+      "values": ["opta_style_metric_definition"]
+    },
+    {"id": "evidence_no_null", "rule": "list_no_null_items", "field": "evidence_refs"},
+    {"id": "reason_no_null", "rule": "list_no_null_items", "field": "reason_codes"},
+    {"id": "quality_no_null", "rule": "list_no_null_items", "field": "quality_flags"},
+    {"id": "contract_version_ge1", "rule": "int_ge", "field": "contract_version", "value": 1}
+  ],
+  "table_metadata": {
+    "stage": "13A",
+    "never_invent_live_when_uncertain": "true",
+    "metric_origin": "project_generated",
+    "definition_style": "opta_style_metric_definition",
+    "interval_semantics": "half_open_start_end",
+    "time_base": "video_time_us"
+  }
+}

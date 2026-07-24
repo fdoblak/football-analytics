@@ -87,6 +87,12 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `scripts/check_ground_duel_baseline.py` (Stage 12C ground / tackle / recovery / turnover baseline)
 - `scripts/check_aerial_clearance_baseline.py` (Stage 12D aerial / clearance baseline)
 - `scripts/check_duels_pipeline.py` (Stage 12E fusion + Stage 12 close)
+- `scripts/check_events_contracts.py` (Stage 13 contracts: replay / ledger / revisions)
+- `scripts/check_replay_candidate_baseline.py` (Stage 13A replay candidate baseline)
+- `scripts/check_attack_direction_resolver.py` (Stage 13B period-scoped attack direction)
+- `scripts/check_target_event_ledger.py` (Stage 13C canonical target event ledger)
+- `scripts/check_target_event_metrics.py` (Stage 13D target event metrics aggregation)
+- `scripts/check_events_pipeline.py` (Stage 13E fusion + Stage 13 close)
 - `scripts/collect_evidence.py` (small safe evidence backfill into `artifacts/evidence/`)
 - `scripts/check_stage_cache.py`, `check_ci_workflow.py`, `check_project.py`
 - Or: `football-analytics project check --profile local --quick`
@@ -115,7 +121,12 @@ pass; attack direction unknown → directional metrics not_evaluable; penalty pr
 12A contracts → 12B take-on → 12C ground/tackle/recovery/turnover → 12D aerial/clearance
 → 12E fusion. Nearby opponent alone ≠ take-on; nearest/track switch ≠ duel outcome;
 monocular aerial is conservative (no exact 3D height); long ball alone ≠ clearance;
-real football duels/events accuracy is not validated. Do **not** start Stage 13
+real football duels/events accuracy is not validated. Stage 13 is closed:
+13A replay/live/camera_position/dedup → 13B attack-direction resolver → 13C
+append-only target event ledger → 13D coverage-aware metrics → 13E fusion.
+Never invent live when replay uncertain; conflict/unknown attack direction →
+directional metrics not_evaluable; no invented team names; real football
+target-event accuracy is not validated. Do **not** start Stage 14
 without an explicit user prompt.
 
 ---
@@ -213,6 +224,8 @@ possession → fusion). Stage 10 is **closed**. Stage 11A–11D passing / recept
 progression baseline is in-tree when merged (contracts → pass/reception → metrics →
 fusion). Stage 11 is **closed**. Stage 12A–12E duels / competitive-events baseline is
 in-tree when merged (contracts → take-on → ground family → aerial/clearance → fusion).
-Stage 12 is **closed**. Do **not** start Stage 13 without an explicit
+Stage 12 is **closed**. Stage 13A–13E target-events baseline is in-tree when
+merged (replay/live context → attack direction → ledger → metrics → fusion).
+Stage 13 is **closed**. Do **not** start Stage 14 without an explicit
 user prompt.
 Manual Cursor flow only — no Codex/background automation.

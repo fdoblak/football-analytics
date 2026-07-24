@@ -1,0 +1,22 @@
+# Stage 13C target event ledger baseline.
+schema_version: 1
+config_version: 1
+stage: "13C"
+append_only: true
+no_destructive_merge: true
+temporal_dedup: true
+overlapping_candidate_resolution: true
+source_preservation: true
+lineage_required: true
+replay_live_eligibility: true
+revision_revocation_append_only: true
+evaluation_leakage_guard: true
+automatic_ceiling: provisional
+dedup:
+  same_family_overlap_us: 500000
+  prefer_higher_confidence: true
+  prefer_confirmed_target: true
+runtime_root: /home/fdoblak/workspace/target_event_ledger_checks
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false

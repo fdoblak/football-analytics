@@ -14,14 +14,15 @@ Quick orientation for which stage owns which runtime/workspace roots and close s
 | 09 | CLOSED | Physical metrics | physical checks | `stage_09/` |
 | 10 | CLOSED | Human–ball interaction | interaction checks | `stage_10/` |
 | 11 | CLOSED | Passing / reception / progression | `passing_*_checks` | `stage_11/` |
-| **12** | **CLOSED** | **Duels / take-on / tackle / recovery / turnover / aerial / clearance** | `duels_contract_checks`, `take_on_checks`, `ground_duel_checks`, `aerial_clearance_checks`, `duels_pipeline_checks` | `stage_12/` |
+| 12 | CLOSED | Duels / take-on / tackle / recovery / turnover / aerial / clearance | `duels_*_checks` | `stage_12/` |
+| **13** | **CLOSED** | **Target event ledger / metrics aggregation** | `events_contract_checks`, `replay_candidate_checks`, `attack_direction_checks`, `target_event_ledger_checks`, `target_event_metrics_checks`, `events_pipeline_checks` | `stage_13/` |
 
-## Stage 12 close gate
+## Stage 13 close gate
 
-`PASS_WITH_FINDINGS — DUELS EVENTS PIPELINE ACTIVE; STAGE 12 CLOSED; REAL FOOTBALL ACCURACY NOT YET VALIDATED`
+`PASS_WITH_FINDINGS — TARGET EVENTS PIPELINE ACTIVE; STAGE 13 CLOSED; REAL FOOTBALL ACCURACY NOT YET VALIDATED`
 
 ## Notes
 
-- Registry contract count after Stage 12: **42**
-- Do not start Stage 13 without an explicit user prompt
+- Registry contract count after Stage 13: **45**
+- Do not start Stage 14 without an explicit user prompt
 - Real football / Opta accuracy is not validated

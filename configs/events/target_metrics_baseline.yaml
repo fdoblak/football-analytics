@@ -1,0 +1,43 @@
+# Stage 13D coverage-aware target event metrics.
+schema_version: 1
+config_version: 1
+stage: "13D"
+dictionary_version: 1
+metric_origin: project_generated
+definition_style: opta_style_metric_definition
+attack_direction:
+  invent_forbidden: true
+  conflict_yields: unknown
+  default: unknown
+thresholds:
+  min_evaluable_passes: 1
+  min_evaluable_duels: 1
+  min_evaluable_take_ons: 1
+  min_evaluable_aerials: 1
+  min_evaluable_long_passes: 1
+  long_pass_distance_m: 30.0
+  min_joint_coverage_ratio: 0.1
+requested_metrics:
+  - pass_attempts
+  - pass_completion_rate
+  - receptions
+  - progressive_passes_def_to_mid
+  - progressive_passes_mid_to_att
+  - long_pass_attempts
+  - long_pass_completion_rate
+  - dribbles_successful
+  - dribbles_failed
+  - take_on_success_rate
+  - duels_won
+  - duel_win_rate
+  - aerial_duels
+  - aerial_win_rate
+  - tackles_interceptions_recoveries
+  - ball_losses
+  - clearances
+  - penalty_area_ball_touches
+  - interaction_coverage
+runtime_root: /home/fdoblak/workspace/target_event_metrics_checks
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false

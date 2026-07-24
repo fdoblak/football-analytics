@@ -1,0 +1,24 @@
+# Stage 13A conservative replay candidate baseline.
+schema_version: 1
+config_version: 1
+stage: "13A"
+never_invent_live_when_uncertain: true
+automatic_ceiling: provisional
+thresholds:
+  dissolve_score_min: 0.55
+  graphics_overlay_min: 0.45
+  scoreboard_interruption_overlay_min: 0.60
+  replay_confidence_min: 0.55
+  live_confidence_min: 0.70
+supported_camera_position_by_view:
+  main_broadcast: sideline
+  goal_view: behind_goal
+  aerial: overhead
+  tactical: sideline
+# All other view families → unknown
+unsupported_views_camera_position: unknown
+always_unknown_if_uncertain: true
+runtime_root: /home/fdoblak/workspace/replay_candidate_checks
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false

@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/events/events_evaluation.schema.json",
+  "title": "Target events evaluation (Stage 13)",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "evaluation_status",
+    "real_football_accuracy_validated",
+    "opta_accuracy_validated"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "evaluation_status": {
+      "type": "string"
+    },
+    "real_football_accuracy_validated": {
+      "type": "boolean",
+      "const": false
+    },
+    "opta_accuracy_validated": {
+      "type": "boolean",
+      "const": false
+    }
+  }
+}
