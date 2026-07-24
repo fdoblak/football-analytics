@@ -1,0 +1,81 @@
+# Stage 10D human-ball interaction fusion + Stage 10 close.
+# Runs 10B proximity/contact then 10C possession; fuses lineage/quality.
+# Project-generated — NOT official Opta. Real football accuracy not validated.
+
+schema_version: 1
+config_version: 1
+pipeline_id: human_ball_interaction_pipeline
+pipeline_version: 1
+stage: "10D"
+
+metric_origin: project_generated
+definition_style: opta_style_metric_definition
+
+automatic_ceiling: provisional
+nearest_player_is_not_possession: true
+no_real_event_metrics: true
+no_automatic_confirmed: true
+separate_operational_from_event_accuracy: true
+
+stages:
+  proximity_contact: "10B"
+  possession_control: "10C"
+  fusion: "10D"
+
+inputs:
+  proximity_config: configs/interaction/human_ball_proximity_contact_baseline.yaml
+  possession_config: configs/interaction/possession_control_baseline.yaml
+  interaction_policy: configs/interaction/human_ball_interaction_policy.yaml
+
+integrity:
+  require_matching_run_video: true
+  require_fresh_receipts: true
+  fail_on_source_mix: true
+  silent_repair_forbidden: true
+  validate_interaction_bundle: true
+
+quality_gate:
+  result_levels:
+    - candidate
+    - provisional
+    - confirmed
+    - contested
+    - unknown
+    - not_evaluable
+    - rejected
+  zero_distinct_from_null_and_not_evaluable: true
+  missing_ball_is_not_no_possession: true
+  nearest_is_not_owner: true
+  no_official_opta_claim: true
+  operational_metrics_are_not_event_accuracy: true
+
+output_policy:
+  write_proximity: true
+  write_contact_candidates: true
+  write_possession_hypotheses: true
+  write_summary: true
+  write_quality: true
+  write_receipt: true
+  write_evaluation: true
+  write_review_queue: true
+  write_visuals_to_git: false
+  no_overwrite: true
+  atomic: true
+
+forbidden:
+  pass_count: true
+  dribble_count: true
+  duel_count: true
+  box_touch_count: true
+  automatic_confirmed: true
+  opta_or_accuracy_claim: true
+  stage_11_events: true
+
+runtime_root: /home/fdoblak/workspace/human_ball_interaction_pipeline_checks
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+notes:
+  - Stage 10D fuses 10B+10C into one interaction package and closes Stage 10.
+  - Event extraction starts at Stage 11.

@@ -1,0 +1,26 @@
+{
+  "contact_candidate_count": 1,
+  "event_metrics_produced": false,
+  "label": "controlled_carry_sample",
+  "possession_hypothesis_count": 1,
+  "possession_state_counts": {
+    "candidate": 1
+  },
+  "possession_states_sample": [
+    {
+      "automatic_ceiling": "provisional",
+      "hypothesis_id": "poss_0001",
+      "owner_human_track_id": 1,
+      "possession_state": "candidate",
+      "reason_codes": [
+        "TEMPORAL_PROXIMITY_SUPPORT",
+        "CONTACT_CANDIDATE_SUPPORT"
+      ],
+      "termination_reason": "none"
+    }
+  ],
+  "proximity_row_count": 5,
+  "real_football_accuracy_validated": false,
+  "run_id": "run_20260724T120531416897Z_9d6f06d8fa05",
+  "video_id": "video_synth_10d"
+}

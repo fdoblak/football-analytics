@@ -1,0 +1,76 @@
+# Stage 10C possession / control baseline.
+# Project-generated Opta-style thresholds — NOT official Opta.
+# Automatic ceiling is provisional; confirmed requires manual review.
+
+schema_version: 1
+config_version: 1
+pipeline_id: possession_control_baseline
+pipeline_version: 1
+stage: "10C"
+
+metric_origin: project_generated
+definition_style: opta_style_metric_definition
+
+automatic_ceiling: provisional
+nearest_player_is_not_possession: true
+contact_is_not_controlled_possession: true
+no_real_event_metrics: true
+no_automatic_confirmed: true
+missing_ball_is_not_no_possession: true
+missing_ball_is_not_loose: true
+
+input_eligibility:
+  require_proximity_rows: true
+  require_contact_candidates: false
+  forbid_predicted_sole_evidence: true
+  require_playable_non_replay: true
+  require_video_time_us: true
+
+possession:
+  max_state: provisional
+  min_contact_frames_for_candidate: 2
+  min_contact_duration_us_for_provisional: 80000
+  require_contact_for_provisional: true
+  co_motion_pitch_delta_m: 0.3
+  multi_player_overlap_is_contested: true
+  nearest_alone_is_not_owner: true
+  loose_ball_requires_observed_ball: true
+  short_occlusion_max_us: 200000
+  short_occlusion_carries_uncertainty: true
+
+lifecycle:
+  hard_gap_us: 500000
+  terminate_on: [shot_cut, replay, non_playable, hard_gap, track_termination]
+  no_merge_across_hard_gap: true
+  owner_change_requires_evidence: true
+
+coverage:
+  low_joint_coverage_ratio: 0.15
+  low_joint_status: not_evaluable
+
+output_policy:
+  write_possession_hypotheses: true
+  write_proximity: false
+  write_contact_candidates: false
+  atomic_json: true
+  no_overwrite: true
+
+forbidden:
+  pass_count: true
+  dribble_count: true
+  duel_count: true
+  box_touch_count: true
+  automatic_confirmed: true
+  opta_or_accuracy_claim: true
+  nearest_as_owner: true
+  missing_ball_as_loose: true
+  missing_ball_as_no_possession: true
+
+runtime_root: /home/fdoblak/workspace/possession_control_checks
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+notes:
+  - Stage 10C builds explainable possession hypotheses from proximity + contact candidates.
+  - Event extraction (pass/dribble/duel) is Stage 11+.

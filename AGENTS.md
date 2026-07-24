@@ -75,6 +75,9 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `scripts/check_physical_metric_contracts.py` (Stage 9A trajectory / physical metric contracts)
 - `scripts/check_target_trajectory_baseline.py` (Stage 9B trajectory prepare + quality baseline)
 - `scripts/check_human_ball_interaction_contracts.py` (Stage 10A human-ball interaction contracts)
+- `scripts/check_human_ball_proximity_contact_baseline.py` (Stage 10B proximity / contact baseline)
+- `scripts/check_possession_control_baseline.py` (Stage 10C possession / control baseline)
+- `scripts/check_human_ball_interaction_pipeline.py` (Stage 10D fusion + Stage 10 close)
 - `scripts/collect_evidence.py` (small safe evidence backfill into `artifacts/evidence/`)
 - `scripts/check_stage_cache.py`, `check_ci_workflow.py`, `check_project.py`
 - Or: `football-analytics project check --profile local --quick`
@@ -93,9 +96,11 @@ football coordinate accuracy not validated. Stage 9 is closed
 (`physical-metrics-baseline-v0.9.0`): 9A contracts → 9B trajectory → 9C
 distance/speed/sprint → 9D heatmap/zones/activity → 9E fusion. Real football
 accuracy is not validated; official Opta data was not used; final customer
-visual is deferred. Stage 10A adds human-ball interaction / possession /
-contact-candidate **contracts only**. Do **not** start Stage 10B without an
-explicit user prompt.
+visual is deferred. Stage 10 is closed: 10A contracts → 10B proximity/contact →
+10C possession/control → 10D fusion. Automatic ceiling remains provisional;
+nearest ≠ owner; missing ball ≠ loose/no-possession; real football interaction
+accuracy is not validated. Do **not** start Stage 11 without an explicit user
+prompt.
 
 ---
 
@@ -186,7 +191,8 @@ target-player baseline is in-tree when merged (`identity-baseline-v0.7.0`).
 Stage 7 is **closed**. Stage 8A–8D pitch calibration / projection baseline is
 in-tree when merged (`calibration-baseline-v0.8.0`). Stage 8 is **closed**.
 Stage 9A–9E target-player physical metrics baseline is in-tree when merged
-(`physical-metrics-baseline-v0.9.0`). Stage 9 is **closed**. Stage 10A
-(human-ball interaction / possession contracts) is in-tree when merged.
-Do **not** start Stage 10B without an explicit user prompt.
+(`physical-metrics-baseline-v0.9.0`). Stage 9 is **closed**. Stage 10A–10D
+human-ball interaction baseline is in-tree when merged (contracts → proximity →
+possession → fusion). Stage 10 is **closed**. Do **not** start Stage 11 without
+an explicit user prompt.
 Manual Cursor flow only — no Codex/background automation.

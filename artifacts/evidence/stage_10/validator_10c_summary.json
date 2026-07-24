@@ -1,0 +1,26 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "config_fp": "3f0ad2ea75acde11bc80d9e04d53c1ceb2f314021d598b5960d02c4e16a235a7",
+    "gate": "PASS \u2014 POSSESSION CONTROL BASELINE ACTIVE"
+  },
+  "scenarios": {
+    "00_deterministic_config": "PASS",
+    "01_provisional_control": "PASS",
+    "02_contested": "PASS",
+    "03_loose_ball": "PASS",
+    "04_missing_ball_not_loose": "PASS",
+    "05_hard_gap_terminate": "PASS",
+    "06_nearest_not_owner": "PASS",
+    "07_replay_terminate": "PASS",
+    "08_predicted_ball": "PASS",
+    "09_not_evaluated_gt": "PASS",
+    "10_no_event_implies": "PASS",
+    "11_deterministic_repeat": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-24T12:05:19.819722Z",
+  "warnings": []
+}

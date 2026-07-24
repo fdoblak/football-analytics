@@ -1,0 +1,78 @@
+# Stage 10B human-ball proximity + contact-candidate baseline.
+# Project-generated Opta-style thresholds — NOT official Opta.
+
+schema_version: 1
+config_version: 1
+pipeline_id: human_ball_proximity_contact_baseline
+pipeline_version: 1
+stage: "10B"
+
+metric_origin: project_generated
+definition_style: opta_style_metric_definition
+
+automatic_ceiling: provisional
+nearest_player_is_not_possession: true
+single_frame_is_not_contact: true
+no_real_event_metrics: true
+no_automatic_confirmed: true
+
+input_eligibility:
+  require_observed_human: true
+  require_observed_ball: true
+  forbid_predicted_sole_evidence: true
+  require_playable_non_replay: true
+  require_primary_or_allow_ambiguous_as_unknown: true
+  require_video_time_us: true
+  pitch_distance_requires_grounded_and_valid_calibration: true
+
+proximity:
+  image_distance_threshold_px: 80.0
+  pitch_distance_threshold_m: 2.5
+  normalize_image_by: frame_diagonal
+  foot_reference_type: bbox_bottom_centre
+  ball_reference_type: detection_centre
+  mark_nearest_human: true
+  nearest_implies_possession: false
+
+contact:
+  min_frames: 2
+  min_duration_us: 40000
+  max_internal_gap_us: 120000
+  require_proximity_support: true
+  trajectory_change_delta_speed_mps: 1.5
+  trajectory_change_delta_heading_deg: 35.0
+  max_state: provisional
+
+lifecycle:
+  hard_gap_us: 500000
+  terminate_on: [shot_cut, replay, non_playable, hard_gap, track_termination]
+  no_merge_across_hard_gap: true
+
+coverage:
+  low_joint_coverage_ratio: 0.15
+  low_joint_status: not_evaluable
+
+output_policy:
+  write_proximity: true
+  write_contact_candidates: true
+  write_possession_hypotheses: false
+  atomic_json: true
+  no_overwrite: true
+
+forbidden:
+  pass_count: true
+  dribble_count: true
+  duel_count: true
+  box_touch_count: true
+  automatic_confirmed: true
+  opta_or_accuracy_claim: true
+  nearest_as_owner: true
+
+runtime_root: /home/fdoblak/workspace/human_ball_proximity_contact_checks
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+notes:
+  - Stage 10B computes proximity and contact candidates only.
+  - Possession baseline is Stage 10C.

@@ -1869,6 +1869,183 @@ def cmd_interaction_contracts_validate(*, keep: bool, as_json: bool) -> int:
     return int(main_fn(argv))
 
 
+def cmd_interaction_proximity_compute(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    fixture_smoke: bool = False,
+) -> int:
+    """Stage 10B: compute human-ball proximity + contact candidates (synthetic smoke)."""
+    from football_analytics.interaction.proximity_config import (
+        load_proximity_baseline_config,
+        proximity_baseline_config_fingerprint,
+    )
+    from football_analytics.interaction.proximity_fixtures import load_fixture
+    from football_analytics.interaction.proximity_service import (
+        compute_human_ball_proximity_contact,
+    )
+
+    try:
+        cfg = load_proximity_baseline_config(config_path)
+        _ = proximity_baseline_config_fingerprint(cfg)
+        if not fixture_smoke:
+            print(
+                "error: provide --fixture-smoke for Stage 10B synthetic compute",
+                file=sys.stderr,
+            )
+            return 2
+        fx = load_fixture("controlled_carry")
+        result = compute_human_ball_proximity_contact(
+            output_dir=output_dir, points=fx["points"], config_path=config_path
+        )
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
+    if not result.accepted:
+        print(f"accepted: {result.accepted}", file=sys.stderr)
+        print(f"error_code: {result.error_code}", file=sys.stderr)
+        return int(result.exit_code or 1)
+    print(f"proximity_parquet: {result.proximity_parquet}")
+    print(f"contact_parquet: {result.contact_parquet}")
+    print(f"summary_json: {result.summary_json}")
+    return 0
+
+
+def cmd_interaction_proximity_validate(*, keep: bool = False, as_json: bool = False) -> int:
+    """Run Stage 10B proximity / contact-candidate baseline validator."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_human_ball_proximity_contact_baseline.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("proximity validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
+def cmd_interaction_possession_compute(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    fixture_smoke: bool = False,
+) -> int:
+    """Stage 10C: compute possession hypotheses (synthetic smoke)."""
+    from football_analytics.interaction.possession_config import (
+        load_possession_baseline_config,
+        possession_baseline_config_fingerprint,
+    )
+    from football_analytics.interaction.possession_fixtures import load_fixture
+    from football_analytics.interaction.possession_service import compute_possession_control
+
+    try:
+        cfg = load_possession_baseline_config(config_path)
+        _ = possession_baseline_config_fingerprint(cfg)
+        if not fixture_smoke:
+            print(
+                "error: provide --fixture-smoke for Stage 10C synthetic compute",
+                file=sys.stderr,
+            )
+            return 2
+        fx = load_fixture("provisional_control")
+        result = compute_possession_control(
+            output_dir=output_dir, points=fx["points"], config_path=config_path
+        )
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
+    if not result.accepted:
+        print(f"accepted: {result.accepted}", file=sys.stderr)
+        print(f"error_code: {result.error_code}", file=sys.stderr)
+        return int(result.exit_code or 1)
+    print(f"possession_parquet: {result.possession_parquet}")
+    print(f"summary_json: {result.summary_json}")
+    return 0
+
+
+def cmd_interaction_possession_validate(*, keep: bool = False, as_json: bool = False) -> int:
+    """Run Stage 10C possession / control baseline validator."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_possession_control_baseline.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("possession validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
+def cmd_interaction_integrate(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    fixture_smoke: bool = False,
+) -> int:
+    """Stage 10D: fuse proximity + contact + possession (synthetic smoke)."""
+    from football_analytics.interaction.pipeline_config import (
+        interaction_pipeline_config_fingerprint,
+        load_interaction_pipeline_config,
+    )
+    from football_analytics.interaction.pipeline_fixtures import load_pipeline_fixture
+    from football_analytics.interaction.pipeline_service import (
+        integrate_human_ball_interaction,
+    )
+
+    try:
+        cfg = load_interaction_pipeline_config(config_path)
+        _ = interaction_pipeline_config_fingerprint(cfg)
+        if not fixture_smoke:
+            print(
+                "error: provide --fixture-smoke for Stage 10D synthetic integrate",
+                file=sys.stderr,
+            )
+            return 2
+        fx = load_pipeline_fixture("controlled_carry")
+        result = integrate_human_ball_interaction(
+            output_dir=output_dir, points=fx["points"], config_path=config_path
+        )
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
+    if not result.accepted:
+        print(f"accepted: {result.accepted}", file=sys.stderr)
+        print(f"error_code: {result.error_code}", file=sys.stderr)
+        return int(result.exit_code or 1)
+    print(f"summary_json: {result.summary_json}")
+    print(f"possession_parquet: {result.possession_parquet}")
+    print(f"overall_status: {result.summary.get('overall_status')}")
+    return 0
+
+
+def cmd_interaction_pipeline_validate(*, keep: bool = False, as_json: bool = False) -> int:
+    """Run Stage 10D interaction fusion validator (Stage 10 close)."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_human_ball_interaction_pipeline.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("interaction pipeline validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
 def cmd_physical_trajectory_prepare(
     *,
     output_dir: Path,
@@ -4166,7 +4343,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     p_interaction = sub.add_parser(
         "interaction",
-        help="Human-ball interaction / possession contracts (Stage 10A)",
+        help="Human-ball interaction / possession (Stage 10A–10D)",
     )
     interaction_sub = p_interaction.add_subparsers(dest="interaction_command")
     p_int_contracts = interaction_sub.add_parser("contracts", help="Interaction contract helpers")
@@ -4176,6 +4353,57 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p_int_c_val.add_argument("--keep", action="store_true", help="Keep validator session dir")
     p_int_c_val.add_argument("--json", action="store_true", help="Emit JSON report")
+
+    p_int_prox = interaction_sub.add_parser(
+        "proximity", help="Proximity / contact-candidate baseline (10B)"
+    )
+    int_prox_sub = p_int_prox.add_subparsers(dest="interaction_proximity_command")
+    p_int_prox_compute = int_prox_sub.add_parser(
+        "compute", help="Compute proximity + contact candidates"
+    )
+    p_int_prox_compute.add_argument("--output-dir", type=Path, required=True)
+    p_int_prox_compute.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/interaction/human_ball_proximity_contact_baseline.yaml"),
+    )
+    p_int_prox_compute.add_argument("--fixture-smoke", action="store_true")
+    p_int_prox_val = int_prox_sub.add_parser("validate", help="Run Stage 10B validator")
+    p_int_prox_val.add_argument("--keep", action="store_true")
+    p_int_prox_val.add_argument("--json", action="store_true")
+
+    p_int_poss = interaction_sub.add_parser(
+        "possession", help="Possession / control baseline (10C)"
+    )
+    int_poss_sub = p_int_poss.add_subparsers(dest="interaction_possession_command")
+    p_int_poss_compute = int_poss_sub.add_parser("compute", help="Compute possession hypotheses")
+    p_int_poss_compute.add_argument("--output-dir", type=Path, required=True)
+    p_int_poss_compute.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/interaction/possession_control_baseline.yaml"),
+    )
+    p_int_poss_compute.add_argument("--fixture-smoke", action="store_true")
+    p_int_poss_val = int_poss_sub.add_parser("validate", help="Run Stage 10C validator")
+    p_int_poss_val.add_argument("--keep", action="store_true")
+    p_int_poss_val.add_argument("--json", action="store_true")
+
+    p_int_integrate = interaction_sub.add_parser(
+        "integrate", help="Fuse proximity + contact + possession (10D)"
+    )
+    p_int_integrate.add_argument("--output-dir", type=Path, required=True)
+    p_int_integrate.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/interaction/human_ball_interaction_pipeline.yaml"),
+    )
+    p_int_integrate.add_argument("--fixture-smoke", action="store_true")
+
+    p_int_pipe_val = interaction_sub.add_parser(
+        "pipeline-validate", help="Run Stage 10D fusion validator (Stage 10 close)"
+    )
+    p_int_pipe_val.add_argument("--keep", action="store_true")
+    p_int_pipe_val.add_argument("--json", action="store_true")
 
     p_cal_features = cal_sub.add_parser(
         "features", help="Pitch keypoint/line feature detection (8B)"
@@ -4959,6 +5187,40 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
             parser.parse_args(["interaction", "contracts", "--help"])
             return 2
+        if args.interaction_command == "proximity":
+            if args.interaction_proximity_command == "compute":
+                return cmd_interaction_proximity_compute(
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    fixture_smoke=bool(args.fixture_smoke),
+                )
+            if args.interaction_proximity_command == "validate":
+                return cmd_interaction_proximity_validate(
+                    keep=bool(args.keep), as_json=bool(args.json)
+                )
+            parser.parse_args(["interaction", "proximity", "--help"])
+            return 2
+        if args.interaction_command == "possession":
+            if args.interaction_possession_command == "compute":
+                return cmd_interaction_possession_compute(
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    fixture_smoke=bool(args.fixture_smoke),
+                )
+            if args.interaction_possession_command == "validate":
+                return cmd_interaction_possession_validate(
+                    keep=bool(args.keep), as_json=bool(args.json)
+                )
+            parser.parse_args(["interaction", "possession", "--help"])
+            return 2
+        if args.interaction_command == "integrate":
+            return cmd_interaction_integrate(
+                output_dir=args.output_dir,
+                config_path=args.config,
+                fixture_smoke=bool(args.fixture_smoke),
+            )
+        if args.interaction_command == "pipeline-validate":
+            return cmd_interaction_pipeline_validate(keep=bool(args.keep), as_json=bool(args.json))
         parser.parse_args(["interaction", "--help"])
         return 2
     parser.print_help()

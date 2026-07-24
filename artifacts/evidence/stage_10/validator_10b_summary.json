@@ -1,0 +1,23 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "config_fp": "94ed9736abb1e694e95a53161f2fd507bddc4035724daa2b9c570f5a99750713",
+    "gate": "PASS \u2014 HUMAN BALL PROXIMITY CONTACT BASELINE ACTIVE"
+  },
+  "scenarios": {
+    "00_deterministic_config": "PASS",
+    "01_controlled_carry": "PASS",
+    "02_nearest_not_possession": "PASS",
+    "03_single_frame_rejected": "PASS",
+    "04_missing_ball": "PASS",
+    "05_replay_excluded": "PASS",
+    "06_airborne_blocks_pitch": "PASS",
+    "07_not_evaluated_gt": "PASS",
+    "08_deterministic_repeat": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-24T12:05:13.798097Z",
+  "warnings": []
+}

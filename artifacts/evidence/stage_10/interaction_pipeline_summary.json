@@ -1,0 +1,59 @@
+{
+  "config_fingerprint": "2884f196acc3bbac015a3a29d075a8935a1f2076ebd930f99ca180d3e2cd08ac",
+  "contact_candidate_count": 1,
+  "contract_fingerprints": {
+    "ball_contact_candidates": "962e1566de124f1e34f72df09c91b2768cafaebffcfc7669bb73ccef153be058",
+    "human_ball_proximity": "a8f6bf8a36402bbdb065263c24870c6ba4cc2ed37061fe7575bb472209852ebd",
+    "possession_hypotheses": "ab6f816a93b188841d42fe45531463ae7dd97b7842dbbdd599ee34d2a8e6f927"
+  },
+  "created_at_utc": "2026-07-24T12:05:32.997507Z",
+  "evaluation_status": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH",
+  "event_accuracy_validated": false,
+  "event_metrics_produced": false,
+  "findings": [],
+  "gate_hint": "PASS_WITH_FINDINGS \u2014 HUMAN BALL INTERACTION PIPELINE ACTIVE; STAGE 10 CLOSED; REAL FOOTBALL ACCURACY NOT YET VALIDATED",
+  "identity_status": "confirmed",
+  "nearest_implies_possession": false,
+  "operational_metrics_produced": true,
+  "overall_status": "succeeded",
+  "policy_fingerprint": "2e8eeeed5e3869bce59f285d90896d9ea67380ae4cf75ec75591b93cb935e620",
+  "possession_config_fingerprint": "3f0ad2ea75acde11bc80d9e04d53c1ceb2f314021d598b5960d02c4e16a235a7",
+  "possession_hypothesis_count": 1,
+  "possession_state_counts": {
+    "candidate": 1
+  },
+  "proximity_config_fingerprint": "94ed9736abb1e694e95a53161f2fd507bddc4035724daa2b9c570f5a99750713",
+  "proximity_row_count": 5,
+  "real_football_accuracy_validated": false,
+  "request": {
+    "analysis_windows_ref": "synthetic://analysis_windows",
+    "ball_tracks_ref": "synthetic://tracks/ball",
+    "cache_enabled": false,
+    "calibration_artifact_ref": "synthetic://calibration",
+    "created_at_utc": "2026-07-24T12:05:32.808610Z",
+    "detections_ref": "synthetic://detections",
+    "human_tracks_ref": "synthetic://tracks/human",
+    "identity_artifact_ref": "synthetic://identity",
+    "interaction_policy_fingerprint": "2e8eeeed5e3869bce59f285d90896d9ea67380ae4cf75ec75591b93cb935e620",
+    "no_overwrite": true,
+    "output_root": "/home/fdoblak/workspace/human_ball_interaction_pipeline_checks",
+    "projected_positions_ref": "synthetic://projected_positions",
+    "provenance": {
+      "label": "synthetic_contract_fixture",
+      "no_real_interaction_inference": true,
+      "notes": "no_real_interaction_inference",
+      "stage": "10A"
+    },
+    "request_id": "hbi_req_01",
+    "run_id": "run_20260724T120531416897Z_9d6f06d8fa05",
+    "schema_version": 1,
+    "target_player_id": "target_player_01",
+    "video_id": "video_synth_10d"
+  },
+  "review_queue_count": 0,
+  "run_id": "run_20260724T120531416897Z_9d6f06d8fa05",
+  "schema_version": 1,
+  "stage": "10D",
+  "stage_closed": "10",
+  "video_id": "video_synth_10d"
+}

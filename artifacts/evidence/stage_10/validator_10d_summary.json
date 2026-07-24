@@ -1,0 +1,32 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "config_fp": "2884f196acc3bbac015a3a29d075a8935a1f2076ebd930f99ca180d3e2cd08ac",
+    "gate": "PASS_WITH_FINDINGS \u2014 HUMAN BALL INTERACTION PIPELINE ACTIVE; STAGE 10 CLOSED; REAL FOOTBALL ACCURACY NOT YET VALIDATED"
+  },
+  "scenarios": {
+    "00_deterministic_config": "PASS",
+    "01_controlled_carry": "PASS",
+    "02_loose_ball": "PASS",
+    "03_contested_ball": "PASS",
+    "04_two_player_ambiguity": "PASS",
+    "05_missing_ball": "PASS",
+    "06_predicted_ball": "PASS",
+    "07_cut_replay": "PASS",
+    "08_rapid_owner_change": "PASS",
+    "09_false_nearest": "PASS",
+    "10_target_confirmed": "PASS",
+    "11_target_revoked": "PASS",
+    "12_deterministic_repeat": "PASS",
+    "13_not_evaluated_gt": "PASS",
+    "14_stage_10_close_hint": "PASS",
+    "15_receipt_quality_review": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS_WITH_WARNINGS",
+  "timestamp_utc": "2026-07-24T12:05:30.519394Z",
+  "warnings": [
+    "real_football_accuracy_not_yet_validated"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "artifact_hashes": {},
+  "contact_candidate_count": 1,
+  "coverage_summary": {
+    "ambiguous_ball_us": 0,
+    "ball_observed_us": 200000,
+    "calibration_valid_us": 200000,
+    "contested_us": 0,
+    "human_observed_us": 200000,
+    "joint_coverage_ratio": 1.0,
+    "joint_observed_us": 200000,
+    "low_joint_coverage_is_not_evaluable": true,
+    "missing_ball_is_not_no_possession": true,
+    "not_observed_us": 0,
+    "playable_us": 200000,
+    "target_confirmed_us": 200000
+  },
+  "created_at_utc": "2026-07-24T12:05:32.808683Z",
+  "error_codes": [],
+  "evaluation_status": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH",
+  "event_metrics_produced": {
+    "aerial": false,
+    "box_touch": false,
+    "dribble": false,
+    "duel": false,
+    "pass": false,
+    "turnover": false
+  },
+  "input_fingerprints": {
+    "calibration": null,
+    "detections": null,
+    "identity": null,
+    "pipeline_config": "2884f196acc3bbac015a3a29d075a8935a1f2076ebd930f99ca180d3e2cd08ac",
+    "possession_config": "3f0ad2ea75acde11bc80d9e04d53c1ceb2f314021d598b5960d02c4e16a235a7",
+    "projected_positions": null,
+    "proximity_config": "94ed9736abb1e694e95a53161f2fd507bddc4035724daa2b9c570f5a99750713",
+    "tracks": null
+  },
+  "interaction_policy_fingerprint": "2e8eeeed5e3869bce59f285d90896d9ea67380ae4cf75ec75591b93cb935e620",
+  "lineage": {
+    "stage_10b_receipt": "/home/fdoblak/workspace/human_ball_interaction_pipeline_checks/ev10_2e66q8xn/carry/stage_10b/proximity_contact_receipt.json",
+    "stage_10b_summary": "/home/fdoblak/workspace/human_ball_interaction_pipeline_checks/ev10_2e66q8xn/carry/stage_10b/proximity_contact_summary.json",
+    "stage_10c_receipt": "/home/fdoblak/workspace/human_ball_interaction_pipeline_checks/ev10_2e66q8xn/carry/stage_10c/possession_control_receipt.json",
+    "stage_10c_summary": "/home/fdoblak/workspace/human_ball_interaction_pipeline_checks/ev10_2e66q8xn/carry/stage_10c/possession_control_summary.json"
+  },
+  "output_fingerprints": {
+    "ball_contact_candidates": "eb5801f1c24eb312eba6ca87abdd1f76bc4fb2f6f1f91c3651a4461f960a01ba",
+    "human_ball_proximity": "d0db8945dadcc49ad056166f4561967a54350286e3bb85a24e6d656edfc48d38",
+    "possession_hypotheses": "d1c85ee7bc0f030e06a798e3c8ea12df0ee4fbdae42bbbfcb97653988ae4e31a"
+  },
+  "possession_hypothesis_count": 1,
+  "provenance": {
+    "label": "human_ball_interaction_pipeline",
+    "no_real_interaction_inference": true,
+    "notes": "no_real_interaction_inference",
+    "stage": "10D"
+  },
+  "proximity_row_count": 5,
+  "receipt_id": "hbi_receipt_01",
+  "request_id": "hbi_req_01",
+  "review_count": 0,
+  "run_id": "run_20260724T120531416897Z_9d6f06d8fa05",
+  "schema_version": 1,
+  "state_counts": {
+    "candidate": 7
+  },
+  "status": "succeeded",
+  "target_player_id": "target_player_01",
+  "video_id": "video_synth_10d",
+  "warning_codes": []
+}

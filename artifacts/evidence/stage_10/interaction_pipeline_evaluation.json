@@ -1,0 +1,39 @@
+{
+  "adapter_notes": "stage_10d_fusion_operational_not_event_accuracy",
+  "config_fingerprint": "2884f196acc3bbac015a3a29d075a8935a1f2076ebd930f99ca180d3e2cd08ac",
+  "created_at_utc": "2026-07-24T12:05:32.809241Z",
+  "findings": [
+    "No reviewed human-ball interaction ground truth available.",
+    "Stage 10A is contracts-only; synthetic fixtures are not real accuracy.",
+    "No Opta or official event accuracy claim is made."
+  ],
+  "ground_truth_evaluation_status": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH",
+  "metric_reasons": {
+    "contact_candidate_precision_recall": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH",
+    "contested_agreement": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH",
+    "coverage_calibration": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH",
+    "false_possession_rate": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH",
+    "not_evaluable_correctness": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH",
+    "possession_precision_recall": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH",
+    "proximity_timing_error": "NOT_EVALUATED_NO_REVIEWED_HUMAN_BALL_INTERACTION_GROUND_TRUTH"
+  },
+  "metrics": {
+    "contact_candidate_precision_recall": null,
+    "contested_agreement": null,
+    "coverage_calibration": null,
+    "false_possession_rate": null,
+    "not_evaluable_correctness": null,
+    "possession_precision_recall": null,
+    "proximity_timing_error": null
+  },
+  "operational_vs_event_accuracy": {
+    "event_accuracy_validated": false,
+    "operational_metrics_produced": true,
+    "opta_claim": false,
+    "real_football_accuracy_validated": false
+  },
+  "run_id": "run_20260724T120531416897Z_9d6f06d8fa05",
+  "schema_version": 1,
+  "status": "not_evaluated",
+  "video_id": "video_synth_10d"
+}

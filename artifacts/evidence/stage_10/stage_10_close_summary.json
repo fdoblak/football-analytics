@@ -1,0 +1,13 @@
+{
+  "gate": "PASS_WITH_FINDINGS \u2014 HUMAN BALL INTERACTION PIPELINE ACTIVE; STAGE 10 CLOSED; REAL FOOTBALL ACCURACY NOT YET VALIDATED",
+  "opta_or_accuracy_claim": false,
+  "schema_version": 1,
+  "stage": "10",
+  "status": "CLOSED",
+  "sub_stages": {
+    "10A": "CLOSED",
+    "10B": "CLOSED",
+    "10C": "CLOSED",
+    "10D": "CLOSED"
+  }
+}

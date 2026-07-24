@@ -57,6 +57,9 @@ WORKSPACE_STAGE_MAP: dict[str, str] = {
     "heatmap_activity_checks": "stage_09d",
     "physical_metric_pipeline_checks": "stage_09e",
     "human_ball_contract_checks": "stage_10a",
+    "human_ball_proximity_contact_checks": "stage_10b",
+    "possession_control_checks": "stage_10c",
+    "human_ball_interaction_pipeline_checks": "stage_10d",
 }
 
 

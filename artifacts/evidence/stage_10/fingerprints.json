@@ -1,0 +1,9 @@
+{
+  "ball_contact_candidates": "962e1566de124f1e34f72df09c91b2768cafaebffcfc7669bb73ccef153be058",
+  "human_ball_proximity": "a8f6bf8a36402bbdb065263c24870c6ba4cc2ed37061fe7575bb472209852ebd",
+  "interaction_pipeline_config": "2884f196acc3bbac015a3a29d075a8935a1f2076ebd930f99ca180d3e2cd08ac",
+  "interaction_policy": "2e8eeeed5e3869bce59f285d90896d9ea67380ae4cf75ec75591b93cb935e620",
+  "possession_baseline_config": "3f0ad2ea75acde11bc80d9e04d53c1ceb2f314021d598b5960d02c4e16a235a7",
+  "possession_hypotheses": "ab6f816a93b188841d42fe45531463ae7dd97b7842dbbdd599ee34d2a8e6f927",
+  "proximity_baseline_config": "94ed9736abb1e694e95a53161f2fd507bddc4035724daa2b9c570f5a99750713"
+}
