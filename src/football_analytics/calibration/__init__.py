@@ -1,4 +1,4 @@
-"""Pitch calibration contracts (8A) + feature detection (8B) + homography (8C).
+"""Pitch calibration contracts (8A) + features (8B) + homography (8C) + projection (8D).
 
 Importing this package must NOT load SV_kp/SV_lines weights or HRNet modules.
 Heavy adapters live in pitch_feature_adapter and are loaded only on explicit call.
@@ -28,6 +28,9 @@ from football_analytics.calibration.homography_evaluation import (
 from football_analytics.calibration.pitch_feature_evaluation import (
     NOT_EVALUATED_PITCH_FEATURES,
 )
+from football_analytics.calibration.pitch_projection_evaluation import (
+    NOT_EVALUATED_PROJECTED_POS,
+)
 from football_analytics.calibration.types import CONTRACT_VERSION
 
 __all__ = [
@@ -42,6 +45,7 @@ __all__ = [
     "NOT_EVALUATED_CALIBRATION",
     "NOT_EVALUATED_PITCH_FEATURES",
     "NOT_EVALUATED_HOMOGRAPHY",
+    "NOT_EVALUATED_PROJECTED_POS",
     "assert_calibration_contracts_registered",
     "assert_calibrations_fingerprint_frozen",
     "calibration_schema_fingerprints",

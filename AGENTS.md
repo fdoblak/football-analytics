@@ -71,6 +71,7 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `scripts/check_calibration_contracts.py` (Stage 8A pitch calibration / homography / coordinate contracts)
 - `scripts/check_pitch_feature_baseline.py` (Stage 8B pitch keypoint / line detection baseline)
 - `scripts/check_homography_baseline.py` (Stage 8C homography solve + calibration segments)
+- `scripts/check_pitch_projection_pipeline.py` (Stage 8D pitch projection + Stage 8 close)
 - `scripts/check_stage_cache.py`, `check_ci_workflow.py`, `check_project.py`
 - Or: `football-analytics project check --profile local --quick`
 
@@ -81,12 +82,11 @@ fusion + quality gates. Stage 7 is closed (`identity-baseline-v0.7.0`):
 7D jersey OCR → 7E evidence fusion + manual target workflow. Appearance / team /
 jersey alone cannot confirm; confirmed requires scoped manual decision;
 `auto_confirm=false`; face forbidden; real football identity accuracy not
-validated. Stage 8A pitch calibration / homography / coordinate **contracts**
-are in-tree. Stage 8B pitch keypoint/line detection baseline is in-tree
-(evaluation_only; real football pitch-feature accuracy not validated). Stage 8C
-homography solve + calibration segments baseline is in-tree when merged
-(synthetic known-H; real football homography accuracy not validated; no
-projected positions). Do **not** start Stage 8D without an explicit user prompt.
+validated. Stage 8 is closed (`calibration-baseline-v0.8.0`): 8A contracts →
+8B pitch features → 8C homography/segments → 8D projected positions. Attack
+direction remains unknown; ball never physical/event metric-eligible; real
+football coordinate accuracy not validated. Do **not** start Stage 9A without
+an explicit user prompt.
 
 ---
 
@@ -174,10 +174,8 @@ Stage 5A–5E detection baseline is in-tree when merged (`detection-baseline-v0.
 Stage 5 is **closed**. Stage 6A–6D tracking baseline is in-tree when merged
 (`tracking-baseline-v0.6.0`). Stage 6 is **closed**. Stage 7A–7E identity /
 target-player baseline is in-tree when merged (`identity-baseline-v0.7.0`).
-Stage 7 is **closed**. Stage 8A pitch calibration / homography / coordinate
-contracts are in-tree when merged (contracts only). Stage 8B pitch keypoint /
-line detection baseline is in-tree when merged (SV_kp/SV_lines evaluation_only
-smoke). Stage 8C homography solve + calibration segments baseline is in-tree
-when merged (no projected positions; accuracy not validated). Stage 8D is
+Stage 7 is **closed**. Stage 8A–8D pitch calibration / projection baseline is
+in-tree when merged (`calibration-baseline-v0.8.0`). Stage 8 is **closed**.
+Stage 9A (target player pitch time-series / physical metric contracts) is
 **not** started unless explicitly requested.
 Manual Cursor flow only — no Codex/background automation.

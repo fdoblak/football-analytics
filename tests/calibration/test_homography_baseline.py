@@ -48,7 +48,10 @@ from football_analytics.calibration.homography_segments import (
     projection_distance,
     select_medoid_candidate,
 )
-from football_analytics.calibration.homography_service import run_homography_solve, run_segments_build
+from football_analytics.calibration.homography_service import (
+    run_homography_solve,
+    run_segments_build,
+)
 from football_analytics.calibration.homography_solve import (
     HomographyQuality,
     normalized_dlt,

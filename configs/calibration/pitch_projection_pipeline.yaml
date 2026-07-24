@@ -1,0 +1,101 @@
+# Stage 8D pitch projection pipeline.
+# Input: track_observations + calibration_segments (+ optional identity timeline /
+# analysis windows). Output: projected_positions + receipt/quality/eval/review.
+# NO distance/speed/sprint/heatmap/events. Attack direction remains unknown.
+# Ball physical/event metric eligibility is always false in this stage.
+config_version: 1
+
+pipeline_id: pitch_projection_pipeline
+pipeline_version: "1.0.0"
+direction: image_to_pitch
+
+human_source:
+  point_type: bbox_bottom_centre
+  require_observed: true
+  min_bbox_width_px: 4.0
+  min_bbox_height_px: 8.0
+  max_aspect_ratio: 8.0
+  frame_edge_margin_px: 2.0
+  truncated_uncertainty_boost_m: 0.5
+  pose_foot_model: false
+
+ball_source:
+  point_type: bbox_centre
+  require_observed: true
+  min_bbox_width_px: 2.0
+  min_bbox_height_px: 2.0
+  max_aspect_ratio: 4.0
+  frame_edge_margin_px: 2.0
+  ambiguous_primary_review: true
+  airborne_status: unknown
+  physical_metric_eligible: false
+  event_metric_eligible: false
+
+projection:
+  homogeneous_w_epsilon: 0.000000000001
+  pitch_bound_tolerance_m: 0.5
+  round_trip_tolerance_px: 1.5
+  round_trip_tolerance_m: 0.08
+  outside_coverage_is_extrapolated: true
+  clamp_pitch_coordinates: false
+  use_image_to_pitch_only: true
+  forbid_h_inv_for_projection: true
+
+uncertainty:
+  max_uncertainty_m: 1.5
+  base_from_reprojection_scale: 0.15   # metres per px mean reproj
+  coverage_distance_scale_m: 0.02      # metres per px outside/near hull
+  truncation_boost_m: 0.4
+  ambiguity_boost_m: 0.6
+  unknown_null_reason: UNCERTAINTY_NOT_COMPUTABLE
+
+segment_selection:
+  require_validity_status: valid
+  require_physical_metric_eligible: true
+  allow_interpolated: false
+  overlap_is_hard_conflict: true
+  degraded_uncertain_not_physical: true
+  verify_inverse_round_trip: true
+
+eligibility:
+  predicted_observation_physical_metric_eligible: false
+  interpolated_observation_physical_metric_eligible: false
+  extrapolated_physical_metric_eligible: false
+  ball_physical_metric_eligible: false
+  ball_event_metric_eligible: false
+  require_playable_window: true
+  require_confirmed_target_for_customer_metric: true
+  provisional_target_customer_metric_eligible: false
+  revoked_target_customer_metric_eligible: false
+
+pitch:
+  length_m: 105.0
+  width_m: 68.0
+  real_size_known: false
+
+attack_direction: unknown
+
+output_policy:
+  atomic_writes: true
+  overwrite_allowed: false
+  write_projected_positions: true
+  write_evaluation_json: true
+  write_quality_json: true
+  write_review_queue: true
+
+review_sampling:
+  enabled: true
+  max_samples: 32
+
+runtime_root: /home/fdoblak/workspace/pitch_projection_checks
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+compute_physical_metrics: false
+compute_events: false
+
+notes: >
+  Synthetic known-H projection is not football match accuracy. Human footpoint
+  is bbox_bottom_centre approximation (no pose/foot model). Ball centre is
+  image-plane only; airborne/grounded unknown; ball never physical/event
+  eligible in Stage 8D. Attack direction remains unknown.

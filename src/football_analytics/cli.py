@@ -2026,8 +2026,11 @@ def cmd_calibration_homography_baseline_validate(*, keep: bool, as_json: bool) -
     return int(main_fn(argv))
 
 
-def cmd_calibration_project_validate() -> int:
-    """Validate synthetic projection + physical-metric eligibility rules."""
+def cmd_calibration_project_validate(*, keep: bool = False, as_json: bool = False) -> int:
+    """Validate Stage 8D pitch projection pipeline (synthetic + eligibility)."""
+    import runpy
+
+    # Keep Stage 8A synthetic eligibility smoke, then run 8D pipeline validator.
     from football_analytics.calibration.fixtures import e2e_bundle, projected_from_track
 
     bundle = e2e_bundle()
@@ -2053,6 +2056,157 @@ def cmd_calibration_project_validate() -> int:
     if pred["physical_metric_eligibility"] == "eligible":
         return 1
     print("project_validate: PASS")
+
+    script = _project_root() / "scripts" / "check_pitch_projection_pipeline.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("pitch projection validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
+def cmd_calibration_project_tracks(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    contain_root: Path | None,
+    observations: Path | None,
+    segments: Path | None,
+    run_id: str | None,
+    video_id: str | None,
+    fixture_smoke: bool,
+) -> int:
+    """Stage 8D: project track observations onto pitch metres."""
+    from football_analytics.calibration.pitch_projection_config import (
+        default_pitch_projection_config_path,
+        load_pitch_projection_config,
+    )
+    from football_analytics.calibration.pitch_projection_fixtures import base_bundle, perspective_H
+    from football_analytics.calibration.pitch_projection_service import run_pitch_projection
+    from football_analytics.data.registry import default_project_root
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    if not cfg_path.is_file():
+        cfg_path = default_pitch_projection_config_path(repo_root=root)
+    try:
+        config = load_pitch_projection_config(cfg_path)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    contain = contain_root if contain_root is not None else Path(str(config["runtime_root"]))
+    obs_rows = None
+    seg_rows = None
+    kwargs: dict = {}
+    if fixture_smoke:
+        bundle = base_bundle(
+            H=perspective_H(), run_id=run_id, video_id=video_id or "video_proj_fixture"
+        )
+        obs_rows = bundle["observations"]
+        seg_rows = bundle["segments"]
+        kwargs = {
+            "frame_times": bundle["frame_times"],
+            "coverage_hulls": bundle["coverage_hulls"],
+            "eligibility_timeline": bundle["eligibility_timeline"],
+            "analysis_windows": bundle["analysis_windows"],
+            "fingerprints": bundle["fingerprints"],
+            "frame_width": bundle["frame_width"],
+            "frame_height": bundle["frame_height"],
+        }
+        run_id = bundle["run_id"]
+        video_id = bundle["video_id"]
+    elif observations is None or segments is None:
+        print(
+            "error: --observations and --segments required unless --fixture-smoke", file=sys.stderr
+        )
+        return 2
+    result = run_pitch_projection(
+        output_dir=str(output_dir),
+        config=config,
+        contain_root=contain,
+        run_id=run_id,
+        video_id=video_id,
+        observations_path=str(observations) if observations else None,
+        observations_rows=obs_rows,
+        segments_path=str(segments) if segments else None,
+        segments_rows=seg_rows,
+        **kwargs,
+    )
+    summary = result.to_summary()
+    print(f"accepted: {summary['accepted']}")
+    print(f"exit_code: {summary['exit_code']}")
+    print(f"projected_positions_parquet: {summary.get('projected_positions_parquet')}")
+    print(f"receipt_json: {summary.get('receipt_json')}")
+    print(f"evaluation_status: {summary.get('evaluation_status')}")
+    if summary.get("error_code"):
+        print(f"error_code: {summary['error_code']}")
+    return int(result.exit_code)
+
+
+def cmd_calibration_projection_evaluate(
+    *,
+    projections: Path | None,
+    ground_truth: Path | None,
+    output: Path,
+    config_path: Path,
+) -> int:
+    """Stage 8D: evaluate projected positions (NOT_EVALUATED without reviewed GT)."""
+    from football_analytics.calibration.pitch_projection_config import (
+        load_pitch_projection_config,
+        pitch_projection_config_fingerprint,
+    )
+    from football_analytics.calibration.pitch_projection_evaluation import (
+        evaluate_pitch_projection,
+    )
+    from football_analytics.core.records import write_json_record
+    from football_analytics.data.compiler import get_contract
+    from football_analytics.data.parquet import read_contract_parquet
+    from football_analytics.data.registry import default_project_root
+
+    root = default_project_root()
+    cfg_path = config_path if config_path.is_absolute() else root / config_path
+    try:
+        config = load_pitch_projection_config(cfg_path)
+        cfg_fp = pitch_projection_config_fingerprint(config)
+    except Exception as exc:  # noqa: BLE001
+        print(f"config_error: {exc}", file=sys.stderr)
+        return 2
+    try:
+        proj_rows = None
+        if projections is not None:
+            proj_rows = read_contract_parquet(
+                projections, get_contract("projected_positions", 1)
+            ).to_pylist()
+        gt_rows = None
+        has_gt = False
+        if ground_truth is not None:
+            import json as _json
+
+            payload = _json.loads(Path(ground_truth).read_text(encoding="utf-8"))
+            gt_rows = list(payload.get("projected_positions") or payload.get("ground_truth") or [])
+            has_gt = bool(payload.get("is_reviewed_ground_truth"))
+        report = evaluate_pitch_projection(
+            projections=proj_rows,
+            ground_truth=gt_rows,
+            has_reviewed_ground_truth=has_gt,
+        )
+        write_json_record(
+            output,
+            report.to_dict(run_id="eval", video_id="eval", config_fingerprint=cfg_fp),
+            overwrite=False,
+        )
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
+    print(f"status: {report.status}")
+    print(f"ground_truth_evaluation_status: {report.ground_truth_evaluation_status}")
+    print(f"output: {output}")
     return 0
 
 
@@ -3512,9 +3666,43 @@ def build_parser() -> argparse.ArgumentParser:
     p_cal_seg_build.add_argument("--contain-root", type=Path, default=None)
     p_cal_seg_build.add_argument("--run-id", type=str, default=None)
     p_cal_seg_build.add_argument("--video-id", type=str, default=None)
-    p_cal_p = cal_sub.add_parser("project", help="Projected position helpers")
+    p_cal_p = cal_sub.add_parser("project", help="Projected position helpers (8D)")
     cal_p_sub = p_cal_p.add_subparsers(dest="calibration_project_command")
-    cal_p_sub.add_parser("validate", help="Validate synthetic projection eligibility rules")
+    p_cal_p_tracks = cal_p_sub.add_parser(
+        "tracks", help="Project track observations to pitch metres (8D)"
+    )
+    p_cal_p_tracks.add_argument("--output-dir", type=Path, required=True)
+    p_cal_p_tracks.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/calibration/pitch_projection_pipeline.yaml"),
+    )
+    p_cal_p_tracks.add_argument("--contain-root", type=Path, default=None)
+    p_cal_p_tracks.add_argument("--observations", type=Path, default=None)
+    p_cal_p_tracks.add_argument("--segments", type=Path, default=None)
+    p_cal_p_tracks.add_argument("--run-id", type=str, default=None)
+    p_cal_p_tracks.add_argument("--video-id", type=str, default=None)
+    p_cal_p_tracks.add_argument(
+        "--fixture-smoke",
+        action="store_true",
+        help="Run synthetic known-H fixture (no real video)",
+    )
+    p_cal_p_val = cal_p_sub.add_parser("validate", help="Validate pitch projection pipeline (8D)")
+    p_cal_p_val.add_argument("--keep", action="store_true")
+    p_cal_p_val.add_argument("--json", action="store_true")
+    p_cal_proj = cal_sub.add_parser("projection", help="Projection evaluation (8D)")
+    cal_proj_sub = p_cal_proj.add_subparsers(dest="calibration_projection_command")
+    p_cal_proj_eval = cal_proj_sub.add_parser(
+        "evaluate", help="Evaluate projected positions (NOT_EVALUATED without GT)"
+    )
+    p_cal_proj_eval.add_argument("--projections", type=Path, default=None)
+    p_cal_proj_eval.add_argument("--ground-truth", type=Path, default=None)
+    p_cal_proj_eval.add_argument("--output", type=Path, required=True)
+    p_cal_proj_eval.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/calibration/pitch_projection_pipeline.yaml"),
+    )
 
     return parser
 
@@ -4056,9 +4244,33 @@ def main(argv: Sequence[str] | None = None) -> int:
             parser.parse_args(["calibration", "segments", "--help"])
             return 2
         if args.calibration_command == "project":
+            if args.calibration_project_command == "tracks":
+                return cmd_calibration_project_tracks(
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    contain_root=args.contain_root,
+                    observations=args.observations,
+                    segments=args.segments,
+                    run_id=args.run_id,
+                    video_id=args.video_id,
+                    fixture_smoke=bool(args.fixture_smoke),
+                )
             if args.calibration_project_command == "validate":
-                return cmd_calibration_project_validate()
+                return cmd_calibration_project_validate(
+                    keep=bool(getattr(args, "keep", False)),
+                    as_json=bool(getattr(args, "json", False)),
+                )
             parser.parse_args(["calibration", "project", "--help"])
+            return 2
+        if args.calibration_command == "projection":
+            if args.calibration_projection_command == "evaluate":
+                return cmd_calibration_projection_evaluate(
+                    projections=args.projections,
+                    ground_truth=args.ground_truth,
+                    output=args.output,
+                    config_path=args.config,
+                )
+            parser.parse_args(["calibration", "projection", "--help"])
             return 2
         parser.parse_args(["calibration", "--help"])
         return 2

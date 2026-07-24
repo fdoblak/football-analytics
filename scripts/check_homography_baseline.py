@@ -219,7 +219,7 @@ def run_checks(args: argparse.Namespace) -> Result:
         "NBJW/SV adapter remains evaluation_only / GPL-2.0 linking risk (Stage 8B; not vendored)"
     )
     result.finding("Real football homography accuracy not validated — no reviewed ground truth")
-    result.finding("Homography is pitch-plane only; projected positions deferred to Stage 8D")
+    result.finding("Homography is pitch-plane only; Stage 8D projection is separate pipeline")
     result.warn("Synthetic known-H metrics are not match accuracy")
 
     result.extras["gate"] = GATE

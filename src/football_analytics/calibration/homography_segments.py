@@ -329,9 +329,7 @@ def build_calibration_segments(
             if boundary != "none":
                 reasons.append(boundary)
 
-            h_list, hinv_list = row_major_with_inverse(
-                medoid.H_row_major, medoid.H_inv_row_major
-            )
+            h_list, hinv_list = row_major_with_inverse(medoid.H_row_major, medoid.H_inv_row_major)
             row = segment_row(
                 run_id=run_id,
                 video_id=video_id,

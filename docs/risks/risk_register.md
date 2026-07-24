@@ -1,6 +1,6 @@
 # Risk Register — football-analytics
 
-**Updated:** 2026-07-24 (Stage 8C homography / calibration segments)
+**Updated:** 2026-07-24 (Stage 8D pitch projection / Stage 8 close)
 
 **Owner default:** Furkan Doblak unless stated otherwise
 
@@ -1281,3 +1281,73 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Stage 8C+ |
+
+## RISK-091 — Footpoint approximation treated as true ground contact (8D)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-091 |
+| description | Human `bbox_bottom_centre` footpoint treated as true shoe–pitch contact; truncation/occlusion bias distance/sprint metrics. |
+| probability | high |
+| impact | high |
+| mitigation | Provenance `pose_foot_model=false`; truncated/edge bbox raises uncertainty + review; physical eligibility gated; NOT_EVALUATED without reviewed GT. |
+| trigger | customer metrics using unreviewed footpoint projections as ground truth |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 8D+ |
+
+## RISK-092 — Airborne ball projection as ground position / possession (8D)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-092 |
+| description | Ball image-centre projected via planar H treated as grounded pitch position or possession/event evidence while airborne status is unknown. |
+| probability | high |
+| impact | high |
+| mitigation | `airborne_status=unknown`; ball `physical_metric_eligible=false` and `event_metric_eligible=false` always (receipt counts must be 0); no pass/shot/possession from ball projection. |
+| trigger | eligible ball projection or event derived from Stage 8D ball row |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 8D+ |
+
+## RISK-093 — Extrapolated / outside-coverage projections as metrics (8D)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-093 |
+| description | Points outside correspondence coverage hull or pitch soft-bounds marked physical-metric eligible. |
+| probability | high |
+| impact | high |
+| mitigation | Coverage-hull → `extrapolated`; outside soft bounds → `outside_pitch`/`extrapolated`; eligibility forbids extrapolated; operational quality fails on violations. |
+| trigger | eligible projected_position with is_extrapolated=true or outside coverage |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 8D+ |
+
+## RISK-094 — False calibration segment driving projections (8D)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-094 |
+| description | Wrong/mirrored/degraded/uncertain/interpolated H segment used for metric-eligible projection. |
+| probability | high |
+| impact | high |
+| mitigation | Only `valid` + physical-eligible segments; degraded/uncertain/interpolated → not_calibrated for physical mapping; overlap → hard conflict; image_to_pitch only; fingerprint/FK hard-fail. |
+| trigger | eligible projection from non-valid or conflicting segment |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 8D+ |
+
+## RISK-095 — Projected-position accuracy claimed without reviewed GT (8D)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-095 |
+| description | Synthetic known-H projection smoke treated as real football pitch-coordinate accuracy. |
+| probability | high |
+| impact | high |
+| mitigation | NOT_EVALUATED_NO_REVIEWED_PROJECTED_POSITION_GROUND_TRUTH; PASS_WITH_FINDINGS Stage 8 close gate; no distance/speed/sprint/heatmap/events in 8D. |
+| trigger | customer metrics using unvalidated projected_positions |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 8D+ |

@@ -1,4 +1,4 @@
-"""Homography / calibration-segment evaluation (Stage 8C — no reviewed GT)."""
+"""Projected-position evaluation (Stage 8D — no reviewed GT claimed)."""
 
 from __future__ import annotations
 
@@ -8,24 +8,23 @@ from datetime import datetime, timezone
 from typing import Any
 
 # Split to avoid false-positive secret entropy scanners.
-NOT_EVALUATED_HOMOGRAPHY = "NOT_EVALUATED_NO_REVIEWED_" "HOMOGRAPHY_GROUND_TRUTH"
+NOT_EVALUATED_PROJECTED_POS = "NOT_EVALUATED_NO_REVIEWED_" "PROJECTED_POSITION_GROUND_TRUTH"
 
 NULL_METRICS: dict[str, Any] = {
-    "keypoint_reprojection_error_px": None,
     "pitch_coordinate_error_m": None,
-    "line_alignment_distance": None,
-    "homography_success_rate": None,
-    "inlier_precision": None,
-    "inlier_recall": None,
-    "segment_temporal_coverage": None,
-    "catastrophic_mirrored_failure_rate": None,
-    "camera_change_boundary_accuracy": None,
-    "calibration_readiness_rate": None,
+    "human_footpoint_projection_error_m": None,
+    "ball_image_plane_projection_error_m": None,
+    "in_bounds_classification_accuracy": None,
+    "extrapolation_detection_rate": None,
+    "mapping_coverage": None,
+    "calibration_gap_handling": None,
+    "catastrophic_mirrored_projection_rate": None,
+    "target_eligible_coverage": None,
 }
 
 
 @dataclass(frozen=True)
-class HomographyEvaluationReport:
+class PitchProjectionEvaluationReport:
     status: str
     ground_truth_evaluation_status: str
     metrics: dict[str, Any]
@@ -60,25 +59,25 @@ def _utc_now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
 
 
-def evaluate_homography(
+def evaluate_pitch_projection(
     *,
-    calibrations: Sequence[Mapping[str, Any]] | None = None,
-    segments: Sequence[Mapping[str, Any]] | None = None,
+    projections: Sequence[Mapping[str, Any]] | None = None,
     ground_truth: Sequence[Mapping[str, Any]] | None = None,
     has_reviewed_ground_truth: bool = False,
-) -> HomographyEvaluationReport:
-    """Null metrics unless reviewed homography GT is present (not claimed here)."""
-    _ = (calibrations, segments)
+) -> PitchProjectionEvaluationReport:
+    """Null metrics unless reviewed projected-position GT is present (not claimed)."""
+    _ = projections
     findings: list[str] = []
     if not has_reviewed_ground_truth or ground_truth is None:
-        findings.append(NOT_EVALUATED_HOMOGRAPHY)
-        findings.append("synthetic known-H is not football match accuracy")
-        findings.append("feature detection does not guarantee correct homography")
-        findings.append("projected player/ball positions handled in Stage 8D pipeline")
+        findings.append(NOT_EVALUATED_PROJECTED_POS)
+        findings.append("synthetic known-H projection is not football match accuracy")
+        findings.append("human footpoint is bbox_bottom_centre approximation (no pose model)")
+        findings.append("ball projection is image-plane centre; airborne/grounded unknown")
         findings.append("attack_direction remains unknown")
+        findings.append("no distance/speed/sprint/heatmap/events computed")
         findings.append("SV/NBJW adapter remains evaluation_only / GPL linking risk")
-        eval_status = NOT_EVALUATED_HOMOGRAPHY
-        return HomographyEvaluationReport(
+        eval_status = NOT_EVALUATED_PROJECTED_POS
+        return PitchProjectionEvaluationReport(
             status="not_evaluated",
             ground_truth_evaluation_status=eval_status,
             metrics=dict(NULL_METRICS),
@@ -86,11 +85,12 @@ def evaluate_homography(
             findings=tuple(findings),
             created_at_utc=_utc_now(),
             adapter_notes=(
-                "Stage 8C baseline: normalized DLT + OpenCV RANSAC; " "no reviewed homography GT"
+                "Stage 8D baseline: image_to_pitch projection from calibration_segments; "
+                "no reviewed projected-position GT"
             ),
         )
-    findings.append("reviewed GT present but metric computation not enabled in Stage 8C")
-    return HomographyEvaluationReport(
+    findings.append("reviewed GT present but metric computation not enabled in Stage 8D")
+    return PitchProjectionEvaluationReport(
         status="partial",
         ground_truth_evaluation_status="partial",
         metrics=dict(NULL_METRICS),
@@ -102,8 +102,8 @@ def evaluate_homography(
 
 
 __all__ = [
-    "NOT_EVALUATED_HOMOGRAPHY",
+    "NOT_EVALUATED_PROJECTED_POS",
     "NULL_METRICS",
-    "HomographyEvaluationReport",
-    "evaluate_homography",
+    "PitchProjectionEvaluationReport",
+    "evaluate_pitch_projection",
 ]
