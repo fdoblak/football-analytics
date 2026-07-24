@@ -1,0 +1,81 @@
+{
+  "artifact_hashes": {
+    "evaluation": {
+      "sha256": "5c04af43f71f8f2c8c02106b2a998397917ad656985ac9c41460dfa1d477cb75",
+      "size": 1658
+    },
+    "metric_results": {
+      "sha256": "ab728434d0248fea285763b17ee64002e37a77758da1ce47c7667279745c2286",
+      "size": 12665
+    },
+    "quality": {
+      "sha256": "daaaa8595f9fc11fd1aedea91bb3cfea4f1c11143ee626b3af88926ff616174e",
+      "size": 785
+    },
+    "segment_metrics": {
+      "sha256": "7daf70f9309c21b60a4fe815ef99d7e96be79f017d735c66d58fe903dce1bd41",
+      "size": 608
+    },
+    "sprint_bouts": {
+      "sha256": "b3ed3f2ec59211fa2b42542ced44a78e40a3acca0c6f7bef8f8cdf48e9640496",
+      "size": 1063
+    },
+    "summary": {
+      "sha256": "c0716ac787acdac772574c6a5e82817af85d7918b87ea12bb27e8f24d9556352",
+      "size": 1200
+    }
+  },
+  "completion_status": "succeeded",
+  "config_fingerprint": "c9d91fcb99827d8d3b2c7c9876b327e4ca95b85052bc33010eb292dca9d54b3d",
+  "coverage_summary": {
+    "derived_coverage_us": 0,
+    "measured_eligible_duration_us": 1500000,
+    "observed_coverage_us": 1500000
+  },
+  "created_at_utc": "2026-07-24T10:10:43.559647Z",
+  "eligible_duration_us": 1500000,
+  "eligible_sample_count": 16,
+  "error_codes": [],
+  "evaluation_status": "NOT_EVALUATED_NO_REVIEWED_DISTANCE_SPEED_SPRINT_GROUND_TRUTH",
+  "excluded_duration_us": 0,
+  "gap_count": 0,
+  "input_fingerprints": {
+    "physical_metric_results": "aa705bb819e10e49acb71be4d54b6bf65345b9795611b909676d2f5b596dc55b"
+  },
+  "metric_status_counts": {
+    "computed": 4
+  },
+  "metrics_policy_fingerprint": "c9d91fcb99827d8d3b2c7c9876b327e4ca95b85052bc33010eb292dca9d54b3d",
+  "outlier_count": 0,
+  "output_fingerprints": {
+    "physical_metric_results": "aa705bb819e10e49acb71be4d54b6bf65345b9795611b909676d2f5b596dc55b"
+  },
+  "provenance": {
+    "definition_style": "opta_style_metric_definition",
+    "label": "distance_speed_sprint_baseline",
+    "metric_origin": "project_generated",
+    "no_coverage_extrapolation": true,
+    "not_official_opta": true,
+    "primary_sample_layer": "filtered",
+    "stage": "9C"
+  },
+  "reason_code_distribution": {},
+  "receipt_id": "motion_receipt_01",
+  "rejected_sample_count": 0,
+  "request_id": "motion_req_01",
+  "review_count": 0,
+  "run_id": "run_20260724T101042997309Z_aa8463ea9af3",
+  "schema_version": 1,
+  "segment_count": 1,
+  "status": "succeeded",
+  "summary_metrics": {
+    "measured_distance_m": 12.0,
+    "robust_mean_speed_mps": 8.0,
+    "robust_peak_speed_mps": 8.000000000000007,
+    "sprint_count": 1
+  },
+  "target_player_id": "target_player_01",
+  "trajectory_policy_fingerprint": "c9d91fcb99827d8d3b2c7c9876b327e4ca95b85052bc33010eb292dca9d54b3d",
+  "video_id": "video_synth_01",
+  "warning_codes": []
+}

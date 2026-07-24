@@ -1,7 +1,7 @@
-"""Target trajectory and physical metric contracts (Stage 9A).
+"""Target trajectory and physical metric contracts / baselines (Stages 9A–9C).
 
-Importing this package must NOT compute real distance/speed/sprint/heatmap metrics
-or load models/videos.
+Importing this package must NOT load models/videos. Stage 9C motion compute is
+explicit via `motion_service.compute_physical_motion` (not on import).
 """
 
 from __future__ import annotations

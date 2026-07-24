@@ -1,0 +1,14 @@
+{
+  "motion_config_fingerprint": "c9d91fcb99827d8d3b2c7c9876b327e4ca95b85052bc33010eb292dca9d54b3d",
+  "physical_metric_results_contract": "aa705bb819e10e49acb71be4d54b6bf65345b9795611b909676d2f5b596dc55b",
+  "physical_schema_fingerprints": {
+    "calibration_segments": "9ce13ae0d771d92a66b72ec5818943f29e96ff4ac71ebf5603fb7fc9c8ab5037",
+    "calibrations": "41360b19ae034f361949a75d8e773c265f0792b2603b69f612ab5863662ac871",
+    "physical_metric_results": "aa705bb819e10e49acb71be4d54b6bf65345b9795611b909676d2f5b596dc55b",
+    "projected_positions": "1860638e13c101a2c4b52ecb86e31c264f1b09ee8f255b3813fb9da8325055ba",
+    "target_trajectory_samples": "70a89bcb00a800fa0d71067616b76703dfcdb281ee0c4079d2867eaf29c1d2cb",
+    "target_trajectory_segments": "6b649e0be17b4a57d971b5dd4cef5b253baeffc091a5b3b0d74c0e8c10f3f79a",
+    "track_identity_assignments": "235e7888e13b3e1435eddc8b2c7aa0fcdcbbd2505b3e3c8b00bd51fdf09e74c0",
+    "trajectory_gaps": "5e034e176bc8f9915bc5ab863238ff378bb85db7cdc088b0dc7692e2b221121c"
+  }
+}

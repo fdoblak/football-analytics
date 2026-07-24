@@ -5,8 +5,8 @@
 | Sub-stage | Status |
 |-----------|--------|
 | **9A** Trajectory + physical metric **contracts** | CLOSED |
-| **9B** Trajectory cleaning / resampling / quality baseline | **ACTIVE (this stage)** |
-| 9C Distance / speed / sprint computation | NOT STARTED |
+| **9B** Trajectory cleaning / resampling / quality baseline | CLOSED |
+| **9C** Distance / speed / sprint computation | **ACTIVE (this stage)** |
 | 9D Heatmap / activity / coverage | NOT STARTED |
 | 9E Physical metric fusion + Stage 9 close | NOT STARTED |
 

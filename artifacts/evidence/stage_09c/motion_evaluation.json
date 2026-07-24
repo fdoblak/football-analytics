@@ -1,0 +1,33 @@
+{
+  "adapter_notes": "stage_9c_synthetic_math_only",
+  "config_fingerprint": "c9d91fcb99827d8d3b2c7c9876b327e4ca95b85052bc33010eb292dca9d54b3d",
+  "created_at_utc": "2026-07-24T10:10:43.504449Z",
+  "findings": [
+    "No reviewed distance/speed/sprint ground truth available.",
+    "Synthetic fixtures prove math/pipeline only — not real football accuracy.",
+    "Sprint definition is project_generated / opta_style_metric_definition, not official Opta."
+  ],
+  "ground_truth_evaluation_status": "NOT_EVALUATED_NO_REVIEWED_DISTANCE_SPEED_SPRINT_GROUND_TRUTH",
+  "metric_reasons": {
+    "distance_absolute_relative_error": "NOT_EVALUATED_NO_REVIEWED_DISTANCE_SPEED_SPRINT_GROUND_TRUTH",
+    "false_sprint_rate": "NOT_EVALUATED_NO_REVIEWED_DISTANCE_SPEED_SPRINT_GROUND_TRUTH",
+    "not_evaluable_correctness": "NOT_EVALUATED_NO_REVIEWED_DISTANCE_SPEED_SPRINT_GROUND_TRUTH",
+    "peak_speed_error": "NOT_EVALUATED_NO_REVIEWED_DISTANCE_SPEED_SPRINT_GROUND_TRUTH",
+    "speed_mae_rmse": "NOT_EVALUATED_NO_REVIEWED_DISTANCE_SPEED_SPRINT_GROUND_TRUTH",
+    "sprint_event_precision_recall_f1": "NOT_EVALUATED_NO_REVIEWED_DISTANCE_SPEED_SPRINT_GROUND_TRUTH",
+    "sprint_timing_error": "NOT_EVALUATED_NO_REVIEWED_DISTANCE_SPEED_SPRINT_GROUND_TRUTH"
+  },
+  "metrics": {
+    "distance_absolute_relative_error": null,
+    "false_sprint_rate": null,
+    "not_evaluable_correctness": null,
+    "peak_speed_error": null,
+    "speed_mae_rmse": null,
+    "sprint_event_precision_recall_f1": null,
+    "sprint_timing_error": null
+  },
+  "run_id": "run_20260724T101042997309Z_aa8463ea9af3",
+  "schema_version": 1,
+  "status": "not_evaluated",
+  "video_id": "video_synth_01"
+}

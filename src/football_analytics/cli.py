@@ -1872,9 +1872,7 @@ def cmd_physical_trajectory_prepare(
             print("error: provide --fixture-smoke for Stage 9B synthetic prepare", file=sys.stderr)
             return 2
         candidates = continuous_movement_bundle(fp)
-        result = prepare_target_trajectory(
-            candidates=candidates, output_dir=output_dir, config=cfg
-        )
+        result = prepare_target_trajectory(candidates=candidates, output_dir=output_dir, config=cfg)
     except Exception as exc:  # noqa: BLE001
         print(f"error: {type(exc).__name__}: {exc}", file=sys.stderr)
         return 1
@@ -1899,6 +1897,111 @@ def cmd_physical_trajectory_validate(*, keep: bool = False, as_json: bool = Fals
     main_fn = ns.get("main")
     if not callable(main_fn):
         print("trajectory validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
+def cmd_physical_motion_compute(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    fixture_smoke: bool = False,
+) -> int:
+    """Stage 9C: compute distance/speed/sprint from eligible trajectory (synthetic smoke)."""
+    from football_analytics.physical.motion_config import (
+        load_motion_baseline_config,
+        motion_baseline_config_fingerprint,
+    )
+    from football_analytics.physical.motion_fixtures import single_sprint_points
+    from football_analytics.physical.motion_service import compute_physical_motion
+
+    try:
+        cfg = load_motion_baseline_config(config_path)
+        fp = motion_baseline_config_fingerprint(cfg)
+        if not fixture_smoke:
+            print(
+                "error: provide --fixture-smoke for Stage 9C synthetic compute "
+                "(refuses silent user-data overwrite)",
+                file=sys.stderr,
+            )
+            return 2
+        points = single_sprint_points(fp)
+        result = compute_physical_motion(primary_points=points, output_dir=output_dir, config=cfg)
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
+    if not result.accepted or not result.receipt_json:
+        print(f"accepted: {result.accepted}", file=sys.stderr)
+        print(f"error_code: {result.error_code}", file=sys.stderr)
+        return int(result.exit_code or 1)
+    print(f"accepted: {result.accepted}")
+    print(f"config_fingerprint: {result.config_fingerprint}")
+    print(f"receipt: {result.receipt_json}")
+    for k in (
+        "measured_distance_m",
+        "robust_mean_speed_mps",
+        "robust_peak_speed_mps",
+        "sprint_count",
+        "evaluation_status",
+        "primary_sample_layer",
+    ):
+        if k in result.summary:
+            print(f"{k}: {result.summary[k]}")
+    return int(result.exit_code)
+
+
+def cmd_physical_motion_evaluate(
+    *,
+    summary_path: Path | None,
+    output: Path,
+    fixture_smoke: bool = False,
+) -> int:
+    """Stage 9C: write evaluation JSON (NOT_EVALUATED without reviewed GT)."""
+    from football_analytics.core.records import write_json_record
+    from football_analytics.physical.motion_evaluation import evaluate_motion_metrics
+
+    if not fixture_smoke and summary_path is None:
+        print(
+            "error: provide --fixture-smoke or --summary for Stage 9C evaluate",
+            file=sys.stderr,
+        )
+        return 2
+    run_id = "run_synth_motion"
+    video_id = "video_synth_01"
+    if summary_path is not None:
+        if not summary_path.is_file() or summary_path.is_symlink():
+            print(f"summary missing or symlink: {summary_path}", file=sys.stderr)
+            return 2
+        payload = json.loads(summary_path.read_text(encoding="utf-8"))
+        if isinstance(payload, dict):
+            run_id = str(payload.get("run_id") or run_id)
+            video_id = str(payload.get("video_id") or video_id)
+    report = evaluate_motion_metrics(has_reviewed_ground_truth=False)
+    out = report.to_dict(run_id=run_id, video_id=video_id)
+    try:
+        write_json_record(output, out, overwrite=False)
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
+    print(f"evaluation_status: {out['ground_truth_evaluation_status']}")
+    print(f"wrote: {output}")
+    return 0
+
+
+def cmd_physical_motion_validate(*, keep: bool = False, as_json: bool = False) -> int:
+    """Run Stage 9C distance/speed/sprint baseline validator."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_distance_speed_sprint_baseline.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("motion validator missing main()", file=sys.stderr)
         return 2
     return int(main_fn(argv))
 
@@ -3731,6 +3834,31 @@ def build_parser() -> argparse.ArgumentParser:
     p_phys_traj_val = phys_traj_sub.add_parser("validate", help="Run Stage 9B validator")
     p_phys_traj_val.add_argument("--keep", action="store_true")
     p_phys_traj_val.add_argument("--json", action="store_true")
+    p_phys_motion = phys_sub.add_parser("motion", help="Distance/speed/sprint metrics (9C)")
+    phys_motion_sub = p_phys_motion.add_subparsers(dest="physical_motion_command")
+    p_phys_motion_compute = phys_motion_sub.add_parser(
+        "compute", help="Compute measured distance/speed/sprint"
+    )
+    p_phys_motion_compute.add_argument("--output-dir", type=Path, required=True)
+    p_phys_motion_compute.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/physical/distance_speed_sprint_baseline.yaml"),
+    )
+    p_phys_motion_compute.add_argument(
+        "--fixture-smoke",
+        action="store_true",
+        help="Use synthetic single-sprint fixture (no video; no user-data overwrite)",
+    )
+    p_phys_motion_eval = phys_motion_sub.add_parser(
+        "evaluate", help="Write motion evaluation JSON (no reviewed GT → NOT_EVALUATED)"
+    )
+    p_phys_motion_eval.add_argument("--summary", type=Path, default=None)
+    p_phys_motion_eval.add_argument("--output", type=Path, required=True)
+    p_phys_motion_eval.add_argument("--fixture-smoke", action="store_true")
+    p_phys_motion_val = phys_motion_sub.add_parser("validate", help="Run Stage 9C validator")
+    p_phys_motion_val.add_argument("--keep", action="store_true")
+    p_phys_motion_val.add_argument("--json", action="store_true")
 
     p_cal_features = cal_sub.add_parser(
         "features", help="Pitch keypoint/line feature detection (8B)"
@@ -4455,6 +4583,23 @@ def main(argv: Sequence[str] | None = None) -> int:
                     keep=bool(args.keep), as_json=bool(args.json)
                 )
             parser.parse_args(["physical", "trajectory", "--help"])
+            return 2
+        if args.physical_command == "motion":
+            if args.physical_motion_command == "compute":
+                return cmd_physical_motion_compute(
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    fixture_smoke=bool(args.fixture_smoke),
+                )
+            if args.physical_motion_command == "evaluate":
+                return cmd_physical_motion_evaluate(
+                    summary_path=args.summary,
+                    output=args.output,
+                    fixture_smoke=bool(args.fixture_smoke),
+                )
+            if args.physical_motion_command == "validate":
+                return cmd_physical_motion_validate(keep=bool(args.keep), as_json=bool(args.json))
+            parser.parse_args(["physical", "motion", "--help"])
             return 2
         parser.parse_args(["physical", "--help"])
         return 2

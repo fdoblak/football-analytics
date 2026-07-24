@@ -90,9 +90,9 @@ validated. Stage 8 is closed (`calibration-baseline-v0.8.0`): 8A contracts →
 direction remains unknown; ball never physical/event metric-eligible; real
 football coordinate accuracy not validated. Stage 9A added target trajectory and
 physical metric **contracts only**. Stage 9B prepares raw/filtered/resampled
-trajectories (no customer distance/speed/sprint yet) and retains small evidence
-under `artifacts/evidence/`. Do **not** start Stage 9C without an explicit user
-prompt.
+trajectories. Stage 9C computes measured distance / robust speed / project
+sprint bouts (synthetic math validated; real football accuracy not claimed).
+Do **not** start Stage 9D without an explicit user prompt.
 
 ---
 

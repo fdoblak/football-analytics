@@ -1,0 +1,123 @@
+# Stage 9C distance / speed / sprint baseline.
+# Project-generated Opta-style thresholds — NOT an official Opta standard.
+
+schema_version: 1
+config_version: 1
+pipeline_id: distance_speed_sprint_baseline
+pipeline_version: 1
+stage: "9C"
+
+metric_origin: project_generated
+definition_style: opta_style_metric_definition
+
+# Customer primary layer: filtered (quality-gated observed points).
+# raw_observed and resampled remain diagnostic-only.
+primary_sample_layer: filtered
+diagnostic_sample_layers:
+  - raw_observed
+  - resampled
+
+input_eligibility:
+  require_confirmed_target: true
+  require_observed_or_filtered: true
+  require_mapping_status: mapped
+  require_physical_metric_eligible: true
+  require_valid_calibration: true
+  uncertainty_max_m: 2.5
+  forbid_revoked: true
+  forbid_predicted_interpolated: true
+  forbid_provisional: true
+  forbid_ball: true
+  require_playable_non_replay: true
+  require_video_time_us: true
+
+pitch:
+  length_m: 105.0
+  width_m: 68.0
+
+distance:
+  unit: m
+  method: euclidean_2d_pitch
+  same_continuous_eligible_segment_only: true
+  gap_bridge_forbidden: true
+  min_points_per_segment: 2
+  min_delta_time_us: 1000
+  max_delta_time_us: 500000
+  # Coverage below this → distance status not_evaluable (no extrapolation).
+  min_coverage_ratio_for_computed: 0.15
+  notes: "Measured eligible distance only; not full-match estimate."
+
+speed:
+  canonical_unit: m_s
+  display_unit_optional: km_h
+  time_source: video_time_us
+  forbid_frame_fps_time: true
+  min_delta_time_us: 1000
+  max_delta_time_us: 500000
+  # Quality-gate outlier speeds excluded from customer robust speed.
+  outlier_impossible_speed_mps: 12.0
+  exclude_quality_gate_outliers_from_customer: true
+  smoothing:
+    method: median_window
+    window_samples: 3
+    deterministic: true
+  peak_speed:
+    min_support_samples: 3
+    min_support_duration_us: 300000
+    single_two_point_spike_not_peak: true
+  min_eligible_duration_us: 500000
+  min_coverage_ratio_for_computed: 0.15
+  notes: "Diagnostic raw instantaneous speed ≠ customer robust speed."
+
+sprint:
+  profile_version: 1
+  entry_speed_mps: 7.0
+  exit_speed_mps: 6.0
+  hysteresis: true
+  min_duration_us: 1000000
+  min_supporting_samples: 3
+  min_distance_m: 5.0
+  max_internal_sample_gap_us: 400000
+  single_frame_spike_not_sprint: true
+  gap_or_boundary_terminates: true
+  uncertain_interval_not_sprint: true
+  not_universal_standard: true
+  not_official_opta: true
+
+coverage:
+  # Measured eligible duration vs wall-clock analysis window are distinct.
+  extrapolate_uncovered_time: false
+  low_coverage_is_not_inactivity: true
+  single_point_segment_motion_ineligible: true
+
+output_policy:
+  write_segment_metrics: true
+  write_sprint_bouts: true
+  write_metric_results: true
+  write_summary: true
+  write_receipt: true
+  write_quality: true
+  write_evaluation: true
+  no_overwrite: true
+  atomic: true
+
+forbidden:
+  heatmap: true
+  activity_score: true
+  events: true
+  pixel_distance: true
+  coverage_extrapolation: true
+  official_opta_claim: true
+
+runtime_root: /home/fdoblak/workspace/distance_speed_sprint_checks
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+attack_direction: unknown
+
+notes:
+  - "Sprint thresholds are project policy placeholders, not official Opta."
+  - "Primary customer distance/speed uses filtered layer; raw/resampled are diagnostic."
+  - "Hard gaps never bridge distance, speed, or sprint bouts."
+  - "Stage 9C does not claim real-match football accuracy."

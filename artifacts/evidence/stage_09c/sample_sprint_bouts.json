@@ -1,0 +1,29 @@
+{
+  "bouts": [
+    {
+      "config_fingerprint": "c9d91fcb99827d8d3b2c7c9876b327e4ca95b85052bc33010eb292dca9d54b3d",
+      "definition_style": "opta_style_metric_definition",
+      "derived_coverage_us": 0,
+      "distance_m": 12.0,
+      "duration_us": 1500000,
+      "end_time_us": 1500000,
+      "evaluability": "evaluable",
+      "mean_robust_speed_mps": 7.999999999999999,
+      "metric_origin": "project_generated",
+      "observed_coverage_us": 1500000,
+      "peak_robust_speed_mps": 8.000000000000043,
+      "reason_codes": [
+        "SPRINT_ENDED_AT_SEGMENT_BOUNDARY"
+      ],
+      "sample_layer": "filtered",
+      "source_segment_id": "traj_seg_sprint1",
+      "sprint_id": "sprint_traj_seg_sprint1_01",
+      "sprint_profile_version": 1,
+      "start_time_us": 0,
+      "supporting_sample_count": 16,
+      "uncertainty_m": 0.4
+    }
+  ],
+  "definition_style": "opta_style_metric_definition",
+  "metric_origin": "project_generated"
+}

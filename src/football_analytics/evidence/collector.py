@@ -53,6 +53,7 @@ WORKSPACE_STAGE_MAP: dict[str, str] = {
     "pitch_projection_checks": "stage_08d",
     "physical_metric_contract_checks": "stage_09a",
     "target_trajectory_checks": "stage_09b",
+    "distance_speed_sprint_checks": "stage_09c",
 }
 
 
@@ -278,6 +279,122 @@ def backfill_from_workspace(
     }
 
 
+def normalize_byte_identical_duplicates(
+    *,
+    stage_id: str,
+    project_root: Path | None = None,
+    dry_run: bool = False,
+) -> dict[str, Any]:
+    """Remove plain-name copies that are byte+SHA identical to an indexed canonical file.
+
+    Keeps the index-referenced (or hash-prefixed) canonical path. Never deletes a
+    file whose SHA is unique. Records cleanup in the artifact index.
+    """
+    root = project_root or default_project_root()
+    ev = evidence_root(project_root=root)
+    stage_dir = ev / stage_id
+    index_path = ev / "index.json"
+    index = load_index(index_path)
+    if not stage_dir.is_dir():
+        return {
+            "stage_id": stage_id,
+            "removed": [],
+            "kept": [],
+            "findings": ["stage_dir_missing"],
+            "data_loss": False,
+        }
+
+    files = [p for p in stage_dir.iterdir() if p.is_file() and not p.is_symlink()]
+    by_hash: dict[str, list[Path]] = {}
+    for path in files:
+        digest = sha256_file(path)
+        by_hash.setdefault(digest, []).append(path)
+
+    indexed_rels = {
+        str(e.get("relative_path"))
+        for e in index.get("entries") or []
+        if e.get("stage_id") == stage_id and e.get("relative_path") and e.get("status") == "present"
+    }
+    removed: list[dict[str, Any]] = []
+    kept: list[str] = []
+    findings: list[str] = []
+
+    for digest, paths in sorted(by_hash.items(), key=lambda kv: kv[0]):
+        if len(paths) < 2:
+            kept.extend(str(p.name) for p in paths)
+            continue
+        # Prefer indexed path as canonical; else prefer hash-prefixed name.
+        canonical: Path | None = None
+        for p in paths:
+            try:
+                rel = str(p.resolve().relative_to(root.resolve()))
+            except ValueError:
+                rel = str(p)
+            if rel in indexed_rels:
+                canonical = p
+                break
+        if canonical is None:
+            prefixed = [p for p in paths if p.name.startswith(digest[:12] + "_")]
+            canonical = sorted(prefixed or paths, key=lambda p: p.name)[0]
+        for p in paths:
+            if p == canonical:
+                kept.append(p.name)
+                continue
+            # Only remove if content truly identical (already same hash group).
+            entry = {
+                "removed_name": p.name,
+                "canonical_name": canonical.name,
+                "sha256": digest,
+                "size_bytes": p.stat().st_size,
+            }
+            if not dry_run:
+                p.unlink()
+            removed.append(entry)
+
+    if not dry_run:
+        cleanup_entry = {
+            "artifact_id": f"{stage_id}_duplicate_normalization",
+            "stage_id": stage_id,
+            "relative_path": None,
+            "source_path": str(stage_dir),
+            "sha256": None,
+            "size_bytes": None,
+            "artifact_type": "duplicate_normalization_record",
+            "license_class": "project",
+            "data_classification": "safe_small_evidence",
+            "status": "present",
+            "git_tracked": True,
+            "reason_not_git": None,
+            "commit_sha": None,
+            "notes": json.dumps(
+                {
+                    "removed_count": len(removed),
+                    "removed": removed,
+                    "kept_count": len(kept),
+                },
+                sort_keys=True,
+            ),
+        }
+        # Replace prior normalization record if any
+        entries = [
+            e
+            for e in (index.get("entries") or [])
+            if e.get("artifact_id") != cleanup_entry["artifact_id"]
+        ]
+        entries.append(cleanup_entry)
+        index["entries"] = entries
+        save_index(index_path, index)
+
+    return {
+        "stage_id": stage_id,
+        "removed": removed,
+        "kept": kept,
+        "findings": findings,
+        "data_loss": False,
+        "dry_run": dry_run,
+    }
+
+
 def mark_missing_stages(stage_ids: Iterable[str], *, project_root: Path | None = None) -> int:
     root = project_root or default_project_root()
     index_path = evidence_root(project_root=root) / "index.json"
@@ -321,5 +438,6 @@ __all__ = [
     "save_index",
     "register_or_copy",
     "backfill_from_workspace",
+    "normalize_byte_identical_duplicates",
     "mark_missing_stages",
 ]

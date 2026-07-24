@@ -1408,7 +1408,7 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | status | open |
 | target_stage | Stage 9A+ |
 
-## RISK-100 — Physical metric accuracy claimed without reviewed GT (9A)
+## RISK-100 — Physical metric accuracy claimed without reviewed GT (9A+)
 
 | Field | Value |
 |-------|-------|
@@ -1416,8 +1416,22 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | description | Contract stubs or synthetic fixtures presented as validated distance/speed/sprint/heatmap accuracy. |
 | probability | high |
 | impact | high |
-| mitigation | NOT_EVALUATED_NO_REVIEWED_PHYSICAL_METRIC_GROUND_TRUTH; `no_real_metric_computation=true`; metric results status `contract_stub` / `not_evaluable`. |
-| trigger | customer report claiming Opta-grade or validated physical metrics from Stage 9A |
+| mitigation | NOT_EVALUATED_NO_REVIEWED_PHYSICAL_METRIC_GROUND_TRUTH (9A); NOT_EVALUATED_NO_REVIEWED_DISTANCE_SPEED_SPRINT_GROUND_TRUTH (9C); sprint marked project_generated / not official Opta; no coverage extrapolation. |
+| trigger | customer report claiming Opta-grade or validated physical metrics from Stage 9 |
 | owner | Furkan Doblak |
 | status | open |
 | target_stage | Stage 9A+ |
+
+## RISK-101 — Coverage gaps extrapolated into distance/speed (9C)
+
+| Field | Value |
+|-------|-------|
+| risk_id | RISK-101 |
+| description | Unobserved / gap time filled to inflate total distance or mean speed toward a full-match estimate. |
+| probability | medium |
+| impact | high |
+| mitigation | `extrapolate_uncovered_time: false`; measured eligible duration distinct from analysis window; low coverage → `not_evaluable`. |
+| trigger | full-match distance reported from partial eligible segments |
+| owner | Furkan Doblak |
+| status | open |
+| target_stage | Stage 9C+ |

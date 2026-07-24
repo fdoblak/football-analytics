@@ -1,0 +1,54 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "config_fingerprint": "c9d91fcb99827d8d3b2c7c9876b327e4ca95b85052bc33010eb292dca9d54b3d",
+    "constant_speed": {
+      "actual_distance_m": 3.5,
+      "actual_mean_mps": 5.0,
+      "expected_distance_m": 3.5,
+      "expected_speed_mps": 5.0
+    },
+    "definition_style": "opta_style_metric_definition",
+    "e2e_summary": {
+      "evaluation_status": "NOT_EVALUATED_NO_REVIEWED_DISTANCE_SPEED_SPRINT_GROUND_TRUTH",
+      "measured_distance_m": 12.0,
+      "robust_mean_speed_mps": 8.0,
+      "robust_peak_speed_mps": 8.000000000000007,
+      "sprint_count": 1
+    },
+    "metric_origin": "project_generated",
+    "primary_sample_layer": "filtered",
+    "single_sprint": {
+      "not_evaluable_count": 0,
+      "sprint_count": 1,
+      "sprint_distance_m": 12.0,
+      "sprint_duration_us": 1500000
+    }
+  },
+  "scenarios": {
+    "00_metadata": "PASS",
+    "01_constant_speed": "PASS",
+    "02_known_distance": "PASS",
+    "03_vfr_timestamps": "PASS",
+    "04_zero_delta_rejected": "PASS",
+    "05_single_point_not_evaluable": "PASS",
+    "06_hard_gap_no_bridge": "PASS",
+    "07_shot_boundary_split": "PASS",
+    "08_outlier_not_customer_peak": "PASS",
+    "09_low_coverage_not_evaluable": "PASS",
+    "10_below_sprint_threshold": "PASS",
+    "11_hysteresis_sprint": "PASS",
+    "12_short_burst_not_sprint": "PASS",
+    "13_single_sprint": "PASS",
+    "14_multi_sprint": "PASS",
+    "15_gap_split_sprints": "PASS",
+    "16_uncertainty_not_evaluable": "PASS",
+    "17_deterministic_repeat": "PASS",
+    "18_e2e_receipt": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-24T10:10:45.858025Z",
+  "warnings": []
+}
