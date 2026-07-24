@@ -385,3 +385,30 @@ contracts:
       1:
         spec_path: schemas/data/v1/clearance_events.json
     migration_edges: []
+
+  replay_candidates:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/replay_candidates.json
+    migration_edges: []
+
+  target_event_ledger:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/target_event_ledger.json
+    migration_edges: []
+
+  event_revisions:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/event_revisions.json
+    migration_edges: []

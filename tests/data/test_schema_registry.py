@@ -27,7 +27,7 @@ class RegistryCompilerTests(unittest.TestCase):
 
     def test_01_list_nineteen_v1(self) -> None:
         names = list_contracts(registry=self.reg)
-        self.assertEqual(len(names), 42)
+        self.assertEqual(len(names), 45)
         for n in (
             "videos",
             "frames",

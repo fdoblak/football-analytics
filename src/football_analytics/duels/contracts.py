@@ -57,7 +57,7 @@ JSON_SCHEMA_NAMES: tuple[str, ...] = (
     "manual_review_queue",
 )
 
-EXPECTED_REGISTRY_CONTRACT_COUNT = 42
+EXPECTED_REGISTRY_CONTRACT_COUNT = 45
 
 
 def load_duels_contract(name: str, version: int = 1, *, registry: Any = None) -> ContractSpec:

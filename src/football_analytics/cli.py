@@ -2269,6 +2269,116 @@ def cmd_duels_pipeline_validate(*, keep: bool = False, as_json: bool = False) ->
     return int(main_fn(argv))
 
 
+def cmd_events_contracts_validate(*, keep: bool = False, as_json: bool = False) -> int:
+    """Run Stage 13 contracts validator."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_events_contracts.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("events contract validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
+def cmd_events_compute(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    fixture_smoke: bool = False,
+) -> int:
+    """Stage 13A replay candidate baseline (synthetic)."""
+    from football_analytics.events.fixtures import replay_contexts_fixture
+    from football_analytics.events.replay_config import (
+        load_replay_config,
+        replay_config_fingerprint,
+    )
+    from football_analytics.events.replay_service import compute_replay_candidates
+
+    try:
+        cfg = load_replay_config(config_path)
+        _ = replay_config_fingerprint(cfg)
+        if not fixture_smoke:
+            print("events compute requires --fixture-smoke in Stage 13", file=sys.stderr)
+            return 2
+        result = compute_replay_candidates(
+            output_dir=output_dir,
+            contexts=replay_contexts_fixture("mixed"),
+            config_path=config_path,
+        )
+    except Exception as exc:  # noqa: BLE001
+        print(f"events compute failed: {exc}", file=sys.stderr)
+        return 1
+    print(f"accepted: {result.accepted}")
+    print(f"replay_parquet: {result.replay_parquet}")
+    print(f"summary_json: {result.summary_json}")
+    return 0 if result.accepted else 1
+
+
+def cmd_events_integrate(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    fixture_smoke: bool = False,
+) -> int:
+    """Fuse Stage 13A–13D into Stage 13E target-events package (synthetic)."""
+    from football_analytics.events.fixtures import pipeline_fixture
+    from football_analytics.events.pipeline_config import (
+        events_pipeline_config_fingerprint,
+        load_events_pipeline_config,
+    )
+    from football_analytics.events.pipeline_service import integrate_target_events
+
+    try:
+        cfg = load_events_pipeline_config(config_path)
+        _ = events_pipeline_config_fingerprint(cfg)
+        if not fixture_smoke:
+            print("events integrate requires --fixture-smoke in Stage 13", file=sys.stderr)
+            return 2
+        fx = pipeline_fixture("full_package")
+        result = integrate_target_events(
+            output_dir=output_dir,
+            sources=fx["sources"],
+            replay_contexts=fx["replay_contexts"],
+            attack_periods=fx["attack_periods"],
+            config_path=config_path,
+            run_id=fx["run_id"],
+            video_id=fx["video_id"],
+            interaction_coverage=fx["interaction_coverage"],
+        )
+    except Exception as exc:  # noqa: BLE001
+        print(f"events integrate failed: {exc}", file=sys.stderr)
+        return 1
+    print(f"accepted: {result.accepted}")
+    print(f"summary_json: {result.summary_json}")
+    print(f"gate_hint: {result.summary.get('gate_hint')}")
+    return 0 if result.accepted else 1
+
+
+def cmd_events_pipeline_validate(*, keep: bool = False, as_json: bool = False) -> int:
+    """Run Stage 13E target-events fusion validator (Stage 13 close)."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_events_pipeline.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("events pipeline validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
 def cmd_physical_trajectory_prepare(
     *,
     output_dir: Path,
@@ -4710,6 +4820,47 @@ def build_parser() -> argparse.ArgumentParser:
     p_duels_pipe_val.add_argument("--keep", action="store_true")
     p_duels_pipe_val.add_argument("--json", action="store_true")
 
+    p_events = sub.add_parser(
+        "events",
+        help="Target event ledger / metrics (Stage 13)",
+    )
+    events_sub = p_events.add_subparsers(dest="events_command")
+    p_events_contracts = events_sub.add_parser("contracts", help="Events contract helpers")
+    events_contracts_sub = p_events_contracts.add_subparsers(dest="events_contracts_command")
+    p_events_c_val = events_contracts_sub.add_parser(
+        "validate", help="Validate events contracts (synthetic Stage 13)"
+    )
+    p_events_c_val.add_argument("--keep", action="store_true")
+    p_events_c_val.add_argument("--json", action="store_true")
+
+    p_events_compute = events_sub.add_parser(
+        "compute", help="Replay candidate baseline compute (13A synthetic)"
+    )
+    p_events_compute.add_argument("--output-dir", type=Path, required=True)
+    p_events_compute.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/events/replay_candidate_baseline.yaml"),
+    )
+    p_events_compute.add_argument("--fixture-smoke", action="store_true")
+
+    p_events_integrate = events_sub.add_parser(
+        "integrate", help="Fuse 13A–13D target-events package (13E synthetic)"
+    )
+    p_events_integrate.add_argument("--output-dir", type=Path, required=True)
+    p_events_integrate.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/events/events_pipeline.yaml"),
+    )
+    p_events_integrate.add_argument("--fixture-smoke", action="store_true")
+
+    p_events_pipe_val = events_sub.add_parser(
+        "pipeline-validate", help="Run Stage 13E fusion validator (Stage 13 close)"
+    )
+    p_events_pipe_val.add_argument("--keep", action="store_true")
+    p_events_pipe_val.add_argument("--json", action="store_true")
+
     p_cal_features = cal_sub.add_parser(
         "features", help="Pitch keypoint/line feature detection (8B)"
     )
@@ -5571,6 +5722,28 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.duels_command == "pipeline-validate":
             return cmd_duels_pipeline_validate(keep=bool(args.keep), as_json=bool(args.json))
         parser.parse_args(["duels", "--help"])
+        return 2
+    if args.command == "events":
+        if args.events_command == "contracts":
+            if args.events_contracts_command == "validate":
+                return cmd_events_contracts_validate(keep=bool(args.keep), as_json=bool(args.json))
+            parser.parse_args(["events", "contracts", "--help"])
+            return 2
+        if args.events_command == "compute":
+            return cmd_events_compute(
+                output_dir=args.output_dir,
+                config_path=args.config,
+                fixture_smoke=bool(args.fixture_smoke),
+            )
+        if args.events_command == "integrate":
+            return cmd_events_integrate(
+                output_dir=args.output_dir,
+                config_path=args.config,
+                fixture_smoke=bool(args.fixture_smoke),
+            )
+        if args.events_command == "pipeline-validate":
+            return cmd_events_pipeline_validate(keep=bool(args.keep), as_json=bool(args.json))
+        parser.parse_args(["events", "--help"])
         return 2
     parser.print_help()
     return 2

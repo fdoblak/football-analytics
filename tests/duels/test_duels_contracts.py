@@ -49,7 +49,7 @@ class DuelsContractsTests(unittest.TestCase):
 
     def test_registry_count(self) -> None:
         self.assertEqual(len(list_contracts(registry=self.reg)), EXPECTED_REGISTRY_CONTRACT_COUNT)
-        self.assertEqual(EXPECTED_REGISTRY_CONTRACT_COUNT, 42)
+        self.assertEqual(EXPECTED_REGISTRY_CONTRACT_COUNT, 45)
 
     def test_duels_contracts_registered(self) -> None:
         assert_duels_contracts_registered(registry=self.reg)

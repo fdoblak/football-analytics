@@ -69,6 +69,12 @@ WORKSPACE_STAGE_MAP: dict[str, str] = {
     "ground_duel_checks": "stage_12c",
     "aerial_clearance_checks": "stage_12d",
     "duels_pipeline_checks": "stage_12e",
+    "events_contract_checks": "stage_13",
+    "replay_candidate_checks": "stage_13a",
+    "attack_direction_checks": "stage_13b",
+    "target_event_ledger_checks": "stage_13c",
+    "target_event_metrics_checks": "stage_13d",
+    "events_pipeline_checks": "stage_13e",
 }
 
 
