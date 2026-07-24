@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-07-22T14:01:04.866475+00:00",
+  "config_path": "configs/system/paths.yaml",
+  "status": "PASS",
+  "exit_code": 0,
+  "active_backend": "wsl_local",
+  "active_root": {
+    "configured": "/home/fdoblak/football_data",
+    "resolved": "/home/fdoblak/football_data",
+    "exists": true,
+    "is_directory": true,
+    "is_symlink": false,
+    "owner_uid": 0,
+    "owner_gid": 0,
+    "mode": "0o755",
+    "readable": true,
+    "writable": true,
+    "traversable": true
+  },
+  "filesystem": {
+    "device": "/dev/sdd",
+    "type": "ext4",
+    "total_bytes": 1081101176832,
+    "used_bytes": 32591167488,
+    "free_bytes": 993517654016,
+    "free_percent": 91.8987,
+    "capacity_status": "PASS"
+  },
+  "thresholds": {
+    "minimum_free_bytes": 21474836480,
+    "warning_free_bytes": 107374182400,
+    "require_absolute_paths": true,
+    "require_paths_under_active_root": true,
+    "reject_symlink_escape": true
+  },
+  "paths": {
+    "raw_matches": {
+      "configured": "/home/fdoblak/football_data/videos/raw_matches",
+      "status": "PASS",
+      "exists": true,
+      "is_directory": true,
+      "is_symlink": false,
+      "resolved": "/home/fdoblak/football_data/videos/raw_matches",
+      "under_active_root": true,
+      "owner_uid": 0,
+      "owner_gid": 0,
+      "mode": "0o755"
+    },
+    "test_clips": {
+      "configured": "/home/fdoblak/football_data/videos/test_clips",
+      "status": "PASS",
+      "exists": true,
+      "is_directory": true,
+      "is_symlink": false,
+      "resolved": "/home/fdoblak/football_data/videos/test_clips",
+      "under_active_root": true,
+      "owner_uid": 0,
+      "owner_gid": 0,
+      "mode": "0o755"
+    },
+    "datasets": {
+      "configured": "/home/fdoblak/football_data/datasets",
+      "status": "PASS",
+      "exists": true,
+      "is_directory": true,
+      "is_symlink": false,
+      "resolved": "/home/fdoblak/football_data/datasets",
+      "under_active_root": true,
+      "owner_uid": 0,
+      "owner_gid": 0,
+      "mode": "0o755"
+    },
+    "results": {
+      "configured": "/home/fdoblak/football_data/results",
+      "status": "PASS",
+      "exists": true,
+      "is_directory": true,
+      "is_symlink": false,
+      "resolved": "/home/fdoblak/football_data/results",
+      "under_active_root": true,
+      "owner_uid": 0,
+      "owner_gid": 0,
+      "mode": "0o755"
+    },
+    "rendered_outputs": {
+      "configured": "/home/fdoblak/football_data/rendered_outputs",
+      "status": "PASS",
+      "exists": true,
+      "is_directory": true,
+      "is_symlink": false,
+      "resolved": "/home/fdoblak/football_data/rendered_outputs",
+      "under_active_root": true,
+      "owner_uid": 0,
+      "owner_gid": 0,
+      "mode": "0o755"
+    },
+    "reports": {
+      "configured": "/home/fdoblak/football_data/reports",
+      "status": "PASS",
+      "exists": true,
+      "is_directory": true,
+      "is_symlink": false,
+      "resolved": "/home/fdoblak/football_data/reports",
+      "under_active_root": true,
+      "owner_uid": 0,
+      "owner_gid": 0,
+      "mode": "0o755"
+    },
+    "model_archive": {
+      "configured": "/home/fdoblak/football_data/model_archive",
+      "status": "PASS",
+      "exists": true,
+      "is_directory": true,
+      "is_symlink": false,
+      "resolved": "/home/fdoblak/football_data/model_archive",
+      "under_active_root": true,
+      "owner_uid": 0,
+      "owner_gid": 0,
+      "mode": "0o755"
+    },
+    "experiments_archive": {
+      "configured": "/home/fdoblak/football_data/experiments_archive",
+      "status": "PASS",
+      "exists": true,
+      "is_directory": true,
+      "is_symlink": false,
+      "resolved": "/home/fdoblak/football_data/experiments_archive",
+      "under_active_root": true,
+      "owner_uid": 0,
+      "owner_gid": 0,
+      "mode": "0o755"
+    },
+    "backups": {
+      "configured": "/home/fdoblak/football_data/backups",
+      "status": "PASS",
+      "exists": true,
+      "is_directory": true,
+      "is_symlink": false,
+      "resolved": "/home/fdoblak/football_data/backups",
+      "under_active_root": true,
+      "owner_uid": 0,
+      "owner_gid": 0,
+      "mode": "0o755"
+    }
+  },
+  "probe": {
+    "requested": true,
+    "executed": true,
+    "passed": true,
+    "cleanup_verified": true,
+    "path": "/home/fdoblak/football_data/.storage_probe_20260722T140104_84fde76b6ec53b65",
+    "sha256": "e4104e0eab8c37f6a458c9e0092c3cf15e6a42c30c09a2beb63ecf37ba1a60bc",
+    "size_bytes": 2085
+  },
+  "warnings": [],
+  "errors": [],
+  "extras": {
+    "planned_archive": {
+      "root": "/mnt/d/football_data",
+      "status": "unverified",
+      "validated_as_active": false,
+      "note": "Planned archive is not subject to active-root existence checks"
+    }
+  }
+}

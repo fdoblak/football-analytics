@@ -1,0 +1,32 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "config_fingerprint": "760c5135c742fb2137bec35e16370622188b7f9985b5010ede5dc58ad869f680",
+    "gate": "PASS — TARGET TRAJECTORY PREPARATION ACTIVE",
+    "scenarios_passed": 17
+  },
+  "scenarios": {
+    "01_valid_continuous_movement": "PASS",
+    "02_duplicate_timestamp": "PASS",
+    "03_conflicting_duplicate": "PASS",
+    "04_impossible_jump": "PASS",
+    "05_short_spike": "PASS",
+    "06_hard_gap": "PASS",
+    "07_shot_boundary": "PASS",
+    "08_track_boundary": "PASS",
+    "09_revoked_identity": "PASS",
+    "10_invalid_calibration": "PASS",
+    "11_uncertainty_rejection": "PASS",
+    "12_interpolation_threshold": "PASS",
+    "13_no_extrapolation": "PASS",
+    "14_vfr_timestamps": "PASS",
+    "15_single_point_segment": "PASS",
+    "16_deterministic_repeat": "PASS",
+    "17_atomic_no_overwrite": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-24T09:37:33.236498Z",
+  "warnings": []
+}

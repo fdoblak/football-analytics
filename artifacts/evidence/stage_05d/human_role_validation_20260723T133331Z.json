@@ -1,0 +1,27 @@
+{
+  "config_fingerprint": "7b401ca051d0eb280d27d7676556a9b604c6530d9574f4275b3fad0f34664838",
+  "detections_fingerprint": "04ae8dd7a7e92bf7bd468db7a263e5e28258a30887d43c8f603c69d56f5c18b6",
+  "errors": [],
+  "evaluation_status": "NOT_EVALUATED_NO_REVIEWED_HUMAN_ROLE_GROUND_TRUTH",
+  "exit_code": 0,
+  "findings": [
+    "No reviewed football human-role ground truth \u2014 real role accuracy not validated",
+    "User-facing \"other\" maps to canonical RoleLabel staff"
+  ],
+  "gate": "PASS_WITH_FINDINGS \u2014 HUMAN ROLE CLASSIFICATION BASELINE ACTIVE; REAL FOOTBALL ACCURACY NOT YET VALIDATED",
+  "lazy_import_ok": true,
+  "other_maps_to": "staff",
+  "overall_status": "PASS_WITH_FINDINGS",
+  "receipt_assignment_counts": {
+    "abstained": 0,
+    "classified": 4,
+    "failed": 0,
+    "not_eligible": 0,
+    "skipped": 0
+  },
+  "runtime_root": "/home/fdoblak/workspace/human_role_checks",
+  "schema_version": 1,
+  "status": "PASS_WITH_FINDINGS",
+  "timestamp": "2026-07-23T13:33:31.436869Z",
+  "warnings": []
+}

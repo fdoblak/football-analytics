@@ -1,0 +1,87 @@
+{
+  "artifact_hashes": {
+    "evaluation": {
+      "sha256": "d844ceffb57401f2279ec7af3762cc82301a1c78ba238dbd57d90ded4f21a5a6",
+      "size": 1292
+    },
+    "filtered": {
+      "sha256": "2947edadac7af286ed607d0cb5becf3d06d76d5b2ebea75a7f1995c0358317d8",
+      "size": 15802
+    },
+    "gaps": {
+      "sha256": "d4fd0e4e598f5c8fb9a9bad1fe4926e1344315a131f2e4e07e5d9f3d408a3720",
+      "size": 5247
+    },
+    "quality": {
+      "sha256": "4ab7c8c28597de7e6cb891d220075aaa7a6e6d8d99c979e49859a24642af7e40",
+      "size": 612
+    },
+    "raw": {
+      "sha256": "3dfaa0bd8e3ffd385eedbe410b934c95f6b03702fa47f21ce239ec0d28a5a38f",
+      "size": 15618
+    },
+    "rejections": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "resampled": {
+      "sha256": "047b6a7294446b989f65f663f055ccc111dbda0cbf96aeaddf7d06476b3bc2e3",
+      "size": 16486
+    },
+    "segments": {
+      "sha256": "8bbd6d0e1b811e634ced72f47eeeeec0c2a05af2d6951ca70db80405ecac5f75",
+      "size": 10700
+    }
+  },
+  "completion_status": "succeeded",
+  "config_fingerprint": "760c5135c742fb2137bec35e16370622188b7f9985b5010ede5dc58ad869f680",
+  "coverage_summary": {
+    "derived_coverage_us": 700000,
+    "observed_coverage_us": 700000
+  },
+  "created_at_utc": "2026-07-24T09:38:07.634911Z",
+  "eligible_duration_us": 700000,
+  "eligible_sample_count": 8,
+  "error_codes": [],
+  "evaluation_status": "NOT_EVALUATED_NO_REVIEWED_TARGET_TRAJECTORY_GROUND_TRUTH",
+  "excluded_duration_us": 0,
+  "filtered_sample_count": 8,
+  "gap_count": 0,
+  "input_fingerprints": {
+    "target_trajectory_samples": "70a89bcb00a800fa0d71067616b76703dfcdb281ee0c4079d2867eaf29c1d2cb"
+  },
+  "metric_status_counts": {
+    "contract_stub": 0
+  },
+  "metrics_policy_fingerprint": "760c5135c742fb2137bec35e16370622188b7f9985b5010ede5dc58ad869f680",
+  "outlier_count": 0,
+  "output_fingerprints": {
+    "target_trajectory_samples": "70a89bcb00a800fa0d71067616b76703dfcdb281ee0c4079d2867eaf29c1d2cb",
+    "target_trajectory_segments": "6b649e0be17b4a57d971b5dd4cef5b253baeffc091a5b3b0d74c0e8c10f3f79a",
+    "trajectory_gaps": "5e034e176bc8f9915bc5ab863238ff378bb85db7cdc088b0dc7692e2b221121c"
+  },
+  "provenance": {
+    "label": "target_trajectory_preparation",
+    "no_real_metric_computation": true,
+    "notes": "no_customer_physical_metrics",
+    "stage": "9B"
+  },
+  "raw_sample_count": 8,
+  "reason_code_distribution": {},
+  "receipt_id": "traj_receipt_01",
+  "rejected_sample_count": 0,
+  "request_id": "traj_req_01",
+  "resampled_sample_count": 8,
+  "review_count": 0,
+  "run_id": "run_20260724T093806291597Z_bcc98965231e",
+  "schema_version": 1,
+  "segment_count": 1,
+  "status": "succeeded",
+  "target_player_id": "target_player_01",
+  "trajectory_policy_fingerprint": "760c5135c742fb2137bec35e16370622188b7f9985b5010ede5dc58ad869f680",
+  "video_id": "video_synth_01",
+  "warning_codes": [
+    "customer_physical_metrics_not_computed",
+    "attack_direction_unknown"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "accepted_cases": [
+    "mpeg4_to_h264"
+  ],
+  "cleanup_verified": true,
+  "errors": [],
+  "exit_code": 0,
+  "ffmpeg_path": "/usr/bin/ffmpeg",
+  "ffmpeg_version": {
+    "path": "/usr/bin/ffmpeg",
+    "realpath": "/usr/bin/ffmpeg",
+    "version_line": "ffmpeg version 4.4.2-0ubuntu0.22.04.1 Copyright (c) 2000-2021 the FFmpeg developers",
+    "version_token": "4.4.2-0ubuntu0.22.04.1"
+  },
+  "overall_status": "PASS",
+  "policy_version": "video_ingest_policy_v1",
+  "protected_package_versions": {
+    "SoccerNet": "0.1.62",
+    "numpy": "2.2.6",
+    "opencv-python": "5.0.0.93",
+    "opencv-python-headless": "5.0.0.93",
+    "pandas": "2.3.3",
+    "pyarrow": "25.0.0",
+    "torch": "2.11.0+cu128",
+    "torchaudio": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128",
+    "ultralytics": "8.4.91"
+  },
+  "schema_version": 1,
+  "security_cases": [
+    "url_rejected"
+  ],
+  "skipped_cases": [
+    "canonical_h264"
+  ],
+  "status": "PASS",
+  "synthetic_cases": [
+    "cfr_skip",
+    "mpeg4_normalize",
+    "dry_run_planned"
+  ],
+  "timestamp": "2026-07-23T07:43:01.753067Z",
+  "warnings": []
+}

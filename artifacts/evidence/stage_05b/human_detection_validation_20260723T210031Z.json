@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-07-23T21:00:31.730388Z",
+  "status": "PASS_WITH_FINDINGS",
+  "exit_code": 0,
+  "errors": [],
+  "warnings": [],
+  "findings": [
+    "AGPL-3.0 distribution risk \u2014 evaluation_only / production_approved=false",
+    "NOT_EVALUATED_NO_REVIEWED_GROUND_TRUTH \u2014 no reviewed football GT for real accuracy"
+  ],
+  "overall_status": "PASS_WITH_FINDINGS",
+  "gate": "PASS_WITH_FINDINGS \u2014 HUMAN DETECTION BASELINE ACTIVE; REAL FOOTBALL ACCURACY NOT YET VALIDATED",
+  "config_fingerprint": "1f0b08e65ad8ebfcff95f05dcd959874e4f1c5045668eb5c1d3173fcc50fb424",
+  "model_registry_id": "ultralytics_yolo11n_coco_person",
+  "model_sha256_registry": "0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1",
+  "production_approved": false,
+  "model_sha256_actual": "0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1",
+  "lazy_import_ok": true,
+  "inverse_sample": [
+    20.0,
+    -8.0,
+    40.0,
+    32.0
+  ],
+  "smoke_detection_count": 0,
+  "smoke_ball_count": 0,
+  "adapter_cpu_smoke": true,
+  "coordinate_space_note": "Ultralytics YOLO maps boxes back to original image space when predict is run on the source image. Stage 5B treats raw adapter boxes as source-space and applies clip/area/aspect filters only; inverse l"
+}

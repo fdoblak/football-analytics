@@ -1,0 +1,50 @@
+{
+  "items": [
+    {
+      "evidence": {
+        "detection_id": 0,
+        "frame_index": 1,
+        "run_id": "run_20260723T153157218262Z_fdcb3b1b8e28",
+        "video_id": "video_01"
+      },
+      "item_id": "unknown_role_f1_d0",
+      "priority": "low",
+      "reason_codes": [
+        "ROLE_UNKNOWN_ABSTENTION"
+      ],
+      "status": "pending"
+    },
+    {
+      "evidence": {
+        "detection_id": 0,
+        "frame_index": 7,
+        "run_id": "run_20260723T153157218262Z_fdcb3b1b8e28",
+        "video_id": "video_01"
+      },
+      "item_id": "unknown_role_f7_d0",
+      "priority": "low",
+      "reason_codes": [
+        "ROLE_UNKNOWN_ABSTENTION"
+      ],
+      "status": "pending"
+    },
+    {
+      "evidence": {
+        "frame_index": 1,
+        "note": "ambiguous primary is not upgraded to true ball",
+        "run_id": "run_20260723T153157218262Z_fdcb3b1b8e28",
+        "video_id": "video_01"
+      },
+      "item_id": "ball_amb_f1",
+      "priority": "medium",
+      "reason_codes": [
+        "BALL_PRIMARY_AMBIGUOUS"
+      ],
+      "status": "pending"
+    }
+  ],
+  "policy_version": "1.0.0",
+  "run_id": "run_20260723T153157218262Z_fdcb3b1b8e28",
+  "schema_version": 1,
+  "video_id": "video_01"
+}

@@ -1,0 +1,560 @@
+{
+  "cleanup_verified": true,
+  "config_fingerprint": "290df9c765852632e2c8a2c63153f3c614150c4795e9f257b087cef3f149ace3",
+  "deterministic_repeat": true,
+  "errors": [],
+  "exit_code": 0,
+  "fixtures": {
+    "alt_green_pitch": "556e8570522265297ab82f130c85214f9dfa12ff3f5d8fc91c638aa07bac179b",
+    "compound_motion": "d2668dda429cd4961f6d56dd7a89a3aa050b9d831c06b9fd384afd84697c972d",
+    "dev_closeup": "e9b4503e376fe2dc9069d0493a86f4e7f2cdb12dfbb470c415bfbac9dee28bac",
+    "dominant_overlay": "5994c0ae74fa6a6ce49d1cb54c4e36258135149d90752c848ff9ce51262c8ef0",
+    "fullscreen_graphics": "d4d88b5cef054623497aabf9aad281c222406c02adf4f4db48430b12385bc3f5",
+    "low_light_pitch": "83372849b1d165740a7280fd25101792ead0318ad6c15d318be0cceae89a24f0",
+    "medium_pitch": "77cc3106f32e158e0772870c6b79af32d856e030b11d8d39c5912e8f99ae5b6e",
+    "ood_crowd": "53cc239ee71b27142233b00d17448f47f61a578665a7b9a46c8193ac1cf211b8",
+    "pan_motion": "5f77a021d4d2a9e324a9144de0ba73ab757c927f6ef679f3241d214ddc05269f",
+    "partial_overlay": "0d2b7bd9c7beddd36d2bf82a1d249471e509144094db4262b9bc71aa874590cc",
+    "player_isolation": "8ae72206a71ab671d2299fd4cb314e32237c8bef0eb09725b729d534bc978e52",
+    "static_wide": "a907947c6344d958a5533a8ebde12f9f2b776221c48fe47d6a5325f92302c00a",
+    "unstable_motion": "5884be46228f6b614f03162e38d968ff0ecf25e36b5c5570169cce82e59994c2",
+    "wide_pitch": "a907947c6344d958a5533a8ebde12f9f2b776221c48fe47d6a5325f92302c00a",
+    "zoom_motion": "1f90bc3d706b53bcb60198fbee8e35bf65cf7276c3ce11a40cfbef3630b0c990"
+  },
+  "metrics": {
+    "axes": {
+      "camera_motion": {
+        "abstention_rate": 0.0,
+        "axis": "camera_motion",
+        "confusion": {
+          "compound": {
+            "compound": 0,
+            "pan": 0,
+            "static": 0,
+            "unknown": 0,
+            "unstable": 0,
+            "zoom": 0
+          },
+          "pan": {
+            "compound": 0,
+            "pan": 0,
+            "static": 0,
+            "unknown": 0,
+            "unstable": 1,
+            "zoom": 0
+          },
+          "static": {
+            "compound": 0,
+            "pan": 0,
+            "static": 6,
+            "unknown": 0,
+            "unstable": 0,
+            "zoom": 0
+          },
+          "unknown": {
+            "compound": 0,
+            "pan": 0,
+            "static": 0,
+            "unknown": 0,
+            "unstable": 0,
+            "zoom": 0
+          },
+          "unstable": {
+            "compound": 0,
+            "pan": 0,
+            "static": 1,
+            "unknown": 0,
+            "unstable": 0,
+            "zoom": 0
+          },
+          "zoom": {
+            "compound": 0,
+            "pan": 0,
+            "static": 1,
+            "unknown": 0,
+            "unstable": 0,
+            "zoom": 0
+          }
+        },
+        "coverage": 1.0,
+        "f1": {
+          "compound": null,
+          "pan": null,
+          "static": 0.8571428571428571,
+          "unknown": null,
+          "unstable": null,
+          "zoom": null
+        },
+        "labels": [
+          "static",
+          "pan",
+          "zoom",
+          "compound",
+          "unstable",
+          "unknown"
+        ],
+        "macro_f1": 0.8571428571428571,
+        "macro_precision": 0.375,
+        "macro_recall": 0.25,
+        "precision": {
+          "compound": null,
+          "pan": null,
+          "static": 0.75,
+          "unknown": null,
+          "unstable": 0.0,
+          "zoom": null
+        },
+        "predicted": 9,
+        "recall": {
+          "compound": null,
+          "pan": 0.0,
+          "static": 1.0,
+          "unknown": null,
+          "unstable": 0.0,
+          "zoom": 0.0
+        },
+        "selective_accuracy": 0.6666666666666666,
+        "status": "ok",
+        "support": 9
+      },
+      "framing_scale": {
+        "abstention_rate": 0.2222222222222222,
+        "axis": "framing_scale",
+        "confusion": {
+          "close_up": {
+            "close_up": 1,
+            "medium": 0,
+            "unknown": 0,
+            "wide": 0
+          },
+          "medium": {
+            "close_up": 0,
+            "medium": 1,
+            "unknown": 0,
+            "wide": 0
+          },
+          "unknown": {
+            "close_up": 0,
+            "medium": 0,
+            "unknown": 2,
+            "wide": 0
+          },
+          "wide": {
+            "close_up": 0,
+            "medium": 0,
+            "unknown": 0,
+            "wide": 5
+          }
+        },
+        "coverage": 1.0,
+        "f1": {
+          "close_up": 1.0,
+          "medium": 1.0,
+          "unknown": 1.0,
+          "wide": 1.0
+        },
+        "labels": [
+          "wide",
+          "medium",
+          "close_up",
+          "unknown"
+        ],
+        "macro_f1": 1.0,
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "precision": {
+          "close_up": 1.0,
+          "medium": 1.0,
+          "unknown": 1.0,
+          "wide": 1.0
+        },
+        "predicted": 9,
+        "recall": {
+          "close_up": 1.0,
+          "medium": 1.0,
+          "unknown": 1.0,
+          "wide": 1.0
+        },
+        "selective_accuracy": 1.0,
+        "status": "ok",
+        "support": 9
+      },
+      "graphics_status": {
+        "abstention_rate": 0.0,
+        "axis": "graphics_status",
+        "confusion": {
+          "dominant_overlay": {
+            "dominant_overlay": 1,
+            "full_screen": 0,
+            "none": 0,
+            "partial_overlay": 0,
+            "unknown": 0
+          },
+          "full_screen": {
+            "dominant_overlay": 0,
+            "full_screen": 1,
+            "none": 0,
+            "partial_overlay": 0,
+            "unknown": 0
+          },
+          "none": {
+            "dominant_overlay": 0,
+            "full_screen": 0,
+            "none": 6,
+            "partial_overlay": 0,
+            "unknown": 0
+          },
+          "partial_overlay": {
+            "dominant_overlay": 0,
+            "full_screen": 0,
+            "none": 0,
+            "partial_overlay": 1,
+            "unknown": 0
+          },
+          "unknown": {
+            "dominant_overlay": 0,
+            "full_screen": 0,
+            "none": 0,
+            "partial_overlay": 0,
+            "unknown": 0
+          }
+        },
+        "coverage": 1.0,
+        "f1": {
+          "dominant_overlay": 1.0,
+          "full_screen": 1.0,
+          "none": 1.0,
+          "partial_overlay": 1.0,
+          "unknown": null
+        },
+        "labels": [
+          "none",
+          "partial_overlay",
+          "dominant_overlay",
+          "full_screen",
+          "unknown"
+        ],
+        "macro_f1": 1.0,
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "precision": {
+          "dominant_overlay": 1.0,
+          "full_screen": 1.0,
+          "none": 1.0,
+          "partial_overlay": 1.0,
+          "unknown": null
+        },
+        "predicted": 9,
+        "recall": {
+          "dominant_overlay": 1.0,
+          "full_screen": 1.0,
+          "none": 1.0,
+          "partial_overlay": 1.0,
+          "unknown": null
+        },
+        "selective_accuracy": 1.0,
+        "status": "ok",
+        "support": 9
+      },
+      "playability": {
+        "abstention_rate": 0.0,
+        "axis": "playability",
+        "confusion": {
+          "non_playable": {
+            "non_playable": 2,
+            "partially_playable": 0,
+            "playable": 0,
+            "uncertain": 0
+          },
+          "partially_playable": {
+            "non_playable": 0,
+            "partially_playable": 2,
+            "playable": 0,
+            "uncertain": 0
+          },
+          "playable": {
+            "non_playable": 0,
+            "partially_playable": 0,
+            "playable": 5,
+            "uncertain": 0
+          },
+          "uncertain": {
+            "non_playable": 0,
+            "partially_playable": 0,
+            "playable": 0,
+            "uncertain": 0
+          }
+        },
+        "coverage": 1.0,
+        "f1": {
+          "non_playable": 1.0,
+          "partially_playable": 1.0,
+          "playable": 1.0,
+          "uncertain": null
+        },
+        "labels": [
+          "playable",
+          "partially_playable",
+          "non_playable",
+          "uncertain"
+        ],
+        "macro_f1": 1.0,
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "precision": {
+          "non_playable": 1.0,
+          "partially_playable": 1.0,
+          "playable": 1.0,
+          "uncertain": null
+        },
+        "predicted": 9,
+        "recall": {
+          "non_playable": 1.0,
+          "partially_playable": 1.0,
+          "playable": 1.0,
+          "uncertain": null
+        },
+        "selective_accuracy": 1.0,
+        "status": "ok",
+        "support": 9
+      },
+      "view_family": {
+        "abstention_rate": 0.0,
+        "axis": "view_family",
+        "confusion": {
+          "graphics": {
+            "graphics": 2,
+            "main_broadcast": 0,
+            "player_isolation": 0,
+            "unknown": 0
+          },
+          "main_broadcast": {
+            "graphics": 0,
+            "main_broadcast": 6,
+            "player_isolation": 0,
+            "unknown": 0
+          },
+          "player_isolation": {
+            "graphics": 0,
+            "main_broadcast": 0,
+            "player_isolation": 1,
+            "unknown": 0
+          },
+          "unknown": {
+            "graphics": 0,
+            "main_broadcast": 0,
+            "player_isolation": 0,
+            "unknown": 0
+          }
+        },
+        "coverage": 1.0,
+        "f1": {
+          "graphics": 1.0,
+          "main_broadcast": 1.0,
+          "player_isolation": 1.0,
+          "unknown": null
+        },
+        "labels": [
+          "main_broadcast",
+          "player_isolation",
+          "graphics",
+          "unknown"
+        ],
+        "macro_f1": 1.0,
+        "macro_precision": 1.0,
+        "macro_recall": 1.0,
+        "precision": {
+          "graphics": 1.0,
+          "main_broadcast": 1.0,
+          "player_isolation": 1.0,
+          "unknown": null
+        },
+        "predicted": 9,
+        "recall": {
+          "graphics": 1.0,
+          "main_broadcast": 1.0,
+          "player_isolation": 1.0,
+          "unknown": null
+        },
+        "selective_accuracy": 1.0,
+        "status": "ok",
+        "support": 9
+      }
+    },
+    "graphics_macro_f1": 1.0,
+    "motion_macro_f1": 0.8571428571428571,
+    "ood_abstention_rate": 1.0,
+    "per_fixture": {
+      "dominant_overlay": {
+        "gt": {
+          "camera_motion": "static",
+          "framing_scale": "unknown",
+          "graphics_status": "dominant_overlay",
+          "playability": "non_playable",
+          "view_family": "graphics"
+        },
+        "pred": {
+          "camera_motion": "static",
+          "framing_scale": "unknown",
+          "graphics_status": "dominant_overlay",
+          "playability": "non_playable",
+          "view_family": "graphics"
+        }
+      },
+      "fullscreen_graphics": {
+        "gt": {
+          "camera_motion": "static",
+          "framing_scale": "unknown",
+          "graphics_status": "full_screen",
+          "playability": "non_playable",
+          "view_family": "graphics"
+        },
+        "pred": {
+          "camera_motion": "static",
+          "framing_scale": "unknown",
+          "graphics_status": "full_screen",
+          "playability": "non_playable",
+          "view_family": "graphics"
+        }
+      },
+      "medium_pitch": {
+        "gt": {
+          "camera_motion": "static",
+          "framing_scale": "medium",
+          "graphics_status": "none",
+          "playability": "playable",
+          "view_family": "main_broadcast"
+        },
+        "pred": {
+          "camera_motion": "static",
+          "framing_scale": "medium",
+          "graphics_status": "none",
+          "playability": "playable",
+          "view_family": "main_broadcast"
+        }
+      },
+      "ood_crowd": {
+        "gt": {
+          "is_ood": true,
+          "view_family": "unknown"
+        },
+        "pred": {
+          "view_family": "unknown"
+        }
+      },
+      "pan_motion": {
+        "gt": {
+          "camera_motion": "pan",
+          "framing_scale": "wide",
+          "graphics_status": "none",
+          "playability": "playable",
+          "view_family": "main_broadcast"
+        },
+        "pred": {
+          "camera_motion": "unstable",
+          "framing_scale": "wide",
+          "graphics_status": "none",
+          "playability": "playable",
+          "view_family": "main_broadcast"
+        }
+      },
+      "partial_overlay": {
+        "gt": {
+          "camera_motion": "static",
+          "framing_scale": "wide",
+          "graphics_status": "partial_overlay",
+          "playability": "partially_playable",
+          "view_family": "main_broadcast"
+        },
+        "pred": {
+          "camera_motion": "static",
+          "framing_scale": "wide",
+          "graphics_status": "partial_overlay",
+          "playability": "partially_playable",
+          "view_family": "main_broadcast"
+        }
+      },
+      "player_isolation": {
+        "gt": {
+          "camera_motion": "static",
+          "framing_scale": "close_up",
+          "graphics_status": "none",
+          "playability": "partially_playable",
+          "view_family": "player_isolation"
+        },
+        "pred": {
+          "camera_motion": "static",
+          "framing_scale": "close_up",
+          "graphics_status": "none",
+          "playability": "partially_playable",
+          "view_family": "player_isolation"
+        }
+      },
+      "unstable_motion": {
+        "gt": {
+          "camera_motion": "unstable",
+          "framing_scale": "wide",
+          "graphics_status": "none",
+          "playability": "playable",
+          "view_family": "main_broadcast"
+        },
+        "pred": {
+          "camera_motion": "static",
+          "framing_scale": "wide",
+          "graphics_status": "none",
+          "playability": "playable",
+          "view_family": "main_broadcast"
+        }
+      },
+      "wide_pitch": {
+        "gt": {
+          "camera_motion": "static",
+          "framing_scale": "wide",
+          "graphics_status": "none",
+          "playability": "playable",
+          "view_family": "main_broadcast"
+        },
+        "pred": {
+          "camera_motion": "static",
+          "framing_scale": "wide",
+          "graphics_status": "none",
+          "playability": "playable",
+          "view_family": "main_broadcast"
+        }
+      },
+      "zoom_motion": {
+        "gt": {
+          "camera_motion": "zoom",
+          "framing_scale": "wide",
+          "graphics_status": "none",
+          "playability": "playable",
+          "view_family": "main_broadcast"
+        },
+        "pred": {
+          "camera_motion": "static",
+          "framing_scale": "wide",
+          "graphics_status": "none",
+          "playability": "playable",
+          "view_family": "main_broadcast"
+        }
+      }
+    },
+    "playability_macro_f1": 1.0,
+    "unsafe_playable_false_positive_rate": 0.0,
+    "view_framing_macro_f1": 1.0
+  },
+  "overall_status": "PASS",
+  "schema_version": 1,
+  "session": "/home/fdoblak/workspace/camera_view_checks/s4c_20260723T095611Z_oc7l89kh",
+  "status": "PASS",
+  "thresholds": {
+    "graphics_macro_f1_min": 0.9,
+    "motion_macro_f1_min": 0.8,
+    "ood_abstention_rate_min": 0.8,
+    "playability_macro_f1_min": 0.9,
+    "unsafe_playable_fp_rate_max": 0.0,
+    "view_framing_macro_f1_min": 0.85
+  },
+  "timestamp": "2026-07-23T09:56:17.231656Z",
+  "warnings": []
+}

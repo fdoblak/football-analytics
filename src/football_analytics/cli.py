@@ -1851,6 +1851,58 @@ def cmd_physical_receipt_validate(receipt_path: Path) -> int:
     return 0
 
 
+def cmd_physical_trajectory_prepare(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    fixture_smoke: bool = False,
+) -> int:
+    """Stage 9B: prepare raw/filtered/resampled target trajectory (synthetic or explicit)."""
+    from football_analytics.physical.trajectory_config import (
+        load_trajectory_baseline_config,
+        trajectory_baseline_config_fingerprint,
+    )
+    from football_analytics.physical.trajectory_fixtures import continuous_movement_bundle
+    from football_analytics.physical.trajectory_service import prepare_target_trajectory
+
+    try:
+        cfg = load_trajectory_baseline_config(config_path)
+        fp = trajectory_baseline_config_fingerprint(cfg)
+        if not fixture_smoke:
+            print("error: provide --fixture-smoke for Stage 9B synthetic prepare", file=sys.stderr)
+            return 2
+        candidates = continuous_movement_bundle(fp)
+        result = prepare_target_trajectory(
+            candidates=candidates, output_dir=output_dir, config=cfg
+        )
+    except Exception as exc:  # noqa: BLE001
+        print(f"error: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
+    print(f"accepted: {result.accepted}")
+    print(f"config_fingerprint: {result.config_fingerprint}")
+    for k, v in result.summary.items():
+        print(f"{k}: {v}")
+    return int(result.exit_code)
+
+
+def cmd_physical_trajectory_validate(*, keep: bool = False, as_json: bool = False) -> int:
+    """Run Stage 9B target trajectory baseline validator."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_target_trajectory_baseline.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("trajectory validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
 def cmd_calibration_homography_validate() -> int:
     """Validate synthetic known-H solve / reject degenerates (contracts only)."""
     from football_analytics.calibration.fixtures import (
@@ -3662,6 +3714,23 @@ def build_parser() -> argparse.ArgumentParser:
     phys_receipt_sub = p_phys_receipt.add_subparsers(dest="physical_receipt_command")
     p_phys_rec_val = phys_receipt_sub.add_parser("validate", help="Validate receipt JSON")
     p_phys_rec_val.add_argument("receipt", type=Path)
+    p_phys_traj = phys_sub.add_parser("trajectory", help="Target trajectory preparation (9B)")
+    phys_traj_sub = p_phys_traj.add_subparsers(dest="physical_trajectory_command")
+    p_phys_traj_prep = phys_traj_sub.add_parser("prepare", help="Prepare raw/filtered/resampled")
+    p_phys_traj_prep.add_argument("--output-dir", type=Path, required=True)
+    p_phys_traj_prep.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/physical/target_trajectory_baseline.yaml"),
+    )
+    p_phys_traj_prep.add_argument(
+        "--fixture-smoke",
+        action="store_true",
+        help="Use synthetic continuous movement fixture (no video)",
+    )
+    p_phys_traj_val = phys_traj_sub.add_parser("validate", help="Run Stage 9B validator")
+    p_phys_traj_val.add_argument("--keep", action="store_true")
+    p_phys_traj_val.add_argument("--json", action="store_true")
 
     p_cal_features = cal_sub.add_parser(
         "features", help="Pitch keypoint/line feature detection (8B)"
@@ -4373,6 +4442,19 @@ def main(argv: Sequence[str] | None = None) -> int:
             if args.physical_receipt_command == "validate":
                 return cmd_physical_receipt_validate(args.receipt)
             parser.parse_args(["physical", "receipt", "--help"])
+            return 2
+        if args.physical_command == "trajectory":
+            if args.physical_trajectory_command == "prepare":
+                return cmd_physical_trajectory_prepare(
+                    output_dir=args.output_dir,
+                    config_path=args.config,
+                    fixture_smoke=bool(args.fixture_smoke),
+                )
+            if args.physical_trajectory_command == "validate":
+                return cmd_physical_trajectory_validate(
+                    keep=bool(args.keep), as_json=bool(args.json)
+                )
+            parser.parse_args(["physical", "trajectory", "--help"])
             return 2
         parser.parse_args(["physical", "--help"])
         return 2

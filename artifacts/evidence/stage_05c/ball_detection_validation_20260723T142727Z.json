@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-07-23T14:27:27.523665Z",
+  "status": "PASS_WITH_FINDINGS",
+  "exit_code": 0,
+  "errors": [],
+  "warnings": [],
+  "findings": [
+    "AGPL-3.0 distribution risk \u2014 evaluation_only / production_approved=false (reuse)",
+    "NOT_EVALUATED_NO_REVIEWED_BALL_GROUND_TRUTH \u2014 no reviewed football ball GT"
+  ],
+  "overall_status": "PASS_WITH_FINDINGS",
+  "gate": "PASS_WITH_FINDINGS \u2014 BALL DETECTION BASELINE ACTIVE; REAL FOOTBALL ACCURACY NOT YET VALIDATED",
+  "config_fingerprint": "6d54e8f56f0d90610e38cee0524cdff4244f44400ed3dabb7d156a97e0f27686",
+  "inference_mode": "hybrid",
+  "model_registry_id": "ultralytics_yolo11n_coco_person",
+  "model_sha256_registry": "0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1",
+  "production_approved": false,
+  "model_sha256_actual": "0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1",
+  "model_size_bytes": 5613764,
+  "lazy_import_ok": true,
+  "tile_count": 6,
+  "tile_map_sample": [
+    1.0,
+    2.0,
+    5.0,
+    6.0
+  ],
+  "smoke_detection_count": 0,
+  "smoke_human_count": 0,
+  "smoke_ball_count": 0,
+  "adapter_cpu_smoke": true,
+  "sports_ball_runtime_name": "sports ball",
+  "coordinate_space_note": "Full-frame Ultralytics YOLO boxes are source-space. Tile-crop predictions are tile-local and mapped via map_tile_bbox_to_source before merge/filters. Stage 5C does not apply inverse letterbox on Ultra"
+}

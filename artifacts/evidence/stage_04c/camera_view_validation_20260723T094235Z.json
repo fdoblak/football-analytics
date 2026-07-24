@@ -1,0 +1,22 @@
+{
+  "cleanup_verified": true,
+  "config_fingerprint": "56f4ea2311f8ff90a048cc5c9af508e59e49b47a31b4d05b06987c1a2adc8590",
+  "errors": [
+    "validator exception: CameraFixtureError: ffmpeg failed: 00 / 56. 70.100\n  libavcodec     58.134.100 / 58.134.100\n  libavformat    58. 76.100 / 58. 76.100\n  libavdevice    58. 13.100 / 58. 13.100\n  libavfilter     7.110.100 /  7.110.100\n  libswscale      5.  9.100 /  5.  9.100\n  libswresample   3.  9.100 /  3.  9.100\n  libpostproc    55.  9.100 / 55.  9.100\nInput #0, lavfi, from 'color=c=0x148C28:s=480x240:d=1.2:r=25':\n  Duration: N/A, start: 0.000000, bitrate: N/A\n  Stream #0:0: Video: rawvideo (I420 / 0x30323449), yuv420p, 480x240 [SAR 1:1 DAR 2:1], 25 tbr, 25 tbn, 25 tbc\n[Parsed_scale_4 @ 0x6041b6eba380] Expressions with frame variables 'n', 't', 'pos' are not valid in init eval_mode.\n[AVFilterGraph @ 0x6041b6eb3e00] Error initializing filter 'scale' with args '320*(1+0.4*t):180*(1+0.4*t)'\nError initializing complex filters.\nInvalid argument\n"
+  ],
+  "exit_code": 3,
+  "overall_status": "FAIL",
+  "schema_version": 1,
+  "session": "/home/fdoblak/workspace/camera_view_checks/s4c_20260723T094234Z_6x90bwfw",
+  "status": "FAIL",
+  "thresholds": {
+    "graphics_macro_f1_min": 0.9,
+    "motion_macro_f1_min": 0.8,
+    "ood_abstention_rate_min": 0.8,
+    "playability_macro_f1_min": 0.9,
+    "unsafe_playable_fp_rate_max": 0.0,
+    "view_framing_macro_f1_min": 0.85
+  },
+  "timestamp": "2026-07-23T09:42:35.577594Z",
+  "warnings": []
+}

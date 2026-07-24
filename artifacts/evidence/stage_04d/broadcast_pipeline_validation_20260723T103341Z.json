@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-07-23T10:33:41.782188Z",
+  "status": "FAIL",
+  "exit_code": 1,
+  "errors": [
+    "pipeline rejected: INPUT_BUNDLE_INVALID"
+  ],
+  "warnings": [],
+  "overall_status": "FAIL",
+  "policy_fingerprint": "df46cf69c4cd2b6f6136a074c97d6ffc704ac7f1718916ec8d7b8258c4262df5",
+  "session": "/home/fdoblak/workspace/broadcast_pipeline_checks/bp_d5zg6exz",
+  "cleaned": true
+}

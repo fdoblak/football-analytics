@@ -1,0 +1,26 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "contract_names": [
+      "shot_boundaries",
+      "shot_segments",
+      "camera_view_segments"
+    ],
+    "crowd_playable_rejected": true,
+    "fingerprints": {
+      "camera_view_segments": "e575051b9e675f21abfdd8b7e41cc66d3db9a495fa57941c466b96683dcb3ead",
+      "shot_boundaries": "c73985b83a2829c54bef31a427d9f0cfbedb83587de9256701a99bc4a0c2e71b",
+      "shot_segments": "80505f74c9c04534e28b43aa0dd245f04caf6a00c53baafe38ae7fb00596d95a"
+    },
+    "fixture_cleaned": true,
+    "fixture_root": "/home/fdoblak/workspace/broadcast_contract_checks/fixtures/run_20260723T205959Z",
+    "overlap_rejected": true,
+    "parquet_roundtrip": true,
+    "valid_bundle_status": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-23T21:00:01.263082Z",
+  "warnings": []
+}

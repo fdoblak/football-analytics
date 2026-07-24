@@ -1,0 +1,27 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "contract_count": 9,
+    "fingerprints": {
+      "calibrations:1": "41360b19ae034f361949a75d8e773c265f0792b2603b69f612ab5863662ac871",
+      "detections:0": "deed3b478817ed146c3f289a2474cce6d8266a42f227d0f98bc2ba0f5935c1bb",
+      "detections:1": "04ae8dd7a7e92bf7bd468db7a263e5e28258a30887d43c8f603c69d56f5c18b6",
+      "events:1": "d4fff2ce7c0f1efc7b9eef4ae242f5e78bcc5a28265368bcf8de64220e9e013d",
+      "frames:1": "0d6321a47935a86008c57d84f609ec9db08974a7971c9bb2fa18c33fdb5d9af2",
+      "jersey_observations:1": "aabc7642d9c7a31b99393bd2704470d2095c61d84ca1281d1a5e63cd3dfd9365",
+      "team_assignments:1": "759aa9b77de6faa8c00d32ccc71846b164bd5cb66ca4155051b0587be07458d0",
+      "track_observations:1": "9ca2f7af56e69b47ec8db8d644164c84aa7fe3a62da40e247ed6db4f2c4c5f01",
+      "track_summaries:1": "7b04e31d641c49e66ad06baec53e1075e2bc286b9f08f1497aa0571bf7c1c168",
+      "videos:1": "d1b78698aaf7990a4d663b9d86a8693fd7e340f157909ae83258090cb766d70a"
+    },
+    "fixture_cleaned": true,
+    "fixture_root": "/home/fdoblak/workspace/data_contract_checks/fixtures/run_20260722T192342Z",
+    "migration_smoke": true,
+    "synthetic_roundtrip": true
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-22T19:23:43.143359Z",
+  "warnings": []
+}

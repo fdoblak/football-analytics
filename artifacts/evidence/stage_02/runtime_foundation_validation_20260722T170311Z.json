@@ -1,0 +1,16 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "config_fingerprint": "79cf718d55e5b003b31b193909859c8875c9c00f24477722526b9071b1dbf3dd",
+    "git_commit": "7f9ec52fc4ee0eda49c8918f1aa3400712ab4e08",
+    "sample_run_id": "run_20260722T170329268088Z_3a6c3415808d",
+    "synthetic_cleaned": true,
+    "synthetic_root": "/home/fdoblak/workspace/foundation_checks/synthetic_20260722T170329Z",
+    "synthetic_run_id": "run_20260722T170329312059Z_0512ca1066ab"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-22T17:03:29.367490Z",
+  "warnings": []
+}

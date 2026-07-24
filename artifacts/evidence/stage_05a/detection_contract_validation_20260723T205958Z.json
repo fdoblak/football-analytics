@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "timestamp_utc": "2026-07-23T20:59:58.743422Z",
+  "status": "PASS",
+  "exit_code": 0,
+  "errors": [],
+  "warnings": [],
+  "extras": {
+    "detections_v1_sha256": "957a41ca2ded9580bc18d39bc7902e133b34ec866077ccc944ab334b9e2681fd",
+    "contract_count": 23,
+    "schema_fingerprints": {
+      "detection_frame_status": "04198a03f78f0910a5467553342eae5e48ab0c1cb564aa95f379f6e6d6f84514",
+      "detection_attributes": "dffdb2ab47e09767577f589f7d28ebd4d18200ddae224756e85e2895711648a0",
+      "detections": "04ae8dd7a7e92bf7bd468db7a263e5e28258a30887d43c8f603c69d56f5c18b6"
+    },
+    "taxonomy_fingerprint": "f4570fd89abd8f70dcca14f303cfe0356c09a4803b255c2d3c4ae17aacb8fda7",
+    "policy_fingerprint": "a81584e08e434f52208d1e56fc20b402184443c17a3956724ac189654397f5bb",
+    "bbox_roundtrip": [
+      10.0,
+      20.0,
+      40.0,
+      80.0
+    ],
+    "bundle_status": "PASS",
+    "work_dir": "/home/fdoblak/workspace/detection_contract_checks/work_20260723T205952Z",
+    "cleanup": "removed_work_dir"
+  }
+}

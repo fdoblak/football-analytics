@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-07-23T20:59:51.805562Z",
+  "status": "PASS",
+  "exit_code": 0,
+  "errors": [],
+  "warnings": [],
+  "overall_status": "PASS",
+  "policy_fingerprint": "df46cf69c4cd2b6f6136a074c97d6ffc704ac7f1718916ec8d7b8258c4262df5",
+  "session": "/home/fdoblak/workspace/broadcast_pipeline_checks/bp_1p9lk95w",
+  "evaluation": {
+    "window_temporal_coverage": 1.0,
+    "gap_rate": null,
+    "overlap_rate": 0.0,
+    "unexplained_gap_rate": 0.0,
+    "eligibility_axes": {
+      "tracking": {
+        "confusion": {
+          "eligible": {
+            "eligible": 5,
+            "conditionally_eligible": 0,
+            "ineligible": 0,
+            "unknown": 0
+          },
+          "conditionally_eligible": {
+            "eligible": 0,
+            "conditionally_eligible": 1,
+            "ineligible": 0,
+            "unknown": 0
+          },
+          "ineligible": {
+            "eligible": 0,
+            "conditionally_eligible": 0,
+            "ineligible": 3,
+            "unknown": 0
+          },
+          "unknown": {
+            "eligible": 0,
+            "conditionally_eligible": 0,
+            "ineligible": 0,
+            "unknown": 4
+          }
+        },
+        "per_class_f1": {
+          "eligible": 1.0,
+          "conditionally_eligible": 1.0,
+          "ineligible": 1.0,
+          "unknown": 1.0
+        },
+        "macro_f1": 1.0,
+        "status": "ok"
+      },
+      "calibration": {
+        "confusion": {
+          "eligible": {
+            "eligible": 5,
+            "conditionally_eligible": 0,
+            "ineligible": 0,
+            "unknown": 0
+          },
+          "conditionally_eligible": {
+            "eligible": 0,
+            "conditionally_eligible": 1,
+            "ineligible": 0,
+            "unknown": 0
+          },
+          "ineligible": {
+            "eligible": 0,
+            "conditionally_eligible": 0,
+            "ineligible": 3,
+            "unknown": 0
+          },
+          "unknown": {
+            "eligible": 0,
+            "conditionally_eligible": 0,
+            "ineligible": 0,
+            "unknown": 4
+          }
+        },
+        "per_class_f1": {
+          "eligible": 1.0,
+          "conditionally_eligible": 1.0,
+          "ineligible": 1.0,
+          "unknown": 1.0
+        },
+        "macro_f1": 1.0,
+        "status": "ok"
+      },
+      "identity": {
+        "confusion": {
+          "eligible": {
+            "eligible": 2,
+            "conditionally_eligible": 0,
+            "ineligible": 0,
+            "unknown": 0
+          },
+          "conditionally_eligible": {
+            "eligible": 0,
+            "conditionally_eligible": 5,
+            "ineligible": 0,
+            "unknown": 0
+          },
+          "ineligible": {
+            "eligible": 0,
+            "conditionally_eligible": 0,
+            "ineligible": 1,
+            "unknown": 0
+          },
+          "unknown": {
+            "eligible": 0,
+            "conditionally_eligible": 0,
+            "ineligible": 0,
+            "unknown": 5
+          }
+        },
+        "per_class_f1": {
+          "eligible": 1.0,
+          "conditionally_eligible": 1.0,
+          "ineligible": 1.0,
+          "unknown": 1.0
+        },
+        "macro_f1": 1.0,
+        "status": "ok"
+      },
+      "ball_analysis": {
+        "confusion": {
+          "eligible": {
+            "eligible": 5,
+            "conditionally_eligible": 0,
+            "ineligible": 0,
+            "unknown": 0
+          },
+          "conditionally_eligible": {
+            "eligible": 0,
+            "conditionally_eligible": 1,
+            "ineligible": 0,
+            "unknown": 0
+          },
+          "ineligible": {
+            "eligible": 0,
+            "conditionally_eligible": 0,
+            "ineligible": 3,
+            "unknown": 0
+          },
+          "unknown": {
+            "eligible": 0,
+            "conditionally_eligible": 0,
+            "ineligible": 0,
+            "unknown": 4
+          }
+        },
+        "per_class_f1": {
+          "eligible": 1.0,
+          "conditionally_eligible": 1.0,
+          "ineligible": 1.0,
+          "unknown": 1.0
+        },
+        "macro_f1": 1.0,
+        "status": "ok"
+      },
+      "live_event": {
+        "confusion": {
+          "eligible": {
+            "eligible": 4,
+            "conditionally_eligible": 0,
+            "ineligible": 0,
+            "unknown": 0
+          },
+          "conditionally_eligible": {
+            "eligible": 0,
+            "conditionally_eligible": 1,
+            "ineligible": 0,
+            "unknown": 0
+          },
+          "ineligible": {
+            "eligible": 0,
+            "conditionally_eligible": 0,
+            "ineligible": 2,
+            "unknown": 0
+          },
+          "unknown": {
+            "eligible": 0,
+            "conditionally_eligible": 0,
+            "ineligible": 0,
+            "unknown": 6
+          }
+        },
+        "per_class_f1": {
+          "eligible": 1.0,
+          "conditionally_eligible": 1.0,
+          "ineligible": 1.0,
+          "unknown": 1.0
+        },
+        "macro_f1": 1.0,
+        "status": "ok"
+      },
+      "physical_metric": {
+        "confusion": {
+          "eligible": {
+            "eligible": 4,
+            "conditionally_eligible": 0,
+            "ineligible": 0,
+            "unknown": 0
+          },
+          "conditionally_eligible": {
+            "eligible": 0,
+            "conditionally_eligible": 0,
+            "ineligible": 0,
+            "unknown": 0
+          },
+          "ineligible": {
+            "eligible": 0,
+            "conditionally_eligible": 0,
+            "ineligible": 4,
+            "unknown": 0
+          },
+          "unknown": {
+            "eligible": 0,
+            "conditionally_eligible": 0,
+            "ineligible": 0,
+            "unknown": 5
+          }
+        },
+        "per_class_f1": {
+          "eligible": 1.0,
+          "conditionally_eligible": null,
+          "ineligible": 1.0,
+          "unknown": 1.0
+        },
+        "macro_f1": 1.0,
+        "status": "ok"
+      }
+    },
+    "macro_f1": {
+      "tracking": 1.0,
+      "calibration": 1.0,
+      "identity": 1.0,
+      "ball_analysis": 1.0,
+      "live_event": 1.0,
+      "physical_metric": 1.0
+    },
+    "manual_review_recall": 1.0,
+    "unsafe_tracking_false_positive_rate": 0.0,
+    "unsafe_calibration_false_positive_rate": 0.0,
+    "unsafe_live_event_false_positive_rate": 0.0,
+    "unsafe_physical_metric_false_positive_rate": 0.0,
+    "non_playable_eligible_false_positive_rate": 0.0,
+    "decision_code_accuracy": 1.0,
+    "deterministic_repeat": true,
+    "n_pred": 13,
+    "n_gt": 13,
+    "status": "ok"
+  },
+  "review_count": 6,
+  "window_count": 13,
+  "cleaned": true
+}

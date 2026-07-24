@@ -1,0 +1,49 @@
+{
+  "accepted_cases": [
+    "cfr",
+    "cfr_audio"
+  ],
+  "cleanup_verified": true,
+  "contract_fingerprints": {
+    "probe_ref": "d18e7d04d24d79299432b3588434a3a4e4c1bef63e00697a831afb596a2d13b1"
+  },
+  "errors": [],
+  "exit_code": 0,
+  "ffprobe_path": "/usr/bin/ffprobe",
+  "ffprobe_version": {
+    "path": "/usr/bin/ffprobe",
+    "realpath": "/usr/bin/ffprobe",
+    "version_line": "ffprobe version 4.4.2-0ubuntu0.22.04.1 Copyright (c) 2007-2021 the FFmpeg developers",
+    "version_token": "4.4.2-0ubuntu0.22.04.1"
+  },
+  "overall_status": "PASS",
+  "policy_version": "video_ingest_policy_v1",
+  "protected_package_versions": {
+    "SoccerNet": "0.1.62",
+    "numpy": "2.2.6",
+    "opencv-python": "5.0.0.93",
+    "opencv-python-headless": "5.0.0.93",
+    "pandas": "2.3.3",
+    "pyarrow": "25.0.0",
+    "torch": "2.11.0+cu128",
+    "torchaudio": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128",
+    "ultralytics": "8.4.91"
+  },
+  "rejected_cases": [
+    "invalid_media"
+  ],
+  "schema_version": 1,
+  "security_cases": [
+    "invalid_media_rejected",
+    "url_rejected"
+  ],
+  "status": "PASS",
+  "synthetic_cases": [
+    "cfr_video_only",
+    "cfr_video_audio"
+  ],
+  "timeouts": 0,
+  "timestamp": "2026-07-22T21:53:56.613145Z",
+  "warnings": []
+}

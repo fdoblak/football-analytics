@@ -1,0 +1,107 @@
+# Stage 9B target trajectory preparation baseline.
+# Enables deterministic filter + resample. Does NOT compute customer distance/speed/sprint.
+
+schema_version: 1
+config_version: 1
+pipeline_id: target_trajectory_baseline
+pipeline_version: 1
+stage: "9B"
+
+input_eligibility:
+  require_confirmed_target: true
+  require_observed: true
+  require_mapping_status: mapped
+  require_physical_metric_eligible: true
+  require_valid_calibration: true
+  uncertainty_max_m: 2.5
+  forbid_revoked: true
+  forbid_predicted_interpolated: true
+  forbid_provisional: true
+  forbid_ball: true
+  require_playable_non_replay: true
+
+pitch:
+  length_m: 105.0
+  width_m: 68.0
+  soft_bound_tolerance_m: 0.5
+
+segment_split:
+  long_gap_us: 1000000
+  max_sample_interval_us: 500000
+  split_on:
+    - run_video_change
+    - assignment_scope_change
+    - assignment_revoke
+    - track_change
+    - shot_cut
+    - non_playable
+    - calibration_segment_change
+    - calibration_gap
+    - physical_eligibility_loss
+    - long_time_gap
+    - timestamp_regression
+    - duplicate_conflict
+  interval_semantics: "[start_us,end_us)"
+  single_point_motion_ineligible: true
+
+quality_filter:
+  enabled: true
+  reject_non_finite: true
+  reject_outside_pitch: true
+  reject_timestamp_regression: true
+  exact_duplicate_keep_first: true
+  conflicting_duplicate_reject_both: true
+  uncertainty_max_m: 2.5
+  max_jump_m: 8.0
+  max_implied_speed_mps: 12.0
+  spike_window: 3
+  spike_max_deviation_m: 4.0
+  endpoint_policy: leave_unchanged
+  speed_check_provenance: quality_gate_only
+  note: "Implied speed is quality-gate only; not a customer speed metric."
+
+resample:
+  enabled: true
+  grid_us: 100000
+  max_interpolation_gap_us: 400000
+  method: linear_time
+  causal: false
+  endpoint_policy: no_extrapolate
+  preserve_exact_observed_timestamps: true
+  cannot_cross_hard_gap: true
+  cannot_cross_shot_track_identity_calibration_boundary: true
+  uncertainty_propagation: max_neighbor
+  uncertainty_must_not_shrink_below_neighbors: true
+
+output_policy:
+  write_raw: true
+  write_filtered: true
+  write_resampled: true
+  write_gaps: true
+  write_segments: true
+  write_receipt: true
+  write_quality: true
+  write_evaluation: true
+  no_overwrite: true
+  atomic: true
+
+customer_metrics_forbidden:
+  distance: true
+  speed: true
+  max_speed: true
+  sprint_count: true
+  sprint_distance: true
+  heatmap: true
+  activity_score: true
+  events: true
+
+runtime_root: /home/fdoblak/workspace/target_trajectory_checks
+overwrite_allowed: false
+symlinks_allowed: false
+network_sources_allowed: false
+
+attack_direction: unknown
+
+notes:
+  - "Stage 9B prepares trajectories only; customer physical metrics start in 9C."
+  - "Thresholds are project policy placeholders, not Opta standards."

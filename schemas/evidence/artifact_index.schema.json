@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/evidence/artifact_index.schema.json",
+  "title": "Evidence artifact index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "updated_at_utc", "entries"],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "updated_at_utc": { "type": "string", "minLength": 10 },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "artifact_id",
+          "stage_id",
+          "relative_path",
+          "sha256",
+          "size_bytes",
+          "artifact_type",
+          "status",
+          "git_tracked"
+        ],
+        "properties": {
+          "artifact_id": { "type": "string", "minLength": 1 },
+          "stage_id": { "type": "string", "minLength": 1 },
+          "relative_path": { "type": ["string", "null"] },
+          "source_path": { "type": ["string", "null"] },
+          "sha256": { "type": ["string", "null"] },
+          "size_bytes": { "type": ["integer", "null"], "minimum": 0 },
+          "artifact_type": { "type": "string" },
+          "license_class": { "type": "string" },
+          "data_classification": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["present", "manifest_only", "not_available_cleaned", "skipped_unsafe"]
+          },
+          "git_tracked": { "type": "boolean" },
+          "reason_not_git": { "type": ["string", "null"] },
+          "commit_sha": { "type": ["string", "null"] },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

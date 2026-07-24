@@ -1,0 +1,29 @@
+{
+  "adapter_notes": "stage_9b_trajectory_preparation",
+  "config_fingerprint": "760c5135c742fb2137bec35e16370622188b7f9985b5010ede5dc58ad869f680",
+  "created_at_utc": "2026-07-24T09:38:08.309246Z",
+  "findings": [
+    "No reviewed target trajectory ground truth.",
+    "Stage 9B synthetic fixtures are not real football accuracy.",
+    "Customer distance/speed/sprint metrics not computed."
+  ],
+  "ground_truth_evaluation_status": "NOT_EVALUATED_NO_REVIEWED_TARGET_TRAJECTORY_GROUND_TRUTH",
+  "metric_reasons": {
+    "coverage_calibration": "NOT_EVALUATED_NO_REVIEWED_TARGET_TRAJECTORY_GROUND_TRUTH",
+    "filter_precision_recall": "NOT_EVALUATED_NO_REVIEWED_TARGET_TRAJECTORY_GROUND_TRUTH",
+    "gap_detection_accuracy": "NOT_EVALUATED_NO_REVIEWED_TARGET_TRAJECTORY_GROUND_TRUTH",
+    "position_error_m": "NOT_EVALUATED_NO_REVIEWED_TARGET_TRAJECTORY_GROUND_TRUTH",
+    "resample_timing_error": "NOT_EVALUATED_NO_REVIEWED_TARGET_TRAJECTORY_GROUND_TRUTH"
+  },
+  "metrics": {
+    "coverage_calibration": null,
+    "filter_precision_recall": null,
+    "gap_detection_accuracy": null,
+    "position_error_m": null,
+    "resample_timing_error": null
+  },
+  "run_id": "run_20260724T093807652815Z_004367a69e95",
+  "schema_version": 1,
+  "status": "not_evaluated",
+  "video_id": "video_synth_01"
+}

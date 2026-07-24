@@ -1,0 +1,39 @@
+{
+  "config_fingerprint": "4c6c602e4ecff19bbb5a0821a360f2445842939664774877b96262c8bd6d020a",
+  "created_at_utc": "2026-07-23T15:31:57.461194Z",
+  "findings": [
+    "NOT_EVALUATED_NO_REVIEWED_TRACKING_GROUND_TRUTH"
+  ],
+  "ground_truth_evaluation_status": "NOT_EVALUATED_NO_REVIEWED_TRACKING_GROUND_TRUTH",
+  "metrics": {
+    "ambiguous_ball_frames": 1,
+    "ball_ambiguity_rate": 0.125,
+    "ball_detection_count": 8,
+    "cross_cut_violation_count": 0,
+    "dangling_fk_count": 0,
+    "detection_assignment_coverage": 0.9375,
+    "duplicate_count": 0,
+    "eligible_frame_count": 8,
+    "eligible_tracking_coverage": 1.0,
+    "human_detection_count": 8,
+    "interpolated_count": 0,
+    "invalid_bbox_count": 0,
+    "max_gap_us": 40000.0,
+    "mean_gap_us": 40000.0,
+    "no_candidate_ball_frames": 1,
+    "observed_count": 15,
+    "predicted_count": 1,
+    "predicted_ratio": 0.0625,
+    "primary_ball_frames": 6,
+    "receipt_mismatch_count": 0,
+    "role_abstention_count": 4,
+    "role_abstention_rate": 0.5,
+    "terminated_reopen_count": 0,
+    "track_fragmentation": 0.0,
+    "tracked_frame_count": 8
+  },
+  "run_id": "run_20260723T153157218262Z_fdcb3b1b8e28",
+  "schema_version": 1,
+  "status": "pass_with_findings",
+  "video_id": "video_01"
+}

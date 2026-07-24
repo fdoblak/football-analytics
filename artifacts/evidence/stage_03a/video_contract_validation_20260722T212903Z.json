@@ -1,0 +1,37 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "fixture_scenarios": [
+      "cfr_tiny",
+      "cfr_with_audio",
+      "rotation_metadata",
+      "vfr_metadata",
+      "unknown_frame_count",
+      "unsupported_codec",
+      "zero_byte",
+      "symlink_negative",
+      "hash_mismatch"
+    ],
+    "policy_version": "video_ingest_policy_v1",
+    "runtime_root": "/home/fdoblak/workspace/video_contract_checks",
+    "schema_files": [
+      "video_source.schema.json",
+      "ingest_request.schema.json",
+      "video_probe.schema.json",
+      "normalize_plan.schema.json",
+      "ingest_receipt.schema.json"
+    ],
+    "schemas": [
+      "ingest_receipt.schema.json",
+      "ingest_request.schema.json",
+      "normalize_plan.schema.json",
+      "video_probe.schema.json",
+      "video_source.schema.json"
+    ]
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-22T21:29:24.935301Z",
+  "warnings": []
+}

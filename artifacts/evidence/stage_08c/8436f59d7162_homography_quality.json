@@ -1,0 +1,65 @@
+{
+  "calibration_quality_counts": {
+    "degraded": 0,
+    "invalid": 0,
+    "no_solution": 0,
+    "not_available": 0,
+    "solved": 3,
+    "uncertain": 0,
+    "valid": 3
+  },
+  "condition_summary": {
+    "mean": 271.30153538151643,
+    "n": 3
+  },
+  "correspondence_counts": {
+    "accepted": 12,
+    "rejected": 0,
+    "total": 12
+  },
+  "coverage_summary": {
+    "mean": 0.8208612040133779,
+    "n": 3
+  },
+  "created_at_utc": "2026-07-23T22:06:20.989916Z",
+  "gaps": [],
+  "inlier_ratio_summary": {
+    "mean": 1.0,
+    "n": 3
+  },
+  "notes": [
+    "operational quality only; not football accuracy",
+    "no projected_positions in Stage 8C",
+    "attack_direction=unknown"
+  ],
+  "overlaps": [],
+  "recounted_calibrations": {
+    "degraded": 0,
+    "invalid": 0,
+    "is_valid_true": 3,
+    "not_available": 0,
+    "total": 3,
+    "uncertain": 0,
+    "valid": 3
+  },
+  "reprojection_summary": {
+    "mean": 1.9197189459478453e-14,
+    "median": 1.9197189459478453e-14,
+    "n": 3
+  },
+  "run_id": "run_20260723T220619973225Z_b41ca89c1055",
+  "schema_version": 1,
+  "segment_stats": {
+    "cut_terminations": 0,
+    "drift_splits": 0,
+    "gaps": 0,
+    "input_frames": 3,
+    "overlaps": 0,
+    "pan_zoom_splits": 0,
+    "physical_eligible_segments": 1,
+    "review_required": 0,
+    "segmentable_frames": 3,
+    "segments": 1
+  },
+  "video_id": "video_homo_fixture"
+}

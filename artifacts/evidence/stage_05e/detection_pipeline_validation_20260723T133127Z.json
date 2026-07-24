@@ -1,0 +1,24 @@
+{
+  "cleanup": "removed_session",
+  "config_fingerprint": "cd1146cf4b4da85359952872200e9c9ff247f21c6b1f2828d069105f67c55c46",
+  "cuda_required": false,
+  "detections_fingerprint": "04ae8dd7a7e92bf7bd468db7a263e5e28258a30887d43c8f603c69d56f5c18b6",
+  "deterministic": true,
+  "errors": [],
+  "exit_code": 0,
+  "findings": [
+    "NOT_EVALUATED_NO_REVIEWED_DETECTION_GROUND_TRUTH",
+    "real football detection accuracy not validated"
+  ],
+  "gate": "PASS_WITH_FINDINGS \u2014 DETECTION PIPELINE ACTIVE; STAGE 5 CLOSED; REAL FOOTBALL ACCURACY NOT YET VALIDATED",
+  "lazy_import_ok": true,
+  "overall_status": "PASS_WITH_FINDINGS",
+  "quality_status": "pass_with_findings",
+  "review_count": 2,
+  "schema_validation": "ok",
+  "schema_version": 1,
+  "status": "PASS_WITH_FINDINGS",
+  "timestamp": "2026-07-23T13:31:27.946025Z",
+  "total_detection_count": 16,
+  "warnings": []
+}

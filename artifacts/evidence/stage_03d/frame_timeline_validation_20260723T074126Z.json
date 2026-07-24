@@ -1,0 +1,39 @@
+{
+  "cases": [
+    {
+      "ok": true,
+      "sha256": "68a97d6895e1bc8f97876ad2e22b07e2e2a3716654b9665169738bbd67195fcd",
+      "step": "generate"
+    },
+    {
+      "ok": true,
+      "step": "probe"
+    },
+    {
+      "ok": true,
+      "output": "/home/fdoblak/workspace/frame_timeline_checks/e2e_20260723T074123Z/source.mp4",
+      "status": "skipped",
+      "step": "normalize"
+    },
+    {
+      "frame_count": 25,
+      "mapping_quality": "exact",
+      "ok": true,
+      "step": "timeline_only"
+    },
+    {
+      "materialized_frame_count": 13,
+      "ok": true,
+      "step": "sampled"
+    }
+  ],
+  "cleanup_verified": true,
+  "errors": [],
+  "exit_code": 0,
+  "overall_status": "PASS",
+  "policy_version": "video_ingest_policy_v1",
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp": "2026-07-23T07:41:26.541296Z",
+  "warnings": []
+}

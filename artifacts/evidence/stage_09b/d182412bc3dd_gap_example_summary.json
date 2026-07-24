@@ -1,0 +1,14 @@
+{
+  "config_fingerprint": "760c5135c742fb2137bec35e16370622188b7f9985b5010ede5dc58ad869f680",
+  "scenario": "hard_gap",
+  "summary": {
+    "customer_metrics_computed": false,
+    "evaluation_status": "NOT_EVALUATED_NO_REVIEWED_TARGET_TRAJECTORY_GROUND_TRUTH",
+    "filtered_count": 5,
+    "gap_count": 1,
+    "raw_count": 6,
+    "rejected_count": 1,
+    "resampled_count": 5,
+    "segment_count": 2
+  }
+}

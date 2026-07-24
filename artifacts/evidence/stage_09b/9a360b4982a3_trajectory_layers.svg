@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="220" viewBox="0 0 520 220">
+  <rect width="520" height="220" fill="#f7f7f5"/>
+  <text x="12" y="22" font-size="14" font-family="monospace">Stage 9B synthetic trajectory layers</text>
+  <text x="10" y="62" font-size="12" font-family="monospace">raw_observed</text><circle cx="80.0" cy="74.0" r="3" fill="#1d4ed8"/><circle cx="82.0" cy="74.0" r="3" fill="#1d4ed8"/><circle cx="84.0" cy="74.0" r="3" fill="#1d4ed8"/><circle cx="86.0" cy="74.0" r="3" fill="#1d4ed8"/><circle cx="88.0" cy="74.0" r="3" fill="#1d4ed8"/><circle cx="90.0" cy="74.0" r="3" fill="#1d4ed8"/><circle cx="92.0" cy="74.0" r="3" fill="#1d4ed8"/><circle cx="94.0" cy="74.0" r="3" fill="#1d4ed8"/>
+  <text x="10" y="112" font-size="12" font-family="monospace">filtered</text><circle cx="80.0" cy="124.0" r="3" fill="#15803d"/><circle cx="82.0" cy="124.0" r="3" fill="#15803d"/><circle cx="84.0" cy="124.0" r="3" fill="#15803d"/><circle cx="86.0" cy="124.0" r="3" fill="#15803d"/><circle cx="88.0" cy="124.0" r="3" fill="#15803d"/><circle cx="90.0" cy="124.0" r="3" fill="#15803d"/><circle cx="92.0" cy="124.0" r="3" fill="#15803d"/><circle cx="94.0" cy="124.0" r="3" fill="#15803d"/>
+  <text x="10" y="162" font-size="12" font-family="monospace">resampled</text><circle cx="80.0" cy="174.0" r="3" fill="#b45309"/><circle cx="82.0" cy="174.0" r="3" fill="#b45309"/><circle cx="84.0" cy="174.0" r="3" fill="#b45309"/><circle cx="86.0" cy="174.0" r="3" fill="#b45309"/><circle cx="88.0" cy="174.0" r="3" fill="#b45309"/><circle cx="90.0" cy="174.0" r="3" fill="#b45309"/><circle cx="92.0" cy="174.0" r="3" fill="#b45309"/><circle cx="94.0" cy="174.0" r="3" fill="#b45309"/>
+  <text x="12" y="210" font-size="10" font-family="monospace">synthetic only — not real match accuracy</text>
+</svg>

@@ -1,0 +1,35 @@
+{
+  "analysis_window_fingerprint": "9408075b76e7d881581506c47d20a5345469843ed7b6d508f288be516b683676",
+  "artifacts": {
+    "ball_primary_candidates": {
+      "path": "ball_primary_candidates.json",
+      "sha256": "d42687371ffaaa2489968c7b8e9c4e7709ece4a7f64cc4b75a08494cee17012f",
+      "size_bytes": 1364
+    },
+    "track_lifecycle": {
+      "path": "track_lifecycle.parquet",
+      "sha256": "314fc77f4114d38f4b61df16d82bd151e6cc1e270bb9c744253b97c3b0711011",
+      "size_bytes": 6578
+    },
+    "track_observations": {
+      "path": "track_observations.parquet",
+      "sha256": "d06f398aed0bc49a9a24702194df03a10344d1a7d0c169a9a58422cd2e9dea63",
+      "size_bytes": 5852
+    },
+    "track_summaries": {
+      "path": "track_summaries.parquet",
+      "sha256": "3e4dae11007edccbb6e2ad47759f12e6e862809c9f580ec42f0b3cb769da74e0",
+      "size_bytes": 5126
+    }
+  },
+  "config_fingerprint": "4c6c602e4ecff19bbb5a0821a360f2445842939664774877b96262c8bd6d020a",
+  "created_at_utc": "2026-07-23T15:32:15.619378Z",
+  "detection_bundle_fingerprint": "bf86e658a9a2c9e4ad4550326cc0923860c1c964f283fcbad9ed4f9bcf062140",
+  "pipeline_id": "tracking_fusion_baseline",
+  "pipeline_version": "1.0.0",
+  "run_id": "run_20260723T153157218262Z_fdcb3b1b8e28",
+  "schema_version": 1,
+  "source_video_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "timeline_fingerprint": "b3ebba1703857928f7b72b0bb17d4eb9d463af19757e3681dd7a95ae6abeb690",
+  "video_id": "video_01"
+}

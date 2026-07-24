@@ -1,0 +1,24 @@
+{
+  "analysis_window_fingerprint": "9408075b76e7d881581506c47d20a5345469843ed7b6d508f288be516b683676",
+  "artifacts": {
+    "analysis_window_fingerprint": "9408075b76e7d881581506c47d20a5345469843ed7b6d508f288be516b683676",
+    "detection_bundle_fingerprint": "bf86e658a9a2c9e4ad4550326cc0923860c1c964f283fcbad9ed4f9bcf062140",
+    "source_video_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "timeline_fingerprint": "b3ebba1703857928f7b72b0bb17d4eb9d463af19757e3681dd7a95ae6abeb690"
+  },
+  "config_fingerprint": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "detection_bundle_fingerprint": "bf86e658a9a2c9e4ad4550326cc0923860c1c964f283fcbad9ed4f9bcf062140",
+  "policy_fingerprint": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "provenance": {
+    "label": "synthetic",
+    "stage": "6C"
+  },
+  "receipt_id": "trk_ball_mot_bas",
+  "run_id": "run_20260723T153157218262Z_fdcb3b1b8e28",
+  "schema_version": 1,
+  "source_video_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "status": "succeeded",
+  "timeline_fingerprint": "b3ebba1703857928f7b72b0bb17d4eb9d463af19757e3681dd7a95ae6abeb690",
+  "tracker_id": "ball_mot_baseline",
+  "video_id": "video_01"
+}

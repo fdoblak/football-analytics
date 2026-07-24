@@ -73,6 +73,8 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `scripts/check_homography_baseline.py` (Stage 8C homography solve + calibration segments)
 - `scripts/check_pitch_projection_pipeline.py` (Stage 8D pitch projection + Stage 8 close)
 - `scripts/check_physical_metric_contracts.py` (Stage 9A trajectory / physical metric contracts)
+- `scripts/check_target_trajectory_baseline.py` (Stage 9B trajectory prepare + quality baseline)
+- `scripts/collect_evidence.py` (small safe evidence backfill into `artifacts/evidence/`)
 - `scripts/check_stage_cache.py`, `check_ci_workflow.py`, `check_project.py`
 - Or: `football-analytics project check --profile local --quick`
 
@@ -86,9 +88,11 @@ jersey alone cannot confirm; confirmed requires scoped manual decision;
 validated. Stage 8 is closed (`calibration-baseline-v0.8.0`): 8A contracts →
 8B pitch features → 8C homography/segments → 8D projected positions. Attack
 direction remains unknown; ball never physical/event metric-eligible; real
-football coordinate accuracy not validated. Stage 9A adds target trajectory and
-physical metric **contracts only** (no real distance/speed/sprint/heatmap). Do
-**not** start Stage 9B without an explicit user prompt.
+football coordinate accuracy not validated. Stage 9A added target trajectory and
+physical metric **contracts only**. Stage 9B prepares raw/filtered/resampled
+trajectories (no customer distance/speed/sprint yet) and retains small evidence
+under `artifacts/evidence/`. Do **not** start Stage 9C without an explicit user
+prompt.
 
 ---
 

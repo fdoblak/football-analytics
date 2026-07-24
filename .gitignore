@@ -57,5 +57,21 @@ stage_cache_checks/
 !tests/fixtures/**
 !tests/fixtures/**/**
 
+# Evidence retention allowlist (Stage 9B+) — small safe summaries only
+!artifacts/
+!artifacts/evidence/
+!artifacts/evidence/**
+# Still deny dangerous binaries even under evidence
+artifacts/evidence/**/*.pt
+artifacts/evidence/**/*.pth
+artifacts/evidence/**/*.onnx
+artifacts/evidence/**/*.mp4
+artifacts/evidence/**/*.mkv
+artifacts/evidence/**/*.avi
+artifacts/evidence/**/*.npy
+artifacts/evidence/**/*.npz
+# Allow tiny synthetic parquet samples under evidence only
+!artifacts/evidence/**/*.parquet
+
 # Keep registry / schema / docs trackable (do not ignore YAML/JSON registries)
 # model_registry.yaml / dataset_registry.yaml / schemas/** intentionally not ignored

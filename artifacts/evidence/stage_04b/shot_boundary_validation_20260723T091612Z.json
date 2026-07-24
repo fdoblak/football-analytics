@@ -1,0 +1,380 @@
+{
+  "cleanup_verified": true,
+  "config_fingerprint": "22747078f657326e87a6a320120374fc5ea22573677acb6a65282b4992d17d8c",
+  "deterministic_repeat": true,
+  "errors": [],
+  "exit_code": 0,
+  "fixtures": {
+    "dissolve": "a41b0b8b7058c77a9cab0e0096729565386506450afe59da1db56aa61433cf5e",
+    "fade": "5c84b7fe46e7d15a35ffcbd198b8585932212ffaa79368bf55c400ebeaf363db",
+    "flash": "f010025dd687bf61c814261d4ebee7ba7b0e135950fdbd22ae012fd5a2662bcd",
+    "hard_cut": "b91980e8ab75b2a8236ae5a98f2ef826d1520d2e107ee3de93c42224d04cc9ae",
+    "hard_cut_multi": "9be9235cc979d2c139ed2ef9e2cd4a68e52845b2e865c631863334468dd0fa17",
+    "pan": "465405e83752eb461862610c49af442fdf666e85b0de152dc98347625b060cfb",
+    "static": "efff0041b02ab28afdd542f3de5f5cd5d3e0e590a19e12c4b832af2abe52c8fd"
+  },
+  "metrics": {
+    "gradual": {
+      "f1": 1.0,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "fp_per_minute": null,
+      "ground_truth_count": 3,
+      "matches": [
+        {
+          "abs_error_us": 70000,
+          "gt_index": 0,
+          "pred_index": 0
+        },
+        {
+          "abs_error_us": 10000,
+          "gt_index": 1,
+          "pred_index": 1
+        },
+        {
+          "abs_error_us": 70000,
+          "gt_index": 2,
+          "pred_index": 2
+        }
+      ],
+      "max_abs_timing_error_us": 70000,
+      "mean_abs_timing_error_us": 50000.0,
+      "median_abs_timing_error_us": 70000.0,
+      "over_segmentation": 0,
+      "per_transition": {
+        "dissolve": {
+          "f1": 1.0,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "true_positives": 1
+        },
+        "fade": {
+          "f1": 1.0,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "true_positives": 2
+        },
+        "unknown": {
+          "f1": null,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "precision": null,
+          "recall": null,
+          "true_positives": 0
+        }
+      },
+      "precision": 1.0,
+      "predicted_count": 3,
+      "recall": 1.0,
+      "shot_count_error": 0,
+      "true_positives": 3,
+      "under_segmentation": 0
+    },
+    "hard_cut": {
+      "f1": 1.0,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "fp_per_minute": null,
+      "ground_truth_count": 1,
+      "matches": [
+        {
+          "abs_error_us": 0,
+          "gt_index": 0,
+          "pred_index": 0
+        }
+      ],
+      "max_abs_timing_error_us": 0,
+      "mean_abs_timing_error_us": 0.0,
+      "median_abs_timing_error_us": 0.0,
+      "over_segmentation": 0,
+      "per_transition": {
+        "hard_cut": {
+          "f1": 1.0,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "true_positives": 1
+        }
+      },
+      "precision": 1.0,
+      "predicted_count": 1,
+      "recall": 1.0,
+      "shot_count_error": 0,
+      "true_positives": 1,
+      "under_segmentation": 0
+    },
+    "overall": {
+      "f1": 1.0,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "fp_per_minute": null,
+      "ground_truth_count": 4,
+      "matches": [
+        {
+          "abs_error_us": 70000,
+          "gt_index": 0,
+          "pred_index": 0
+        },
+        {
+          "abs_error_us": 0,
+          "gt_index": 1,
+          "pred_index": 1
+        },
+        {
+          "abs_error_us": 10000,
+          "gt_index": 2,
+          "pred_index": 2
+        },
+        {
+          "abs_error_us": 70000,
+          "gt_index": 3,
+          "pred_index": 3
+        }
+      ],
+      "max_abs_timing_error_us": 70000,
+      "mean_abs_timing_error_us": 37500.0,
+      "median_abs_timing_error_us": 40000.0,
+      "over_segmentation": 0,
+      "per_transition": {
+        "dissolve": {
+          "f1": 1.0,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "true_positives": 1
+        },
+        "fade": {
+          "f1": 1.0,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "true_positives": 2
+        },
+        "hard_cut": {
+          "f1": 1.0,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "true_positives": 1
+        },
+        "unknown": {
+          "f1": null,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "precision": null,
+          "recall": null,
+          "true_positives": 0
+        }
+      },
+      "precision": 1.0,
+      "predicted_count": 4,
+      "recall": 1.0,
+      "shot_count_error": 0,
+      "true_positives": 4,
+      "under_segmentation": 0
+    },
+    "per_fixture": {
+      "dissolve": {
+        "f1": 1.0,
+        "false_negatives": 0,
+        "false_positives": 0,
+        "fp_per_minute": 0.0,
+        "ground_truth_count": 1,
+        "matches": [
+          {
+            "abs_error_us": 10000,
+            "gt_index": 0,
+            "pred_index": 0
+          }
+        ],
+        "max_abs_timing_error_us": 10000,
+        "mean_abs_timing_error_us": 10000.0,
+        "median_abs_timing_error_us": 10000.0,
+        "over_segmentation": 0,
+        "per_transition": {
+          "dissolve": {
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_positives": 1
+          },
+          "unknown": {
+            "f1": null,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": null,
+            "recall": null,
+            "true_positives": 0
+          }
+        },
+        "precision": 1.0,
+        "predicted_count": 1,
+        "recall": 1.0,
+        "shot_count_error": 0,
+        "true_positives": 1,
+        "under_segmentation": 0
+      },
+      "fade": {
+        "f1": 1.0,
+        "false_negatives": 0,
+        "false_positives": 0,
+        "fp_per_minute": 0.0,
+        "ground_truth_count": 2,
+        "matches": [
+          {
+            "abs_error_us": 70000,
+            "gt_index": 0,
+            "pred_index": 0
+          },
+          {
+            "abs_error_us": 70000,
+            "gt_index": 1,
+            "pred_index": 1
+          }
+        ],
+        "max_abs_timing_error_us": 70000,
+        "mean_abs_timing_error_us": 70000.0,
+        "median_abs_timing_error_us": 70000.0,
+        "over_segmentation": 0,
+        "per_transition": {
+          "dissolve": {
+            "f1": null,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": null,
+            "recall": null,
+            "true_positives": 0
+          },
+          "fade": {
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_positives": 2
+          }
+        },
+        "precision": 1.0,
+        "predicted_count": 2,
+        "recall": 1.0,
+        "shot_count_error": 0,
+        "true_positives": 2,
+        "under_segmentation": 0
+      },
+      "flash": {
+        "f1": null,
+        "false_negatives": 0,
+        "false_positives": 0,
+        "fp_per_minute": 0.0,
+        "ground_truth_count": 0,
+        "matches": [],
+        "max_abs_timing_error_us": null,
+        "mean_abs_timing_error_us": null,
+        "median_abs_timing_error_us": null,
+        "over_segmentation": 0,
+        "per_transition": {},
+        "precision": null,
+        "predicted_count": 0,
+        "recall": null,
+        "shot_count_error": 0,
+        "true_positives": 0,
+        "under_segmentation": 0
+      },
+      "hard_cut": {
+        "f1": 1.0,
+        "false_negatives": 0,
+        "false_positives": 0,
+        "fp_per_minute": 0.0,
+        "ground_truth_count": 1,
+        "matches": [
+          {
+            "abs_error_us": 0,
+            "gt_index": 0,
+            "pred_index": 0
+          }
+        ],
+        "max_abs_timing_error_us": 0,
+        "mean_abs_timing_error_us": 0.0,
+        "median_abs_timing_error_us": 0.0,
+        "over_segmentation": 0,
+        "per_transition": {
+          "hard_cut": {
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_positives": 1
+          }
+        },
+        "precision": 1.0,
+        "predicted_count": 1,
+        "recall": 1.0,
+        "shot_count_error": 0,
+        "true_positives": 1,
+        "under_segmentation": 0
+      },
+      "pan": {
+        "f1": null,
+        "false_negatives": 0,
+        "false_positives": 0,
+        "fp_per_minute": 0.0,
+        "ground_truth_count": 0,
+        "matches": [],
+        "max_abs_timing_error_us": null,
+        "mean_abs_timing_error_us": null,
+        "median_abs_timing_error_us": null,
+        "over_segmentation": 0,
+        "per_transition": {},
+        "precision": null,
+        "predicted_count": 0,
+        "recall": null,
+        "shot_count_error": 0,
+        "true_positives": 0,
+        "under_segmentation": 0
+      },
+      "static": {
+        "f1": null,
+        "false_negatives": 0,
+        "false_positives": 0,
+        "fp_per_minute": 0.0,
+        "ground_truth_count": 0,
+        "matches": [],
+        "max_abs_timing_error_us": null,
+        "mean_abs_timing_error_us": null,
+        "median_abs_timing_error_us": null,
+        "over_segmentation": 0,
+        "per_transition": {},
+        "precision": null,
+        "predicted_count": 0,
+        "recall": null,
+        "shot_count_error": 0,
+        "true_positives": 0,
+        "under_segmentation": 0
+      }
+    }
+  },
+  "negative_false_positives": 0,
+  "overall_status": "PASS",
+  "schema_version": 1,
+  "session": "/home/fdoblak/workspace/shot_boundary_checks/s4b_20260723T091608Z_39_iuduq",
+  "status": "PASS",
+  "thresholds": {
+    "gradual_f1_min": 0.8,
+    "hard_cut_f1_min": 0.95,
+    "negative_fp_max": 0,
+    "overall_f1_min": 0.9
+  },
+  "timestamp": "2026-07-23T09:16:12.471857Z",
+  "warnings": []
+}

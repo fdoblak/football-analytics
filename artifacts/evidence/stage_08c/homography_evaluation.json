@@ -1,0 +1,42 @@
+{
+  "adapter_notes": "Stage 8C baseline: normalized DLT + OpenCV RANSAC; no reviewed homography GT",
+  "config_fingerprint": "31f9d286123e84a8d9bec16af2ee22ba5bbe7f6ea84fac7d66cc0b41795a810c",
+  "created_at_utc": "2026-07-23T22:04:25.413077Z",
+  "findings": [
+    "NOT_EVALUATED_NO_REVIEWED_HOMOGRAPHY_GROUND_TRUTH",
+    "synthetic known-H is not football match accuracy",
+    "feature detection does not guarantee correct homography",
+    "projected player/ball positions deferred to Stage 8D",
+    "attack_direction remains unknown",
+    "SV/NBJW adapter remains evaluation_only / GPL linking risk"
+  ],
+  "ground_truth_evaluation_status": "NOT_EVALUATED_NO_REVIEWED_HOMOGRAPHY_GROUND_TRUTH",
+  "metric_reasons": {
+    "calibration_readiness_rate": "NOT_EVALUATED_NO_REVIEWED_HOMOGRAPHY_GROUND_TRUTH",
+    "camera_change_boundary_accuracy": "NOT_EVALUATED_NO_REVIEWED_HOMOGRAPHY_GROUND_TRUTH",
+    "catastrophic_mirrored_failure_rate": "NOT_EVALUATED_NO_REVIEWED_HOMOGRAPHY_GROUND_TRUTH",
+    "homography_success_rate": "NOT_EVALUATED_NO_REVIEWED_HOMOGRAPHY_GROUND_TRUTH",
+    "inlier_precision": "NOT_EVALUATED_NO_REVIEWED_HOMOGRAPHY_GROUND_TRUTH",
+    "inlier_recall": "NOT_EVALUATED_NO_REVIEWED_HOMOGRAPHY_GROUND_TRUTH",
+    "keypoint_reprojection_error_px": "NOT_EVALUATED_NO_REVIEWED_HOMOGRAPHY_GROUND_TRUTH",
+    "line_alignment_distance": "NOT_EVALUATED_NO_REVIEWED_HOMOGRAPHY_GROUND_TRUTH",
+    "pitch_coordinate_error_m": "NOT_EVALUATED_NO_REVIEWED_HOMOGRAPHY_GROUND_TRUTH",
+    "segment_temporal_coverage": "NOT_EVALUATED_NO_REVIEWED_HOMOGRAPHY_GROUND_TRUTH"
+  },
+  "metrics": {
+    "calibration_readiness_rate": null,
+    "camera_change_boundary_accuracy": null,
+    "catastrophic_mirrored_failure_rate": null,
+    "homography_success_rate": null,
+    "inlier_precision": null,
+    "inlier_recall": null,
+    "keypoint_reprojection_error_px": null,
+    "line_alignment_distance": null,
+    "pitch_coordinate_error_m": null,
+    "segment_temporal_coverage": null
+  },
+  "run_id": "run_20260723T220424747912Z_dcf32f288a10",
+  "schema_version": 1,
+  "status": "not_evaluated",
+  "video_id": "video_homo_fixture"
+}

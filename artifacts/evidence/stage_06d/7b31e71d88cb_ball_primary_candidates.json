@@ -1,0 +1,58 @@
+{
+  "config_fingerprint": "4c6c602e4ecff19bbb5a0821a360f2445842939664774877b96262c8bd6d020a",
+  "created_at_utc": "2026-07-23T15:31:57.536242Z",
+  "frames": [
+    {
+      "frame_index": 0,
+      "primary_detection_id": 1,
+      "primary_track_id": 1,
+      "status": "primary"
+    },
+    {
+      "frame_index": 1,
+      "primary_detection_id": null,
+      "primary_track_id": null,
+      "status": "ambiguous"
+    },
+    {
+      "frame_index": 2,
+      "primary_detection_id": 1,
+      "primary_track_id": 1,
+      "status": "primary"
+    },
+    {
+      "frame_index": 3,
+      "primary_detection_id": 1,
+      "primary_track_id": 1,
+      "status": "primary"
+    },
+    {
+      "frame_index": 4,
+      "primary_detection_id": 1,
+      "primary_track_id": 1,
+      "status": "primary"
+    },
+    {
+      "frame_index": 5,
+      "primary_detection_id": 1,
+      "primary_track_id": 1,
+      "status": "primary"
+    },
+    {
+      "frame_index": 6,
+      "primary_detection_id": 1,
+      "primary_track_id": 1,
+      "status": "primary"
+    },
+    {
+      "frame_index": 7,
+      "primary_detection_id": null,
+      "primary_track_id": null,
+      "status": "no_candidate"
+    }
+  ],
+  "note": "primary_ball_candidate is not a guarantee of true ball identity",
+  "run_id": "run_20260723T153157218262Z_fdcb3b1b8e28",
+  "schema_version": 1,
+  "video_id": "video_01"
+}

@@ -1,0 +1,32 @@
+{
+  "cleanup": "removed_session",
+  "config_fingerprint": "4c6c602e4ecff19bbb5a0821a360f2445842939664774877b96262c8bd6d020a",
+  "cuda_required": false,
+  "detections_fingerprint": "04ae8dd7a7e92bf7bd468db7a263e5e28258a30887d43c8f603c69d56f5c18b6",
+  "deterministic": true,
+  "errors": [],
+  "exit_code": 0,
+  "findings": [
+    "NOT_EVALUATED_NO_REVIEWED_TRACKING_GROUND_TRUTH",
+    "real football tracking accuracy not validated"
+  ],
+  "fixture_fps": {
+    "DETECTION_FP_A": "eeeeeeee",
+    "SOURCE_SHA_A": "aaaaaaaa",
+    "TIMELINE_FP_A": "cccccccc",
+    "WINDOW_FP_A": "11111111"
+  },
+  "gate": "PASS_WITH_FINDINGS \u2014 TRACKING PIPELINE ACTIVE; STAGE 6 CLOSED; REAL FOOTBALL ACCURACY NOT YET VALIDATED",
+  "overall_status": "PASS_WITH_FINDINGS",
+  "quality_status": "pass_with_findings",
+  "review_count": 3,
+  "schema_validation": "ok",
+  "schema_version": 1,
+  "status": "PASS_WITH_FINDINGS",
+  "timestamp": "2026-07-23T15:23:44.670588Z",
+  "total_track_count": 2,
+  "track_lifecycle_fingerprint": "613cd81e4359e780c19ba6d709999963a9f528bed25245ea2236ca84027fa40d",
+  "track_observations_fingerprint": "9ca2f7af56e69b47ec8db8d644164c84aa7fe3a62da40e247ed6db4f2c4c5f01",
+  "track_summaries_fingerprint": "7b04e31d641c49e66ad06baec53e1075e2bc286b9f08f1497aa0571bf7c1c168",
+  "warnings": []
+}

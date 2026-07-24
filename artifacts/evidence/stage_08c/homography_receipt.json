@@ -1,0 +1,86 @@
+{
+  "atomic_writes": true,
+  "attack_direction": "unknown",
+  "auto_project_positions": false,
+  "calibration_quality_counts": {
+    "degraded": 0,
+    "invalid": 0,
+    "no_solution": 0,
+    "not_available": 0,
+    "solved": 3,
+    "uncertain": 0,
+    "valid": 3
+  },
+  "config_fingerprint": "31f9d286123e84a8d9bec16af2ee22ba5bbe7f6ea84fac7d66cc0b41795a810c",
+  "contract_version": 1,
+  "correspondence_counts": {
+    "accepted": 12,
+    "rejected": 0,
+    "total": 12
+  },
+  "created_at_utc": "2026-07-23T22:04:25.414370Z",
+  "errors": [],
+  "evaluation_status": "NOT_EVALUATED_NO_REVIEWED_HOMOGRAPHY_GROUND_TRUTH",
+  "gap_count": 0,
+  "method": "ransac_opencv",
+  "no_overwrite": true,
+  "output_artifacts": {
+    "calibration_segments": {
+      "path": "/home/fdoblak/workspace/homography_checks/fix_8c_26000/solve/calibration_segments.parquet",
+      "sha256": "56826296d21666ed5adb83f14717d68d19499ea28a6aed9341764d72ac0ecf5e",
+      "size_bytes": 14459
+    },
+    "calibrations": {
+      "path": "/home/fdoblak/workspace/homography_checks/fix_8c_26000/solve/calibrations.parquet",
+      "sha256": "51c82cc944ee1f3ed610c6c73c735cacfea4dae1a4fd74ddf7bc969b56a44a67",
+      "size_bytes": 5254
+    }
+  },
+  "overlap_count": 0,
+  "physical_mapping_eligible_segment_count": 1,
+  "pitch_length_m": 105.0,
+  "pitch_template_fingerprint": "bb6436b73fc3653352dabdac8a38b1629923f9e05941da82424cc608e9adf893",
+  "pitch_width_m": 68.0,
+  "provenance": {
+    "gpl_adapter_unchanged": true,
+    "notes": "Synthetic known-H and operational smoke are not football match accuracy. Homography is pitch-plane only. Feature detection does not guarantee correct H. NBJW/SV adapter remains evaluation_only / GPL linking risk (Stage 8B).\\n",
+    "projected_positions": false,
+    "stage": "8C"
+  },
+  "real_pitch_size_known": false,
+  "receipt_id": "homo_dcf32f288a10",
+  "recounted_calibrations": {
+    "degraded": 0,
+    "invalid": 0,
+    "is_valid_true": 3,
+    "not_available": 0,
+    "total": 3,
+    "uncertain": 0,
+    "valid": 3
+  },
+  "review_count": 0,
+  "run_id": "run_20260723T220424747912Z_dcf32f288a10",
+  "schema_version": 1,
+  "segment_stats": {
+    "cut_terminations": 0,
+    "drift_splits": 0,
+    "gaps": 0,
+    "input_frames": 3,
+    "overlaps": 0,
+    "pan_zoom_splits": 0,
+    "physical_eligible_segments": 1,
+    "review_required": 0,
+    "segmentable_frames": 3,
+    "segments": 1
+  },
+  "solver_id": "homography_baseline",
+  "solver_version": "1.0.0",
+  "stage": "8C",
+  "status": "succeeded",
+  "video_id": "video_homo_fixture",
+  "warnings": [
+    "REAL_FOOTBALL_ACCURACY_NOT_YET_VALIDATED",
+    "HOMOGRAPHY_IS_PITCH_PLANE_ONLY",
+    "FEATURE_DETECTION_NOT_HOMOGRAPHY_GUARANTEE"
+  ]
+}

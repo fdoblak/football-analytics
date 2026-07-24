@@ -1,0 +1,25 @@
+{
+  "config_fingerprint": "760c5135c742fb2137bec35e16370622188b7f9985b5010ede5dc58ad869f680",
+  "counts": {
+    "filtered": 8,
+    "gaps": 0,
+    "raw": 8,
+    "rejected": 0,
+    "resampled": 8,
+    "segments": 1,
+    "single_point_segments": 0
+  },
+  "coverage": {
+    "derived_coverage_us": 700000,
+    "note": "derived_coverage_is_not_observed_coverage",
+    "observed_coverage_us": 700000
+  },
+  "customer_metrics_computed": false,
+  "findings": [
+    "customer_physical_metrics_not_computed",
+    "attack_direction_unknown"
+  ],
+  "reason_code_distribution": {},
+  "schema_version": 1,
+  "status": "pass"
+}
