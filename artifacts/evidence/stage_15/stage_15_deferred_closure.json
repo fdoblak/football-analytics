@@ -1,0 +1,19 @@
+{
+  "closed_machine_local": [
+    "RISK-029",
+    "RISK-041",
+    "bounded_memory_resumability_hardening",
+    "license_adapter_isolation_gates",
+    "storage_readiness_no_mnt_d_claim",
+    "local_ci_parity"
+  ],
+  "remaining_stage_16_only": [
+    "Model / GPL/AGPL legal clearance",
+    "Same-VHDX /mnt/d independent backup verification",
+    "GitHub API 403 / remote CI visibility (RISK-042)",
+    "Real match GT / accuracy / E2E",
+    "Manual identity / real video",
+    "Real final report + single visual"
+  ],
+  "schema_version": 1
+}

@@ -18,5 +18,6 @@ max_entry_files: 256
 max_entry_bytes: 1073741824
 
 quarantine_corrupt_entries: true
-# Permanent purge/GC is out of scope for Stage 2D.
+# Permanent purge remains forbidden. Stage 15A adds dry-run/quarantine GC only
+# (see configs/system/hardening_policy.yaml + football_analytics.hardening.cache_gc).
 automatic_purge: false

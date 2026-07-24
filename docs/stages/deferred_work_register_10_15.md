@@ -2,17 +2,22 @@
 
 | ID / title | Classification | Close stage | Note |
 |---|---|---|---|
-| RISK-029 streaming/materialize memory | close_by_stage_10_15 | 15A | Bounded streaming + pylist policy |
-| RISK-041 cache GC | close_by_stage_10_15 | 15A | Dry-run/quarantine GC; no permanent delete by default |
+| RISK-029 streaming/materialize memory | close_by_stage_10_15 | 15A | **CLOSED** — bounded pylist + streaming policy |
+| RISK-041 cache GC | close_by_stage_10_15 | 15A | **CLOSED** — dry-run/quarantine GC; no permanent delete by default |
 | Replay detector missing | close_by_stage_10_15 | 13A | CLOSED — conservative replay candidate baseline |
 | camera_position/replay_status unknown | close_by_stage_10_15 | 13A | CLOSED — supported classes only; else unknown |
 | Attack direction unknown | close_by_stage_10_15 | 13B | CLOSED — resolver + unknown → not_evaluable |
 | Final customer visual deferred | close_by_stage_10_15 | 14D/16 | Renderer CLOSED in 14 (synthetic); real final visual in 16 |
-| Bounded memory/resumability/hardening | close_by_stage_10_15 | 15 | Pre-release |
-| GPL/AGPL evaluation-only | external_legal_or_hardware | 15B isolate / 16 legal | No production approval invented |
+| Bounded memory/resumability/hardening | close_by_stage_10_15 | 15 | **CLOSED** — Stage 15A–15F machine-local |
+| GPL/AGPL evaluation-only | external_legal_or_hardware | 15B isolate / 16 legal | **15B CLOSED** (gates); **16** legal clearance remains |
 | Model license review | external_legal_or_hardware | 16 | review_required |
 | Same-VHDX /mnt/d backup | external_legal_or_hardware | 16 | Do not fake D: |
-| GitHub API 403 / remote CI | external_legal_or_hardware | 15D local parity / 16 | Local CI-equivalent |
+| GitHub API 403 / remote CI | external_legal_or_hardware | 15D local parity / 16 | **15D CLOSED** (local parity); remote remains RISK-042 |
 | Real match GT / accuracy / E2E | stage_16_real_data_validation | 16 | NOT_EVALUATED without reviewed GT |
 | Manual identity / real video | stage_16_real_data_validation | 16 | External inputs |
 | Real final report + single visual | stage_16_real_data_validation | 16 | Paths reserved |
+
+## Stage 16-only remaining
+
+All machine-local implementation deferred items for Stages 10–15 are closed.
+Only external / real-match acceptance items remain for Stage 16.

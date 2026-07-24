@@ -1,0 +1,104 @@
+# Stage 15 pre-release hardening policy (machine-local).
+# Not a legal clearance and not a claim that /mnt/d backup exists.
+schema_version: 1
+
+materialize:
+  # RISK-029: forbid unbounded to_pylist / full-table Python materialization
+  max_pylist_rows: 50000
+  max_pylist_bytes_estimate: 268435456  # 256 MiB soft estimate
+  chunk_rows: 4096
+  prefer_streaming_parquet: true
+  allow_unbounded_pylist: false
+
+cache_gc:
+  # RISK-041: dry-run / quarantine only; never permanent delete by default
+  automatic_purge: false
+  permanent_delete_by_default: false
+  default_mode: dry_run  # dry_run | quarantine
+  max_age_days: 30
+  max_entry_bytes: 1073741824
+  quarantine_subdir: cache_gc_quarantine
+
+disk:
+  minimum_free_bytes_pipeline: 2147483648  # 2 GiB gate before heavy runs
+  minimum_free_bytes_cache: 1073741824     # 1 GiB
+  warning_free_bytes: 10737418240         # 10 GiB
+
+gpu:
+  classification_default: AGENT_CONTEXT_GPU_UNVERIFIABLE
+  prefer_cuda_else_cpu: true
+  cpu_fallback_required: true
+  rtx3050_4gb:
+    profile_id: rtx3050_4gb_bounded
+    max_batch_size: 1
+    max_imgsz: 960
+    fp16_preferred: true
+    max_concurrent_models: 1
+    estimated_vram_budget_mb: 3500
+
+network:
+  network_video_download_allowed: false
+  dataset_download_allowed: false
+  large_model_download_allowed: false
+  allow_outbound_by_default: false
+
+artifacts:
+  max_evidence_file_bytes: 10485760  # 10 MiB (matches evidence collector)
+  forbid_video_in_evidence: true
+  forbid_model_weights_in_evidence: true
+  unsafe_suffixes:
+    - .pt
+    - .pth
+    - .onnx
+    - .mp4
+    - .mkv
+    - .avi
+    - .mov
+    - .bin
+    - .ckpt
+
+licensing:
+  require_evaluation_only_for_copyleft: true
+  forbid_production_approved_true: true
+  invent_legal_approval: false
+
+storage:
+  planned_archive_root: /mnt/d/football_data
+  pretend_mnt_d_exists: false
+  independent_backup_claimed: false
+  large_file_scan_bytes: 104857600  # 100 MiB
+  exclude_suffixes_from_backup_claims:
+    - .mp4
+    - .mkv
+    - .avi
+    - .mov
+    - .pt
+    - .pth
+    - .onnx
+    - .ckpt
+    - .bin
+
+performance:
+  subprocess_timeout_sec: 120
+  synthetic_acceptance_timeout_sec: 300
+  deterministic_repeat_runs: 2
+  memory_soft_limit_mb: 2048
+
+concurrency:
+  lock_timeout_seconds: 30
+
+recovery:
+  interrupted_marker_name: .run_interrupted
+  require_failure_receipt_on_error: true
+  atomic_output_required: true
+
+ci_parity:
+  remote_ci_status: UNVERIFIABLE_AGENT_API_CONTEXT
+  require_local_deep_validation: true
+  protected_pins_enforced: true
+  external_repo_lock_enforced: true
+  no_hidden_network: true
+
+gate_hint: >
+  PASS_WITH_FINDINGS — STAGE 15 PRE-RELEASE COMPLETE; ALL IMPLEMENTATION
+  STAGES CLOSED; ONLY REAL-MATCH ACCEPTANCE STAGE 16 REMAINS

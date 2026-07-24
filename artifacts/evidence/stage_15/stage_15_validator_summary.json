@@ -1,0 +1,255 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "acceptance": {
+      "acceptance_labels": [
+        "ambiguous",
+        "low_coverage",
+        "negative",
+        "not_evaluable",
+        "positive"
+      ],
+      "cleanup_paths": [],
+      "not_evaluable_present": true,
+      "overall_status": "succeeded",
+      "renderer_temp_cleaned": true,
+      "renderer_temp_created": true,
+      "user_video_mutated": false
+    },
+    "ci_parity": {
+      "local_commands": [
+        "ruff check src tests scripts",
+        "black --check src tests scripts",
+        "isort --check-only src tests scripts",
+        "mypy src/football_analytics",
+        "pytest -q",
+        "python scripts/check_secrets.py --root .",
+        "python scripts/check_ci_workflow.py",
+        "python scripts/check_project.py --profile local --quick",
+        "python scripts/local_deep_validation.py --skip-project",
+        "python scripts/check_prerelease_hardening.py"
+      ],
+      "lock": {
+        "bytes": 7032,
+        "path": "/home/fdoblak/projects/football-analytics/external_repos.lock.yaml",
+        "status": "PASS"
+      },
+      "pins": {
+        "pin_count": 5,
+        "protected_packages": [
+          "SoccerNet",
+          "numpy",
+          "opencv-python",
+          "torch",
+          "ultralytics"
+        ],
+        "status": "PASS"
+      },
+      "remote": {
+        "invented_green_remote_ci": false,
+        "local_parity_required": true,
+        "note": "If GitHub API returns 403, treat remote CI as external finding and run local CI-equivalent.",
+        "remote_ci_status": "UNVERIFIABLE_AGENT_API_CONTEXT",
+        "risk_id": "RISK-042"
+      },
+      "workflow": {
+        "errors": [],
+        "exit_code": 0,
+        "status": "PASS",
+        "warnings": []
+      }
+    },
+    "cuda_smoke": {
+      "cuda_available": false,
+      "cuda_smoke": "ran",
+      "gpu_classification": "AGENT_CONTEXT_GPU_UNVERIFIABLE",
+      "torch_imported": true
+    },
+    "disk": {
+      "below_warning": false,
+      "cache_ok": true,
+      "free_bytes": 991991394304,
+      "minimum_free_bytes_cache": 1073741824,
+      "minimum_free_bytes_pipeline": 2147483648,
+      "path": "/home/fdoblak/workspace/prerelease_hardening_checks/hard15_zcf8m4ds",
+      "pipeline_ok": true,
+      "warning_free_bytes": 10737418240
+    },
+    "evidence_index": {
+      "entry_count": 285,
+      "has_required_stage": true,
+      "index_path": "/home/fdoblak/projects/football-analytics/artifacts/evidence/index.json",
+      "stage_ids_sample": [
+        "stage_09c",
+        "stage_09d",
+        "stage_09e",
+        "stage_10",
+        "stage_10a",
+        "stage_11",
+        "stage_12",
+        "stage_13",
+        "stage_14",
+        "stage_15"
+      ],
+      "status": "PASS"
+    },
+    "gate": "PASS_WITH_FINDINGS \u2014 STAGE 15 PRE-RELEASE COMPLETE; ALL IMPLEMENTATION STAGES CLOSED; ONLY REAL-MATCH ACCEPTANCE STAGE 16 REMAINS",
+    "hardening_policy_fp": "5de0569742bbf5ff87ae89264170899c1a5d521353125cf98735e3e783f79b92",
+    "licensing": {
+      "fallback": {
+        "behavior": "cpu_stub_or_skip",
+        "invent_outputs": false,
+        "metrics": "not_evaluable",
+        "production_approved": false,
+        "reason_code": "MODEL_UNAVAILABLE_OR_LICENSE_GATED"
+      },
+      "notices": {
+        "legal_clearance": false,
+        "license_inventory": true,
+        "note": "Technical inventory only; not legal approval",
+        "path_inventory": "/home/fdoblak/projects/football-analytics/docs/legal/license_inventory.md",
+        "path_notices": "/home/fdoblak/projects/football-analytics/docs/legal/third_party_notices.md",
+        "third_party_notices": true
+      },
+      "scan": {
+        "copyleft_adjacent_ids": [
+          "sn_banner_sv_kp",
+          "sn_banner_sv_lines",
+          "ultralytics_yolo11n_coco_person"
+        ],
+        "evaluation_only_ids": [
+          "sn_banner_sv_kp",
+          "sn_banner_sv_lines",
+          "ultralytics_yolo11n_coco_person"
+        ],
+        "findings": [],
+        "legal_approval_invented": false,
+        "model_count": 3,
+        "production_approved_any": false,
+        "status": "PASS"
+      }
+    },
+    "performance": {
+      "cuda_smoke": {
+        "cuda_available": false,
+        "cuda_smoke": "ran",
+        "gpu_classification": "AGENT_CONTEXT_GPU_UNVERIFIABLE",
+        "torch_imported": true
+      },
+      "deterministic": {
+        "deterministic": true,
+        "runs": 2
+      },
+      "memory": {
+        "label": "probe",
+        "peak_mb": 0.0,
+        "soft_limit_mb": 2048,
+        "within_soft_limit": true
+      },
+      "streaming_parquet": {
+        "api": "football_analytics.data.parquet.write_contract_parquet_streaming",
+        "materialize_policy": "football_analytics.hardening.materialize",
+        "notes": [
+          "Prefer streaming ParquetWriter batches over full-table to_pylist",
+          "RISK-029 closed machine-locally via max_pylist_rows + chunked iteration"
+        ]
+      }
+    },
+    "risk_029": {
+      "allow_unbounded_pylist": false,
+      "chunk_rows": 4096,
+      "max_pylist_rows": 50000,
+      "prefer_streaming_parquet": true,
+      "risk_id": "RISK-029",
+      "status": "closed_machine_local"
+    },
+    "risk_041": {
+      "dry_run": {
+        "automatic_purge": false,
+        "cache_root": "/home/fdoblak/workspace/prerelease_hardening_checks/hard15_zcf8m4ds/cache",
+        "executed_at_utc": "2026-07-24T14:03:46.934752Z",
+        "mode": "dry_run",
+        "permanent_delete_performed": false,
+        "plan_fingerprint": "6105cfb4c68d1a93df9a1ee15d7172b4b847d69bdcd35dd603930ba05057a670",
+        "planned_candidates": 0,
+        "quarantine_root": "/home/fdoblak/workspace/prerelease_hardening_checks/hard15_zcf8m4ds/cache_q",
+        "quarantined": [],
+        "receipt_fingerprint": "e6b28744af680f569de51bea4d8e959bb789730e91927f33f6fbb4688a014031",
+        "risk_id": "RISK-041",
+        "schema_version": 1
+      },
+      "plan": {
+        "automatic_purge": false,
+        "cache_root": "/home/fdoblak/workspace/prerelease_hardening_checks/hard15_zcf8m4ds/cache",
+        "candidate_count": 0,
+        "candidates": [],
+        "mode": "dry_run",
+        "permanent_delete_performed": false,
+        "plan_fingerprint": "b25a236cf3de7fbd6ee8ef252b38b5750ed2fc3e5ddaf93e33318a74543a1631",
+        "planned_at_utc": "2026-07-24T14:03:46.933543Z",
+        "risk_id": "RISK-041",
+        "scanned_entries": 0,
+        "schema_version": 1
+      }
+    },
+    "storage": {
+      "readiness": {
+        "active_root": "/home/fdoblak/football_data",
+        "classification": "WSL_LOCAL_PRIMARY_D_UNVERIFIED",
+        "independent_backup": false,
+        "mnt_d_claimed_ready": false,
+        "mnt_d_exists": false,
+        "planned_archive_root": "/mnt/d/football_data",
+        "planned_archive_status": "unverified",
+        "status": "PASS"
+      },
+      "scan": {
+        "excluded_video_or_model": [],
+        "files_seen": 5,
+        "large_files": [],
+        "root": "/home/fdoblak/workspace/prerelease_hardening_checks/hard15_zcf8m4ds",
+        "scanned": true,
+        "threshold_bytes": 104857600
+      }
+    }
+  },
+  "findings": [
+    "GPL/AGPL adapters remain evaluation_only; legal clearance deferred to Stage 16",
+    "Same-VHDX /mnt/d independent backup remains Stage 16 external",
+    "Remote GitHub Actions status UNVERIFIABLE_AGENT_API_CONTEXT (RISK-042); local CI-equivalent required",
+    "ONLY REAL-MATCH ACCEPTANCE STAGE 16 REMAINS"
+  ],
+  "gate": "PASS_WITH_FINDINGS \u2014 STAGE 15 PRE-RELEASE COMPLETE; ALL IMPLEMENTATION STAGES CLOSED; ONLY REAL-MATCH ACCEPTANCE STAGE 16 REMAINS",
+  "scenarios": {
+    "15a_cache_gc": "PASS",
+    "15a_concurrency_lock": "PASS",
+    "15a_cpu_fallback": "PASS",
+    "15a_disk_gate": "PASS",
+    "15a_evidence_index": "PASS",
+    "15a_failure_receipt": "PASS",
+    "15a_fingerprints": "PASS",
+    "15a_gpu_profile": "PASS",
+    "15a_large_artifact": "PASS",
+    "15a_materialize": "PASS",
+    "15a_no_network": "PASS",
+    "15a_policy": "PASS",
+    "15a_recovery": "PASS",
+    "15a_redaction": "PASS",
+    "15b_licensing": "PASS",
+    "15c_storage": "PASS",
+    "15d_ci_parity": "PASS",
+    "15e_report_consistency": "PASS",
+    "15e_synthetic_acceptance": "PASS",
+    "15f_performance": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS_WITH_FINDINGS",
+  "timestamp_utc": "2026-07-24T14:03:54.520343Z",
+  "warnings": [
+    "GPL/AGPL adapters remain evaluation_only; legal clearance deferred to Stage 16",
+    "Same-VHDX /mnt/d independent backup remains Stage 16 external",
+    "Remote GitHub Actions status UNVERIFIABLE_AGENT_API_CONTEXT (RISK-042); local CI-equivalent required",
+    "ONLY REAL-MATCH ACCEPTANCE STAGE 16 REMAINS"
+  ]
+}

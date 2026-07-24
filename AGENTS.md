@@ -78,6 +78,9 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `scripts/check_human_ball_proximity_contact_baseline.py` (Stage 10B proximity / contact baseline)
 - `scripts/check_possession_control_baseline.py` (Stage 10C possession / control baseline)
 - `scripts/check_human_ball_interaction_pipeline.py` (Stage 10D fusion + Stage 10 close)
+- `scripts/check_single_player_pipeline.py` (Stage 14E single-player E2E + close)
+- `scripts/check_prerelease_hardening.py` (Stage 15A–15G pre-release hardening + close)
+- `scripts/local_deep_validation.py` (Stage 15D local CI-equivalent)
 - `scripts/check_passing_contracts.py` (Stage 11A pass / reception / progression contracts)
 - `scripts/check_pass_reception_baseline.py` (Stage 11B pass / reception baseline)
 - `scripts/check_passing_metrics_baseline.py` (Stage 11C target passing metrics baseline)
@@ -129,8 +132,11 @@ directional metrics not_evaluable; no invented team names; real football
 target-event accuracy is not validated. Stage 14 is closed:
 14A orchestration → 14B unified review hub → 14C report data → 14D renderer →
 14E CLI/close. Synthetic E2E only; final customer visual reserved for Stage 16;
-real football accuracy is not validated. Do **not** start Stage 15
-without an explicit user prompt.
+real football accuracy is not validated. Stage 15 is closed:
+15A hardening policies → 15B license isolation gates → 15C storage readiness →
+15D local CI parity → 15E synthetic acceptance → 15F performance → 15G docs.
+All implementation stages closed; only real-match acceptance Stage 16 remains.
+Do **not** start Stage 16 without an explicit user prompt.
 
 ---
 
@@ -183,16 +189,19 @@ Do not upgrade / uninstall casually (pins in `requirements/constraints-ai-dev.tx
 
 ## 8. Open findings — do not mark solved
 
-These remain open until independently verified and closed by policy:
+These remain open until independently verified and closed by policy (Stage 16 / external):
 
-- GitHub API proxy 403 (Cursor agent)
-- Remote CI unverifiable in agent API context
-- Registry license / access warnings
+- GitHub API proxy 403 (Cursor agent) — RISK-042
+- Remote CI unverifiable in agent API context — RISK-042
+- Registry license / access warnings (legal clearance)
 - GPU host gate unverifiable (`AGENT_CONTEXT_GPU_UNVERIFIABLE`)
-- Same-VHDX local archive ≠ independent backup
-- RISK-029 (large-table validation / pylist memory pressure; mitigated for Stage 3D frame timeline streaming write path)
-- Cache GC / automatic purge absent
+- Same-VHDX local archive ≠ independent backup (`/mnt/d` unverified)
+- Real-match / Opta accuracy without reviewed ground truth
 
+Closed machine-locally in Stage 15 (do not reopen without evidence regression):
+
+- RISK-029 bounded streaming / pylist materialization policy
+- RISK-041 cache GC dry-run / quarantine (permanent delete still not default)
 ---
 
 ## 9. Reports path (audit only)
@@ -231,5 +240,6 @@ Stage 12 is **closed**. Stage 13A–13E target-events baseline is in-tree when
 merged (replay/live context → attack direction → ledger → metrics → fusion).
 Stage 13 is **closed**. Stage 14A–14E single-player orchestration / review /
 report / renderer baseline is in-tree when merged. Stage 14 is **closed**.
-Do **not** start Stage 15 without an explicit user prompt.
+Stage 15A–15G pre-release hardening is in-tree when merged. Stage 15 is
+**closed**. Do **not** start Stage 16 without an explicit user prompt.
 Manual Cursor flow only — no Codex/background automation.

@@ -92,8 +92,22 @@ def _finite_float(v: Any) -> bool:
     return False
 
 
+def _guard_pylist_materialize(table: Any, result: ValidationResult) -> bool:
+    """RISK-029: refuse unbounded Python materialization during validation."""
+    try:
+        from football_analytics.hardening.materialize import assert_pylist_bounds
+
+        assert_pylist_bounds(int(table.num_rows), context="validate_table")
+        return True
+    except Exception as exc:  # noqa: BLE001
+        result.err(f"materialize_bound: {exc}")
+        return False
+
+
 def _check_pk(table: Any, pk: tuple[str, ...], result: ValidationResult) -> None:
     if table.num_rows == 0:
+        return
+    if not _guard_pylist_materialize(table, result):
         return
     seen: set[tuple[Any, ...]] = set()
     arrays = [_col(table, c).to_pylist() for c in pk]

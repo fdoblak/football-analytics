@@ -408,11 +408,11 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | description | Large tables validated via pylist conversion may use excess memory. |
 | probability | medium |
 | impact | medium |
-| mitigation | Bounded error lists; document complexity; future Arrow-compute paths. Stage 3D adds streaming `write_contract_parquet_streaming` for the frame timeline write path (batched ParquetWriter; no full-frame pylist on timeline write). Stage 4B adds streaming OpenCV decode for shot features (no full-res frame buffer); Stage 4C adds seek-by-index sample decode for camera features (not full-video materialization). Stage 4D analysis_windows validation still uses pylist joins against shots/cameras. Neither closes general pylist / materialize-join pressure in `validate_broadcast_bundle` / `validate_analysis_windows_bundle`. Stage 3D-F1 taxonomy work does **not** close general pylist / materialize-join pressure. |
+| mitigation | Bounded error lists; document complexity; Arrow-compute paths preferred. Stage 3D streaming write; Stage 4B/4C streaming decode. **Stage 15A CLOSED machine-locally:** `football_analytics.hardening.materialize` enforces `max_pylist_rows` / chunked iteration; `validate_table` guards pylist materialization; streaming parquet preferred. Residual: very large semantic joins should keep using chunked/Arrow paths. |
 | trigger | Stage 2C |
 | owner | Furkan Doblak |
-| status | mitigated (frame timeline streaming write path; shot-feature streaming decode; camera sample decode); open (general semantic validation pylist + materialize metadata join + analysis_windows bundle) |
-| target_stage | Stage 2C+/2D/3D/4D |
+| status | closed_machine_local (Stage 15A); residual large-join discipline remains operational guidance |
+| target_stage | Stage 15A |
 
 ## RISK-043 — Broadcast routing over-abstention / live-eligibility drift
 
@@ -590,11 +590,11 @@ Probability / impact scale: `low` | `medium` | `high` | `critical`
 | description | Content-addressed cache grows without bound because automatic purge/GC is disabled. |
 | probability | high |
 | impact | medium |
-| mitigation | `automatic_purge: false` by design; publish-time size/file caps; manual operator cleanup later; document limitation. |
+| mitigation | `automatic_purge: false` by design; publish-time size/file caps. **Stage 15A CLOSED:** `football_analytics.hardening.cache_gc` dry-run plan + quarantine moves; `permanent_delete_performed` always false by default; operator permanent purge remains out of band. |
 | trigger | Stage 2D cache use |
 | owner | Furkan Doblak |
-| status | open |
-| target_stage | Stage 3+ (policy) |
+| status | closed_machine_local (Stage 15A dry-run/quarantine GC); permanent auto-purge remains forbidden |
+| target_stage | Stage 15A |
 
 ## RISK-042 — GitHub API proxy / remote CI visibility
 

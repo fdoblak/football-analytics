@@ -84,8 +84,14 @@ Corrupt hits during `execute_stage` may call `quarantine_cache_entry` when
 
 ## No automatic purge
 
-`automatic_purge` **must** be `false` in Stage 2D. Policy load fails otherwise.
-There is no GC; disk growth is an acknowledged limitation (RISK-041).
+`automatic_purge` **must** be `false`. Policy load fails otherwise.
+
+Stage 15A closes RISK-041 with **safe GC only**:
+
+- `football_analytics.hardening.cache_gc.plan_cache_gc` — dry-run candidate plan
+- `execute_cache_gc(..., mode="quarantine")` — move stale/oversize entries to quarantine
+- `permanent_delete_performed` always `false` by default
+- Operator permanent purge remains out of band and never automatic
 
 ## Trust model
 

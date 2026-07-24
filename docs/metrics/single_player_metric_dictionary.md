@@ -4,6 +4,7 @@
 **schema companion:** `schemas/metrics/single_player_report.schema.json`
 **registry companion:** `configs/metrics/single_player_metrics.yaml`
 **product scope:** `docs/scope/single_player_product_v1.md`
+**pre-release note (Stage 15):** Hardening gates do not change metric definitions. Synthetic fixtures may emit `not_evaluable` / `insufficient_coverage`; real-match accuracy remains Stage 16.
 
 All metrics are computed for **one** `target_player` only. Team/opponent context is intermediate.
 

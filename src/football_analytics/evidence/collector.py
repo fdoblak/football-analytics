@@ -76,6 +76,7 @@ WORKSPACE_STAGE_MAP: dict[str, str] = {
     "target_event_metrics_checks": "stage_13d",
     "events_pipeline_checks": "stage_13e",
     "single_player_pipeline_checks": "stage_14",
+    "prerelease_hardening_checks": "stage_15",
 }
 
 

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "gate_hint": "PASS_WITH_FINDINGS — STAGE 15 PRE-RELEASE COMPLETE; ALL IMPLEMENTATION STAGES CLOSED; ONLY REAL-MATCH ACCEPTANCE STAGE 16 REMAINS",
+  "arrow_registry_bumped": false,
+  "expected_registry_contract_count": 45,
+  "policy": "configs/system/hardening_policy.yaml",
+  "package": "football_analytics.hardening",
+  "validators": [
+    "scripts/check_prerelease_hardening.py",
+    "scripts/local_deep_validation.py"
+  ],
+  "modules": [
+    "materialize",
+    "cache_gc",
+    "disk_gate",
+    "gpu_profile",
+    "network",
+    "recovery",
+    "fingerprints",
+    "artifacts",
+    "licensing",
+    "storage_readiness",
+    "evidence_checks",
+    "ci_parity",
+    "performance",
+    "acceptance",
+    "concurrency"
+  ]
+}

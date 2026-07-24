@@ -29,4 +29,4 @@
 
 ## Next (do not start without explicit prompt)
 
-Stage 15+ — wait for explicit user prompt.
+Stage 16 acceptance — see `docs/stages/stage_16_acceptance_runbook.md`. Stage 15 is closed.
