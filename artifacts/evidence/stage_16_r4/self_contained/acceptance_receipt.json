@@ -1,0 +1,14 @@
+{
+  "config_fingerprint": "e9752b834ac9cd49068fc87eb1a56f866c396044b4857571b1ef5a34d07891dc",
+  "download_required": false,
+  "evidence_level": "SELF_CONTAINED_TESTED",
+  "hf_required": false,
+  "metrics_fingerprint": "2e20387864b8469660ffa94bafaaaeaeb7e0fedccdcbe4dc402005198a6154c9",
+  "metrics_sha256": "ea0264b4647fe1b10895b3d4674d27871070b546905fcfedfddc1769ca340634",
+  "namespace": "self_contained_deterministic_acceptance",
+  "network_required": false,
+  "scenario_sha256": "bf99af9fc0120171e728d1c5bbb82e805b716ac674705e16af9be524d781cd05",
+  "schema": "self_contained_acceptance_receipt_v1",
+  "seed": 16040,
+  "status": "passed"
+}

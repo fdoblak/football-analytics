@@ -42,10 +42,10 @@ def render_acceptance_summary_png(
     fig = plt.figure(figsize=(14.0, 9.0), dpi=160)
     fig.patch.set_facecolor("#0f1a14")
     # atmospheric background gradient via imshow
-    ax_bg = fig.add_axes([0, 0, 1, 1])
+    ax_bg = fig.add_axes((0.0, 0.0, 1.0, 1.0))
     ax_bg.axis("off")
     gradient = [[i / 255.0] * 20 for i in range(40, 90)]
-    ax_bg.imshow(gradient, aspect="auto", cmap="Greens", extent=[0, 1, 0, 1], alpha=0.35)
+    ax_bg.imshow(gradient, aspect="auto", cmap="Greens", extent=(0.0, 1.0, 0.0, 1.0), alpha=0.35)
 
     # Title
     fig.text(
@@ -67,7 +67,7 @@ def render_acceptance_summary_png(
     )
 
     # Pitch / heatmap panel
-    ax_pitch = fig.add_axes([0.05, 0.28, 0.42, 0.55])
+    ax_pitch = fig.add_axes((0.05, 0.28, 0.42, 0.55))
     ax_pitch.set_facecolor("#1b5e20")
     ax_pitch.set_xlim(-52.5, 52.5)
     ax_pitch.set_ylim(-34, 34)
@@ -96,7 +96,7 @@ def render_acceptance_summary_png(
         )
 
     # Metrics panel
-    ax_m = fig.add_axes([0.52, 0.28, 0.44, 0.55])
+    ax_m = fig.add_axes((0.52, 0.28, 0.44, 0.55))
     ax_m.set_facecolor("#102018")
     ax_m.axis("off")
     ax_m.set_title("Metrikler / Değerlendirilebilirlik", color="#e8f5e9", fontsize=11, loc="left")

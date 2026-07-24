@@ -1,57 +1,29 @@
-# Stage 16 acceptance runbook — Real-match validation
+# Stage 16 acceptance runbook — Technical preview (R4)
 
-**Status:** NO-GO — video download blocked by official Drive quota (annotations retained).
+**Status:** `PASS_WITH_FINDINGS — SELF-CONTAINED TECHNICAL ACCEPTANCE COMPLETE; REAL-VIDEO TRACKING VALIDATED; VIDEO-EVENT ACCURACY NOT VALIDATED`
 
-See `artifacts/evidence/stage_16/STAGE16_COMPLETION.md`.
+SoccerTrack v2 panoramic MP4 is **optional** and is **not** required for release gates, CLI defaults, tests, or builds. Hugging Face token/login is **not** required.
 
-This runbook is documentation only. Stage 15 closed all implementation stages.
-Do **not** invent Opta accuracy, legal clearance, `/mnt/d` readiness, or green remote CI.
+## Three evidence tracks (do not mix)
 
-## Preconditions
+1. **TeamTrack real-video pilot** (`teamtrack_real_video_pilot`) — real video ingest/GPU/detection/tracking.
+2. **SoccerTrack v2 reference** (`soccertrack_v2_reference_analysis`) — GSR/BAS annotation-derived metrics for match `128057` / jersey `24` / `506469`. **Not** video prediction.
+3. **Self-contained deterministic acceptance** (`self_contained_deterministic_acceptance`) — offline contract/metric/report arithmetic.
 
-1. Stage 15 gate evidence present under `artifacts/evidence/stage_15/`
-2. Reviewed ground-truth available for the target video (or explicitly mark `NOT_EVALUATED`)
-3. Manual identity confirmation path ready when identity is uncertain
-4. Legal review outcome recorded before any production redistribution of AGPL/GPL adapters
-5. Optional: verified independent archive root (do not claim `/mnt/d` until probed)
+## Offline commands
 
-## Acceptance scenarios
-
-| Scenario | Expected |
-|----------|----------|
-| Positive real match | Metrics evaluable where coverage/identity/calibration allow |
-| Negative / no-event segments | Explicit empty-with-coverage; never fake zeros as success |
-| Ambiguous identity / ball / pass | Review hub required; no auto-confirm |
-| Low coverage | `insufficient_coverage` / `not_evaluable` |
-| Not evaluable calibration | Physical/zone metrics null with reason codes |
-
-## Final visual (reserved)
-
-Only after acceptance:
-
-- `/home/fdoblak/football_data/rendered_outputs/final/single_player_analysis_summary.png`
-- `artifacts/final/single_player_analysis_summary.png`
-
-Synthetic Stage 14/15 renders must **not** be copied to these paths as customer finals.
-
-## External findings to resolve (or re-document)
-
-| ID | Item |
-|----|------|
-| Legal | AGPL Ultralytics / GPL NBJW production clearance |
-| RISK-042 | GitHub API / remote CI visibility |
-| Storage | Same-VHDX vs independent `/mnt/d` backup |
-| Accuracy | Real football / Opta claims only with reviewed GT |
-
-## Commands (when Stage 16 is explicitly started)
-
-```text
-# placeholders — implement only under Stage 16 prompt
-python scripts/check_prerelease_hardening.py   # still green from Stage 15
-# + real-match validators / evidence under artifacts/evidence/stage_16/
+```bash
+football-analytics acceptance generate --output-dir artifacts/evidence/stage_16_r4/self_contained
+football-analytics acceptance run --output-dir artifacts/evidence/stage_16_r4/self_contained
+football-analytics acceptance validate --dir-a /tmp/a --dir-b /tmp/b
+football-analytics acceptance reference soccertrack-v2
+football-analytics report render-final
 ```
 
-## Gate (expected shape — not claimed yet)
+## Final customer outputs
 
-Real-match acceptance gate text will be defined in the Stage 16 prompt. Until then:
-`ONLY REAL-MATCH ACCEPTANCE STAGE 16 REMAINS`.
+- `artifacts/final/single_player_analysis_summary.json`
+- `artifacts/final/single_player_analysis_summary.png`
+- twin: `/home/fdoblak/football_data/rendered_outputs/final/single_player_analysis_summary.png`
+
+Only one customer final PNG is retained in the current tree.

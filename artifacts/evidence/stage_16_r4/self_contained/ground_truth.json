@@ -1,0 +1,167 @@
+{
+  "calibration": {
+    "origin": "pitch_center",
+    "pitch_length_m": 105.0,
+    "pitch_width_m": 68.0,
+    "provenance": "self_contained_synthetic_gt",
+    "units": "metres"
+  },
+  "event_ledger": [
+    {
+      "label": "Pass",
+      "meta": {
+        "outcome": "completed"
+      },
+      "player_id": "T24",
+      "provenance": "self_contained_synthetic_gt",
+      "t_ms": 8000,
+      "team": "left"
+    },
+    {
+      "label": "Pass",
+      "meta": {
+        "outcome": "failed"
+      },
+      "player_id": "T24",
+      "provenance": "self_contained_synthetic_gt",
+      "t_ms": 12000,
+      "team": "left"
+    },
+    {
+      "label": "High Pass",
+      "meta": {},
+      "player_id": "T24",
+      "provenance": "self_contained_synthetic_gt",
+      "t_ms": 18000,
+      "team": "left"
+    },
+    {
+      "label": "Drive",
+      "meta": {},
+      "player_id": "T24",
+      "provenance": "self_contained_synthetic_gt",
+      "t_ms": 28000,
+      "team": "left"
+    },
+    {
+      "label": "Take-On",
+      "meta": {
+        "outcome": "success"
+      },
+      "player_id": "T24",
+      "provenance": "self_contained_synthetic_gt",
+      "t_ms": 36000,
+      "team": "left"
+    },
+    {
+      "label": "Take-On",
+      "meta": {
+        "outcome": "fail"
+      },
+      "player_id": "T24",
+      "provenance": "self_contained_synthetic_gt",
+      "t_ms": 44000,
+      "team": "left"
+    },
+    {
+      "label": "Duel",
+      "meta": {
+        "outcome": "won"
+      },
+      "player_id": "T24",
+      "provenance": "self_contained_synthetic_gt",
+      "t_ms": 52000,
+      "team": "left"
+    },
+    {
+      "label": "Player Successful Tackle",
+      "meta": {},
+      "player_id": "T24",
+      "provenance": "self_contained_synthetic_gt",
+      "t_ms": 60000,
+      "team": "left"
+    },
+    {
+      "label": "Recovery",
+      "meta": {},
+      "player_id": "T24",
+      "provenance": "self_contained_synthetic_gt",
+      "t_ms": 68000,
+      "team": "left"
+    },
+    {
+      "label": "Turnover",
+      "meta": {},
+      "player_id": "T24",
+      "provenance": "self_contained_synthetic_gt",
+      "t_ms": 76000,
+      "team": "left"
+    },
+    {
+      "label": "Header",
+      "meta": {},
+      "player_id": "T24",
+      "provenance": "self_contained_synthetic_gt",
+      "t_ms": 84000,
+      "team": "left"
+    },
+    {
+      "label": "Clearance",
+      "meta": {},
+      "player_id": "T24",
+      "provenance": "self_contained_synthetic_gt",
+      "t_ms": 92000,
+      "team": "left"
+    },
+    {
+      "label": "Box Contact",
+      "meta": {},
+      "player_id": "T24",
+      "provenance": "self_contained_synthetic_gt",
+      "t_ms": 100000,
+      "team": "left"
+    },
+    {
+      "label": "Pass",
+      "meta": {
+        "outcome": "completed"
+      },
+      "player_id": "T24",
+      "provenance": "self_contained_synthetic_gt",
+      "t_ms": 108000,
+      "team": "left"
+    }
+  ],
+  "expected_metrics": {
+    "activity_index": 0.116667,
+    "aerials": 1,
+    "analyzed_duration_s": 120.0,
+    "box_presence_frames": 1678,
+    "clearances": 1,
+    "duels_won": 1,
+    "failed_take_ons": 1,
+    "long_pass_attempts": 1,
+    "mean_speed_m_s": 1.25475,
+    "measured_distance_m": 147.799322,
+    "n_events": 14,
+    "n_trajectory_points": 3000,
+    "pass_accuracy": 0.666667,
+    "pass_attempts": 3,
+    "pass_completed": 2,
+    "peak_speed_m_s": 2.411061,
+    "penalty_area_contacts": 1,
+    "recoveries": 1,
+    "sprint_count": 0,
+    "successful_take_ons": 1,
+    "tackles": 1,
+    "turnovers": 1,
+    "visibility_coverage": 0.955
+  },
+  "identity": {
+    "jersey_number": 24,
+    "namespace": "self_contained_deterministic_acceptance",
+    "provenance": "self_contained_synthetic_gt",
+    "target_player_id": "T24",
+    "team_side": "left"
+  }
+}

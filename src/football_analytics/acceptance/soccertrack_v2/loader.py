@@ -143,6 +143,8 @@ def iter_gsr_player_observations(
         if x_m is None or y_m is None:
             continue
         image_id_raw = obj.get("image_id")
+        if image_id_raw is None:
+            continue
         frame_index = _image_id_to_frame_index(image_id_raw)
         jersey = maybe_int(attrs.get("jersey"))
         team = maybe_str(attrs.get("team"))

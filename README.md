@@ -3,9 +3,11 @@
 Proprietary broadcast football video analytics pipeline (detection → tracking →
 identity → calibration → game state → events → reports/API).
 
-**Current stage:** Stage 2D — foundation complete
-(`PASS_WITH_FINDINGS — STAGE 2 FOUNDATION COMPLETE`).
-Stages 0–2D closed. Milestone tag: **`foundation-v0.1.0`**.
+**Current stage:** Stage 16-R4 technical preview
+(`PASS_WITH_FINDINGS — SELF-CONTAINED TECHNICAL ACCEPTANCE COMPLETE; REAL-VIDEO TRACKING VALIDATED; VIDEO-EVENT ACCURACY NOT VALIDATED`).
+Tag: **`single-player-analytics-technical-preview-v0.16.0`** (not v1.0.0).
+SoccerTrack v2 panoramic video is an **optional** external validation source —
+Hugging Face token/login is **not** required for acceptance, tests, or release.
 
 **Product direction:** single-player report v1 (one `target_player`) — see
 [docs/scope/single_player_product_v1.md](docs/scope/single_player_product_v1.md),
@@ -69,6 +71,16 @@ football-analytics cache verify <64_hex_cache_key>
 ```
 
 No `run` / `ingest` / `detect` / `track` / `evaluate` commands yet.
+
+Offline Stage 16-R4 acceptance (no network / token / gated video required):
+
+```bash
+football-analytics acceptance generate
+football-analytics acceptance run
+football-analytics acceptance validate --dir-a DIR_A --dir-b DIR_B
+football-analytics acceptance reference soccertrack-v2
+football-analytics report render-final
+```
 
 Foundation docs:
 

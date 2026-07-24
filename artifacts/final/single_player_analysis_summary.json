@@ -1,0 +1,378 @@
+{
+  "attribution": "SoccerTrack v2 annotations \u2014 CC BY 4.0 (Atom Scott et al.). TeamTrack pilot \u2014 MIT. Project-generated technical preview; not official Opta data.",
+  "disclaimers": [
+    "REFERENCE-ANNOTATION-DERIVED",
+    "VIDEO EVENT-INFERENCE ACCURACY NOT VALIDATED",
+    "NOT OFFICIAL OPTA DATA",
+    "SoccerTrack v2 panoramic video is an optional external validation source, not a release dependency."
+  ],
+  "drive_required": false,
+  "evidence_tracks": {
+    "self_contained_deterministic_acceptance": {
+      "level": "SELF_CONTAINED_TESTED",
+      "receipt": {
+        "config_fingerprint": "e9752b834ac9cd49068fc87eb1a56f866c396044b4857571b1ef5a34d07891dc",
+        "metrics_fingerprint": "2e20387864b8469660ffa94bafaaaeaeb7e0fedccdcbe4dc402005198a6154c9",
+        "status": "passed"
+      }
+    },
+    "soccertrack_v2_reference_analysis": {
+      "level": "REFERENCE_ANNOTATION_DERIVED",
+      "not_video_prediction": true,
+      "summary": {
+        "bas_target_label_counts": {
+          "Ball Player Block": 1,
+          "Cross": 2,
+          "Drive": 28,
+          "Free Kick": 2,
+          "High Pass": 3,
+          "Out": 2,
+          "Pass": 30,
+          "Player Successful Tackle": 5,
+          "Throw In": 2
+        },
+        "metric_keys": [
+          "activity_index",
+          "bas_drive_actions",
+          "bas_header_actions",
+          "bas_high_pass_attempts",
+          "bas_pass_attempts",
+          "bas_successful_tackles",
+          "box_touches",
+          "clearances",
+          "duel_win_rate",
+          "failed_dribbles",
+          "heatmap",
+          "mean_speed_m_s",
+          "measured_distance_m",
+          "pass_accuracy",
+          "peak_speed_m_s",
+          "penalty_area_presence_points",
+          "possession",
+          "sprint_count",
+          "sprint_distance_m",
+          "visibility_coverage"
+        ]
+      }
+    },
+    "teamtrack_real_video_pilot": {
+      "does_not_prove": [
+        "pass_accuracy",
+        "duels",
+        "pitch_meters_events"
+      ],
+      "level": "REAL_VIDEO_VALIDATED",
+      "proves": [
+        "real_video_ingest",
+        "gpu_inference",
+        "human_detection",
+        "target_tracking"
+      ],
+      "summary": {
+        "detection": {
+          "f1": 0.6196559575006324,
+          "fn": 7452,
+          "fp": 4576,
+          "iou_thresh": 0.5,
+          "note": "framewise greedy IoU matching; not COCO mAP",
+          "precision": 0.6816474189508835,
+          "recall": 0.568,
+          "tp": 9798
+        },
+        "pilot": {
+          "device": "cuda:0",
+          "duration_s": 30.0,
+          "elapsed_s": 246.63376379013062,
+          "false_success": false,
+          "gt_leakage_into_prediction": false,
+          "human_detections": 14374,
+          "oom": false,
+          "seq_length_frames": 750,
+          "tracks_observed": 383
+        },
+        "sequence": "F_20200220_1_0330_0360",
+        "target_tracking": {
+          "gt_frames": 750,
+          "hota_mota_idf1": "not_evaluable_lightweight_pilot_evaluator",
+          "id_switches": "not_evaluable_without_full_mot_tracker_ids",
+          "iou_thresh": 0.3,
+          "matched_frames_iou_ge_thresh": 750,
+          "mean_center_error_px": 3.955655885292195,
+          "mean_iou": 0.6752426397328349,
+          "target_coverage_ratio": 1.0
+        }
+      }
+    }
+  },
+  "gate": "PASS_WITH_FINDINGS \u2014 SELF-CONTAINED TECHNICAL ACCEPTANCE COMPLETE; REAL-VIDEO TRACKING VALIDATED; VIDEO-EVENT ACCURACY NOT VALIDATED",
+  "generated_at_utc": "2026-07-25T00:00:00Z",
+  "hf_required": false,
+  "metrics": {
+    "activity_index": {
+      "coverage": {
+        "target_bas_events": {
+          "Ball Player Block": 1,
+          "Cross": 2,
+          "Drive": 28,
+          "Free Kick": 2,
+          "High Pass": 3,
+          "Out": 2,
+          "Pass": 30,
+          "Player Successful Tackle": 5,
+          "Throw In": 2
+        }
+      },
+      "definition": "Target BAS events per half present",
+      "limitations": null,
+      "provenance": "reference_annotation_derived",
+      "source": "BAS",
+      "status": "REFERENCE_ANNOTATION_DERIVED",
+      "value": 37.5
+    },
+    "bas_drive_actions": {
+      "coverage": null,
+      "definition": "Drive actions; not equated to completed dribbles",
+      "limitations": "Drive \u2260 successful dribble/take-on",
+      "provenance": "reference_annotation_derived",
+      "source": "BAS",
+      "status": "REFERENCE_ANNOTATION_DERIVED",
+      "value": 28
+    },
+    "bas_header_actions": {
+      "coverage": null,
+      "definition": "Header / aerial action candidate",
+      "limitations": null,
+      "provenance": "reference_annotation_derived",
+      "source": "BAS",
+      "status": "REFERENCE_ANNOTATION_DERIVED",
+      "value": 0
+    },
+    "bas_high_pass_attempts": {
+      "coverage": null,
+      "definition": "High Pass action count (long-pass candidate)",
+      "limitations": null,
+      "provenance": "reference_annotation_derived",
+      "source": "BAS",
+      "status": "REFERENCE_ANNOTATION_DERIVED",
+      "value": 3
+    },
+    "bas_pass_attempts": {
+      "coverage": null,
+      "definition": "Pass action count for target",
+      "limitations": null,
+      "provenance": "reference_annotation_derived",
+      "source": "BAS",
+      "status": "REFERENCE_ANNOTATION_DERIVED",
+      "value": 30
+    },
+    "bas_successful_tackles": {
+      "coverage": null,
+      "definition": "Player Successful Tackle count",
+      "limitations": null,
+      "provenance": "reference_annotation_derived",
+      "source": "BAS",
+      "status": "REFERENCE_ANNOTATION_DERIVED",
+      "value": 5
+    },
+    "box_touches": {
+      "coverage": null,
+      "definition": "Explicit box-touch events not labeled",
+      "limitations": null,
+      "provenance": "reference_annotation_derived",
+      "source": "BAS",
+      "status": "NOT_EVALUABLE",
+      "value": null
+    },
+    "clearances": {
+      "coverage": null,
+      "definition": "Clearance class not in 12 BAS labels",
+      "limitations": null,
+      "provenance": "reference_annotation_derived",
+      "source": "BAS",
+      "status": "NOT_EVALUABLE",
+      "value": null
+    },
+    "duel_win_rate": {
+      "coverage": null,
+      "definition": "Duel win rate not supported",
+      "limitations": null,
+      "provenance": "reference_annotation_derived",
+      "source": "BAS",
+      "status": "NOT_EVALUABLE",
+      "value": null
+    },
+    "failed_dribbles": {
+      "coverage": null,
+      "definition": "Failed dribble outcomes not labeled",
+      "limitations": null,
+      "provenance": "reference_annotation_derived",
+      "source": "BAS",
+      "status": "NOT_EVALUABLE",
+      "value": null
+    },
+    "heatmap": {
+      "coverage": {
+        "halves_present": [
+          1,
+          2
+        ],
+        "n_points": 3450,
+        "stride_note": "regex_sample_every_40th_hit"
+      },
+      "definition": "Reference pitch occupancy summary from annotated trajectory",
+      "limitations": null,
+      "provenance": "reference_annotation_derived",
+      "source": "GSR",
+      "status": "REFERENCE_ANNOTATION_DERIVED",
+      "value": {
+        "n_points": 3449,
+        "x_mean": 2.2050304436068444
+      }
+    },
+    "mean_speed_m_s": {
+      "coverage": {
+        "halves_present": [
+          1,
+          2
+        ],
+        "n_points": 3450,
+        "stride_note": "regex_sample_every_40th_hit"
+      },
+      "definition": "Mean segment speed from annotated trajectory",
+      "limitations": null,
+      "provenance": "reference_annotation_derived",
+      "source": "GSR",
+      "status": "REFERENCE_ANNOTATION_DERIVED",
+      "value": 1.9885
+    },
+    "measured_distance_m": {
+      "coverage": {
+        "halves_present": [
+          1,
+          2
+        ],
+        "n_points": 3450,
+        "stride_note": "regex_sample_every_40th_hit"
+      },
+      "definition": "Polyline length of strided pitch coordinates",
+      "limitations": "Stride undersamples path length",
+      "provenance": "reference_annotation_derived",
+      "source": "GSR",
+      "status": "REFERENCE_ANNOTATION_DERIVED",
+      "value": 10969.106
+    },
+    "pass_accuracy": {
+      "coverage": null,
+      "definition": "Pass completion not in SoccerTrack BAS",
+      "limitations": "Outcome labels unavailable",
+      "provenance": "reference_annotation_derived",
+      "source": "BAS",
+      "status": "NOT_EVALUABLE",
+      "value": null
+    },
+    "peak_speed_m_s": {
+      "coverage": {
+        "halves_present": [
+          1,
+          2
+        ],
+        "n_points": 3450,
+        "stride_note": "regex_sample_every_40th_hit"
+      },
+      "definition": "Peak segment speed from annotated trajectory",
+      "limitations": null,
+      "provenance": "reference_annotation_derived",
+      "source": "GSR",
+      "status": "REFERENCE_ANNOTATION_DERIVED",
+      "value": 9.0351
+    },
+    "penalty_area_presence_points": {
+      "coverage": {
+        "halves_present": [
+          1,
+          2
+        ],
+        "n_points": 3450,
+        "stride_note": "regex_sample_every_40th_hit"
+      },
+      "definition": "Trajectory points with x_m >= 36 (attacking third/box proxy)",
+      "limitations": "Proxy threshold; not exact penalty-area polygon",
+      "provenance": "reference_annotation_derived",
+      "source": "GSR",
+      "status": "REFERENCE_ANNOTATION_DERIVED",
+      "value": 208
+    },
+    "possession": {
+      "coverage": null,
+      "definition": "Possession intervals not provided",
+      "limitations": null,
+      "provenance": "reference_annotation_derived",
+      "source": "BAS/GSR",
+      "status": "NOT_EVALUABLE",
+      "value": null
+    },
+    "sprint_count": {
+      "coverage": {
+        "halves_present": [
+          1,
+          2
+        ],
+        "n_points": 3450,
+        "stride_note": "regex_sample_every_40th_hit"
+      },
+      "definition": "Segments with speed >= 7 m/s",
+      "limitations": "Threshold heuristic; not Opta sprint definition",
+      "provenance": "reference_annotation_derived",
+      "source": "GSR",
+      "status": "REFERENCE_ANNOTATION_DERIVED",
+      "value": 8
+    },
+    "sprint_distance_m": {
+      "coverage": {
+        "halves_present": [
+          1,
+          2
+        ],
+        "n_points": 3450,
+        "stride_note": "regex_sample_every_40th_hit"
+      },
+      "definition": "Distance while segment speed >= 7 m/s",
+      "limitations": null,
+      "provenance": "reference_annotation_derived",
+      "source": "GSR",
+      "status": "REFERENCE_ANNOTATION_DERIVED",
+      "value": 96.408
+    },
+    "visibility_coverage": {
+      "coverage": {
+        "halves_present": [
+          1,
+          2
+        ],
+        "n_points": 3450,
+        "stride_note": "regex_sample_every_40th_hit"
+      },
+      "definition": "Point count present; full-frame visibility ratio not claimed",
+      "limitations": "Strided export; not per-frame visibility ratio",
+      "provenance": "reference_annotation_derived",
+      "source": "GSR_strided_trajectory",
+      "status": "REFERENCE_ANNOTATION_DERIVED",
+      "value": null
+    }
+  },
+  "network_required": false,
+  "schema": "single_player_technical_preview_report_v1",
+  "target": {
+    "display_name": "SoccerTrack v2 Match 128057 / Team left / Jersey 24",
+    "jersey_number": 24,
+    "match_id": "128057",
+    "player_id": "506469",
+    "team_side": "left"
+  },
+  "teamtrack_pilot_target_isolated": {
+    "anonymous_track_id": 7,
+    "dataset": "TeamTrack",
+    "sequence": "F_20200220_1_0330_0360"
+  },
+  "title": "TECHNICAL PREVIEW \u2014 REFERENCE-ANNOTATION-DERIVED"
+}

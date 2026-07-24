@@ -5099,6 +5099,61 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p_rep_render.add_argument("--report-json", type=Path, required=True)
     p_rep_render.add_argument("--output", type=Path, required=True)
+    p_rep_final = report_sub.add_parser(
+        "render-final",
+        help="Render Stage 16-R4 technical-preview final JSON+PNG (offline)",
+    )
+    p_rep_final.add_argument(
+        "--self-contained-dir",
+        type=Path,
+        default=Path("artifacts/evidence/stage_16_r4/self_contained"),
+    )
+    p_rep_final.add_argument(
+        "--reference-json",
+        type=Path,
+        default=Path("artifacts/evidence/stage_16_r4/soccertrack_v2_reference.json"),
+    )
+    p_rep_final.add_argument(
+        "--teamtrack-report",
+        type=Path,
+        default=Path("artifacts/evidence/stage_16_real_video_pilot/real_video_pilot_report.json"),
+    )
+
+    p_acceptance = sub.add_parser(
+        "acceptance",
+        help="Self-contained / reference acceptance (Stage 16-R4; offline default)",
+    )
+    acc_sub = p_acceptance.add_subparsers(dest="acceptance_command")
+    p_acc_gen = acc_sub.add_parser("generate", help="Generate deterministic scenario (offline)")
+    p_acc_gen.add_argument(
+        "--output-dir",
+        type=Path,
+        default=Path("artifacts/evidence/stage_16_r4/self_contained"),
+    )
+    p_acc_gen.add_argument("--seed", type=int, default=16040)
+    p_acc_run = acc_sub.add_parser("run", help="Run self-contained acceptance (offline)")
+    p_acc_run.add_argument(
+        "--output-dir",
+        type=Path,
+        default=Path("artifacts/evidence/stage_16_r4/self_contained"),
+    )
+    p_acc_run.add_argument("--seed", type=int, default=16040)
+    p_acc_val = acc_sub.add_parser("validate", help="Validate two-run determinism")
+    p_acc_val.add_argument("--dir-a", type=Path, required=True)
+    p_acc_val.add_argument("--dir-b", type=Path, required=True)
+    p_acc_ref = acc_sub.add_parser("reference", help="Annotation-derived reference adapters")
+    acc_ref_sub = p_acc_ref.add_subparsers(dest="acceptance_reference_command")
+    p_acc_ref_st = acc_ref_sub.add_parser(
+        "soccertrack-v2",
+        help="SoccerTrack v2 GSR/BAS reference analysis (not video prediction)",
+    )
+    p_acc_ref_st.add_argument(
+        "--output",
+        type=Path,
+        default=Path("artifacts/evidence/stage_16_r4/soccertrack_v2_reference.json"),
+    )
+    p_acc_ref_st.add_argument("--trajectory", type=Path, default=None)
+    p_acc_ref_st.add_argument("--bas", type=Path, default=None)
 
     p_cal_features = cal_sub.add_parser(
         "features", help="Pitch keypoint/line feature detection (8B)"
@@ -6026,7 +6081,46 @@ def main(argv: Sequence[str] | None = None) -> int:
             return cmd_report_data(output=args.output, as_json=bool(args.json))
         if args.report_command == "render":
             return cmd_report_render(report_json=args.report_json, output=args.output)
+        if args.report_command == "render-final":
+            from football_analytics.acceptance.cli_handlers import cmd_report_render_final
+
+            return cmd_report_render_final(
+                self_contained_dir=args.self_contained_dir,
+                reference_json=args.reference_json,
+                teamtrack_report=args.teamtrack_report,
+                project_root=_project_root(),
+            )
         parser.parse_args(["report", "--help"])
+        return 2
+    if args.command == "acceptance":
+        from football_analytics.acceptance.cli_handlers import (
+            DEFAULT_BAS,
+            DEFAULT_TRAJ,
+            cmd_acceptance_generate,
+            cmd_acceptance_run,
+            cmd_acceptance_validate,
+            cmd_reference_soccertrack_v2,
+        )
+
+        if args.acceptance_command in {"generate", "run"}:
+            fn = (
+                cmd_acceptance_generate
+                if args.acceptance_command == "generate"
+                else cmd_acceptance_run
+            )
+            return fn(output_dir=args.output_dir, seed=int(args.seed))
+        if args.acceptance_command == "validate":
+            return cmd_acceptance_validate(dir_a=args.dir_a, dir_b=args.dir_b)
+        if args.acceptance_command == "reference":
+            if args.acceptance_reference_command == "soccertrack-v2":
+                return cmd_reference_soccertrack_v2(
+                    output=args.output,
+                    trajectory=args.trajectory or DEFAULT_TRAJ,
+                    bas=args.bas or DEFAULT_BAS,
+                )
+            parser.parse_args(["acceptance", "reference", "--help"])
+            return 2
+        parser.parse_args(["acceptance", "--help"])
         return 2
     parser.print_help()
     return 2

@@ -1,43 +1,23 @@
 # Stage 16 completion status
 
-## Gate
+## Current gate (Stage 16-R4)
 
-`NO-GO — REAL-MATCH ACCEPTANCE FAILURE`
+`PASS_WITH_FINDINGS — SELF-CONTAINED TECHNICAL ACCEPTANCE COMPLETE; REAL-VIDEO TRACKING VALIDATED; VIDEO-EVENT ACCURACY NOT VALIDATED`
 
-## Stage 16-R2 resume gate
+See `artifacts/evidence/stage_16_r4/STAGE16_R4_COMPLETION.md`.
 
-`PASS_WITH_FINDINGS — REAL-VIDEO TRACKING PILOT COMPLETE; FULL EVENT ACCEPTANCE BLOCKED`
+Technical preview tag: `single-player-analytics-technical-preview-v0.16.0` — **not** `single-player-analytics-v1.0.0` (video-event accuracy on real match GT remains unvalidated).
 
-See `artifacts/evidence/stage_16_real_video_pilot/STAGE16_R2_COMPLETION.md`. SoccerTrack v2 panoramic MP4 still blocked; TeamTrack official `soccer_side` sequence used for tracking pilot only. Tag `real-video-pilot-v0.16.0` — **not** `single-player-analytics-v1.0.0`.
+## Prior gates (historical)
 
+| Stage | Gate |
+|-------|------|
+| 16 | `NO-GO — REAL-MATCH ACCEPTANCE FAILURE` (HF 401 / Drive quota on panoramic MP4) |
+| 16-R1 | `NO-GO — OFFICIAL SOCCERTRACK VIDEO UNAVAILABLE` |
+| 16-R2 | `PASS_WITH_FINDINGS — REAL-VIDEO TRACKING PILOT COMPLETE; FULL EVENT ACCEPTANCE BLOCKED` (`real-video-pilot-v0.16.0`) |
+| 16-R3 | `WAITING — HUGGING FACE DATASET AUTHORIZATION REQUIRED` (superseded by R4 policy) |
 
-## Why
+## Policy (R4)
 
-Official SoccerTrack v2 source and CC BY 4.0 license were verified. Match `128057` GSR+BAS(+calibration metadata) were downloaded from the official Google Drive mirror and hashed. Target selection, leakage namespaces, and held-out BAS scaffold completed.
-
-**Blocking failure:** panoramic match MP4 download repeatedly returned Google Drive **Quota exceeded** / Too many users after virus-scan confirm. Hugging Face canonical dataset URL returned **401** at access time. Without the official video, pilot/full-match prediction pipeline, held-out prediction evaluation, final customer report from pipeline predictions, and dual-path final PNG cannot be completed honestly.
-
-## Retained for resume (not deleted)
-
-- `/home/fdoblak/football_data/datasets/soccertrack_v2/source/gsr/128057/*.json` (~5.2 GiB total source tree)
-- `/home/fdoblak/football_data/datasets/soccertrack_v2/source/bas/128057/*.json`
-- `/home/fdoblak/football_data/datasets/soccertrack_v2/source/raw/128057/*` (partial)
-- `/home/fdoblak/football_data/datasets/soccertrack_v2/source/license/*`
-- Run namespaces under `/home/fdoblak/football_data/datasets/soccertrack_v2/runs/128057/`
-
-## Completed productization pieces
-
-- Acceptance adapter package + leakage hard-fail tests (13 passed)
-- Dataset registry entry `soccertrack_v2_single_match_acceptance`
-- External lock pin for SoccerTrack-v2 @ `3ee38e481aab9de0f1d099c1cdde15302eb63f49`
-- CC BY attribution in notices / license inventory
-- Selected target: SoccerTrack v2 Match 128057 / Team left / Jersey 24 (`player_id` 506469)
-- Checkpoint commit: `fbdcb6f19a06cfeaee4ffb280167725dff4d3bdf`
-
-## Not claimed
-
-- Real-match video processed
-- Final `single-player-analytics-v1.0.0` tag
-- Final dual-path PNG
-- Broadcast production validation
-- Official Opta accuracy
+SoccerTrack v2 panoramic video is an **optional external validation source**, not a release dependency.
+Release proceeds via three isolated tracks: TeamTrack real-video pilot, SoccerTrack annotation-derived reference, and self-contained deterministic acceptance.

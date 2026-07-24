@@ -1,0 +1,7 @@
+{
+  "seed": 16040,
+  "metrics_fingerprint": "2e20387864b8469660ffa94bafaaaeaeb7e0fedccdcbe4dc402005198a6154c9",
+  "config_fingerprint": "e9752b834ac9cd49068fc87eb1a56f866c396044b4857571b1ef5a34d07891dc",
+  "namespace": "self_contained_deterministic_acceptance",
+  "disclaimer": "Synthetic self-contained expected fingerprints; not real-match accuracy."
+}

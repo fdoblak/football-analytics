@@ -18,7 +18,13 @@ Quick orientation for which stage owns which runtime/workspace roots and close s
 | 13 | CLOSED | Target event ledger / metrics aggregation | `events_*_checks` | `stage_13/` |
 | 14 | CLOSED | Single-player E2E orchestration / review / report / render | `single_player_pipeline_checks` | `stage_14/` |
 | **15** | **CLOSED** | **Pre-release hardening (15A–15G)** | `prerelease_hardening_checks` | `stage_15/` |
-| 16 | OPEN | Real-match acceptance / final visual | TBD | `stage_16/` (not started) |
+| 16 | CLOSED (tech preview) | Self-contained technical acceptance + reference report (R4); video-event accuracy not validated | offline acceptance CLI | `stage_16/`, `stage_16_r4/`, `stage_16_real_video_pilot/` |
+
+## Stage 16-R4 gate
+
+`PASS_WITH_FINDINGS — SELF-CONTAINED TECHNICAL ACCEPTANCE COMPLETE; REAL-VIDEO TRACKING VALIDATED; VIDEO-EVENT ACCURACY NOT VALIDATED`
+
+Tag: `single-player-analytics-technical-preview-v0.16.0` (not `single-player-analytics-v1.0.0`).
 
 ## Stage 15 close gate
 
@@ -27,7 +33,8 @@ Quick orientation for which stage owns which runtime/workspace roots and close s
 ## Notes
 
 - Registry Arrow contract count remains **45** (Stage 15 did not bump)
-- Do not start Stage 16 without an explicit user prompt
-- Real football / Opta accuracy is not validated
-- Stage 16 reserved finals: `/home/fdoblak/football_data/rendered_outputs/final/single_player_analysis_summary.png` and `artifacts/final/single_player_analysis_summary.png`
+- SoccerTrack v2 panoramic video is an **optional** external validation source (not a release dependency)
+- Hugging Face token/login is not required for acceptance CLI, tests, build, or technical-preview release
+- Real football / Opta / video-event accuracy is not validated
+- Stage 16 final customer visual: `/home/fdoblak/football_data/rendered_outputs/final/single_player_analysis_summary.png` and `artifacts/final/single_player_analysis_summary.png`
 - Capability matrix: `docs/architecture/capability_matrix.md`

@@ -1,0 +1,73 @@
+{
+  "data_loss": false,
+  "items": [
+    {
+      "data_loss": false,
+      "path": "/home/fdoblak/football_data/rendered_outputs/pilots/real_video_pilot_summary.png",
+      "permanent_delete_performed": true,
+      "reason": "Stage 16-R4 single final customer visual policy; content folded into technical-preview PNG evidence box; JSON evidence retained",
+      "referenced_before": true,
+      "replacement": "artifacts/final/single_player_analysis_summary.png",
+      "sha256": "4c57ccba630a9f8bd4d69dcad74c5d6c80fb7abfe4325b5872e9adc790d64502",
+      "size": 141864,
+      "type": "customer_preview_png_superseded"
+    },
+    {
+      "data_loss": false,
+      "path": "/home/fdoblak/projects/football-analytics/artifacts/evidence/stage_16_real_video_pilot/real_video_pilot_summary.png",
+      "permanent_delete_performed": true,
+      "reason": "Stage 16-R4 single final customer visual policy; content folded into technical-preview PNG evidence box; JSON evidence retained",
+      "referenced_before": true,
+      "replacement": "artifacts/final/single_player_analysis_summary.png",
+      "sha256": "4c57ccba630a9f8bd4d69dcad74c5d6c80fb7abfe4325b5872e9adc790d64502",
+      "size": 141864,
+      "type": "customer_preview_png_superseded"
+    },
+    {
+      "data_loss": false,
+      "path": "/home/fdoblak/football_data/datasets/teamtrack/staging/soccer_side/F_20200220_1_0330_0360/gt/gt.txt",
+      "permanent_delete_performed": true,
+      "reason": "Duplicate of retained TeamTrack source GT/seqinfo; staging leftover after MP4 cleanup",
+      "referenced_before": false,
+      "replacement": "/home/fdoblak/football_data/datasets/teamtrack/source/soccer_side/F_20200220_1_0330_0360/gt/gt.txt",
+      "sha256": "80fd710824a4f006528aa0bb0207ae34c1869e469373cdb276800260d96a7ff4",
+      "size": 558062,
+      "source_sha_match": true,
+      "type": "duplicate_staging_copy"
+    },
+    {
+      "data_loss": false,
+      "path": "/home/fdoblak/football_data/datasets/teamtrack/staging/soccer_side/F_20200220_1_0330_0360/seqinfo.ini",
+      "permanent_delete_performed": true,
+      "reason": "Duplicate of retained TeamTrack source GT/seqinfo; staging leftover after MP4 cleanup",
+      "referenced_before": false,
+      "replacement": "/home/fdoblak/football_data/datasets/teamtrack/source/soccer_side/F_20200220_1_0330_0360/seqinfo.ini",
+      "sha256": "aa39f018e451bb260f831cd930855e5894539bfb40f10d452e62af0888793f10",
+      "size": 132,
+      "source_sha_match": true,
+      "type": "duplicate_staging_copy"
+    },
+    {
+      "data_loss": false,
+      "path": "/home/fdoblak/football_data/datasets/teamtrack/staging/soccer_side/F_20200220_1_0330_0360/gt",
+      "permanent_delete_performed": true,
+      "reason": "empty staging after duplicate cleanup",
+      "referenced_before": false,
+      "replacement": null,
+      "sha256": null,
+      "size": 0,
+      "type": "empty_directory"
+    }
+  ],
+  "note_mp4_optional_external": "SoccerTrack v2 panoramic MP4s under source/videos/128057 are optional external validation assets and were NOT deleted; they are not a release dependency.",
+  "retained_critical": [
+    "/home/fdoblak/football_data/datasets/soccertrack_v2/source/gsr",
+    "/home/fdoblak/football_data/datasets/soccertrack_v2/source/bas",
+    "/home/fdoblak/football_data/datasets/soccertrack_v2/source/raw",
+    "/home/fdoblak/football_data/datasets/soccertrack_v2/source/license",
+    "artifacts/evidence/stage_16",
+    "artifacts/evidence/stage_16_real_video_pilot/real_video_pilot_report.json"
+  ],
+  "schema": "stage16_r4_cleanup_receipt_v1",
+  "written_at_utc": "2026-07-24T23:39:29.272787+00:00"
+}

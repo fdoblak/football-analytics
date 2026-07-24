@@ -1,8 +1,11 @@
 {
+  "note": "Stage 16-R4: superseded pilot PNG removed from current tree under single-final-customer-visual policy; hashes retained for provenance. Final customer PNG is artifacts/final/single_player_analysis_summary.png.",
+  "superseded": true,
   "local": "/home/fdoblak/football_data/rendered_outputs/pilots/real_video_pilot_summary.png",
   "github": "artifacts/evidence/stage_16_real_video_pilot/real_video_pilot_summary.png",
   "sha256_local": "4c57ccba630a9f8bd4d69dcad74c5d6c80fb7abfe4325b5872e9adc790d64502",
   "sha256_github": "4c57ccba630a9f8bd4d69dcad74c5d6c80fb7abfe4325b5872e9adc790d64502",
   "equal": true,
-  "size_bytes": 141864
+  "size_bytes": 141864,
+  "replacement": "artifacts/final/single_player_analysis_summary.png"
 }

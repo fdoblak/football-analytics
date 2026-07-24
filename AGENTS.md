@@ -135,8 +135,15 @@ target-event accuracy is not validated. Stage 14 is closed:
 real football accuracy is not validated. Stage 15 is closed:
 15A hardening policies → 15B license isolation gates → 15C storage readiness →
 15D local CI parity → 15E synthetic acceptance → 15F performance → 15G docs.
-All implementation stages closed; only real-match acceptance Stage 16 remains.
-Do **not** start Stage 16 without an explicit user prompt.
+All implementation stages through Stage 15 are closed. Stage 16 technical
+preview (16-R4) is complete under gate
+`PASS_WITH_FINDINGS — SELF-CONTAINED TECHNICAL ACCEPTANCE COMPLETE; REAL-VIDEO TRACKING VALIDATED; VIDEO-EVENT ACCURACY NOT VALIDATED`.
+SoccerTrack v2 panoramic video is an **optional external validation source** —
+not a release dependency. Hugging Face token/login is not required for
+acceptance CLI, tests, build, or release. Do **not** claim Opta / video-event
+accuracy or create `single-player-analytics-v1.0.0` until real-match video-event
+GT validation exists. Technical preview tag:
+`single-player-analytics-technical-preview-v0.16.0`.
 
 ---
 
@@ -241,5 +248,7 @@ merged (replay/live context → attack direction → ledger → metrics → fusi
 Stage 13 is **closed**. Stage 14A–14E single-player orchestration / review /
 report / renderer baseline is in-tree when merged. Stage 14 is **closed**.
 Stage 15A–15G pre-release hardening is in-tree when merged. Stage 15 is
-**closed**. Do **not** start Stage 16 without an explicit user prompt.
-Manual Cursor flow only — no Codex/background automation.
+**closed**. Stage 16-R4 technical preview is complete
+(`single-player-analytics-technical-preview-v0.16.0`); video-event accuracy remains
+unvalidated — do **not** create `single-player-analytics-v1.0.0` without real-match
+video-event GT proof. Manual Cursor flow only — no Codex/background automation.

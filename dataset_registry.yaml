@@ -214,11 +214,13 @@ datasets:
     last_verified: "2026-07-24"
     planned_stage: Stage-16
     notes: >
-      purpose: Stage 16 real-match acceptance; production_input: false; acceptance_dataset: true;
-      selected_match_id: 128057; official mirror used when HF returned 401 at access time
-      (Google Drive folder 1N2Qx2qkFgRtpbHitl2Vh6sLVYGgqkWwn); camera_domain panoramic_full_pitch;
-      held-out secret test matches 117099/117100 were not selected.
-      Stage 16-R2: panoramic MP4 still unavailable (HF 401 / Drive quota); see teamtrack_soccer_side_pilot.
+      purpose: Stage 16 annotation-derived reference + optional external video validation;
+      production_input: false; acceptance_dataset: true; release_dependency_video: false;
+      selected_match_id: 128057; authoritative target left/jersey 24/player_id 506469;
+      HF gated video is optional (not required for technical-preview release);
+      official mirror used historically for GSR/BAS when HF returned 401;
+      camera_domain panoramic_full_pitch; held-out secret test matches 117099/117100 not selected.
+      Stage 16-R4: self-contained technical acceptance + reference analysis; MP4 not a hard gate.
 
   - id: teamtrack_soccer_side_pilot
     display_name: TeamTrack soccer_side real-video pilot (F_20200220_1_0330_0360)
