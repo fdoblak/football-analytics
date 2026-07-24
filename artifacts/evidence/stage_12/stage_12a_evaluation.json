@@ -1,0 +1,37 @@
+{
+  "adapter_notes": "contracts_and_synthetic_baseline_stage_12",
+  "config_fingerprint": null,
+  "created_at_utc": "2026-07-24T12:57:46.191655Z",
+  "findings": [
+    "No reviewed duels/events ground truth available.",
+    "Stage 12 synthetic fixtures are not real accuracy.",
+    "No Opta or official event accuracy claim is made."
+  ],
+  "ground_truth_evaluation_status": "NOT_EVALUATED_NO_REVIEWED_DUELS_EVENTS_GROUND_TRUTH",
+  "metric_reasons": {
+    "aerial_duel_win_rate": "NOT_EVALUATED_NO_REVIEWED_DUELS_EVENTS_GROUND_TRUTH",
+    "clearance_precision_recall": "NOT_EVALUATED_NO_REVIEWED_DUELS_EVENTS_GROUND_TRUTH",
+    "coverage_calibration": "NOT_EVALUATED_NO_REVIEWED_DUELS_EVENTS_GROUND_TRUTH",
+    "ground_duel_win_rate": "NOT_EVALUATED_NO_REVIEWED_DUELS_EVENTS_GROUND_TRUTH",
+    "not_evaluable_correctness": "NOT_EVALUATED_NO_REVIEWED_DUELS_EVENTS_GROUND_TRUTH",
+    "recovery_precision_recall": "NOT_EVALUATED_NO_REVIEWED_DUELS_EVENTS_GROUND_TRUTH",
+    "tackle_success_rate": "NOT_EVALUATED_NO_REVIEWED_DUELS_EVENTS_GROUND_TRUTH",
+    "take_on_success_rate": "NOT_EVALUATED_NO_REVIEWED_DUELS_EVENTS_GROUND_TRUTH",
+    "turnover_precision_recall": "NOT_EVALUATED_NO_REVIEWED_DUELS_EVENTS_GROUND_TRUTH"
+  },
+  "metrics": {
+    "aerial_duel_win_rate": null,
+    "clearance_precision_recall": null,
+    "coverage_calibration": null,
+    "ground_duel_win_rate": null,
+    "not_evaluable_correctness": null,
+    "recovery_precision_recall": null,
+    "tackle_success_rate": null,
+    "take_on_success_rate": null,
+    "turnover_precision_recall": null
+  },
+  "run_id": "run_20260724T125741600766Z_26cdd1f75c8a",
+  "schema_version": 1,
+  "status": "not_evaluated",
+  "video_id": "video_synth_01"
+}

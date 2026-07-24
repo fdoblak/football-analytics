@@ -46,7 +46,7 @@ class PassingContractsTests(unittest.TestCase):
 
     def test_registry_count(self) -> None:
         self.assertEqual(len(list_contracts(registry=self.reg)), EXPECTED_REGISTRY_CONTRACT_COUNT)
-        self.assertEqual(EXPECTED_REGISTRY_CONTRACT_COUNT, 35)
+        self.assertEqual(EXPECTED_REGISTRY_CONTRACT_COUNT, 42)
 
     def test_passing_contracts_registered(self) -> None:
         assert_passing_contracts_registered(registry=self.reg)

@@ -1,0 +1,34 @@
+# Stage 12D aerial duel / clearance baseline.
+# Monocular aerial remains conservative. Long ball alone ≠ clearance.
+# Project-generated — NOT official Opta.
+
+schema_version: 1
+config_version: 1
+pipeline_id: aerial_clearance_baseline
+pipeline_version: 1
+stage: "12D"
+
+metric_origin: project_generated
+definition_style: opta_style_metric_definition
+
+automatic_ceiling: provisional
+no_automatic_confirmed: true
+monocular_aerial_no_exact_height: true
+long_ball_alone_is_not_clearance: true
+no_opta_claim: true
+no_real_video: true
+
+input_eligibility:
+  allow_synthetic: true
+  monocular_conservative: true
+
+thresholds:
+  long_ball_distance_m: 30.0
+
+target:
+  track_id: 1
+  relationship: confirmed_target
+
+safety:
+  runtime_root: /home/fdoblak/workspace/aerial_clearance_checks
+  no_overwrite: true

@@ -1,0 +1,66 @@
+{
+  "accuracy_claims": {
+    "opta_accuracy_validated": false,
+    "real_football_accuracy_validated": false
+  },
+  "aerial_duel_candidate_count": 1,
+  "artifact_hashes": {},
+  "clearance_event_count": 1,
+  "coverage_summary": {
+    "calibration_valid_us": 9000000,
+    "joint_coverage_ratio": 0.75,
+    "long_ball_alone_is_not_clearance": true,
+    "monocular_aerial_no_exact_height": true,
+    "nearby_opponent_alone_is_not_take_on": true,
+    "nearest_switch_alone_is_not_duel_outcome": true,
+    "not_observed_us": 1000000,
+    "opponent_context_us": 7000000,
+    "playable_us": 9500000,
+    "possession_or_contact_us": 8000000,
+    "target_confirmed_us": 10000000
+  },
+  "created_at_utc": "2026-07-24T12:57:42.596447Z",
+  "duels_policy_fingerprint": "5d4222ca347c7eceb094efd9a7187c444f4845382a2203b48f259ac619e9f161",
+  "error_codes": [],
+  "evaluation_status": "NOT_EVALUATED_NO_REVIEWED_DUELS_EVENTS_GROUND_TRUTH",
+  "ground_duel_candidate_count": 1,
+  "input_fingerprints": {
+    "calibration": null,
+    "contact_candidates": null,
+    "identity": null,
+    "possession_hypotheses": null,
+    "projected_positions": null
+  },
+  "output_fingerprints": {
+    "aerial_duel_candidates": null,
+    "clearance_events": null,
+    "ground_duel_candidates": null,
+    "recovery_events": null,
+    "tackle_events": null,
+    "take_on_attempts": null,
+    "turnover_events": null
+  },
+  "provenance": {
+    "label": "synthetic_contract_fixture",
+    "no_real_duels_inference": true,
+    "notes": "no_real_duels_inference",
+    "stage": "12A"
+  },
+  "receipt_id": "duels_receipt_01",
+  "recovery_event_count": 1,
+  "request_id": "duels_req_01",
+  "review_count": 0,
+  "run_id": "run_20260724T125741600766Z_26cdd1f75c8a",
+  "schema_version": 1,
+  "state_counts": {
+    "not_evaluable": 1,
+    "provisional": 6
+  },
+  "status": "contract_stub",
+  "tackle_event_count": 1,
+  "take_on_attempt_count": 1,
+  "target_player_id": "target_player_01",
+  "turnover_event_count": 1,
+  "video_id": "video_synth_01",
+  "warning_codes": []
+}

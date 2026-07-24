@@ -1,0 +1,23 @@
+{
+  "cache_enabled": false,
+  "calibration_artifact_ref": "synthetic://calibration",
+  "contact_candidates_ref": "synthetic://ball_contact_candidates",
+  "created_at_utc": "2026-07-24T12:57:42.596427Z",
+  "duels_policy_fingerprint": "5d4222ca347c7eceb094efd9a7187c444f4845382a2203b48f259ac619e9f161",
+  "identity_artifact_ref": "synthetic://identity",
+  "no_overwrite": true,
+  "output_root": "/home/fdoblak/workspace/duels_contract_checks",
+  "possession_hypotheses_ref": "synthetic://possession_hypotheses",
+  "projected_positions_ref": "synthetic://projected_positions",
+  "provenance": {
+    "label": "synthetic_contract_fixture",
+    "no_real_duels_inference": true,
+    "notes": "no_real_duels_inference",
+    "stage": "12A"
+  },
+  "request_id": "duels_req_01",
+  "run_id": "run_20260724T125741600766Z_26cdd1f75c8a",
+  "schema_version": 1,
+  "target_player_id": "target_player_01",
+  "video_id": "video_synth_01"
+}

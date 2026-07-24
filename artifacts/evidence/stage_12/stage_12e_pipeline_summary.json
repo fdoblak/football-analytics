@@ -1,0 +1,21 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "config_fp": "7c1ee8b240c83c8ddaa0bcd6e6253e07af410a29c72b181f8111c9844b87abde"
+  },
+  "scenarios": {
+    "00_deterministic_config": "PASS",
+    "scenario_aerial_only": "PASS",
+    "scenario_full_package": "PASS",
+    "scenario_ground_only": "PASS",
+    "scenario_nearby_and_switch": "PASS",
+    "scenario_take_on_only": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-24T12:57:56.049907Z",
+  "warnings": [
+    "real_football_accuracy_not_yet_validated"
+  ]
+}

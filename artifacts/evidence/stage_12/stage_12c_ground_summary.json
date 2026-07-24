@@ -1,0 +1,16 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "config_fp": "eb39f758637e98f5075124a637acedcffa14dd0f3cc244c3ba622d64a7dc1061"
+  },
+  "scenarios": {
+    "00_deterministic_config": "PASS",
+    "01_contested_ground": "PASS",
+    "02_nearest_switch_alone": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-24T12:55:34.125454Z",
+  "warnings": []
+}

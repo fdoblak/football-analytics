@@ -1,0 +1,17 @@
+{
+  "fingerprints": {
+    "aerial_duel_candidates": "be840728078fe43da39e6336b1188a4e260ae8d701469201132d9c96b97360de",
+    "ball_contact_candidates": "962e1566de124f1e34f72df09c91b2768cafaebffcfc7669bb73ccef153be058",
+    "clearance_events": "b29f1e433734c9a8fb3972152334946937b419c02d7eea073cbc1f3ce7b4fe9b",
+    "ground_duel_candidates": "47c7d1eee2857cd89b11f5625ac94fe8f19036e21ce7ef5030659d8dfc15834c",
+    "pass_candidates": "923f16283c45eca74d32bae4570d00935952628640a295334ad09600e8d55053",
+    "pass_outcomes": "bc65b9e3079f388854aa2b962c04b03900ec030313e89844f54012ab789584b8",
+    "possession_hypotheses": "ab6f816a93b188841d42fe45531463ae7dd97b7842dbbdd599ee34d2a8e6f927",
+    "reception_candidates": "ceb755b8cc2de05e87f48bbc645e70f2fed46b772b33ed628bb3983eef03336f",
+    "recovery_events": "411eedc7cdd44b825ba990c3b7223df540e204c5082264cd2d06ea115cb14d39",
+    "tackle_events": "0e6d278d54d8e3c59f2bc3de8ef18dae8112c507e24ea73e241bf27385f966fe",
+    "take_on_attempts": "b38f29ac54e00f2281906ad7b55107a70196b4312c52a74cbfb425fc23c25412",
+    "turnover_events": "e3b2e14d9b7cf0e3474a764bd84b2d10c74c3e809f3faf660609b07dd47146ba"
+  },
+  "schema_version": 1
+}

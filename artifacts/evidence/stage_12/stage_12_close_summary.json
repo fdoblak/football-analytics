@@ -1,0 +1,10 @@
+{
+  "created_at_utc": "2026-07-24T12:57:56.068757Z",
+  "evaluation_status": "NOT_EVALUATED_NO_REVIEWED_DUELS_EVENTS_GROUND_TRUTH",
+  "gate": "PASS_WITH_FINDINGS — DUELS EVENTS PIPELINE ACTIVE; STAGE 12 CLOSED; REAL FOOTBALL ACCURACY NOT YET VALIDATED",
+  "opta_accuracy_validated": false,
+  "real_football_accuracy_validated": false,
+  "schema_version": 1,
+  "stage": "12",
+  "status": "CLOSED"
+}

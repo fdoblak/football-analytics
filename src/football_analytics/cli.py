@@ -2157,6 +2157,118 @@ def cmd_passing_pipeline_validate(*, keep: bool = False, as_json: bool = False) 
     return int(main_fn(argv))
 
 
+def cmd_duels_contracts_validate(*, keep: bool = False, as_json: bool = False) -> int:
+    """Run Stage 12A synthetic duels contract validator."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_duels_contracts.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("duels contract validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
+def cmd_duels_compute(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    fixture_smoke: bool = False,
+) -> int:
+    """Compute Stage 12B take-on baseline (synthetic fixtures)."""
+    from football_analytics.duels.take_on_config import (
+        load_take_on_config,
+        take_on_config_fingerprint,
+    )
+    from football_analytics.duels.take_on_fixtures import load_fixture
+    from football_analytics.duels.take_on_service import compute_take_ons
+
+    try:
+        cfg = load_take_on_config(config_path)
+        _ = take_on_config_fingerprint(cfg)
+        if not fixture_smoke:
+            print("duels compute requires --fixture-smoke in Stage 12", file=sys.stderr)
+            return 2
+        fx = load_fixture("successful_take_on")
+        result = compute_take_ons(
+            output_dir=output_dir,
+            contexts=fx["contexts"],
+            run_id=fx.get("run_id"),
+            video_id=fx.get("video_id"),
+            config_path=config_path,
+        )
+    except Exception as exc:  # noqa: BLE001
+        print(f"duels compute failed: {exc}", file=sys.stderr)
+        return 1
+    print(f"accepted: {result.accepted}")
+    print(f"summary_json: {result.summary_json}")
+    print(f"take_on_parquet: {result.take_on_parquet}")
+    return 0 if result.accepted else 1
+
+
+def cmd_duels_integrate(
+    *,
+    output_dir: Path,
+    config_path: Path,
+    fixture_smoke: bool = False,
+) -> int:
+    """Fuse Stage 12B–12D into Stage 12E duels package (synthetic)."""
+    from football_analytics.duels.pipeline_config import (
+        duels_pipeline_config_fingerprint,
+        load_duels_pipeline_config,
+    )
+    from football_analytics.duels.pipeline_fixtures import load_pipeline_fixture
+    from football_analytics.duels.pipeline_service import integrate_duels
+
+    try:
+        cfg = load_duels_pipeline_config(config_path)
+        _ = duels_pipeline_config_fingerprint(cfg)
+        if not fixture_smoke:
+            print("duels integrate requires --fixture-smoke in Stage 12", file=sys.stderr)
+            return 2
+        fx = load_pipeline_fixture("full_package")
+        result = integrate_duels(
+            output_dir=output_dir,
+            take_on_contexts=fx.get("take_on_contexts"),
+            ground_contexts=fx.get("ground_contexts"),
+            aerial_contexts=fx.get("aerial_contexts"),
+            run_id=fx.get("run_id"),
+            video_id=fx.get("video_id"),
+            config_path=config_path,
+        )
+    except Exception as exc:  # noqa: BLE001
+        print(f"duels integrate failed: {exc}", file=sys.stderr)
+        return 1
+    print(f"accepted: {result.accepted}")
+    print(f"summary_json: {result.summary_json}")
+    print(f"gate_hint: {result.summary.get('gate_hint')}")
+    return 0 if result.accepted else 1
+
+
+def cmd_duels_pipeline_validate(*, keep: bool = False, as_json: bool = False) -> int:
+    """Run Stage 12E duels fusion validator (Stage 12 close)."""
+    import runpy
+
+    script = _project_root() / "scripts" / "check_duels_pipeline.py"
+    argv: list[str] = []
+    if keep:
+        argv.append("--keep")
+    if as_json:
+        argv.append("--json")
+    ns = runpy.run_path(str(script), run_name="__not_main__")
+    main_fn = ns.get("main")
+    if not callable(main_fn):
+        print("duels pipeline validator missing main()", file=sys.stderr)
+        return 2
+    return int(main_fn(argv))
+
+
 def cmd_physical_trajectory_prepare(
     *,
     output_dir: Path,
@@ -4557,6 +4669,47 @@ def build_parser() -> argparse.ArgumentParser:
     p_pass_pipe_val.add_argument("--keep", action="store_true")
     p_pass_pipe_val.add_argument("--json", action="store_true")
 
+    p_duels = sub.add_parser(
+        "duels",
+        help="Duels / take-on / tackle / recovery / aerial / clearance (Stage 12A–12E)",
+    )
+    duels_sub = p_duels.add_subparsers(dest="duels_command")
+    p_duels_contracts = duels_sub.add_parser("contracts", help="Duels contract helpers")
+    duels_contracts_sub = p_duels_contracts.add_subparsers(dest="duels_contracts_command")
+    p_duels_c_val = duels_contracts_sub.add_parser(
+        "validate", help="Validate duels contracts (synthetic Stage 12A)"
+    )
+    p_duels_c_val.add_argument("--keep", action="store_true")
+    p_duels_c_val.add_argument("--json", action="store_true")
+
+    p_duels_compute = duels_sub.add_parser(
+        "compute", help="Take-on baseline compute (12B synthetic)"
+    )
+    p_duels_compute.add_argument("--output-dir", type=Path, required=True)
+    p_duels_compute.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/duels/take_on_baseline.yaml"),
+    )
+    p_duels_compute.add_argument("--fixture-smoke", action="store_true")
+
+    p_duels_integrate = duels_sub.add_parser(
+        "integrate", help="Fuse 12B–12D duels package (12E synthetic)"
+    )
+    p_duels_integrate.add_argument("--output-dir", type=Path, required=True)
+    p_duels_integrate.add_argument(
+        "--config",
+        type=Path,
+        default=Path("configs/duels/duels_pipeline.yaml"),
+    )
+    p_duels_integrate.add_argument("--fixture-smoke", action="store_true")
+
+    p_duels_pipe_val = duels_sub.add_parser(
+        "pipeline-validate", help="Run Stage 12E fusion validator (Stage 12 close)"
+    )
+    p_duels_pipe_val.add_argument("--keep", action="store_true")
+    p_duels_pipe_val.add_argument("--json", action="store_true")
+
     p_cal_features = cal_sub.add_parser(
         "features", help="Pitch keypoint/line feature detection (8B)"
     )
@@ -5378,9 +5531,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.command == "passing":
         if args.passing_command == "contracts":
             if args.passing_contracts_command == "validate":
-                return cmd_passing_contracts_validate(
-                    keep=bool(args.keep), as_json=bool(args.json)
-                )
+                return cmd_passing_contracts_validate(keep=bool(args.keep), as_json=bool(args.json))
             parser.parse_args(["passing", "contracts", "--help"])
             return 2
         if args.passing_command == "compute":
@@ -5398,6 +5549,28 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.passing_command == "pipeline-validate":
             return cmd_passing_pipeline_validate(keep=bool(args.keep), as_json=bool(args.json))
         parser.parse_args(["passing", "--help"])
+        return 2
+    if args.command == "duels":
+        if args.duels_command == "contracts":
+            if args.duels_contracts_command == "validate":
+                return cmd_duels_contracts_validate(keep=bool(args.keep), as_json=bool(args.json))
+            parser.parse_args(["duels", "contracts", "--help"])
+            return 2
+        if args.duels_command == "compute":
+            return cmd_duels_compute(
+                output_dir=args.output_dir,
+                config_path=args.config,
+                fixture_smoke=bool(args.fixture_smoke),
+            )
+        if args.duels_command == "integrate":
+            return cmd_duels_integrate(
+                output_dir=args.output_dir,
+                config_path=args.config,
+                fixture_smoke=bool(args.fixture_smoke),
+            )
+        if args.duels_command == "pipeline-validate":
+            return cmd_duels_pipeline_validate(keep=bool(args.keep), as_json=bool(args.json))
+        parser.parse_args(["duels", "--help"])
         return 2
     parser.print_help()
     return 2

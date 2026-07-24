@@ -1,0 +1,36 @@
+# Stage 12B take-on / dribble baseline.
+# Project-generated Opta-style thresholds — NOT official Opta.
+# Automatic ceiling is provisional; confirmed requires manual review.
+
+schema_version: 1
+config_version: 1
+pipeline_id: take_on_baseline
+pipeline_version: 1
+stage: "12B"
+
+metric_origin: project_generated
+definition_style: opta_style_metric_definition
+
+automatic_ceiling: provisional
+no_automatic_confirmed: true
+nearby_opponent_alone_is_not_take_on: true
+direction_change_alone_is_not_take_on: true
+no_opta_claim: true
+no_real_video: true
+
+input_eligibility:
+  require_contested_context: true
+  require_contact_refs: false
+  allow_synthetic: true
+
+thresholds:
+  min_carry_distance_m: 1.0
+  opponent_proximity_m: 2.5
+
+target:
+  track_id: 1
+  relationship: confirmed_target
+
+safety:
+  runtime_root: /home/fdoblak/workspace/take_on_checks
+  no_overwrite: true

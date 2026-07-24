@@ -82,6 +82,11 @@ Reuse Stage 2 validators and tests before claiming progress:
 - `scripts/check_pass_reception_baseline.py` (Stage 11B pass / reception baseline)
 - `scripts/check_passing_metrics_baseline.py` (Stage 11C target passing metrics baseline)
 - `scripts/check_passing_pipeline.py` (Stage 11D fusion + Stage 11 close)
+- `scripts/check_duels_contracts.py` (Stage 12A take-on / duel / tackle / recovery / turnover / clearance contracts)
+- `scripts/check_take_on_baseline.py` (Stage 12B take-on / dribble baseline)
+- `scripts/check_ground_duel_baseline.py` (Stage 12C ground / tackle / recovery / turnover baseline)
+- `scripts/check_aerial_clearance_baseline.py` (Stage 12D aerial / clearance baseline)
+- `scripts/check_duels_pipeline.py` (Stage 12E fusion + Stage 12 close)
 - `scripts/collect_evidence.py` (small safe evidence backfill into `artifacts/evidence/`)
 - `scripts/check_stage_cache.py`, `check_ci_workflow.py`, `check_project.py`
 - Or: `football-analytics project check --profile local --quick`
@@ -106,8 +111,12 @@ nearest ≠ owner; missing ball ≠ loose/no-possession; real football interacti
 accuracy is not validated. Stage 11 is closed: 11A contracts → 11B pass/reception →
 11C metrics → 11D fusion. Owner change alone ≠ completed pass; cut/replay/gap → no
 pass; attack direction unknown → directional metrics not_evaluable; penalty presence
-≠ box touch; real football passing accuracy is not validated. Do **not** start
-Stage 12 without an explicit user prompt.
+≠ box touch; real football passing accuracy is not validated. Stage 12 is closed:
+12A contracts → 12B take-on → 12C ground/tackle/recovery/turnover → 12D aerial/clearance
+→ 12E fusion. Nearby opponent alone ≠ take-on; nearest/track switch ≠ duel outcome;
+monocular aerial is conservative (no exact 3D height); long ball alone ≠ clearance;
+real football duels/events accuracy is not validated. Do **not** start Stage 13
+without an explicit user prompt.
 
 ---
 
@@ -202,6 +211,8 @@ Stage 9A–9E target-player physical metrics baseline is in-tree when merged
 human-ball interaction baseline is in-tree when merged (contracts → proximity →
 possession → fusion). Stage 10 is **closed**. Stage 11A–11D passing / reception /
 progression baseline is in-tree when merged (contracts → pass/reception → metrics →
-fusion). Stage 11 is **closed**. Do **not** start Stage 12 without an explicit
+fusion). Stage 11 is **closed**. Stage 12A–12E duels / competitive-events baseline is
+in-tree when merged (contracts → take-on → ground family → aerial/clearance → fusion).
+Stage 12 is **closed**. Do **not** start Stage 13 without an explicit
 user prompt.
 Manual Cursor flow only — no Codex/background automation.

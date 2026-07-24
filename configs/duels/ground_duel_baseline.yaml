@@ -1,0 +1,32 @@
+# Stage 12C ground duel / tackle / recovery / turnover baseline.
+# Project-generated Opta-style thresholds — NOT official Opta.
+
+schema_version: 1
+config_version: 1
+pipeline_id: ground_duel_baseline
+pipeline_version: 1
+stage: "12C"
+
+metric_origin: project_generated
+definition_style: opta_style_metric_definition
+
+automatic_ceiling: provisional
+no_automatic_confirmed: true
+nearest_switch_alone_is_not_duel_outcome: true
+no_opta_claim: true
+no_real_video: true
+
+input_eligibility:
+  require_contested_possession: true
+  allow_synthetic: true
+
+thresholds:
+  contest_window_us: 2_000_000
+
+target:
+  track_id: 1
+  relationship: confirmed_target
+
+safety:
+  runtime_root: /home/fdoblak/workspace/ground_duel_checks
+  no_overwrite: true

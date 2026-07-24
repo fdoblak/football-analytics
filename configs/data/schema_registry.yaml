@@ -322,3 +322,66 @@ contracts:
       1:
         spec_path: schemas/data/v1/target_ball_touches.json
     migration_edges: []
+
+  take_on_attempts:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/take_on_attempts.json
+    migration_edges: []
+
+  ground_duel_candidates:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/ground_duel_candidates.json
+    migration_edges: []
+
+  aerial_duel_candidates:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/aerial_duel_candidates.json
+    migration_edges: []
+
+  tackle_events:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/tackle_events.json
+    migration_edges: []
+
+  recovery_events:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/recovery_events.json
+    migration_edges: []
+
+  turnover_events:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/turnover_events.json
+    migration_edges: []
+
+  clearance_events:
+    current_version: 1
+    supported_versions: [1]
+    status: active
+    versions:
+      1:
+        spec_path: schemas/data/v1/clearance_events.json
+    migration_edges: []

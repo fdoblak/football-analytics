@@ -1,0 +1,17 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "config_fp": "e75864192b502b52f314c4d914462f9a80784422356a15daacdf726db9809bb1"
+  },
+  "scenarios": {
+    "00_deterministic_config": "PASS",
+    "scenario_cut_replay": "PASS",
+    "scenario_nearby_opponent_alone": "PASS",
+    "scenario_successful_take_on": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-24T12:55:30.881948Z",
+  "warnings": []
+}

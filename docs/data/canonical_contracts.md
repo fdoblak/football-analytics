@@ -24,6 +24,18 @@ contracts are **not** duplicated as hand-written Python field lists.
 | team_assignments | run_id, video_id, assignment_id | → track_summaries |
 | jersey_observations | run_id, video_id, frame_index, observation_id | → track_summaries |
 | events | run_id, video_id, event_id | actor tracks → track_summaries (bundle) |
+| pass_candidates | run_id, video_id, pass_candidate_id | — |
+| reception_candidates | run_id, video_id, reception_candidate_id | — |
+| pass_outcomes | run_id, video_id, outcome_id | — |
+| ball_progression_segments | run_id, video_id, segment_id | — |
+| target_ball_touches | run_id, video_id, touch_id | — |
+| take_on_attempts | run_id, video_id, take_on_attempt_id | — |
+| ground_duel_candidates | run_id, video_id, ground_duel_candidate_id | — |
+| aerial_duel_candidates | run_id, video_id, aerial_duel_candidate_id | — |
+| tackle_events | run_id, video_id, tackle_event_id | — |
+| recovery_events | run_id, video_id, recovery_event_id | — |
+| turnover_events | run_id, video_id, turnover_event_id | — |
+| clearance_events | run_id, video_id, clearance_event_id | — |
 
 ## Policies
 

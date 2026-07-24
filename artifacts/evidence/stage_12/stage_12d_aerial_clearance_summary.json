@@ -1,0 +1,17 @@
+{
+  "errors": [],
+  "exit_code": 0,
+  "extras": {
+    "config_fp": "a0919c0eeb7912bf388fff8f537fa1fa222a91e0724576914673683522c70278"
+  },
+  "scenarios": {
+    "00_deterministic_config": "PASS",
+    "01_monocular_aerial": "PASS",
+    "02_clearance_with_evidence": "PASS",
+    "03_long_ball_alone": "PASS"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "timestamp_utc": "2026-07-24T12:55:36.708564Z",
+  "warnings": []
+}

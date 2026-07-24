@@ -1,0 +1,22 @@
+{
+  "coverage": {
+    "calibration_valid_us": 9000000,
+    "joint_coverage_ratio": 0.75,
+    "long_ball_alone_is_not_clearance": true,
+    "monocular_aerial_no_exact_height": true,
+    "nearby_opponent_alone_is_not_take_on": true,
+    "nearest_switch_alone_is_not_duel_outcome": true,
+    "not_observed_us": 1000000,
+    "opponent_context_us": 7000000,
+    "playable_us": 9500000,
+    "possession_or_contact_us": 8000000,
+    "target_confirmed_us": 10000000
+  },
+  "created_at_utc": "2026-07-24T12:57:42.596455Z",
+  "duels_policy_fingerprint": "5d4222ca347c7eceb094efd9a7187c444f4845382a2203b48f259ac619e9f161",
+  "not_evaluable_reasons": [],
+  "quality_flags": [],
+  "run_id": "run_20260724T125741600766Z_26cdd1f75c8a",
+  "schema_version": 1,
+  "video_id": "video_synth_01"
+}

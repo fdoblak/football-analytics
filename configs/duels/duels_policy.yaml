@@ -1,0 +1,87 @@
+# Stage 12A duels / competitive-events contracts policy.
+# Contracts-only semantics. Project-generated Opta-style definitions — NOT official Opta.
+
+schema_version: 1
+policy_version: 1
+config_version: 1
+
+stage: "12A"
+contracts_only: true
+no_real_duels_inference: true
+metric_origin: project_generated
+definition_style: opta_style_metric_definition
+
+result_levels:
+  - candidate
+  - provisional
+  - confirmed
+  - contested
+  - unknown
+  - not_evaluable
+  - rejected
+
+automatic_baseline:
+  max_state: provisional
+  confirmed_requires: [scoped_manual_review]
+  nearby_opponent_alone_is_not_take_on: true
+  nearest_switch_alone_is_not_duel_outcome: true
+  monocular_aerial_no_exact_height: true
+  long_ball_alone_is_not_clearance: true
+  automatic_ceiling: provisional
+
+eligibility:
+  require_video_time_us: true
+  interval_semantics: half_open_start_end
+  take_on_requires:
+    possession_or_contact: true
+    opponent_context: true
+    playable: true
+  aerial_requires:
+    monocular_conservative: true
+    no_exact_3d_height: true
+
+lifecycle:
+  terminate_on:
+    - shot_cut
+    - replay
+    - non_playable
+    - hard_gap
+  cut_replay_gap_no_event: true
+  source_observations_immutable: true
+  state_transitions_auditable: true
+  revocation_append_only: true
+  cross_run_video_scope_hard_fail: true
+
+coverage:
+  components:
+    - target_confirmed
+    - possession_or_contact
+    - calibration
+    - playable
+    - opponent_context
+    - not_observed
+  low_coverage_status: not_evaluable
+
+forbidden_outputs:
+  opta_accuracy_claim: true
+  real_football_accuracy_claim: true
+  automatic_confirmed_duel: true
+  exact_3d_aerial_height_claim: true
+
+review:
+  manual_review_queue_enabled: true
+  confirmed_via_manual_review_only_when_policy_allows: true
+
+safety:
+  no_real_duels_inference: true
+  no_opta_claim: true
+  no_real_video: true
+  no_downloads: true
+  runtime_root: /home/fdoblak/workspace/duels_contract_checks
+
+notes:
+  - Stage 12A defines contracts/semantics/validators.
+  - Stage 12B take-on baseline consumes synthetic contested possession contexts.
+  - Stage 12C ground/tackle/recovery/turnover baselines are synthetic.
+  - Stage 12D aerial/clearance baselines remain monocular-conservative.
+  - Stage 12E fuses 12B–12D and closes Stage 12.

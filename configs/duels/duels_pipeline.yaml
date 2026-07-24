@@ -1,0 +1,35 @@
+# Stage 12E duels fusion + Stage 12 close.
+# Runs 12B take-on, 12C ground family, 12D aerial/clearance; fuses lineage/quality.
+# Project-generated — NOT official Opta. Real football accuracy not validated.
+
+schema_version: 1
+config_version: 1
+pipeline_id: duels_pipeline
+pipeline_version: 1
+stage: "12E"
+
+metric_origin: project_generated
+definition_style: opta_style_metric_definition
+
+automatic_ceiling: provisional
+no_automatic_confirmed: true
+no_opta_claim: true
+real_football_accuracy_validated: false
+
+inputs:
+  take_on_config: configs/duels/take_on_baseline.yaml
+  ground_config: configs/duels/ground_duel_baseline.yaml
+  aerial_config: configs/duels/aerial_clearance_baseline.yaml
+  policy: configs/duels/duels_policy.yaml
+
+integrity:
+  fail_on_source_mix: true
+  no_overwrite: true
+
+gate:
+  include_real_football_accuracy_not_yet_validated: true
+
+safety:
+  runtime_root: /home/fdoblak/workspace/duels_pipeline_checks
+  no_real_video: true
+  no_downloads: true

@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://football-analytics.local/schemas/duels/duels_evaluation.schema.json",
+  "title": "Duels evaluation (Stage 12A)",
+  "description": "Evaluation stub. Without reviewed GT use NOT_EVALUATED_NO_REVIEWED_DUELS_EVENTS_GROUND_TRUTH.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "video_id",
+    "status",
+    "ground_truth_evaluation_status",
+    "metrics",
+    "metric_reasons",
+    "findings",
+    "adapter_notes",
+    "created_at_utc"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "video_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "config_fingerprint": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "not_evaluated",
+        "partial",
+        "evaluated",
+        "failed"
+      ]
+    },
+    "ground_truth_evaluation_status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "metric_reasons": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "adapter_notes": {
+      "type": "string"
+    },
+    "created_at_utc": {
+      "type": "string",
+      "minLength": 10
+    }
+  }
+}

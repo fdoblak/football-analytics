@@ -1,0 +1,403 @@
+{
+  "contract_name": "aerial_duel_candidates",
+  "version": 1,
+  "description": "Stage 12A aerial duel candidates for a single target player. Monocular aerial is conservative (candidate/unknown/not_evaluable); no exact 3D height claim. Automatic ceiling is provisional.",
+  "fields": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "video_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "aerial_duel_candidate_id",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "monocular_only",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "exact_3d_height_claimed",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "exact_3d_height_m",
+      "type": "float32",
+      "nullable": true
+    },
+    {
+      "name": "aerial_evaluability",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "implies_aerial_outcome",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "outcome",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "target_human_track_id",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "opponent_human_track_id",
+      "type": "int64",
+      "nullable": true
+    },
+    {
+      "name": "start_time_us",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "end_time_us",
+      "type": "int64",
+      "nullable": false
+    },
+    {
+      "name": "x_m",
+      "type": "float32",
+      "nullable": true
+    },
+    {
+      "name": "y_m",
+      "type": "float32",
+      "nullable": true
+    },
+    {
+      "name": "zone_neutral",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "event_state",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "target_relationship",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "possession_hypothesis_id",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "contact_candidate_ids",
+      "type": "list",
+      "nullable": false,
+      "value_type": "string"
+    },
+    {
+      "name": "evidence_refs",
+      "type": "list",
+      "nullable": false,
+      "value_type": "string"
+    },
+    {
+      "name": "cut_or_replay",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "hard_gap",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "playability_status",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "calibration_status",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "automatic_ceiling",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "review_status",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "manual_review_required",
+      "type": "bool",
+      "nullable": false
+    },
+    {
+      "name": "uncertainty",
+      "type": "float32",
+      "nullable": true
+    },
+    {
+      "name": "reason_codes",
+      "type": "list",
+      "nullable": false,
+      "value_type": "string"
+    },
+    {
+      "name": "quality_flags",
+      "type": "list",
+      "nullable": false,
+      "value_type": "string"
+    },
+    {
+      "name": "metric_origin",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "definition_style",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "policy_fingerprint",
+      "type": "string",
+      "nullable": false
+    },
+    {
+      "name": "provenance_json",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "contract_version",
+      "type": "int32",
+      "nullable": false
+    }
+  ],
+  "primary_key": [
+    "run_id",
+    "video_id",
+    "aerial_duel_candidate_id"
+  ],
+  "foreign_keys": [],
+  "partition_by": [
+    "run_id",
+    "video_id"
+  ],
+  "sort_by": [
+    "run_id",
+    "video_id",
+    "start_time_us",
+    "aerial_duel_candidate_id"
+  ],
+  "semantic_rules": [
+    {
+      "id": "aerial_duel_candidate_id_safe",
+      "rule": "safe_identifier",
+      "field": "aerial_duel_candidate_id"
+    },
+    {
+      "id": "run_id_format",
+      "rule": "run_id_stage2b"
+    },
+    {
+      "id": "video_id_safe",
+      "rule": "safe_identifier",
+      "field": "video_id"
+    },
+    {
+      "id": "target_ge0",
+      "rule": "int_ge",
+      "field": "target_human_track_id",
+      "value": 0
+    },
+    {
+      "id": "opponent_ge0_or_null",
+      "rule": "int_ge_or_null",
+      "field": "opponent_human_track_id",
+      "value": 0
+    },
+    {
+      "id": "start_ge0",
+      "rule": "int_ge",
+      "field": "start_time_us",
+      "value": 0
+    },
+    {
+      "id": "end_ge0",
+      "rule": "int_ge",
+      "field": "end_time_us",
+      "value": 0
+    },
+    {
+      "id": "zone_enum",
+      "rule": "enum",
+      "field": "zone_neutral",
+      "values": [
+        "goal_a",
+        "middle",
+        "goal_b",
+        "unknown",
+        "not_evaluable"
+      ]
+    },
+    {
+      "id": "event_state_enum",
+      "rule": "enum",
+      "field": "event_state",
+      "values": [
+        "candidate",
+        "provisional",
+        "confirmed",
+        "contested",
+        "unknown",
+        "not_evaluable",
+        "rejected"
+      ]
+    },
+    {
+      "id": "target_rel_enum",
+      "rule": "enum",
+      "field": "target_relationship",
+      "values": [
+        "confirmed_target",
+        "candidate_target",
+        "non_target",
+        "anonymous",
+        "unknown"
+      ]
+    },
+    {
+      "id": "playability_enum",
+      "rule": "enum",
+      "field": "playability_status",
+      "values": [
+        "playable",
+        "replay",
+        "non_playable",
+        "unknown"
+      ]
+    },
+    {
+      "id": "calibration_enum",
+      "rule": "enum",
+      "field": "calibration_status",
+      "values": [
+        "valid",
+        "invalid",
+        "unknown"
+      ]
+    },
+    {
+      "id": "ceiling_enum",
+      "rule": "enum",
+      "field": "automatic_ceiling",
+      "values": [
+        "candidate",
+        "provisional"
+      ]
+    },
+    {
+      "id": "review_enum",
+      "rule": "enum",
+      "field": "review_status",
+      "values": [
+        "unreviewed",
+        "reviewed",
+        "rejected",
+        "not_required",
+        "revoked"
+      ]
+    },
+    {
+      "id": "metric_origin_enum",
+      "rule": "enum",
+      "field": "metric_origin",
+      "values": [
+        "project_generated"
+      ]
+    },
+    {
+      "id": "definition_style_enum",
+      "rule": "enum",
+      "field": "definition_style",
+      "values": [
+        "opta_style_metric_definition"
+      ]
+    },
+    {
+      "id": "contact_no_null",
+      "rule": "list_no_null_items",
+      "field": "contact_candidate_ids"
+    },
+    {
+      "id": "evidence_no_null",
+      "rule": "list_no_null_items",
+      "field": "evidence_refs"
+    },
+    {
+      "id": "reason_no_null",
+      "rule": "list_no_null_items",
+      "field": "reason_codes"
+    },
+    {
+      "id": "quality_no_null",
+      "rule": "list_no_null_items",
+      "field": "quality_flags"
+    },
+    {
+      "id": "contract_version_ge1",
+      "rule": "int_ge",
+      "field": "contract_version",
+      "value": 1
+    },
+    {
+      "id": "aerial_eval_enum",
+      "rule": "enum",
+      "field": "aerial_evaluability",
+      "values": [
+        "candidate",
+        "unknown",
+        "not_evaluable",
+        "provisional"
+      ]
+    },
+    {
+      "id": "outcome_enum",
+      "rule": "enum",
+      "field": "outcome",
+      "values": [
+        "won",
+        "lost",
+        "drawn",
+        "uncertain",
+        "not_evaluable",
+        "rejected"
+      ]
+    }
+  ],
+  "table_metadata": {
+    "stage": "12A",
+    "automatic_confirmed_forbidden": "true",
+    "metric_origin": "project_generated",
+    "definition_style": "opta_style_metric_definition",
+    "interval_semantics": "half_open_start_end",
+    "time_base": "video_time_us",
+    "monocular_aerial_conservative": "true",
+    "no_exact_3d_height_claim": "true"
+  }
+}
