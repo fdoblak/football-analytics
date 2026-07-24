@@ -4,7 +4,7 @@
 - Official project: https://atomscott.github.io/SoccerTrack-v2/
 - Official repository: https://github.com/AtomScott/SoccerTrack-v2
 - External repo full SHA: `3ee38e481aab9de0f1d099c1cdde15302eb63f49`
-- Canonical HF URL: https://huggingface.co/datasets/atomscott/soccertrack-v2 (HTTP 401 at Stage 16 access time)
+- Canonical HF URL: https://huggingface.co/datasets/atomscott/soccertrack-v2 (HTTP 401 at Stage 16 and Stage 16-R1; tree not enumerable anonymously)
 - Official mirror used: https://drive.google.com/drive/folders/1N2Qx2qkFgRtpbHitl2Vh6sLVYGgqkWwn
 - Data license: CC BY 4.0 (LICENSE-DATA)
 - Code license: MIT
@@ -14,4 +14,5 @@
 - Selected match ID: `128057` (training/validation style; not held-out secret 117099/117100)
 - Camera domain: panoramic_full_pitch
 - Download date (UTC session): 2026-07-24
-- Videos status: Drive quota exceeded at download time; annotations GSR+BAS available locally (see source_manifest.json)
+- Videos status (Stage 16): Drive quota exceeded; annotations GSR+BAS available locally
+- Videos status (Stage 16-R1): exact Drive MP4 paths/IDs discovered for `128057_panorama_{1st,2nd}_half.mp4`; download still quota-blocked; HF still 401 — see `video_download_recovery_r1.json` and `source_manifest.json` revision_history

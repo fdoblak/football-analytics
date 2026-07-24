@@ -102,10 +102,51 @@
       "source_url": "https://drive.google.com/drive/folders/1N2Qx2qkFgRtpbHitl2Vh6sLVYGgqkWwn"
     }
   ],
-  "hf_status": "401_at_access_time",
+  "hf_status": "401_anonymous_unreadable_tree_not_enumerable",
   "license": "CC-BY-4.0",
+  "r1_gate": "NO-GO \u2014 OFFICIAL SOCCERTRACK VIDEO UNAVAILABLE",
+  "revision_history": [
+    {
+      "hf_status": "401_at_access_time",
+      "note": "Original Stage 16 NO-GO: Drive video quota; annotations present.",
+      "revision_id": "stage16_nogo_drive_quota",
+      "source": "official_google_drive_mirror",
+      "videos_status": "pending_drive_rate_limit",
+      "written_at_utc": "2026-07-24T17:10:43.849761+00:00"
+    },
+    {
+      "discovered_drive_video_paths": [
+        {
+          "drive_file_id": "1A2y5s0xgxU7yedVgqTW3bgLTZWfJO05C",
+          "relative_path": "videos/128057/128057_panorama_1st_half.mp4"
+        },
+        {
+          "drive_file_id": "1Vah7favjAsm5yYCjU4ic8Vlcyi0whnQ4",
+          "relative_path": "videos/128057/128057_panorama_2nd_half.mp4"
+        }
+      ],
+      "download_receipt": "artifacts/evidence/stage_16/video_download_recovery_r1.json",
+      "hf_revision": null,
+      "hf_status": "401_anonymous_unreadable_tree_not_enumerable",
+      "note": "R1 recovery: HF metadata/download blocked (401); Drive exact MP4 IDs discovered but confirm/gdown downloads returned quota/too-many-users. No MP4 obtained. Prior Drive quota NO-GO retained.",
+      "revision_id": "stage16_r1_official_video_unavailable",
+      "source": "attempted_hf_canonical_then_drive_mirror",
+      "videos_status": "unavailable_hf_401_and_drive_quota",
+      "written_at_utc": "2026-07-24T18:02:48.863673+00:00"
+    }
+  ],
   "selected_match_id": "128057",
   "source": "official_google_drive_mirror",
-  "videos_status": "pending_drive_rate_limit",
-  "written_at_utc": "2026-07-24T17:10:43.849761+00:00"
+  "video_discovery": {
+    "drive_match_folder_id": "1HJ5an5M45BjzFwJMR5y8N0KoyrSTLnKh",
+    "drive_videos_folder_id": "1Wy1LgQPm9hW4aOQLw2Z3newzuzlKXcNv",
+    "exact_paths": [
+      "videos/128057/128057_panorama_1st_half.mp4",
+      "videos/128057/128057_panorama_2nd_half.mp4"
+    ],
+    "hf_revision_pinned": null,
+    "selected_source": null
+  },
+  "videos_status": "unavailable_hf_401_and_drive_quota",
+  "written_at_utc": "2026-07-24T18:02:48.864248+00:00"
 }

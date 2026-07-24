@@ -4,6 +4,12 @@
 
 `NO-GO — REAL-MATCH ACCEPTANCE FAILURE`
 
+## Stage 16-R1 resume gate
+
+`NO-GO — OFFICIAL SOCCERTRACK VIDEO UNAVAILABLE`
+
+See `STAGE16_R1_COMPLETION.md` and `video_download_recovery_r1.json`. Prior Drive-quota NO-GO history retained in `source_manifest.json` revision_history.
+
 ## Why
 
 Official SoccerTrack v2 source and CC BY 4.0 license were verified. Match `128057` GSR+BAS(+calibration metadata) were downloaded from the official Google Drive mirror and hashed. Target selection, leakage namespaces, and held-out BAS scaffold completed.

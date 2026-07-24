@@ -1,0 +1,96 @@
+{
+  "stage": "16-R1",
+  "gate": "NO-GO — OFFICIAL SOCCERTRACK VIDEO UNAVAILABLE",
+  "started_from_commit": "8d8370f3881d307990d92c7b34c58fd77dd9d75a",
+  "selected_match_id": "128057",
+  "target": {
+    "team": "left",
+    "jersey": "24",
+    "player_id": "506469"
+  },
+  "huggingface": {
+    "repo_id": "atomscott/soccertrack-v2",
+    "canonical_url": "https://huggingface.co/datasets/atomscott/soccertrack-v2",
+    "tools_present": {
+      "hf_cli": false,
+      "huggingface_cli": false,
+      "git_lfs": "not_required_for_failed_metadata_query",
+      "huggingface_hub_python": "1.23.0"
+    },
+    "anonymous_dataset_info": {
+      "http_status": 401,
+      "x_error_message": "Invalid username or password.",
+      "page_title": "404 – Hugging Face",
+      "repository_listable": false,
+      "author_search_atomscott_count": 0,
+      "search_soccertrack_count": 0
+    },
+    "resolve_probes": [
+      {
+        "path": "videos/128057/128057_panorama_1st_half.mp4",
+        "revision": "main",
+        "http_status": 401
+      },
+      {
+        "path": "videos/128057_panorama_1st_half.mp4",
+        "revision": "main",
+        "http_status": 401
+      },
+      {
+        "path": "videos/128057.mp4",
+        "revision": "main",
+        "http_status": 401
+      }
+    ],
+    "revision_pinned": null,
+    "exact_paths_from_hf": null,
+    "note": "HF canonical dataset is advertised as public/CC BY 4.0 but was not anonymously readable at R1 access time; no HF token requested or used. Dataset tree/metadata could not be enumerated; revision SHA could not be pinned."
+  },
+  "google_drive_mirror": {
+    "root_folder_id": "1N2Qx2qkFgRtpbHitl2Vh6sLVYGgqkWwn",
+    "videos_folder_id": "1Wy1LgQPm9hW4aOQLw2Z3newzuzlKXcNv",
+    "match_folder_id_128057": "1HJ5an5M45BjzFwJMR5y8N0KoyrSTLnKh",
+    "discovered_exact_paths": [
+      {
+        "relative_path": "videos/128057/128057_panorama_1st_half.mp4",
+        "drive_file_id": "1A2y5s0xgxU7yedVgqTW3bgLTZWfJO05C",
+        "mime": "video/mp4"
+      },
+      {
+        "relative_path": "videos/128057/128057_panorama_2nd_half.mp4",
+        "drive_file_id": "1Vah7favjAsm5yYCjU4ic8Vlcyi0whnQ4",
+        "mime": "video/mp4"
+      }
+    ],
+    "download_attempts": [
+      {
+        "method": "usercontent_virus_scan_confirm_resume",
+        "file": "128057_panorama_1st_half.mp4",
+        "result": "quota_exceeded_after_confirm",
+        "bounded_retries": 5,
+        "mp4_obtained": false
+      },
+      {
+        "method": "gdown_uc_resume",
+        "file": "128057_panorama_1st_half.mp4",
+        "result": "too_many_users_viewed_or_downloaded",
+        "mp4_obtained": false
+      }
+    ],
+    "quota_policy": "Stopped further Drive retries after confirmed quota; did not attempt access-control bypass.",
+    "selected_source": "none_successful"
+  },
+  "match_switch_evaluation": {
+    "128057_video_published_on_drive": true,
+    "128057_video_downloadable": false,
+    "other_match_switch": "not_applicable_same_mirror_quota_and_hf_unavailable",
+    "unauthorized_alternatives_used": false
+  },
+  "preserved_local_inputs": {
+    "gsr_bas_raw_license": "retained_checksum_verified",
+    "videos_dir": "/home/fdoblak/football_data/datasets/soccertrack_v2/source/videos/128057/",
+    "videos_present": false,
+    "partial_files_cleaned": true
+  },
+  "written_at_utc": "2026-07-24T18:05:00+00:00"
+}
