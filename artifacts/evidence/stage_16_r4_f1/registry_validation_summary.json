@@ -1,0 +1,39 @@
+{
+  "schema": "registry_validation_summary_v1",
+  "written_at_utc": "2026-07-25T01:30:00+00:00",
+  "runs": [
+    {
+      "run": 1,
+      "status": "PASS_WITH_WARNINGS",
+      "exit_code": 0,
+      "integrity_errors": 0,
+      "sn_depth_dirty": false,
+      "third_party_count_lock": 5,
+      "soccernet_count_lock": 19,
+      "all_heads_match_lock": true,
+      "all_working_trees_clean": true
+    },
+    {
+      "run": 2,
+      "status": "PASS_WITH_WARNINGS",
+      "exit_code": 0,
+      "integrity_errors": 0,
+      "sn_depth_dirty": false,
+      "pycache_recreated": false,
+      "all_heads_match_lock": true,
+      "all_working_trees_clean": true
+    }
+  ],
+  "validator_changes": {
+    "hardcoded_expected_third_party_count_3": "removed",
+    "lock_counts_canonical": true,
+    "PYTHONDONTWRITEBYTECODE": true,
+    "sys.dont_write_bytecode": true
+  },
+  "documented_warnings_only": [
+    "license_status=review_required for several SoccerNet datasets/models",
+    "ultralytics source_repo not in external lock",
+    "some SoccerNet access_level=unknown"
+  ],
+  "gate": "PASS_WITH_FINDINGS — VIDEO-BACKED TECHNICAL PREVIEW CONSOLIDATED; RELEASE TREE CLEAN; VIDEO-EVENT ACCURACY NOT VALIDATED"
+}

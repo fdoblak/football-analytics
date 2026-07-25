@@ -22,9 +22,9 @@ Quick orientation for which stage owns which runtime/workspace roots and close s
 
 ## Stage 16-R4 gate
 
-`PASS_WITH_FINDINGS — SELF-CONTAINED TECHNICAL ACCEPTANCE COMPLETE; REAL-VIDEO TRACKING VALIDATED; VIDEO-EVENT ACCURACY NOT VALIDATED`
+`PASS_WITH_FINDINGS — VIDEO-BACKED TECHNICAL PREVIEW CONSOLIDATED; RELEASE TREE CLEAN; VIDEO-EVENT ACCURACY NOT VALIDATED`
 
-Tag: `single-player-analytics-technical-preview-v0.16.0` (not `single-player-analytics-v1.0.0`).
+Tag: `single-player-analytics-technical-preview-v0.16.1` (not `single-player-analytics-v1.0.0`).
 
 ## Stage 15 close gate
 
@@ -36,5 +36,5 @@ Tag: `single-player-analytics-technical-preview-v0.16.0` (not `single-player-ana
 - SoccerTrack v2 panoramic video is an **optional** external validation source (not a release dependency)
 - Hugging Face token/login is not required for acceptance CLI, tests, build, or technical-preview release
 - Real football / Opta / video-event accuracy is not validated
-- Stage 16 final customer visual: `/home/fdoblak/football_data/rendered_outputs/final/single_player_analysis_summary.png` and `artifacts/final/single_player_analysis_summary.png`
+- Stage 16 final customer visual: `/home/fdoblak/football_data/rendered_outputs/final/single_player_analysis_summary.png` and `artifacts/final_delivery/ (canonical customer outputs)`
 - Capability matrix: `docs/architecture/capability_matrix.md`

@@ -1,0 +1,69 @@
+{
+  "count": 5,
+  "policy": "lock third_party_repositories count is canonical; no hardcoded expected=3",
+  "repositories": [
+    {
+      "absolute_path": "/home/fdoblak/projects/third-party/tracklab",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "full_head_sha": "5767e86c32a6d6c68e2fc8ae7311f558fff6c7b2",
+      "license_file": "LICENSE",
+      "name": "tracklab",
+      "project_purpose": "runtime_and_reference",
+      "remote_url": "https://github.com/TrackingLaboratory/tracklab.git",
+      "role": "active",
+      "shallow": false
+    },
+    {
+      "absolute_path": "/home/fdoblak/projects/third-party/pnlcalib",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "full_head_sha": "8c87391d6f4ea40c5e4d65e61529916c7a49ce62",
+      "license_file": "LICENSE",
+      "name": "pnlcalib",
+      "project_purpose": "calibration_candidate",
+      "remote_url": "https://github.com/mguti97/PnLCalib.git",
+      "role": "optional",
+      "shallow": false
+    },
+    {
+      "absolute_path": "/home/fdoblak/projects/third-party/no-bells-just-whistles",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "full_head_sha": "bd993b31c2917096c23bb8aadf148314d17f8345",
+      "license_file": "LICENSE",
+      "name": "no_bells_just_whistles",
+      "project_purpose": "model_source_and_reference",
+      "remote_url": "https://github.com/mguti97/No-Bells-Just-Whistles.git",
+      "role": "optional",
+      "shallow": false
+    },
+    {
+      "absolute_path": "/home/fdoblak/projects/third-party/SoccerTrack-v2",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "full_head_sha": "3ee38e481aab9de0f1d099c1cdde15302eb63f49",
+      "license_file": "LICENSE",
+      "name": "soccertrack_v2",
+      "project_purpose": "Stage16 format/license provenance reference",
+      "remote_url": "https://github.com/AtomScott/SoccerTrack-v2.git",
+      "role": "reference",
+      "shallow": true
+    },
+    {
+      "absolute_path": "/home/fdoblak/projects/third-party/TeamTrack",
+      "branch_or_detached": "main",
+      "dirty": false,
+      "full_head_sha": "748a77db7d631818b9736d3af456e65346c466e5",
+      "license_file": "LICENSE",
+      "name": "teamtrack",
+      "project_purpose": "Stage16-R2 real-video pilot provenance/format reference",
+      "remote_url": "https://github.com/AtomScott/TeamTrack.git",
+      "role": "reference",
+      "shallow": true
+    }
+  ],
+  "schema": "external_repo_inventory_v1",
+  "third_party_root": "/home/fdoblak/projects/third-party",
+  "written_at_utc": "2026-07-25T01:14:58.406838+00:00"
+}

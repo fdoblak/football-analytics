@@ -1,0 +1,36 @@
+{
+  "data_loss": false,
+  "head_sha": "9f6636fafb11447a5bada765e197928ee9efc467",
+  "items": [
+    {
+      "path": "/home/fdoblak/projects/soccernet/sn-depth/baseline/ZoeDepth/zoedepth/data/__pycache__/__init__.cpython-310.pyc",
+      "quarantine_path": "/home/fdoblak/workspace/quarantine/external_repo_cache/20260725_sn_depth_pycache/__init__.cpython-310.pyc",
+      "sha256": "8b7b76e42df7e992b1576e32f30a3c2a912c4e4c5745cb8cf103ce1061afcbbc",
+      "size": 178,
+      "type": "pycache"
+    },
+    {
+      "path": "/home/fdoblak/projects/soccernet/sn-depth/baseline/ZoeDepth/zoedepth/data/__pycache__/diml_indoor_test.cpython-310-pytest-9.1.1.pyc",
+      "quarantine_path": "/home/fdoblak/workspace/quarantine/external_repo_cache/20260725_sn_depth_pycache/diml_indoor_test.cpython-310-pytest-9.1.1.pyc",
+      "sha256": "2eff52a816084dee06d482d8a31946d54df6eea5de96f1f9e5a2b5c4875cea11",
+      "size": 3271,
+      "type": "pycache"
+    },
+    {
+      "path": "/home/fdoblak/projects/soccernet/sn-depth/baseline/ZoeDepth/zoedepth/data/__pycache__/diml_outdoor_test.cpython-310-pytest-9.1.1.pyc",
+      "quarantine_path": "/home/fdoblak/workspace/quarantine/external_repo_cache/20260725_sn_depth_pycache/diml_outdoor_test.cpython-310-pytest-9.1.1.pyc",
+      "sha256": "5901e59a1a397375e2a6571b340237919189726be3ff1877f34234bb9b54726b",
+      "size": 3112,
+      "type": "pycache"
+    }
+  ],
+  "note": "reproducible bytecode only; source untouched",
+  "permanent_delete_performed": false,
+  "quarantine_root": "/home/fdoblak/workspace/quarantine/external_repo_cache/20260725_sn_depth_pycache",
+  "repo": "/home/fdoblak/projects/soccernet/sn-depth",
+  "root_cause": "untracked __pycache__ from prior Python import/pytest under ZoeDepth data/",
+  "schema": "sn_depth_cleanup_receipt_v1",
+  "total_bytes": 6561,
+  "tracked_source_modified": false,
+  "written_at_utc": "2026-07-25T01:14:17.784348+00:00"
+}

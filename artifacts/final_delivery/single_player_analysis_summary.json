@@ -1,113 +1,5 @@
 {
-  "attribution": "SoccerTrack v2 annotations \u2014 CC BY 4.0 (Atom Scott et al.). TeamTrack pilot \u2014 MIT. Project-generated technical preview; not official Opta data.",
-  "disclaimers": [
-    "REFERENCE-ANNOTATION-DERIVED",
-    "VIDEO EVENT-INFERENCE ACCURACY NOT VALIDATED",
-    "NOT OFFICIAL OPTA DATA",
-    "SoccerTrack v2 panoramic video is an optional external validation source, not a release dependency."
-  ],
-  "drive_required": false,
-  "evidence_tracks": {
-    "self_contained_deterministic_acceptance": {
-      "level": "SELF_CONTAINED_TESTED",
-      "receipt": {
-        "config_fingerprint": "e9752b834ac9cd49068fc87eb1a56f866c396044b4857571b1ef5a34d07891dc",
-        "metrics_fingerprint": "2e20387864b8469660ffa94bafaaaeaeb7e0fedccdcbe4dc402005198a6154c9",
-        "status": "passed"
-      }
-    },
-    "soccertrack_v2_reference_analysis": {
-      "level": "REFERENCE_ANNOTATION_DERIVED",
-      "not_video_prediction": true,
-      "summary": {
-        "bas_target_label_counts": {
-          "Ball Player Block": 1,
-          "Cross": 2,
-          "Drive": 28,
-          "Free Kick": 2,
-          "High Pass": 3,
-          "Out": 2,
-          "Pass": 30,
-          "Player Successful Tackle": 5,
-          "Throw In": 2
-        },
-        "metric_keys": [
-          "activity_index",
-          "bas_drive_actions",
-          "bas_header_actions",
-          "bas_high_pass_attempts",
-          "bas_pass_attempts",
-          "bas_successful_tackles",
-          "box_touches",
-          "clearances",
-          "duel_win_rate",
-          "failed_dribbles",
-          "heatmap",
-          "mean_speed_m_s",
-          "measured_distance_m",
-          "pass_accuracy",
-          "peak_speed_m_s",
-          "penalty_area_presence_points",
-          "possession",
-          "sprint_count",
-          "sprint_distance_m",
-          "visibility_coverage"
-        ]
-      }
-    },
-    "teamtrack_real_video_pilot": {
-      "does_not_prove": [
-        "pass_accuracy",
-        "duels",
-        "pitch_meters_events"
-      ],
-      "level": "REAL_VIDEO_VALIDATED",
-      "proves": [
-        "real_video_ingest",
-        "gpu_inference",
-        "human_detection",
-        "target_tracking"
-      ],
-      "summary": {
-        "detection": {
-          "f1": 0.6196559575006324,
-          "fn": 7452,
-          "fp": 4576,
-          "iou_thresh": 0.5,
-          "note": "framewise greedy IoU matching; not COCO mAP",
-          "precision": 0.6816474189508835,
-          "recall": 0.568,
-          "tp": 9798
-        },
-        "pilot": {
-          "device": "cuda:0",
-          "duration_s": 30.0,
-          "elapsed_s": 246.63376379013062,
-          "false_success": false,
-          "gt_leakage_into_prediction": false,
-          "human_detections": 14374,
-          "oom": false,
-          "seq_length_frames": 750,
-          "tracks_observed": 383
-        },
-        "sequence": "F_20200220_1_0330_0360",
-        "target_tracking": {
-          "gt_frames": 750,
-          "hota_mota_idf1": "not_evaluable_lightweight_pilot_evaluator",
-          "id_switches": "not_evaluable_without_full_mot_tracker_ids",
-          "iou_thresh": 0.3,
-          "matched_frames_iou_ge_thresh": 750,
-          "mean_center_error_px": 3.955655885292195,
-          "mean_iou": 0.6752426397328349,
-          "target_coverage_ratio": 1.0
-        }
-      }
-    }
-  },
-  "gate": "PASS_WITH_FINDINGS \u2014 SELF-CONTAINED TECHNICAL ACCEPTANCE COMPLETE; REAL-VIDEO TRACKING VALIDATED; VIDEO-EVENT ACCURACY NOT VALIDATED",
-  "generated_at_utc": "2026-07-25T00:00:00Z",
-  "hf_required": false,
-  "metrics": {
+  "annotation_derived_metrics": {
     "activity_index": {
       "coverage": {
         "target_bas_events": {
@@ -360,19 +252,201 @@
       "value": null
     }
   },
-  "network_required": false,
-  "schema": "single_player_technical_preview_report_v1",
+  "artifact_hashes": {
+    "proof_mp4_sha256": "771e9b62705523a382e09ca631477d20518d6aace13f1180ced8327331e7bff4",
+    "summary_json_sha256": "a932a65f524f44babc2f4b8d938f4c82e7c1a2e6dd246507699a23d15a5e283c",
+    "summary_png_sha256": "af20b195c7cd63c4d020c0e7fc099bf1bd97ef55952fafa9be672e9a4f5c467f"
+  },
+  "dataset_provenance": {
+    "soccertrack_v2": {
+      "license": "CC-BY-4.0",
+      "match_id": "128057",
+      "not_video_prediction": true
+    },
+    "teamtrack": {
+      "id": "teamtrack",
+      "license": "MIT",
+      "license_source": "kaggle_metadata_licenseNameNullable",
+      "official_urls": {
+        "kaggle": "https://www.kaggle.com/datasets/atomscott/teamtrack",
+        "project": "https://atomscott.github.io/TeamTrack/",
+        "repo": "https://github.com/AtomScott/TeamTrack"
+      },
+      "sequence_id": "F_20200220_1_0330_0360",
+      "split": "train",
+      "sport_view": "soccer_side",
+      "version": 6
+    }
+  },
+  "evidence_levels": [
+    "REAL_VIDEO_VALIDATED",
+    "REFERENCE_ANNOTATION_DERIVED",
+    "SELF_CONTAINED_TESTED",
+    "NOT_EVALUABLE"
+  ],
+  "license_attribution": {
+    "soccertrack_v2": "TECHNICAL PREVIEW \u2014 REFERENCE-ANNOTATION-DERIVED \u2014 VIDEO EVENT-INFERENCE ACCURACY NOT VALIDATED \u2014 NOT OFFICIAL OPTA DATA",
+    "teamtrack": "TeamTrack \u00a9 Atom Scott et al.; dataset license MIT (Kaggle metadata). Project-generated pilot analysis; not official Opta data."
+  },
+  "limitations": [
+    "Video-event inference accuracy not validated on real match GT",
+    "TeamTrack and SoccerTrack targets are different persons/datasets",
+    "Annotation-derived metrics are not model predictions",
+    "Not official Opta data"
+  ],
+  "not_evaluable_metrics": [
+    "pass_accuracy",
+    "duel_win_rate",
+    "failed_dribbles",
+    "clearances",
+    "possession",
+    "box_touches",
+    "video_event_inference_accuracy"
+  ],
+  "pilot_report_snapshot": {
+    "detection": {
+      "f1": 0.6196559575006324,
+      "fn": 7452,
+      "fp": 4576,
+      "iou_thresh": 0.5,
+      "note": "framewise greedy IoU matching; not COCO mAP",
+      "precision": 0.6816474189508835,
+      "recall": 0.568,
+      "tp": 9798
+    },
+    "pilot": {
+      "device": "cuda:0",
+      "duration_s": 30.0,
+      "elapsed_s": 266.6851215362549,
+      "false_success": false,
+      "gt_leakage_into_prediction": false,
+      "human_detections": 14374,
+      "oom": false,
+      "seq_length_frames": 750,
+      "tracks_observed": 383
+    },
+    "target_tracking": {
+      "gt_frames": 750,
+      "hota_mota_idf1": "not_evaluable_lightweight_pilot_evaluator",
+      "id_switches": "not_evaluable_without_full_mot_tracker_ids",
+      "iou_thresh": 0.3,
+      "matched_frames_iou_ge_thresh": 750,
+      "mean_center_error_px": 3.955655885292195,
+      "mean_iou": 0.6752426397328349,
+      "target_coverage_ratio": 1.0
+    }
+  },
+  "real_video_validation": {
+    "anonymous_target": "Track 7",
+    "dataset": "TeamTrack v6",
+    "gt_leakage_into_prediction": false,
+    "gt_sha256": "80fd710824a4f006528aa0bb0207ae34c1869e469373cdb276800260d96a7ff4",
+    "metrics": {
+      "detections": {
+        "coverage": null,
+        "evidence_level": "REAL_VIDEO_VALIDATED",
+        "limitations": null,
+        "source": "teamtrack_pilot",
+        "status": "REAL_VIDEO_VALIDATED",
+        "unit": "count",
+        "value": 14374
+      },
+      "device": {
+        "coverage": null,
+        "evidence_level": "REAL_VIDEO_VALIDATED",
+        "limitations": null,
+        "source": "teamtrack_pilot",
+        "status": "REAL_VIDEO_VALIDATED",
+        "unit": null,
+        "value": "cuda:0"
+      },
+      "f1": {
+        "coverage": null,
+        "evidence_level": "REAL_VIDEO_VALIDATED",
+        "limitations": null,
+        "source": "teamtrack_pilot",
+        "status": "REAL_VIDEO_VALIDATED",
+        "unit": "ratio",
+        "value": 0.6196559575006324
+      },
+      "mean_iou": {
+        "coverage": null,
+        "evidence_level": "REAL_VIDEO_VALIDATED",
+        "limitations": null,
+        "source": "teamtrack_pilot",
+        "status": "REAL_VIDEO_VALIDATED",
+        "unit": "ratio",
+        "value": 0.6752426397328349
+      },
+      "precision": {
+        "coverage": null,
+        "evidence_level": "REAL_VIDEO_VALIDATED",
+        "limitations": null,
+        "source": "teamtrack_pilot",
+        "status": "REAL_VIDEO_VALIDATED",
+        "unit": "ratio",
+        "value": 0.6816474189508835
+      },
+      "recall": {
+        "coverage": null,
+        "evidence_level": "REAL_VIDEO_VALIDATED",
+        "limitations": null,
+        "source": "teamtrack_pilot",
+        "status": "REAL_VIDEO_VALIDATED",
+        "unit": "ratio",
+        "value": 0.568
+      },
+      "runtime_s": {
+        "coverage": null,
+        "evidence_level": "REAL_VIDEO_VALIDATED",
+        "limitations": null,
+        "source": "teamtrack_pilot",
+        "status": "REAL_VIDEO_VALIDATED",
+        "unit": "s",
+        "value": 266.6851215362549
+      },
+      "target_coverage": {
+        "coverage": null,
+        "evidence_level": "REAL_VIDEO_VALIDATED",
+        "limitations": null,
+        "source": "teamtrack_pilot",
+        "status": "REAL_VIDEO_VALIDATED",
+        "unit": "ratio",
+        "value": 1.0
+      }
+    },
+    "namespace": "teamtrack_real_video_pilot",
+    "proof_mp4": {
+      "path": "artifacts/final_delivery/real_video_tracking_proof.mp4",
+      "sha256": "771e9b62705523a382e09ca631477d20518d6aace13f1180ced8327331e7bff4",
+      "size_bytes": 1548053
+    },
+    "selected_frame_times_s": {
+      "crowd": 20.96,
+      "end": 29.96,
+      "mid": 14.96,
+      "start": 0.0
+    },
+    "sequence": "soccer_side/train/F_20200220_1_0330_0360",
+    "source_mp4_sha256": "fd42dbe6df8b85946d6ee82fc11863ea94dd2735b3b126e9bfca3972a3149db1",
+    "source_mp4_size_bytes": 13086969
+  },
+  "release": {
+    "download_required_for_release": false,
+    "gate": "PASS_WITH_FINDINGS \u2014 VIDEO-BACKED TECHNICAL PREVIEW CONSOLIDATED; RELEASE TREE CLEAN; VIDEO-EVENT ACCURACY NOT VALIDATED",
+    "hf_required": false,
+    "network_required": false,
+    "tag_candidate": "single-player-analytics-technical-preview-v0.16.1"
+  },
+  "schema": "final_delivery_single_player_summary_v1",
   "target": {
-    "display_name": "SoccerTrack v2 Match 128057 / Team left / Jersey 24",
+    "deprecated_invalid_not_used": {
+      "jersey_number": 11,
+      "player_id": "506466"
+    },
     "jersey_number": 24,
     "match_id": "128057",
     "player_id": "506469",
     "team_side": "left"
-  },
-  "teamtrack_pilot_target_isolated": {
-    "anonymous_track_id": 7,
-    "dataset": "TeamTrack",
-    "sequence": "F_20200220_1_0330_0360"
-  },
-  "title": "TECHNICAL PREVIEW \u2014 REFERENCE-ANNOTATION-DERIVED"
+  }
 }

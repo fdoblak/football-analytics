@@ -153,9 +153,10 @@ repositories:
     integration: dataset_and_reference
     validation_status: cloned_not_smoke_tested
     dirty: false
-updated_at: '2026-07-22T17:15:00+03:00'
-update_notes: 'Stage 1C: added third_party_repositories with exact local SHAs; SoccerNet
-  repositories unchanged'
+updated_at: '2026-07-25T01:20:00+00:00'
+update_notes: 'Stage 16-R4-F1/FINAL: third_party lock count is canonical (5 intentional
+  repos including SoccerTrack-v2 + TeamTrack Stage-16 provenance references);
+  validator no longer hard-codes expected third-party count=3.'
 third_party_repositories:
   tracklab:
     path: /home/fdoblak/projects/third-party/tracklab

@@ -177,6 +177,7 @@ def run_teamtrack_pilot(
     frame_stride: int = 1,
     tile_width: int = 1600,
     tile_overlap: int = 200,
+    dump_predictions_json: Path | None = None,
 ) -> dict[str, Any]:
     """Run bounded real-video pilot. GT used only after predictions for evaluation."""
     t0 = time.time()
@@ -476,6 +477,24 @@ def run_teamtrack_pilot(
     (run_dir / "evaluation" / "real_video_pilot_report.json").write_text(
         json.dumps(report, indent=2, sort_keys=True) + "\n"
     )
+    if dump_predictions_json is not None:
+        dump_predictions_json.parent.mkdir(parents=True, exist_ok=True)
+        dump = {
+            "schema": "teamtrack_pilot_frame_predictions_v1",
+            "sequence_id": sequence_id,
+            "best_pred_track_id": best_pred_tid,
+            "target_gt_track_id": target.persistent_track_id,
+            "gt_target_by_frame": {str(k): list(v) for k, v in sorted(gt_native.items())},
+            "pred_by_frame": {
+                str(k): [list(b) for b in boxes] for k, boxes in sorted(pred_by_frame.items())
+            },
+            "target_pred_by_frame": {
+                str(k): (list(v) if v is not None else None) for k, v in sorted(target_pred.items())
+            },
+            "gt_not_used_in_prediction": True,
+        }
+        dump_predictions_json.write_text(json.dumps(dump) + "\n")
+        report["frame_predictions_dump"] = str(dump_predictions_json)
     return report
 
 

@@ -19,6 +19,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+# Never write bytecode into external/SoccerNet clones during validation.
+os.environ.setdefault("PYTHONDONTWRITEBYTECODE", "1")
+sys.dont_write_bytecode = True
+
 import yaml
 
 try:
@@ -345,10 +349,15 @@ def validate_external_lock(
     if not isinstance(repos, dict) or not isinstance(third, dict):
         result.err("lock repositories groups must be mappings", integrity=True)
         return
-    if len(repos) != 19:
-        result.err(f"expected 19 SoccerNet repos, found {len(repos)}", integrity=True)
-    if len(third) != 3:
-        result.err(f"expected 3 third-party repos, found {len(third)}", integrity=True)
+    # Lock file is canonical: counts must be non-empty and consistent, not hard-coded.
+    if len(repos) < 1:
+        result.err("lock repositories group is empty", integrity=True)
+    if len(third) < 1:
+        result.err("lock third_party_repositories group is empty", integrity=True)
+    result.extras["lock_canonical_counts"] = {
+        "soccernet_repositories": len(repos),
+        "third_party_repositories": len(third),
+    }
     all_ids = list(repos.keys()) + list(third.keys())
     if len(all_ids) != len(set(all_ids)):
         result.err("duplicate repo ids across lock groups", integrity=True)

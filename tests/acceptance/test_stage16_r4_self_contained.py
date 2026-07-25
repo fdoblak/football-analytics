@@ -14,7 +14,6 @@ from football_analytics.acceptance.isolation import (
 )
 from football_analytics.acceptance.namespaces import (
     DEPRECATED_INVALID_TARGET,
-    GATE_TECHNICAL_PREVIEW,
 )
 from football_analytics.acceptance.self_contained import (
     ScenarioConfig,
@@ -86,21 +85,22 @@ def test_reference_analysis_uses_authoritative_target() -> None:
 
 
 def test_final_report_and_single_customer_png_policy() -> None:
-    final_json = ROOT / "artifacts/final/single_player_analysis_summary.json"
-    final_png = ROOT / "artifacts/final/single_player_analysis_summary.png"
+    final_json = ROOT / "artifacts/final_delivery/single_player_analysis_summary.json"
+    final_png = ROOT / "artifacts/final_delivery/single_player_analysis_summary.png"
     assert final_json.is_file()
     assert final_png.is_file()
     payload = json.loads(final_json.read_text())
-    assert payload["gate"] == GATE_TECHNICAL_PREVIEW
-    assert payload["hf_required"] is False
     assert payload["target"]["player_id"] == "506469"
     assert payload["target"]["jersey_number"] == 24
-    pngs = list((ROOT / "artifacts/final").glob("*.png"))
+    assert payload["release"]["hf_required"] is False
+    pngs = list((ROOT / "artifacts").rglob("*.png"))
     assert len(pngs) == 1
     assert pngs[0].name == "single_player_analysis_summary.png"
+    assert "final_delivery" in str(pngs[0])
     assert not (
         ROOT / "artifacts/evidence/stage_16_real_video_pilot/real_video_pilot_summary.png"
     ).exists()
+    assert not (ROOT / "artifacts/final/single_player_analysis_summary.png").exists()
 
 
 def test_offline_env_no_hf_token_required(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:

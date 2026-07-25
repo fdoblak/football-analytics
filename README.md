@@ -3,9 +3,10 @@
 Proprietary broadcast football video analytics pipeline (detection → tracking →
 identity → calibration → game state → events → reports/API).
 
-**Current stage:** Stage 16-R4 technical preview
-(`PASS_WITH_FINDINGS — SELF-CONTAINED TECHNICAL ACCEPTANCE COMPLETE; REAL-VIDEO TRACKING VALIDATED; VIDEO-EVENT ACCURACY NOT VALIDATED`).
-Tag: **`single-player-analytics-technical-preview-v0.16.0`** (not v1.0.0).
+**Current stage:** Stage 16-R4-FINAL technical preview
+(`PASS_WITH_FINDINGS — VIDEO-BACKED TECHNICAL PREVIEW CONSOLIDATED; RELEASE TREE CLEAN; VIDEO-EVENT ACCURACY NOT VALIDATED`).
+Tag: **`single-player-analytics-technical-preview-v0.16.1`**.
+Canonical customer outputs: [`artifacts/final_delivery/`](artifacts/final_delivery/).
 SoccerTrack v2 panoramic video is an **optional** external validation source —
 Hugging Face token/login is **not** required for acceptance, tests, or release.
 
