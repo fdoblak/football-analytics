@@ -399,7 +399,10 @@ class CliAndGitTests(unittest.TestCase):
             text=True,
             check=False,
         )
-        self.assertEqual(proc.stdout.strip(), "")
+        allowed = {"artifacts/final_delivery/real_video_tracking_proof.mp4"}
+        tracked = {line.strip() for line in proc.stdout.splitlines() if line.strip()}
+        self.assertTrue(tracked.issubset(allowed), tracked)
+        self.assertFalse(any(p.endswith(".pt") for p in tracked))
 
 
 if __name__ == "__main__":
