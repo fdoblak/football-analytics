@@ -43,35 +43,35 @@ class PitchMasks:
 
 
 def estimate_fence_y(frame: np.ndarray) -> int:
-    """Upper pitch boundary approximation from horizontal edge energy."""
+    """Far touchline / fence y from top of dominant green pitch blob."""
     h, w = frame.shape[:2]
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    edges = cv2.Canny(gray, 60, 150)
-    # Prefer upper-mid band for fence / far touchline
-    y0, y1 = int(0.12 * h), int(0.55 * h)
-    band = edges[y0:y1, :]
-    row_energy = band.mean(axis=1)
-    if row_energy.size == 0:
-        return int(0.28 * h)
-    # Peak of horizontal structure
-    peak = int(np.argmax(row_energy))
-    return y0 + peak
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    green = cv2.inRange(hsv, (28, 20, 30), (95, 255, 255))
+    green = cv2.morphologyEx(green, cv2.MORPH_CLOSE, np.ones((9, 9), np.uint8))
+    # row-wise green fraction
+    row_frac = green.mean(axis=1) / 255.0
+    # find first row from top where green becomes substantial (pitch starts)
+    thresh = 0.25
+    ys = np.where(row_frac >= thresh)[0]
+    if ys.size == 0:
+        return int(0.22 * h)
+    y_start = int(ys[0])
+    # fence sits slightly above pitch green onset
+    return max(0, y_start - 4)
 
 
 def compute_pitch_masks(frame: np.ndarray) -> PitchMasks:
-    """Tight playable pitch: green + below fence + largest component + erosion."""
+    """Tight playable pitch: green below far touchline + largest component + erosion."""
     h, w = frame.shape[:2]
     fence_y = estimate_fence_y(frame)
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     green = cv2.inRange(hsv, (28, 20, 30), (95, 255, 255))
-    # Drop upper band (trees/fence/sky)
-    green[: max(0, fence_y - 8), :] = 0
-    # Drop extreme bottom spectator stand strip if highly non-green
-    bottom = int(0.88 * h)
-    green[bottom:, :] = cv2.bitwise_and(
-        green[bottom:, :],
-        cv2.inRange(hsv[bottom:, :], (28, 40, 40), (95, 255, 255)),
-    )
+    # Drop sky/trees above far touchline
+    green[: max(0, fence_y), :] = 0
+    # Drop extreme bottom spectator strip unless strongly green
+    bottom = int(0.90 * h)
+    strong = cv2.inRange(hsv[bottom:, :], (28, 45, 40), (95, 255, 255))
+    green[bottom:, :] = cv2.bitwise_and(green[bottom:, :], strong)
     green = cv2.morphologyEx(green, cv2.MORPH_CLOSE, np.ones((11, 11), np.uint8))
     green = cv2.morphologyEx(green, cv2.MORPH_OPEN, np.ones((5, 5), np.uint8))
     cnts, _ = cv2.findContours(green, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -80,10 +80,9 @@ def compute_pitch_masks(frame: np.ndarray) -> PitchMasks:
         c = max(cnts, key=cv2.contourArea)
         if cv2.contourArea(c) > 0.08 * h * w:
             cv2.drawContours(visible, [c], -1, 255, -1)
-    # Interior: erode to exclude touchline staff / fence-adjacent people
-    interior = cv2.erode(visible, np.ones((31, 31), np.uint8), iterations=1)
-    # Extra: anything above fence_y+margin is never interior
-    interior[: min(h, fence_y + 12), :] = 0
+    # Milder erosion so on-field players near touchline keep eligibility
+    interior = cv2.erode(visible, np.ones((17, 17), np.uint8), iterations=1)
+    interior[: min(h, fence_y + 4), :] = 0
     area_frac = float(np.count_nonzero(visible)) / float(h * w)
     return PitchMasks(visible=visible, interior=interior, fence_y=fence_y, area_frac=area_frac)
 
