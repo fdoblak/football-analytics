@@ -40,4 +40,6 @@ def test_holdout_evaluation_is_nogo() -> None:
     assert ev["gate"].startswith("NO-GO")
     assert ev["gt_counts"]["human_reviewed"] >= 180
     assert ev["gt_counts"]["ball_reviewed"] >= 300
-    assert "role_macro_f1" in ev["acceptance_blockers"] or ev["role_macro_f1"] < 0.9
+    assert "calibration" in ev["acceptance_blockers"]
+    assert ev["role_macro_f1"] >= 0.90
+    assert ev["ball_holdout"]["f1"] >= 0.75

@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+from collections import defaultdict
 from typing import Any
 
 ALLOWED_ROLES = {"player", "goalkeeper", "referee", "staff", "unknown"}
 PLAYER_TEAMS = {"yellow", "white", "unknown"}
+ROLE_EVAL_LABELS = ("player", "goalkeeper", "referee", "staff")
 
 
 def normalize_team_for_role(role: str, team: str | None) -> str | None:
@@ -53,3 +55,40 @@ def role_confusion_referee_as_player(humans_gt: list[dict], humans_pred: list[di
                 bad += 1
                 break
     return bad
+
+
+def role_macro_f1(
+    pairs: list[tuple[str, str]], labels: tuple[str, ...] = ROLE_EVAL_LABELS
+) -> tuple[float, dict[str, float], dict[str, int]]:
+    """Macro-F1 over role labels present in GT or predictions; skip unknown."""
+    confusion: dict[str, int] = defaultdict(int)
+    tp = {lab: 0 for lab in labels}
+    fp = {lab: 0 for lab in labels}
+    fn = {lab: 0 for lab in labels}
+    for gt, pred in pairs:
+        g = gt if gt in labels else "unknown"
+        p = pred if pred in labels else "unknown"
+        confusion[f"{g}->{p}"] += 1
+        if g == "unknown" and p == "unknown":
+            continue
+        if g == p and g in labels:
+            tp[g] += 1
+        else:
+            if p in labels:
+                fp[p] += 1
+            if g in labels:
+                fn[g] += 1
+    per: dict[str, float] = {}
+    scores: list[float] = []
+    for lab in labels:
+        prec = tp[lab] / (tp[lab] + fp[lab]) if (tp[lab] + fp[lab]) else 0.0
+        rec = tp[lab] / (tp[lab] + fn[lab]) if (tp[lab] + fn[lab]) else 0.0
+        f1 = (2 * prec * rec / (prec + rec)) if (prec + rec) else 0.0
+        # Only average labels with GT support
+        if tp[lab] + fn[lab] > 0:
+            per[lab] = f1
+            scores.append(f1)
+        else:
+            per[lab] = float("nan")
+    macro = float(sum(scores) / len(scores)) if scores else 0.0
+    return macro, per, dict(confusion)

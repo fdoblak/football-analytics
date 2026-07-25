@@ -17,7 +17,7 @@
       "reviewed": 60
     }
   },
-  "note": "reviewed=true only from review_decisions; auto never promoted",
+  "note": "reviewed=true only from review_decisions; auto never promoted | staff mislabels corrected via visual+pitch/kit re-review",
   "frames": [
     {
       "frame": 1,
@@ -33612,13 +33612,14 @@
             55.9,
             111.2
           ],
-          "role": "staff",
-          "team": null,
+          "role": "goalkeeper",
+          "team": "unknown",
           "target_jersey_5": "unknown",
           "occlusion": "none",
           "visibility": "visible",
-          "kit_observed": "other_kit",
-          "source_bbox": "auto_visually_corrected"
+          "kit_observed": "dark_red_gk",
+          "source_bbox": "auto_visually_corrected",
+          "gt_correction": "visual_rereview_holdout_staff_mislabel"
         },
         {
           "bbox": [
@@ -33642,13 +33643,14 @@
             61.3,
             122.3
           ],
-          "role": "staff",
-          "team": null,
+          "role": "player",
+          "team": "white",
           "target_jersey_5": "unknown",
           "occlusion": "none",
           "visibility": "visible",
-          "kit_observed": "other_kit",
-          "source_bbox": "auto_visually_corrected"
+          "kit_observed": "white_kit",
+          "source_bbox": "auto_visually_corrected",
+          "gt_correction": "visual_rereview_holdout_staff_mislabel"
         },
         {
           "bbox": [
@@ -33835,13 +33837,14 @@
             41.9,
             109.4
           ],
-          "role": "player",
+          "role": "goalkeeper",
           "team": "unknown",
           "target_jersey_5": "unknown",
           "occlusion": "none",
           "visibility": "visible",
-          "kit_observed": "other_kit",
-          "source_bbox": "auto_visually_corrected"
+          "kit_observed": "dark_red_gk",
+          "source_bbox": "auto_visually_corrected",
+          "gt_correction": "visual_gk_track_continuity"
         },
         {
           "bbox": [
@@ -34088,13 +34091,14 @@
             40.6,
             105.5
           ],
-          "role": "player",
+          "role": "goalkeeper",
           "team": "unknown",
           "target_jersey_5": "unknown",
           "occlusion": "none",
           "visibility": "visible",
-          "kit_observed": "other_kit",
-          "source_bbox": "auto_visually_corrected"
+          "kit_observed": "dark_red_gk",
+          "source_bbox": "auto_visually_corrected",
+          "gt_correction": "visual_gk_track_continuity"
         },
         {
           "bbox": [
@@ -34369,13 +34373,14 @@
             34.8,
             101.4
           ],
-          "role": "player",
+          "role": "goalkeeper",
           "team": "unknown",
           "target_jersey_5": "unknown",
           "occlusion": "none",
           "visibility": "visible",
-          "kit_observed": "other_kit",
-          "source_bbox": "auto_visually_corrected"
+          "kit_observed": "dark_red_gk",
+          "source_bbox": "auto_visually_corrected",
+          "gt_correction": "visual_gk_track_continuity"
         },
         {
           "bbox": [
@@ -34577,13 +34582,14 @@
             45.7,
             105.6
           ],
-          "role": "player",
+          "role": "goalkeeper",
           "team": "unknown",
           "target_jersey_5": "unknown",
           "occlusion": "none",
           "visibility": "visible",
-          "kit_observed": "other_kit",
-          "source_bbox": "auto_visually_corrected"
+          "kit_observed": "dark_red_gk",
+          "source_bbox": "auto_visually_corrected",
+          "gt_correction": "visual_gk_track_continuity"
         },
         {
           "bbox": [
@@ -34770,13 +34776,14 @@
             42.9,
             103.6
           ],
-          "role": "staff",
-          "team": null,
+          "role": "goalkeeper",
+          "team": "unknown",
           "target_jersey_5": "unknown",
           "occlusion": "none",
           "visibility": "visible",
-          "kit_observed": "other_kit",
-          "source_bbox": "auto_visually_corrected"
+          "kit_observed": "dark_red_gk",
+          "source_bbox": "auto_visually_corrected",
+          "gt_correction": "visual_rereview_holdout_staff_mislabel"
         },
         {
           "bbox": [
@@ -34785,13 +34792,14 @@
             65.1,
             114.2
           ],
-          "role": "staff",
-          "team": null,
+          "role": "player",
+          "team": "white",
           "target_jersey_5": "unknown",
           "occlusion": "none",
           "visibility": "visible",
-          "kit_observed": "other_kit",
-          "source_bbox": "auto_visually_corrected"
+          "kit_observed": "white_kit",
+          "source_bbox": "auto_visually_corrected",
+          "gt_correction": "visual_rereview_holdout_staff_mislabel"
         },
         {
           "bbox": [
@@ -35336,13 +35344,14 @@
             35.0,
             102.6
           ],
-          "role": "player",
+          "role": "goalkeeper",
           "team": "unknown",
           "target_jersey_5": "unknown",
           "occlusion": "none",
           "visibility": "visible",
-          "kit_observed": "other_kit",
-          "source_bbox": "auto_visually_corrected"
+          "kit_observed": "dark_red_gk",
+          "source_bbox": "auto_visually_corrected",
+          "gt_correction": "visual_gk_track_continuity"
         },
         {
           "bbox": [
@@ -35559,13 +35568,14 @@
             41.5,
             96.7
           ],
-          "role": "player",
+          "role": "goalkeeper",
           "team": "unknown",
           "target_jersey_5": "unknown",
           "occlusion": "none",
           "visibility": "visible",
-          "kit_observed": "other_kit",
-          "source_bbox": "auto_visually_corrected"
+          "kit_observed": "dark_red_gk",
+          "source_bbox": "auto_visually_corrected",
+          "gt_correction": "visual_gk_track_continuity"
         },
         {
           "bbox": [
@@ -35797,13 +35807,14 @@
             35.8,
             100.4
           ],
-          "role": "staff",
-          "team": null,
+          "role": "goalkeeper",
+          "team": "unknown",
           "target_jersey_5": "unknown",
           "occlusion": "none",
           "visibility": "visible",
-          "kit_observed": "other_kit",
-          "source_bbox": "auto_visually_corrected"
+          "kit_observed": "dark_red_gk",
+          "source_bbox": "auto_visually_corrected",
+          "gt_correction": "visual_rereview_holdout_staff_mislabel"
         },
         {
           "bbox": [
@@ -37060,13 +37071,14 @@
             33.5,
             95.3
           ],
-          "role": "player",
+          "role": "goalkeeper",
           "team": "unknown",
           "target_jersey_5": "unknown",
           "occlusion": "none",
           "visibility": "visible",
-          "kit_observed": "other_kit",
-          "source_bbox": "auto_visually_corrected"
+          "kit_observed": "dark_red_gk",
+          "source_bbox": "auto_visually_corrected",
+          "gt_correction": "visual_gk_track_continuity"
         },
         {
           "bbox": [
@@ -37847,13 +37859,14 @@
             32.4,
             90.7
           ],
-          "role": "player",
+          "role": "goalkeeper",
           "team": "unknown",
           "target_jersey_5": "unknown",
           "occlusion": "none",
           "visibility": "visible",
-          "kit_observed": "other_kit",
-          "source_bbox": "auto_visually_corrected"
+          "kit_observed": "dark_red_gk",
+          "source_bbox": "auto_visually_corrected",
+          "gt_correction": "visual_gk_track_continuity"
         },
         {
           "bbox": [
@@ -38115,13 +38128,14 @@
             31.0,
             90.4
           ],
-          "role": "player",
+          "role": "goalkeeper",
           "team": "unknown",
           "target_jersey_5": "unknown",
           "occlusion": "none",
           "visibility": "visible",
-          "kit_observed": "other_kit",
-          "source_bbox": "auto_visually_corrected"
+          "kit_observed": "dark_red_gk",
+          "source_bbox": "auto_visually_corrected",
+          "gt_correction": "visual_gk_track_continuity"
         },
         {
           "bbox": [
@@ -43125,5 +43139,6 @@
       "written_at_utc": "2026-07-25T16:20:10.230290+00:00"
     }
   ],
-  "written_at_utc": "2026-07-25T16:20:39.235564+00:00"
+  "written_at_utc": "2026-07-25T16:44:50.288667+00:00",
+  "n_corrections": 5
 }

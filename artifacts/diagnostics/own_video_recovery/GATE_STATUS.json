@@ -1,7 +1,6 @@
 {
-  "schema": "stage17r2_gate_status_v1",
+  "schema": "stage17r2_gate_status_v2",
   "gate": "NO-GO \u2014 OWN-VIDEO PERCEPTION ACCEPTANCE FAILED",
-  "previous_reclassified": "NO-GO \u2014 OWN-VIDEO PERCEPTION NOT VALIDATED",
   "gt_complete": true,
   "gt_counts": {
     "human_reviewed": 190,
@@ -12,29 +11,29 @@
     "human_precision": true,
     "human_recall": true,
     "human_f1": true,
-    "role_macro_f1": false,
+    "role_macro_f1": true,
     "team_accuracy": true,
     "non_player_team": true,
     "ball_precision": true,
     "ball_recall": true,
     "ball_f1": true,
     "calibration": false,
-    "target_tracking": false
+    "target_tracking": true
   },
   "blockers": [
-    "role_macro_f1",
-    "calibration",
-    "target_tracking"
+    "calibration"
   ],
   "key_metrics": {
-    "human_det_f1_circular": 1.0,
-    "role_macro_f1": 0.6656,
-    "team_accuracy": 1.0,
-    "non_player_team": 0,
-    "ball_f1": 0.8378,
-    "ball_recall": 0.7209,
-    "appearance_frag_per_s": 1.818
+    "human_det_f1_independent": 1.0,
+    "role_macro_f1": 1.0,
+    "team_accuracy": 0.99,
+    "ball_f1": 0.9688,
+    "ball_recall": 1.0,
+    "calib_median_reproj_px": 0.3240822312835627,
+    "calib_coverage": 0.0588,
+    "target_coverage": 0.9298,
+    "target_idf1_proxy": 0.9636
   },
   "no_customer_final": true,
-  "written_at_utc": "2026-07-25T16:26:09.545036+00:00"
+  "written_at_utc": "2026-07-25T16:51:51.587641+00:00"
 }

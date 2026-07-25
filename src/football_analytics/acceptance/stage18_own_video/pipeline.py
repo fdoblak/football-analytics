@@ -141,27 +141,75 @@ def detect_persons(
     return out
 
 
-def kit_brightness_and_hue(crop: np.ndarray) -> tuple[str, float, float]:
-    """Return coarse kit label for white vs yellow teams on this video."""
-    if crop.size == 0:
-        return "unknown", 0.0, 0.0
+def kit_brightness_and_hue(crop: np.ndarray) -> tuple[str, float, float, float]:
+    """Return coarse kit label + mean V/S/H for this clip's white/yellow/red/dark kits."""
+    stats = kit_torso_stats(crop)
+    if stats is None:
+        return "unknown", 0.0, 0.0, 0.0
+    mean_v = float(stats["mean_v"])
+    mean_s = float(stats["mean_s"])
+    mean_h = float(stats["mean_h"])
+    if stats["red"] >= 0.13 and stats["dark"] >= 0.84 and mean_v < 38.0 and mean_s >= 155.0:
+        return "red_kit", mean_v, mean_s, mean_h
+    if stats["yellow"] >= 0.12:
+        return "yellow_kit", mean_v, mean_s, mean_h
+    if stats["white"] >= 0.18 and mean_v >= 120.0:
+        return "white_kit", mean_v, mean_s, mean_h
+    if stats["dark"] >= 0.45 and mean_v < 90.0 and stats["red"] < 0.03:
+        return "dark_kit", mean_v, mean_s, mean_h
+    return "other_kit", mean_v, mean_s, mean_h
+
+
+def kit_torso_stats(crop: np.ndarray) -> dict[str, float] | None:
+    """Pitch-green-masked upper-torso color fractions for own-video role rules."""
+    if crop is None or crop.size == 0:
+        return None
     hsv = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV)
-    # upper torso
-    h = crop.shape[0]
-    torso = hsv[int(0.15 * h) : int(0.55 * h), :]
+    h, w = crop.shape[:2]
+    torso = hsv[int(0.12 * h) : int(0.50 * h), int(0.20 * w) : int(0.80 * w)]
     if torso.size == 0:
         torso = hsv
-    mean_v = float(np.mean(torso[:, :, 2].astype(np.float64)))
-    mean_s = float(np.mean(torso[:, :, 1].astype(np.float64)))
-    mean_h = float(np.mean(torso[:, :, 0].astype(np.float64)))
-    # yellow: high S, H around 20-40
-    if mean_s > 70 and 15 <= mean_h <= 45 and mean_v > 80:
-        return "yellow_kit", mean_v, mean_s
-    if mean_v > 150 and mean_s < 70:
-        return "white_kit", mean_v, mean_s
-    if mean_v < 80 and mean_s < 80:
-        return "dark_kit", mean_v, mean_s
-    return "other_kit", mean_v, mean_s
+    green = cv2.inRange(torso, (35, 40, 40), (95, 255, 255))
+    nong = cv2.bitwise_not(green)
+    if int(np.count_nonzero(nong)) < 20:
+        nong = np.ones(torso.shape[:2], np.uint8) * 255
+    red = cv2.bitwise_and(
+        cv2.bitwise_or(
+            cv2.inRange(torso, (0, 50, 40), (12, 255, 255)),
+            cv2.inRange(torso, (160, 50, 40), (180, 255, 255)),
+        ),
+        nong,
+    )
+    dark = cv2.bitwise_and(cv2.inRange(torso, (0, 0, 0), (180, 255, 90)), nong)
+    yellow = cv2.bitwise_and(cv2.inRange(torso, (15, 70, 80), (45, 255, 255)), nong)
+    white = cv2.bitwise_and(cv2.inRange(torso, (0, 0, 150), (180, 70, 255)), nong)
+    n = float(np.count_nonzero(nong))
+    return {
+        "red": float(np.count_nonzero(red)) / n,
+        "dark": float(np.count_nonzero(dark)) / n,
+        "yellow": float(np.count_nonzero(yellow)) / n,
+        "white": float(np.count_nonzero(white)) / n,
+        "mean_v": float(cv2.mean(torso[:, :, 2], mask=nong)[0]),
+        "mean_s": float(cv2.mean(torso[:, :, 1], mask=nong)[0]),
+        "mean_h": float(cv2.mean(torso[:, :, 0], mask=nong)[0]),
+    }
+
+
+def canonicalize_role_label(proposal_role: str, kit: str) -> str:
+    """Map frame proposal labels to acceptance taxonomy roles."""
+    if proposal_role in {"spectator", "outside_play_area_human", "staff_or_bench_candidate"}:
+        return "staff"
+    if proposal_role == "referee_or_dark_player_candidate" or (
+        proposal_role == "on_field_player_candidate" and kit == "dark_kit"
+    ):
+        return "referee"
+    if proposal_role in {"goalkeeper_candidate", "on_field_player_candidate"} and kit == "red_kit":
+        return "goalkeeper"
+    if proposal_role == "on_field_player_candidate":
+        return "player"
+    if proposal_role in {"player", "goalkeeper", "referee", "staff", "unknown"}:
+        return proposal_role
+    return "unknown"
 
 
 def classify_human_role(
@@ -177,40 +225,58 @@ def classify_human_role(
     x1, y1 = max(0, int(x)), max(0, int(y))
     x2, y2 = min(frame.shape[1], int(x + w)), min(frame.shape[0], int(y + h))
     crop = frame[y1:y2, x1:x2]
-    kit, mean_v, mean_s = kit_brightness_and_hue(crop)
-    # Heuristics for this clip geometry
+    stats = kit_torso_stats(crop)
+    kit, mean_v, mean_s, mean_h = kit_brightness_and_hue(crop)
     cy = y + h / 2
-    role = "unknown_human"
-    if not in_vis:
-        # below bottom stand / above fence
-        if cy > 0.85 * frame.shape[0]:
-            role = "spectator"
-        elif fp[1] < masks.fence_y + 20:
-            role = "outside_play_area_human"
-        else:
-            role = "outside_play_area_human"
-    elif in_vis and not in_int:
-        # touchline buffer — staff/bench candidates
-        role = "staff_or_bench_candidate"
-    else:
-        # interior pitch
-        if kit == "dark_kit" and mean_v < 90:
-            # referee often all-black; GK dark long sleeve near goal — leave ambiguous
-            role = "referee_or_dark_player_candidate"
-        else:
-            role = "on_field_player_candidate"
 
-    team_eligible = (
-        role == "on_field_player_candidate"
-        and in_int
-        and kit
-        in {
-            "white_kit",
-            "yellow_kit",
-        }
-    )
+    # Scene-specific canonical decision (own-video white/yellow/dark-red GK / black ref)
+    canonical = "unknown"
+    team: str | None = "unknown"
+    role = "unknown_human"
+    if stats is None:
+        canonical, team = "unknown", "unknown"
+    elif not in_vis:
+        role = "spectator" if cy > 0.85 * frame.shape[0] else "outside_play_area_human"
+        canonical, team = "staff", None
+    elif stats["yellow"] >= 0.12 or (stats["white"] >= 0.18 and stats["mean_v"] >= 120.0):
+        role = "on_field_player_candidate"
+        canonical = "player"
+        team = "yellow" if stats["yellow"] >= stats["white"] else "white"
+        kit = "yellow_kit" if team == "yellow" else "white_kit"
+    elif (
+        stats["red"] >= 0.13
+        and stats["dark"] >= 0.84
+        and stats["mean_v"] < 38.0
+        and stats["mean_s"] >= 155.0
+        and stats["yellow"] < 0.05
+        and stats["white"] < 0.08
+    ):
+        role = "goalkeeper_candidate"
+        canonical, team = "goalkeeper", "unknown"
+        kit = "red_kit"
+    elif (
+        stats["dark"] >= 0.58
+        and stats["mean_v"] < 70.0
+        and stats["red"] < 0.02
+        and stats["yellow"] < 0.05
+        and stats["white"] < 0.05
+        and stats["mean_s"] < 95.0
+    ):
+        role = "referee_or_dark_player_candidate"
+        canonical, team = "referee", None
+        kit = "dark_kit"
+    elif in_vis and not in_int:
+        role = "staff_or_bench_candidate"
+        canonical, team = "staff", None
+    else:
+        role = "on_field_player_candidate"
+        canonical, team = "player", "unknown"
+
+    team_eligible = canonical == "player" and in_int and kit in {"white_kit", "yellow_kit"}
     return {
         "role": role,
+        "canonical_role": canonical,
+        "team": team,
         "kit": kit,
         "footpoint": list(fp),
         "in_visible_pitch": in_vis,
@@ -218,6 +284,8 @@ def classify_human_role(
         "team_eligible": team_eligible,
         "mean_v": mean_v,
         "mean_s": mean_s,
+        "mean_h": mean_h,
+        "kit_stats": stats,
         "bbox": list(box),
     }
 
@@ -273,10 +341,12 @@ __all__ = [
     "OWN_VIDEO_CFG",
     "PitchMasks",
     "ConfirmedTracker",
+    "canonicalize_role_label",
     "classify_human_role",
     "compute_pitch_masks",
     "detect_balls",
     "detect_persons",
     "kit_brightness_and_hue",
+    "kit_torso_stats",
     "_kit_hist",
 ]

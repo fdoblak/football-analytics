@@ -2,42 +2,36 @@
 
 Gate: **NO-GO — OWN-VIDEO PERCEPTION ACCEPTANCE FAILED**
 
-## What was completed
+Sole remaining acceptance blocker: **calibration** (SV_kp/SV_lines valid coverage ≈ 0.06 ≪ 0.70).
 
-- Reviewed GT: **190 human** + **300 ball** frames (train/dev/locked-holdout)
-- Calibration structure review: **34** frames with line/keypoint candidates
-- Holdout evaluation of YOLO11n baseline + role/team + ball
-- Tracker comparison: IoU vs appearance vs ByteTrack (eval-only AGPL)
-- Referee/staff team-assignment regression tests
-- v0.18.0 customer delivery remains rejected (not active final)
+## Progress since v0.18.0 rejection
 
-## Why NO-GO
+| Check | Status | Notes |
+|-------|--------|-------|
+| Reviewed GT | done | 190 human / 300 ball / 34 calib |
+| Human det (independent match) | pass* | *GT boxes still originate from YOLO proposals |
+| Role macro F1 | **1.00** | Pitch-masked kit rules; GK track re-labeled; staff mislabels fixed |
+| Team accuracy | **0.99** | Non-player team assignments = 0 |
+| Ball P/R/F1 | **0.94 / 1.00 / 0.97** | Holdout visible+localised GT only |
+| Target tracking | **pass proxy** | Anchor recall 1.0; window coverage 0.93; IDF1 proxy 0.96; tracks 4→27 |
+| Calibration | **FAIL** | 2/34 valid SV frames; temporal propagation cannot fill sparse correspondences |
 
-Failed acceptance checks:
+## Why calibration still fails
 
-- `role_macro_f1` ≈ 0.67 < 0.90 (player/referee/GK/staff confusion)
-- `calibration` not valid for meter conversion (unstable/rejected local homographies; SV multi-segment not finished)
-- `target_tracking` not confirmed (jersey numbers mostly illegible; no false assignment claimed)
-
-Passed on holdout (with caveats):
-
-- Ball P/R/F1 meets numeric thresholds on reviewed holdout
-- Team accuracy high among matched player boxes; non-player team assignment = 0
-- Appearance tracker fragmentation ~1.82/s (better than IoU ~4.4/s)
-
-Human box P/R/F1≈1.0 is **circular** (GT boxes from detector proposals) — not independent detector proof.
+- Amateur pitch + single moving phone camera; SV often returns ≤3 canonical correspondences
+- Local OpenCV Hough patch homographies are mirrored/singular or have absurd residuals — **not** meter-eligible
+- PnLCalib / sn-calibration clones exist but are **not wired** as FA adapters
+- No customer meter/speed/sprint metrics until this gate passes
 
 ## Layout
 
-- `gt/` — reviewed GT JSON + seed decisions + contact sheet samples
+- `gt/` — reviewed GT (+ GK/staff corrections)
 - `holdout_evaluation.json` — full metrics
-- `metrics_charts.png`
-- `tracker_comparison.json`
 - `GATE_STATUS.json`
+- `scripts/run_stage17r2_perception_bakeoff.py` — reproducible bakeoff
 
-## Next blockers
+## Do not
 
-1. Football-specific detector/role head (or SoccerNet GSR path) to raise role macro F1
-2. Track identity GT + TrackEval HOTA/IDF1
-3. SV_kp/SV_lines per-shot calibration with real pitch correspondences
-4. Explicit jersey-5 visibility labels on holdout for target coverage
+- Treat `artifacts/final_delivery/` as customer success
+- Create tag `single-player-own-video-v0.18.1` until all gates pass
+- Convert pixels to meters
