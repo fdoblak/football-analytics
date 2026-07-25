@@ -1,0 +1,2420 @@
+{
+  "schema": "stage17r2_sheet_review_notes_v1",
+  "reviewer": "cursor_agent_visual",
+  "written_at_utc": "2026-07-25T16:17:48.757048+00:00",
+  "source": {
+    "contact_sheets_dir": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full",
+    "index": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/index.json",
+    "overlays_ball_used_for_verification": "/home/fdoblak/workspace/own_video_analysis/stage17r2/overlays_ball",
+    "note": "Frame lists taken from index.json yellow labels on sheets. Ball per-frame judgments from contact sheets, cross-checked on full overlays/zooms where needed."
+  },
+  "human_sheets": [
+    {
+      "sheet_file": "h_004.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/h_004.jpg",
+      "frames": [
+        193,
+        197,
+        201,
+        205,
+        209,
+        213,
+        217,
+        221,
+        225,
+        229,
+        233,
+        237
+      ],
+      "yellow_white_team_boxes_mostly_correct": true,
+      "referee_black_wrongly_team_boxed": {
+        "present": false,
+        "frames": []
+      },
+      "off_pitch_people_boxed_as_players": {
+        "present": false,
+        "frames": []
+      },
+      "red_kit_goalkeeper": {
+        "present": true,
+        "labeling": "red bounding box consistently near left goal",
+        "frames_noted": "all frames on sheet"
+      },
+      "overall_quality": "good",
+      "notes": "Stable yellow/white team boxes; referee in black left unboxed; spectators/off-pitch not boxed."
+    },
+    {
+      "sheet_file": "h_005.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/h_005.jpg",
+      "frames": [
+        241,
+        245,
+        249,
+        253,
+        257,
+        261,
+        265,
+        269,
+        273,
+        277,
+        281,
+        285
+      ],
+      "yellow_white_team_boxes_mostly_correct": true,
+      "referee_black_wrongly_team_boxed": {
+        "present": false,
+        "frames": []
+      },
+      "off_pitch_people_boxed_as_players": {
+        "present": false,
+        "frames": []
+      },
+      "red_kit_goalkeeper": {
+        "present": true,
+        "labeling": "red bounding box near left goal",
+        "frames_noted": "all frames on sheet"
+      },
+      "overall_quality": "good",
+      "notes": "Team boxes consistent; referee not given team box; background walkers not boxed."
+    },
+    {
+      "sheet_file": "h_006.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/h_006.jpg",
+      "frames": [
+        289,
+        293,
+        297,
+        301,
+        305,
+        309,
+        313,
+        317,
+        361,
+        367,
+        373,
+        379
+      ],
+      "yellow_white_team_boxes_mostly_correct": true,
+      "referee_black_wrongly_team_boxed": {
+        "present": false,
+        "frames": []
+      },
+      "off_pitch_people_boxed_as_players": {
+        "present": false,
+        "frames": []
+      },
+      "red_kit_goalkeeper": {
+        "present": true,
+        "labeling": "red box in tighter camera frames 289-317; not visible in wider midfield frames 361-379",
+        "frames_noted": "289-317"
+      },
+      "overall_quality": "good",
+      "notes": "Top 8 frames closer view with red GK; bottom 4 wider midfield view without GK in frame. Referee unboxed throughout."
+    },
+    {
+      "sheet_file": "h_007.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/h_007.jpg",
+      "frames": [
+        385,
+        391,
+        397,
+        403,
+        409,
+        415,
+        421,
+        427,
+        433,
+        439,
+        445,
+        451
+      ],
+      "yellow_white_team_boxes_mostly_correct": true,
+      "referee_black_wrongly_team_boxed": {
+        "present": true,
+        "frames": [
+          433,
+          439,
+          445,
+          451
+        ],
+        "detail": "person in black on right sideline (coach/official) given yellow team box; on-pitch referee earlier appears unboxed"
+      },
+      "off_pitch_people_boxed_as_players": {
+        "present": true,
+        "frames": [
+          391,
+          433,
+          439,
+          445,
+          451
+        ],
+        "detail": "individuals on far right edge / sideline boxed yellow"
+      },
+      "red_kit_goalkeeper": {
+        "present": false,
+        "labeling": "none visible",
+        "frames_noted": null
+      },
+      "overall_quality": "mixed",
+      "notes": "On-pitch yellow/white boxes mostly OK; recurring sideline false positives and black-kit sideline person boxed as yellow."
+    },
+    {
+      "sheet_file": "h_008.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/h_008.jpg",
+      "frames": [
+        457,
+        463,
+        469,
+        475,
+        481,
+        487,
+        493,
+        499,
+        505,
+        511,
+        517,
+        523
+      ],
+      "yellow_white_team_boxes_mostly_correct": true,
+      "referee_black_wrongly_team_boxed": {
+        "present": false,
+        "frames": []
+      },
+      "off_pitch_people_boxed_as_players": {
+        "present": false,
+        "frames": []
+      },
+      "red_kit_goalkeeper": {
+        "present": false,
+        "labeling": "none clearly identifiable",
+        "frames_noted": null
+      },
+      "overall_quality": "good",
+      "notes": "Wide side view; team boxes track kits correctly; referee near center circle unboxed."
+    },
+    {
+      "sheet_file": "h_009.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/h_009.jpg",
+      "frames": [
+        529,
+        535,
+        541,
+        547,
+        553,
+        559,
+        565,
+        571,
+        577,
+        583,
+        589,
+        595
+      ],
+      "yellow_white_team_boxes_mostly_correct": true,
+      "referee_black_wrongly_team_boxed": {
+        "present": false,
+        "frames": []
+      },
+      "off_pitch_people_boxed_as_players": {
+        "present": false,
+        "frames": []
+      },
+      "red_kit_goalkeeper": {
+        "present": false,
+        "labeling": "none clearly visible in these wide shots",
+        "frames_noted": null
+      },
+      "overall_quality": "good",
+      "notes": "Stable team classification across pitch; far fence people not boxed."
+    },
+    {
+      "sheet_file": "h_010.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/h_010.jpg",
+      "frames": [
+        601,
+        607,
+        613,
+        619,
+        625,
+        631,
+        637,
+        643,
+        649,
+        655,
+        661,
+        667
+      ],
+      "yellow_white_team_boxes_mostly_correct": true,
+      "referee_black_wrongly_team_boxed": {
+        "present": false,
+        "frames": []
+      },
+      "off_pitch_people_boxed_as_players": {
+        "present": true,
+        "frames": [
+          601,
+          607,
+          613,
+          619
+        ],
+        "detail": "person beyond far fence top-right wrongly boxed yellow"
+      },
+      "red_kit_goalkeeper": {
+        "present": false,
+        "labeling": "none visible",
+        "frames_noted": null
+      },
+      "overall_quality": "mixed",
+      "notes": "On-pitch boxes good; early-frame off-pitch FP beyond fence; referee left unboxed."
+    },
+    {
+      "sheet_file": "h_011.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/h_011.jpg",
+      "frames": [
+        673,
+        679,
+        685,
+        691,
+        697,
+        703,
+        709,
+        715,
+        721,
+        727,
+        733,
+        739
+      ],
+      "yellow_white_team_boxes_mostly_correct": true,
+      "referee_black_wrongly_team_boxed": {
+        "present": false,
+        "frames": []
+      },
+      "off_pitch_people_boxed_as_players": {
+        "present": false,
+        "frames": []
+      },
+      "red_kit_goalkeeper": {
+        "present": false,
+        "labeling": "none distinctly visible",
+        "frames_noted": null
+      },
+      "overall_quality": "good",
+      "notes": "Black-kit official on touchline/lower-right correctly left unboxed."
+    },
+    {
+      "sheet_file": "h_012.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/h_012.jpg",
+      "frames": [
+        745,
+        751,
+        757,
+        763,
+        769,
+        775,
+        781,
+        787,
+        793,
+        799,
+        805,
+        811
+      ],
+      "yellow_white_team_boxes_mostly_correct": true,
+      "referee_black_wrongly_team_boxed": {
+        "present": false,
+        "frames": []
+      },
+      "off_pitch_people_boxed_as_players": {
+        "present": true,
+        "frames": [
+          751,
+          787,
+          811
+        ],
+        "detail": "far-right off-pitch/sideline person with yellow box"
+      },
+      "red_kit_goalkeeper": {
+        "present": true,
+        "labeling": "present but wrongly labeled with WHITE team box throughout sheet",
+        "frames_noted": "all frames on sheet"
+      },
+      "overall_quality": "mixed",
+      "notes": "Outfield yellow/white mostly correct; red GK misclassified as white; intermittent right-edge off-pitch FPs."
+    },
+    {
+      "sheet_file": "h_013.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/h_013.jpg",
+      "frames": [
+        817,
+        823,
+        829,
+        835,
+        841,
+        847,
+        853,
+        859,
+        865,
+        871,
+        877,
+        883
+      ],
+      "yellow_white_team_boxes_mostly_correct": true,
+      "referee_black_wrongly_team_boxed": {
+        "present": false,
+        "frames": []
+      },
+      "off_pitch_people_boxed_as_players": {
+        "present": false,
+        "frames": []
+      },
+      "red_kit_goalkeeper": {
+        "present": false,
+        "labeling": "none; near-side GK appears yellow-kit and yellow-boxed",
+        "frames_noted": null
+      },
+      "overall_quality": "good",
+      "notes": "Central referee in black correctly unboxed across all frames."
+    },
+    {
+      "sheet_file": "h_014.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/h_014.jpg",
+      "frames": [
+        889,
+        895,
+        901,
+        907,
+        913,
+        919,
+        925,
+        931,
+        937,
+        943,
+        949,
+        955
+      ],
+      "yellow_white_team_boxes_mostly_correct": true,
+      "referee_black_wrongly_team_boxed": {
+        "present": false,
+        "frames": []
+      },
+      "off_pitch_people_boxed_as_players": {
+        "present": false,
+        "frames": []
+      },
+      "red_kit_goalkeeper": {
+        "present": true,
+        "labeling": "red bounding box near right goal",
+        "frames_noted": "all frames on sheet"
+      },
+      "overall_quality": "good",
+      "notes": "Background fence people not boxed; red GK correctly distinguished with red box."
+    },
+    {
+      "sheet_file": "h_015.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/h_015.jpg",
+      "frames": [
+        961,
+        967,
+        973,
+        979,
+        985,
+        991,
+        997,
+        1003,
+        1009,
+        1015
+      ],
+      "yellow_white_team_boxes_mostly_correct": true,
+      "referee_black_wrongly_team_boxed": {
+        "present": false,
+        "frames": []
+      },
+      "off_pitch_people_boxed_as_players": {
+        "present": false,
+        "frames": []
+      },
+      "red_kit_goalkeeper": {
+        "present": true,
+        "labeling": "present in/near right goal but NOT boxed in any frame on this sheet",
+        "frames_noted": "all 10 frames"
+      },
+      "overall_quality": "good",
+      "notes": "Only 10 frames on sheet (last two slots empty). Outfield team boxes good; red GK missed (no box)."
+    }
+  ],
+  "ball_sheets": [
+    {
+      "sheet_file": "b_004.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_004.jpg",
+      "frames": [
+        145,
+        148,
+        151,
+        154,
+        157,
+        160,
+        163,
+        166,
+        169,
+        172,
+        175,
+        178
+      ],
+      "per_frame": [
+        {
+          "frame": 145,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not discernable"
+        },
+        {
+          "frame": 148,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 151,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 154,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 157,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 160,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "orange box on ball at white player's feet, right side"
+        },
+        {
+          "frame": 163,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball among cluster hard to confirm"
+        },
+        {
+          "frame": 166,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 169,
+          "ball_visibility": "ambiguous",
+          "auto_ball_box": "false_positive",
+          "notes": "auto box on yellow player's lower leg/ankle; true ball appears lower near railing \u2014 FP"
+        },
+        {
+          "frame": 172,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 175,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 178,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        }
+      ],
+      "notes": "Mostly no-detection; one clear TP (160) and one FP (169)."
+    },
+    {
+      "sheet_file": "b_005.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_005.jpg",
+      "frames": [
+        181,
+        184,
+        187,
+        190,
+        193,
+        196,
+        199,
+        202,
+        205,
+        208,
+        211,
+        214
+      ],
+      "per_frame": [
+        {
+          "frame": 181,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 184,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 187,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 190,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 193,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 196,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 199,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 202,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 205,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "orange box on ball near white player lower pitch"
+        },
+        {
+          "frame": 208,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 211,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 214,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        }
+      ],
+      "notes": "Single TP detection in sequence; rest not_visible."
+    },
+    {
+      "sheet_file": "b_006.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_006.jpg",
+      "frames": [
+        217,
+        220,
+        223,
+        226,
+        229,
+        232,
+        235,
+        238,
+        241,
+        244,
+        247,
+        250
+      ],
+      "per_frame": [
+        {
+          "frame": 217,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly identifiable in wide view"
+        },
+        {
+          "frame": 220,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly identifiable in wide view"
+        },
+        {
+          "frame": 223,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly identifiable in wide view"
+        },
+        {
+          "frame": 226,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly identifiable in wide view"
+        },
+        {
+          "frame": 229,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly identifiable in wide view"
+        },
+        {
+          "frame": 232,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly identifiable in wide view"
+        },
+        {
+          "frame": 235,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly identifiable in wide view"
+        },
+        {
+          "frame": 238,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly identifiable in wide view"
+        },
+        {
+          "frame": 241,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly identifiable in wide view"
+        },
+        {
+          "frame": 244,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly identifiable in wide view"
+        },
+        {
+          "frame": 247,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly identifiable in wide view"
+        },
+        {
+          "frame": 250,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly identifiable in wide view"
+        }
+      ],
+      "notes": "Entire sheet auto not_visible; no orange boxes. Red-kit GK visible left goal but irrelevant to ball track."
+    },
+    {
+      "sheet_file": "b_007.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_007.jpg",
+      "frames": [
+        253,
+        256,
+        259,
+        262,
+        265,
+        268,
+        271,
+        274,
+        277,
+        280,
+        283,
+        286
+      ],
+      "per_frame": [
+        {
+          "frame": 253,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "ball in air / contested; orange box TP"
+        },
+        {
+          "frame": 256,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "aerial ball TP"
+        },
+        {
+          "frame": 259,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "descending ball TP"
+        },
+        {
+          "frame": 262,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "ball right of cluster TP"
+        },
+        {
+          "frame": 265,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "auto not_visible; ball not clearly identifiable"
+        },
+        {
+          "frame": 268,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "low-score but orange box on ball near #7 TP"
+        },
+        {
+          "frame": 271,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "central TP"
+        },
+        {
+          "frame": 274,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "central TP"
+        },
+        {
+          "frame": 277,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "central TP"
+        },
+        {
+          "frame": 280,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "central TP"
+        },
+        {
+          "frame": 283,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "auto not_visible"
+        },
+        {
+          "frame": 286,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "ground ball lower center TP"
+        }
+      ],
+      "notes": "Strong aerial then ground tracking; gaps at 265 and 283."
+    },
+    {
+      "sheet_file": "b_008.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_008.jpg",
+      "frames": [
+        289,
+        292,
+        295,
+        298,
+        301,
+        304,
+        307,
+        310,
+        313,
+        316,
+        319,
+        322
+      ],
+      "per_frame": [
+        {
+          "frame": 289,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center-left cluster TP"
+        },
+        {
+          "frame": 292,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "moving right TP"
+        },
+        {
+          "frame": 295,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "rightward TP"
+        },
+        {
+          "frame": 298,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "right side TP"
+        },
+        {
+          "frame": 301,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "auto not_visible; ball hard to spot"
+        },
+        {
+          "frame": 304,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "auto not_visible"
+        },
+        {
+          "frame": 307,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "auto not_visible"
+        },
+        {
+          "frame": 310,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "auto not_visible"
+        },
+        {
+          "frame": 313,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "bottom-left near yellow player TP"
+        },
+        {
+          "frame": 316,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "auto not_visible"
+        },
+        {
+          "frame": 319,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "auto not_visible"
+        },
+        {
+          "frame": 322,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "auto not_visible"
+        }
+      ],
+      "notes": "Good early track then lost mid-sheet; brief reacquire at 313."
+    },
+    {
+      "sheet_file": "b_009.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_009.jpg",
+      "frames": [
+        325,
+        328,
+        331,
+        334,
+        337,
+        340,
+        343,
+        346,
+        349,
+        352,
+        355,
+        358
+      ],
+      "per_frame": [
+        {
+          "frame": 325,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "low-score auto box; ball left-center near players"
+        },
+        {
+          "frame": 328,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "clear orange box TP"
+        },
+        {
+          "frame": 331,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "occluded in cluster"
+        },
+        {
+          "frame": 334,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "not clearly visible"
+        },
+        {
+          "frame": 337,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "ball left side near white; auto box present"
+        },
+        {
+          "frame": 340,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "not clearly visible"
+        },
+        {
+          "frame": 343,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "not clearly visible"
+        },
+        {
+          "frame": 346,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center-right open space TP"
+        },
+        {
+          "frame": 349,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "lower-center TP"
+        },
+        {
+          "frame": 352,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "not clearly visible"
+        },
+        {
+          "frame": 355,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center-right TP"
+        },
+        {
+          "frame": 358,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "right open grass TP"
+        }
+      ],
+      "notes": "Intermittent visibility with TPs when auto fires."
+    },
+    {
+      "sheet_file": "b_010.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_010.jpg",
+      "frames": [
+        361,
+        364,
+        367,
+        370,
+        373,
+        376,
+        379,
+        382,
+        385,
+        388,
+        391,
+        394
+      ],
+      "per_frame": [
+        {
+          "frame": 361,
+          "ball_visibility": "visible",
+          "auto_ball_box": "none",
+          "notes": "ball visible center-left but no auto box (miss)"
+        },
+        {
+          "frame": 364,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center-left TP"
+        },
+        {
+          "frame": 367,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "moving left TP"
+        },
+        {
+          "frame": 370,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "toward bottom-left TP"
+        },
+        {
+          "frame": 373,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "lower-left TP"
+        },
+        {
+          "frame": 376,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "lower-left TP"
+        },
+        {
+          "frame": 379,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "lower-left TP"
+        },
+        {
+          "frame": 382,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "lower-left TP"
+        },
+        {
+          "frame": 385,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "near bottom-left corner TP"
+        },
+        {
+          "frame": 388,
+          "ball_visibility": "visible",
+          "auto_ball_box": "none",
+          "notes": "ball at bottom-left edge; no auto box"
+        },
+        {
+          "frame": 391,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "appears out of frame bottom-left"
+        },
+        {
+          "frame": 394,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "not visible"
+        }
+      ],
+      "notes": "Strong leftward track 364-385; human-visible misses at 361 and 388."
+    },
+    {
+      "sheet_file": "b_011.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_011.jpg",
+      "frames": [
+        397,
+        400,
+        403,
+        406,
+        409,
+        412,
+        415,
+        418,
+        421,
+        424,
+        427,
+        430
+      ],
+      "per_frame": [
+        {
+          "frame": 397,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 400,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "left-center near yellow player TP (low score)"
+        },
+        {
+          "frame": 403,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "at yellow player's feet TP"
+        },
+        {
+          "frame": 406,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "just kicked ahead of yellow TP"
+        },
+        {
+          "frame": 409,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "lost after kick"
+        },
+        {
+          "frame": 412,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 415,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 418,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 421,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 424,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 427,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 430,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        }
+      ],
+      "notes": "Short 3-frame TP burst then lost."
+    },
+    {
+      "sheet_file": "b_012.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_012.jpg",
+      "frames": [
+        433,
+        436,
+        439,
+        442,
+        445,
+        448,
+        451,
+        454,
+        457,
+        460,
+        463,
+        466
+      ],
+      "per_frame": [
+        {
+          "frame": 433,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clear"
+        },
+        {
+          "frame": 436,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clear"
+        },
+        {
+          "frame": 439,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clear"
+        },
+        {
+          "frame": 442,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clear"
+        },
+        {
+          "frame": 445,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clear"
+        },
+        {
+          "frame": 448,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clear"
+        },
+        {
+          "frame": 451,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clear"
+        },
+        {
+          "frame": 454,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center-right near white player TP"
+        },
+        {
+          "frame": 457,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "near yellow player TP"
+        },
+        {
+          "frame": 460,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "left of center circle TP"
+        },
+        {
+          "frame": 463,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center-right TP"
+        },
+        {
+          "frame": 466,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center with white player TP"
+        }
+      ],
+      "notes": "First 7 frames no detection; last 5 consecutive TPs near midfield."
+    },
+    {
+      "sheet_file": "b_013.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_013.jpg",
+      "frames": [
+        469,
+        472,
+        475,
+        478,
+        481,
+        484,
+        487,
+        490,
+        493,
+        496,
+        499,
+        502
+      ],
+      "per_frame": [
+        {
+          "frame": 469,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "left of center circle TP"
+        },
+        {
+          "frame": 472,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center circle TP"
+        },
+        {
+          "frame": 475,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "outside center circle TP"
+        },
+        {
+          "frame": 478,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "right of center circle TP"
+        },
+        {
+          "frame": 481,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "near yellow player TP"
+        },
+        {
+          "frame": 484,
+          "ball_visibility": "visible",
+          "auto_ball_box": "none",
+          "notes": "ball clearly visible midfield but auto not_visible \u2014 miss/FN"
+        },
+        {
+          "frame": 487,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center circle TP"
+        },
+        {
+          "frame": 490,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "right of center TP"
+        },
+        {
+          "frame": 493,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "central TP"
+        },
+        {
+          "frame": 496,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "right of center TP"
+        },
+        {
+          "frame": 499,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "further right TP"
+        },
+        {
+          "frame": 502,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "right of center circle TP"
+        }
+      ],
+      "notes": "Near-continuous midfield track; one FN at 484."
+    },
+    {
+      "sheet_file": "b_014.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_014.jpg",
+      "frames": [
+        505,
+        508,
+        511,
+        514,
+        517,
+        520,
+        523,
+        526,
+        529,
+        532,
+        535,
+        538
+      ],
+      "per_frame": [
+        {
+          "frame": 505,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 508,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "right of center circle TP"
+        },
+        {
+          "frame": 511,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 514,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "right side TP"
+        },
+        {
+          "frame": 517,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "right-center TP"
+        },
+        {
+          "frame": 520,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 523,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "right side TP"
+        },
+        {
+          "frame": 526,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "further right TP"
+        },
+        {
+          "frame": 529,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "right side TP"
+        },
+        {
+          "frame": 532,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "right near player cluster TP"
+        },
+        {
+          "frame": 535,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "right side TP"
+        },
+        {
+          "frame": 538,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "right side TP"
+        }
+      ],
+      "notes": "Play toward right wing; gaps at 505/511/520."
+    },
+    {
+      "sheet_file": "b_015.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_015.jpg",
+      "frames": [
+        541,
+        544,
+        547,
+        550,
+        553,
+        556,
+        559,
+        562,
+        565,
+        568,
+        571,
+        574
+      ],
+      "per_frame": [
+        {
+          "frame": 541,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center circle TP"
+        },
+        {
+          "frame": 544,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "left of center TP"
+        },
+        {
+          "frame": 547,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center circle TP"
+        },
+        {
+          "frame": 550,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "lower midfield TP"
+        },
+        {
+          "frame": 553,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "bottom-left quadrant TP"
+        },
+        {
+          "frame": 556,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center-line lower TP"
+        },
+        {
+          "frame": 559,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center circle TP"
+        },
+        {
+          "frame": 562,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "bottom-center TP"
+        },
+        {
+          "frame": 565,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "bottom-left TP"
+        },
+        {
+          "frame": 568,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center-line TP"
+        },
+        {
+          "frame": 571,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "bottom-center TP"
+        },
+        {
+          "frame": 574,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "bottom-center TP despite lower score"
+        }
+      ],
+      "notes": "Best continuous track on reviewed sheets \u2014 12/12 TP."
+    },
+    {
+      "sheet_file": "b_016.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_016.jpg",
+      "frames": [
+        577,
+        580,
+        583,
+        586,
+        589,
+        592,
+        595,
+        598,
+        661,
+        664,
+        667,
+        670
+      ],
+      "per_frame": [
+        {
+          "frame": 577,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center circle between white/yellow TP"
+        },
+        {
+          "frame": 580,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; hard to confirm at sheet scale"
+        },
+        {
+          "frame": 583,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 586,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 589,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 592,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 595,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 598,
+          "ball_visibility": "ambiguous",
+          "auto_ball_box": "unsure",
+          "notes": "low-score box near yellow player's foot; ball not clearly resolved \u2014 ambiguous TP/FP"
+        },
+        {
+          "frame": 661,
+          "ball_visibility": "ambiguous",
+          "auto_ball_box": "none",
+          "notes": "holdout jump; no auto box; ball hard to confirm on sheet (prior holdout review claimed visible)"
+        },
+        {
+          "frame": 664,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center-circle area TP"
+        },
+        {
+          "frame": 667,
+          "ball_visibility": "ambiguous",
+          "auto_ball_box": "none",
+          "notes": "no auto box; hard to confirm on sheet"
+        },
+        {
+          "frame": 670,
+          "ball_visibility": "ambiguous",
+          "auto_ball_box": "none",
+          "notes": "no auto box; hard to confirm on sheet"
+        }
+      ],
+      "notes": "Frame jump 598\u2192661 (dev\u2192holdout). Sparse detections."
+    },
+    {
+      "sheet_file": "b_017.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_017.jpg",
+      "frames": [
+        673,
+        676,
+        679,
+        682,
+        685,
+        688,
+        691,
+        694,
+        697,
+        700,
+        703,
+        706
+      ],
+      "per_frame": [
+        {
+          "frame": 673,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center circle right of line TP"
+        },
+        {
+          "frame": 676,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center circle TP"
+        },
+        {
+          "frame": 679,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "right of center spot TP"
+        },
+        {
+          "frame": 682,
+          "ball_visibility": "ambiguous",
+          "auto_ball_box": "none",
+          "notes": "auto not_visible; ball status unclear in cluster"
+        },
+        {
+          "frame": 685,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center circle TP"
+        },
+        {
+          "frame": 688,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "near center spot TP"
+        },
+        {
+          "frame": 691,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center circle TP"
+        },
+        {
+          "frame": 694,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "central TP"
+        },
+        {
+          "frame": 697,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center circle TP"
+        },
+        {
+          "frame": 700,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "near center line TP"
+        },
+        {
+          "frame": 703,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "auto not_visible"
+        },
+        {
+          "frame": 706,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "auto not_visible"
+        }
+      ],
+      "notes": "Holdout midfield track with mostly low-score but plausible TPs."
+    },
+    {
+      "sheet_file": "b_018.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_018.jpg",
+      "frames": [
+        709,
+        712,
+        715,
+        718,
+        721,
+        724,
+        727,
+        730,
+        733,
+        736,
+        739,
+        742
+      ],
+      "per_frame": [
+        {
+          "frame": 709,
+          "ball_visibility": "ambiguous",
+          "auto_ball_box": "false_positive",
+          "notes": "box near white player's trailing leg; ball not clearly in box \u2014 FP risk (matches prior holdout note)"
+        },
+        {
+          "frame": 712,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 715,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 718,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 721,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 724,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 727,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "small white speck in orange box near center line TP"
+        },
+        {
+          "frame": 730,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 733,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 736,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 739,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 742,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "ball between yellow players mid-right TP"
+        }
+      ],
+      "notes": "Sparse low-score detections; 709 suspicious FP."
+    },
+    {
+      "sheet_file": "b_019.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_019.jpg",
+      "frames": [
+        745,
+        748,
+        751,
+        754,
+        757,
+        760,
+        763,
+        766,
+        769,
+        772,
+        775,
+        778
+      ],
+      "per_frame": [
+        {
+          "frame": 745,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 748,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center-right near white TP"
+        },
+        {
+          "frame": 751,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 754,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "upper-right near cluster TP"
+        },
+        {
+          "frame": 757,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "central orange box TP"
+        },
+        {
+          "frame": 760,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "center near white player TP"
+        },
+        {
+          "frame": 763,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 766,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 769,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 772,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 775,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 778,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        }
+      ],
+      "notes": "Four midfield TPs then long not_visible stretch."
+    },
+    {
+      "sheet_file": "b_020.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_020.jpg",
+      "frames": [
+        781,
+        784,
+        787,
+        790,
+        793,
+        796,
+        799,
+        802,
+        805,
+        808,
+        811,
+        814
+      ],
+      "per_frame": [
+        {
+          "frame": 781,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "upper midfield near white TP"
+        },
+        {
+          "frame": 784,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "left of center circle TP"
+        },
+        {
+          "frame": 787,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 790,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "high near top sideline TP"
+        },
+        {
+          "frame": 793,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 796,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 799,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "high-center near top sideline TP"
+        },
+        {
+          "frame": 802,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 805,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 808,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "high-center near fence TP"
+        },
+        {
+          "frame": 811,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "same far sideline region TP"
+        },
+        {
+          "frame": 814,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "between players near top sideline TP"
+        }
+      ],
+      "notes": "Ball often near far (top) touchline when detected."
+    },
+    {
+      "sheet_file": "b_021.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_021.jpg",
+      "frames": [
+        817,
+        820,
+        823,
+        826,
+        829,
+        832,
+        835,
+        838,
+        841,
+        844,
+        847,
+        850
+      ],
+      "per_frame": [
+        {
+          "frame": 817,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "upper-right near yellow cluster TP"
+        },
+        {
+          "frame": 820,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "upper-right TP"
+        },
+        {
+          "frame": 823,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "upper-right TP"
+        },
+        {
+          "frame": 826,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly discernable"
+        },
+        {
+          "frame": 829,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly discernable"
+        },
+        {
+          "frame": 832,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly discernable"
+        },
+        {
+          "frame": 835,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly discernable"
+        },
+        {
+          "frame": 838,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly discernable"
+        },
+        {
+          "frame": 841,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly discernable"
+        },
+        {
+          "frame": 844,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly discernable"
+        },
+        {
+          "frame": 847,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly discernable"
+        },
+        {
+          "frame": 850,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box; ball not clearly discernable"
+        }
+      ],
+      "notes": "Three-frame TP then long not_visible run."
+    },
+    {
+      "sheet_file": "b_022.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_022.jpg",
+      "frames": [
+        853,
+        856,
+        859,
+        862,
+        865,
+        868,
+        871,
+        874,
+        877,
+        880,
+        883,
+        886
+      ],
+      "per_frame": [
+        {
+          "frame": 853,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 856,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 859,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 862,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 865,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 868,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 871,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 874,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 877,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "lower-left near white player feet TP"
+        },
+        {
+          "frame": 880,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 883,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 886,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        }
+      ],
+      "notes": "Only frame 877 has auto detection (TP)."
+    },
+    {
+      "sheet_file": "b_023.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_023.jpg",
+      "frames": [
+        889,
+        892,
+        895,
+        898,
+        901,
+        904,
+        907,
+        910,
+        913,
+        916,
+        919,
+        922
+      ],
+      "per_frame": [
+        {
+          "frame": 889,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 892,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 895,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 898,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "middle-right near white TP"
+        },
+        {
+          "frame": 901,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "further right wing TP"
+        },
+        {
+          "frame": 904,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 907,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 910,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 913,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "bottom-right sideline TP"
+        },
+        {
+          "frame": 916,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        },
+        {
+          "frame": 919,
+          "ball_visibility": "visible",
+          "auto_ball_box": "true_positive",
+          "notes": "inside/near right goal area TP"
+        },
+        {
+          "frame": 922,
+          "ball_visibility": "not_visible",
+          "auto_ball_box": "none",
+          "notes": "no auto box"
+        }
+      ],
+      "notes": "Ball progressing toward right goal; intermittent TPs."
+    },
+    {
+      "sheet_file": "b_024.jpg",
+      "sheet_path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full/b_024.jpg",
+      "frames": [
+        925,
+        928,
+        931,
+        934,
+        937,
+        940,
+        943,
+        946,
+        949,
+        952,
+        955,
+        958
+      ],
+      "per_frame": [
+        {
+          "frame": 925,
+          "ball_visibility": "visible",
+          "auto_ball_box": "none",
+          "notes": "ball resting in right goal net (dead-ball after goal); auto not_visible / no box \u2014 systematic miss"
+        },
+        {
+          "frame": 928,
+          "ball_visibility": "visible",
+          "auto_ball_box": "none",
+          "notes": "ball resting in right goal net (dead-ball after goal); auto not_visible / no box \u2014 systematic miss"
+        },
+        {
+          "frame": 931,
+          "ball_visibility": "visible",
+          "auto_ball_box": "none",
+          "notes": "ball resting in right goal net (dead-ball after goal); auto not_visible / no box \u2014 systematic miss"
+        },
+        {
+          "frame": 934,
+          "ball_visibility": "visible",
+          "auto_ball_box": "none",
+          "notes": "ball resting in right goal net (dead-ball after goal); auto not_visible / no box \u2014 systematic miss"
+        },
+        {
+          "frame": 937,
+          "ball_visibility": "visible",
+          "auto_ball_box": "none",
+          "notes": "ball resting in right goal net (dead-ball after goal); auto not_visible / no box \u2014 systematic miss"
+        },
+        {
+          "frame": 940,
+          "ball_visibility": "visible",
+          "auto_ball_box": "none",
+          "notes": "ball resting in right goal net (dead-ball after goal); auto not_visible / no box \u2014 systematic miss"
+        },
+        {
+          "frame": 943,
+          "ball_visibility": "visible",
+          "auto_ball_box": "none",
+          "notes": "ball resting in right goal net (dead-ball after goal); auto not_visible / no box \u2014 systematic miss"
+        },
+        {
+          "frame": 946,
+          "ball_visibility": "visible",
+          "auto_ball_box": "none",
+          "notes": "ball resting in right goal net (dead-ball after goal); auto not_visible / no box \u2014 systematic miss"
+        },
+        {
+          "frame": 949,
+          "ball_visibility": "visible",
+          "auto_ball_box": "none",
+          "notes": "ball resting in right goal net (dead-ball after goal); auto not_visible / no box \u2014 systematic miss"
+        },
+        {
+          "frame": 952,
+          "ball_visibility": "visible",
+          "auto_ball_box": "none",
+          "notes": "ball resting in right goal net (dead-ball after goal); auto not_visible / no box \u2014 systematic miss"
+        },
+        {
+          "frame": 955,
+          "ball_visibility": "visible",
+          "auto_ball_box": "none",
+          "notes": "ball resting in right goal net (dead-ball after goal); auto not_visible / no box \u2014 systematic miss"
+        },
+        {
+          "frame": 958,
+          "ball_visibility": "visible",
+          "auto_ball_box": "none",
+          "notes": "ball resting in right goal net (dead-ball after goal); auto not_visible / no box \u2014 systematic miss"
+        }
+      ],
+      "notes": "Ball clearly visible in net all 12 frames but never auto-boxed."
+    }
+  ],
+  "summary": {
+    "human_sheets_reviewed": 12,
+    "ball_sheets_reviewed": 21,
+    "human_quality_counts": {
+      "good": 9,
+      "mixed": 3,
+      "poor": 0
+    },
+    "human_issues_highlights": [
+      "h_007: sideline black-kit person + off-pitch FPs boxed yellow",
+      "h_010: off-pitch person beyond fence boxed yellow (601-619)",
+      "h_012: red GK labeled white; off-pitch FPs 751/787/811",
+      "h_015: red GK present but unboxed"
+    ],
+    "ball_issues_highlights": [
+      "b_004 f169: false positive on player leg",
+      "b_010: visible ball missed at 361 and 388",
+      "b_013 f484: visible ball with no auto box",
+      "b_018 f709: ambiguous/FP-risk auto box",
+      "b_024: ball in goal net visible all frames, never auto-detected"
+    ]
+  }
+}

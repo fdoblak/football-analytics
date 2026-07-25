@@ -1,0 +1,94 @@
+{
+  "schema": "stage17r2_holdout_evaluation_v1",
+  "gate": "NO-GO \u2014 OWN-VIDEO PERCEPTION ACCEPTANCE FAILED",
+  "checks": {
+    "human_precision": true,
+    "human_recall": true,
+    "human_f1": true,
+    "role_macro_f1": false,
+    "team_accuracy": true,
+    "non_player_team": true,
+    "ball_precision": true,
+    "ball_recall": true,
+    "ball_f1": true,
+    "calibration": false,
+    "target_tracking": false
+  },
+  "human_detection_holdout": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 791,
+    "fp": 0,
+    "fn": 0,
+    "caveat": "GT human bboxes originated from detector proposals then visually role/team-corrected; box P/R/F1\u22481.0 is not an independent detector acceptance proof. Role/team metrics remain informative."
+  },
+  "role_macro_f1": 0.6656,
+  "role_confusion": {
+    "player->player": 783,
+    "staff->player": 5,
+    "referee->referee": 3
+  },
+  "team_accuracy": 1.0,
+  "team_n": 698,
+  "non_player_team_assignments": 0,
+  "referee_predicted_as_player": 0,
+  "ball_holdout": {
+    "precision": 1.0,
+    "recall": 0.7209,
+    "f1": 0.8378,
+    "tp": 31,
+    "fp": 0,
+    "fn": 12,
+    "centre_error_median_px": 0.04,
+    "n_ambiguous_excluded": 5
+  },
+  "trackers": {
+    "iou": {
+      "n_player_tracks": 150,
+      "fragmentation_per_s": 4.399,
+      "id_switch_proxy": 151
+    },
+    "appearance": {
+      "n_player_tracks": 62,
+      "fragmentation_per_s": 1.818,
+      "id_switch_proxy": 37
+    },
+    "bytetrack_eval_only": {
+      "status": "ok",
+      "n_track_ids": 188,
+      "note": "AGPL eval-only"
+    },
+    "botsort": {
+      "status": "not_run",
+      "reason": "BoT-SORT+CMC/ReID requires additional tracker config/weights; AGPL family; deferred with finding"
+    },
+    "selected_for_product": "appearance",
+    "hota_idf1": "not_evaluable \u2014 TrackEval not installed; track identity GT not labeled"
+  },
+  "target": {
+    "identity_status": "provisional",
+    "reason": "jersey numbers mostly illegible in GT review; no false confirmed assignment",
+    "false_assignment": 0,
+    "confirmed_intervals": [],
+    "coverage_holdout": "not_evaluable_without_jersey5_labels"
+  },
+  "calibration": {
+    "n_reviewed": 34,
+    "valid_homography_ok": 12,
+    "median_reproj_usable": false,
+    "note": "Local patch homographies unstable/rejected; NO meter conversion; SV_kp multi-segment not completed this pass",
+    "playable_frame_coverage_estimate": null
+  },
+  "gt_counts": {
+    "human_reviewed": 190,
+    "ball_reviewed": 300,
+    "calib_reviewed": 34
+  },
+  "written_at_utc": "2026-07-25T16:25:12.608745+00:00",
+  "acceptance_blockers": [
+    "role_macro_f1",
+    "calibration",
+    "target_tracking"
+  ]
+}

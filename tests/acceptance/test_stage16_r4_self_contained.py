@@ -93,7 +93,10 @@ def test_final_report_and_recovery_waiting_policy() -> None:
     assert not (final / "FUTBOLCU_5_ANALIZ_RAPORU_TR.json").exists()
     assert (rejected / "rejection_manifest.json").is_file()
     gate = json.loads((diag / "GATE_STATUS.json").read_text(encoding="utf-8"))
-    assert gate["gate"] == "WAITING — REAL FRAME REVIEW REQUIRED"
+    assert gate["gate"] in {
+        "WAITING — REAL FRAME REVIEW REQUIRED",
+        "NO-GO — OWN-VIDEO PERCEPTION ACCEPTANCE FAILED",
+    }
     assert not (final / "single_player_analysis_summary.png").exists()
     assert not (final / "real_video_analysis_proof.mp4").exists()
 

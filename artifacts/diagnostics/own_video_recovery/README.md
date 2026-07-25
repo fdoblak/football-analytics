@@ -1,33 +1,43 @@
 # Own-video perception recovery — diagnostics (Stage 17-R2)
 
-Gate: **WAITING — REAL FRAME REVIEW REQUIRED**
+Gate: **NO-GO — OWN-VIDEO PERCEPTION ACCEPTANCE FAILED**
 
-Previous v0.18.0 customer delivery reclassified as
-`NO-GO — OWN-VIDEO PERCEPTION NOT VALIDATED` (see `artifacts/rejected_v0.18.0/`).
+## What was completed
 
-## Why waiting
+- Reviewed GT: **190 human** + **300 ball** frames (train/dev/locked-holdout)
+- Calibration structure review: **34** frames with line/keypoint candidates
+- Holdout evaluation of YOLO11n baseline + role/team + ball
+- Tracker comparison: IoU vs appearance vs ByteTrack (eval-only AGPL)
+- Referee/staff team-assignment regression tests
+- v0.18.0 customer delivery remains rejected (not active final)
 
-Reviewed ground truth is incomplete:
+## Why NO-GO
 
-- human frames reviewed << 180
-- ball frames reviewed << 300
-- no pitch line/keypoint review set yet
+Failed acceptance checks:
 
-Auto prelabels remain `auto_candidate` and must not be treated as GT.
+- `role_macro_f1` ≈ 0.67 < 0.90 (player/referee/GK/staff confusion)
+- `calibration` not valid for meter conversion (unstable/rejected local homographies; SV multi-segment not finished)
+- `target_tracking` not confirmed (jersey numbers mostly illegible; no false assignment claimed)
 
-## How to continue
+Passed on holdout (with caveats):
 
-```bash
-python scripts/review_own_video_frames.py list --kind human --split holdout
-python scripts/review_own_video_frames.py show --kind human --frame 709 --open
-python scripts/review_own_video_frames.py export-gt
-```
+- Ball P/R/F1 meets numeric thresholds on reviewed holdout
+- Team accuracy high among matched player boxes; non-player team assignment = 0
+- Appearance tracker fragmentation ~1.82/s (better than IoU ~4.4/s)
 
-Overlays live under `/home/fdoblak/workspace/own_video_analysis/stage17r2/` (not Git).
+Human box P/R/F1≈1.0 is **circular** (GT boxes from detector proposals) — not independent detector proof.
 
-## Files
+## Layout
 
-- `gt/gt_human.json`, `gt/gt_ball.json`
-- `seed_metrics.json` (seed-only; not acceptance)
-- `PREVIOUS_RESULT_RECLASSIFIED.json`
-- `recovery_plan_status.json`
+- `gt/` — reviewed GT JSON + seed decisions + contact sheet samples
+- `holdout_evaluation.json` — full metrics
+- `metrics_charts.png`
+- `tracker_comparison.json`
+- `GATE_STATUS.json`
+
+## Next blockers
+
+1. Football-specific detector/role head (or SoccerNet GSR path) to raise role macro F1
+2. Track identity GT + TrackEval HOTA/IDF1
+3. SV_kp/SV_lines per-shot calibration with real pitch correspondences
+4. Explicit jersey-5 visibility labels on holdout for target coverage

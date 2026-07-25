@@ -17,7 +17,7 @@ REJECTED = REPO / "artifacts" / "rejected_v0.18.0"
 def test_no_active_jersey5_customer_delivery_while_waiting() -> None:
     assert not (FINAL / "FUTBOLCU_5_ANALIZ_RAPORU_TR.json").exists()
     gate = json.loads((DIAG / "GATE_STATUS.json").read_text(encoding="utf-8"))
-    assert "WAITING" in gate["gate"]
+    assert ("WAITING" in gate["gate"]) or ("NO-GO" in gate["gate"])
 
 
 @pytest.mark.skipif(not REJECTED.is_dir(), reason="rejected archive missing")
@@ -35,7 +35,9 @@ def test_cleanup_data_loss_false() -> None:
 
 
 @pytest.mark.skipif(not DIAG.is_dir(), reason="diagnostics missing")
-def test_seed_metrics_not_acceptance() -> None:
-    m = json.loads((DIAG / "seed_metrics.json").read_text(encoding="utf-8"))
-    assert "SEED" in m["warning"].upper() or "seed" in m["warning"].lower()
-    assert m["gt_human"]["reviewed"] < m["gt_human"]["required_min"]
+def test_holdout_evaluation_is_nogo() -> None:
+    ev = json.loads((DIAG / "holdout_evaluation.json").read_text(encoding="utf-8"))
+    assert ev["gate"].startswith("NO-GO")
+    assert ev["gt_counts"]["human_reviewed"] >= 180
+    assert ev["gt_counts"]["ball_reviewed"] >= 300
+    assert "role_macro_f1" in ev["acceptance_blockers"] or ev["role_macro_f1"] < 0.9

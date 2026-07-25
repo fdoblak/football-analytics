@@ -1,0 +1,23 @@
+{
+  "iou": {
+    "n_player_tracks": 150,
+    "fragmentation_per_s": 4.399,
+    "id_switch_proxy": 151
+  },
+  "appearance": {
+    "n_player_tracks": 62,
+    "fragmentation_per_s": 1.818,
+    "id_switch_proxy": 37
+  },
+  "bytetrack_eval_only": {
+    "status": "ok",
+    "n_track_ids": 188,
+    "note": "AGPL eval-only"
+  },
+  "botsort": {
+    "status": "not_run",
+    "reason": "BoT-SORT+CMC/ReID requires additional tracker config/weights; AGPL family; deferred with finding"
+  },
+  "selected_for_product": "appearance",
+  "hota_idf1": "not_evaluable \u2014 TrackEval not installed; track identity GT not labeled"
+}
