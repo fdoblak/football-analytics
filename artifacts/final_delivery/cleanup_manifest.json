@@ -1,124 +1,23 @@
 {
-  "counts": {
-    "bytes_removed": 26486845,
-    "removed_items": 9
-  },
   "data_loss": false,
   "items": [
     {
       "data_loss": false,
-      "reason": "superseded by artifacts/final_delivery/",
-      "recoverable_from_git": true,
-      "removed_path": "/home/fdoblak/projects/football-analytics/artifacts/final/single_player_analysis_summary.png",
-      "replacement_or_canonical_path": "artifacts/final_delivery/single_player_analysis_summary.png",
-      "sha256": "312ea840e466f9a84228103c61c7d3edceddabec301bc21e9e8532edf672a6ad",
-      "size": 150660,
-      "tracked": true,
-      "type": "OBSOLETE_RUNTIME"
+      "old_path": "/home/fdoblak/workspace/final_delivery_repair/old_broken/real_video_tracking_proof.mp4",
+      "old_sha": "771e9b62705523a382e09ca631477d20518d6aace13f1180ced8327331e7bff4",
+      "reason": "moov_after_mdat; profile=High level=50; 4680x720 ultra-wide; Windows/browser seek/play fragile",
+      "replacement_path": "artifacts/final_delivery/real_video_tracking_proof.mp4",
+      "replacement_sha": "79e238d4a0b60e41aecc765cc7872a78c950227b818e1dd99686124269e760aa"
     },
     {
       "data_loss": false,
-      "reason": "superseded by artifacts/final_delivery/",
-      "recoverable_from_git": true,
-      "removed_path": "/home/fdoblak/projects/football-analytics/artifacts/final/single_player_analysis_summary.json",
-      "replacement_or_canonical_path": "artifacts/final_delivery/single_player_analysis_summary.json",
-      "sha256": "9c5bc734b1f1ea25e82435a53e2995bad5dc2b0247f82e180a2dca7624e06595",
-      "size": 11587,
-      "tracked": true,
-      "type": "OBSOLETE_RUNTIME"
-    },
-    {
-      "data_loss": false,
-      "reason": "old twin of artifacts/final PNG; final_delivery is canonical",
-      "recoverable_from_git": false,
-      "removed_path": "/home/fdoblak/football_data/rendered_outputs/final/single_player_analysis_summary.png",
-      "replacement_or_canonical_path": "artifacts/final_delivery/single_player_analysis_summary.png",
-      "sha256": "312ea840e466f9a84228103c61c7d3edceddabec301bc21e9e8532edf672a6ad",
-      "size": 150660,
-      "tracked": false,
-      "type": "DUPLICATE"
-    },
-    {
-      "data_loss": false,
-      "derived_png_sha256": "af20b195c7cd63c4d020c0e7fc099bf1bd97ef55952fafa9be672e9a4f5c467f",
-      "derived_proof_mp4_sha256": "771e9b62705523a382e09ca631477d20518d6aace13f1180ced8327331e7bff4",
-      "expected_source_sha256": "fd42dbe6df8b85946d6ee82fc11863ea94dd2735b3b126e9bfca3972a3149db1",
-      "reason": "raw TeamTrack MP4 removed after annotated proof + hashes verified; re-downloadable from official Drive ID",
-      "recoverable_from_git": false,
-      "removed_path": "/home/fdoblak/football_data/datasets/teamtrack/source/soccer_side/F_20200220_1_0330_0360/img1.mp4",
-      "replacement_or_canonical_path": "artifacts/final_delivery/real_video_tracking_proof.mp4",
-      "sha256": "fd42dbe6df8b85946d6ee82fc11863ea94dd2735b3b126e9bfca3972a3149db1",
-      "size": 13086969,
-      "tracked": false,
-      "type": "OBSOLETE_RUNTIME"
-    },
-    {
-      "data_loss": false,
-      "derived_png_sha256": "af20b195c7cd63c4d020c0e7fc099bf1bd97ef55952fafa9be672e9a4f5c467f",
-      "derived_proof_mp4_sha256": "771e9b62705523a382e09ca631477d20518d6aace13f1180ced8327331e7bff4",
-      "expected_source_sha256": "fd42dbe6df8b85946d6ee82fc11863ea94dd2735b3b126e9bfca3972a3149db1",
-      "reason": "raw TeamTrack MP4 removed after annotated proof + hashes verified; re-downloadable from official Drive ID",
-      "recoverable_from_git": false,
-      "removed_path": "/home/fdoblak/workspace/final_video_proof/staging/img1.mp4",
-      "replacement_or_canonical_path": "artifacts/final_delivery/real_video_tracking_proof.mp4",
-      "sha256": "fd42dbe6df8b85946d6ee82fc11863ea94dd2735b3b126e9bfca3972a3149db1",
-      "size": 13086969,
-      "tracked": false,
-      "type": "OBSOLETE_RUNTIME"
-    },
-    {
-      "data_loss": false,
-      "reason": "empty after consolidation",
-      "recoverable_from_git": false,
-      "removed_path": "/home/fdoblak/projects/football-analytics/artifacts/final",
-      "replacement_or_canonical_path": "artifacts/final_delivery/",
-      "sha256": null,
-      "size": 0,
-      "tracked": true,
-      "type": "EMPTY_DIRECTORY"
-    },
-    {
-      "data_loss": false,
-      "reason": "empty after consolidation",
-      "recoverable_from_git": false,
-      "removed_path": "/home/fdoblak/football_data/rendered_outputs/pilots",
-      "replacement_or_canonical_path": "artifacts/final_delivery/",
-      "sha256": null,
-      "size": 0,
-      "tracked": false,
-      "type": "EMPTY_DIRECTORY"
-    },
-    {
-      "data_loss": false,
-      "reason": "empty after consolidation",
-      "recoverable_from_git": false,
-      "removed_path": "/home/fdoblak/football_data/rendered_outputs/final",
-      "replacement_or_canonical_path": "artifacts/final_delivery/",
-      "sha256": null,
-      "size": 0,
-      "tracked": false,
-      "type": "EMPTY_DIRECTORY"
-    },
-    {
-      "data_loss": false,
-      "reason": "empty after consolidation",
-      "recoverable_from_git": false,
-      "removed_path": "/home/fdoblak/football_data/datasets/teamtrack/staging/soccer_side/F_20200220_1_0330_0360/license",
-      "replacement_or_canonical_path": "artifacts/final_delivery/",
-      "sha256": null,
-      "size": 0,
-      "tracked": false,
-      "type": "EMPTY_DIRECTORY"
+      "old_path": "/home/fdoblak/workspace/final_delivery_repair/old_broken/single_player_analysis_summary.png",
+      "old_sha": "af20b195c7cd63c4d020c0e7fc099bf1bd97ef55952fafa9be672e9a4f5c467f",
+      "reason": "RGBA (alpha) instead of 8-bit RGB",
+      "replacement_path": "artifacts/final_delivery/single_player_analysis_summary.png",
+      "replacement_sha": "0e8ce22c95b952d2dfb0f8d0186515e344a5e1744b1e862314af11c91eea9a6f"
     }
   ],
-  "retained": [
-    "artifacts/final_delivery/",
-    "source code/tests/schemas/configs",
-    "GSR/BAS/raw/license",
-    "model weights",
-    "external repos",
-    "artifacts/evidence/*/ small JSON evidence"
-  ],
-  "schema": "final_delivery_cleanup_manifest_v1",
-  "written_at_utc": "2026-07-25T01:24:05.886575+00:00"
+  "schema": "final_delivery_fix2_cleanup_manifest_v1",
+  "written_at_utc": "2026-07-25T06:54:13.110636+00:00"
 }

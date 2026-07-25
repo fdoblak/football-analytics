@@ -1,0 +1,7 @@
+# Binary media (never treat as text; not Git LFS)
+*.mp4 binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary

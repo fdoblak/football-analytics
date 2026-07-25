@@ -253,9 +253,9 @@
     }
   },
   "artifact_hashes": {
-    "proof_mp4_sha256": "771e9b62705523a382e09ca631477d20518d6aace13f1180ced8327331e7bff4",
-    "summary_json_sha256": "a932a65f524f44babc2f4b8d938f4c82e7c1a2e6dd246507699a23d15a5e283c",
-    "summary_png_sha256": "af20b195c7cd63c4d020c0e7fc099bf1bd97ef55952fafa9be672e9a4f5c467f"
+    "proof_mp4_sha256": "79e238d4a0b60e41aecc765cc7872a78c950227b818e1dd99686124269e760aa",
+    "summary_json_sha256": "bd84fd7c32938ee8ea6a55a9da81f97b80f62f02a1141bdae862345e11e909db",
+    "summary_png_sha256": "0e8ce22c95b952d2dfb0f8d0186515e344a5e1744b1e862314af11c91eea9a6f"
   },
   "dataset_provenance": {
     "soccertrack_v2": {
@@ -294,6 +294,64 @@
     "Annotation-derived metrics are not model predictions",
     "Not official Opta data"
   ],
+  "media_repair": {
+    "new_mp4_validation": {
+      "atoms_head": [
+        [
+          "ftyp",
+          0,
+          32
+        ],
+        [
+          "moov",
+          32,
+          9805
+        ],
+        [
+          "free",
+          9837,
+          8
+        ],
+        [
+          "mdat",
+          9845,
+          867421
+        ]
+      ],
+      "codec_name": "h264",
+      "codec_tag_string": "avc1",
+      "duration": 30.0,
+      "frame0_shape": [
+        720,
+        1280,
+        3
+      ],
+      "height": 720,
+      "last_shape": [
+        720,
+        1280,
+        3
+      ],
+      "level": 40,
+      "middle_shape": [
+        720,
+        1280,
+        3
+      ],
+      "moov_before_mdat": true,
+      "nb_frames_meta": 750,
+      "pix_fmt": "yuv420p",
+      "profile": "Main",
+      "sequential_frames": 750,
+      "width": 1280
+    },
+    "old": {
+      "mp4_diag": "moov_after_mdat; profile=High level=50; 4680x720 ultra-wide; Windows/browser seek/play fragile",
+      "mp4_sha": "771e9b62705523a382e09ca631477d20518d6aace13f1180ced8327331e7bff4",
+      "png_diag": "RGBA (alpha) instead of 8-bit RGB",
+      "png_sha": "af20b195c7cd63c4d020c0e7fc099bf1bd97ef55952fafa9be672e9a4f5c467f"
+    }
+  },
   "not_evaluable_metrics": [
     "pass_accuracy",
     "duel_win_rate",
@@ -346,7 +404,7 @@
         "coverage": null,
         "evidence_level": "REAL_VIDEO_VALIDATED",
         "limitations": null,
-        "source": "teamtrack_pilot",
+        "source": "teamtrack_recount",
         "status": "REAL_VIDEO_VALIDATED",
         "unit": "count",
         "value": 14374
@@ -355,7 +413,7 @@
         "coverage": null,
         "evidence_level": "REAL_VIDEO_VALIDATED",
         "limitations": null,
-        "source": "teamtrack_pilot",
+        "source": "pilot_rerun",
         "status": "REAL_VIDEO_VALIDATED",
         "unit": null,
         "value": "cuda:0"
@@ -364,16 +422,34 @@
         "coverage": null,
         "evidence_level": "REAL_VIDEO_VALIDATED",
         "limitations": null,
-        "source": "teamtrack_pilot",
+        "source": "teamtrack_recount",
         "status": "REAL_VIDEO_VALIDATED",
         "unit": "ratio",
         "value": 0.6196559575006324
+      },
+      "fn": {
+        "coverage": null,
+        "evidence_level": "REAL_VIDEO_VALIDATED",
+        "limitations": null,
+        "source": "teamtrack_recount",
+        "status": "REAL_VIDEO_VALIDATED",
+        "unit": "count",
+        "value": 7452
+      },
+      "fp": {
+        "coverage": null,
+        "evidence_level": "REAL_VIDEO_VALIDATED",
+        "limitations": null,
+        "source": "teamtrack_recount",
+        "status": "REAL_VIDEO_VALIDATED",
+        "unit": "count",
+        "value": 4576
       },
       "mean_iou": {
         "coverage": null,
         "evidence_level": "REAL_VIDEO_VALIDATED",
         "limitations": null,
-        "source": "teamtrack_pilot",
+        "source": "teamtrack_recount",
         "status": "REAL_VIDEO_VALIDATED",
         "unit": "ratio",
         "value": 0.6752426397328349
@@ -382,7 +458,7 @@
         "coverage": null,
         "evidence_level": "REAL_VIDEO_VALIDATED",
         "limitations": null,
-        "source": "teamtrack_pilot",
+        "source": "teamtrack_recount",
         "status": "REAL_VIDEO_VALIDATED",
         "unit": "ratio",
         "value": 0.6816474189508835
@@ -391,7 +467,7 @@
         "coverage": null,
         "evidence_level": "REAL_VIDEO_VALIDATED",
         "limitations": null,
-        "source": "teamtrack_pilot",
+        "source": "teamtrack_recount",
         "status": "REAL_VIDEO_VALIDATED",
         "unit": "ratio",
         "value": 0.568
@@ -400,7 +476,7 @@
         "coverage": null,
         "evidence_level": "REAL_VIDEO_VALIDATED",
         "limitations": null,
-        "source": "teamtrack_pilot",
+        "source": "pilot_rerun",
         "status": "REAL_VIDEO_VALIDATED",
         "unit": "s",
         "value": 266.6851215362549
@@ -409,17 +485,27 @@
         "coverage": null,
         "evidence_level": "REAL_VIDEO_VALIDATED",
         "limitations": null,
-        "source": "teamtrack_pilot",
+        "source": "teamtrack_recount",
         "status": "REAL_VIDEO_VALIDATED",
         "unit": "ratio",
         "value": 1.0
+      },
+      "tp": {
+        "coverage": null,
+        "evidence_level": "REAL_VIDEO_VALIDATED",
+        "limitations": null,
+        "source": "teamtrack_recount",
+        "status": "REAL_VIDEO_VALIDATED",
+        "unit": "count",
+        "value": 9798
       }
     },
     "namespace": "teamtrack_real_video_pilot",
     "proof_mp4": {
+      "encode_profile": "H.264 Main@L4.0 avc1 yuv420p CFR faststart 1280x720",
       "path": "artifacts/final_delivery/real_video_tracking_proof.mp4",
-      "sha256": "771e9b62705523a382e09ca631477d20518d6aace13f1180ced8327331e7bff4",
-      "size_bytes": 1548053
+      "sha256": "79e238d4a0b60e41aecc765cc7872a78c950227b818e1dd99686124269e760aa",
+      "size_bytes": 877266
     },
     "selected_frame_times_s": {
       "crowd": 20.96,
@@ -433,10 +519,10 @@
   },
   "release": {
     "download_required_for_release": false,
-    "gate": "PASS_WITH_FINDINGS \u2014 VIDEO-BACKED TECHNICAL PREVIEW CONSOLIDATED; RELEASE TREE CLEAN; VIDEO-EVENT ACCURACY NOT VALIDATED",
+    "gate": "PASS_WITH_FINDINGS \u2014 PORTABLE FINAL DELIVERY VALIDATED; VIDEO-EVENT ACCURACY NOT VALIDATED",
     "hf_required": false,
     "network_required": false,
-    "tag_candidate": "single-player-analytics-technical-preview-v0.16.1"
+    "tag_candidate": "single-player-analytics-technical-preview-v0.16.2"
   },
   "schema": "final_delivery_single_player_summary_v1",
   "target": {

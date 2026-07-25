@@ -1,115 +1,54 @@
 {
   "claims": [
     {
-      "calculation_config_fingerprint": {
-        "conf": 0.15,
-        "device": "cuda:0",
-        "imgsz": 960,
-        "model": "yolo11n.pt",
-        "tile_width": 1600
-      },
-      "claim": "TeamTrack detection F1 on soccer_side sequence",
+      "claim": "TeamTrack detection F1",
       "claim_id": "real_detection_f1",
       "evidence_level": "REAL_VIDEO_VALIDATED",
-      "frame_time_range": "0.0\u201330.0s",
-      "limitations": "framewise greedy IoU@0.5; not COCO mAP",
+      "limitations": "greedy IoU@0.5",
       "result": 0.6196559575006324,
-      "source_artifact": "artifacts/final_delivery/single_player_analysis_summary.json#real_video_validation.metrics.f1",
-      "source_dataset": "TeamTrack v6"
+      "source_artifact": "single_player_analysis_summary.json"
     },
     {
-      "calculation_config_fingerprint": {
-        "iou_thresh": 0.3
-      },
-      "claim": "Target Track 7 coverage ratio",
+      "claim": "Track7 coverage",
       "claim_id": "target_coverage",
       "evidence_level": "REAL_VIDEO_VALIDATED",
-      "frame_time_range": "0.0\u201330.0s",
-      "limitations": "anonymous track association via mean IoU; not jersey ID",
+      "limitations": "anonymous track",
       "result": 1.0,
-      "source_artifact": "artifacts/final_delivery/real_video_tracking_proof.mp4",
-      "source_dataset": "TeamTrack v6"
+      "source_artifact": "real_video_tracking_proof.mp4"
     },
     {
-      "calculation_config_fingerprint": {
-        "iou_thresh": 0.3
-      },
-      "claim": "Mean IoU of associated target track vs GT Track 7",
+      "claim": "Track7 mean IoU",
       "claim_id": "target_mean_iou",
       "evidence_level": "REAL_VIDEO_VALIDATED",
-      "frame_time_range": "0.0\u201330.0s",
-      "limitations": "image-plane boxes only",
+      "limitations": "image plane",
       "result": 0.6752426397328349,
-      "source_artifact": "artifacts/final_delivery/single_player_analysis_summary.json",
-      "source_dataset": "TeamTrack v6"
+      "source_artifact": "single_player_analysis_summary.json"
     },
     {
-      "calculation_config_fingerprint": {
-        "player_id": "506469"
-      },
-      "claim": "Annotation-derived polyline distance for SoccerTrack player 506469",
+      "claim": "GSR polyline distance player 506469",
       "claim_id": "measured_distance",
       "evidence_level": "REFERENCE_ANNOTATION_DERIVED",
-      "frame_time_range": "strided GSR export",
-      "limitations": "not video prediction; stride undersamples path",
+      "limitations": "strided annotation",
       "result": 10969.106,
-      "source_artifact": "artifacts/final_delivery/single_player_analysis_summary.json#annotation_derived_metrics.measured_distance_m",
-      "source_dataset": "SoccerTrack v2 match 128057 GSR"
+      "source_artifact": "single_player_analysis_summary.json"
     },
     {
-      "calculation_config_fingerprint": {
-        "threshold_m_s": 7.0
-      },
-      "claim": "Annotation-derived sprint segment count (>=7 m/s)",
-      "claim_id": "sprint_count",
-      "evidence_level": "REFERENCE_ANNOTATION_DERIVED",
-      "frame_time_range": "strided GSR export",
-      "limitations": "heuristic threshold; not Opta sprint definition",
-      "result": 8,
-      "source_artifact": "artifacts/final_delivery/single_player_analysis_summary.json",
-      "source_dataset": "SoccerTrack v2 GSR"
-    },
-    {
-      "calculation_config_fingerprint": {
-        "player_id": "506469"
-      },
-      "claim": "Reference pitch occupancy summary from GSR trajectory",
-      "claim_id": "heatmap",
-      "evidence_level": "REFERENCE_ANNOTATION_DERIVED",
-      "frame_time_range": "strided GSR export",
-      "limitations": "not video prediction heatmap",
-      "result": {
-        "n_points": 3449,
-        "x_mean": 2.2050304436068444
-      },
-      "source_artifact": "artifacts/final_delivery/single_player_analysis_summary.json",
-      "source_dataset": "SoccerTrack v2 GSR"
-    },
-    {
-      "calculation_config_fingerprint": {
-        "label": "Pass"
-      },
-      "claim": "BAS Pass count for target player",
+      "claim": "BAS Pass count",
       "claim_id": "pass_reference_count",
       "evidence_level": "REFERENCE_ANNOTATION_DERIVED",
-      "frame_time_range": "full BAS for match 128057 target",
-      "limitations": "action count only; completion unknown",
+      "limitations": "no completion",
       "result": 30,
-      "source_artifact": "artifacts/final_delivery/single_player_analysis_summary.json",
-      "source_dataset": "SoccerTrack v2 BAS"
+      "source_artifact": "single_player_analysis_summary.json"
     },
     {
-      "calculation_config_fingerprint": null,
-      "claim": "Pass accuracy not evaluable from SoccerTrack BAS",
+      "claim": "pass accuracy",
       "claim_id": "not_evaluable_pass_accuracy",
       "evidence_level": "NOT_EVALUABLE",
-      "frame_time_range": null,
-      "limitations": "outcome labels unavailable",
+      "limitations": "unsupported",
       "result": null,
-      "source_artifact": "artifacts/final_delivery/single_player_analysis_summary.json",
-      "source_dataset": "SoccerTrack v2 BAS"
+      "source_artifact": "single_player_analysis_summary.json"
     }
   ],
   "schema": "final_delivery_evidence_manifest_v1",
-  "written_at_utc": "2026-07-25T01:24:05.810171+00:00"
+  "written_at_utc": "2026-07-25T06:54:13.100440+00:00"
 }
