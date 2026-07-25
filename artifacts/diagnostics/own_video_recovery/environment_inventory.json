@@ -1,0 +1,22 @@
+{
+  "written_at_utc": "2026-07-25T15:06:55.417594+00:00",
+  "yolo_weights": {
+    "path": "/home/fdoblak/football_data/model_archive/yolo11n.pt",
+    "sha256": "0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1",
+    "size": 5613764,
+    "role": "baseline_coco"
+  },
+  "external_repos": {
+    "tracklab": false,
+    "sn-gamestate": true,
+    "SoccerNet": true,
+    "sn-calibration": true,
+    "PnLCalib": false,
+    "sn_depth": true,
+    "ByteTrack": false,
+    "BoT": false
+  },
+  "adapters": [
+    "src/football_analytics/calibration"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "cleanup_receipt_v1",
+  "data_loss": false,
+  "source_video_preserved": true,
+  "source_path": "/mnt/c/Users/furka/Downloads/\u00f6rnek_video_FA.mp4",
+  "active_final_cleared": true,
+  "rejected_archive": "artifacts/rejected_v0.18.0",
+  "workspace_kept_not_in_git": [
+    "workspace/own_video_analysis/stage17r2/frames_review",
+    "workspace/own_video_analysis/stage17r2/overlays_human",
+    "workspace/own_video_analysis/stage17r2/overlays_ball",
+    "workspace/own_video_analysis/stage17r2/contact_sheets"
+  ],
+  "git_allowed_diagnostics": "artifacts/diagnostics/own_video_recovery",
+  "written_at_utc": "2026-07-25T15:13:21.408970+00:00"
+}

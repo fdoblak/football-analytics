@@ -1,0 +1,20 @@
+{
+  "detector": {
+    "baseline": "yolo11n.pt COCO person+sports ball",
+    "football_specific_finetune": "not_run \u2014 insufficient reviewed train GT (need >=180 human frames reviewed)",
+    "soccernet_gsr_tracklab": "available on disk but not installed in ai-dev; AGPL/eval isolation required"
+  },
+  "trackers": {
+    "appearance_confirmed": "available (stage17r1)",
+    "bytetrack": "ultralytics BYTETracker eval-only AGPL finding",
+    "botsort_cmc": "not_run \u2014 requires reviewed track GT + TrackEval",
+    "botsort_reid": "not_run",
+    "strongsort_prtreid": "sn-gamestate/tracklab on disk; not wired/installed"
+  },
+  "calibration_stack": {
+    "SV_kp_SV_lines": "weights local; adapter present",
+    "homography_opencv": "present",
+    "pnlcalib_sn_calibration": "repos present; no FA adapter run this stage",
+    "status": "deferred_until_line_keypoint_review_gt"
+  }
+}

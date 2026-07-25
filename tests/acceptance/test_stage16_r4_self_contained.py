@@ -84,25 +84,17 @@ def test_reference_analysis_uses_authoritative_target() -> None:
     assert report["bas_target_label_counts"].get("Pass", 0) >= 1
 
 
-def test_final_report_and_jersey5_customer_media_policy() -> None:
-    """Stage 17-R1 replaced Stage 17 jersey-7 dual delivery with jersey-5 own-video."""
+def test_final_report_and_recovery_waiting_policy() -> None:
+    """Stage 17-R2: active final cleared; recovery diagnostics + rejected v0.18.0."""
     final = ROOT / "artifacts/final_delivery"
-    assert (final / "FUTBOLCU_5_ANALIZ_RAPORU_TR.json").is_file()
-    assert (final / "futbolcu_5_analiz_ozeti.png").is_file()
-    assert (final / "FUTBOLCU_5_ANALIZ_RAPORU_TR.pdf").is_file()
-    assert (final / "futbolcu_5_video_analiz.mp4").is_file()
-    payload = json.loads((final / "FUTBOLCU_5_ANALIZ_RAPORU_TR.json").read_text(encoding="utf-8"))
-    assert payload["target_jersey"] == 5
-    assert payload["jersey7_revoked"] is True
-    assert "506469" not in json.dumps(payload)
-    assert not any(p.name.startswith("7_NUMARA_") for p in final.iterdir())
-    assert not (final / "FUTBOLCU_ANALIZ_RAPORU_TR.json").exists()
+    diag = ROOT / "artifacts/diagnostics/own_video_recovery"
+    rejected = ROOT / "artifacts/rejected_v0.18.0"
+    assert (final / "REJECTED_SEE_rejected_v0.18.0.txt").is_file()
+    assert not (final / "FUTBOLCU_5_ANALIZ_RAPORU_TR.json").exists()
+    assert (rejected / "rejection_manifest.json").is_file()
+    gate = json.loads((diag / "GATE_STATUS.json").read_text(encoding="utf-8"))
+    assert gate["gate"] == "WAITING — REAL FRAME REVIEW REQUIRED"
     assert not (final / "single_player_analysis_summary.png").exists()
-    assert not (
-        ROOT / "artifacts/evidence/stage_16_real_video_pilot/real_video_pilot_summary.png"
-    ).exists()
-    assert not (ROOT / "artifacts/final/single_player_analysis_summary.png").exists()
-    assert not (final / "real_video_tracking_proof.mp4").exists()
     assert not (final / "real_video_analysis_proof.mp4").exists()
 
 

@@ -1,0 +1,3 @@
+Active final_delivery cleared. Previous v0.18.0 customer outputs reclassified.
+See artifacts/rejected_v0.18.0/
+Gate: NO-GO — OWN-VIDEO PERCEPTION NOT VALIDATED

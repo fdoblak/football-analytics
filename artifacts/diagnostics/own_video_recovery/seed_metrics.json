@@ -1,0 +1,72 @@
+{
+  "schema": "stage17r2_seed_metrics_v1",
+  "warning": "METRICS ON SEED REVIEW ONLY \u2014 NOT acceptance; GT incomplete vs 180/300 targets",
+  "gt_human": {
+    "reviewed": 15,
+    "required_min": 180,
+    "auto": 175,
+    "splits": {
+      "train": {
+        "n": 80,
+        "reviewed": 0
+      },
+      "dev": {
+        "n": 50,
+        "reviewed": 0
+      },
+      "holdout": {
+        "n": 60,
+        "reviewed": 15
+      }
+    }
+  },
+  "gt_ball": {
+    "reviewed": 24,
+    "required_min": 300,
+    "auto": 276,
+    "splits": {
+      "train": {
+        "n": 120,
+        "reviewed": 0
+      },
+      "dev": {
+        "n": 80,
+        "reviewed": 0
+      },
+      "holdout": {
+        "n": 100,
+        "reviewed": 24
+      }
+    }
+  },
+  "role_agreement_seed": {
+    "n": 195,
+    "correct": 187,
+    "acc": 0.959
+  },
+  "team_agreement_seed_players": {
+    "n": 177,
+    "correct": 177,
+    "acc": 1.0
+  },
+  "referee_predicted_as_player_seed": 8,
+  "auto_non_player_team_assignments_on_seed_frames": 0,
+  "ball_seed_prf": {
+    "precision": 0.917,
+    "recall": 0.478,
+    "f1": 0.629,
+    "tp": 11,
+    "fp": 1,
+    "fn": 12
+  },
+  "calibration": {
+    "status": "not_run_gt_incomplete",
+    "valid_segments": 0
+  },
+  "tracking_hota": {
+    "status": "not_evaluable",
+    "reason": "TrackEval/sn-trackeval not installed in ai-dev; reviewed track GT incomplete"
+  },
+  "detector_baseline": "yolo11n_coco_person_ball",
+  "written_at_utc": "2026-07-25T15:13:21.406111+00:00"
+}

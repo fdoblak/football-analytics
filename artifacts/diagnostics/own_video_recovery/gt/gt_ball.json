@@ -1,0 +1,4720 @@
+{
+  "schema": "own_video_gt_ball_v1",
+  "n_frames": 300,
+  "n_reviewed": 24,
+  "n_auto_candidate": 276,
+  "splits": {
+    "train": {
+      "n": 120,
+      "reviewed": 0
+    },
+    "dev": {
+      "n": 80,
+      "reviewed": 0
+    },
+    "holdout": {
+      "n": 100,
+      "reviewed": 24
+    }
+  },
+  "note": "reviewed=true only from review_decisions; auto never promoted",
+  "frames": [
+    {
+      "frame": 1,
+      "t_s": 0.0,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 4,
+      "t_s": 0.1,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 7,
+      "t_s": 0.2,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 10,
+      "t_s": 0.3,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 13,
+      "t_s": 0.4,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 16,
+      "t_s": 0.5,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 19,
+      "t_s": 0.6,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 22,
+      "t_s": 0.7,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 25,
+      "t_s": 0.8,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 28,
+      "t_s": 0.9,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 31,
+      "t_s": 1.0,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 34,
+      "t_s": 1.1,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        1055.3,
+        390.4,
+        16.5,
+        12.8
+      ],
+      "centre": [
+        1063.6,
+        396.8
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.186
+    },
+    {
+      "frame": 37,
+      "t_s": 1.2,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        1013.1,
+        407.8,
+        13.9,
+        11.5
+      ],
+      "centre": [
+        1020.0,
+        413.6
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.477
+    },
+    {
+      "frame": 40,
+      "t_s": 1.3,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 43,
+      "t_s": 1.4,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 46,
+      "t_s": 1.5,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 49,
+      "t_s": 1.6,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 52,
+      "t_s": 1.7,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        1001.6,
+        460.2,
+        12.9,
+        11.8
+      ],
+      "centre": [
+        1008.1,
+        466.1
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.082
+    },
+    {
+      "frame": 55,
+      "t_s": 1.8,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        1016.2,
+        478.5,
+        15.4,
+        14.9
+      ],
+      "centre": [
+        1023.9,
+        485.9
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.651
+    },
+    {
+      "frame": 58,
+      "t_s": 1.9,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        1037.8,
+        511.2,
+        14.4,
+        14.7
+      ],
+      "centre": [
+        1045.0,
+        518.6
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.518
+    },
+    {
+      "frame": 61,
+      "t_s": 2.0,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        1045.6,
+        503.0,
+        14.0,
+        12.2
+      ],
+      "centre": [
+        1052.6,
+        509.1
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.408
+    },
+    {
+      "frame": 64,
+      "t_s": 2.1,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        1056.2,
+        488.8,
+        16.5,
+        13.3
+      ],
+      "centre": [
+        1064.5,
+        495.4
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.102
+    },
+    {
+      "frame": 67,
+      "t_s": 2.2,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        1087.1,
+        489.6,
+        14.0,
+        12.5
+      ],
+      "centre": [
+        1094.2,
+        495.9
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.114
+    },
+    {
+      "frame": 70,
+      "t_s": 2.3,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        1115.1,
+        503.8,
+        14.0,
+        11.0
+      ],
+      "centre": [
+        1122.1,
+        509.3
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.662
+    },
+    {
+      "frame": 73,
+      "t_s": 2.4,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        1140.0,
+        511.1,
+        13.4,
+        13.0
+      ],
+      "centre": [
+        1146.7,
+        517.6
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.11
+    },
+    {
+      "frame": 76,
+      "t_s": 2.5,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        1153.7,
+        504.2,
+        13.4,
+        13.3
+      ],
+      "centre": [
+        1160.4,
+        510.9
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.224
+    },
+    {
+      "frame": 79,
+      "t_s": 2.6,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 82,
+      "t_s": 2.7,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 85,
+      "t_s": 2.8,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 88,
+      "t_s": 2.9,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 91,
+      "t_s": 3.0,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 94,
+      "t_s": 3.1,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 97,
+      "t_s": 3.2,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 100,
+      "t_s": 3.3,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 103,
+      "t_s": 3.4,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 106,
+      "t_s": 3.5,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        790.4,
+        609.0,
+        13.8,
+        17.9
+      ],
+      "centre": [
+        797.3,
+        617.9
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.103
+    },
+    {
+      "frame": 109,
+      "t_s": 3.6,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 112,
+      "t_s": 3.7,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        801.3,
+        604.9,
+        10.9,
+        21.4
+      ],
+      "centre": [
+        806.8,
+        615.6
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.169
+    },
+    {
+      "frame": 115,
+      "t_s": 3.8,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 118,
+      "t_s": 3.9,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 121,
+      "t_s": 4.0,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 124,
+      "t_s": 4.1,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 127,
+      "t_s": 4.2,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 130,
+      "t_s": 4.3,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 133,
+      "t_s": 4.4,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 136,
+      "t_s": 4.5,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 139,
+      "t_s": 4.6,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 142,
+      "t_s": 4.7,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 145,
+      "t_s": 4.8,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 148,
+      "t_s": 4.9,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 151,
+      "t_s": 5.0,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 154,
+      "t_s": 5.1,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 157,
+      "t_s": 5.2,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 160,
+      "t_s": 5.3,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        1029.3,
+        536.8,
+        13.2,
+        23.5
+      ],
+      "centre": [
+        1035.9,
+        548.6
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.113
+    },
+    {
+      "frame": 163,
+      "t_s": 5.4,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 166,
+      "t_s": 5.5,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 169,
+      "t_s": 5.6,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        1084.4,
+        525.2,
+        20.5,
+        24.5
+      ],
+      "centre": [
+        1094.7,
+        537.5
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.204
+    },
+    {
+      "frame": 172,
+      "t_s": 5.7,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 175,
+      "t_s": 5.8,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 178,
+      "t_s": 5.9,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 181,
+      "t_s": 6.0,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 184,
+      "t_s": 6.1,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 187,
+      "t_s": 6.2,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 190,
+      "t_s": 6.3,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 193,
+      "t_s": 6.4,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 196,
+      "t_s": 6.5,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 199,
+      "t_s": 6.6,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 202,
+      "t_s": 6.7,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 205,
+      "t_s": 6.8,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        765.8,
+        640.5,
+        16.3,
+        15.0
+      ],
+      "centre": [
+        773.9,
+        648.0
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.404
+    },
+    {
+      "frame": 208,
+      "t_s": 6.9,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 211,
+      "t_s": 7.0,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 214,
+      "t_s": 7.1,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 217,
+      "t_s": 7.2,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 220,
+      "t_s": 7.3,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 223,
+      "t_s": 7.4,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 226,
+      "t_s": 7.5,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 229,
+      "t_s": 7.6,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 232,
+      "t_s": 7.7,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 235,
+      "t_s": 7.8,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 238,
+      "t_s": 7.9,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 241,
+      "t_s": 8.0,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 244,
+      "t_s": 8.1,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 247,
+      "t_s": 8.2,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 250,
+      "t_s": 8.3,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 253,
+      "t_s": 8.4,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        783.1,
+        340.2,
+        18.3,
+        19.0
+      ],
+      "centre": [
+        792.3,
+        349.7
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.874
+    },
+    {
+      "frame": 256,
+      "t_s": 8.5,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        762.2,
+        351.5,
+        17.8,
+        19.0
+      ],
+      "centre": [
+        771.1,
+        361.0
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.75
+    },
+    {
+      "frame": 259,
+      "t_s": 8.6,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        733.2,
+        376.3,
+        18.7,
+        16.9
+      ],
+      "centre": [
+        742.5,
+        384.8
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.815
+    },
+    {
+      "frame": 262,
+      "t_s": 8.7,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        703.5,
+        409.0,
+        19.6,
+        19.2
+      ],
+      "centre": [
+        713.3,
+        418.7
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.361
+    },
+    {
+      "frame": 265,
+      "t_s": 8.8,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 268,
+      "t_s": 8.9,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        648.2,
+        500.4,
+        21.6,
+        23.9
+      ],
+      "centre": [
+        659.1,
+        512.3
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.107
+    },
+    {
+      "frame": 271,
+      "t_s": 9.0,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        624.4,
+        523.4,
+        21.1,
+        19.7
+      ],
+      "centre": [
+        635.0,
+        533.3
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.731
+    },
+    {
+      "frame": 274,
+      "t_s": 9.1,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        565.8,
+        550.7,
+        20.0,
+        17.3
+      ],
+      "centre": [
+        575.9,
+        559.3
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.54
+    },
+    {
+      "frame": 277,
+      "t_s": 9.2,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        510.0,
+        593.9,
+        20.8,
+        27.5
+      ],
+      "centre": [
+        520.4,
+        607.7
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.635
+    },
+    {
+      "frame": 280,
+      "t_s": 9.3,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        481.9,
+        621.3,
+        23.4,
+        17.7
+      ],
+      "centre": [
+        493.6,
+        630.1
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.403
+    },
+    {
+      "frame": 283,
+      "t_s": 9.4,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 286,
+      "t_s": 9.5,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        441.5,
+        618.1,
+        20.4,
+        21.1
+      ],
+      "centre": [
+        451.7,
+        628.7
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.82
+    },
+    {
+      "frame": 289,
+      "t_s": 9.6,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        433.2,
+        592.9,
+        19.0,
+        16.2
+      ],
+      "centre": [
+        442.7,
+        601.0
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.573
+    },
+    {
+      "frame": 292,
+      "t_s": 9.7,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        425.8,
+        578.1,
+        20.2,
+        17.1
+      ],
+      "centre": [
+        435.9,
+        586.7
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.811
+    },
+    {
+      "frame": 295,
+      "t_s": 9.8,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        420.9,
+        573.1,
+        20.0,
+        15.6
+      ],
+      "centre": [
+        430.9,
+        580.9
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.637
+    },
+    {
+      "frame": 298,
+      "t_s": 9.9,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        411.4,
+        577.2,
+        19.6,
+        15.7
+      ],
+      "centre": [
+        421.2,
+        585.0
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.514
+    },
+    {
+      "frame": 301,
+      "t_s": 10.0,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 304,
+      "t_s": 10.1,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 307,
+      "t_s": 10.2,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 310,
+      "t_s": 10.3,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 313,
+      "t_s": 10.4,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        485.7,
+        602.0,
+        18.3,
+        16.4
+      ],
+      "centre": [
+        494.8,
+        610.2
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.238
+    },
+    {
+      "frame": 316,
+      "t_s": 10.5,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 319,
+      "t_s": 10.6,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 322,
+      "t_s": 10.7,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 325,
+      "t_s": 10.8,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        567.1,
+        617.2,
+        18.7,
+        20.2
+      ],
+      "centre": [
+        576.5,
+        627.3
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.174
+    },
+    {
+      "frame": 328,
+      "t_s": 10.9,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        605.1,
+        613.2,
+        19.1,
+        17.7
+      ],
+      "centre": [
+        614.7,
+        622.0
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.85
+    },
+    {
+      "frame": 331,
+      "t_s": 11.0,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 334,
+      "t_s": 11.1,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 337,
+      "t_s": 11.2,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        749.9,
+        585.0,
+        18.4,
+        20.6
+      ],
+      "centre": [
+        759.1,
+        595.2
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.696
+    },
+    {
+      "frame": 340,
+      "t_s": 11.3,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 343,
+      "t_s": 11.4,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 346,
+      "t_s": 11.5,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        851.9,
+        567.0,
+        17.2,
+        18.5
+      ],
+      "centre": [
+        860.5,
+        576.3
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.719
+    },
+    {
+      "frame": 349,
+      "t_s": 11.6,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        889.3,
+        561.7,
+        20.3,
+        19.9
+      ],
+      "centre": [
+        899.4,
+        571.7
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.699
+    },
+    {
+      "frame": 352,
+      "t_s": 11.7,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 355,
+      "t_s": 11.8,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        879.6,
+        552.7,
+        19.2,
+        17.0
+      ],
+      "centre": [
+        889.2,
+        561.2
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.528
+    },
+    {
+      "frame": 358,
+      "t_s": 11.9,
+      "split": "train",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        775.6,
+        559.6,
+        16.6,
+        16.2
+      ],
+      "centre": [
+        783.9,
+        567.7
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.852
+    },
+    {
+      "frame": 361,
+      "t_s": 12.0,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 364,
+      "t_s": 12.1,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        576.3,
+        574.8,
+        16.8,
+        16.0
+      ],
+      "centre": [
+        584.7,
+        582.8
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.778
+    },
+    {
+      "frame": 367,
+      "t_s": 12.2,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        463.3,
+        583.4,
+        17.0,
+        14.8
+      ],
+      "centre": [
+        471.8,
+        590.8
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.812
+    },
+    {
+      "frame": 370,
+      "t_s": 12.3,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        388.3,
+        585.5,
+        18.9,
+        14.8
+      ],
+      "centre": [
+        397.7,
+        592.9
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.707
+    },
+    {
+      "frame": 373,
+      "t_s": 12.4,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        325.7,
+        579.7,
+        18.3,
+        16.7
+      ],
+      "centre": [
+        334.8,
+        588.0
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.667
+    },
+    {
+      "frame": 376,
+      "t_s": 12.5,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        288.0,
+        582.7,
+        16.8,
+        14.5
+      ],
+      "centre": [
+        296.4,
+        589.9
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.792
+    },
+    {
+      "frame": 379,
+      "t_s": 12.6,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        231.6,
+        590.5,
+        19.6,
+        17.8
+      ],
+      "centre": [
+        241.4,
+        599.4
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.654
+    },
+    {
+      "frame": 382,
+      "t_s": 12.7,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        196.5,
+        579.1,
+        19.2,
+        15.8
+      ],
+      "centre": [
+        206.1,
+        587.0
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.724
+    },
+    {
+      "frame": 385,
+      "t_s": 12.8,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        165.4,
+        576.2,
+        18.5,
+        17.0
+      ],
+      "centre": [
+        174.6,
+        584.7
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.823
+    },
+    {
+      "frame": 388,
+      "t_s": 12.9,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 391,
+      "t_s": 13.0,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 394,
+      "t_s": 13.1,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 397,
+      "t_s": 13.2,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 400,
+      "t_s": 13.3,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        235.8,
+        548.5,
+        19.2,
+        18.2
+      ],
+      "centre": [
+        245.4,
+        557.6
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.125
+    },
+    {
+      "frame": 403,
+      "t_s": 13.4,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        277.3,
+        539.3,
+        17.4,
+        19.9
+      ],
+      "centre": [
+        286.0,
+        549.2
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.508
+    },
+    {
+      "frame": 406,
+      "t_s": 13.5,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        296.4,
+        535.0,
+        19.0,
+        17.9
+      ],
+      "centre": [
+        306.0,
+        544.0
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.84
+    },
+    {
+      "frame": 409,
+      "t_s": 13.6,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 412,
+      "t_s": 13.7,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 415,
+      "t_s": 13.8,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 418,
+      "t_s": 13.9,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 421,
+      "t_s": 14.0,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 424,
+      "t_s": 14.1,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 427,
+      "t_s": 14.2,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 430,
+      "t_s": 14.3,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 433,
+      "t_s": 14.4,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 436,
+      "t_s": 14.5,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 439,
+      "t_s": 14.6,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 442,
+      "t_s": 14.7,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 445,
+      "t_s": 14.8,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 448,
+      "t_s": 14.9,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 451,
+      "t_s": 15.0,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 454,
+      "t_s": 15.1,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        522.1,
+        443.7,
+        14.5,
+        14.9
+      ],
+      "centre": [
+        529.3,
+        451.1
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.7
+    },
+    {
+      "frame": 457,
+      "t_s": 15.2,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        511.1,
+        434.7,
+        14.7,
+        13.3
+      ],
+      "centre": [
+        518.4,
+        441.4
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.715
+    },
+    {
+      "frame": 460,
+      "t_s": 15.3,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        499.3,
+        428.4,
+        14.0,
+        14.1
+      ],
+      "centre": [
+        506.3,
+        435.4
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.914
+    },
+    {
+      "frame": 463,
+      "t_s": 15.4,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        492.0,
+        418.7,
+        17.3,
+        13.0
+      ],
+      "centre": [
+        500.6,
+        425.2
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.749
+    },
+    {
+      "frame": 466,
+      "t_s": 15.5,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        488.0,
+        415.0,
+        15.1,
+        11.6
+      ],
+      "centre": [
+        495.6,
+        420.8
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.918
+    },
+    {
+      "frame": 469,
+      "t_s": 15.6,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        482.8,
+        411.6,
+        13.5,
+        13.1
+      ],
+      "centre": [
+        489.6,
+        418.2
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.709
+    },
+    {
+      "frame": 472,
+      "t_s": 15.7,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        473.3,
+        411.8,
+        15.3,
+        14.9
+      ],
+      "centre": [
+        481.0,
+        419.2
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.833
+    },
+    {
+      "frame": 475,
+      "t_s": 15.8,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        462.5,
+        400.3,
+        14.3,
+        14.3
+      ],
+      "centre": [
+        469.7,
+        407.4
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.776
+    },
+    {
+      "frame": 478,
+      "t_s": 15.9,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        460.3,
+        398.6,
+        13.8,
+        12.7
+      ],
+      "centre": [
+        467.1,
+        405.0
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.791
+    },
+    {
+      "frame": 481,
+      "t_s": 16.0,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        444.6,
+        399.6,
+        15.0,
+        13.7
+      ],
+      "centre": [
+        452.0,
+        406.4
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.694
+    },
+    {
+      "frame": 484,
+      "t_s": 16.1,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 487,
+      "t_s": 16.2,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        471.8,
+        376.4,
+        12.1,
+        12.4
+      ],
+      "centre": [
+        477.9,
+        382.6
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.687
+    },
+    {
+      "frame": 490,
+      "t_s": 16.3,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        559.1,
+        355.0,
+        14.6,
+        11.2
+      ],
+      "centre": [
+        566.4,
+        360.5
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.337
+    },
+    {
+      "frame": 493,
+      "t_s": 16.4,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        622.7,
+        346.1,
+        15.3,
+        10.8
+      ],
+      "centre": [
+        630.3,
+        351.5
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.704
+    },
+    {
+      "frame": 496,
+      "t_s": 16.5,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        665.5,
+        340.6,
+        13.7,
+        12.2
+      ],
+      "centre": [
+        672.4,
+        346.7
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.641
+    },
+    {
+      "frame": 499,
+      "t_s": 16.6,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        729.3,
+        339.2,
+        13.0,
+        14.3
+      ],
+      "centre": [
+        735.8,
+        346.4
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.537
+    },
+    {
+      "frame": 502,
+      "t_s": 16.7,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        790.0,
+        342.9,
+        15.4,
+        14.8
+      ],
+      "centre": [
+        797.7,
+        350.3
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.552
+    },
+    {
+      "frame": 505,
+      "t_s": 16.8,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 508,
+      "t_s": 16.9,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        934.2,
+        370.5,
+        14.0,
+        13.2
+      ],
+      "centre": [
+        941.2,
+        377.1
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.887
+    },
+    {
+      "frame": 511,
+      "t_s": 17.0,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 514,
+      "t_s": 17.1,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        920.3,
+        375.1,
+        13.9,
+        12.3
+      ],
+      "centre": [
+        927.2,
+        381.2
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.856
+    },
+    {
+      "frame": 517,
+      "t_s": 17.2,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        884.5,
+        371.4,
+        13.4,
+        12.5
+      ],
+      "centre": [
+        891.2,
+        377.6
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.806
+    },
+    {
+      "frame": 520,
+      "t_s": 17.3,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 523,
+      "t_s": 17.4,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        782.3,
+        378.2,
+        13.3,
+        12.6
+      ],
+      "centre": [
+        789.0,
+        384.4
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.664
+    },
+    {
+      "frame": 526,
+      "t_s": 17.5,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        731.7,
+        389.7,
+        14.1,
+        12.9
+      ],
+      "centre": [
+        738.8,
+        396.2
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.838
+    },
+    {
+      "frame": 529,
+      "t_s": 17.6,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        683.6,
+        407.5,
+        12.7,
+        11.4
+      ],
+      "centre": [
+        690.0,
+        413.1
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.698
+    },
+    {
+      "frame": 532,
+      "t_s": 17.7,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        639.1,
+        423.1,
+        14.5,
+        14.4
+      ],
+      "centre": [
+        646.4,
+        430.3
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.613
+    },
+    {
+      "frame": 535,
+      "t_s": 17.8,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        605.6,
+        404.1,
+        15.3,
+        13.7
+      ],
+      "centre": [
+        613.2,
+        410.9
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.784
+    },
+    {
+      "frame": 538,
+      "t_s": 17.9,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        590.0,
+        398.0,
+        14.6,
+        12.4
+      ],
+      "centre": [
+        597.3,
+        404.2
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.864
+    },
+    {
+      "frame": 541,
+      "t_s": 18.0,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        577.4,
+        394.4,
+        12.5,
+        13.7
+      ],
+      "centre": [
+        583.6,
+        401.2
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.928
+    },
+    {
+      "frame": 544,
+      "t_s": 18.1,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        552.5,
+        396.4,
+        13.1,
+        10.5
+      ],
+      "centre": [
+        559.1,
+        401.6
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.836
+    },
+    {
+      "frame": 547,
+      "t_s": 18.2,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        540.7,
+        400.8,
+        14.6,
+        13.5
+      ],
+      "centre": [
+        548.0,
+        407.5
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.839
+    },
+    {
+      "frame": 550,
+      "t_s": 18.3,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        523.2,
+        417.4,
+        13.6,
+        10.8
+      ],
+      "centre": [
+        530.0,
+        422.8
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.893
+    },
+    {
+      "frame": 553,
+      "t_s": 18.4,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        511.5,
+        418.5,
+        12.2,
+        11.6
+      ],
+      "centre": [
+        517.6,
+        424.3
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.943
+    },
+    {
+      "frame": 556,
+      "t_s": 18.5,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        501.1,
+        411.6,
+        12.3,
+        13.0
+      ],
+      "centre": [
+        507.2,
+        418.1
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.853
+    },
+    {
+      "frame": 559,
+      "t_s": 18.6,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        492.7,
+        410.0,
+        14.2,
+        13.0
+      ],
+      "centre": [
+        499.8,
+        416.5
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.736
+    },
+    {
+      "frame": 562,
+      "t_s": 18.7,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        489.2,
+        415.7,
+        12.8,
+        12.3
+      ],
+      "centre": [
+        495.6,
+        421.8
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.949
+    },
+    {
+      "frame": 565,
+      "t_s": 18.8,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        487.2,
+        413.3,
+        13.4,
+        12.4
+      ],
+      "centre": [
+        494.0,
+        419.5
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.85
+    },
+    {
+      "frame": 568,
+      "t_s": 18.9,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        488.1,
+        412.2,
+        13.8,
+        13.1
+      ],
+      "centre": [
+        495.0,
+        418.7
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.818
+    },
+    {
+      "frame": 571,
+      "t_s": 19.0,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        492.3,
+        414.3,
+        13.9,
+        12.8
+      ],
+      "centre": [
+        499.2,
+        420.7
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.884
+    },
+    {
+      "frame": 574,
+      "t_s": 19.1,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        496.9,
+        411.5,
+        14.4,
+        14.0
+      ],
+      "centre": [
+        504.1,
+        418.5
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.561
+    },
+    {
+      "frame": 577,
+      "t_s": 19.2,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        503.3,
+        410.4,
+        14.1,
+        14.6
+      ],
+      "centre": [
+        510.3,
+        417.7
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.435
+    },
+    {
+      "frame": 580,
+      "t_s": 19.3,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 583,
+      "t_s": 19.4,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 586,
+      "t_s": 19.5,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 589,
+      "t_s": 19.6,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 592,
+      "t_s": 19.7,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 595,
+      "t_s": 19.8,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 598,
+      "t_s": 19.9,
+      "split": "dev",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        1250.0,
+        725.1,
+        20.8,
+        18.9
+      ],
+      "centre": [
+        1260.4,
+        734.5
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.099
+    },
+    {
+      "frame": 661,
+      "t_s": 22.0,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball near yellow player left of center circle",
+      "written_at_utc": "2026-07-25T15:12:20.001285+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 664,
+      "t_s": 22.1,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "visible",
+      "bbox": [
+        658.1,
+        405.0,
+        12.0,
+        16.3
+      ],
+      "centre": [
+        664.1,
+        413.2
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.139,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball in play left-center",
+      "written_at_utc": "2026-07-25T15:12:20.001303+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 667,
+      "t_s": 22.2,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball near center",
+      "written_at_utc": "2026-07-25T15:12:20.001317+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 670,
+      "t_s": 22.3,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball near center",
+      "written_at_utc": "2026-07-25T15:12:20.001330+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 673,
+      "t_s": 22.4,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "visible",
+      "bbox": [
+        882.1,
+        353.3,
+        12.4,
+        12.8
+      ],
+      "centre": [
+        888.3,
+        359.7
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.145,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "orange auto box on ball in center circle — TP",
+      "written_at_utc": "2026-07-25T15:12:20.001345+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 676,
+      "t_s": 22.5,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "visible",
+      "bbox": [
+        871.2,
+        350.7,
+        13.9,
+        13.8
+      ],
+      "centre": [
+        878.1,
+        357.6
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.365,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball moving right of center",
+      "written_at_utc": "2026-07-25T15:12:20.001359+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 679,
+      "t_s": 22.6,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "visible",
+      "bbox": [
+        851.9,
+        346.6,
+        13.2,
+        13.4
+      ],
+      "centre": [
+        858.5,
+        353.3
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.284,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball midfield",
+      "written_at_utc": "2026-07-25T15:12:20.001372+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 682,
+      "t_s": 22.7,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball midfield right",
+      "written_at_utc": "2026-07-25T15:12:20.001385+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 685,
+      "t_s": 22.8,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "visible",
+      "bbox": [
+        838.1,
+        342.2,
+        12.3,
+        13.1
+      ],
+      "centre": [
+        844.3,
+        348.8
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.333,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball right half",
+      "written_at_utc": "2026-07-25T15:12:20.001399+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 688,
+      "t_s": 22.9,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "visible",
+      "bbox": [
+        838.3,
+        341.7,
+        12.5,
+        13.0
+      ],
+      "centre": [
+        844.5,
+        348.2
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.242,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball right half",
+      "written_at_utc": "2026-07-25T15:12:20.001412+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 691,
+      "t_s": 23.0,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "visible",
+      "bbox": [
+        833.5,
+        339.5,
+        13.1,
+        12.1
+      ],
+      "centre": [
+        840.1,
+        345.6
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.149,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball right",
+      "written_at_utc": "2026-07-25T15:12:20.001455+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 694,
+      "t_s": 23.1,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "visible",
+      "bbox": [
+        828.3,
+        338.6,
+        13.8,
+        12.3
+      ],
+      "centre": [
+        835.2,
+        344.8
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.261,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball right",
+      "written_at_utc": "2026-07-25T15:12:20.001472+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 697,
+      "t_s": 23.2,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "visible",
+      "bbox": [
+        827.0,
+        338.9,
+        10.7,
+        10.8
+      ],
+      "centre": [
+        832.4,
+        344.3
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.199,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball near center controlled by white",
+      "written_at_utc": "2026-07-25T15:12:20.001485+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 700,
+      "t_s": 23.3,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "visible",
+      "bbox": [
+        818.6,
+        336.0,
+        13.5,
+        12.0
+      ],
+      "centre": [
+        825.3,
+        342.0
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.159,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball midfield",
+      "written_at_utc": "2026-07-25T15:12:20.001498+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 703,
+      "t_s": 23.4,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball midfield cluster",
+      "written_at_utc": "2026-07-25T15:12:20.001510+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 706,
+      "t_s": 23.5,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball midfield",
+      "written_at_utc": "2026-07-25T15:12:20.001523+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 709,
+      "t_s": 23.6,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": 0.098,
+      "visible": "ambiguous",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball present near #30 but auto box appears offset/FP risk",
+      "written_at_utc": "2026-07-25T15:12:20.001570+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 712,
+      "t_s": 23.7,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball left of center building attack",
+      "written_at_utc": "2026-07-25T15:12:20.001584+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 715,
+      "t_s": 23.8,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball left side",
+      "written_at_utc": "2026-07-25T15:12:20.001596+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 718,
+      "t_s": 23.9,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball left",
+      "written_at_utc": "2026-07-25T15:12:20.001609+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 721,
+      "t_s": 24.0,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball left",
+      "written_at_utc": "2026-07-25T15:12:20.001622+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 724,
+      "t_s": 24.1,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball left",
+      "written_at_utc": "2026-07-25T15:12:20.001634+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 727,
+      "t_s": 24.2,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "visible",
+      "bbox": [
+        345.1,
+        385.0,
+        8.4,
+        7.7
+      ],
+      "centre": [
+        349.3,
+        388.8
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.096,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball left",
+      "written_at_utc": "2026-07-25T15:12:20.001646+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 730,
+      "t_s": 24.3,
+      "split": "holdout",
+      "review_status": "reviewed",
+      "reviewed": true,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null,
+      "visible": "visible",
+      "occlusion": "none",
+      "reviewer": "cursor_agent_visual",
+      "provenance": "ball left",
+      "written_at_utc": "2026-07-25T15:12:20.001659+00:00",
+      "schema": "review_decision_ball_v1"
+    },
+    {
+      "frame": 733,
+      "t_s": 24.4,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 736,
+      "t_s": 24.5,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 739,
+      "t_s": 24.6,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 742,
+      "t_s": 24.7,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        693.4,
+        319.4,
+        11.0,
+        12.0
+      ],
+      "centre": [
+        698.9,
+        325.3
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.115
+    },
+    {
+      "frame": 745,
+      "t_s": 24.8,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 748,
+      "t_s": 24.9,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        1036.3,
+        347.5,
+        12.6,
+        12.3
+      ],
+      "centre": [
+        1042.6,
+        353.6
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.118
+    },
+    {
+      "frame": 751,
+      "t_s": 25.0,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 754,
+      "t_s": 25.1,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        650.0,
+        315.7,
+        13.1,
+        11.0
+      ],
+      "centre": [
+        656.5,
+        321.2
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.215
+    },
+    {
+      "frame": 757,
+      "t_s": 25.2,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        642.7,
+        314.6,
+        11.5,
+        12.1
+      ],
+      "centre": [
+        648.5,
+        320.7
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.086
+    },
+    {
+      "frame": 760,
+      "t_s": 25.3,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        630.0,
+        315.1,
+        11.5,
+        11.8
+      ],
+      "centre": [
+        635.7,
+        321.0
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.098
+    },
+    {
+      "frame": 763,
+      "t_s": 25.4,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 766,
+      "t_s": 25.5,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 769,
+      "t_s": 25.6,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 772,
+      "t_s": 25.7,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 775,
+      "t_s": 25.8,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 778,
+      "t_s": 25.9,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 781,
+      "t_s": 26.0,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        611.1,
+        290.0,
+        12.6,
+        11.9
+      ],
+      "centre": [
+        617.4,
+        295.9
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.141
+    },
+    {
+      "frame": 784,
+      "t_s": 26.1,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        668.8,
+        282.1,
+        11.0,
+        9.9
+      ],
+      "centre": [
+        674.2,
+        287.1
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.232
+    },
+    {
+      "frame": 787,
+      "t_s": 26.2,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 790,
+      "t_s": 26.3,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        741.2,
+        286.7,
+        12.6,
+        9.4
+      ],
+      "centre": [
+        747.5,
+        291.4
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.198
+    },
+    {
+      "frame": 793,
+      "t_s": 26.4,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 796,
+      "t_s": 26.5,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 799,
+      "t_s": 26.6,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        804.0,
+        276.1,
+        10.5,
+        11.0
+      ],
+      "centre": [
+        809.2,
+        281.6
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.126
+    },
+    {
+      "frame": 802,
+      "t_s": 26.7,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 805,
+      "t_s": 26.8,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 808,
+      "t_s": 26.9,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        717.7,
+        247.7,
+        12.5,
+        11.0
+      ],
+      "centre": [
+        724.0,
+        253.2
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.197
+    },
+    {
+      "frame": 811,
+      "t_s": 27.0,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        694.2,
+        243.4,
+        10.1,
+        10.2
+      ],
+      "centre": [
+        699.2,
+        248.5
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.1
+    },
+    {
+      "frame": 814,
+      "t_s": 27.1,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        647.2,
+        240.1,
+        9.8,
+        9.4
+      ],
+      "centre": [
+        652.1,
+        244.8
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.449
+    },
+    {
+      "frame": 817,
+      "t_s": 27.2,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        624.5,
+        240.7,
+        10.2,
+        9.6
+      ],
+      "centre": [
+        629.7,
+        245.5
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.343
+    },
+    {
+      "frame": 820,
+      "t_s": 27.3,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        583.2,
+        245.8,
+        10.2,
+        11.0
+      ],
+      "centre": [
+        588.2,
+        251.2
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.1
+    },
+    {
+      "frame": 823,
+      "t_s": 27.4,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        552.8,
+        255.0,
+        12.8,
+        10.7
+      ],
+      "centre": [
+        559.2,
+        260.3
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.098
+    },
+    {
+      "frame": 826,
+      "t_s": 27.5,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 829,
+      "t_s": 27.6,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 832,
+      "t_s": 27.7,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 835,
+      "t_s": 27.8,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 838,
+      "t_s": 27.9,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 841,
+      "t_s": 28.0,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 844,
+      "t_s": 28.1,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 847,
+      "t_s": 28.2,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 850,
+      "t_s": 28.3,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 853,
+      "t_s": 28.4,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 856,
+      "t_s": 28.5,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 859,
+      "t_s": 28.6,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 862,
+      "t_s": 28.7,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 865,
+      "t_s": 28.8,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 868,
+      "t_s": 28.9,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 871,
+      "t_s": 29.0,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 874,
+      "t_s": 29.1,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 877,
+      "t_s": 29.2,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        536.3,
+        296.3,
+        10.1,
+        8.5
+      ],
+      "centre": [
+        541.3,
+        300.6
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.235
+    },
+    {
+      "frame": 880,
+      "t_s": 29.3,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 883,
+      "t_s": 29.4,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 886,
+      "t_s": 29.5,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 889,
+      "t_s": 29.6,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 892,
+      "t_s": 29.7,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 895,
+      "t_s": 29.8,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 898,
+      "t_s": 29.9,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        902.0,
+        296.9,
+        10.0,
+        7.9
+      ],
+      "centre": [
+        907.0,
+        300.8
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.611
+    },
+    {
+      "frame": 901,
+      "t_s": 30.0,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        937.7,
+        296.8,
+        9.4,
+        8.9
+      ],
+      "centre": [
+        942.4,
+        301.3
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.369
+    },
+    {
+      "frame": 904,
+      "t_s": 30.1,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 907,
+      "t_s": 30.2,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 910,
+      "t_s": 30.3,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 913,
+      "t_s": 30.4,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        1054.5,
+        303.2,
+        10.8,
+        10.2
+      ],
+      "centre": [
+        1059.9,
+        308.3
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.634
+    },
+    {
+      "frame": 916,
+      "t_s": 30.5,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 919,
+      "t_s": 30.6,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "visible",
+      "bbox": [
+        1098.4,
+        301.3,
+        10.7,
+        11.3
+      ],
+      "centre": [
+        1103.8,
+        307.0
+      ],
+      "occlusion_auto": "unknown",
+      "score": 0.33
+    },
+    {
+      "frame": 922,
+      "t_s": 30.7,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 925,
+      "t_s": 30.8,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 928,
+      "t_s": 30.9,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 931,
+      "t_s": 31.0,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 934,
+      "t_s": 31.1,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 937,
+      "t_s": 31.2,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 940,
+      "t_s": 31.3,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 943,
+      "t_s": 31.4,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 946,
+      "t_s": 31.5,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 949,
+      "t_s": 31.6,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 952,
+      "t_s": 31.7,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 955,
+      "t_s": 31.8,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    },
+    {
+      "frame": 958,
+      "t_s": 31.9,
+      "split": "holdout",
+      "review_status": "auto_candidate",
+      "reviewed": false,
+      "visible_auto": "not_visible",
+      "bbox": null,
+      "centre": null,
+      "occlusion_auto": "unknown",
+      "score": null
+    }
+  ],
+  "written_at_utc": "2026-07-25T15:12:20.218215+00:00"
+}

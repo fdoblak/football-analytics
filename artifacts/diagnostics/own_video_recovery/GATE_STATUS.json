@@ -1,0 +1,25 @@
+{
+  "schema": "stage17r2_gate_status_v1",
+  "gate": "WAITING \u2014 REAL FRAME REVIEW REQUIRED",
+  "previous_reclassified": "NO-GO \u2014 OWN-VIDEO PERCEPTION NOT VALIDATED",
+  "blockers": [
+    "human reviewed GT 15 < 180 required",
+    "ball reviewed GT 24 < 300 required",
+    "calibration line/keypoint review GT not created",
+    "TrackEval HOTA not runnable without reviewed track GT + env install",
+    "football-specific detector finetune blocked on train GT volume"
+  ],
+  "next_actions": [
+    "Use scripts/review_own_video_frames.py with overlays under workspace/own_video_analysis/stage17r2",
+    "Complete holdout human/ball reviews first (LOCKED), then train/dev",
+    "After GT thresholds met: fine-tune detector, run tracker bakeoff + TrackEval, calibrate per shot"
+  ],
+  "tooling": {
+    "review_cli": "scripts/review_own_video_frames.py",
+    "prelabels": "/home/fdoblak/workspace/own_video_analysis/stage17r2/prelabels_human.json",
+    "overlays_human": "/home/fdoblak/workspace/own_video_analysis/stage17r2/overlays_human",
+    "overlays_ball": "/home/fdoblak/workspace/own_video_analysis/stage17r2/overlays_ball",
+    "contact_sheets": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets"
+  },
+  "written_at_utc": "2026-07-25T15:13:21.408455+00:00"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "rejected_v0.18.0_manifest_v1",
+  "reclassified_gate": "NO-GO — OWN-VIDEO PERCEPTION NOT VALIDATED",
+  "previous_claimed_gate": "PASS_WITH_FINDINGS — JERSEY 5 OWN-VIDEO CLIP ANALYSIS COMPLETE; FULL-MATCH ACCURACY NOT VALIDATED",
+  "tag_left_unmoved": "single-player-own-video-v0.18.0",
+  "commit": "84fe5b4faa7bec9896488be1066f743dab9b5e1d",
+  "verified_findings": {
+    "gt_reviewed": 6,
+    "gt_auto_candidate": 114,
+    "confirmed_player_tracks": 67,
+    "fragmentation_tracks_per_s": 1.965,
+    "id_switch_proxy": 37,
+    "team_flips": 102,
+    "ball_prf": "ÖLÇÜLEMEDİ",
+    "valid_calibration_segments": 0,
+    "target_confirmed_frame_ratio_approx": 0.267,
+    "pixel_only_metrics": true,
+    "png_lacks_pitch_heatmap_evidence": true
+  },
+  "reasons": [
+    "120-frame set almost entirely auto_candidate (6 reviewed)",
+    "tracking fragmentation and ID switches remain high for 34s clip",
+    "team flips=102 undermines team consistency narrative",
+    "ball P/R/F1 not measured on reviewed GT",
+    "no valid calibration; pixel metrics presented as analysis",
+    "target identity fragmented across tracks 4 and 27",
+    "customer delivery not perception-validated"
+  ],
+  "checksums_sha256": {
+    "FUTBOLCU_5_ANALIZ_RAPORU_TR.json": "c28c8ae668d62911f67d2135ab77a46379efcf7efe8bc407a946806325fce1a7",
+    "FUTBOLCU_5_ANALIZ_RAPORU_TR.pdf": "91d69c1d517d50dc0a64a17e4c4e22998d54c2bb226da3c61b3422bf46c27c7c",
+    "OPEN_RESULTS.html": "39df2fb1881f00b07d64d2e3fa93cbbd9be0daf9eba005c8dbae9db8e2869773",
+    "README.md": "2ed6c3dc8758531e1d8dbc417c1788b76f379d4e808281236e69e50c30337f1d",
+    "checksums.sha256": "6a6828b7e06d73fc57cf463193dca128eb845d2616f4186cf85983ae3dccfe40",
+    "cleanup_manifest.json": "a7b5eec8ed7ff603b53ca7be144b6be81d5fc4520afbcdb00cc31ba4a6bf4dbc",
+    "evidence_manifest.json": "1f980dedbf1db535d3cefcd17c2a1ef73ae2b64773ca7560054ee1f9b5a42e39",
+    "futbolcu_5_analiz_ozeti.png": "50fcde88cdc5032a8ea03c1638f0b39a351745ef889eb6e551ba03c9a9f36eac",
+    "futbolcu_5_video_analiz.mp4": "b61ad0017eefef3219d116d5a039a1f6c4691f6fdbdbe4ed9126b470d7cf7332"
+  },
+  "written_at_utc": "2026-07-25T15:06:42.280589+00:00",
+  "mp4_not_duplicated_in_archive": true,
+  "mp4_available_in_git_history_path": "artifacts/final_delivery/futbolcu_5_video_analiz.mp4@84fe5b4"
+}
