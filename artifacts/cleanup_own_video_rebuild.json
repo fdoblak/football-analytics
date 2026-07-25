@@ -1,0 +1,1130 @@
+{
+  "schema": "cleanup_own_video_rebuild_v1",
+  "written_at_utc": "2026-07-25T11:31:54.267393+00:00",
+  "source_video_preserved": true,
+  "source_video_path": "/mnt/c/Users/furka/Downloads/\u00f6rnek_video_FA.mp4",
+  "source_video_sha256": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160",
+  "source_video_deleted": false,
+  "data_loss": false,
+  "n_removed": 124,
+  "bytes_removed": 86324233,
+  "removed": [
+    {
+      "path": "artifacts/final_delivery/7_NUMARA_ADAY_A_ANALIZ_KANITI.mp4",
+      "size": 15380317,
+      "sha256": "3a6cbdad6702fb9191d5c39249b36fad2a0565fa53c6d05dd9c67459e551c7b3",
+      "reason": "stage17_rejected_delivery_removed",
+      "tracked": true,
+      "recoverable_from_git": true,
+      "data_loss": false
+    },
+    {
+      "path": "artifacts/final_delivery/7_NUMARA_ADAY_A_ANALIZ_OZETI.png",
+      "size": 371034,
+      "sha256": "ee3672dde6a55f9a45800442dad7e8cb91c4f57f939031c6aaa3be9a8ed4bf62",
+      "reason": "stage17_rejected_delivery_removed",
+      "tracked": true,
+      "recoverable_from_git": true,
+      "data_loss": false
+    },
+    {
+      "path": "artifacts/final_delivery/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR.pdf",
+      "size": 67830,
+      "sha256": "ea9aff3f1ef32df9863933dbd4dae9fffb1863d828dae3c68dd992a981a77bd4",
+      "reason": "stage17_rejected_delivery_removed",
+      "tracked": true,
+      "recoverable_from_git": true,
+      "data_loss": false
+    },
+    {
+      "path": "artifacts/final_delivery/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_VERILERI.json",
+      "size": 12139,
+      "sha256": "230d8b57aa733bd426035b3eb2ab8963550aa4ecb3fdcd54e63518af2d56de4a",
+      "reason": "stage17_rejected_delivery_removed",
+      "tracked": true,
+      "recoverable_from_git": true,
+      "data_loss": false
+    },
+    {
+      "path": "artifacts/final_delivery/7_NUMARA_ADAY_B_ANALIZ_KANITI.mp4",
+      "size": 6351123,
+      "sha256": "05d626f8dbfe4fa7c05b04ace110f608da526fe5f334b508ebcd5362ebca70dd",
+      "reason": "stage17_rejected_delivery_removed",
+      "tracked": true,
+      "recoverable_from_git": true,
+      "data_loss": false
+    },
+    {
+      "path": "artifacts/final_delivery/7_NUMARA_ADAY_B_ANALIZ_OZETI.png",
+      "size": 254998,
+      "sha256": "916dcca5b4f5120577a224f8aec919a19be83f99cbc5aa885d3c6f94e881091f",
+      "reason": "stage17_rejected_delivery_removed",
+      "tracked": true,
+      "recoverable_from_git": true,
+      "data_loss": false
+    },
+    {
+      "path": "artifacts/final_delivery/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR.pdf",
+      "size": 67313,
+      "sha256": "1fb9a10885e84c0bb9fcde682bca197894948b4895d3781214afd113882c4bf1",
+      "reason": "stage17_rejected_delivery_removed",
+      "tracked": true,
+      "recoverable_from_git": true,
+      "data_loss": false
+    },
+    {
+      "path": "artifacts/final_delivery/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_VERILERI.json",
+      "size": 11967,
+      "sha256": "92bf609f9aa1ea50e82bd4ba01e7773fcb78a75b08b1186eeb02c61e0106918c",
+      "reason": "stage17_rejected_delivery_removed",
+      "tracked": true,
+      "recoverable_from_git": true,
+      "data_loss": false
+    },
+    {
+      "path": "artifacts/final_delivery/OPEN_RESULTS.html",
+      "size": 2181,
+      "sha256": "3f525b817bfa9912fa4df9f66aeeef7ce4dec308887f7372d751df411945a312",
+      "reason": "stage17_rejected_delivery_removed",
+      "tracked": true,
+      "recoverable_from_git": true,
+      "data_loss": false
+    },
+    {
+      "path": "artifacts/final_delivery/README.md",
+      "size": 212,
+      "sha256": "975a6cbf1728c4d015d0b0058cd6712014b8afac2fc72a1c84562c5941f9f37d",
+      "reason": "stage17_rejected_delivery_removed",
+      "tracked": true,
+      "recoverable_from_git": true,
+      "data_loss": false
+    },
+    {
+      "path": "artifacts/final_delivery/checksums.sha256",
+      "size": 1272,
+      "sha256": "2990a15953486a9ca11e2efa0413e33851a6e68885debad6f602b214615dcbfa",
+      "reason": "stage17_rejected_delivery_removed",
+      "tracked": true,
+      "recoverable_from_git": true,
+      "data_loss": false
+    },
+    {
+      "path": "artifacts/final_delivery/cleanup_manifest.json",
+      "size": 1368,
+      "sha256": "8be1fbdca50eff7619fdba66d7e84ccc032fc7003ff3c70c45e4ed5b4a9de898",
+      "reason": "stage17_rejected_delivery_removed",
+      "tracked": true,
+      "recoverable_from_git": true,
+      "data_loss": false
+    },
+    {
+      "path": "artifacts/final_delivery/evidence_manifest.json",
+      "size": 1953,
+      "sha256": "53d537906f66bb7bfedd9ea75b120fb8dcfb1868e334d5a890907778d1a1433b",
+      "reason": "stage17_rejected_delivery_removed",
+      "tracked": true,
+      "recoverable_from_git": true,
+      "data_loss": false
+    },
+    {
+      "path": "artifacts/final_delivery/recovery_manifest.json",
+      "size": 1963,
+      "sha256": "db2815e73caac613833d00eaa720b882efb1ef4f13feeb4004f90b1238b6ffdb",
+      "reason": "stage17_rejected_delivery_removed",
+      "tracked": true,
+      "recoverable_from_git": true,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pytest_full2.log",
+      "size": 1630,
+      "sha256": "bf697021328077b2db37cf90fac4ed601fbb6815f58b57e096d87a94a81ed438",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pytest_full.log",
+      "size": 6167,
+      "sha256": "f71ced8e8802a6b1693d772be173e7e456bcb09cc21eb3a578ae5de1689ca3f9",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/proof_qa/7_NUMARA_ADAY_B_ANALIZ_KANITI.mp4_mid.png",
+      "size": 1886590,
+      "sha256": "d9e75cf1d8df864b28484a75db9ac1e50d5f3284641e2ba2caa90fb4ada10a34",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/proof_qa/7_NUMARA_ADAY_B_ANALIZ_KANITI.mp4_last.png",
+      "size": 1883153,
+      "sha256": "62ed71d667d4f1477f4a11225b1d5f637189582a6b3319535eef0b79188011ac",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/proof_qa/7_NUMARA_ADAY_B_ANALIZ_KANITI.mp4_first.png",
+      "size": 1721177,
+      "sha256": "9985faf578d05d1b1a28f2f97f4465cfb4b74a274573b199f3e0e835e98b8f0b",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/proof_qa/7_NUMARA_ADAY_A_ANALIZ_KANITI.mp4_mid.png",
+      "size": 1895417,
+      "sha256": "3c5ed2031c97d1100df0caffb413cded7426cca712cced5ea68bc65654c596a2",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/proof_qa/7_NUMARA_ADAY_A_ANALIZ_KANITI.mp4_last.png",
+      "size": 1903350,
+      "sha256": "ec7059e5c5bed137b6b8fb141dc8db67e22c443b9e0d2fa8cf24523c992fe45d",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/proof_qa/7_NUMARA_ADAY_A_ANALIZ_KANITI.mp4_first.png",
+      "size": 1890906,
+      "sha256": "0567e2be7c7b2f3eab0e65b89dd7b34ce97d2bedb4a68a9036e51918d0b903b0",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/proof_qa",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/B",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/A",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR/page_15.png",
+      "size": 52447,
+      "sha256": "b938c8ef41328dc6c9e3cc0377a3e137437da1dea89aa4028ef7a9fbb41b3107",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR/page_14.png",
+      "size": 68706,
+      "sha256": "e91918c235b3d2eb3e35c29d6dbca1691081bc687a30204efbcb52a72b123809",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR/page_13.png",
+      "size": 65653,
+      "sha256": "9f98b453387de04ce1bb00a6853d40908f5d518c5f6aa92f367f21a9eaf29133",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR/page_12.png",
+      "size": 66457,
+      "sha256": "788fc0988b51cb1bbd5c6b731aaf8ca87b6e8d0e9659fe8d467dbf519b8e5a98",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR/page_11.png",
+      "size": 28569,
+      "sha256": "ee5654f9d724caee2bed246e76ca3d0bd642b5be6085ebf825b07093d426f61e",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR/page_10.png",
+      "size": 38045,
+      "sha256": "325af4892a529a3fd13a41fd0474f1b737853280e96691acec1e9b841df5e6a2",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR/page_09.png",
+      "size": 17496,
+      "sha256": "b1f126baa909437622d530e227729c0f0f4397a543cf13e133b1e35840ae8026",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR/page_08.png",
+      "size": 16881,
+      "sha256": "e4c13357fe892776e34fa39ceff577a6ac892b5c320588e789e2d2539a20a794",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR/page_07.png",
+      "size": 26075,
+      "sha256": "7a1e190e1e53f894b27efef42f3166e1989f257f097630ee2599d6efe2cfd68a",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR/page_06.png",
+      "size": 23514,
+      "sha256": "3e92c7f446567c2fb51a3538fd61f569fa54604acaa54a8c4bf78c0d69caf47a",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR/page_05.png",
+      "size": 21995,
+      "sha256": "b92b3674cd17b6de068adc80333276aba2813d39863da665e5a5c4215efb4664",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR/page_04.png",
+      "size": 26587,
+      "sha256": "174d0b06c28d54825e5a0f8407cda9d7b379a452e9d853c57abac3df4f1d7a90",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR/page_03.png",
+      "size": 27779,
+      "sha256": "9e5b7216ee931ab27ed47bc746aa8718c1eb133180237fe1b5188b18dd41ea40",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR/page_02.png",
+      "size": 35354,
+      "sha256": "f0120c30f26e4221db5c62682f86f5ab8dbe7e1ef394a9ee01299cf18b03be97",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR/page_01.png",
+      "size": 31875,
+      "sha256": "8ed92000834f0e7146c3750fc8d5938ebeead485a6806ef630563e5139f631b4",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR/page_15.png",
+      "size": 52612,
+      "sha256": "a46ba93abf3dbc0b58f07371f56ea5cc20b9048d03fe5dc15994b191b8f464e9",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR/page_14.png",
+      "size": 68722,
+      "sha256": "4c6384c7a3a07d8e7dd90262fcb88a057fc3e23be6e44cf18e72892ec1e15e6b",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR/page_13.png",
+      "size": 65653,
+      "sha256": "9f98b453387de04ce1bb00a6853d40908f5d518c5f6aa92f367f21a9eaf29133",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR/page_12.png",
+      "size": 66457,
+      "sha256": "788fc0988b51cb1bbd5c6b731aaf8ca87b6e8d0e9659fe8d467dbf519b8e5a98",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR/page_11.png",
+      "size": 28562,
+      "sha256": "e2c5a6fcf94e67a29dfe5cb5ae5c9cd6480b84ca52399f1e0992ffde6c2fe333",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR/page_10.png",
+      "size": 38045,
+      "sha256": "325af4892a529a3fd13a41fd0474f1b737853280e96691acec1e9b841df5e6a2",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR/page_09.png",
+      "size": 18441,
+      "sha256": "a0a2437c6129c7b2cefa5c8b2c21cee5d518972b33b3c89c1c6b5c52c773fd21",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR/page_08.png",
+      "size": 16881,
+      "sha256": "e4c13357fe892776e34fa39ceff577a6ac892b5c320588e789e2d2539a20a794",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR/page_07.png",
+      "size": 26075,
+      "sha256": "7a1e190e1e53f894b27efef42f3166e1989f257f097630ee2599d6efe2cfd68a",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR/page_06.png",
+      "size": 23679,
+      "sha256": "8085f8252d189c5f12f3d00414792230a58cfc39b696e3cc9d96a39c9370569a",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR/page_05.png",
+      "size": 22964,
+      "sha256": "034e3e4ebce27814a277b54092fffd41ef602bab4956bdeece2181647fb68335",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR/page_04.png",
+      "size": 26587,
+      "sha256": "174d0b06c28d54825e5a0f8407cda9d7b379a452e9d853c57abac3df4f1d7a90",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR/page_03.png",
+      "size": 27681,
+      "sha256": "3b9b782e5806aaad62b9682be802ba9827f5dbb95b534f8297c7da84424763fd",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR/page_02.png",
+      "size": 35423,
+      "sha256": "6b96055718d9404f13b9bcb437a2847486987e9cafa20c63af5c991cafc8cbd8",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR/page_01.png",
+      "size": 31814,
+      "sha256": "ab0718611c34b7a24f8c1e1fe9209110251a2b0db65137f72f7534e8e28210eb",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/pdf_qa",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/dual_delivery_v2.log",
+      "size": 1668,
+      "sha256": "1684f66b982468bffefaf5fe692637b278fe3da10ec1fa78f768e67cdb001996",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/dual_delivery.log",
+      "size": 1635,
+      "sha256": "465ed37923d826f7784c5c5f2029986cbcd5b8f146beb2a9f4428f5a0ef04663",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/download_receipt.json",
+      "size": 822,
+      "sha256": "cf0f63ea0ae93752aa51ed2bbf6cb4319ecb1e803fba825c7d94f9740478ebc8",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/accept_tests.log",
+      "size": 1149,
+      "sha256": "27adb0c45196847d0145a0b16b9122ad7ffd4441c373583730ad8cac7cca43f1",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/ADAY_B/frame_dump_B.json",
+      "size": 7302231,
+      "sha256": "5351d311cd6529422b5a8ae4263dee236e07ee3a7db1730fe36f26b3715017af",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/ADAY_B/analysis_B.json",
+      "size": 1667,
+      "sha256": "c700413b3525d99ca4603101af8b36534cec7d54dd8d76cf65f40240576ab873",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/ADAY_B/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_VERILERI.json",
+      "size": 11967,
+      "sha256": "92bf609f9aa1ea50e82bd4ba01e7773fcb78a75b08b1186eeb02c61e0106918c",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/ADAY_B/7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR.pdf",
+      "size": 67313,
+      "sha256": "1fb9a10885e84c0bb9fcde682bca197894948b4895d3781214afd113882c4bf1",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/ADAY_B/7_NUMARA_ADAY_B_ANALIZ_OZETI.png",
+      "size": 254998,
+      "sha256": "916dcca5b4f5120577a224f8aec919a19be83f99cbc5aa885d3c6f94e881091f",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/ADAY_B/7_NUMARA_ADAY_B_ANALIZ_KANITI.mp4",
+      "size": 6351123,
+      "sha256": "05d626f8dbfe4fa7c05b04ace110f608da526fe5f334b508ebcd5362ebca70dd",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/ADAY_B",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/ADAY_A/frame_dump_A.json",
+      "size": 10102472,
+      "sha256": "a5eec4bd689277efbfa794cd5eb1df27b6117e416f6317c4192a738b7218e85a",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/ADAY_A/analysis_A.json",
+      "size": 1783,
+      "sha256": "f4d0a50fb77f070f99241e10af8702295855535f589654ac5811d8778a46d80d",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/ADAY_A/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_VERILERI.json",
+      "size": 12139,
+      "sha256": "230d8b57aa733bd426035b3eb2ab8963550aa4ecb3fdcd54e63518af2d56de4a",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/ADAY_A/7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR.pdf",
+      "size": 67830,
+      "sha256": "ea9aff3f1ef32df9863933dbd4dae9fffb1863d828dae3c68dd992a981a77bd4",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/ADAY_A/7_NUMARA_ADAY_A_ANALIZ_OZETI.png",
+      "size": 371034,
+      "sha256": "ee3672dde6a55f9a45800442dad7e8cb91c4f57f939031c6aaa3be9a8ed4bf62",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/ADAY_A/7_NUMARA_ADAY_A_ANALIZ_KANITI.mp4",
+      "size": 15380317,
+      "sha256": "3a6cbdad6702fb9191d5c39249b36fad2a0565fa53c6d05dd9c67459e551c7b3",
+      "reason": "stage17_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7/ADAY_A",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/stage17_jersey7",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/target_7_selection/target_candidates.png",
+      "size": 197113,
+      "sha256": "a80e579818da51d0073474a30d58890bb5c4d338467e3cd37758e0c1056eedb8",
+      "reason": "stage17_scout",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/target_7_selection/jersey7_scout_full.json",
+      "size": 3173,
+      "sha256": "07f15861abebdf5cbb1bbfcaf6f01192e7f2bb6a79bb38884e81c3fc82548ea3",
+      "reason": "stage17_scout",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/target_7_selection/hit_3601_8_blue_kit.png",
+      "size": 1487,
+      "sha256": "54aa0cfd59259ae7b5e1b237729e6baadb703013f470ed515c578debe38937f9",
+      "reason": "stage17_scout",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/target_7_selection/hit_27181_9_blue_kit.png",
+      "size": 1911,
+      "sha256": "439524b6491946f140d9be4a58a3fb9384cb6e2d209045b923955a33677ccb04",
+      "reason": "stage17_scout",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/target_7_selection/hit_19741_9_blue_kit.png",
+      "size": 1385,
+      "sha256": "88e2ecb7b92cc00c6a282d4f3f77bc51f1bd227a8650172d46e0fccb1d3955b0",
+      "reason": "stage17_scout",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/target_7_selection/hit_12961_10_blue_kit.png",
+      "size": 1998,
+      "sha256": "afef1ad520b82a6bd138e1ff5de247f8a69aab9f309e5c4323f3057284f632db",
+      "reason": "stage17_scout",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/target_7_selection/hit_12001_8_blue_kit.png",
+      "size": 1350,
+      "sha256": "27e014da4e7dc4384c6e921b7bd302525d1001cffa0793dbb1a9b9808ad8a341",
+      "reason": "stage17_scout",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/target_7_selection/WAITING_MULTIPLE_JERSEY7.json",
+      "size": 863,
+      "sha256": "75103c434e5c4ccf25add65c0e1c73cdf7eccb5f475d792a666588baf5a31bf3",
+      "reason": "stage17_scout",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/target_7_selection",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/run3.log",
+      "size": 4474,
+      "sha256": "92e1313d8ed69025ed44281f7f0ec4d824ff2185c9b89fcf0daf8db8dc2128dc",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/run2.log",
+      "size": 208,
+      "sha256": "7dbab4869409dc44fa7bcf20ddf8035258ba5a97e9092af9a27c73979fb8f6d3",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/run.log",
+      "size": 1512,
+      "sha256": "6fe7ebd0262d77e3d3d99a2bd92bb58958709d9c3a8f2e64e0a4bda26b85a184",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts/single_player_analysis_summary.png",
+      "size": 316878,
+      "sha256": "9e2911ed4efaa1e34d587b2571c1ae1322961fdc7ffe7c5f070c2f9878919cb0",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts/root_cause_diagnosis.json",
+      "size": 2539,
+      "sha256": "79729c5f6bf6e9f2aba998c610f5b3e7d293a4504b2ab5dd2895e29a734b3cdd",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts/real_video_analysis_proof.mp4",
+      "size": 1075134,
+      "sha256": "33aeb05202856242800f719260b06faff9a0f1f3126fd4443da015e3ac0e3808",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts/proof_receipt.json",
+      "size": 557,
+      "sha256": "77276c8249434558060cf9c9676bb95ad7a593e53a3889e83bccc9fe71eed3db",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts/proof_frame_audit/frame_0750.png",
+      "size": 357882,
+      "sha256": "bcf04ea4e483df8806cbcec5d0c054ca9872da7aae1813c18d7c5876b23ee6ab",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts/proof_frame_audit/frame_0525.png",
+      "size": 346094,
+      "sha256": "1dfb83dcdcb14ed267875a7c233e27b33f5a6cdcb5d92e7b1f79ffbfa58af8a0",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts/proof_frame_audit/frame_0375.png",
+      "size": 347581,
+      "sha256": "90d996170c87a52dc79067d74e51ae2830e15f900be17aef24e8602aab47c98f",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts/proof_frame_audit/frame_0001.png",
+      "size": 312762,
+      "sha256": "0c304666258616f3edb286c58f8d7e9fc35a4b5a238f97abfd9a06c5a4642eb5",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts/proof_frame_audit",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts/perception_report.json",
+      "size": 8010,
+      "sha256": "226ff724700843fc93fa487723b7f4fe4ebde2698abef344c6d9642046e1531c",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts/pdf_page_audit/page11_table.png",
+      "size": 46808,
+      "sha256": "a7ba280af3b54c53d188938255e7962c3c77d470cdfa83afb6699a8acd916228",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts/pdf_page_audit/page01_cover.png",
+      "size": 29440,
+      "sha256": "2cc2de0524a7351c0627051a8dcf1b7f177a24319c29884e4499d37a1db4f4d4",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts/pdf_page_audit",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts/frame_dump.json",
+      "size": 2787527,
+      "sha256": "8c137e0e6a20d79b530672ec092e7b9418d923761148dd9be9f8d4b682631d5d",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts/candidate_preds_cache.json",
+      "size": 1021329,
+      "sha256": "96b83ece8b488078d0a7be478461d8e0d8d96b73de1484bdb61a04ca570fc4f5",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts/ball_summary.json",
+      "size": 301,
+      "sha256": "1a05a04aa4e61126203792c4df3111024a6686d1c5b029b7a53944f9477cb5fd",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts/assembly_receipt.json",
+      "size": 1652,
+      "sha256": "5d33950d381b0fc9c48e787baae044bfdc021403dcd5ecfa712f25d656a83b02",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts/FUTBOLCU_ANALIZ_RAPORU_TR.pdf",
+      "size": 251647,
+      "sha256": "6f47631d30e972cadee0dfec91daa1176a18201f61af41d9cb69f042c612b490",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts/FUTBOLCU_ANALIZ_RAPORU_TR.json",
+      "size": 20071,
+      "sha256": "7c99f63962affd8c4d34b15f8d9636c68ce567291ce5a009330362e785ccf1e1",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair/artifacts",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_perception_repair",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_delivery_repair/summary_candidate_b.png",
+      "size": 325149,
+      "sha256": "0e8ce22c95b952d2dfb0f8d0186515e344a5e1744b1e862314af11c91eea9a6f",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_delivery_repair/summary_candidate.png",
+      "size": 325149,
+      "sha256": "0e8ce22c95b952d2dfb0f8d0186515e344a5e1744b1e862314af11c91eea9a6f",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_delivery_repair/proof_portable.mp4",
+      "size": 877266,
+      "sha256": "79e238d4a0b60e41aecc765cc7872a78c950227b818e1dd99686124269e760aa",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_delivery_repair/proof_final_candidate.mp4",
+      "size": 877266,
+      "sha256": "79e238d4a0b60e41aecc765cc7872a78c950227b818e1dd99686124269e760aa",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_delivery_repair/old_broken/single_player_analysis_summary.png",
+      "size": 346459,
+      "sha256": "af20b195c7cd63c4d020c0e7fc099bf1bd97ef55952fafa9be672e9a4f5c467f",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_delivery_repair/old_broken/real_video_tracking_proof.mp4",
+      "size": 1548053,
+      "sha256": "771e9b62705523a382e09ca631477d20518d6aace13f1180ced8327331e7bff4",
+      "reason": "stage16_runtime",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_delivery_repair/old_broken",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_delivery_repair",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_video_proof/staging",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/final_video_proof",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/football_data/videos/raw_matches/authorized_youtube_B_cKZkrgxrM/B_cKZkrgxrM.info.json",
+      "size": 82704,
+      "sha256": "473aee772e8ab4e8d49d8d31a3d3619a9a1526bf6bf6e8932797b5a19c2274a9",
+      "reason": "youtube_leftover_metadata",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/football_data/videos/raw_matches/authorized_youtube_B_cKZkrgxrM/download_stderr.log",
+      "size": 59264,
+      "sha256": "da976198d52cd3460325fec14f1f1886fb317557ecdeeaed2837eca42e80c2f6",
+      "reason": "youtube_leftover_metadata",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/football_data/videos/raw_matches/authorized_youtube_B_cKZkrgxrM",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/football_data/videos/normalized/authorized_youtube_B_cKZkrgxrM",
+      "size": 0,
+      "sha256": null,
+      "reason": "empty_dir_rmdir",
+      "tracked": false,
+      "recoverable_from_git": false,
+      "data_loss": false
+    }
+  ],
+  "errors": []
+}
