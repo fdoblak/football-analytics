@@ -1,23 +1,20 @@
 {
-  "data_loss": false,
-  "items": [
-    {
-      "data_loss": false,
-      "old_path": "/home/fdoblak/workspace/final_delivery_repair/old_broken/real_video_tracking_proof.mp4",
-      "old_sha": "771e9b62705523a382e09ca631477d20518d6aace13f1180ced8327331e7bff4",
-      "reason": "moov_after_mdat; profile=High level=50; 4680x720 ultra-wide; Windows/browser seek/play fragile",
-      "replacement_path": "artifacts/final_delivery/real_video_tracking_proof.mp4",
-      "replacement_sha": "79e238d4a0b60e41aecc765cc7872a78c950227b818e1dd99686124269e760aa"
-    },
-    {
-      "data_loss": false,
-      "old_path": "/home/fdoblak/workspace/final_delivery_repair/old_broken/single_player_analysis_summary.png",
-      "old_sha": "af20b195c7cd63c4d020c0e7fc099bf1bd97ef55952fafa9be672e9a4f5c467f",
-      "reason": "RGBA (alpha) instead of 8-bit RGB",
-      "replacement_path": "artifacts/final_delivery/single_player_analysis_summary.png",
-      "replacement_sha": "0e8ce22c95b952d2dfb0f8d0186515e344a5e1744b1e862314af11c91eea9a6f"
-    }
+  "note": "legacy proof/media removed after real_video_analysis_proof.mp4 validated",
+  "removed_count": 4,
+  "removed_kinds": [
+    "legacy_proof_mp4",
+    "english_summary_json",
+    "non_final_mirror_residue"
   ],
-  "schema": "final_delivery_fix2_cleanup_manifest_v1",
-  "written_at_utc": "2026-07-25T06:54:13.110636+00:00"
+  "retained": [
+    "OPEN_RESULTS.html",
+    "README.md",
+    "FUTBOLCU_ANALIZ_RAPORU_TR.pdf",
+    "FUTBOLCU_ANALIZ_RAPORU_TR.json",
+    "single_player_analysis_summary.png",
+    "real_video_analysis_proof.mp4",
+    "evidence_manifest.json",
+    "checksums.sha256",
+    "cleanup_manifest.json"
+  ]
 }

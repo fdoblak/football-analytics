@@ -1,54 +1,65 @@
 {
-  "claims": [
-    {
-      "claim": "TeamTrack detection F1",
-      "claim_id": "real_detection_f1",
-      "evidence_level": "REAL_VIDEO_VALIDATED",
-      "limitations": "greedy IoU@0.5",
-      "result": 0.6196559575006324,
-      "source_artifact": "single_player_analysis_summary.json"
-    },
-    {
-      "claim": "Track7 coverage",
-      "claim_id": "target_coverage",
-      "evidence_level": "REAL_VIDEO_VALIDATED",
-      "limitations": "anonymous track",
-      "result": 1.0,
-      "source_artifact": "real_video_tracking_proof.mp4"
-    },
-    {
-      "claim": "Track7 mean IoU",
-      "claim_id": "target_mean_iou",
-      "evidence_level": "REAL_VIDEO_VALIDATED",
-      "limitations": "image plane",
-      "result": 0.6752426397328349,
-      "source_artifact": "single_player_analysis_summary.json"
-    },
-    {
-      "claim": "GSR polyline distance player 506469",
-      "claim_id": "measured_distance",
-      "evidence_level": "REFERENCE_ANNOTATION_DERIVED",
-      "limitations": "strided annotation",
-      "result": 10969.106,
-      "source_artifact": "single_player_analysis_summary.json"
-    },
-    {
-      "claim": "BAS Pass count",
-      "claim_id": "pass_reference_count",
-      "evidence_level": "REFERENCE_ANNOTATION_DERIVED",
-      "limitations": "no completion",
-      "result": 30,
-      "source_artifact": "single_player_analysis_summary.json"
-    },
-    {
-      "claim": "pass accuracy",
-      "claim_id": "not_evaluable_pass_accuracy",
-      "evidence_level": "NOT_EVALUABLE",
-      "limitations": "unsupported",
-      "result": null,
-      "source_artifact": "single_player_analysis_summary.json"
-    }
-  ],
-  "schema": "final_delivery_evidence_manifest_v1",
-  "written_at_utc": "2026-07-25T06:54:13.100440+00:00"
+  "isolation": {
+    "gt_not_used_in_prediction": true,
+    "teamtrack_track_7_not_soccertrack_506469": true
+  },
+  "pdf_page_count": 14,
+  "pdf_turkish_font_embedded": true,
+  "perception": {
+    "ball_evaluation": "not_evaluable_no_ball_gt",
+    "detection_f1": 0.618051248571895,
+    "selected_tracker": "confirmed_iou_cv",
+    "team_flip_count": 0
+  },
+  "portable_mp4_validation": {
+    "atoms_head": [
+      [
+        "ftyp",
+        0,
+        32
+      ],
+      [
+        "moov",
+        32,
+        9797
+      ],
+      [
+        "free",
+        9829,
+        8
+      ],
+      [
+        "mdat",
+        9837,
+        1065297
+      ]
+    ],
+    "codec_name": "h264",
+    "codec_tag_string": "avc1",
+    "duration": 30.0,
+    "frame0_shape": [
+      720,
+      1280,
+      3
+    ],
+    "height": 720,
+    "last_shape": [
+      720,
+      1280,
+      3
+    ],
+    "level": 40,
+    "middle_shape": [
+      720,
+      1280,
+      3
+    ],
+    "moov_before_mdat": true,
+    "nb_frames_meta": 750,
+    "pix_fmt": "yuv420p",
+    "profile": "Main",
+    "sequential_frames": 750,
+    "width": 1280
+  },
+  "schema": "final_delivery_evidence_manifest_v2"
 }

@@ -1,76 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
 <meta charset="utf-8"/>
-<title>Football Analytics — Technical Preview Results</title>
+<title>Futbol Analitiği — Nihai Sonuçlar</title>
 <style>
-body {
-  font-family: Segoe UI, Arial, sans-serif;
-  background:#0b1210; color:#e8f5e9; margin:0; padding:24px;
-}
-h1 { color:#ffe082; margin-bottom:4px; }
-h2 { color:#80cbc4; }
-.card { background:#1b2a22; padding:16px; margin:16px 0; border-radius:8px; }
-table { border-collapse:collapse; width:100%; }
-td,th { border:1px solid #345; padding:8px; text-align:left; }
-img { max-width:100%; height:auto; background:#000; }
-video { width:100%; max-width:1280px; background:#000; }
-a { color:#81d4fa; }
-.note { color:#ffcc80; }
+body{font-family:Segoe UI,DejaVu Sans,sans-serif;margin:24px;background:#0f1c2e;color:#e8f0ff}
+a{color:#9ecbff} .card{background:#1b2838;padding:16px;margin:12px 0;border-radius:8px}
+h1{color:#f0c36a} video,img{max-width:100%;height:auto}
+table{border-collapse:collapse;width:100%} td,th{border:1px solid #345;padding:6px;text-align:left}
 </style>
 </head>
 <body>
-<h1>Football Analytics — Single Player Technical Preview</h1>
-<p>SoccerTrack v2 Match 128057 · Team left / Jersey 24 / Player 506469</p>
-<p class="note">
-TeamTrack Track 7 is a different person/dataset used only for real-video tracking proof.
-</p>
-
+<h1>Nihai Türkçe Futbolcu Analiz Teslimi</h1>
 <div class="card">
-<h2>Real-video proof (TeamTrack)</h2>
-<video controls preload="metadata" src="real_video_tracking_proof.mp4">
-Your browser cannot play this MP4. Open the file directly.
-</video>
+<h2>1. Nihai Türkçe PDF raporu</h2>
+<p><a href="FUTBOLCU_ANALIZ_RAPORU_TR.pdf">FUTBOLCU_ANALIZ_RAPORU_TR.pdf</a></p>
 </div>
-
 <div class="card">
-<h2>Summary visual</h2>
-<img src="single_player_analysis_summary.png" alt="Single player analysis summary"/>
+<h2>2. Türkçe dashboard PNG</h2>
+<p><a href="single_player_analysis_summary.png">single_player_analysis_summary.png</a></p>
+<p><img src="single_player_analysis_summary.png" alt="dashboard"/></p>
 </div>
-
 <div class="card">
-<h2>Key metrics</h2>
-<table>
-<tr><th>Metric</th><th>Value</th><th>Evidence</th></tr>
-<tr><td>Detections</td><td>14374</td>
-<td>REAL_VIDEO_VALIDATED</td></tr>
-<tr><td>Precision</td><td>0.681647</td>
-<td>REAL_VIDEO_VALIDATED</td></tr>
-<tr><td>Recall</td><td>0.568000</td>
-<td>REAL_VIDEO_VALIDATED</td></tr>
-<tr><td>F1</td><td>0.619656</td>
-<td>REAL_VIDEO_VALIDATED</td></tr>
-<tr><td>Target coverage</td><td>1.000000</td>
-<td>REAL_VIDEO_VALIDATED</td></tr>
-<tr><td>Mean IoU</td><td>0.675243</td>
-<td>REAL_VIDEO_VALIDATED</td></tr>
-</table>
-<p>Annotation-derived SoccerTrack metrics and NOT EVALUABLE fields are in the JSON/PNG.</p>
+<h2>3. Yeni gerçek-video analysis proof MP4</h2>
+<p><a href="real_video_analysis_proof.mp4">real_video_analysis_proof.mp4</a></p>
+<video controls src="real_video_analysis_proof.mp4"></video>
 </div>
-
 <div class="card">
-<h2>Files</h2>
+<h2>4. Temel metrik tablosu</h2>
+<p>Tam tablo PDF ve <a href="FUTBOLCU_ANALIZ_RAPORU_TR.json">JSON</a> içindedir.</p>
+</div>
+<div class="card">
+<h2>5. Kanıt seviyesi açıklaması</h2>
 <ul>
-<li><a href="real_video_tracking_proof.mp4">Download MP4</a></li>
-<li><a href="single_player_analysis_summary.png">Open PNG</a></li>
-<li><a href="single_player_analysis_summary.json">Open JSON</a></li>
-<li><a href="evidence_manifest.json">Evidence manifest</a></li>
-<li><a href="checksums.sha256">Checksums</a></li>
+<li>GERÇEK VİDEODA DOĞRULANDI</li>
+<li>ANNOTASYONDAN HESAPLANDI</li>
+<li>SİSTEM TESTİNDE DOĞRULANDI</li>
+<li>ÖLÇÜLEMEDİ</li>
 </ul>
-<p>
-Not official Opta data. Video-event inference accuracy is not validated.
-No internet required.
-</p>
+<p>TeamTrack sistem kanıtı, SoccerTrack oyuncu raporundan ayrıdır. Opta yoktur.
+Video-olay doğruluğu doğrulanmamıştır.</p>
 </div>
 </body>
 </html>

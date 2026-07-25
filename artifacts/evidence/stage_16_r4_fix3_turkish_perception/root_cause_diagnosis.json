@@ -1,0 +1,59 @@
+{
+  "schema": "final_perception_repair_root_cause_v1",
+  "sequence": "soccer_side/train/F_20200220_1_0330_0360",
+  "inspected_artifact": "artifacts/final_delivery/real_video_tracking_proof.mp4",
+  "findings": {
+    "duplicate_detection": {
+      "present": true,
+      "severity": "partial",
+      "detail": "Horizontal tile merge + NMS IoU=0.5 leaves residual overlapping person boxes; product view showed every detection as a box."
+    },
+    "gt_and_prediction_dual_boxes": {
+      "present": true,
+      "severity": "primary_visual_clutter",
+      "detail": "portable_final_media.build_portable_proof_mp4 draws all prediction boxes plus GT Track7 outline each frame; target gets yellow pred + green GT dual box. Matching colors (cyan/red/yellow) encode eval status, not team identity."
+    },
+    "multiple_track_ids_same_player": {
+      "present": "likely",
+      "severity": "secondary",
+      "detail": "_SimpleIoUTracker assigns a new ID on brief misses; no confirmed/tentative gate; unconfirmed short tracks drawn as full tracks."
+    },
+    "track_id_switch": {
+      "present": "possible",
+      "severity": "secondary",
+      "detail": "Lightweight IoU tracker; ID switches not fully MOT-evaluated in prior pilot (marked not_evaluable)."
+    },
+    "short_false_positives_as_confirmed": {
+      "present": true,
+      "severity": "primary_product_bug",
+      "detail": "No min-hit confirmation; every frame detection rendered as a track box."
+    },
+    "referee_gk_player_role_mix": {
+      "present": "unknown_unlabeled",
+      "severity": "not_in_overlay",
+      "detail": "Roles never assigned in proof overlay; GT class_id=-1 only."
+    },
+    "team_assignment": {
+      "working_in_pipeline": false,
+      "shown_in_video": false,
+      "severity": "missing_feature_in_proof",
+      "detail": "Team kit clustering exists in identity/ but was not run or overlaid on final proof."
+    },
+    "ball_detector": {
+      "zero_candidates": "not_run_on_proof",
+      "filtered_away": "n/a",
+      "resolution_issue": "possible_for_small_ball_on_6500x1000",
+      "severity": "missing_feature",
+      "detail": "Proof pipeline never invoked ball adapter; TeamTrack GT has no ball class (class_id=-1 only) so ball accuracy not evaluable from GT."
+    }
+  },
+  "primary_root_causes_for_user_complaint": [
+    "evaluation_style_overlay_all_preds_plus_gt_target",
+    "no_confirmed_track_gate",
+    "no_team_colors_in_overlay",
+    "ball_pipeline_not_integrated"
+  ],
+  "not_caused_by": [
+    "GT_leakage_into_detector_input"
+  ]
+}
