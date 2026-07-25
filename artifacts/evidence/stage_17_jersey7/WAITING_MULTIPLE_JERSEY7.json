@@ -1,0 +1,36 @@
+{
+  "schema": "stage17_waiting_multiple_jersey7_v1",
+  "gate": "RESOLVED — DUAL CANDIDATE REPORTS DELIVERED",
+  "face_recognition_used": false,
+  "candidates": [
+    {
+      "id": "A",
+      "label_tr": "Aday A",
+      "kit": "light_kit / acik renk forma",
+      "n_ocr_hits": 3,
+      "timestamps_s": [
+        400.0,
+        658.0,
+        906.0
+      ],
+      "note": "Gorsel incelemede acik forma uzerinde 7"
+    },
+    {
+      "id": "B",
+      "label_tr": "Aday B",
+      "kit": "dark_kit / koyu renk forma",
+      "n_ocr_hits": 2,
+      "timestamps_s": [
+        120.0,
+        432.0
+      ],
+      "note": "Gorsel incelemede koyu forma uzerinde 7"
+    }
+  ],
+  "contact_sheet": "/home/fdoblak/workspace/target_7_selection/target_candidates.png",
+  "not_in_final_delivery": true,
+  "written_at_utc": "2026-07-25T09:49:53.286768+00:00",
+  "resolved_by": "user_selected_both_separate_reports",
+  "resolution": "DUAL_REPORTS_ADAY_A_AND_ADAY_B",
+  "resolved_at_utc": "2026-07-25T11:11:43.876486+00:00"
+}

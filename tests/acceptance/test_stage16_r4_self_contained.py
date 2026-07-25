@@ -84,24 +84,29 @@ def test_reference_analysis_uses_authoritative_target() -> None:
     assert report["bas_target_label_counts"].get("Pass", 0) >= 1
 
 
-def test_final_report_and_single_customer_png_policy() -> None:
-    final_json = ROOT / "artifacts/final_delivery/FUTBOLCU_ANALIZ_RAPORU_TR.json"
-    final_png = ROOT / "artifacts/final_delivery/single_player_analysis_summary.png"
-    final_pdf = ROOT / "artifacts/final_delivery/FUTBOLCU_ANALIZ_RAPORU_TR.pdf"
-    assert final_json.is_file()
-    assert final_png.is_file()
-    assert final_pdf.is_file()
-    payload = json.loads(final_json.read_text(encoding="utf-8"))
-    assert payload["target"]["player_id"] == "506469"
-    assert int(payload["target"]["jersey_number"]) == 24
-    pngs = list((ROOT / "artifacts/final_delivery").glob("*.png"))
-    assert len(pngs) == 1
-    assert pngs[0].name == "single_player_analysis_summary.png"
+def test_final_report_and_dual_jersey7_customer_media_policy() -> None:
+    """Stage 17 replaced Stage 16 SoccerTrack customer files in final_delivery."""
+    final = ROOT / "artifacts/final_delivery"
+    for slug in ("ADAY_A", "ADAY_B"):
+        assert (final / f"7_NUMARA_{slug}_FUTBOLCU_ANALIZ_VERILERI.json").is_file()
+        assert (final / f"7_NUMARA_{slug}_ANALIZ_OZETI.png").is_file()
+        assert (final / f"7_NUMARA_{slug}_FUTBOLCU_ANALIZ_RAPORU_TR.pdf").is_file()
+        assert (final / f"7_NUMARA_{slug}_ANALIZ_KANITI.mp4").is_file()
+    payload = json.loads(
+        (final / "7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_VERILERI.json").read_text(encoding="utf-8")
+    )
+    assert payload["target"]["face_recognition_used"] is False
+    assert "506469" not in json.dumps(payload)
+    pngs = list(final.glob("*.png"))
+    assert len(pngs) == 2
+    assert not (final / "FUTBOLCU_ANALIZ_RAPORU_TR.json").exists()
+    assert not (final / "single_player_analysis_summary.png").exists()
     assert not (
         ROOT / "artifacts/evidence/stage_16_real_video_pilot/real_video_pilot_summary.png"
     ).exists()
     assert not (ROOT / "artifacts/final/single_player_analysis_summary.png").exists()
-    assert not (ROOT / "artifacts/final_delivery/real_video_tracking_proof.mp4").exists()
+    assert not (final / "real_video_tracking_proof.mp4").exists()
+    assert not (final / "real_video_analysis_proof.mp4").exists()
 
 
 def test_offline_env_no_hf_token_required(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:

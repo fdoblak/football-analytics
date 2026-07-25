@@ -1,0 +1,19 @@
+{
+  "schema": "stage17_authorized_download_receipt_v1",
+  "video_id": "B_cKZkrgxrM",
+  "title": "Galatasaray Erokspor U-12 Lig Maçı İkinci Yarı  12.01.25",
+  "channel": "Genç Yetenekler ",
+  "uploader": "Genç Yetenekler ",
+  "duration_s": 1273,
+  "resolution": "1920x1080",
+  "fps": 30,
+  "codec": "h264",
+  "source_url": "https://www.youtube.com/watch?v=B_cKZkrgxrM",
+  "download_timestamp_utc": "2026-07-25T09:11:28.050479+00:00",
+  "size_bytes": 711072869,
+  "sha256": "03952ff5f6c2d17bcaf7886fc22b731b904076207800d523478c424aa705375f",
+  "permission_basis": "user_confirmed_rights",
+  "path": "/home/fdoblak/football_data/videos/raw_matches/authorized_youtube_B_cKZkrgxrM/B_cKZkrgxrM.mp4",
+  "yt_dlp_version": "2026.07.04",
+  "yt_dlp_sha256": "495be29ff4d9d4e9be7eabdfef225221e5d5282e77f2f505abc6dca80349f3fd"
+}

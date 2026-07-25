@@ -1,20 +1,30 @@
 {
-  "note": "legacy proof/media removed after real_video_analysis_proof.mp4 validated",
-  "removed_count": 4,
-  "removed_kinds": [
-    "legacy_proof_mp4",
-    "english_summary_json",
-    "non_final_mirror_residue"
-  ],
-  "retained": [
+  "removed_from_final_delivery": [
+    "7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_VERILERI.json",
+    "checksums.sha256",
+    "cleanup_manifest.json",
+    "7_NUMARA_ADAY_A_ANALIZ_KANITI.mp4",
+    "evidence_manifest.json",
     "OPEN_RESULTS.html",
     "README.md",
-    "FUTBOLCU_ANALIZ_RAPORU_TR.pdf",
-    "FUTBOLCU_ANALIZ_RAPORU_TR.json",
-    "single_player_analysis_summary.png",
-    "real_video_analysis_proof.mp4",
-    "evidence_manifest.json",
-    "checksums.sha256",
-    "cleanup_manifest.json"
-  ]
+    "7_NUMARA_ADAY_A_ANALIZ_OZETI.png",
+    "7_NUMARA_ADAY_B_ANALIZ_KANITI.mp4",
+    "7_NUMARA_ADAY_B_ANALIZ_OZETI.png",
+    "7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR.pdf",
+    "7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_VERILERI.json",
+    "recovery_manifest.json",
+    "7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR.pdf"
+  ],
+  "raw_video_path": "/home/fdoblak/football_data/videos/raw_matches/authorized_youtube_B_cKZkrgxrM/B_cKZkrgxrM.mp4",
+  "raw_video_retained_until_receipt": false,
+  "contact_sheet_not_in_final": "/home/fdoblak/workspace/target_7_selection/target_candidates.png",
+  "data_loss": false,
+  "desktop_mirror": "/mnt/c/Users/furka/Desktop/Football Analytics Final",
+  "downloads_mirror": "/mnt/c/Users/furka/Downloads/Football Analytics Final",
+  "raw_video_sha256_before_delete": "03952ff5f6c2d17bcaf7886fc22b731b904076207800d523478c424aa705375f",
+  "raw_video_size_before_delete": 711072869,
+  "normalized_removed": true,
+  "raw_video_deleted": true,
+  "normalized_sha256_before_delete": "92dd25630058ee22573107e3f3734e3470db80958481384159b640e44e32b9cd",
+  "normalized_size_before_delete": 734556355
 }

@@ -1,0 +1,49 @@
+{
+  "schema": "recovery_manifest_v1",
+  "written_at_utc": "2026-07-25T10:47:42.236529+00:00",
+  "baseline_head": "bfa330138dbe6d334c4204fa063a04a933842f8c",
+  "git_restored_tracked": [
+    {
+      "path": "artifacts/final_delivery/single_player_analysis_summary.png",
+      "origin_blob": "a3ec8defa8cb981b4216b1b7c1ca7f637a873e02",
+      "restored_sha256": "9e2911ed4efaa1e34d587b2571c1ae1322961fdc7ffe7c5f070c2f9878919cb0",
+      "reason": "accidentally_deleted_tracked_file",
+      "note": "later_replaced_by_stage17_dual_delivery"
+    }
+  ],
+  "reconstructed_from_config": [
+    "/home/fdoblak/football_data/** from configs/system/paths.yaml"
+  ],
+  "redownloaded_verified_source": [
+    {
+      "id": "yolo11n.pt",
+      "source_url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n.pt",
+      "sha256": "0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1",
+      "size_bytes": 5613764,
+      "license": "AGPL-3.0 (Ultralytics YOLO11n COCO)"
+    },
+    {
+      "tool": "yt-dlp",
+      "version": "2026.07.04",
+      "path": "/home/fdoblak/.local/bin/yt-dlp"
+    }
+  ],
+  "missing_untracked_not_in_git": [
+    "prior football_data datasets/runs (SoccerTrack GSR/BAS, TeamTrack caches)"
+  ],
+  "user_file_unknown": [],
+  "storage_validator": "PASS",
+  "stage17_mode": "dual_candidate_reports_user_selected_both",
+  "authorized_video": {
+    "url": "https://www.youtube.com/watch?v=B_cKZkrgxrM",
+    "sha256": "03952ff5f6c2d17bcaf7886fc22b731b904076207800d523478c424aa705375f",
+    "size_bytes": 711072869,
+    "in_git": false
+  },
+  "windows_mirror": {
+    "desktop_attempt": "/mnt/c/Users/furka/Desktop/Football Analytics Final",
+    "desktop_writable": true,
+    "downloads_mirror": "/mnt/c/Users/furka/Downloads/Football Analytics Final"
+  },
+  "registry_validator_note": "verify-files reports MISSING paths for SoccerTrack/TeamTrack datasets (MISSING_UNTRACKED_NOT_IN_GIT after football_data wipe); not fabricated."
+}

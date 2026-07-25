@@ -1,4 +1,4 @@
-"""Portable final_delivery media and Turkish report validation (Stage 16-R4-FIX3)."""
+"""Portable final_delivery media validation (Stage 17 dual jersey-7)."""
 
 from __future__ import annotations
 
@@ -19,20 +19,27 @@ WIN = Path("/mnt/c/Users/furka/Desktop/Football Analytics Final")
 REQUIRED = [
     "OPEN_RESULTS.html",
     "README.md",
-    "FUTBOLCU_ANALIZ_RAPORU_TR.pdf",
-    "FUTBOLCU_ANALIZ_RAPORU_TR.json",
-    "single_player_analysis_summary.png",
-    "real_video_analysis_proof.mp4",
+    "7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR.pdf",
+    "7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_VERILERI.json",
+    "7_NUMARA_ADAY_A_ANALIZ_OZETI.png",
+    "7_NUMARA_ADAY_A_ANALIZ_KANITI.mp4",
+    "7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR.pdf",
+    "7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_VERILERI.json",
+    "7_NUMARA_ADAY_B_ANALIZ_OZETI.png",
+    "7_NUMARA_ADAY_B_ANALIZ_KANITI.mp4",
     "evidence_manifest.json",
+    "recovery_manifest.json",
     "checksums.sha256",
     "cleanup_manifest.json",
 ]
 
 
-def test_final_mp4_ffprobe_and_portable_profile() -> None:
-    mp4 = DELIVERY / "real_video_analysis_proof.mp4"
+@pytest.mark.parametrize("slug", ["ADAY_A", "ADAY_B"])
+def test_final_mp4_ffprobe_and_portable_profile(slug: str) -> None:
+    mp4 = DELIVERY / f"7_NUMARA_{slug}_ANALIZ_KANITI.mp4"
     assert mp4.is_file()
-    info = validate_portable_mp4(mp4, expected_frames=750, expected_duration=30.0)
+    # variable length highlight reel — validate profile without fixed frame count
+    info = validate_portable_mp4(mp4)
     assert info["codec_name"] == "h264"
     assert info["codec_tag_string"] == "avc1"
     assert info["pix_fmt"] == "yuv420p"
@@ -42,17 +49,19 @@ def test_final_mp4_ffprobe_and_portable_profile() -> None:
     assert info["moov_before_mdat"] is True
 
 
-def test_final_mp4_full_decode_and_frames() -> None:
-    mp4 = DELIVERY / "real_video_analysis_proof.mp4"
-    info = validate_portable_mp4(mp4, expected_frames=750, expected_duration=30.0)
-    assert info["sequential_frames"] == 750
+@pytest.mark.parametrize("slug", ["ADAY_A", "ADAY_B"])
+def test_final_mp4_full_decode_and_frames(slug: str) -> None:
+    mp4 = DELIVERY / f"7_NUMARA_{slug}_ANALIZ_KANITI.mp4"
+    info = validate_portable_mp4(mp4)
+    assert info["sequential_frames"] >= 100
     assert info["frame0_shape"][0] == 720
     assert info["middle_shape"][0] == 720
     assert info["last_shape"][0] == 720
 
 
-def test_final_png_pillow_and_opencv() -> None:
-    png = DELIVERY / "single_player_analysis_summary.png"
+@pytest.mark.parametrize("slug", ["ADAY_A", "ADAY_B"])
+def test_final_png_pillow_and_opencv(slug: str) -> None:
+    png = DELIVERY / f"7_NUMARA_{slug}_ANALIZ_OZETI.png"
     im = Image.open(png)
     im.verify()
     im = Image.open(png)
@@ -64,33 +73,44 @@ def test_final_png_pillow_and_opencv() -> None:
     assert arr.ndim == 3
 
 
-def test_turkish_report_json_metrics() -> None:
-    payload = json.loads((DELIVERY / "FUTBOLCU_ANALIZ_RAPORU_TR.json").read_text(encoding="utf-8"))
-    assert payload["target"]["player_id"] == "506469"
-    assert int(payload["target"]["jersey_number"]) == 24
-    assert payload["namespace_isolation"]["not_the_same_person"] is True
-    table = {r["metric"]: r for r in payload["metric_table"]}
-    assert table["Pas girişimi"]["value"] == 30
-    assert table["Koşu mesafesi"]["value"] == 10969.106
+@pytest.mark.parametrize(
+    ("slug", "kit"),
+    [("ADAY_A", "light_kit"), ("ADAY_B", "dark_kit")],
+)
+def test_turkish_report_json_metrics(slug: str, kit: str) -> None:
+    payload = json.loads(
+        (DELIVERY / f"7_NUMARA_{slug}_FUTBOLCU_ANALIZ_VERILERI.json").read_text(encoding="utf-8")
+    )
+    assert payload["target"]["face_recognition_used"] is False
+    assert payload["target"]["real_name_used"] is False
+    assert payload["target"]["kit_color_label"] == kit
+    assert "506469" not in json.dumps(payload)
+    names = {r["metric"] for r in payload["metric_table"]}
+    assert "Pas girişimi" in names
+    assert "Görünürlük coverage" in names
     for row in payload["metric_table"]:
         if row["status"] == "ÖLÇÜLEMEDİ":
             assert row["value"] not in (0, "0", 0.0)
             assert "ÖLÇÜLEMEDİ" in str(row["value"])
-    assert (DELIVERY / "FUTBOLCU_ANALIZ_RAPORU_TR.pdf").is_file()
-    assert (DELIVERY / "FUTBOLCU_ANALIZ_RAPORU_TR.pdf").stat().st_size > 10_000
+    pdf = DELIVERY / f"7_NUMARA_{slug}_FUTBOLCU_ANALIZ_RAPORU_TR.pdf"
+    assert pdf.is_file()
+    assert pdf.stat().st_size > 10_000
 
 
 def test_html_references_existing_files() -> None:
     html = (DELIVERY / "OPEN_RESULTS.html").read_text(encoding="utf-8")
     for name in (
-        "real_video_analysis_proof.mp4",
-        "single_player_analysis_summary.png",
-        "FUTBOLCU_ANALIZ_RAPORU_TR.pdf",
-        "FUTBOLCU_ANALIZ_RAPORU_TR.json",
+        "7_NUMARA_ADAY_A_ANALIZ_KANITI.mp4",
+        "7_NUMARA_ADAY_A_ANALIZ_OZETI.png",
+        "7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR.pdf",
+        "7_NUMARA_ADAY_B_ANALIZ_KANITI.mp4",
+        "7_NUMARA_ADAY_B_ANALIZ_OZETI.png",
+        "7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR.pdf",
     ):
         assert name in html
         assert (DELIVERY / name).is_file()
     assert "real_video_tracking_proof" not in html
+    assert "506469" not in html
     assert "autoplay" not in html.lower()
     assert "controls" in html
 
@@ -105,7 +125,7 @@ def test_windows_mirror_hash_equality() -> None:
 
 
 def test_git_blob_not_lfs_pointer_and_decode() -> None:
-    path = "artifacts/final_delivery/real_video_analysis_proof.mp4"
+    path = "artifacts/final_delivery/7_NUMARA_ADAY_A_ANALIZ_KANITI.mp4"
     proc = subprocess.run(
         ["git", "ls-files", "-s", path],
         cwd=str(ROOT),
@@ -125,22 +145,32 @@ def test_git_blob_not_lfs_pointer_and_decode() -> None:
         tmp.write(blob)
         tmp_path = P(tmp.name)
     try:
-        validate_portable_mp4(tmp_path, expected_frames=750, expected_duration=30.0)
+        validate_portable_mp4(tmp_path)
     finally:
         tmp_path.unlink(missing_ok=True)
 
 
-def test_only_one_final_delivery_media() -> None:
+def test_only_dual_final_delivery_media() -> None:
     assert sorted(p.name for p in DELIVERY.iterdir() if p.is_file()) == sorted(REQUIRED)
-    pngs = list(DELIVERY.glob("*.png"))
-    mp4s = list(DELIVERY.glob("*.mp4"))
-    pdfs = list(DELIVERY.glob("*.pdf"))
-    assert len(pngs) == 1
-    assert len(mp4s) == 1
-    assert len(pdfs) == 1
-    assert pngs[0].name == "single_player_analysis_summary.png"
-    assert mp4s[0].name == "real_video_analysis_proof.mp4"
-    assert pdfs[0].name == "FUTBOLCU_ANALIZ_RAPORU_TR.pdf"
+    pngs = sorted(p.name for p in DELIVERY.glob("*.png"))
+    mp4s = sorted(p.name for p in DELIVERY.glob("*.mp4"))
+    pdfs = sorted(p.name for p in DELIVERY.glob("*.pdf"))
+    assert pngs == [
+        "7_NUMARA_ADAY_A_ANALIZ_OZETI.png",
+        "7_NUMARA_ADAY_B_ANALIZ_OZETI.png",
+    ]
+    assert mp4s == [
+        "7_NUMARA_ADAY_A_ANALIZ_KANITI.mp4",
+        "7_NUMARA_ADAY_B_ANALIZ_KANITI.mp4",
+    ]
+    assert pdfs == [
+        "7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_RAPORU_TR.pdf",
+        "7_NUMARA_ADAY_B_FUTBOLCU_ANALIZ_RAPORU_TR.pdf",
+    ]
+    # Stage 16 SoccerTrack customer media must not remain current
+    assert not (DELIVERY / "FUTBOLCU_ANALIZ_RAPORU_TR.pdf").exists()
+    assert not (DELIVERY / "real_video_analysis_proof.mp4").exists()
+    assert not (DELIVERY / "single_player_analysis_summary.png").exists()
 
 
 def test_metric_recount_from_perception_evidence() -> None:

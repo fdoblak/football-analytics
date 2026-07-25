@@ -1,10 +1,7 @@
-# Football Analytics — Final Delivery (TR)
+# 7 Numaralı Oyuncu — Çift Aday Analizi
 
-- `FUTBOLCU_ANALIZ_RAPORU_TR.pdf` — Nihai Türkçe futbolcu raporu
-- `FUTBOLCU_ANALIZ_RAPORU_TR.json` — Canonical metrik tablosu
-- `single_player_analysis_summary.png` — Türkçe dashboard
-- `real_video_analysis_proof.mp4` — TeamTrack gerçek-video sistem kanıtı
-- `OPEN_RESULTS.html` — Çevrimdışı görüntüleyici
+Yetkilendirilmiş U-12 videosu. İki ayrı forma-7 adayı için ayrı raporlar.
+Yüz tanıma yok. Ham video Git’te yok.
 
-TeamTrack Track 7 ≠ SoccerTrack Player 506469.
-Opta yoktur. Video-event accuracy doğrulanmamıştır.
+- Aday A: açık forma
+- Aday B: koyu forma
