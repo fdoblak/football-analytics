@@ -84,21 +84,18 @@ def test_reference_analysis_uses_authoritative_target() -> None:
     assert report["bas_target_label_counts"].get("Pass", 0) >= 1
 
 
-def test_final_report_and_dual_jersey7_customer_media_policy() -> None:
-    """Stage 17 replaced Stage 16 SoccerTrack customer files in final_delivery."""
+def test_final_report_and_jersey5_customer_media_policy() -> None:
+    """Stage 17-R1 replaced Stage 17 jersey-7 dual delivery with jersey-5 own-video."""
     final = ROOT / "artifacts/final_delivery"
-    for slug in ("ADAY_A", "ADAY_B"):
-        assert (final / f"7_NUMARA_{slug}_FUTBOLCU_ANALIZ_VERILERI.json").is_file()
-        assert (final / f"7_NUMARA_{slug}_ANALIZ_OZETI.png").is_file()
-        assert (final / f"7_NUMARA_{slug}_FUTBOLCU_ANALIZ_RAPORU_TR.pdf").is_file()
-        assert (final / f"7_NUMARA_{slug}_ANALIZ_KANITI.mp4").is_file()
-    payload = json.loads(
-        (final / "7_NUMARA_ADAY_A_FUTBOLCU_ANALIZ_VERILERI.json").read_text(encoding="utf-8")
-    )
-    assert payload["target"]["face_recognition_used"] is False
+    assert (final / "FUTBOLCU_5_ANALIZ_RAPORU_TR.json").is_file()
+    assert (final / "futbolcu_5_analiz_ozeti.png").is_file()
+    assert (final / "FUTBOLCU_5_ANALIZ_RAPORU_TR.pdf").is_file()
+    assert (final / "futbolcu_5_video_analiz.mp4").is_file()
+    payload = json.loads((final / "FUTBOLCU_5_ANALIZ_RAPORU_TR.json").read_text(encoding="utf-8"))
+    assert payload["target_jersey"] == 5
+    assert payload["jersey7_revoked"] is True
     assert "506469" not in json.dumps(payload)
-    pngs = list(final.glob("*.png"))
-    assert len(pngs) == 2
+    assert not any(p.name.startswith("7_NUMARA_") for p in final.iterdir())
     assert not (final / "FUTBOLCU_ANALIZ_RAPORU_TR.json").exists()
     assert not (final / "single_player_analysis_summary.png").exists()
     assert not (

@@ -151,9 +151,9 @@ def kit_brightness_and_hue(crop: np.ndarray) -> tuple[str, float, float]:
     torso = hsv[int(0.15 * h) : int(0.55 * h), :]
     if torso.size == 0:
         torso = hsv
-    mean_v = float(np.mean(torso[:, :, 2]))
-    mean_s = float(np.mean(torso[:, :, 1]))
-    mean_h = float(np.mean(torso[:, :, 0]))
+    mean_v = float(np.mean(torso[:, :, 2].astype(np.float64)))
+    mean_s = float(np.mean(torso[:, :, 1].astype(np.float64)))
+    mean_h = float(np.mean(torso[:, :, 0].astype(np.float64)))
     # yellow: high S, H around 20-40
     if mean_s > 70 and 15 <= mean_h <= 45 and mean_v > 80:
         return "yellow_kit", mean_v, mean_s
@@ -200,10 +200,15 @@ def classify_human_role(
         else:
             role = "on_field_player_candidate"
 
-    team_eligible = role == "on_field_player_candidate" and in_int and kit in {
-        "white_kit",
-        "yellow_kit",
-    }
+    team_eligible = (
+        role == "on_field_player_candidate"
+        and in_int
+        and kit
+        in {
+            "white_kit",
+            "yellow_kit",
+        }
+    )
     return {
         "role": role,
         "kit": kit,
