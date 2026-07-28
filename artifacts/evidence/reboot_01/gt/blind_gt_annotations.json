@@ -1,0 +1,1239 @@
+{
+  "schema": "own_video_human_blind_gt_v1",
+  "dataset_id": "own_video_human_blind_gt_v1",
+  "status": "WAITING_VISUAL_APPROVAL",
+  "source_id": "own_video_97b298e4",
+  "source_sha256": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160",
+  "canonical_path": "/home/fdoblak/football_data/videos/raw_matches/own_video_97b298e4/original.mp4",
+  "image_size": {
+    "width": 1336,
+    "height": 744
+  },
+  "fps": 30.0,
+  "class_taxonomy": [
+    "human_on_pitch"
+  ],
+  "splits": {
+    "train": "0-12s",
+    "dev": "12-22s",
+    "holdout": "22-34s"
+  },
+  "n_frames": 150,
+  "counts": {
+    "frames_by_split": {
+      "train": 54,
+      "dev": 43,
+      "holdout": 53
+    },
+    "positive_boxes": 0,
+    "ignore_boxes": 0,
+    "reviewed_frames": 0
+  },
+  "frames": [
+    {
+      "frame_idx": 3,
+      "t_s": 0.1,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 5,
+      "t_s": 0.1667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 11,
+      "t_s": 0.3667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 18,
+      "t_s": 0.6,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 26,
+      "t_s": 0.8667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 33,
+      "t_s": 1.1,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 40,
+      "t_s": 1.3333,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 41,
+      "t_s": 1.3667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 48,
+      "t_s": 1.6,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 56,
+      "t_s": 1.8667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 63,
+      "t_s": 2.1,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 71,
+      "t_s": 2.3667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 78,
+      "t_s": 2.6,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 86,
+      "t_s": 2.8667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 90,
+      "t_s": 3.0,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 93,
+      "t_s": 3.1,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 101,
+      "t_s": 3.3667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 108,
+      "t_s": 3.6,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 116,
+      "t_s": 3.8667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 123,
+      "t_s": 4.1,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 131,
+      "t_s": 4.3667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 138,
+      "t_s": 4.6,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 146,
+      "t_s": 4.8667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 150,
+      "t_s": 5.0,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 153,
+      "t_s": 5.1,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 161,
+      "t_s": 5.3667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 168,
+      "t_s": 5.6,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 176,
+      "t_s": 5.8667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 183,
+      "t_s": 6.1,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 191,
+      "t_s": 6.3667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 198,
+      "t_s": 6.6,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 206,
+      "t_s": 6.8667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 213,
+      "t_s": 7.1,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 221,
+      "t_s": 7.3667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 228,
+      "t_s": 7.6,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 236,
+      "t_s": 7.8667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 243,
+      "t_s": 8.1,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 250,
+      "t_s": 8.3333,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 251,
+      "t_s": 8.3667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 258,
+      "t_s": 8.6,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 266,
+      "t_s": 8.8667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 273,
+      "t_s": 9.1,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 281,
+      "t_s": 9.3667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 288,
+      "t_s": 9.6,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 296,
+      "t_s": 9.8667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 303,
+      "t_s": 10.1,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 311,
+      "t_s": 10.3667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 318,
+      "t_s": 10.6,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 326,
+      "t_s": 10.8667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 330,
+      "t_s": 11.0,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 333,
+      "t_s": 11.1,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 341,
+      "t_s": 11.3667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 348,
+      "t_s": 11.6,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 356,
+      "t_s": 11.8667,
+      "split": "train",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 363,
+      "t_s": 12.1,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 371,
+      "t_s": 12.3667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 378,
+      "t_s": 12.6,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 386,
+      "t_s": 12.8667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 393,
+      "t_s": 13.1,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 400,
+      "t_s": 13.3333,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 401,
+      "t_s": 13.3667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 408,
+      "t_s": 13.6,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 416,
+      "t_s": 13.8667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 423,
+      "t_s": 14.1,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 431,
+      "t_s": 14.3667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 438,
+      "t_s": 14.6,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 446,
+      "t_s": 14.8667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 453,
+      "t_s": 15.1,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 461,
+      "t_s": 15.3667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 468,
+      "t_s": 15.6,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 476,
+      "t_s": 15.8667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 483,
+      "t_s": 16.1,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 491,
+      "t_s": 16.3667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 498,
+      "t_s": 16.6,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 500,
+      "t_s": 16.6667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 506,
+      "t_s": 16.8667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 513,
+      "t_s": 17.1,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 521,
+      "t_s": 17.3667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 528,
+      "t_s": 17.6,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 536,
+      "t_s": 17.8667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 543,
+      "t_s": 18.1,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 551,
+      "t_s": 18.3667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 558,
+      "t_s": 18.6,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 566,
+      "t_s": 18.8667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 573,
+      "t_s": 19.1,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 580,
+      "t_s": 19.3333,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 581,
+      "t_s": 19.3667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 588,
+      "t_s": 19.6,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 596,
+      "t_s": 19.8667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 603,
+      "t_s": 20.1,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 611,
+      "t_s": 20.3667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 618,
+      "t_s": 20.6,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 626,
+      "t_s": 20.8667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 633,
+      "t_s": 21.1,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 641,
+      "t_s": 21.3667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 648,
+      "t_s": 21.6,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 656,
+      "t_s": 21.8667,
+      "split": "dev",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 663,
+      "t_s": 22.1,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 671,
+      "t_s": 22.3667,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 678,
+      "t_s": 22.6,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 686,
+      "t_s": 22.8667,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 694,
+      "t_s": 23.1333,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 700,
+      "t_s": 23.3333,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 701,
+      "t_s": 23.3667,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 709,
+      "t_s": 23.6333,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 716,
+      "t_s": 23.8667,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 724,
+      "t_s": 24.1333,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 731,
+      "t_s": 24.3667,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 739,
+      "t_s": 24.6333,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 746,
+      "t_s": 24.8667,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 754,
+      "t_s": 25.1333,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 762,
+      "t_s": 25.4,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 769,
+      "t_s": 25.6333,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 777,
+      "t_s": 25.9,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 780,
+      "t_s": 26.0,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 784,
+      "t_s": 26.1333,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 792,
+      "t_s": 26.4,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 799,
+      "t_s": 26.6333,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 807,
+      "t_s": 26.9,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 815,
+      "t_s": 27.1667,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 822,
+      "t_s": 27.4,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 830,
+      "t_s": 27.6667,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 837,
+      "t_s": 27.9,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 845,
+      "t_s": 28.1667,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 850,
+      "t_s": 28.3333,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 852,
+      "t_s": 28.4,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 860,
+      "t_s": 28.6667,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 867,
+      "t_s": 28.9,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 875,
+      "t_s": 29.1667,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 883,
+      "t_s": 29.4333,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 890,
+      "t_s": 29.6667,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 898,
+      "t_s": 29.9333,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 905,
+      "t_s": 30.1667,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 913,
+      "t_s": 30.4333,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 920,
+      "t_s": 30.6667,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 928,
+      "t_s": 30.9333,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 936,
+      "t_s": 31.2,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 943,
+      "t_s": 31.4333,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 951,
+      "t_s": 31.7,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 958,
+      "t_s": 31.9333,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 966,
+      "t_s": 32.2,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 973,
+      "t_s": 32.4333,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 980,
+      "t_s": 32.6667,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 981,
+      "t_s": 32.7,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 988,
+      "t_s": 32.9333,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 996,
+      "t_s": 33.2,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 1004,
+      "t_s": 33.4667,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 1010,
+      "t_s": 33.6667,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 1011,
+      "t_s": 33.7,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    },
+    {
+      "frame_idx": 1019,
+      "t_s": 33.9667,
+      "split": "holdout",
+      "review_status": "not_reviewed",
+      "humans": [],
+      "notes": "Pending blind visual annotation approval; prior agent freehand attempt invalidated (boxes on empty turf)."
+    }
+  ],
+  "invalidated_prior_attempt": {
+    "reason": "Agent freehand/grid boxes failed person-presence validation (681/682 holdout positives scored as empty turf).",
+    "path": "artifacts/evidence/reboot_01/gt_invalid_attempt/"
+  },
+  "written_at_utc": "2026-07-28T21:59:22.949538+00:00"
+}

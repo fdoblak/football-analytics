@@ -1,0 +1,8 @@
+{
+  "dataset_id": "own_video_human_blind_gt_v1",
+  "freeze_fingerprint_sha256": "36b9d3ad67683fa86461e74862fedd2a4a5d0b798214ec4aa5c7c5f6b47e41a9",
+  "frozen_at_utc": "2026-07-28T21:55:23.872440+00:00",
+  "n_frames": 150,
+  "positive_boxes": 1927,
+  "annotation_sha256": "36b9d3ad67683fa86461e74862fedd2a4a5d0b798214ec4aa5c7c5f6b47e41a9"
+}

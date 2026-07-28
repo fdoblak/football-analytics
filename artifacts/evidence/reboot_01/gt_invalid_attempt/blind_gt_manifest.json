@@ -1,0 +1,45 @@
+{
+  "schema": "own_video_human_blind_gt_v1_manifest",
+  "dataset_id": "own_video_human_blind_gt_v1",
+  "n_frames": 150,
+  "counts": {
+    "frames_by_split": {
+      "train": 54,
+      "dev": 43,
+      "holdout": 53
+    },
+    "positive_boxes": 1927,
+    "ignore_boxes": 285,
+    "positive_by_split": {
+      "train": 806,
+      "dev": 439,
+      "holdout": 682
+    },
+    "all_boxes_by_split": {
+      "train": 1076,
+      "dev": 440,
+      "holdout": 696
+    }
+  },
+  "splits": {
+    "train": "0-12s",
+    "dev": "12-22s",
+    "holdout": "22-34s"
+  },
+  "source_id": "own_video_97b298e4",
+  "source_sha256": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160",
+  "annotation_path": "artifacts/evidence/reboot_01/gt/blind_gt_annotations.json",
+  "qa_second_pass_frames": 45,
+  "qa_fraction": 0.3,
+  "uncertain_frames": [
+    71,
+    138,
+    401,
+    513,
+    603,
+    633,
+    860
+  ],
+  "dedupe_fixes": 0,
+  "written_at_utc": "2026-07-28T21:55:23.870151+00:00"
+}

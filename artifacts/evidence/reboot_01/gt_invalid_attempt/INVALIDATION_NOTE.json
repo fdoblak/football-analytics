@@ -1,0 +1,9 @@
+{
+  "invalidated": true,
+  "reason": "Freehand/grid agent boxes failed person-presence validation on holdout (nearly all positives on empty turf).",
+  "person_score_empty_rate_holdout": "681/682",
+  "must_not_use_for_acceptance": true,
+  "written_at_utc": "2026-07-28T21:59:22.949538+00:00",
+  "invalid_annotations_sha256": "36b9d3ad67683fa86461e74862fedd2a4a5d0b798214ec4aa5c7c5f6b47e41a9",
+  "invalid_annotations_size_bytes": 870610
+}

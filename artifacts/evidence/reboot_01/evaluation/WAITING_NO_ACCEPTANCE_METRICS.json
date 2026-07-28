@@ -1,0 +1,6 @@
+{
+  "acceptance_metrics_computed": false,
+  "reason": "No frozen independent blind GT",
+  "baseline_predictions_exist_for_diagnostic": true,
+  "written_at_utc": "2026-07-28T21:59:22.949538+00:00"
+}

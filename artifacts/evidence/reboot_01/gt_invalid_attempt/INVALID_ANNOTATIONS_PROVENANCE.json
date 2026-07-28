@@ -1,0 +1,7 @@
+{
+  "removed_from_git_tree": true,
+  "reason": "Invalid empty-turf boxes; full blob retained only by sha for audit",
+  "sha256": "36b9d3ad67683fa86461e74862fedd2a4a5d0b798214ec4aa5c7c5f6b47e41a9",
+  "size_bytes": 870610,
+  "workspace_copy_hint": "/home/fdoblak/workspace/own_video_analysis/r1_blind_gt/annotations/"
+}

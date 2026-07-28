@@ -1,0 +1,18 @@
+{
+  "schema": "own_video_human_blind_gt_v1_manifest",
+  "dataset_id": "own_video_human_blind_gt_v1",
+  "status": "WAITING_VISUAL_APPROVAL",
+  "n_frames": 150,
+  "counts": {
+    "frames_by_split": {
+      "train": 54,
+      "dev": 43,
+      "holdout": 53
+    },
+    "positive_boxes": 0,
+    "ignore_boxes": 0,
+    "reviewed_frames": 0
+  },
+  "freeze_status": "NOT_FROZEN",
+  "written_at_utc": "2026-07-28T21:59:22.949538+00:00"
+}

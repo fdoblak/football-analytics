@@ -1,0 +1,91 @@
+{
+  "schema": "r1_windows_mirror_sha_v1",
+  "match_all": true,
+  "files": [
+    {
+      "file": "R1_GT_REVIEW.html",
+      "sha256": "9ed1e0d3e435232a02c223a179f762e14e44d1ea7ba2a227fe22524000b7fcd2",
+      "match": true
+    },
+    {
+      "file": "OPEN_R1_RESULTS.html",
+      "sha256": "e2509a706cdc9099c9006f64329ce272a37038548ee215cb808984e15f59acca",
+      "match": true
+    },
+    {
+      "file": "GATE_STATUS.json",
+      "sha256": "d9c13da78ac07f360018bf3d022d7daaad4705a2b4e05bb7cc66899d5435d7ef",
+      "match": true
+    },
+    {
+      "file": "gt_contact_sheets/dev_raw_00.jpg",
+      "sha256": "4306a11b9b579e9c247c37169c7b2314a9588c1eabe7240d699392380167b1c5",
+      "match": true
+    },
+    {
+      "file": "gt_contact_sheets/dev_raw_01.jpg",
+      "sha256": "8ee473a6223d008f5a1f2d518a4b30ae19129fff2b739974c205566acee1e3d9",
+      "match": true
+    },
+    {
+      "file": "gt_contact_sheets/dev_raw_02.jpg",
+      "sha256": "777f8011b0499df66012c035437f35bdc646605c4d02c41777966e523b656db9",
+      "match": true
+    },
+    {
+      "file": "gt_contact_sheets/dev_raw_03.jpg",
+      "sha256": "37cf5996718d77d6cce7e1f90947ad3c80870484cf86d24c242b1961b1d330f5",
+      "match": true
+    },
+    {
+      "file": "gt_contact_sheets/holdout_raw_00.jpg",
+      "sha256": "8cf7e43dc9d1ee75f3ec863f722902801db5786fe4c0bc865d6c6dab90873f8f",
+      "match": true
+    },
+    {
+      "file": "gt_contact_sheets/holdout_raw_01.jpg",
+      "sha256": "f3d6e79bf8713fee69a7275e2fb42ed3ad8df45a5cc8848022e846e282690a6e",
+      "match": true
+    },
+    {
+      "file": "gt_contact_sheets/holdout_raw_02.jpg",
+      "sha256": "17b7476713dfc380b0a8acaabf7b005206e2bbbce1296f04c8dcdfd109feb751",
+      "match": true
+    },
+    {
+      "file": "gt_contact_sheets/holdout_raw_03.jpg",
+      "sha256": "56714e1fb1b592cf9f8616bbedf473320721eaada23a98d2074a278043b7ec18",
+      "match": true
+    },
+    {
+      "file": "gt_contact_sheets/holdout_raw_04.jpg",
+      "sha256": "082932fb4a1f14d95bcd0c424a9ff23e7355225c7be223de9cad7ad0a502c840",
+      "match": true
+    },
+    {
+      "file": "gt_contact_sheets/train_raw_00.jpg",
+      "sha256": "5c665b49f294ec898100fdd1de8aca8caa52e6b92e4c5c106f463849f54c4342",
+      "match": true
+    },
+    {
+      "file": "gt_contact_sheets/train_raw_01.jpg",
+      "sha256": "51ff27d6420c3958e78f1111ccb943ed27de3747d743cbe89a60440830a65773",
+      "match": true
+    },
+    {
+      "file": "gt_contact_sheets/train_raw_02.jpg",
+      "sha256": "c8b1c22469546ef3e3879fb387acf04a1cc695db60aa9c18008c344e69627dd6",
+      "match": true
+    },
+    {
+      "file": "gt_contact_sheets/train_raw_03.jpg",
+      "sha256": "65652f919fd87a6361da33b062a751efaff50b809975202ef8aac9a577aafc5f",
+      "match": true
+    },
+    {
+      "file": "gt_contact_sheets/train_raw_04.jpg",
+      "sha256": "2ade3d869afc31ff2cbc5a3b48785b1ee6aa0e390d217564d32fadc02fafc5da",
+      "match": true
+    }
+  ]
+}
