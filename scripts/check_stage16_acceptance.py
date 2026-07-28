@@ -45,7 +45,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--local-png",
         type=Path,
-        default=Path("/home/fdoblak/football_data/rendered_outputs/final/single_player_analysis_summary.png"),
+        default=Path(
+            "/home/fdoblak/football_data/rendered_outputs/final/single_player_analysis_summary.png"
+        ),
     )
     parser.add_argument(
         "--github-png",
@@ -64,11 +66,7 @@ def main(argv: list[str] | None = None) -> int:
         },
     }
     print(json.dumps(report, indent=2))
-    fails = [
-        k
-        for k, v in report.items()
-        if isinstance(v, dict) and v.get("status") == "FAIL"
-    ]
+    fails = [k for k, v in report.items() if isinstance(v, dict) and v.get("status") == "FAIL"]
     return 1 if fails else 0
 
 

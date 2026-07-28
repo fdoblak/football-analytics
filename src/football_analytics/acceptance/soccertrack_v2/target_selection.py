@@ -89,9 +89,7 @@ def _accumulate_gsr(
         path = gsr_path(root, match_id, half)
         if not path.is_file():
             continue
-        for obs in iter_gsr_player_observations(
-            path, half=half, sample_stride=sample_stride
-        ):
+        for obs in iter_gsr_player_observations(path, half=half, sample_stride=sample_stride):
             st = stats.setdefault(obs.player_id, PlayerCoverageStats(player_id=obs.player_id))
             st.role_counts[obs.role] = st.role_counts.get(obs.role, 0) + 1
             jkey = str(obs.jersey_number)

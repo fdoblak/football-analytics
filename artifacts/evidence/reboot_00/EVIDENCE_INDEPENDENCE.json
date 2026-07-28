@@ -1,0 +1,82 @@
+{
+  "schema": "reboot_00_evidence_independence_v1",
+  "written_at_utc": "2026-07-28T10:56:22.983557+00:00",
+  "human_detection": {
+    "human_detection_independent_gt": false,
+    "reason": "All human boxes have source_bbox=auto_visually_corrected; GT started from YOLO proposals then visual role/team correction.",
+    "source_bbox_counts": {
+      "auto_visually_corrected": 2709
+    },
+    "missed_humans_search_documented": false,
+    "acceptance_use": "INVALID as independent detector P/R/F1 proof; circular when matched to same proposals",
+    "reported_f1_1_0": "invalidated"
+  },
+  "role_team": {
+    "reported_role_macro_f1": 1.0,
+    "classes_with_holdout_support": {
+      "player": 776,
+      "goalkeeper": 12,
+      "referee": 3
+    },
+    "staff_holdout_count": 0,
+    "naming": "observed-class macro F1 over player/goalkeeper/referee (staff absent in holdout after re-label)",
+    "not_full_four_class_role_f1": true,
+    "gk_gt_corrected_after_visual_review": true,
+    "gk_correction_risk": "GK boxes on holdout were relabeled after kit-stat candidates matched dark/red track; risk of prediction-aligned labeling bias must be treated as finding",
+    "team_accuracy_scope": "matched player/GK boxes with yellow/white GT team only",
+    "non_player_team_assignments": 0,
+    "acceptance_use": "informative for this clip heuristics; not a general football role-head validation"
+  },
+  "target_identity": {
+    "holdout_22_34s_jersey5_visible_frames": 0,
+    "holdout_target_accuracy_claim_allowed": false,
+    "idf1_is_trackeval": false,
+    "idf1_is_frame_set_proxy": true,
+    "tracks_4_and_27_evidence": "six reviewed visual anchors with digit 5; IoU match to appearance tracks 4 then 27",
+    "intervals_beyond_anchors": "identity windows around anchors; not independently frame-reviewed for every frame",
+    "false_assignment_negatives_reviewed": false,
+    "acceptance_use": "proxy only; not official IDF1/HOTA"
+  },
+  "ball": {
+    "reviewed_frames": 300,
+    "visible_counts_all": {
+      "not_visible": 161,
+      "visible": 132,
+      "ambiguous": 7
+    },
+    "visible_counts_holdout": {
+      "ambiguous": 5,
+      "visible": 43,
+      "not_visible": 52
+    },
+    "visible_without_localisation_excluded": 12,
+    "exclusion_reason": "visible=true but centre/bbox null \u2014 cannot score localisation P/R",
+    "gt_from_auto_then_sheet_review": true,
+    "reported_holdout_metrics": {
+      "precision": 0.9394,
+      "recall": 1.0,
+      "f1": 0.9688,
+      "tp": 31,
+      "fp": 2,
+      "fn": 0,
+      "centre_error_median_px": 0.04,
+      "n_ambiguous_excluded": 5,
+      "n_visible_without_localisation_gt_excluded": 12
+    },
+    "acceptance_use": "usable for this clip with caveats; not fully independent from detector proposals"
+  },
+  "calibration": {
+    "n_reviewed": 34,
+    "n_valid_sv": 2,
+    "coverage": 0.0588,
+    "median_reproj_on_valid_only": 0.3240822312835627,
+    "low_median_not_success_when_coverage_low": true,
+    "generalization_from_two_frames_forbidden": true,
+    "acceptance_use": "FAIL \u2014 blocker"
+  },
+  "result_epochs": {
+    "old_first_bakeoff": "superseded \u2014 role_macro~0.67, target not_evaluable",
+    "old_gk_grid_search": "superseded intermediate \u2014 macro~0.58 before GT correction",
+    "current_recovery_d388e7e": "latest metrics in holdout_evaluation.json but subject to independence invalidations above"
+  }
+}

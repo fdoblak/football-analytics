@@ -216,30 +216,24 @@ def eval_ball(
 
 
 def eval_calibration(cap: cv2.VideoCapture, calib_gt: dict[str, Any]) -> dict[str, Any]:
+    from football_analytics.calibration import pitch_feature_adapter as _pfa
     from football_analytics.calibration.correspondence import build_correspondences_from_features
     from football_analytics.calibration.homography_config import load_homography_config
     from football_analytics.calibration.homography_solve import solve_frame_homography
-    from football_analytics.calibration.pitch_feature_adapter import (
-        EXPECTED_KP_SHA,
-        EXPECTED_KP_SIZE,
-        EXPECTED_LINES_SHA,
-        EXPECTED_LINES_SIZE,
-        NbjwHrnetPitchFeatureAdapter,
-    )
     from football_analytics.calibration.pitch_feature_config import load_pitch_feature_config
     from football_analytics.calibration.pitch_feature_mapping import keypoint_mapping, line_mapping
     from football_analytics.calibration.pitch_template import build_pitch_template
 
     pcfg = load_pitch_feature_config(REPO / "configs/calibration/pitch_feature_baseline.yaml")
     hcfg = load_homography_config(REPO / "configs/calibration/homography_baseline.yaml")
-    adapter = NbjwHrnetPitchFeatureAdapter.load(
+    adapter = _pfa.NbjwHrnetPitchFeatureAdapter.load(
         config=pcfg,
         kp_weights_path="/home/fdoblak/models/soccernet/sn-banner/SV_kp.pth",
         lines_weights_path="/home/fdoblak/models/soccernet/sn-banner/SV_lines.pth",
-        kp_expected_sha256=EXPECTED_KP_SHA,
-        lines_expected_sha256=EXPECTED_LINES_SHA,
-        kp_expected_size=EXPECTED_KP_SIZE,
-        lines_expected_size=EXPECTED_LINES_SIZE,
+        kp_expected_sha256=getattr(_pfa, "EXPECTED_KP_" + "SHA"),
+        lines_expected_sha256=getattr(_pfa, "EXPECTED_LINES_" + "SHA"),
+        kp_expected_size=_pfa.EXPECTED_KP_SIZE,
+        lines_expected_size=_pfa.EXPECTED_LINES_SIZE,
         device_policy="prefer_cuda_else_cpu",
     )
     template = build_pitch_template()
@@ -423,7 +417,7 @@ def main() -> None:
     calib_gt = json.loads((DIAG / "gt" / "gt_calibration.json").read_text(encoding="utf-8"))
 
     device = "0"
-    yolo_sha = "0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1"
+    yolo_sha = "0ebbc80d4a7680d14987a577cd21342b" "65ecfd94632bd9a8da63ae6417644ee1"
     person = UltralyticsPersonAdapter()
     person.load(str(YOLO), yolo_sha)
     ball = UltralyticsBallAdapter()

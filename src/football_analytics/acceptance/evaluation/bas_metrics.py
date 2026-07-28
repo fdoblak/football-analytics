@@ -40,6 +40,7 @@ def match_events(
 
     labels = sorted(set(by_label_ref) | set(by_label_pred))
     for label in labels:
+
         def _tkey(x: dict[str, Any]) -> tuple[int, int]:
             return (int(x.get("half") or 0), int(x.get("t_ms") or 0))
 

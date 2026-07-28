@@ -35,9 +35,7 @@ def test_gt_marker_under_predictions_hard_fails(tmp_path: Path) -> None:
 
 def test_prediction_bundle_rejects_gt_provenance() -> None:
     with pytest.raises(LeakageError):
-        validate_prediction_bundle_not_gt(
-            {"provenance": EXTERNAL_CC_BY_REFERENCE_GT}
-        )
+        validate_prediction_bundle_not_gt({"provenance": EXTERNAL_CC_BY_REFERENCE_GT})
 
 
 def test_event_ledger_copy_from_gt_hard_fails() -> None:

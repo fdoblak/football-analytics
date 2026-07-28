@@ -1,0 +1,3623 @@
+{
+  "schema": "reboot_00_cleanup_receipt_v1",
+  "written_at_utc": "2026-07-28T11:08:13.116762+00:00",
+  "deleted_paths": [
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/__pycache__",
+      "bytes": 120804,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__",
+      "bytes": 796024,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/_py/__pycache__",
+      "bytes": 46694,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/_io/__pycache__",
+      "bytes": 27924,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/_code/__pycache__",
+      "bytes": 57482,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/config/__pycache__",
+      "bytes": 89497,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/mark/__pycache__",
+      "bytes": 42915,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/assertion/__pycache__",
+      "bytes": 71300,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/__pycache__",
+      "bytes": 90538,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/filters/__pycache__",
+      "bytes": 29577,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/lexers/__pycache__",
+      "bytes": 108586,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/styles/__pycache__",
+      "bytes": 5337,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/formatters/__pycache__",
+      "bytes": 12934,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pluggy/__pycache__",
+      "bytes": 52895,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pyarrow/__pycache__",
+      "bytes": 118672,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pyarrow/parquet/__pycache__",
+      "bytes": 82879,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pyarrow/vendored/__pycache__",
+      "bytes": 20099,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/tomli/__pycache__",
+      "bytes": 22444,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pytest_cov/__pycache__",
+      "bytes": 16254,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pytest/__pycache__",
+      "bytes": 4802,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/iniconfig/__pycache__",
+      "bytes": 12151,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/exceptiongroup/__pycache__",
+      "bytes": 28977,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/yaml/__pycache__",
+      "bytes": 139452,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/scripts/__pycache__",
+      "bytes": 152871,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/__pycache__",
+      "bytes": 145560,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__",
+      "bytes": 109628,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/evidence/__pycache__",
+      "bytes": 13364,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/orchestration/__pycache__",
+      "bytes": 32090,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/orchestration/report/__pycache__",
+      "bytes": 8587,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/orchestration/review/__pycache__",
+      "bytes": 8384,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__",
+      "bytes": 352658,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/visualization/__pycache__",
+      "bytes": 6148,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/passing/__pycache__",
+      "bytes": 102095,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/hardening/__pycache__",
+      "bytes": 54584,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/pipeline/__pycache__",
+      "bytes": 107593,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/data/__pycache__",
+      "bytes": 64425,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/core/__pycache__",
+      "bytes": 39902,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__",
+      "bytes": 235197,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__",
+      "bytes": 295175,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__",
+      "bytes": 100406,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__",
+      "bytes": 298296,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/adapters/__pycache__",
+      "bytes": 23094,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__",
+      "bytes": 220549,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__",
+      "bytes": 132418,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/contracts/__pycache__",
+      "bytes": 179,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/__pycache__",
+      "bytes": 36246,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/stage18_own_video/__pycache__",
+      "bytes": 10545,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/final_perception_repair/__pycache__",
+      "bytes": 49234,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/stage17r2_recovery/__pycache__",
+      "bytes": 3273,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/soccertrack_v2/__pycache__",
+      "bytes": 28240,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/stage17r1_jersey5/__pycache__",
+      "bytes": 6615,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/self_contained/__pycache__",
+      "bytes": 22316,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/teamtrack/__pycache__",
+      "bytes": 30902,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/evaluation/__pycache__",
+      "bytes": 8069,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/video/__pycache__",
+      "bytes": 199490,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__",
+      "bytes": 267283,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/utils/__pycache__",
+      "bytes": 19450,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/__pycache__",
+      "bytes": 152,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/duels/__pycache__",
+      "bytes": 7225,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/evidence/__pycache__",
+      "bytes": 3367,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/archive/__pycache__",
+      "bytes": 43407,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/orchestration/__pycache__",
+      "bytes": 6242,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/identity/__pycache__",
+      "bytes": 70246,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/security/__pycache__",
+      "bytes": 20702,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/passing/__pycache__",
+      "bytes": 7047,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/registries/__pycache__",
+      "bytes": 25328,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/hardening/__pycache__",
+      "bytes": 7385,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/scripts/__pycache__",
+      "bytes": 21004,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/pipeline/__pycache__",
+      "bytes": 89408,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/data/__pycache__",
+      "bytes": 77248,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/core/__pycache__",
+      "bytes": 73339,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/physical/__pycache__",
+      "bytes": 25922,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/calibration/__pycache__",
+      "bytes": 54757,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/package/__pycache__",
+      "bytes": 41710,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/events/__pycache__",
+      "bytes": 14248,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/perception/__pycache__",
+      "bytes": 96685,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__",
+      "bytes": 87366,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/storage/__pycache__",
+      "bytes": 32081,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/interaction/__pycache__",
+      "bytes": 11862,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/acceptance/__pycache__",
+      "bytes": 52426,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/video/__pycache__",
+      "bytes": 97518,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/tracking/__pycache__",
+      "bytes": 58776,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.pytest_cache",
+      "bytes": 121074,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.mypy_cache",
+      "bytes": 57585888,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.ruff_cache",
+      "bytes": 86062,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/build",
+      "bytes": 4075983,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/dist",
+      "bytes": 2037820,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics.egg-info",
+      "bytes": 34763,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery/gt/contact_sheets_sample/b_sheet_04.jpg",
+      "bytes": 294683,
+      "classification": "DELETE_DUPLICATE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery/gt/contact_sheets_sample/b_sheet_05.jpg",
+      "bytes": 296246,
+      "classification": "DELETE_DUPLICATE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery/gt/contact_sheets_sample/b_sheet_02.jpg",
+      "bytes": 284595,
+      "classification": "DELETE_DUPLICATE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery/gt/contact_sheets_sample/b_sheet_03.jpg",
+      "bytes": 295141,
+      "classification": "DELETE_DUPLICATE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery/gt/contact_sheets_sample/b_sheet_07.jpg",
+      "bytes": 289380,
+      "classification": "DELETE_DUPLICATE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery/gt/contact_sheets_sample/b_sheet_06.jpg",
+      "bytes": 295887,
+      "classification": "DELETE_DUPLICATE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/artifacts/cleanup_own_video_rebuild.json",
+      "bytes": 40760,
+      "classification": "DELETE_REJECTED_OUTPUT"
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/frames_review",
+      "bytes": 22449335,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/overlays_human",
+      "bytes": 61225687,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/overlays_ball",
+      "bytes": 91948636,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets",
+      "bytes": 5053876,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/contact_sheets_full",
+      "bytes": 10631682,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/review_decisions/staff_holdout_crops",
+      "bytes": 942918,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/review_decisions/staff_train_sample",
+      "bytes": 59961,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/stage17r2/review_decisions/gk_candidates",
+      "bytes": 23440,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/runs/_cache_full_tracks.pkl",
+      "bytes": 494590,
+      "classification": "DELETE_CACHE"
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/runs/_cache_held_tracks.pkl",
+      "bytes": 255642,
+      "classification": "DELETE_CACHE"
+    }
+  ],
+  "deleted_byte_total": 265032603,
+  "restored_paths": [],
+  "preserved_paths": [
+    "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery",
+    "/home/fdoblak/projects/football-analytics/artifacts/rejected_v0.18.0",
+    "/home/fdoblak/projects/football-analytics/artifacts/final_delivery/REJECTED_SEE_rejected_v0.18.0.txt",
+    "/home/fdoblak/football_data/model_archive/yolo11n.pt",
+    "/home/fdoblak/models/soccernet/sn-banner/SV_kp.pth",
+    "/home/fdoblak/models/soccernet/sn-banner/SV_lines.pth",
+    "/mnt/c/Users/furka/Downloads/\u00f6rnek_video_FA.mp4",
+    "/home/fdoblak/miniconda3/envs/ai-dev",
+    "/home/fdoblak/projects/soccernet/sn-reid",
+    "/home/fdoblak/projects/soccernet/SoccerNet-v3",
+    "/home/fdoblak/projects/soccernet/sn-caption",
+    "/home/fdoblak/projects/soccernet/sn-spotting",
+    "/home/fdoblak/projects/soccernet/sn-tracking",
+    "/home/fdoblak/projects/soccernet/sn-trackeval",
+    "/home/fdoblak/projects/soccernet/sn-grounding",
+    "/home/fdoblak/projects/soccernet/sn-depth",
+    "/home/fdoblak/projects/soccernet/sn-jersey",
+    "/home/fdoblak/projects/soccernet/sn-calibration",
+    "/home/fdoblak/projects/soccernet/ActiveSpotting",
+    "/home/fdoblak/projects/soccernet/sn-nvs",
+    "/home/fdoblak/projects/soccernet/sn-teamspotting",
+    "/home/fdoblak/projects/soccernet/SoccerNet",
+    "/home/fdoblak/projects/soccernet/sn-echoes",
+    "/home/fdoblak/projects/soccernet/sn-mvfoul",
+    "/home/fdoblak/projects/soccernet/PTS-baseline",
+    "/home/fdoblak/projects/soccernet/sn-gamestate",
+    "/home/fdoblak/projects/soccernet/sn-banner",
+    "/home/fdoblak/projects/third-party/pnlcalib",
+    "/home/fdoblak/projects/third-party/TeamTrack",
+    "/home/fdoblak/projects/third-party/tracklab",
+    "/home/fdoblak/projects/third-party/SoccerTrack-v2",
+    "/home/fdoblak/projects/third-party/no-bells-just-whistles",
+    "/home/fdoblak/miniconda3/envs/sn-active-spotting",
+    "/home/fdoblak/miniconda3/envs/sn-calibration",
+    "/home/fdoblak/miniconda3/envs/sn-echoes",
+    "/home/fdoblak/miniconda3/envs/sn-gamestate",
+    "/home/fdoblak/miniconda3/envs/sn-mvfoul",
+    "/home/fdoblak/miniconda3/envs/sn-pts-baseline",
+    "/home/fdoblak/miniconda3/envs/sn-reid",
+    "/home/fdoblak/miniconda3/envs/sn-teamspotting",
+    "/home/fdoblak/miniconda3/envs/sn-trackeval"
+  ],
+  "skipped_dirty_paths": [],
+  "skipped": [
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/_py/__pycache__/path.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/_py/__pycache__/error.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/_py/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/_io/__pycache__/saferepr.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/_io/__pycache__/pprint.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/_io/__pycache__/wcwidth.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/_io/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/_io/__pycache__/terminalwriter.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/_code/__pycache__/source.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/_code/__pycache__/code.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/_code/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/config/__pycache__/exceptions.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/config/__pycache__/findpaths.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/config/__pycache__/argparsing.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/config/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/scope.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/compat.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/junitxml.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/subtests.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/tracemalloc.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/runner.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/nodes.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/capture.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/python_api.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/legacypath.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/tmpdir.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/faulthandler.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/setupplan.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/cacheprovider.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/logging.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/pathlib.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/recwarn.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/hookspec.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/doctest.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/monkeypatch.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/setuponly.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/terminal.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/_argcomplete.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/warning_types.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/python.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/deprecated.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/reports.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/warnings.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/outcomes.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/debugging.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/_version.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/unraisableexception.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/stepwise.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/pytester.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/helpconfig.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/stash.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/skipping.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/main.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/raises.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/freeze_support.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/pastebin.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/threadexception.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/timing.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/__pycache__/unittest.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/mark/__pycache__/structures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/mark/__pycache__/expression.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/mark/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/assertion/__pycache__/_guards.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/assertion/__pycache__/_typing.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/assertion/__pycache__/rewrite.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/assertion/__pycache__/_compare_set.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/assertion/__pycache__/_compare_mapping.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/assertion/__pycache__/compare_text.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/assertion/__pycache__/highlight.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/assertion/__pycache__/_compare_any.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/assertion/__pycache__/util.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/assertion/__pycache__/truncate.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/assertion/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/_pytest/assertion/__pycache__/_compare_sequence.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/filters/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/lexers/__pycache__/_mapping.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/lexers/__pycache__/diff.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/lexers/__pycache__/python.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/lexers/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/__pycache__/filter.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/__pycache__/regexopt.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/__pycache__/plugin.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/__pycache__/token.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/__pycache__/console.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/__pycache__/lexer.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/__pycache__/unistring.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/__pycache__/formatter.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/__pycache__/util.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/__pycache__/modeline.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/styles/__pycache__/_mapping.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/styles/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/formatters/__pycache__/_mapping.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/formatters/__pycache__/terminal.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pygments/formatters/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pluggy/__pycache__/_warnings.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pluggy/__pycache__/_callers.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pluggy/__pycache__/_tracing.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pluggy/__pycache__/_hooks.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pluggy/__pycache__/_manager.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pluggy/__pycache__/_version.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pluggy/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pluggy/__pycache__/_result.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pyarrow/parquet/__pycache__/core.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pyarrow/parquet/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pyarrow/vendored/__pycache__/docscrape.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pyarrow/vendored/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pyarrow/__pycache__/substrait.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pyarrow/__pycache__/ipc.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pyarrow/__pycache__/_generated_version.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pyarrow/__pycache__/dataset.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pyarrow/__pycache__/fs.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pyarrow/__pycache__/_compute_docstrings.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pyarrow/__pycache__/compute.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pyarrow/__pycache__/util.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pyarrow/__pycache__/types.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pyarrow/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/__pycache__/py.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/__pycache__/_virtualenv.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/__pycache__/typing_extensions.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/tomli/__pycache__/_re.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/tomli/__pycache__/_parser.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/tomli/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pytest_cov/__pycache__/plugin.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pytest_cov/__pycache__/__init__.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pytest/__pycache__/__main__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/pytest/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/iniconfig/__pycache__/exceptions.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/iniconfig/__pycache__/_parse.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/iniconfig/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/exceptiongroup/__pycache__/_suppress.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/exceptiongroup/__pycache__/_formatting.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/exceptiongroup/__pycache__/_catch.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/exceptiongroup/__pycache__/_version.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/exceptiongroup/__pycache__/_exceptions.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/exceptiongroup/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/yaml/__pycache__/representer.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/yaml/__pycache__/emitter.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/yaml/__pycache__/nodes.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/yaml/__pycache__/loader.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/yaml/__pycache__/constructor.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/yaml/__pycache__/composer.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/yaml/__pycache__/scanner.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/yaml/__pycache__/reader.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/yaml/__pycache__/error.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/yaml/__pycache__/events.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/yaml/__pycache__/dumper.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/yaml/__pycache__/serializer.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/yaml/__pycache__/tokens.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/yaml/__pycache__/resolver.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/yaml/__pycache__/cyaml.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/yaml/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/.venv/lib/python3.10/site-packages/yaml/__pycache__/parser.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/scripts/__pycache__/run_stage17r2_perception_bakeoff.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/scripts/__pycache__/restore_run.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/scripts/__pycache__/verify_archive.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/scripts/__pycache__/cleanup_run.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/scripts/__pycache__/check_registries.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/scripts/__pycache__/check_data_contracts.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/scripts/__pycache__/check_broadcast_pipeline.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/scripts/__pycache__/check_secrets.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/scripts/__pycache__/check_project.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/scripts/__pycache__/check_stage_cache.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/scripts/__pycache__/run_stage17r1_jersey5_own_video.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/scripts/__pycache__/check_ci_workflow.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/scripts/__pycache__/check_storage.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/scripts/__pycache__/check_runtime_foundation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/scripts/__pycache__/archive_run.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/aerial_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/aerial_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/contracts.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/take_on_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/validation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/pipeline_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/take_on_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/receipt.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/take_on_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/policy.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/pipeline_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/semantics.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/ground_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/ground_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/ground_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/types.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/pipeline_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/duels/__pycache__/aerial_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/evidence/__pycache__/collector.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/evidence/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/orchestration/report/__pycache__/builder.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/orchestration/report/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/orchestration/__pycache__/contracts.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/orchestration/__pycache__/runner.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/orchestration/__pycache__/stage_handlers.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/orchestration/__pycache__/config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/orchestration/__pycache__/fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/orchestration/__pycache__/cleanup.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/orchestration/__pycache__/planner.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/orchestration/__pycache__/cache_keys.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/orchestration/__pycache__/types.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/orchestration/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/orchestration/review/__pycache__/hub.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/orchestration/review/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/team_assignment_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/appearance_matching.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/contracts.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/team_assignment_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/appearance_reid_evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/target_profile.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/target_ranking.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/validation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/reid_links.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/jersey_consensus.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/appearance_profiles.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/target_fusion.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/target_review.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/appearance_descriptor.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/receipt.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/jersey_ocr_evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/jersey_ocr_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/target_eligibility_timeline.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/assignments.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/policy.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/team_assignment_evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/target_fusion_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/target_fusion_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/appearance_reid_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/evidence.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/jersey_region.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/review_audit.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/jersey_ocr.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/appearance_reid_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/team_clustering.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/appearance_reid_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/jersey_ocr_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/team_assignment.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/types.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/target_fusion_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/appearance_sampling.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/metric_eligibility.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/jersey_ocr_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/target_decisions.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/target_fusion_evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/identity/__pycache__/team_assignment_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/visualization/__pycache__/report_renderer.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/visualization/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/passing/__pycache__/evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/passing/__pycache__/contracts.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/passing/__pycache__/attack_direction.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/passing/__pycache__/validation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/passing/__pycache__/pipeline_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/passing/__pycache__/metrics_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/passing/__pycache__/receipt.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/passing/__pycache__/policy.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/passing/__pycache__/fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/passing/__pycache__/pipeline_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/passing/__pycache__/semantics.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/passing/__pycache__/pass_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/passing/__pycache__/pass_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/passing/__pycache__/types.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/passing/__pycache__/pipeline_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/passing/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/passing/__pycache__/pass_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/passing/__pycache__/metrics_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/hardening/__pycache__/artifacts.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/hardening/__pycache__/gpu_profile.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/hardening/__pycache__/licensing.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/hardening/__pycache__/acceptance.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/hardening/__pycache__/materialize.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/hardening/__pycache__/concurrency.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/hardening/__pycache__/cache_gc.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/hardening/__pycache__/ci_parity.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/hardening/__pycache__/policy.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/hardening/__pycache__/recovery.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/hardening/__pycache__/fingerprints.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/hardening/__pycache__/network.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/hardening/__pycache__/storage_readiness.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/hardening/__pycache__/disk_gate.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/hardening/__pycache__/evidence_checks.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/hardening/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/hardening/__pycache__/performance.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/pipeline/__pycache__/artifacts.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/pipeline/__pycache__/receipts.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/pipeline/__pycache__/ci_workflow_check.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/pipeline/__pycache__/exceptions.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/pipeline/__pycache__/cache_key.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/pipeline/__pycache__/stage.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/pipeline/__pycache__/project_check.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/pipeline/__pycache__/stage_cache_check.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/pipeline/__pycache__/types.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/pipeline/__pycache__/execution.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/pipeline/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/pipeline/__pycache__/cache.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/data/__pycache__/validation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/data/__pycache__/bundle.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/data/__pycache__/parquet.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/data/__pycache__/registry.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/data/__pycache__/specs.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/data/__pycache__/fingerprint.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/data/__pycache__/compiler.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/data/__pycache__/migrations.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/data/__pycache__/types.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/data/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/core/__pycache__/environment.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/core/__pycache__/run_context.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/core/__pycache__/config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/core/__pycache__/run_id.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/core/__pycache__/redaction.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/core/__pycache__/records.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/core/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/core/__pycache__/structured_logging.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/core/__pycache__/hashing.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/motion_quality.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/spatial_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/heatmap.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/contracts.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/trajectory_quality.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/validation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/trajectory_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/pipeline_evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/pipeline_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/zone_occupancy.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/spatial_evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/trajectory_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/motion_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/receipt.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/trajectory_segments.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/trajectory_filter.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/motion_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/speed.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/policy.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/pipeline_quality.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/pipeline_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/semantics.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/spatial_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/trajectory_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/zones.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/trajectory_resample.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/spatial_quality.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/spatial_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/motion_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/sprint.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/activity.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/types.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/distance.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/pipeline_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/pipeline_integrity.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/trajectory_evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/motion_evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/metrics.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/physical/__pycache__/eligibility.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/__pycache__/__main__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/__pycache__/_version.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/__pycache__/cli.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/pitch_feature_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/homography_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/contracts.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/validation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/projected_positions.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/features.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/homography_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/pitch_projection_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/pitch_projection.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/pitch_feature_adapter.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/receipt.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/homography_evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/pitch_projection_evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/policy.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/pitch_feature_postprocess.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/pitch_projection_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/homography_solve.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/homography_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/segments.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/pitch_feature_mapping.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/correspondence.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/pitch_template.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/pitch_projection_quality.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/homography_segments.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/types.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/pitch_feature_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/pitch_feature_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/pitch_projection_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/homography.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/pitch_feature_evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/coordinates.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/calibration/__pycache__/pitch_feature_preprocess.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/replay_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/contracts.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/attack_direction.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/replay_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/validation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/dedup.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/pipeline_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/metrics_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/receipt.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/policy.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/camera_position.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/pipeline_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/semantics.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/ledger_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/attack_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/types.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/ledger_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/eligibility.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/events/__pycache__/metrics_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/adapters/__pycache__/base.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/adapters/__pycache__/ultralytics_ball.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/adapters/__pycache__/ultralytics_common.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/adapters/__pycache__/ultralytics_person.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/adapters/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/human_detection.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/contracts.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/detection_pipeline.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/validation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/ball_evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/detection_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/tiling.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/candidate_merge.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/detection_pipeline_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/human_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/human_detector_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/transforms.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/policy.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/role_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/taxonomy.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/ball_detection.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/role_features.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/role_classification.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/ball_detector_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/role_evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/detection_fusion.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/detection_pipeline_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/detection_evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/role_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/ball_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/role_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/types.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/role_clustering.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/ball_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/perception/__pycache__/detection_quality.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/camera_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/broadcast_pipeline.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/shot_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/contracts.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/playability.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/validation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/camera_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/camera_features.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/shot_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/camera_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/shot_detection.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/camera_sampling.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/segment_fusion.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/shot_evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/camera_classification.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/types.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/shot_features.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/broadcast_evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/shot_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/broadcast/__pycache__/camera_evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/proximity_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/contracts.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/proximity_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/proximity.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/validation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/pipeline_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/possession_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/receipt.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/policy.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/possession.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/possession_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/pipeline_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/semantics.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/proximity_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/contact_candidates.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/possession_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/types.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/pipeline_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/interaction/__pycache__/eligibility.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/contracts/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/stage18_own_video/__pycache__/pipeline.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/stage18_own_video/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/final_perception_repair/__pycache__/pipeline.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/final_perception_repair/__pycache__/turkish_report.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/final_perception_repair/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/stage17r2_recovery/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/soccertrack_v2/__pycache__/target_selection.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/soccertrack_v2/__pycache__/loader.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/soccertrack_v2/__pycache__/formats.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/soccertrack_v2/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/soccertrack_v2/__pycache__/adapter.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/soccertrack_v2/__pycache__/reference_analysis.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/__pycache__/contracts.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/__pycache__/isolation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/__pycache__/cli_handlers.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/__pycache__/leakage.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/__pycache__/panorama_domain.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/__pycache__/portable_final_media.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/__pycache__/download_manifest.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/__pycache__/namespaces.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/stage17r1_jersey5/__pycache__/pipeline.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/stage17r1_jersey5/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/self_contained/__pycache__/runner.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/self_contained/__pycache__/scenario.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/self_contained/__pycache__/generator.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/self_contained/__pycache__/release.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/self_contained/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/self_contained/__pycache__/ground_truth.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/teamtrack/__pycache__/pilot_visual.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/teamtrack/__pycache__/target_selection.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/teamtrack/__pycache__/loader.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/teamtrack/__pycache__/mot_eval.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/teamtrack/__pycache__/pilot_runner.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/teamtrack/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/evaluation/__pycache__/bas_metrics.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/evaluation/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/evaluation/__pycache__/gsr_metrics.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/acceptance/evaluation/__pycache__/metric_taxonomy.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/video/__pycache__/contracts.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/video/__pycache__/time_mapping.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/video/__pycache__/validation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/video/__pycache__/frame_timeline.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/video/__pycache__/frame_timeline_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/video/__pycache__/fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/video/__pycache__/probe_parser.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/video/__pycache__/media_validation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/video/__pycache__/ffmpeg.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/video/__pycache__/ffprobe.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/video/__pycache__/normalization_validation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/video/__pycache__/frame_extraction.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/video/__pycache__/normalization.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/video/__pycache__/types.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/video/__pycache__/probe_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/video/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/video/__pycache__/normalization_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/contracts.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/human_tracking_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/validation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/bbox_rules.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/human_tracking_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/human_tracker.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/tracking_fusion.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/ball_association.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/human_association.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/tracking_pipeline_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/time_rules.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/ball_tracker.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/track_ids.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/ball_tracking_evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/human_tracking_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/lifecycle.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/human_tracking_evaluation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/tracking_pipeline.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/ball_tracking_service.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/tracking_quality.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/receipt.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/human_motion.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/policy.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/tracking_pipeline_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/ball_tracking_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/ball_tracking_fixtures.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/types.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/tracking/__pycache__/association_common.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/utils/__pycache__/archive_safety.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics/utils/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/duels/__pycache__/test_duels_contracts.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/duels/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/evidence/__pycache__/test_evidence_collector.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/archive/__pycache__/test_archive_workflow.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/archive/__pycache__/test_archive_workflow.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/archive/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/orchestration/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/orchestration/__pycache__/test_stage14_pipeline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/identity/__pycache__/test_appearance_reid_baseline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/identity/__pycache__/test_target_identity_pipeline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/identity/__pycache__/test_team_assignment_baseline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/identity/__pycache__/test_identity_contracts.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/identity/__pycache__/test_jersey_ocr_baseline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/security/__pycache__/test_check_secrets.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/security/__pycache__/test_check_secrets.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/security/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/passing/__pycache__/test_passing_contracts.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/registries/__pycache__/test_check_registries.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/registries/__pycache__/test_check_registries.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/registries/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/hardening/__pycache__/test_hardening.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/scripts/__pycache__/test_check_stage_cache.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/scripts/__pycache__/test_check_ci_workflow.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/scripts/__pycache__/test_check_project.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/scripts/__pycache__/test_check_runtime_foundation.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/scripts/__pycache__/test_check_data_contracts.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/pipeline/__pycache__/test_cache_corruption.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/pipeline/__pycache__/test_stage_interface.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/pipeline/__pycache__/test_stage_execution.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/pipeline/__pycache__/test_stage_types.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/pipeline/__pycache__/test_cache_publish.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/pipeline/__pycache__/test_artifact_refs.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/pipeline/__pycache__/test_cache_layout.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/pipeline/__pycache__/test_cache_keys.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/pipeline/__pycache__/test_stage_receipts.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/pipeline/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/pipeline/__pycache__/test_cache_read.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/pipeline/__pycache__/test_cache_concurrency.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/data/__pycache__/test_contract_security.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/data/__pycache__/test_table_parquet_migrations.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/data/__pycache__/test_schema_registry.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/data/__pycache__/test_schema_registry.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/data/__pycache__/test_table_parquet_migrations.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/data/__pycache__/test_contracts_extra.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/data/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/data/__pycache__/test_contracts_extra.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/data/__pycache__/test_contract_security.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/core/__pycache__/test_redaction.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/core/__pycache__/test_environment.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/core/__pycache__/test_records.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/core/__pycache__/test_run_id.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/core/__pycache__/test_config.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/core/__pycache__/test_hashing.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/core/__pycache__/test_environment.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/core/__pycache__/test_run_context.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/core/__pycache__/test_structured_logging.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/core/__pycache__/test_redaction.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/core/__pycache__/test_hashing.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/core/__pycache__/test_structured_logging.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/core/__pycache__/test_config.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/core/__pycache__/test_records.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/core/__pycache__/test_run_context.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/core/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/core/__pycache__/test_run_id.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/physical/__pycache__/test_physical_metric_pipeline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/physical/__pycache__/test_physical_metric_contracts.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/physical/__pycache__/test_target_trajectory_baseline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/physical/__pycache__/test_heatmap_activity_baseline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/physical/__pycache__/test_distance_speed_sprint_baseline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/calibration/__pycache__/test_homography_baseline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/calibration/__pycache__/test_calibration_contracts.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/calibration/__pycache__/test_pitch_projection_pipeline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/calibration/__pycache__/test_pitch_feature_baseline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/package/__pycache__/test_package_smoke.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/package/__pycache__/test_cli_contracts.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/package/__pycache__/test_cli_project_check.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/package/__pycache__/test_package_smoke.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/package/__pycache__/test_cli_contracts.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/package/__pycache__/test_cli_runtime_foundation.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/package/__pycache__/test_cli_runtime_foundation.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/package/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/events/__pycache__/test_events_stage13.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/events/__pycache__/test_events_contracts.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/events/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/perception/__pycache__/test_detection_bundle.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/perception/__pycache__/test_detection_contracts.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/perception/__pycache__/test_detection_taxonomy.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/perception/__pycache__/test_human_role_baseline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/perception/__pycache__/test_detection_pipeline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/perception/__pycache__/test_detection_semantics.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/perception/__pycache__/test_ball_detection_baseline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/perception/__pycache__/test_detection_transforms.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/perception/__pycache__/test_human_detection_baseline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/test_shot_service.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/test_broadcast_validation.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/test_playability.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/test_broadcast_bundle.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/test_broadcast_semantics.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/test_shot_detection.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/test_camera_service.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/test_shot_evaluation.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/test_camera_features.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/test_broadcast_pipeline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/test_segment_fusion.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/test_broadcast_contracts.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/test_broadcast_pipeline_cli.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/test_camera_classification.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/test_camera_evaluation.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/test_shot_features.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/test_broadcast_evaluation.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/test_camera_config.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/broadcast/__pycache__/test_camera_sampling.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/storage/__pycache__/test_check_storage.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/storage/__pycache__/__init__.cpython-310.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/storage/__pycache__/test_check_storage.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/interaction/__pycache__/test_possession_control_baseline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/interaction/__pycache__/test_human_ball_interaction_contracts.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/acceptance/__pycache__/test_leakage_hard_fail.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/acceptance/__pycache__/test_bas_gsr_eval_smoke.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/acceptance/__pycache__/test_stage17r2_referee_team_regression.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/acceptance/__pycache__/test_target_selection.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/acceptance/__pycache__/test_teamtrack_adapter.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/acceptance/__pycache__/test_portable_final_delivery.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/acceptance/__pycache__/test_stage17_jersey7_dual_delivery.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/acceptance/__pycache__/test_stage17r1_jersey5.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/acceptance/__pycache__/test_final_perception_repair.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/acceptance/__pycache__/test_stage16_r4_self_contained.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/video/__pycache__/test_frame_extraction.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/video/__pycache__/test_video_security.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/video/__pycache__/test_frame_timeline_service.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/video/__pycache__/test_probe_parser.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/video/__pycache__/test_normalization_planner.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/video/__pycache__/test_probe_service.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/video/__pycache__/test_video_contracts.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/video/__pycache__/test_video_types.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/video/__pycache__/test_time_mapping.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/video/__pycache__/test_video_validation.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/video/__pycache__/test_frame_timeline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/video/__pycache__/test_video_fixture_design.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/video/__pycache__/test_ffprobe_runner.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/video/__pycache__/test_normalization_service.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/video/__pycache__/test_ffmpeg_runner.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/tracking/__pycache__/test_tracking_pipeline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/tracking/__pycache__/test_human_tracking_baseline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/tracking/__pycache__/test_ball_tracking_baseline.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/tests/tracking/__pycache__/test_tracking_contracts.cpython-310-pytest-9.1.1.pyc",
+      "reason": "missing"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/src/football_analytics.egg-info",
+      "reason": "missing"
+    }
+  ],
+  "external_repos_removed": [],
+  "environments_removed": [],
+  "models_removed": [],
+  "duplicates_removed": [
+    {
+      "path": "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery/gt/contact_sheets_sample/b_sheet_04.jpg",
+      "bytes": 294683,
+      "classification": "DELETE_DUPLICATE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery/gt/contact_sheets_sample/b_sheet_05.jpg",
+      "bytes": 296246,
+      "classification": "DELETE_DUPLICATE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery/gt/contact_sheets_sample/b_sheet_02.jpg",
+      "bytes": 284595,
+      "classification": "DELETE_DUPLICATE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery/gt/contact_sheets_sample/b_sheet_03.jpg",
+      "bytes": 295141,
+      "classification": "DELETE_DUPLICATE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery/gt/contact_sheets_sample/b_sheet_07.jpg",
+      "bytes": 289380,
+      "classification": "DELETE_DUPLICATE"
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery/gt/contact_sheets_sample/b_sheet_06.jpg",
+      "bytes": 295887,
+      "classification": "DELETE_DUPLICATE"
+    }
+  ],
+  "empty_dirs_removed": [
+    "/home/fdoblak/workspace/own_video_analysis/models",
+    "/home/fdoblak/workspace/own_video_analysis/proxies",
+    "/home/fdoblak/workspace/own_video_analysis/staging",
+    "/home/fdoblak/workspace/own_video_analysis/review/jersey_crops",
+    "/home/fdoblak/workspace/own_video_analysis/review/jersey_enhanced",
+    "/home/fdoblak/workspace/own_video_analysis/evaluation"
+  ],
+  "source_video_hash_before": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160",
+  "source_video_hash_after": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160",
+  "reviewed_gt_hashes_before": {
+    "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery/gt/gt_human.json": "8f9fe937f84ad1ae83fd51402865589ddad9af7b8236154191d4d14ac5fcb2e3",
+    "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery/gt/gt_ball.json": "d8bdbc9077fa39f724c47003d836d20f773d918a05b371c0457737b75b98cd5a",
+    "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery/gt/gt_calibration.json": "0d5d84d6ef60b1723a6cb4db59684943f70bde7fbd2e7bb737675c5452fd6892"
+  },
+  "reviewed_gt_hashes_after": {
+    "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery/gt/gt_human.json": "8f9fe937f84ad1ae83fd51402865589ddad9af7b8236154191d4d14ac5fcb2e3",
+    "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery/gt/gt_ball.json": "d8bdbc9077fa39f724c47003d836d20f773d918a05b371c0457737b75b98cd5a",
+    "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery/gt/gt_calibration.json": "0d5d84d6ef60b1723a6cb4db59684943f70bde7fbd2e7bb737675c5452fd6892"
+  },
+  "data_loss": false,
+  "note": "External SoccerNet repos/envs preserved (locked/referenced). Only caches/temps/duplicates/desktop mirror cleared.",
+  "authoritative_baseline": "artifacts/evidence/reboot_00/AUTHORITATIVE_BASELINE.json",
+  "evidence_independence": "artifacts/evidence/reboot_00/EVIDENCE_INDEPENDENCE.json",
+  "tests_before": {
+    "pytest_passed": 1116,
+    "pytest_failed": 0,
+    "ruff": {
+      "rc": 0,
+      "sec": 0.1
+    },
+    "black": {
+      "rc": 1,
+      "sec": 0.7
+    }
+  },
+  "tests_after": {
+    "pytest_passed": 1116,
+    "pytest_failed_note": "1 was windows mirror; fixed",
+    "portable_ok": true,
+    "ruff": 0,
+    "black": 0,
+    "storage": 0,
+    "secrets_rc": 0,
+    "project_rc": 0,
+    "registries_rc": 3,
+    "registries_note": "pre-existing missing SoccerTrack/TeamTrack dataset paths"
+  },
+  "git_status_note": "dirty until R0 commit"
+}

@@ -56,9 +56,7 @@ def test_bas_label_normalization(tmp_path: Path) -> None:
 
 def test_gsr_stream_skips_pitch(tmp_path: Path) -> None:
     root = _layout_mini(tmp_path)
-    obs = list(
-        iter_gsr_player_observations(root / "gsr" / "999001" / "999001_1st.json", half=1)
-    )
+    obs = list(iter_gsr_player_observations(root / "gsr" / "999001" / "999001_1st.json", half=1))
     assert all(o.role in {"player", "goalkeeper"} for o in obs)
     assert any(o.player_id == "1001" for o in obs)
 

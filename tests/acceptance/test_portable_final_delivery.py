@@ -47,4 +47,6 @@ def test_windows_mirror_not_old_final() -> None:
         pytest.skip("Windows mirror unavailable")
     names = {p.name for p in WIN.iterdir()}
     assert "futbolcu_5_video_analiz.mp4" not in names
-    assert "GATE_STATUS.json" in names or "STATUS.txt" in names
+    assert (
+        "GATE_STATUS.json" in names or "STATUS.txt" in names or "AUTHORITATIVE_STATUS.txt" in names
+    )

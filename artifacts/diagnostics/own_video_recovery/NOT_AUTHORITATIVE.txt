@@ -1,0 +1,3 @@
+These diagnostics are historical Stage 17-R2 outputs.
+Authoritative current status: artifacts/evidence/reboot_00/AUTHORITATIVE_BASELINE.json
+Do not treat human P/R/F1=1.0 or IDF1 proxy as acceptance-proof.

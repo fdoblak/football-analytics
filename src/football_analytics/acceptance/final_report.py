@@ -8,8 +8,7 @@ from pathlib import Path
 from typing import Any
 
 ATTRIBUTION_FOOTER = (
-    "Source: SoccerTrack v2 — CC BY 4.0\n"
-    "Project-generated analysis; not official Opta data."
+    "Source: SoccerTrack v2 — CC BY 4.0\n" "Project-generated analysis; not official Opta data."
 )
 
 
