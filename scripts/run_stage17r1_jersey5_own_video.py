@@ -56,7 +56,7 @@ from football_analytics.perception.adapters.ultralytics_person import (  # noqa:
 YOLO = Path("/home/fdoblak/football_data/model_archive/yolo11n.pt")
 YOLO_SHA = "0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1"
 SRC = Path("/mnt/c/Users/furka/Downloads/örnek_video_FA.mp4")
-VID = Path("/home/fdoblak/football_data/videos/own_video_analysis/source_readonly_copy.mp4")
+VID = Path("/home/fdoblak/football_data/videos/raw_matches/own_video_97b298e4/original.mp4")
 EXPECTED_SHA = "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160"
 WORK = Path("/home/fdoblak/workspace/own_video_analysis")
 FINAL = REPO / "artifacts" / "final_delivery"

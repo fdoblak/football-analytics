@@ -32,7 +32,7 @@ from football_analytics.perception.adapters.ultralytics_person import Ultralytic
 REPO = Path("/home/fdoblak/projects/football-analytics")
 DIAG = REPO / "artifacts" / "diagnostics" / "own_video_recovery"
 WS = Path("/home/fdoblak/workspace/own_video_analysis")
-VID = Path("/home/fdoblak/football_data/videos/own_video_analysis/source_readonly_copy.mp4")
+VID = Path("/home/fdoblak/football_data/videos/raw_matches/own_video_97b298e4/original.mp4")
 YOLO = Path("/home/fdoblak/football_data/model_archive/yolo11n.pt")
 ANCHORS = WS / "target" / "jersey5_visual_anchors.json"
 TRACKS = WS / "runs" / "tracks_full_17r1.json"

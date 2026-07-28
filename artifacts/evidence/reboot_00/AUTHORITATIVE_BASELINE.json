@@ -1,11 +1,14 @@
 {
   "schema": "reboot_00_authoritative_baseline_v2",
-  "stage": "R0-F1",
-  "timestamp_utc": "2026-07-28T11:27:55.602843+00:00",
+  "stage": "R0-F2",
+  "timestamp_utc": "2026-07-28T19:34:35.294856+00:00",
   "start_head_r0_f1": "ec2325bee6959a0f96371b63944fa161da5ea6ab",
   "repo_head_precommit": "ec2325bee6959a0f96371b63944fa161da5ea6ab",
   "source_video": {
-    "path": "/mnt/c/Users/furka/Downloads/\u00f6rnek_video_FA.mp4",
+    "source_id": "own_video_97b298e4",
+    "canonical_path": "/home/fdoblak/football_data/videos/raw_matches/own_video_97b298e4/original.mp4",
+    "original_reported_path": "/mnt/c/Users/furka/Downloads/\u00f6rnek_video_FA.mp4",
+    "original_path_status": "missing",
     "sha256": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160",
     "immutable": true,
     "unchanged": true
@@ -240,7 +243,8 @@
     "football_data": "/home/fdoblak/football_data",
     "yolo11n": "/home/fdoblak/football_data/model_archive/yolo11n.pt",
     "sv_kp": "/home/fdoblak/models/soccernet/sn-banner/SV_kp.pth",
-    "sv_lines": "/home/fdoblak/models/soccernet/sn-banner/SV_lines.pth"
+    "sv_lines": "/home/fdoblak/models/soccernet/sn-banner/SV_lines.pth",
+    "canonical_own_video": "/home/fdoblak/football_data/videos/raw_matches/own_video_97b298e4/original.mp4"
   },
   "protected_resources": [
     "ai-dev conda env",
@@ -265,5 +269,17 @@
     "sn_nvs",
     "sn_spotting",
     "sn_teamspotting"
-  ]
+  ],
+  "r0_f2": {
+    "canonical_source": "/home/fdoblak/football_data/videos/raw_matches/own_video_97b298e4/original.mp4",
+    "orphan_envs_removed": [
+      "sn-active-spotting",
+      "sn-echoes",
+      "sn-mvfoul",
+      "sn-pts-baseline",
+      "sn-teamspotting"
+    ],
+    "bytes_freed_envs": 4886771451,
+    "working_copy_deleted": true
+  }
 }

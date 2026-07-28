@@ -1,0 +1,213 @@
+{
+  "schema": "r0_f2_environment_inventory_v1",
+  "written_at_utc": "2026-07-28T19:34:35.294856+00:00",
+  "environments": [
+    {
+      "name": "ai-dev",
+      "path": "/home/fdoblak/miniconda3/envs/ai-dev",
+      "size_bytes": 8850476526,
+      "python_version": "3.10.20",
+      "related_removed_repo": null,
+      "active_process_count": 0,
+      "active_process_sample": [],
+      "ref_files": [
+        "src/football_analytics/pipeline/project_check.py",
+        "src/football_analytics/calibration/pitch_feature_evaluation.py",
+        "tests/package/test_package_smoke.py",
+        "scripts/check_storage.py",
+        "scripts/audit_current_state.py",
+        "scripts/soccernet_setup/run_install_orchestrator.py",
+        "configs/external/status_20260722.json",
+        "configs/environment/current_ai_dev.json"
+      ],
+      "n_refs": 8,
+      "recreate": "conda create -n ai-dev ... from scripts/soccernet_setup if needed; lock not_installed_reclonable for related repo",
+      "final_classification": "KEEP_ACTIVE",
+      "exists_after_r0_f2": true
+    },
+    {
+      "name": "sn-active-spotting",
+      "path": "/home/fdoblak/miniconda3/envs/sn-active-spotting",
+      "size_bytes": 620839389,
+      "python_version": "3.10.20",
+      "related_removed_repo": "active_spotting",
+      "active_process_count": 0,
+      "active_process_sample": [],
+      "ref_files": [
+        "configs/external/status_20260722.json"
+      ],
+      "n_refs": 1,
+      "recreate": "conda create -n sn-active-spotting ... from scripts/soccernet_setup if needed; lock not_installed_reclonable for related repo",
+      "final_classification": "ORPHAN_REMOVABLE",
+      "exists_after_r0_f2": false,
+      "removal_method": "conda env remove -n <name> -y",
+      "removed": true
+    },
+    {
+      "name": "sn-calibration",
+      "path": "/home/fdoblak/miniconda3/envs/sn-calibration",
+      "size_bytes": 799180885,
+      "python_version": "3.10.20",
+      "related_removed_repo": null,
+      "active_process_count": 0,
+      "active_process_sample": [],
+      "ref_files": [
+        "src/football_analytics/calibration/evaluation.py",
+        "scripts/bootstrap_external_repos.sh",
+        "scripts/soccernet_setup/run_install_orchestrator.py",
+        "configs/external/status_20260722.json"
+      ],
+      "n_refs": 4,
+      "recreate": "conda create -n sn-calibration ... from scripts/soccernet_setup if needed; lock not_installed_reclonable for related repo",
+      "final_classification": "KEEP_ACTIVE",
+      "exists_after_r0_f2": true
+    },
+    {
+      "name": "sn-echoes",
+      "path": "/home/fdoblak/miniconda3/envs/sn-echoes",
+      "size_bytes": 141926021,
+      "python_version": "3.10.20",
+      "related_removed_repo": "sn_echoes",
+      "active_process_count": 0,
+      "active_process_sample": [],
+      "ref_files": [
+        "scripts/bootstrap_external_repos.sh",
+        "scripts/soccernet_setup/install_repo.sh",
+        "scripts/soccernet_setup/run_install_orchestrator.py",
+        "configs/external/status_20260722.json"
+      ],
+      "n_refs": 4,
+      "recreate": "conda create -n sn-echoes ... from scripts/soccernet_setup if needed; lock not_installed_reclonable for related repo",
+      "final_classification": "ORPHAN_REMOVABLE",
+      "exists_after_r0_f2": false,
+      "removal_method": "conda env remove -n <name> -y",
+      "removed": true
+    },
+    {
+      "name": "sn-gamestate",
+      "path": "/home/fdoblak/miniconda3/envs/sn-gamestate",
+      "size_bytes": 137692533,
+      "python_version": "3.9.23",
+      "related_removed_repo": null,
+      "active_process_count": 0,
+      "active_process_sample": [],
+      "ref_files": [
+        "scripts/bootstrap_external_repos.sh",
+        "scripts/soccernet_setup/run_install_orchestrator.py",
+        "configs/external/status_20260722.json"
+      ],
+      "n_refs": 3,
+      "recreate": "conda create -n sn-gamestate ... from scripts/soccernet_setup if needed; lock not_installed_reclonable for related repo",
+      "final_classification": "KEEP_ACTIVE",
+      "exists_after_r0_f2": true
+    },
+    {
+      "name": "sn-mvfoul",
+      "path": "/home/fdoblak/miniconda3/envs/sn-mvfoul",
+      "size_bytes": 1259438440,
+      "python_version": "3.9.23",
+      "related_removed_repo": "sn_mvfoul",
+      "active_process_count": 0,
+      "active_process_sample": [],
+      "ref_files": [
+        "scripts/bootstrap_external_repos.sh",
+        "configs/external/status_20260722.json"
+      ],
+      "n_refs": 2,
+      "recreate": "conda create -n sn-mvfoul ... from scripts/soccernet_setup if needed; lock not_installed_reclonable for related repo",
+      "final_classification": "ORPHAN_REMOVABLE",
+      "exists_after_r0_f2": false,
+      "removal_method": "conda env remove -n <name> -y",
+      "removed": true
+    },
+    {
+      "name": "sn-pts-baseline",
+      "path": "/home/fdoblak/miniconda3/envs/sn-pts-baseline",
+      "size_bytes": 1186527742,
+      "python_version": "3.10.20",
+      "related_removed_repo": "pts_baseline",
+      "active_process_count": 0,
+      "active_process_sample": [],
+      "ref_files": [
+        "configs/external/status_20260722.json"
+      ],
+      "n_refs": 1,
+      "recreate": "conda create -n sn-pts-baseline ... from scripts/soccernet_setup if needed; lock not_installed_reclonable for related repo",
+      "final_classification": "ORPHAN_REMOVABLE",
+      "exists_after_r0_f2": false,
+      "removal_method": "conda env remove -n <name> -y",
+      "removed": true
+    },
+    {
+      "name": "sn-reid",
+      "path": "/home/fdoblak/miniconda3/envs/sn-reid",
+      "size_bytes": 1717943292,
+      "python_version": "3.10.20",
+      "related_removed_repo": null,
+      "active_process_count": 0,
+      "active_process_sample": [],
+      "ref_files": [
+        "src/football_analytics/identity/appearance_reid_evaluation.py",
+        "src/football_analytics/identity/evaluation.py",
+        "scripts/check_appearance_reid_baseline.py",
+        "scripts/bootstrap_external_repos.sh",
+        "configs/external/status_20260722.json",
+        "configs/identity/appearance_reid_baseline.yaml"
+      ],
+      "n_refs": 6,
+      "recreate": "conda create -n sn-reid ... from scripts/soccernet_setup if needed; lock not_installed_reclonable for related repo",
+      "final_classification": "KEEP_ACTIVE",
+      "exists_after_r0_f2": true
+    },
+    {
+      "name": "sn-teamspotting",
+      "path": "/home/fdoblak/miniconda3/envs/sn-teamspotting",
+      "size_bytes": 1678039859,
+      "python_version": "3.10.20",
+      "related_removed_repo": "sn_teamspotting",
+      "active_process_count": 0,
+      "active_process_sample": [],
+      "ref_files": [
+        "scripts/bootstrap_external_repos.sh",
+        "scripts/soccernet_setup/run_install_orchestrator.py",
+        "configs/external/status_20260722.json"
+      ],
+      "n_refs": 3,
+      "recreate": "conda create -n sn-teamspotting ... from scripts/soccernet_setup if needed; lock not_installed_reclonable for related repo",
+      "final_classification": "ORPHAN_REMOVABLE",
+      "exists_after_r0_f2": false,
+      "removal_method": "conda env remove -n <name> -y",
+      "removed": true
+    },
+    {
+      "name": "sn-trackeval",
+      "path": "/home/fdoblak/miniconda3/envs/sn-trackeval",
+      "size_bytes": 688808347,
+      "python_version": "3.10.20",
+      "related_removed_repo": null,
+      "active_process_count": 0,
+      "active_process_sample": [],
+      "ref_files": [
+        "src/football_analytics/tracking/ball_tracking_evaluation.py",
+        "src/football_analytics/tracking/human_tracking_evaluation.py",
+        "src/football_analytics/tracking/evaluation.py",
+        "scripts/bootstrap_external_repos.sh",
+        "scripts/soccernet_setup/install_repo.sh",
+        "scripts/soccernet_setup/run_install_orchestrator.py",
+        "configs/external/status_20260722.json",
+        "configs/tracking/tracking_contract_policy.yaml"
+      ],
+      "n_refs": 8,
+      "recreate": "conda create -n sn-trackeval ... from scripts/soccernet_setup if needed; lock not_installed_reclonable for related repo",
+      "final_classification": "KEEP_ACTIVE",
+      "exists_after_r0_f2": true
+    }
+  ],
+  "post_cleanup_conda_envs": [
+    "sn-reid",
+    "ai-dev",
+    "sn-trackeval",
+    "sn-calibration",
+    "sn-gamestate"
+  ]
+}

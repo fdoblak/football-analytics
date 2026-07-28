@@ -1,0 +1,69 @@
+{
+  "schema": "r0_f2_cleanup_receipt_v1",
+  "written_at_utc": "2026-07-28T19:34:35.294856+00:00",
+  "source_hash_before": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160",
+  "source_hash_after": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160",
+  "data_loss": false,
+  "preserved": [
+    {
+      "path": "/home/fdoblak/football_data/videos/raw_matches/own_video_97b298e4/original.mp4",
+      "class": "canonical_immutable",
+      "sha256": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160"
+    }
+  ],
+  "deleted": [
+    {
+      "path": "/home/fdoblak/football_data/videos/own_video_analysis/source_readonly_copy.mp4",
+      "class": "project_generated_working_copy",
+      "size_bytes": 18842737,
+      "sha256": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160",
+      "reason": "exact duplicate after canonical verified"
+    }
+  ],
+  "skipped_user_owned": [
+    {
+      "path": "/mnt/c/Users/furka/Downloads/\u00f6rnek_video_FA.mp4",
+      "status": "already_missing"
+    },
+    {
+      "path": "/mnt/c/Users/furka/Desktop/Football Analytics Final",
+      "status": "no_matching_video_present"
+    }
+  ],
+  "orphan_environments_removed": [
+    {
+      "name": "sn-active-spotting",
+      "size_bytes": 620839389,
+      "method": "conda env remove -y"
+    },
+    {
+      "name": "sn-echoes",
+      "size_bytes": 141926021,
+      "method": "conda env remove -y"
+    },
+    {
+      "name": "sn-mvfoul",
+      "size_bytes": 1259438440,
+      "method": "conda env remove -y"
+    },
+    {
+      "name": "sn-pts-baseline",
+      "size_bytes": 1186527742,
+      "method": "conda env remove -y"
+    },
+    {
+      "name": "sn-teamspotting",
+      "size_bytes": 1678039859,
+      "method": "conda env remove -y"
+    }
+  ],
+  "orphan_environments_bytes_freed": 4886771451,
+  "kept_environments": [
+    "ai-dev",
+    "sn-calibration",
+    "sn-gamestate",
+    "sn-reid",
+    "sn-trackeval"
+  ],
+  "downloads_path_not_recreated": true
+}

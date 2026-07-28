@@ -1,0 +1,40 @@
+schema_version: 1
+source_id: own_video_97b298e4
+canonical_absolute_path: /home/fdoblak/football_data/videos/raw_matches/own_video_97b298e4/original.mp4
+original_reported_path: /mnt/c/Users/furka/Downloads/örnek_video_FA.mp4
+original_path_status: missing
+sha256: 97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160
+size_bytes: 18842737
+duration_sec: 34.112
+width: 1336
+height: 744
+fps_rational: 30/1
+frame_count: 1023
+codec: h264
+pixel_format: yuv420p
+imported_at_utc: '2026-07-28T19:32:40.586119+00:00'
+immutable: true
+read_only_policy: chmod_0444_file_parent_writable
+overwrite_forbidden: true
+license_ownership: user_provided
+git_policy: excluded
+runtime_manifest: /home/fdoblak/football_data/videos/raw_matches/own_video_97b298e4/source_manifest.json
+reviewed_gt_linkage:
+  gt_root: artifacts/diagnostics/own_video_recovery/gt
+  human:
+    path: artifacts/diagnostics/own_video_recovery/gt/gt_human.json
+    n_reviewed: 190
+  ball:
+    path: artifacts/diagnostics/own_video_recovery/gt/gt_ball.json
+    n_reviewed: 300
+  calibration:
+    path: artifacts/diagnostics/own_video_recovery/gt/gt_calibration.json
+    n_reviewed: 34
+  linkage_file: artifacts/diagnostics/own_video_recovery/gt/SOURCE_LINKAGE.json
+derived_output_roots:
+  workspace: /home/fdoblak/workspace/own_video_analysis
+  normalized: /home/fdoblak/football_data/videos/normalized
+  results: /home/fdoblak/football_data/results
+  diagnostics: artifacts/diagnostics/own_video_recovery
+notes: R0-F2 canonical immutable own-video source. Do not overwrite. Separate from
+  normalized/output paths.

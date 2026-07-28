@@ -1,0 +1,53 @@
+{
+  "schema": "r0_f2_source_video_inventory_v1",
+  "written_at_utc": "2026-07-28T19:34:35.294856+00:00",
+  "expected_sha256": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160",
+  "scan": {
+    "expected_sha256": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160",
+    "scanned_at_utc": "2026-07-28T19:29:44.867356+00:00",
+    "roots": [
+      "/home/fdoblak/football_data",
+      "/home/fdoblak/workspace/own_video_analysis",
+      "/home/fdoblak/workspace",
+      "/mnt/c/Users/furka/Downloads",
+      "/mnt/c/Users/furka/Desktop/Football Analytics Final"
+    ],
+    "n_candidates_hashed": 1,
+    "n_exact_matches": 1,
+    "matches": [
+      {
+        "path": "/home/fdoblak/football_data/videos/own_video_analysis/source_readonly_copy.mp4",
+        "resolved": "/home/fdoblak/football_data/videos/own_video_analysis/source_readonly_copy.mp4",
+        "is_symlink": false,
+        "symlink_target": null,
+        "is_regular_file": true,
+        "size_bytes": 18842737,
+        "sha256": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160",
+        "mode": "0o755",
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_utc": "2026-07-25T11:35:09.988932+00:00",
+        "exact_sha_match": true
+      }
+    ],
+    "non_matching_sample": []
+  },
+  "all_records": [
+    {
+      "path": "/home/fdoblak/football_data/videos/own_video_analysis/source_readonly_copy.mp4",
+      "resolved": "/home/fdoblak/football_data/videos/own_video_analysis/source_readonly_copy.mp4",
+      "is_symlink": false,
+      "symlink_target": null,
+      "is_regular_file": true,
+      "size_bytes": 18842737,
+      "sha256": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160",
+      "mode": "0o755",
+      "uid": 1000,
+      "gid": 1000,
+      "mtime_utc": "2026-07-25T11:35:09.988932+00:00",
+      "exact_sha_match": true
+    }
+  ],
+  "canonical_path": "/home/fdoblak/football_data/videos/raw_matches/own_video_97b298e4/original.mp4",
+  "canonical_sha256_after": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160"
+}
