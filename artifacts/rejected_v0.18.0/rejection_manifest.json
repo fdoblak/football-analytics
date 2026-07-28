@@ -1,7 +1,7 @@
 {
   "schema": "rejected_v0.18.0_manifest_v1",
-  "reclassified_gate": "NO-GO — OWN-VIDEO PERCEPTION NOT VALIDATED",
-  "previous_claimed_gate": "PASS_WITH_FINDINGS — JERSEY 5 OWN-VIDEO CLIP ANALYSIS COMPLETE; FULL-MATCH ACCURACY NOT VALIDATED",
+  "reclassified_gate": "NO-GO \u2014 OWN-VIDEO PERCEPTION NOT VALIDATED",
+  "previous_claimed_gate": "PASS_WITH_FINDINGS \u2014 JERSEY 5 OWN-VIDEO CLIP ANALYSIS COMPLETE; FULL-MATCH ACCURACY NOT VALIDATED",
   "tag_left_unmoved": "single-player-own-video-v0.18.0",
   "commit": "84fe5b4faa7bec9896488be1066f743dab9b5e1d",
   "verified_findings": {
@@ -11,7 +11,7 @@
     "fragmentation_tracks_per_s": 1.965,
     "id_switch_proxy": 37,
     "team_flips": 102,
-    "ball_prf": "ÖLÇÜLEMEDİ",
+    "ball_prf": "\u00d6L\u00c7\u00dcLEMED\u0130",
     "valid_calibration_segments": 0,
     "target_confirmed_frame_ratio_approx": 0.267,
     "pixel_only_metrics": true,
@@ -39,5 +39,7 @@
   },
   "written_at_utc": "2026-07-25T15:06:42.280589+00:00",
   "mp4_not_duplicated_in_archive": true,
-  "mp4_available_in_git_history_path": "artifacts/final_delivery/futbolcu_5_video_analiz.mp4@84fe5b4"
+  "mp4_available_in_git_history_path": "artifacts/final_delivery/futbolcu_5_video_analiz.mp4@84fe5b4",
+  "archive_slim_note": "R0-F1 removed duplicate customer PDF/PNG/JSON/HTML from active tree; digests remain in checksums.sha256; recover from tag single-player-own-video-v0.18.0 @ 84fe5b4.",
+  "archive_slim_evidence": "artifacts/evidence/reboot_00/REJECTED_ARCHIVE_SLIM.json"
 }

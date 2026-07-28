@@ -1,0 +1,21 @@
+{
+  "schema": "r0_f1_rejected_archive_slim_v1",
+  "written_at_utc": "2026-07-28T11:21:42.655098+00:00",
+  "removed_names": [
+    "FUTBOLCU_5_ANALIZ_RAPORU_TR.json",
+    "FUTBOLCU_5_ANALIZ_RAPORU_TR.pdf",
+    "OPEN_RESULTS.html",
+    "futbolcu_5_analiz_ozeti.png"
+  ],
+  "removed_size_bytes_total": 120681,
+  "digest_ref": "artifacts/rejected_v0.18.0/checksums.sha256",
+  "recover": "git show 84fe5b4:artifacts/final_delivery/<name>",
+  "retained": [
+    "README.md",
+    "checksums.sha256",
+    "cleanup_manifest.json",
+    "evidence_manifest.json",
+    "rejection_manifest.json"
+  ],
+  "note": "Duplicate customer PDF/PNG/JSON/HTML removed from active tree; originals remain at tag single-player-own-video-v0.18.0 @ 84fe5b4 and checksums preserved in this manifest."
+}

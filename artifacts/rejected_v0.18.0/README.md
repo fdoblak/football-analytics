@@ -1,9 +1,15 @@
-# Forma 5 — Own Video Teslimi
+# Rejected v0.18.0 archive (slim)
 
-34 SANİYELİK VİDEO KLİBİ ANALİZİ
+Customer delivery at tag `single-player-own-video-v0.18.0` (`84fe5b4`) was rejected.
 
-- Gate: `PASS_WITH_FINDINGS — JERSEY 5 OWN-VIDEO CLIP ANALYSIS COMPLETE; FULL-MATCH ACCURACY NOT VALIDATED`
-- Hedef: Forma 5 (Forma 7 iptal)
-- Kaynak videosu Git'e alınmaz ve silinmez
+This directory keeps only the rejection record:
 
-Dosyalar: PDF, JSON, PNG, MP4, HTML, manifestler.
+- `rejection_manifest.json` — reasons, tag/commit, original SHA-256s
+- `checksums.sha256` — original artifact digests
+- `evidence_manifest.json` / `cleanup_manifest.json` — small supporting manifests
+
+Duplicate PDF/PNG/JSON/HTML copies were removed from the active tree in R0-F1; recover from git history if needed:
+
+`git show 84fe5b4:artifacts/final_delivery/<name>`
+
+Source video and reviewed GT are untouched.

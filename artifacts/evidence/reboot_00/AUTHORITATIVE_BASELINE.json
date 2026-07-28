@@ -1,26 +1,231 @@
 {
-  "schema": "reboot_00_authoritative_baseline_v1",
-  "timestamp_utc": "2026-07-28T11:12:41.459552+00:00",
-  "repo_head": "4213fc21fe40e5c6e5ce84f1aafbea82e5def891",
-  "repo_head_note": "R0 commit on main after cleanup",
+  "schema": "reboot_00_authoritative_baseline_v2",
+  "stage": "R0-F1",
+  "timestamp_utc": "2026-07-28T11:27:55.602843+00:00",
+  "start_head_r0_f1": "ec2325bee6959a0f96371b63944fa161da5ea6ab",
+  "repo_head_precommit": "ec2325bee6959a0f96371b63944fa161da5ea6ab",
   "source_video": {
     "path": "/mnt/c/Users/furka/Downloads/\u00f6rnek_video_FA.mp4",
     "sha256": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160",
-    "immutable": true
+    "immutable": true,
+    "unchanged": true
+  },
+  "reviewed_gt": {
+    "human": 190,
+    "ball": 300,
+    "calibration": 34,
+    "unchanged": true,
+    "checksums": {
+      "artifacts/diagnostics/own_video_recovery/gt/gt_human.json": "8f9fe937f84ad1ae83fd51402865589ddad9af7b8236154191d4d14ac5fcb2e3",
+      "artifacts/diagnostics/own_video_recovery/gt/gt_ball.json": "d8bdbc9077fa39f724c47003d836d20f773d918a05b371c0457737b75b98cd5a",
+      "artifacts/diagnostics/own_video_recovery/gt/gt_calibration.json": "0d5d84d6ef60b1723a6cb4db59684943f70bde7fbd2e7bb737675c5452fd6892"
+    }
   },
   "current_gate": "NO-GO \u2014 OWN-VIDEO PERCEPTION ACCEPTANCE FAILED",
-  "current_blockers": [
-    "calibration_valid_coverage",
-    "human_detection_independent_gt_missing",
-    "target_official_idf1_missing",
-    "holdout_has_no_jersey5_visibility"
+  "metric_honesty": {
+    "human_detector_accuracy": "NOT_INDEPENDENTLY_EVALUATED",
+    "human_f1_approx_1_0": "CIRCULAR_PROPOSAL_DERIVED_GT",
+    "role_macro_f1_1_0": "OBSERVED_CLASS_ONLY",
+    "role_staff_holdout": false,
+    "target_idf1": "PROXY_NOT_TRACKEVAL",
+    "target_locked_holdout_jersey5_visible_frames": 0,
+    "ball_evaluation": {
+      "status": "LIMITED",
+      "holdout_tp": 31,
+      "holdout_fp": 2,
+      "holdout_fn": 0,
+      "n_ambiguous_excluded": 5,
+      "n_visible_without_localisation_gt_excluded": 12,
+      "f1_reported_not_acceptance": 0.9688
+    },
+    "calibration": {
+      "status": "FAIL",
+      "valid_playable_frame_coverage": 0.0588,
+      "coverage_ge_0_70": false,
+      "reviewed_frames": 34
+    }
+  },
+  "circular_or_proxy_metrics_not_pass": [
+    {
+      "name": "human_det_f1",
+      "label": "CIRCULAR_PROPOSAL_DERIVED_GT"
+    },
+    {
+      "name": "role_macro_f1_1_0",
+      "label": "OBSERVED_CLASS_ONLY"
+    },
+    {
+      "name": "target_idf1_proxy",
+      "label": "PROXY_NOT_TRACKEVAL"
+    },
+    {
+      "name": "target_coverage_0_93",
+      "label": "PROXY_IDENTITY_WINDOWS_NOT_HOLDOUT"
+    },
+    {
+      "name": "calib_median_reproj_low",
+      "label": "NON_GENERALIZABLE_2_OF_34"
+    }
   ],
+  "active_blockers": [
+    {
+      "id": "independent_human_gt",
+      "severity": "Human detector accuracy not independently evaluated; reviewed human boxes are proposal-derived (auto_visually_corrected).",
+      "blocks_acceptance": true
+    },
+    {
+      "id": "official_target_tracking",
+      "severity": "Target IDF1 is frame-set proxy, not TrackEval; locked holdout 22-34s has jersey5_visible_frames=0.",
+      "blocks_acceptance": true
+    },
+    {
+      "id": "calibration_coverage",
+      "severity": "Calibration valid playable frame coverage 0.0588 < 0.70.",
+      "blocks_acceptance": true
+    },
+    {
+      "id": "ball_evaluation_limited",
+      "severity": "Ball metrics limited by exclusions (ambiguous=5, visible_without_localisation_gt=12); not sole blocker but not full acceptance.",
+      "blocks_acceptance": false
+    }
+  ],
+  "r1_purpose": "A\u015eAMA R1 \u2014 Ba\u011f\u0131ms\u0131z Ground Truth ve \u0130nsan Alg\u0131lama Kabul\u00fc",
+  "r1_started": false,
+  "registry_lifecycle": {
+    "soccertrack_v2_single_match_acceptance": "historical_validation_source",
+    "teamtrack_soccer_side_pilot": "historical_validation_source",
+    "note": "Local dataset paths not installed; not required for own-video recovery; no placeholders created."
+  },
+  "external_usage_summary": {
+    "UNUSED_REMOVABLE": 10,
+    "VALIDATION_REQUIRED": 11,
+    "NEXT_STAGE_REQUIRED": 2,
+    "ACTIVE_REQUIRED": 1
+  },
+  "unused_repos_quarantined": [
+    {
+      "repo_id": "active_spotting",
+      "original_path": "/home/fdoblak/projects/soccernet/ActiveSpotting",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/ActiveSpotting",
+      "remote": "https://github.com/SoccerNet/ActiveSpotting.git",
+      "head": "33a81cb834978ee474ecec0c5a76b6f3f99b4bf4",
+      "size_bytes": 496408,
+      "dirty": false
+    },
+    {
+      "repo_id": "pts_baseline",
+      "original_path": "/home/fdoblak/projects/soccernet/PTS-baseline",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/PTS-baseline",
+      "remote": "https://github.com/SoccerNet/PTS-baseline.git",
+      "head": "af2ea8234e0c887758ef674071da2a17e2bc6c61",
+      "size_bytes": 23913803,
+      "dirty": false
+    },
+    {
+      "repo_id": "sn_caption",
+      "original_path": "/home/fdoblak/projects/soccernet/sn-caption",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-caption",
+      "remote": "https://github.com/SoccerNet/sn-caption.git",
+      "head": "c05973d4f00853e208d54965f4d6fa47364b8d66",
+      "size_bytes": 829409,
+      "dirty": false
+    },
+    {
+      "repo_id": "sn_depth",
+      "original_path": "/home/fdoblak/projects/soccernet/sn-depth",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-depth",
+      "remote": "https://github.com/SoccerNet/sn-depth.git",
+      "head": "9f6636fafb11447a5bada765e197928ee9efc467",
+      "size_bytes": 20006376,
+      "dirty": false
+    },
+    {
+      "repo_id": "sn_echoes",
+      "original_path": "/home/fdoblak/projects/soccernet/sn-echoes",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-echoes",
+      "remote": "https://github.com/SoccerNet/sn-echoes.git",
+      "head": "7105a85b7a8c1c000a31a30d0c29c388105c3de5",
+      "size_bytes": 606654889,
+      "dirty": false
+    },
+    {
+      "repo_id": "sn_grounding",
+      "original_path": "/home/fdoblak/projects/soccernet/sn-grounding",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-grounding",
+      "remote": "https://github.com/SoccerNet/sn-grounding.git",
+      "head": "910bf859ac6d7aff2b80a6d66155956254f24c6b",
+      "size_bytes": 39644394,
+      "dirty": false
+    },
+    {
+      "repo_id": "sn_mvfoul",
+      "original_path": "/home/fdoblak/projects/soccernet/sn-mvfoul",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-mvfoul",
+      "remote": "https://github.com/SoccerNet/sn-mvfoul.git",
+      "head": "502fb44a76c254e332394f095d54abc830131a44",
+      "size_bytes": 69400638,
+      "dirty": false
+    },
+    {
+      "repo_id": "sn_nvs",
+      "original_path": "/home/fdoblak/projects/soccernet/sn-nvs",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-nvs",
+      "remote": "https://github.com/SoccerNet/sn-nvs.git",
+      "head": "1655ab19b3bd78f624a96d0f0c27ec2c9f550f61",
+      "size_bytes": 401361199,
+      "dirty": false
+    },
+    {
+      "repo_id": "sn_spotting",
+      "original_path": "/home/fdoblak/projects/soccernet/sn-spotting",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-spotting",
+      "remote": "https://github.com/SoccerNet/sn-spotting.git",
+      "head": "9842826f94e1419580a9d17219c11aca7225f7ce",
+      "size_bytes": 580596009,
+      "dirty": false
+    },
+    {
+      "repo_id": "sn_teamspotting",
+      "original_path": "/home/fdoblak/projects/soccernet/sn-teamspotting",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-teamspotting",
+      "remote": "https://github.com/SoccerNet/sn-teamspotting.git",
+      "head": "091fed2fc35c33f7489f3596958a2fe385e37d65",
+      "size_bytes": 4708159,
+      "dirty": false
+    }
+  ],
+  "protected_external_kept": [
+    "pnlcalib",
+    "sn_banner",
+    "sn_calibration",
+    "sn_gamestate",
+    "sn_jersey",
+    "sn_reid",
+    "sn_trackeval",
+    "sn_tracking",
+    "soccernet_sdk_source",
+    "soccernet_v3",
+    "tracklab"
+  ],
+  "rejected_archive": {
+    "path": "artifacts/rejected_v0.18.0",
+    "slimmed": true,
+    "retained": [
+      "rejection_manifest.json",
+      "checksums.sha256",
+      "README.md",
+      "evidence_manifest.json",
+      "cleanup_manifest.json"
+    ],
+    "duplicates_removed_from_active_tree": true
+  },
   "verified_capabilities": [
     "yolo11n_person_ball_inference_runs",
     "appearance_tracker_runs",
     "sv_kp_sv_lines_adapter_loads",
     "reviewed_gt_files_present_190_300_34",
-    "referee_staff_team_null_regression_tests"
+    "referee_staff_team_null_regression_tests",
+    "registry_validator_absent_lifecycle_statuses"
   ],
   "unverified_capabilities": [
     "independent_human_detector_accuracy",
@@ -29,68 +234,6 @@
     "meter_calibration",
     "jersey5_holdout_tracking"
   ],
-  "invalidated_metrics": [
-    "human_detection_precision_recall_f1_equals_1_0"
-  ],
-  "circular_or_proxy_metrics": [
-    {
-      "name": "human_det_f1",
-      "status": "circular",
-      "note": "GT boxes from YOLO proposals"
-    },
-    {
-      "name": "role_macro_f1_1_0",
-      "status": "observed_class_only",
-      "note": "no staff in holdout; GK labels corrected post visual kit scan"
-    },
-    {
-      "name": "target_idf1_proxy",
-      "status": "proxy",
-      "note": "not TrackEval"
-    },
-    {
-      "name": "target_coverage_0_93",
-      "status": "proxy_identity_windows",
-      "note": "not holdout 22-34s"
-    },
-    {
-      "name": "calib_median_reproj_low",
-      "status": "non_generalizable",
-      "note": "only 2/34 valid frames"
-    }
-  ],
-  "reviewed_gt_counts": {
-    "human_reviewed": 190,
-    "ball_reviewed": 300,
-    "calib_reviewed": 34,
-    "human_roles_all": {
-      "player": 2407,
-      "staff": 192,
-      "referee": 98,
-      "goalkeeper": 12
-    },
-    "human_holdout_roles": {
-      "player": 776,
-      "goalkeeper": 12,
-      "referee": 3
-    },
-    "ball_visible_all": {
-      "not_visible": 161,
-      "visible": 132,
-      "ambiguous": 7
-    },
-    "jersey5_labels": {
-      "unknown": 2709
-    }
-  },
-  "gt_provenance": {
-    "human_source_bbox": {
-      "auto_visually_corrected": 2709
-    },
-    "human_detection_independent_gt": false,
-    "ball_from_sheet_review_of_prelabels": true,
-    "calib_opencv_hough_structure_review": true
-  },
   "active_runtime_paths": {
     "ai_dev": "/home/fdoblak/miniconda3/envs/ai-dev",
     "workspace": "/home/fdoblak/workspace/own_video_analysis",
@@ -105,42 +248,22 @@
     "reviewed GT JSON",
     "SV_kp/SV_lines weights",
     "yolo11n.pt canonical",
-    "external SoccerNet lock repos (not deleted in R0)"
+    "sn-gamestate, sn-calibration, sn-reid, sn-jersey, sn-tracking, sn-trackeval, SoccerNet SDK, SoccerNet-v3, TrackLab, PnLCalib, sn-banner"
   ],
-  "next_stage": "A\u015eAMA R1 \u2014 Ba\u011f\u0131ms\u0131z Ground Truth ve \u0130nsan Alg\u0131lama Kabul\u00fc",
-  "r0_started_not_r1": true,
   "customer_final_delivery": false,
-  "final_delivery_state": "empty/rejected marker only",
-  "evidence_file_shas": {
-    "artifacts/evidence/reboot_00/EVIDENCE_INDEPENDENCE.json": "313241b00554870f2ec5decd8ad8f9e4d0c5505ec086c422b8f34f58f92cd708",
-    "artifacts/evidence/reboot_00/CLEANUP_PLAN.json": "2f37a569f4f94ea74443a7ccaaf096ba4c7f823e307b0c00c333c934385766d1",
-    "artifacts/evidence/reboot_00/CLEANUP_RECEIPT.json": "ec9f9e7470cb040e10b56a065cc1151d7cbd1508e69efc45a9049a1c9af1f444",
-    "artifacts/evidence/reboot_00/README.md": "032ddbd877142ae2464c2bca2e2801458ae2b509d7b9a004447a399558cc534f",
-    "artifacts/diagnostics/own_video_recovery/GATE_STATUS.json": "4c567cba9510b29fa712080a28825a1ab57411969e82e45c1e5eb678506365df",
-    "artifacts/diagnostics/own_video_recovery/holdout_evaluation.json": "41be98d33a611135b309a9e6b70a112b45821a7f286cb5faee7240ff75d6b5d8",
-    "artifacts/diagnostics/own_video_recovery/gt/gt_human.json": "8f9fe937f84ad1ae83fd51402865589ddad9af7b8236154191d4d14ac5fcb2e3",
-    "artifacts/diagnostics/own_video_recovery/gt/gt_ball.json": "d8bdbc9077fa39f724c47003d836d20f773d918a05b371c0457737b75b98cd5a",
-    "artifacts/diagnostics/own_video_recovery/gt/gt_calibration.json": "0d5d84d6ef60b1723a6cb4db59684943f70bde7fbd2e7bb737675c5452fd6892"
-  },
-  "reported_but_not_acceptance_metrics": {
-    "role_macro_f1": 1.0,
-    "team_accuracy": 0.99,
-    "ball_f1": 0.9688,
-    "target_coverage_proxy": 0.9298,
-    "calib_coverage": 0.0588
-  },
-  "quality_gates_r0": {
-    "pytest_passed": 1116,
-    "ruff": "pass",
-    "black": "pass",
-    "isort": "pass",
-    "mypy": "pass",
-    "pip_check": "pass",
-    "storage": "pass",
-    "secrets": "pass",
-    "project_check": "PASS_WITH_WARNINGS (dirty tree pre-commit)",
-    "registries": "ERROR pre-existing missing SoccerTrack/TeamTrack dataset paths (not introduced by R0)",
-    "build": "pass",
-    "git_diff_check": "pass"
-  }
+  "data_loss": false,
+  "evidence_independence_ref": "artifacts/evidence/reboot_00/EVIDENCE_INDEPENDENCE.json",
+  "unused_repos_permanently_deleted_bytes": 1747611284,
+  "unused_repos_permanently_deleted": [
+    "active_spotting",
+    "pts_baseline",
+    "sn_caption",
+    "sn_depth",
+    "sn_echoes",
+    "sn_grounding",
+    "sn_mvfoul",
+    "sn_nvs",
+    "sn_spotting",
+    "sn_teamspotting"
+  ]
 }

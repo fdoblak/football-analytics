@@ -7,16 +7,28 @@ repositories:
     branch: main
     commit: 33a81cb834978ee474ecec0c5a76b6f3f99b4bf4
     integration: action_spotting_baseline
-    validation_status: cloned_not_smoke_tested
+    validation_status: not_installed_reclonable
     dirty: false
+    local_installed: false
+    r0_f1_removed_at: '2026-07-28T11:18:49.860070+00:00'
+    r0_f1_removed_head: 33a81cb834978ee474ecec0c5a76b6f3f99b4bf4
+    r0_f1_removed_size_bytes: 496408
+    notes: 'R0-F1: unused for own-video recovery; only bootstrap/status inventory
+      refs. Re-clone from remote@commit if needed. No download in R0-F1.'
   pts_baseline:
     path: /home/fdoblak/projects/soccernet/PTS-baseline
     remote: https://github.com/SoccerNet/PTS-baseline.git
     branch: main
     commit: af2ea8234e0c887758ef674071da2a17e2bc6c61
     integration: ball_action_spotting_baseline
-    validation_status: cloned_not_smoke_tested
+    validation_status: not_installed_reclonable
     dirty: false
+    local_installed: false
+    r0_f1_removed_at: '2026-07-28T11:18:49.874593+00:00'
+    r0_f1_removed_head: af2ea8234e0c887758ef674071da2a17e2bc6c61
+    r0_f1_removed_size_bytes: 23913803
+    notes: 'R0-F1: unused for own-video recovery; only bootstrap/status inventory
+      refs. Re-clone from remote@commit if needed. No download in R0-F1.'
   soccernet_sdk_source:
     path: /home/fdoblak/projects/soccernet/SoccerNet
     remote: https://github.com/SoccerNet/SoccerNet.git
@@ -55,24 +67,42 @@ repositories:
     branch: main
     commit: c05973d4f00853e208d54965f4d6fa47364b8d66
     integration: dense_captioning_reference
-    validation_status: cloned_not_smoke_tested
+    validation_status: not_installed_reclonable
     dirty: false
+    local_installed: false
+    r0_f1_removed_at: '2026-07-28T11:18:49.883012+00:00'
+    r0_f1_removed_head: c05973d4f00853e208d54965f4d6fa47364b8d66
+    r0_f1_removed_size_bytes: 829409
+    notes: 'R0-F1: unused for own-video recovery; only bootstrap/status inventory
+      refs. Re-clone from remote@commit if needed. No download in R0-F1.'
   sn_depth:
     path: /home/fdoblak/projects/soccernet/sn-depth
     remote: https://github.com/SoccerNet/sn-depth.git
     branch: main
     commit: 9f6636fafb11447a5bada765e197928ee9efc467
     integration: depth_estimation_reference
-    validation_status: cloned_not_smoke_tested
+    validation_status: not_installed_reclonable
     dirty: false
+    local_installed: false
+    r0_f1_removed_at: '2026-07-28T11:18:49.893657+00:00'
+    r0_f1_removed_head: 9f6636fafb11447a5bada765e197928ee9efc467
+    r0_f1_removed_size_bytes: 20006376
+    notes: 'R0-F1: unused for own-video recovery; only bootstrap/status inventory
+      refs. Re-clone from remote@commit if needed. No download in R0-F1.'
   sn_echoes:
     path: /home/fdoblak/projects/soccernet/sn-echoes
     remote: https://github.com/SoccerNet/sn-echoes.git
     branch: main
     commit: 7105a85b7a8c1c000a31a30d0c29c388105c3de5
     integration: audio_commentary_reference
-    validation_status: cloned_not_smoke_tested
+    validation_status: not_installed_reclonable
     dirty: false
+    local_installed: false
+    r0_f1_removed_at: '2026-07-28T11:18:50.052558+00:00'
+    r0_f1_removed_head: 7105a85b7a8c1c000a31a30d0c29c388105c3de5
+    r0_f1_removed_size_bytes: 606654889
+    notes: 'R0-F1: unused for own-video recovery; only bootstrap/status inventory
+      refs. Re-clone from remote@commit if needed. No download in R0-F1.'
   sn_gamestate:
     path: /home/fdoblak/projects/soccernet/sn-gamestate
     remote: https://github.com/SoccerNet/sn-gamestate.git
@@ -87,8 +117,14 @@ repositories:
     branch: main
     commit: 910bf859ac6d7aff2b80a6d66155956254f24c6b
     integration: replay_grounding_reference
-    validation_status: cloned_not_smoke_tested
+    validation_status: not_installed_reclonable
     dirty: false
+    local_installed: false
+    r0_f1_removed_at: '2026-07-28T11:18:50.060886+00:00'
+    r0_f1_removed_head: 910bf859ac6d7aff2b80a6d66155956254f24c6b
+    r0_f1_removed_size_bytes: 39644394
+    notes: 'R0-F1: unused for own-video recovery; only bootstrap/status inventory
+      refs. Re-clone from remote@commit if needed. No download in R0-F1.'
   sn_jersey:
     path: /home/fdoblak/projects/soccernet/sn-jersey
     remote: https://github.com/SoccerNet/sn-jersey.git
@@ -103,16 +139,28 @@ repositories:
     branch: main
     commit: 502fb44a76c254e332394f095d54abc830131a44
     integration: multiview_foul_reference
-    validation_status: cloned_not_smoke_tested
+    validation_status: not_installed_reclonable
     dirty: false
+    local_installed: false
+    r0_f1_removed_at: '2026-07-28T11:18:50.067864+00:00'
+    r0_f1_removed_head: 502fb44a76c254e332394f095d54abc830131a44
+    r0_f1_removed_size_bytes: 69400638
+    notes: 'R0-F1: unused for own-video recovery; only bootstrap/status inventory
+      refs. Re-clone from remote@commit if needed. No download in R0-F1.'
   sn_nvs:
     path: /home/fdoblak/projects/soccernet/sn-nvs
     remote: https://github.com/SoccerNet/sn-nvs.git
     branch: main
     commit: 1655ab19b3bd78f624a96d0f0c27ec2c9f550f61
     integration: novel_view_synthesis_reference
-    validation_status: cloned_not_smoke_tested
+    validation_status: not_installed_reclonable
     dirty: false
+    local_installed: false
+    r0_f1_removed_at: '2026-07-28T11:18:50.171730+00:00'
+    r0_f1_removed_head: 1655ab19b3bd78f624a96d0f0c27ec2c9f550f61
+    r0_f1_removed_size_bytes: 401361199
+    notes: 'R0-F1: unused for own-video recovery; only bootstrap/status inventory
+      refs. Re-clone from remote@commit if needed. No download in R0-F1.'
   sn_reid:
     path: /home/fdoblak/projects/soccernet/sn-reid
     remote: https://github.com/SoccerNet/sn-reid.git
@@ -127,16 +175,28 @@ repositories:
     branch: main
     commit: 9842826f94e1419580a9d17219c11aca7225f7ce
     integration: action_spotting_reference
-    validation_status: cloned_not_smoke_tested
+    validation_status: not_installed_reclonable
     dirty: false
+    local_installed: false
+    r0_f1_removed_at: '2026-07-28T11:18:50.180855+00:00'
+    r0_f1_removed_head: 9842826f94e1419580a9d17219c11aca7225f7ce
+    r0_f1_removed_size_bytes: 580596009
+    notes: 'R0-F1: unused for own-video recovery; only bootstrap/status inventory
+      refs. Re-clone from remote@commit if needed. No download in R0-F1.'
   sn_teamspotting:
     path: /home/fdoblak/projects/soccernet/sn-teamspotting
     remote: https://github.com/SoccerNet/sn-teamspotting.git
     branch: main
     commit: 091fed2fc35c33f7489f3596958a2fe385e37d65
     integration: team_action_spotting_devkit
-    validation_status: cloned_not_smoke_tested
+    validation_status: not_installed_reclonable
     dirty: false
+    local_installed: false
+    r0_f1_removed_at: '2026-07-28T11:18:50.187470+00:00'
+    r0_f1_removed_head: 091fed2fc35c33f7489f3596958a2fe385e37d65
+    r0_f1_removed_size_bytes: 4708159
+    notes: 'R0-F1: unused for own-video recovery; only bootstrap/status inventory
+      refs. Re-clone from remote@commit if needed. No download in R0-F1.'
   sn_trackeval:
     path: /home/fdoblak/projects/soccernet/sn-trackeval
     remote: https://github.com/SoccerNet/sn-trackeval.git
@@ -155,8 +215,8 @@ repositories:
     dirty: false
 updated_at: '2026-07-25T01:20:00+00:00'
 update_notes: 'Stage 16-R4-F1/FINAL: third_party lock count is canonical (5 intentional
-  repos including SoccerTrack-v2 + TeamTrack Stage-16 provenance references);
-  validator no longer hard-codes expected third-party count=3.'
+  repos including SoccerTrack-v2 + TeamTrack Stage-16 provenance references); validator
+  no longer hard-codes expected third-party count=3.'
 third_party_repositories:
   tracklab:
     path: /home/fdoblak/projects/third-party/tracklab

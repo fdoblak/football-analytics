@@ -1,0 +1,169 @@
+{
+  "schema": "r0_f1_unused_repo_quarantine_v1",
+  "written_at_utc": "2026-07-28T11:18:49.851258+00:00",
+  "items": [
+    {
+      "repo_id": "active_spotting",
+      "original_path": "/home/fdoblak/projects/soccernet/ActiveSpotting",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/ActiveSpotting",
+      "remote": "https://github.com/SoccerNet/ActiveSpotting.git",
+      "head": "33a81cb834978ee474ecec0c5a76b6f3f99b4bf4",
+      "size_bytes": 496408,
+      "dirty": false
+    },
+    {
+      "repo_id": "pts_baseline",
+      "original_path": "/home/fdoblak/projects/soccernet/PTS-baseline",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/PTS-baseline",
+      "remote": "https://github.com/SoccerNet/PTS-baseline.git",
+      "head": "af2ea8234e0c887758ef674071da2a17e2bc6c61",
+      "size_bytes": 23913803,
+      "dirty": false
+    },
+    {
+      "repo_id": "sn_caption",
+      "original_path": "/home/fdoblak/projects/soccernet/sn-caption",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-caption",
+      "remote": "https://github.com/SoccerNet/sn-caption.git",
+      "head": "c05973d4f00853e208d54965f4d6fa47364b8d66",
+      "size_bytes": 829409,
+      "dirty": false
+    },
+    {
+      "repo_id": "sn_depth",
+      "original_path": "/home/fdoblak/projects/soccernet/sn-depth",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-depth",
+      "remote": "https://github.com/SoccerNet/sn-depth.git",
+      "head": "9f6636fafb11447a5bada765e197928ee9efc467",
+      "size_bytes": 20006376,
+      "dirty": false
+    },
+    {
+      "repo_id": "sn_echoes",
+      "original_path": "/home/fdoblak/projects/soccernet/sn-echoes",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-echoes",
+      "remote": "https://github.com/SoccerNet/sn-echoes.git",
+      "head": "7105a85b7a8c1c000a31a30d0c29c388105c3de5",
+      "size_bytes": 606654889,
+      "dirty": false
+    },
+    {
+      "repo_id": "sn_grounding",
+      "original_path": "/home/fdoblak/projects/soccernet/sn-grounding",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-grounding",
+      "remote": "https://github.com/SoccerNet/sn-grounding.git",
+      "head": "910bf859ac6d7aff2b80a6d66155956254f24c6b",
+      "size_bytes": 39644394,
+      "dirty": false
+    },
+    {
+      "repo_id": "sn_mvfoul",
+      "original_path": "/home/fdoblak/projects/soccernet/sn-mvfoul",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-mvfoul",
+      "remote": "https://github.com/SoccerNet/sn-mvfoul.git",
+      "head": "502fb44a76c254e332394f095d54abc830131a44",
+      "size_bytes": 69400638,
+      "dirty": false
+    },
+    {
+      "repo_id": "sn_nvs",
+      "original_path": "/home/fdoblak/projects/soccernet/sn-nvs",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-nvs",
+      "remote": "https://github.com/SoccerNet/sn-nvs.git",
+      "head": "1655ab19b3bd78f624a96d0f0c27ec2c9f550f61",
+      "size_bytes": 401361199,
+      "dirty": false
+    },
+    {
+      "repo_id": "sn_spotting",
+      "original_path": "/home/fdoblak/projects/soccernet/sn-spotting",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-spotting",
+      "remote": "https://github.com/SoccerNet/sn-spotting.git",
+      "head": "9842826f94e1419580a9d17219c11aca7225f7ce",
+      "size_bytes": 580596009,
+      "dirty": false
+    },
+    {
+      "repo_id": "sn_teamspotting",
+      "original_path": "/home/fdoblak/projects/soccernet/sn-teamspotting",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-teamspotting",
+      "remote": "https://github.com/SoccerNet/sn-teamspotting.git",
+      "head": "091fed2fc35c33f7489f3596958a2fe385e37d65",
+      "size_bytes": 4708159,
+      "dirty": false
+    }
+  ],
+  "permanently_deleted_at_utc": "2026-07-28T11:27:55.560442+00:00",
+  "permanently_deleted": [
+    {
+      "repo_id": "active_spotting",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/ActiveSpotting",
+      "size_bytes": 496408,
+      "deleted": true
+    },
+    {
+      "repo_id": "pts_baseline",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/PTS-baseline",
+      "size_bytes": 23913803,
+      "deleted": true
+    },
+    {
+      "repo_id": "sn_caption",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-caption",
+      "size_bytes": 829409,
+      "deleted": true
+    },
+    {
+      "repo_id": "sn_depth",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-depth",
+      "size_bytes": 20006376,
+      "deleted": true
+    },
+    {
+      "repo_id": "sn_echoes",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-echoes",
+      "size_bytes": 606654889,
+      "deleted": true
+    },
+    {
+      "repo_id": "sn_grounding",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-grounding",
+      "size_bytes": 39644394,
+      "deleted": true
+    },
+    {
+      "repo_id": "sn_mvfoul",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-mvfoul",
+      "size_bytes": 69400638,
+      "deleted": true
+    },
+    {
+      "repo_id": "sn_nvs",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-nvs",
+      "size_bytes": 401361199,
+      "deleted": true
+    },
+    {
+      "repo_id": "sn_spotting",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-spotting",
+      "size_bytes": 580596009,
+      "deleted": true
+    },
+    {
+      "repo_id": "sn_teamspotting",
+      "quarantine_path": "/home/fdoblak/football_data/quarantine/r0_f1_unused_repos/sn-teamspotting",
+      "size_bytes": 4708159,
+      "deleted": true
+    }
+  ],
+  "permanently_deleted_bytes": 1747611284,
+  "validation_before_delete": {
+    "pytest": "1118 passed, 2 skipped",
+    "registry": "PASS_WITH_WARNINGS exit 0",
+    "registry_verify_repos": "PASS_WITH_WARNINGS exit 0",
+    "storage": "PASS",
+    "secrets": "PASS",
+    "project_deep": "PASS_WITH_WARNINGS (dirty pre-commit only)",
+    "build": "PASS"
+  }
+}

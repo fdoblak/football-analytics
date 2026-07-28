@@ -50,9 +50,23 @@ MODEL_STATUS = {"planned", "missing", "available", "verified", "blocked", "depre
 DATASET_STATUS = {
     "planned",
     "not_downloaded",
+    "not_installed",
+    "optional_external",
+    "historical_validation_source",
+    "unavailable",
     "available",
     "verified",
     "blocked_access",
+    "deprecated",
+}
+# Statuses that must not claim a present local install.
+DATASET_ABSENT_STATUSES = {
+    "planned",
+    "not_downloaded",
+    "not_installed",
+    "optional_external",
+    "historical_validation_source",
+    "unavailable",
     "deprecated",
 }
 ACCESS_LEVELS = {
@@ -316,14 +330,39 @@ def validate_dataset_registry(
 
         path = item.get("local_path")
         checksum = item.get("checksum")
-        if status in {"planned", "not_downloaded"}:
+        if status in DATASET_ABSENT_STATUSES:
             if path not in (None, ""):
-                result.err(f"{did}: planned/not_downloaded must have local_path=null")
-            if checksum not in (None, ""):
-                result.err(f"{did}: planned/not_downloaded must have checksum=null")
-            # must not claim available
-            if status == "available":
-                result.err(f"{did}: inconsistent status")
+                # Optional: allow stale path pointer only as warning when marked absent.
+                if isinstance(path, str) and Path(path).exists():
+                    result.warn(
+                        f"{did}: status={status} but local_path exists; "
+                        "consider promoting to available/verified if actively used"
+                    )
+                else:
+                    result.warn(
+                        f"{did}: status={status}; local install absent "
+                        f"(path={path!r}) — skipped integrity check"
+                    )
+                # Force honesty: absent statuses should not keep a non-null path claiming install.
+                if status in {
+                    "planned",
+                    "not_downloaded",
+                    "not_installed",
+                    "historical_validation_source",
+                    "unavailable",
+                } and path not in (None, ""):
+                    result.err(
+                        f"{did}: {status} must have local_path=null "
+                        "(do not keep missing path as available claim)"
+                    )
+            if checksum not in (None, "") and status in {
+                "planned",
+                "not_downloaded",
+                "not_installed",
+                "historical_validation_source",
+                "unavailable",
+            }:
+                result.err(f"{did}: {status} must have checksum=null")
         if status in {"available", "verified"}:
             if not isinstance(path, str) or not os.path.isabs(path):
                 result.err(f"{did}: available/verified requires absolute local_path")
@@ -389,7 +428,23 @@ def validate_external_lock(
                     result.warn(f"shared remote URL between {remotes_seen[remote]} and {rid}")
                 remotes_seen[remote] = rid
             p = Path(path)
+            absent = meta.get("local_installed") is False or meta.get("validation_status") in {
+                "not_installed",
+                "not_installed_reclonable",
+                "unavailable_local",
+                "optional_external",
+                "historical_only",
+            }
             if verify_repos:
+                if absent:
+                    if p.exists():
+                        result.warn(f"{rid}: marked not installed but path still exists at {path}")
+                    else:
+                        result.warn(
+                            f"{rid}: not installed locally; skipped HEAD verify "
+                            "(reclonable from remote@commit)"
+                        )
+                    continue
                 if not p.is_dir() or not (p / ".git").exists():
                     result.err(f"{rid}: git repo missing at {path}", integrity=True)
                     continue

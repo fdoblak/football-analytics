@@ -195,8 +195,8 @@ datasets:
   - id: soccertrack_v2_single_match_acceptance
     display_name: SoccerTrack v2 single-match acceptance (128057)
     task: real_match_acceptance
-    status: available
-    local_path: /home/fdoblak/football_data/datasets/soccertrack_v2/source
+    status: historical_validation_source
+    local_path: null
     source: official SoccerTrack v2
     source_url: https://huggingface.co/datasets/atomscott/soccertrack-v2
     version: "v2"
@@ -211,22 +211,22 @@ datasets:
     redistribution_allowed: true
     checksum: null
     size_bytes: null
-    last_verified: "2026-07-24"
+    last_verified: "2026-07-28"
     planned_stage: Stage-16
     notes: >
+      R0-F1: reclassified from available — local path
+      /home/fdoblak/football_data/datasets/soccertrack_v2/source is not installed.
+      Historical Stage 16 annotation-derived reference only; not an active own-video
+      recovery dependency. Do not treat as available install. Re-download forbidden in R0-F1.
       purpose: Stage 16 annotation-derived reference + optional external video validation;
-      production_input: false; acceptance_dataset: true; release_dependency_video: false;
-      selected_match_id: 128057; authoritative target left/jersey 24/player_id 506469;
-      HF gated video is optional (not required for technical-preview release);
-      official mirror used historically for GSR/BAS when HF returned 401;
-      camera_domain panoramic_full_pitch; held-out secret test matches 117099/117100 not selected.
-      Stage 16-R4: self-contained technical acceptance + reference analysis; MP4 not a hard gate.
+      production_input: false; acceptance_dataset: historical; release_dependency_video: false;
+      selected_match_id: 128057; HF gated video optional.
 
   - id: teamtrack_soccer_side_pilot
     display_name: TeamTrack soccer_side real-video pilot (F_20200220_1_0330_0360)
     task: real_video_tracking_pilot
-    status: available
-    local_path: /home/fdoblak/football_data/datasets/teamtrack/source
+    status: historical_validation_source
+    local_path: null
     source: official TeamTrack
     source_url: https://www.kaggle.com/datasets/atomscott/teamtrack
     version: "6"
@@ -240,11 +240,11 @@ datasets:
     credentials_required: false
     redistribution_allowed: true
     checksum: null
-    size_bytes: 13645163
-    last_verified: "2026-07-24"
+    size_bytes: null
+    last_verified: "2026-07-28"
     planned_stage: Stage-16-R2
     notes: >
-      purpose: Stage 16-R2 licensed real-video tracking pilot after SoccerTrack v2 video quota block;
-      production_input: false; acceptance_dataset: pilot_only; full event acceptance: not_covered;
-      anonymous track target only (no jersey invention); isolated from soccertrack_v2 namespaces;
-      downloaded via official Google Drive mirror (Kaggle CLI auth absent).
+      R0-F1: reclassified from available — local path
+      /home/fdoblak/football_data/datasets/teamtrack/source is not installed.
+      Historical Stage 16-R2 pilot source only; not required for own-video recovery.
+      Re-download forbidden in R0-F1. production_input: false; acceptance_dataset: historical.

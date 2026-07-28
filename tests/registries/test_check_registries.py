@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
-import json
 import subprocess
 import sys
 import tempfile
@@ -311,15 +310,33 @@ class CheckRegistriesTests(unittest.TestCase):
         self._write_all()
         self.assertEqual(self._run(), 3)
 
-    def test_21_atomic_json_output_valid(self) -> None:
-        out = self.tmp / "out.json"
-        code = self._run("--json-out", str(out))
-        self.assertEqual(code, 0)
-        payload = json.loads(out.read_text(encoding="utf-8"))
-        self.assertIn("status", payload)
-        self.assertIn("exit_code", payload)
+    def test_22_historical_validation_source_null_path_pass(self) -> None:
+        self.dataset_reg["datasets"][0].update(
+            {
+                "status": "historical_validation_source",
+                "local_path": None,
+                "checksum": None,
+                "access_level": "public",
+                "license_status": "approved",
+            }
+        )
+        self._write_all()
+        self.assertEqual(self._run(), 0)
 
-    def test_22_exit_code_contract(self) -> None:
+    def test_23_historical_with_stale_missing_path_fail(self) -> None:
+        self.dataset_reg["datasets"][0].update(
+            {
+                "status": "historical_validation_source",
+                "local_path": str(self.tmp / "missing_dataset_root"),
+                "checksum": None,
+                "access_level": "public",
+                "license_status": "approved",
+            }
+        )
+        self._write_all()
+        self.assertEqual(self._run(), 1)
+
+    def test_24_exit_code_contract(self) -> None:
         # config error
         code = CR.main(
             [

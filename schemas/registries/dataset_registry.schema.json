@@ -23,7 +23,18 @@
           "id": { "type": "string", "minLength": 1 },
           "status": {
             "type": "string",
-            "enum": ["planned", "not_downloaded", "available", "verified", "blocked_access", "deprecated"]
+            "enum": [
+              "planned",
+              "not_downloaded",
+              "not_installed",
+              "optional_external",
+              "historical_validation_source",
+              "unavailable",
+              "available",
+              "verified",
+              "blocked_access",
+              "deprecated"
+            ]
           },
           "access_level": {
             "type": "string",
