@@ -81,8 +81,22 @@ def collect_git_metadata(repo_root: Path | None) -> dict[str, Any]:
         }
     commit = _run_git(["rev-parse", "HEAD"], cwd=repo_root)
     branch = _run_git(["branch", "--show-current"], cwd=repo_root)
-    porcelain = _run_git(["status", "--porcelain"], cwd=repo_root)
-    dirty = None if porcelain is None else bool(porcelain.strip())
+    # Empty porcelain stdout means a clean tree; do not collapse "" -> None via _run_git.
+    dirty: bool | None
+    try:
+        proc = subprocess.run(
+            ["git", "status", "--porcelain"],
+            cwd=str(repo_root),
+            capture_output=True,
+            text=True,
+            timeout=GIT_TIMEOUT_SEC,
+            check=False,
+            shell=False,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        dirty = None
+    else:
+        dirty = None if proc.returncode != 0 else bool(proc.stdout.strip())
     remote = _run_git(["remote", "get-url", "origin"], cwd=repo_root)
     remote_sanitized = sanitize_remote_url(remote) if remote else None
     return {
