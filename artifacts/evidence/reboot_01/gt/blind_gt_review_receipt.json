@@ -1,6 +1,6 @@
 {
   "schema": "own_video_human_blind_gt_v1_review_receipt",
-  "status": "WAITING_VISUAL_APPROVAL",
+  "status": "BLIND_GT_DRAFT_REVIEW_PACKAGE",
   "blind_policy": "raw_frames_only_required",
   "detector_assistance_used_for_accepted_gt": false,
   "accepted_gt_exists": false,
@@ -23,5 +23,7 @@
     "Holdout 22\u201334s karelerine \u00f6ncelik verin",
     "Onay sonras\u0131 GT freeze fingerprint \u00fcretilecek"
   ],
-  "written_at_utc": "2026-07-28T21:59:22.949538+00:00"
+  "written_at_utc": "2026-07-28T23:11:13.191603+00:00",
+  "human_approved": false,
+  "gt_frozen": false
 }

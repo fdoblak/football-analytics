@@ -1,0 +1,9 @@
+{
+  "schema": "r1_f1_coordinate_roundtrip_v1",
+  "max_err_px_allowed": 1.0,
+  "unit_tests_passed": true,
+  "smoke_boxes": 127,
+  "roundtrip_fail_count": 0,
+  "center_body_ok_rate": 0.9844961240310077,
+  "pass": true
+}

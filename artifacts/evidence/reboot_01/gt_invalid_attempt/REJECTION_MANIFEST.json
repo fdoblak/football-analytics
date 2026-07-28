@@ -1,0 +1,34 @@
+{
+  "schema": "r1_invalid_blind_gt_rejection_manifest_v1",
+  "version": "v1_invalid_agent_freehand",
+  "acceptance_eligible": false,
+  "reason": "Agent-produced boxes failed person-presence validation; coordinates hallucinated without pixel grounding (empty-turf). Must not be counted as GT, reused without correction, or included in acceptance.",
+  "bbox_count": 682,
+  "bbox_count_positive_approx": 682,
+  "empty_turf_rate": 0.9912023460410557,
+  "empty_turf_ratio": "681/682_holdout_diagnostic",
+  "source_frame_size": {
+    "width": 1336,
+    "height": 744
+  },
+  "coordinate_format": "xyxy_claimed_source_pixels",
+  "transform_applied": "identity_claimed_no_affine",
+  "invalidated_at_utc": "2026-07-28T22:59:00.176019+00:00",
+  "quarantine_path": "/home/fdoblak/workspace/own_video_analysis/r1_blind_gt/annotations_invalid_quarantine",
+  "annotations_sha256": "36b9d3ad67683fa86461e74862fedd2a4a5d0b798214ec4aa5c7c5f6b47e41a9",
+  "annotations_size_bytes": 870610,
+  "workspace_runtime_batches_quarantined": [
+    "batch_dev_00.json",
+    "batch_holdout_00.json",
+    "batch_holdout_01.json",
+    "batch_holdout_02.json",
+    "batch_train_00.json",
+    "candidate_v2.json"
+  ],
+  "do_not": [
+    "count_as_gt",
+    "reuse_without_correction",
+    "include_in_acceptance",
+    "silently_overwrite"
+  ]
+}

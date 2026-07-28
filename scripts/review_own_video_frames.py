@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
-"""Local lightweight frame-review tool for Stage 17-R2 own-video GT.
+"""Local frame-review tools for own-video GT (Stage 17-R2 + R1-F1 blind).
 
-Does NOT invent reviewed=true. Opens prelabels + overlays; writes append-only
-review decisions. Use for human/ball/calibration labeling sessions.
+R1-F1 blind interactive review (preferred):
+  python scripts/review_own_video_frames.py blind-server --port 8765
 
-Examples:
-  python scripts/review_own_video_frames.py list --split holdout --kind human
-  python scripts/review_own_video_frames.py show --frame 709 --kind human
-  python scripts/review_own_video_frames.py apply-decision --kind ball --frame 661 \\
-      --visible visible --centre 640,400 --reviewed
+Legacy Stage 17-R2 CLI helpers remain for ball/human decision append.
+
+Does NOT invent reviewed=true / human_approved / GT freeze.
 """
 
 from __future__ import annotations
@@ -17,6 +15,7 @@ import argparse
 import json
 import shutil
 import subprocess
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -26,6 +25,8 @@ DECISIONS = WORK / "review_decisions"
 GT_OUT = Path(
     "/home/fdoblak/projects/football-analytics/artifacts/diagnostics/own_video_recovery/gt"
 )
+REPO = Path(__file__).resolve().parents[1]
+R1_SERVER = REPO / "scripts" / "r1_blind_gt_review_server.py"
 
 
 def utc_now() -> str:
@@ -200,9 +201,58 @@ def cmd_export_gt(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_blind_server(args: argparse.Namespace) -> int:
+    """Launch R1 blind GT review server (prediction visibility off by default)."""
+    if not R1_SERVER.is_file():
+        raise SystemExit(f"missing review server: {R1_SERVER}")
+    cmd = [
+        sys.executable,
+        str(R1_SERVER),
+        "--host",
+        args.host,
+        "--port",
+        str(args.port),
+    ]
+    if args.blind:
+        cmd.append("--blind")
+    else:
+        cmd.append("--no-blind")
+        if args.audit_predictions:
+            cmd.extend(["--audit-predictions", str(args.audit_predictions)])
+    if args.session_dir:
+        cmd.extend(["--session-dir", str(args.session_dir)])
+    print(
+        "Starting blind GT review server "
+        f"(blind={args.blind}, predictions_hidden={args.blind}) → "
+        f"http://{args.host}:{args.port}/"
+    )
+    return int(subprocess.call(cmd))
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description=__doc__)
     sub = p.add_subparsers(dest="cmd", required=True)
+
+    p_blind = sub.add_parser(
+        "blind-server",
+        help="R1-F1 localhost blind annotation UI (source xyxy round-trip)",
+    )
+    p_blind.add_argument("--host", default="127.0.0.1")
+    p_blind.add_argument("--port", type=int, default=8765)
+    p_blind.add_argument("--blind", action="store_true", default=True)
+    p_blind.add_argument(
+        "--audit-predictions",
+        type=Path,
+        default=None,
+        help="Only with --no-blind after GT freeze",
+    )
+    p_blind.add_argument("--no-blind", action="store_true")
+    p_blind.add_argument(
+        "--session-dir",
+        type=Path,
+        default=Path("/home/fdoblak/workspace/own_video_analysis/r1_blind_gt/review_session"),
+    )
+    p_blind.set_defaults(func=cmd_blind_server)
 
     p_list = sub.add_parser("list")
     p_list.add_argument("--kind", choices=["human", "ball"], required=True)
@@ -242,6 +292,8 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    if getattr(args, "cmd", None) == "blind-server" and getattr(args, "no_blind", False):
+        args.blind = False
     return int(args.func(args))
 
 

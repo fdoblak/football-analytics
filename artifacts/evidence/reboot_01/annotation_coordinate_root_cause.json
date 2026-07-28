@@ -1,0 +1,96 @@
+{
+  "schema": "r1_f1_annotation_coordinate_root_cause_v1",
+  "written_at_utc": "2026-07-28T22:59:00.176019+00:00",
+  "source": {
+    "path": "/home/fdoblak/football_data/videos/raw_matches/own_video_97b298e4/original.mp4",
+    "width": 1336,
+    "height": 744,
+    "sha256": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160"
+  },
+  "hypotheses_tested": [
+    {
+      "id": "frame_index_vs_pts_mixup",
+      "result": "NOT_SUPPORTED",
+      "evidence": "boxes empty on claimed frame and neighbors alike for majority"
+    },
+    {
+      "id": "0_vs_1_based_frame",
+      "result": "NOT_SUPPORTED",
+      "evidence": "neighbor-frame person_score hits do not dominate"
+    },
+    {
+      "id": "letterbox_scale_padding",
+      "result": "NOT_SUPPORTED",
+      "evidence": "coords already in 1336x744 range with plausible sizes; no letterbox used in export"
+    },
+    {
+      "id": "contact_sheet_tile_coords",
+      "result": "NOT_SUPPORTED",
+      "evidence": "coordinates span full frame, not 0..thumb"
+    },
+    {
+      "id": "xywh_as_xyxy",
+      "result": "NOT_SUPPORTED",
+      "evidence": "reinterpretation as xywh does not systematically raise IoU"
+    },
+    {
+      "id": "xy_axis_swap",
+      "result": "NOT_SUPPORTED",
+      "evidence": "swap does not systematically improve IoU"
+    },
+    {
+      "id": "normalized_0_1_as_pixels",
+      "result": "NOT_SUPPORTED",
+      "evidence": "boxes not tiny corner stubs"
+    },
+    {
+      "id": "css_canvas_vs_natural",
+      "result": "NOT_APPLICABLE",
+      "evidence": "invalid attempt was not browser-canvas based"
+    },
+    {
+      "id": "devicePixelRatio_zoom",
+      "result": "NOT_APPLICABLE",
+      "evidence": "no browser annotation UI in failed attempt"
+    },
+    {
+      "id": "crop_offset",
+      "result": "NOT_SUPPORTED",
+      "evidence": "full-frame exports used"
+    },
+    {
+      "id": "integer_rounding",
+      "result": "NOT_SUPPORTED",
+      "evidence": "errors are tens of pixels / wrong regions, not 1px"
+    },
+    {
+      "id": "rotation_SAR",
+      "result": "NOT_SUPPORTED",
+      "evidence": "source SAR progressive, no rotation applied"
+    },
+    {
+      "id": "normalized_video_coords_on_raw",
+      "result": "NOT_SUPPORTED",
+      "evidence": "no prior normalized mapping applied"
+    },
+    {
+      "id": "agent_hallucinated_coords_without_pixel_verification",
+      "result": "SUPPORTED",
+      "evidence": "holdout empty-turf person_score rate 676/682; IoU@0.5 vs diagnostic preds ~9.5%; visual overlay showed boxes on empty grass while yolo11n preds fit people"
+    }
+  ],
+  "root_cause": {
+    "primary": "agent_hallucinated_bbox_coordinates_without_pixel_grounding",
+    "category": "annotation_generation_integrity_not_affine_transform_bug",
+    "summary": "Failed R1 blind boxes were emitted as source-space xyxy on the correct 1336\u00d7744 frames, but were not pixel-verified against the raw image. Grid-cell narrative labeling produced plausible-looking numbers that mostly landed on empty turf. This is not a canvas/letterbox/xywh storage transform bug.",
+    "fix": "Canonical source xyxy storage + round-trip tests + mandatory visual smoke + presence QA before any freeze; never reuse invalidated boxes."
+  },
+  "invalid_attempt": {
+    "holdout_positive_boxes": 682,
+    "holdout_empty_turf_boxes": 676,
+    "empty_turf_rate": 0.9912023460410557,
+    "coordinate_format_claimed": "xyxy",
+    "source_size": "1336x744",
+    "transform_applied": "none_identity_claimed"
+  }
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="tr"><head><meta charset="utf-8"/>
+<title>R1-F1 Blind GT Draft Results</title>
+<style>
+body{font-family:Segoe UI,Arial,sans-serif;margin:24px;background:#111;color:#eee}
+a{color:#8cf} img{max-width:100%;border:1px solid #333;margin:8px 0}
+.box{background:#1b1b1b;padding:12px;margin:12px 0;border-radius:6px}
+.warn{color:#ffd36a}
+</style></head><body>
+<h1>R1-F1 Blind GT Draft Review Package</h1>
+<p class="warn"><b>Bu paket model prediction içermez.</b> Kutular yalnız blind GT draft / coordinate smoke doğrulamasıdır.
+human_approved / GT freeze değildir. Acceptance metriği hesaplanmamıştır.</p>
+<div class="box">
+<h2>Özet</h2>
+<ul>
+<li>Frames: 150 (train 54 / dev 43 / holdout 53)</li>
+<li>Frames with draft boxes: 12</li>
+<li>Positive draft boxes: 127</li>
+<li>Ignore: 0 · Uncertain: 0</li>
+<li>Incomplete (needs human review): 150</li>
+<li>Provenance: agent_blind_reviewed_draft</li>
+<li>Coordinate root cause: {"primary": "agent_hallucinated_bbox_coordinates_without_pixel_grounding", "category": "annotation_generation_integrity_not_affine_transform_bug", "summary": "Failed R1 blind boxes were emitted as sou</li>
+<li>Auto QA empty-turf center rate: 0.023622047244094488</li>
+</ul>
+</div>
+<div class="box">
+<h2>Proof video</h2>
+<video controls width="960" src="R1_blind_GT_draft_proof.mp4"></video>
+</div>
+<div class="box"><h2>Contact sheets</h2>
+<p>Start</p><img src="R1_GT_draft_start.png"/>
+<p>Middle</p><img src="R1_GT_draft_middle.png"/>
+<p>Holdout</p><img src="R1_GT_draft_holdout.png"/>
+<p>Negative / pending</p><img src="R1_GT_negative_examples.png"/>
+<p>Difficult</p><img src="R1_GT_difficult_examples.png"/>
+<p>Coordinate before/after</p><img src="../R1_coordinate_before_after.png"/>
+</div>
+</body></html>

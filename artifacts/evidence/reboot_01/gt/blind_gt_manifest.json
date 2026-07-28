@@ -1,7 +1,7 @@
 {
   "schema": "own_video_human_blind_gt_v1_manifest",
   "dataset_id": "own_video_human_blind_gt_v1",
-  "status": "WAITING_VISUAL_APPROVAL",
+  "status": "BLIND_GT_DRAFT_REVIEW_PACKAGE",
   "n_frames": 150,
   "counts": {
     "frames_by_split": {
@@ -9,10 +9,16 @@
       "dev": 43,
       "holdout": 53
     },
-    "positive_boxes": 0,
+    "frames_with_draft_boxes": 12,
+    "positive_boxes": 127,
     "ignore_boxes": 0,
-    "reviewed_frames": 0
+    "uncertain_boxes": 0,
+    "incomplete_frames": 150,
+    "human_complete_frames": 0
   },
   "freeze_status": "NOT_FROZEN",
-  "written_at_utc": "2026-07-28T21:59:22.949538+00:00"
+  "human_approved": false,
+  "acceptance_eligible": false,
+  "written_at_utc": "2026-07-28T23:11:32.015191+00:00",
+  "note": "R1-F1 draft package; not frozen; not acceptance-eligible"
 }
