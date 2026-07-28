@@ -1,8 +1,8 @@
 {
   "schema": "reboot_00_authoritative_baseline_v1",
-  "timestamp_utc": "2026-07-28T11:11:42.787579+00:00",
-  "repo_head": "d388e7ecbbc89975eaf4d397850d9bf7f26d1e2e",
-  "repo_head_note": "pre-R0 HEAD; R0 will add a new commit on top",
+  "timestamp_utc": "2026-07-28T11:12:41.459552+00:00",
+  "repo_head": "4213fc21fe40e5c6e5ce84f1aafbea82e5def891",
+  "repo_head_note": "R0 commit on main after cleanup",
   "source_video": {
     "path": "/mnt/c/Users/furka/Downloads/\u00f6rnek_video_FA.mp4",
     "sha256": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160",
