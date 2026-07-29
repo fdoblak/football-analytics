@@ -1,0 +1,21 @@
+{
+  "schema": "r1_f1_r2_rejection_v1",
+  "status": "REJECTED_BY_USER \u2014 VISUAL QUALITY AND TEMPORAL STABILITY INSUFFICIENT",
+  "previous_gate": "PASS_WITH_FINDINGS \u2014 IMPROVED HUMAN DETECTION PREACCEPTANCE READY; HUMAN GT NOT YET FROZEN",
+  "acceptance_eligible": false,
+  "reasons": [
+    "yolo11n_A_B_visually_too_similar",
+    "boxes_flicker_temporally",
+    "small_distant_still_unreliable",
+    "pitch_eligibility_fence_edge_unreliable",
+    "no_independent_gt",
+    "user_did_not_give_visual_preacceptance"
+  ],
+  "rejected_packages": [
+    "artifacts/evidence/reboot_01/r1_detection_preacceptance/",
+    "artifacts/evidence/reboot_01/r1_f1_gt_review/",
+    "artifacts/evidence/reboot_01/r1_f1_gt_review_REJECTED/ media copies"
+  ],
+  "written_at_utc": "2026-07-29T00:16:01.918393+00:00",
+  "data_loss": false
+}

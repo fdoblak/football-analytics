@@ -1,0 +1,12 @@
+{
+  "id": "ultralytics_yolo11m_coco_person",
+  "path": "/home/fdoblak/football_data/model_archive/yolo11m.pt",
+  "sha256": "d5ffc1a674953a08e11a8d21e022781b1b23a19b730afc309290bd9fb5305b95",
+  "size_bytes": 40684120,
+  "url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11m.pt",
+  "license": "AGPL-3.0",
+  "usage": "evaluation_only",
+  "downloaded_this_stage": true,
+  "selected_as_result_model": false,
+  "written_at_utc": "2026-07-29T00:24:50.588755+00:00"
+}

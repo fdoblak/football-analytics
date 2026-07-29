@@ -25,7 +25,7 @@ from football_analytics.perception.tiling import crop_tile, generate_tiles, map_
 SOURCE_WIDTH = 1336
 SOURCE_HEIGHT = 744
 
-Eligibility = Literal["on_pitch_human_candidate", "off_pitch_human", "uncertain"]
+Eligibility = Literal["on_pitch_human_candidate", "off_pitch_human", "unknown"]
 
 
 @dataclass(frozen=True)
@@ -69,6 +69,7 @@ class HumanDetectConfig:
     min_aspect: float = 0.15
     max_aspect: float = 1.05
     device: str = "auto"
+    half: bool = False
 
 
 def _clip_xyxy(
@@ -148,7 +149,7 @@ def predict_full_frame(
         iou=cfg.predict_iou,
         imgsz=cfg.imgsz_full,
         device=device,
-        half=False,
+        half=cfg.half,
         class_ids=[0],
         class_names=["person"],
         channel_order="bgr",
@@ -189,7 +190,7 @@ def predict_tiled(
             iou=cfg.predict_iou,
             imgsz=cfg.imgsz_tile,
             device=device,
-            half=False,
+            half=cfg.half,
             class_ids=[0],
             class_names=["person"],
             channel_order="bgr",
@@ -228,6 +229,10 @@ def classify_eligibility(
     box_xyxy: tuple[float, float, float, float],
     masks: Any,
 ) -> Eligibility:
+    """Foot-point eligibility only — does not delete detections.
+
+    Conservative: fence/edge uncertainty -> unknown (not automatic on_pitch).
+    """
     xywh = (
         box_xyxy[0],
         box_xyxy[1],
@@ -235,17 +240,26 @@ def classify_eligibility(
         box_xyxy[3] - box_xyxy[1],
     )
     fp = footpoint(xywh)
-    if point_inside(masks.visible, fp):
-        return "on_pitch_human_candidate"
-    # near pitch edge: uncertain rather than hard off
     x, y = fp
-    if 0 <= y < masks.visible.shape[0] and 0 <= x < masks.visible.shape[1]:
-        y0 = max(0, y - 8)
-        y1 = min(masks.visible.shape[0], y + 9)
-        x0 = max(0, x - 8)
-        x1 = min(masks.visible.shape[1], x + 9)
-        if np.count_nonzero(masks.visible[y0:y1, x0:x1]) > 0:
-            return "uncertain"
+    h, w = masks.visible.shape[:2]
+    if x < 0 or y < 0 or x >= w or y >= h:
+        return "off_pitch_human"
+    # Strong interior => on-pitch candidate
+    if point_inside(masks.interior, fp):
+        return "on_pitch_human_candidate"
+    # Visible but not interior / near fence band => unknown (do not auto on_pitch)
+    if point_inside(masks.visible, fp):
+        # near top fence band
+        if y <= int(masks.fence_y) + 18:
+            return "unknown"
+        return "on_pitch_human_candidate"
+    # neighborhood green touch => unknown rather than off
+    y0 = max(0, y - 10)
+    y1 = min(h, y + 11)
+    x0 = max(0, x - 10)
+    x1 = min(w, x + 11)
+    if np.count_nonzero(masks.visible[y0:y1, x0:x1]) > 0:
+        return "unknown"
     return "off_pitch_human"
 
 

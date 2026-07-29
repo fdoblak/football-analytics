@@ -1,0 +1,38 @@
+{
+  "schema": "r1_f1_r2_bakeoff_v1",
+  "diagnostic_not_accuracy": true,
+  "selected": null,
+  "summary": {
+    "A_yolo11n_full": {
+      "flicker1": 22,
+      "eff": 31,
+      "jitter": 0.227,
+      "small": 9,
+      "merged": 4
+    },
+    "B_yolo11n_hybrid": {
+      "flicker1": 27,
+      "eff": 36,
+      "jitter": 0.226,
+      "small": 92,
+      "merged": 3
+    },
+    "C_yolo11m_hybrid": {
+      "flicker1": 28,
+      "eff": 42,
+      "jitter": 0.229,
+      "small": 85,
+      "merged": 3
+    },
+    "D_yolo11m_hybrid_temporal": {
+      "flicker1": 28,
+      "eff": 32,
+      "jitter": 0.229,
+      "small": 85,
+      "merged": 3
+    }
+  },
+  "decision": "NO-GO \u2014 STRONGER HUMAN DETECTION STILL VISUALLY INSUFFICIENT",
+  "reason": "yolo11m hybrid/temporal did not clearly beat yolo11n hybrid B on effective-flicker + small continuity + jitter jointly on fixed 30-frame audit; small dropped 92\u219285 while raw flicker worsened.",
+  "written_at_utc": "2026-07-29T00:24:50.588504+00:00"
+}

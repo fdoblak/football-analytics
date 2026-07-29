@@ -579,7 +579,7 @@ class CliAndGitTests(unittest.TestCase):
         )
         allowed = {
             "artifacts/final_delivery/real_video_analysis_proof.mp4",
-            "artifacts/evidence/reboot_01/r1_detection_preacceptance/R1_human_detection_proof.mp4",
+            "artifacts/evidence/reboot_01/r1_detection_candidate_v2/R1_human_detection_candidate_v2.mp4",
         }
         tracked = {line.strip() for line in proc.stdout.splitlines() if line.strip()}
         self.assertTrue(tracked.issubset(allowed), tracked)

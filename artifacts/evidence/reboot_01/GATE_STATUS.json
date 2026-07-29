@@ -1,6 +1,5 @@
 {
-  "schema": "r1_f1_r1_gate_status_v1",
-  "gate": "PASS_WITH_FINDINGS — IMPROVED HUMAN DETECTION PREACCEPTANCE READY; HUMAN GT NOT YET FROZEN",
-  "selected_config": "B_yolo11n_hybrid_tiled",
-  "written_at_utc": "2026-07-28T23:51:53.166708+00:00"
+  "schema": "r1_f1_r2_gate_status_v1",
+  "gate": "NO-GO \u2014 STRONGER HUMAN DETECTION STILL VISUALLY INSUFFICIENT",
+  "written_at_utc": "2026-07-29T00:24:50.588824+00:00"
 }
