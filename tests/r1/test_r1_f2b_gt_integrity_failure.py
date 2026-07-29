@@ -13,8 +13,21 @@ FAIL = EV / "r1_f2b_gt_integrity_failure"
 
 class R1F2BIntegrityFailureTests(unittest.TestCase):
     def test_gate_is_integrity_nogo(self) -> None:
+        # Historical F2B gate is retained in stage evidence; current GATE_STATUS may
+        # have advanced to train-repair readiness (FIX2) without freezing.
+        hist = FAIL / "integrity_report.json"
+        self.assertTrue(hist.is_file())
+        rep = json.loads(hist.read_text(encoding="utf-8"))
+        self.assertFalse(rep["frozen"])
         gate = json.loads((EV / "GATE_STATUS.json").read_text(encoding="utf-8"))
-        self.assertEqual(gate["gate"], "NO-GO — REVIEWED GT INTEGRITY FAILURE")
+        self.assertIn(
+            gate["gate"],
+            {
+                "NO-GO — REVIEWED GT INTEGRITY FAILURE",
+                "PASS — TRAIN ANNOTATION REPAIR READY",
+                "NO-GO — TRAIN ANNOTATION REPAIR TOOL FAILURE",
+            },
+        )
         self.assertFalse(gate["frozen"])
         self.assertFalse(gate["acceptance_eligible"])
 

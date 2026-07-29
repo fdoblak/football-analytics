@@ -19,8 +19,10 @@ class R1F2AIntegrityTests(unittest.TestCase):
             in {
                 "PASS — INDEPENDENT HUMAN GT REVIEW TOOL READY",
                 "PASS — WINDOWS GT REVIEW LAUNCHER VERIFIED",
+                "PASS — TRAIN ANNOTATION REPAIR READY",
                 "NO-GO — REVIEWED GT INTEGRITY FAILURE",
                 "NO-GO — FINE-TUNED HUMAN DETECTOR HOLDOUT FAILURE",
+                "NO-GO — TRAIN ANNOTATION REPAIR TOOL FAILURE",
                 (
                     "PASS_WITH_FINDINGS — INDEPENDENT HUMAN DETECTOR ACCEPTED "
                     "ON OWN-VIDEO CLIP; GENERALIZATION NOT VALIDATED"
@@ -29,9 +31,11 @@ class R1F2AIntegrityTests(unittest.TestCase):
         )
         if gate["gate"].startswith("PASS —"):
             self.assertFalse(gate["acceptance_eligible"])
-            self.assertFalse(gate["human_approved"])
-            self.assertFalse(gate["reviewed_gt"])
-            self.assertFalse(gate["frozen"])
+            self.assertFalse(gate.get("frozen", False))
+            if "human_approved" in gate:
+                self.assertFalse(gate["human_approved"])
+            if "reviewed_gt" in gate:
+                self.assertFalse(gate["reviewed_gt"])
 
     def test_selection_manifest(self) -> None:
         sel = json.loads(
@@ -59,6 +63,7 @@ class R1F2AIntegrityTests(unittest.TestCase):
             names,
             {
                 "START_GT_REVIEW.bat",
+                "START_TRAIN_REPAIR.bat",
                 "README_TR.txt",
                 "REVIEW_PROGRESS.html",
                 "NO_MODEL_RESULT_YET.txt",

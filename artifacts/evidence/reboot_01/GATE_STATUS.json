@@ -1,11 +1,11 @@
 {
-  "schema": "r1_f2b_gate_status_v1",
-  "gate": "NO-GO \u2014 REVIEWED GT INTEGRITY FAILURE",
-  "frozen": false,
+  "schema": "r1_f2a_fix2_gate_status_v1",
+  "gate": "PASS — TRAIN ANNOTATION REPAIR READY",
+  "acceptance_eligible": false,
   "human_approved": false,
   "reviewed_gt": false,
-  "acceptance_eligible": false,
-  "draft_sha256": "58c490da12be4feeea9c5b74b6f6ca82ff996eb4f554bead0b379e442cccd1ac",
-  "failed_train_empty_n": 37,
-  "written_at_utc": "2026-07-29T10:10:50.854974+00:00"
+  "frozen": false,
+  "repair_mode": "train-empty-complete",
+  "repair_target_n": 37,
+  "written_at_utc": "2026-07-29T10:36:59.525795+00:00"
 }

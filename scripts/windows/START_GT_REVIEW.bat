@@ -59,5 +59,5 @@ pause
 exit /b 0
 
 :CHECK_HEALTH
-powershell -NoProfile -ExecutionPolicy Bypass -Command "try { $r = Invoke-RestMethod -Uri 'http://127.0.0.1:8766/health' -TimeoutSec 2; if ($r.status -eq 'ok' -and $r.service -eq 'r1_independent_gt_review' -and $r.source_id -eq 'own_video_97b298e4') { exit 0 } else { exit 1 } } catch { exit 1 }"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "try { $r = Invoke-RestMethod -Uri 'http://127.0.0.1:8766/health' -TimeoutSec 2; if ($r.status -eq 'ok' -and $r.service -eq 'r1_independent_gt_review' -and $r.source_id -eq 'own_video_97b298e4' -and ($null -eq $r.repair_mode -or $r.repair_mode -eq '')) { exit 0 } else { exit 1 } } catch { exit 1 }"
 exit /b %ERRORLEVEL%

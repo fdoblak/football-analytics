@@ -1,0 +1,63 @@
+{
+  "schema": "r1_f2a_fix2_repair_manifest_v1",
+  "repair_mode": "train-empty-complete",
+  "failed_train_frame_indices": [
+    24,
+    30,
+    36,
+    45,
+    54,
+    60,
+    70,
+    80,
+    90,
+    100,
+    110,
+    120,
+    131,
+    138,
+    144,
+    150,
+    160,
+    170,
+    180,
+    190,
+    200,
+    210,
+    221,
+    232,
+    240,
+    250,
+    260,
+    270,
+    280,
+    290,
+    300,
+    306,
+    312,
+    320,
+    330,
+    340,
+    350
+  ],
+  "protected_train_frame_indices": [
+    0,
+    5,
+    15
+  ],
+  "fingerprints": {
+    "dev": "e2a9020a09bcba7e80c2b5e419cd79bfb05c344f7f836b03888807ea3e234d81",
+    "holdout": "29644e511b4f32369f9fb64459eabc92cac9bb7cef5ed894eafa44f1095519ed",
+    "protected_train": "9d4d5033d5c23f11e6c5ffc9c7c607c94ff4fcc6d8dabc7b1b8c221202d5f56f",
+    "source_sha256": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160"
+  },
+  "fingerprints_before": {
+    "dev": "e2a9020a09bcba7e80c2b5e419cd79bfb05c344f7f836b03888807ea3e234d81",
+    "holdout": "29644e511b4f32369f9fb64459eabc92cac9bb7cef5ed894eafa44f1095519ed",
+    "protected_train": "9d4d5033d5c23f11e6c5ffc9c7c607c94ff4fcc6d8dabc7b1b8c221202d5f56f",
+    "source_sha256": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160"
+  },
+  "root_cause": "UI allowed Complete while pending proposals remained and humans=[]",
+  "dev_holdout_immutable": true,
+  "written_at_utc": "2026-07-29T10:36:59.523517+00:00"
+}

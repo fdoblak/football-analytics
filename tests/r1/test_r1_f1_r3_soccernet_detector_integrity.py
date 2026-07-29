@@ -28,6 +28,8 @@ class R1F1R3IntegrityTests(unittest.TestCase):
             or g.startswith("PASS_WITH_FINDINGS — SOCCERNET FOOTBALL HUMAN DETECTOR")
             or g.startswith("PASS — INDEPENDENT HUMAN GT REVIEW TOOL READY")
             or g.startswith("PASS — WINDOWS GT REVIEW LAUNCHER VERIFIED")
+            or g.startswith("PASS — TRAIN ANNOTATION REPAIR READY")
+            or g.startswith("NO-GO — TRAIN ANNOTATION REPAIR TOOL FAILURE")
             or g.startswith("NO-GO — REVIEWED GT INTEGRITY FAILURE")
             or g.startswith("NO-GO — FINE-TUNED HUMAN DETECTOR HOLDOUT FAILURE")
             or g.startswith("PASS_WITH_FINDINGS — INDEPENDENT HUMAN DETECTOR ACCEPTED")
