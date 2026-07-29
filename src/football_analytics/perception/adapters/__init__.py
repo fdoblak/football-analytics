@@ -11,8 +11,10 @@ __all__ = [
     "RawPersonBox",
     "UltralyticsPersonAdapter",
     "UltralyticsBallAdapter",
+    "SoccerNetGameStateDetectorAdapter",
     "get_person_adapter",
     "get_ball_adapter",
+    "get_soccernet_gamestate_detector_adapter",
 ]
 
 
@@ -39,4 +41,16 @@ def __getattr__(name: str) -> Any:
         from football_analytics.perception.adapters.ultralytics_ball import get_ball_adapter
 
         return get_ball_adapter
+    if name == "SoccerNetGameStateDetectorAdapter":
+        from football_analytics.perception.adapters.soccernet_gamestate_detector import (
+            SoccerNetGameStateDetectorAdapter,
+        )
+
+        return SoccerNetGameStateDetectorAdapter
+    if name == "get_soccernet_gamestate_detector_adapter":
+        from football_analytics.perception.adapters.soccernet_gamestate_detector import (
+            get_soccernet_gamestate_detector_adapter,
+        )
+
+        return get_soccernet_gamestate_detector_adapter
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

@@ -1,0 +1,109 @@
+{
+  "schema": "r1_f1_r3_blocker_v1",
+  "gate": "NO-GO \u2014 OFFICIAL SOCCER FOOTBALL DETECTOR UNAVAILABLE OR INSUFFICIENT",
+  "reason": "official_detector_is_coco_yolo11m_unproven_football_ft_and_does_not_clearly_beat_B;S_small=0_vs_B=59;ST_small=0;S_flicker=22.0_B=27.0",
+  "fine_tune_status": "UNPROVEN_COCO_PRETRAINED_GENERIC",
+  "classification": "COCO_pretrained_generic_model_not_football_ft",
+  "next_mandatory_step": "insan onayl\u0131 train/dev/holdout GT + football-domain detector fine-tuning",
+  "bakeoff_summary": {
+    "B": {
+      "name": "B_yolo11n_hybrid",
+      "observed_detections": 570,
+      "small_distant_detected": 59,
+      "merged_person_boxes": 3,
+      "duplicate_boxes": 0,
+      "off_pitch_or_unknown": 38,
+      "flicker1": 27.0,
+      "flicker2": 31.0,
+      "effective_flicker": 36.0,
+      "bbox_jitter": 0.22635062373075399,
+      "raw_temporal": {
+        "one_frame_disappearance": 27.0,
+        "two_frame_disappearance": 31.0,
+        "reappearance": 58.0,
+        "center_jitter": 0.22635062373075399,
+        "size_jitter": 0.15320005536105522,
+        "short_lived": 281.0,
+        "observed_coverage": 1.0,
+        "carried_coverage": 0.0,
+        "duplicate_rate": 0.0,
+        "effective_one_frame_gap": 36.0,
+        "diagnostic_not_accuracy": true
+      },
+      "n_frames": 30,
+      "frame_wh": [
+        1336,
+        744
+      ]
+    },
+    "S": {
+      "name": "S_soccernet_official_yolo11m",
+      "observed_detections": 380,
+      "small_distant_detected": 0,
+      "merged_person_boxes": 11,
+      "duplicate_boxes": 0,
+      "off_pitch_or_unknown": 11,
+      "flicker1": 22.0,
+      "flicker2": 17.0,
+      "effective_flicker": 30.0,
+      "bbox_jitter": 0.25293796670771657,
+      "raw_temporal": {
+        "one_frame_disappearance": 22.0,
+        "two_frame_disappearance": 17.0,
+        "reappearance": 39.0,
+        "center_jitter": 0.25293796670771657,
+        "size_jitter": 0.12940149251909608,
+        "short_lived": 182.0,
+        "observed_coverage": 1.0,
+        "carried_coverage": 0.0,
+        "duplicate_rate": 0.0,
+        "effective_one_frame_gap": 30.0,
+        "diagnostic_not_accuracy": true
+      },
+      "n_frames": 30,
+      "frame_wh": [
+        1336,
+        744
+      ]
+    },
+    "ST": {
+      "name": "ST_soccernet_plus_temporal",
+      "observed_detections": 380,
+      "small_distant_detected": 0,
+      "merged_person_boxes": 11,
+      "duplicate_boxes": 0,
+      "off_pitch_or_unknown": 11,
+      "flicker1": 22.0,
+      "flicker2": 17.0,
+      "effective_flicker": 32.0,
+      "bbox_jitter": 0.25293796670771657,
+      "raw_temporal": {
+        "one_frame_disappearance": 22.0,
+        "two_frame_disappearance": 17.0,
+        "reappearance": 39.0,
+        "center_jitter": 0.25293796670771657,
+        "size_jitter": 0.12940149251909608,
+        "short_lived": 182.0,
+        "observed_coverage": 0.9336609336609336,
+        "carried_coverage": 0.06633906633906633,
+        "duplicate_rate": 0.0,
+        "effective_one_frame_gap": 32.0,
+        "diagnostic_not_accuracy": true
+      },
+      "n_frames": 30,
+      "frame_wh": [
+        1336,
+        744
+      ]
+    }
+  },
+  "isolated_env_smoke": {
+    "sn_gamestate_python": "/home/fdoblak/miniconda3/envs/sn-gamestate/bin/python",
+    "sn_gamestate_torch_ultralytics": false,
+    "sn_gamestate_error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nModuleNotFoundError: No module named 'torch'\n",
+    "worker_python_selected": "/home/fdoblak/miniconda3/envs/ai-dev/bin/python",
+    "worker_is_sn_gamestate": false
+  },
+  "media_retained": false,
+  "written_at_utc": "2026-07-29T00:46:43.514738+00:00"
+}

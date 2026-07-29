@@ -1,0 +1,56 @@
+{
+  "schema": "r1_f1_r3_agent_pixel_diagnostic_v1",
+  "classification": [
+    "AGENT_PIXEL_GROUNDED_DIAGNOSTIC",
+    "NOT_INDEPENDENT_GT",
+    "NOT_ACCURACY"
+  ],
+  "frames_inspected": [
+    60,
+    330,
+    660,
+    860,
+    1010
+  ],
+  "per_candidate": {
+    "B": {
+      "obvious_visible_humans": "most_on_pitch_players_boxed_on_spot_frames",
+      "observed_detections": 570,
+      "obvious_misses": "occasional_small_distant_still_missed_vs_eye",
+      "obvious_false_positives": "rare_on_spot_frames",
+      "merged_person_boxes": 3,
+      "duplicate_boxes": 0,
+      "loose_boxes": "some_padding_ok",
+      "small_distant_detected": 59,
+      "off_pitch_people": 38,
+      "one_frame_disappearances": 27.0,
+      "two_frame_disappearances": 31.0,
+      "bbox_jitter": 0.22635062373075399
+    },
+    "S": {
+      "obvious_visible_humans": "midfield_ok_but_fewer_than_B_on_crowded_goal_area",
+      "observed_detections": 380,
+      "obvious_misses": "f1010_goalkeeper_black_kit_missed;_small_distant_metric_zero",
+      "obvious_false_positives": "not_increased_vs_B_on_spot_frames",
+      "merged_person_boxes": 11,
+      "duplicate_boxes": 0,
+      "loose_boxes": "similar",
+      "small_distant_detected": 0,
+      "off_pitch_people": 11,
+      "one_frame_disappearances": 22.0,
+      "two_frame_disappearances": 17.0,
+      "bbox_jitter": 0.25293796670771657
+    },
+    "ST": {
+      "note": "observed_same_as_S; carried_not_counted_as_observed",
+      "observed_detections": 380,
+      "small_distant_detected": 0,
+      "merged_person_boxes": 11,
+      "one_frame_disappearances": 22.0,
+      "bbox_jitter": 0.25293796670771657,
+      "effective_flicker": 32.0
+    }
+  },
+  "verdict": "S/ST do not clearly beat B; official detector is COCO yolo11m not football FT",
+  "written_at_utc": "2026-07-29T00:47:44.305789+00:00"
+}

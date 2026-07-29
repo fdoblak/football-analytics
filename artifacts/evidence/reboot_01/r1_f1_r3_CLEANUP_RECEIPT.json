@@ -1,0 +1,193 @@
+{
+  "schema": "r1_f1_r3_cleanup_receipt_v1",
+  "data_loss": false,
+  "n_removed": 5,
+  "bytes_removed": 40686309,
+  "yolo11m_deleted": true,
+  "removed": [
+    {
+      "path": "/home/fdoblak/projects/football-analytics/artifacts/evidence/reboot_01/r1_f1_gt_review/CHECKSUMS.sha256",
+      "type": "file",
+      "bytes": 1134,
+      "sha256": "3a317eb82359a6ee3dee33be055c145e79bc655e64af8389ea6766a25bb9d664",
+      "reason": "r1_f1_r3_cleanup_r1_f1_gt_review",
+      "recoverability": "recreatable_from_git_or_redownload",
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/artifacts/evidence/reboot_01/r1_detection_preacceptance/checksums.sha256",
+      "type": "file",
+      "bytes": 1055,
+      "sha256": "d04fd30e293f64e7316dc25edebf14565f255ad5f560d3e65be5b58b27cd8ea5",
+      "reason": "r1_f1_r3_cleanup_r1_detection_preacceptance",
+      "recoverability": "recreatable_from_git_or_redownload",
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/build",
+      "type": "dir",
+      "bytes": 0,
+      "reason": "build_cache",
+      "recoverability": "regenerable",
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/projects/football-analytics/dist",
+      "type": "dir",
+      "bytes": 0,
+      "reason": "build_cache",
+      "recoverability": "regenerable",
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/football_data/model_archive/yolo11m.pt",
+      "type": "file",
+      "bytes": 40684120,
+      "sha256": "d5ffc1a674953a08e11a8d21e022781b1b23a19b730afc309290bd9fb5305b95",
+      "reason": "unused_rejected_r1_f1_r2_weight",
+      "recoverability": "redownloadable_from_ultralytics_assets_v8.3.0",
+      "data_loss": false,
+      "url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11m.pt"
+    }
+  ],
+  "written_at_utc": "2026-07-29T00:47:44.346252+00:00",
+  "phase2_nogo_media_cleanup": [
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/r1_f1_r3/pixel_spot/B_f330.png",
+      "type": "file",
+      "bytes": 1232846,
+      "sha256": "46eacdb0929a53bab8e82435fc67feeaa07a0a889ad31ba55a793d5769fa7937",
+      "reason": "nogo_temp_pixel_spot_png",
+      "recoverability": "recreatable_from_eval_script",
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/r1_f1_r3/pixel_spot/ST_f330.png",
+      "type": "file",
+      "bytes": 1232031,
+      "sha256": "4c5b925d7445617ed828c9a2afb7988f88bf3dc13cbb947cabb58f57f34866dc",
+      "reason": "nogo_temp_pixel_spot_png",
+      "recoverability": "recreatable_from_eval_script",
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/r1_f1_r3/pixel_spot/B_f660.png",
+      "type": "file",
+      "bytes": 1275434,
+      "sha256": "8e316f7ca997da4807ae56ca449f8ad5f73fa39f518b90fad82188c32c289a2f",
+      "reason": "nogo_temp_pixel_spot_png",
+      "recoverability": "recreatable_from_eval_script",
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/r1_f1_r3/pixel_spot/ST_f660.png",
+      "type": "file",
+      "bytes": 1276779,
+      "sha256": "edf76cddcba5226776577f47d58b4a142a0c1740dee6180db6ac3120549d6447",
+      "reason": "nogo_temp_pixel_spot_png",
+      "recoverability": "recreatable_from_eval_script",
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/r1_f1_r3/pixel_spot/S_f660.png",
+      "type": "file",
+      "bytes": 1276711,
+      "sha256": "5f00e17b76cc0d4ecb3266ef4795114136342e046ea8c489b89ac91feba7dc5f",
+      "reason": "nogo_temp_pixel_spot_png",
+      "recoverability": "recreatable_from_eval_script",
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/r1_f1_r3/pixel_spot/S_f1010.png",
+      "type": "file",
+      "bytes": 1437200,
+      "sha256": "85f10662bb6c93787bc0e8499d01cf7dfe08a26a8fd8ae4a0a2ce7e3268290d1",
+      "reason": "nogo_temp_pixel_spot_png",
+      "recoverability": "recreatable_from_eval_script",
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/r1_f1_r3/pixel_spot/S_f860.png",
+      "type": "file",
+      "bytes": 1462077,
+      "sha256": "59139dc47a4f5a27f99c613f20c359b1a2b6db1ce81a10772815c60824083666",
+      "reason": "nogo_temp_pixel_spot_png",
+      "recoverability": "recreatable_from_eval_script",
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/r1_f1_r3/pixel_spot/B_f860.png",
+      "type": "file",
+      "bytes": 1462177,
+      "sha256": "a176f5a2ce4e52f2a5e7901404702fd0cde9343ec123e882f2b76fc9c9875cab",
+      "reason": "nogo_temp_pixel_spot_png",
+      "recoverability": "recreatable_from_eval_script",
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/r1_f1_r3/pixel_spot/S_f330.png",
+      "type": "file",
+      "bytes": 1232091,
+      "sha256": "5303b912567fd3c7aa4014ff2c8aefe205a94e10709b36b3bae0db10fb87fef3",
+      "reason": "nogo_temp_pixel_spot_png",
+      "recoverability": "recreatable_from_eval_script",
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/r1_f1_r3/pixel_spot/ST_f1010.png",
+      "type": "file",
+      "bytes": 1437234,
+      "sha256": "3377fae594b8157697d449ced37825cd61a1324946692926b18a7608d0755d5d",
+      "reason": "nogo_temp_pixel_spot_png",
+      "recoverability": "recreatable_from_eval_script",
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/r1_f1_r3/pixel_spot/ST_f860.png",
+      "type": "file",
+      "bytes": 1462093,
+      "sha256": "d00d510e56d087797c9a9be0151d720c451794336a835840f6c65b2381820eb6",
+      "reason": "nogo_temp_pixel_spot_png",
+      "recoverability": "recreatable_from_eval_script",
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/r1_f1_r3/pixel_spot/S_f60.png",
+      "type": "file",
+      "bytes": 1475093,
+      "sha256": "dbfa5c2cc2825ec6dd4b63152c92180995d12b6032665e6f4e85f2966970b3df",
+      "reason": "nogo_temp_pixel_spot_png",
+      "recoverability": "recreatable_from_eval_script",
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/r1_f1_r3/pixel_spot/B_f1010.png",
+      "type": "file",
+      "bytes": 1436729,
+      "sha256": "1f6381420c6113778920eb7219af1f22eda4932f5c7ad580794824279a73b83e",
+      "reason": "nogo_temp_pixel_spot_png",
+      "recoverability": "recreatable_from_eval_script",
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/r1_f1_r3/pixel_spot/B_f60.png",
+      "type": "file",
+      "bytes": 1472783,
+      "sha256": "5269a2f745b273798f6b5d9719af177facae209489f411a3a48adc127c0e9f76",
+      "reason": "nogo_temp_pixel_spot_png",
+      "recoverability": "recreatable_from_eval_script",
+      "data_loss": false
+    },
+    {
+      "path": "/home/fdoblak/workspace/own_video_analysis/r1_f1_r3/pixel_spot/ST_f60.png",
+      "type": "file",
+      "bytes": 1475266,
+      "sha256": "1527b058d6a502b3c9ae71056220617183fe8eac5fbdd1f275b7faf96cb5fd52",
+      "reason": "nogo_temp_pixel_spot_png",
+      "recoverability": "recreatable_from_eval_script",
+      "data_loss": false
+    }
+  ],
+  "phase2_bytes": 20646544,
+  "yolo11m_final_absent": true
+}

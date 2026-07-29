@@ -1,5 +1,7 @@
 {
-  "schema": "r1_f1_r2_gate_status_v1",
-  "gate": "NO-GO \u2014 STRONGER HUMAN DETECTION STILL VISUALLY INSUFFICIENT",
-  "written_at_utc": "2026-07-29T00:24:50.588824+00:00"
+  "schema": "r1_f1_r3_gate_status_v1",
+  "gate": "NO-GO \u2014 OFFICIAL SOCCER FOOTBALL DETECTOR UNAVAILABLE OR INSUFFICIENT",
+  "acceptance_eligible": false,
+  "gt_frozen": false,
+  "written_at_utc": "2026-07-29T00:46:43.515157+00:00"
 }

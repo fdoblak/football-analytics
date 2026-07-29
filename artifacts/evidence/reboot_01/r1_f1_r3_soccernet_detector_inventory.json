@@ -1,0 +1,34 @@
+{
+  "schema": "r1_f1_r3_soccernet_detector_inventory_v1",
+  "sn_gamestate_path": "/home/fdoblak/projects/soccernet/sn-gamestate",
+  "tracklab_path": "/home/fdoblak/projects/third-party/tracklab",
+  "bbox_detector_module": "yolo_ultralytics",
+  "model_filename": "yolo11m.pt",
+  "model_url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11m.pt",
+  "fine_tune_status": "UNPROVEN_COCO_PRETRAINED_GENERIC",
+  "classification": {
+    "COCO_pretrained_generic_model": true,
+    "SoccerNet_fine_tuned_football_detector": false,
+    "config_named_but_weight_missing_before_download": true,
+    "baseline_tracker_state": false
+  },
+  "taxonomy": "coco_person_class_0_only",
+  "input_resolution": 640,
+  "min_confidence": 0.4,
+  "nms_iou_ultralytics_default": 0.7,
+  "license_model": "AGPL-3.0",
+  "license_sn_gamestate": "GPL-3.0",
+  "license_tracklab": "MIT",
+  "standalone_detector_possible": true,
+  "weight_individually_downloadable": true,
+  "football_domain_weight_individually_available": false,
+  "note": "Game State default bbox detector is stock Ultralytics yolo11m.pt; no SoccerNet FT checkpoint in-repo.",
+  "isolated_env_smoke": {
+    "sn_gamestate_python": "/home/fdoblak/miniconda3/envs/sn-gamestate/bin/python",
+    "sn_gamestate_torch_ultralytics": false,
+    "sn_gamestate_error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nModuleNotFoundError: No module named 'torch'\n",
+    "worker_python_selected": "/home/fdoblak/miniconda3/envs/ai-dev/bin/python",
+    "worker_is_sn_gamestate": false
+  },
+  "written_at_utc": "2026-07-29T00:45:25.670776+00:00"
+}
