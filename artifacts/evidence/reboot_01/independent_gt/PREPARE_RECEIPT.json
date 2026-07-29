@@ -1,0 +1,9 @@
+{
+  "schema": "r1_f2a_prepare_receipt_v1",
+  "source_sha256": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160",
+  "runtime": "/home/fdoblak/workspace/independent_gt_review/own_video_97b298e4",
+  "n_train_proposals_frames": 40,
+  "n_proposal_boxes": 886,
+  "video_copied": false,
+  "written_at_utc": "2026-07-29T01:13:58.104657+00:00"
+}

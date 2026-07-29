@@ -1,7 +1,17 @@
 {
-  "schema": "r1_f1_r3_gate_status_v1",
-  "gate": "NO-GO \u2014 OFFICIAL SOCCER FOOTBALL DETECTOR UNAVAILABLE OR INSUFFICIENT",
+  "schema": "r1_f2a_gate_status_v1",
+  "gate": "PASS — INDEPENDENT HUMAN GT REVIEW TOOL READY",
   "acceptance_eligible": false,
-  "gt_frozen": false,
-  "written_at_utc": "2026-07-29T00:46:43.515157+00:00"
+  "human_approved": false,
+  "reviewed_gt": false,
+  "frozen": false,
+  "runtime": "/home/fdoblak/workspace/independent_gt_review/own_video_97b298e4",
+  "windows_dir": "/mnt/c/Users/furka/Desktop/Football Analytics Validation/R1 Independent GT",
+  "n_frames": {
+    "train": 40,
+    "dev": 20,
+    "holdout": 20,
+    "total": 80
+  },
+  "written_at_utc": "2026-07-29T01:13:58.104209+00:00"
 }

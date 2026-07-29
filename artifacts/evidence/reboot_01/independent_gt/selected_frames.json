@@ -1,0 +1,772 @@
+{
+  "schema": "independent_gt_frame_selection_v1",
+  "video_id": "own_video_97b298e4",
+  "fps": 30.0,
+  "n_video_frames": 1023,
+  "time_isolation_s": {
+    "train": [
+      0.0,
+      12.0
+    ],
+    "dev": [
+      12.0,
+      22.0
+    ],
+    "holdout": [
+      22.0,
+      34.1
+    ]
+  },
+  "counts": {
+    "train": 40,
+    "dev": 20,
+    "holdout": 20,
+    "total": 80
+  },
+  "min_neighbor_gap_policy": "prefer >=8–12 frames; relax only to fill quota",
+  "coverage_index": {
+    "topup": [
+      "train:0",
+      "train:24",
+      "train:36",
+      "train:54",
+      "train:80",
+      "train:110",
+      "train:138",
+      "train:144",
+      "train:170",
+      "train:232",
+      "train:290",
+      "train:306"
+    ],
+    "easy_negative_regions": [
+      "train:5",
+      "dev:370",
+      "holdout:710"
+    ],
+    "off_pitch_people": [
+      "train:15",
+      "train:350",
+      "holdout:690"
+    ],
+    "wide_camera": [
+      "train:30",
+      "train:90",
+      "train:180",
+      "dev:390",
+      "holdout:720"
+    ],
+    "sideline": [
+      "train:45",
+      "train:300",
+      "dev:620",
+      "holdout:880"
+    ],
+    "small_distant": [
+      "train:60",
+      "train:210",
+      "dev:500",
+      "holdout:820",
+      "holdout:940"
+    ],
+    "lattice": [
+      "train:70",
+      "train:131",
+      "train:160",
+      "train:190",
+      "train:221",
+      "train:260",
+      "train:280",
+      "train:312",
+      "dev:432",
+      "dev:462",
+      "dev:530",
+      "dev:553"
+    ],
+    "partial_truncated": [
+      "train:100",
+      "dev:420",
+      "holdout:760"
+    ],
+    "mid_camera": [
+      "train:120",
+      "train:240",
+      "dev:450",
+      "holdout:780"
+    ],
+    "occlusion": [
+      "train:150",
+      "dev:360",
+      "dev:580",
+      "holdout:900"
+    ],
+    "dark_clothing": [
+      "train:200",
+      "dev:400",
+      "holdout:660",
+      "holdout:1010"
+    ],
+    "motion_blur": [
+      "train:250",
+      "dev:520",
+      "holdout:840"
+    ],
+    "crowded": [
+      "train:270",
+      "train:330",
+      "dev:540",
+      "holdout:860",
+      "holdout:980"
+    ],
+    "goal_area": [
+      "dev:480",
+      "holdout:700",
+      "holdout:740",
+      "holdout:1000"
+    ]
+  },
+  "frames": [
+    {
+      "frame_idx": 0,
+      "t_s": 0.0,
+      "split": "train",
+      "categories": [
+        "topup"
+      ]
+    },
+    {
+      "frame_idx": 5,
+      "t_s": 0.1667,
+      "split": "train",
+      "categories": [
+        "easy_negative_regions"
+      ]
+    },
+    {
+      "frame_idx": 15,
+      "t_s": 0.5,
+      "split": "train",
+      "categories": [
+        "off_pitch_people"
+      ]
+    },
+    {
+      "frame_idx": 24,
+      "t_s": 0.8,
+      "split": "train",
+      "categories": [
+        "topup"
+      ]
+    },
+    {
+      "frame_idx": 30,
+      "t_s": 1.0,
+      "split": "train",
+      "categories": [
+        "wide_camera"
+      ]
+    },
+    {
+      "frame_idx": 36,
+      "t_s": 1.2,
+      "split": "train",
+      "categories": [
+        "topup"
+      ]
+    },
+    {
+      "frame_idx": 45,
+      "t_s": 1.5,
+      "split": "train",
+      "categories": [
+        "sideline"
+      ]
+    },
+    {
+      "frame_idx": 54,
+      "t_s": 1.8,
+      "split": "train",
+      "categories": [
+        "topup"
+      ]
+    },
+    {
+      "frame_idx": 60,
+      "t_s": 2.0,
+      "split": "train",
+      "categories": [
+        "small_distant"
+      ]
+    },
+    {
+      "frame_idx": 70,
+      "t_s": 2.3333,
+      "split": "train",
+      "categories": [
+        "lattice"
+      ]
+    },
+    {
+      "frame_idx": 80,
+      "t_s": 2.6667,
+      "split": "train",
+      "categories": [
+        "topup"
+      ]
+    },
+    {
+      "frame_idx": 90,
+      "t_s": 3.0,
+      "split": "train",
+      "categories": [
+        "wide_camera"
+      ]
+    },
+    {
+      "frame_idx": 100,
+      "t_s": 3.3333,
+      "split": "train",
+      "categories": [
+        "partial_truncated"
+      ]
+    },
+    {
+      "frame_idx": 110,
+      "t_s": 3.6667,
+      "split": "train",
+      "categories": [
+        "topup"
+      ]
+    },
+    {
+      "frame_idx": 120,
+      "t_s": 4.0,
+      "split": "train",
+      "categories": [
+        "mid_camera"
+      ]
+    },
+    {
+      "frame_idx": 131,
+      "t_s": 4.3667,
+      "split": "train",
+      "categories": [
+        "lattice"
+      ]
+    },
+    {
+      "frame_idx": 138,
+      "t_s": 4.6,
+      "split": "train",
+      "categories": [
+        "topup"
+      ]
+    },
+    {
+      "frame_idx": 144,
+      "t_s": 4.8,
+      "split": "train",
+      "categories": [
+        "topup"
+      ]
+    },
+    {
+      "frame_idx": 150,
+      "t_s": 5.0,
+      "split": "train",
+      "categories": [
+        "occlusion"
+      ]
+    },
+    {
+      "frame_idx": 160,
+      "t_s": 5.3333,
+      "split": "train",
+      "categories": [
+        "lattice"
+      ]
+    },
+    {
+      "frame_idx": 170,
+      "t_s": 5.6667,
+      "split": "train",
+      "categories": [
+        "topup"
+      ]
+    },
+    {
+      "frame_idx": 180,
+      "t_s": 6.0,
+      "split": "train",
+      "categories": [
+        "wide_camera"
+      ]
+    },
+    {
+      "frame_idx": 190,
+      "t_s": 6.3333,
+      "split": "train",
+      "categories": [
+        "lattice"
+      ]
+    },
+    {
+      "frame_idx": 200,
+      "t_s": 6.6667,
+      "split": "train",
+      "categories": [
+        "dark_clothing"
+      ]
+    },
+    {
+      "frame_idx": 210,
+      "t_s": 7.0,
+      "split": "train",
+      "categories": [
+        "small_distant"
+      ]
+    },
+    {
+      "frame_idx": 221,
+      "t_s": 7.3667,
+      "split": "train",
+      "categories": [
+        "lattice"
+      ]
+    },
+    {
+      "frame_idx": 232,
+      "t_s": 7.7333,
+      "split": "train",
+      "categories": [
+        "topup"
+      ]
+    },
+    {
+      "frame_idx": 240,
+      "t_s": 8.0,
+      "split": "train",
+      "categories": [
+        "mid_camera"
+      ]
+    },
+    {
+      "frame_idx": 250,
+      "t_s": 8.3333,
+      "split": "train",
+      "categories": [
+        "motion_blur"
+      ]
+    },
+    {
+      "frame_idx": 260,
+      "t_s": 8.6667,
+      "split": "train",
+      "categories": [
+        "lattice"
+      ]
+    },
+    {
+      "frame_idx": 270,
+      "t_s": 9.0,
+      "split": "train",
+      "categories": [
+        "crowded"
+      ]
+    },
+    {
+      "frame_idx": 280,
+      "t_s": 9.3333,
+      "split": "train",
+      "categories": [
+        "lattice"
+      ]
+    },
+    {
+      "frame_idx": 290,
+      "t_s": 9.6667,
+      "split": "train",
+      "categories": [
+        "topup"
+      ]
+    },
+    {
+      "frame_idx": 300,
+      "t_s": 10.0,
+      "split": "train",
+      "categories": [
+        "sideline"
+      ]
+    },
+    {
+      "frame_idx": 306,
+      "t_s": 10.2,
+      "split": "train",
+      "categories": [
+        "topup"
+      ]
+    },
+    {
+      "frame_idx": 312,
+      "t_s": 10.4,
+      "split": "train",
+      "categories": [
+        "lattice"
+      ]
+    },
+    {
+      "frame_idx": 320,
+      "t_s": 10.6667,
+      "split": "train",
+      "categories": [
+        "topup"
+      ]
+    },
+    {
+      "frame_idx": 330,
+      "t_s": 11.0,
+      "split": "train",
+      "categories": [
+        "crowded"
+      ]
+    },
+    {
+      "frame_idx": 340,
+      "t_s": 11.3333,
+      "split": "train",
+      "categories": [
+        "topup"
+      ]
+    },
+    {
+      "frame_idx": 350,
+      "t_s": 11.6667,
+      "split": "train",
+      "categories": [
+        "off_pitch_people"
+      ]
+    },
+    {
+      "frame_idx": 360,
+      "t_s": 12.0,
+      "split": "dev",
+      "categories": [
+        "occlusion"
+      ]
+    },
+    {
+      "frame_idx": 370,
+      "t_s": 12.3333,
+      "split": "dev",
+      "categories": [
+        "easy_negative_regions"
+      ]
+    },
+    {
+      "frame_idx": 390,
+      "t_s": 13.0,
+      "split": "dev",
+      "categories": [
+        "wide_camera"
+      ]
+    },
+    {
+      "frame_idx": 400,
+      "t_s": 13.3333,
+      "split": "dev",
+      "categories": [
+        "dark_clothing"
+      ]
+    },
+    {
+      "frame_idx": 420,
+      "t_s": 14.0,
+      "split": "dev",
+      "categories": [
+        "partial_truncated"
+      ]
+    },
+    {
+      "frame_idx": 432,
+      "t_s": 14.4,
+      "split": "dev",
+      "categories": [
+        "lattice"
+      ]
+    },
+    {
+      "frame_idx": 450,
+      "t_s": 15.0,
+      "split": "dev",
+      "categories": [
+        "mid_camera"
+      ]
+    },
+    {
+      "frame_idx": 462,
+      "t_s": 15.4,
+      "split": "dev",
+      "categories": [
+        "lattice"
+      ]
+    },
+    {
+      "frame_idx": 480,
+      "t_s": 16.0,
+      "split": "dev",
+      "categories": [
+        "goal_area"
+      ]
+    },
+    {
+      "frame_idx": 500,
+      "t_s": 16.6667,
+      "split": "dev",
+      "categories": [
+        "small_distant"
+      ]
+    },
+    {
+      "frame_idx": 520,
+      "t_s": 17.3333,
+      "split": "dev",
+      "categories": [
+        "motion_blur"
+      ]
+    },
+    {
+      "frame_idx": 530,
+      "t_s": 17.6667,
+      "split": "dev",
+      "categories": [
+        "lattice"
+      ]
+    },
+    {
+      "frame_idx": 540,
+      "t_s": 18.0,
+      "split": "dev",
+      "categories": [
+        "crowded"
+      ]
+    },
+    {
+      "frame_idx": 553,
+      "t_s": 18.4333,
+      "split": "dev",
+      "categories": [
+        "lattice"
+      ]
+    },
+    {
+      "frame_idx": 564,
+      "t_s": 18.8,
+      "split": "dev",
+      "categories": [
+        "lattice"
+      ]
+    },
+    {
+      "frame_idx": 580,
+      "t_s": 19.3333,
+      "split": "dev",
+      "categories": [
+        "occlusion"
+      ]
+    },
+    {
+      "frame_idx": 591,
+      "t_s": 19.7,
+      "split": "dev",
+      "categories": [
+        "lattice"
+      ]
+    },
+    {
+      "frame_idx": 602,
+      "t_s": 20.0667,
+      "split": "dev",
+      "categories": [
+        "lattice"
+      ]
+    },
+    {
+      "frame_idx": 620,
+      "t_s": 20.6667,
+      "split": "dev",
+      "categories": [
+        "sideline"
+      ]
+    },
+    {
+      "frame_idx": 633,
+      "t_s": 21.1,
+      "split": "dev",
+      "categories": [
+        "lattice"
+      ]
+    },
+    {
+      "frame_idx": 660,
+      "t_s": 22.0,
+      "split": "holdout",
+      "categories": [
+        "dark_clothing"
+      ]
+    },
+    {
+      "frame_idx": 674,
+      "t_s": 22.4667,
+      "split": "holdout",
+      "categories": [
+        "lattice"
+      ]
+    },
+    {
+      "frame_idx": 690,
+      "t_s": 23.0,
+      "split": "holdout",
+      "categories": [
+        "off_pitch_people"
+      ]
+    },
+    {
+      "frame_idx": 700,
+      "t_s": 23.3333,
+      "split": "holdout",
+      "categories": [
+        "goal_area"
+      ]
+    },
+    {
+      "frame_idx": 710,
+      "t_s": 23.6667,
+      "split": "holdout",
+      "categories": [
+        "easy_negative_regions"
+      ]
+    },
+    {
+      "frame_idx": 720,
+      "t_s": 24.0,
+      "split": "holdout",
+      "categories": [
+        "wide_camera"
+      ]
+    },
+    {
+      "frame_idx": 740,
+      "t_s": 24.6667,
+      "split": "holdout",
+      "categories": [
+        "goal_area"
+      ]
+    },
+    {
+      "frame_idx": 760,
+      "t_s": 25.3333,
+      "split": "holdout",
+      "categories": [
+        "partial_truncated"
+      ]
+    },
+    {
+      "frame_idx": 770,
+      "t_s": 25.6667,
+      "split": "holdout",
+      "categories": [
+        "lattice"
+      ]
+    },
+    {
+      "frame_idx": 780,
+      "t_s": 26.0,
+      "split": "holdout",
+      "categories": [
+        "mid_camera"
+      ]
+    },
+    {
+      "frame_idx": 793,
+      "t_s": 26.4333,
+      "split": "holdout",
+      "categories": [
+        "lattice"
+      ]
+    },
+    {
+      "frame_idx": 820,
+      "t_s": 27.3333,
+      "split": "holdout",
+      "categories": [
+        "small_distant"
+      ]
+    },
+    {
+      "frame_idx": 840,
+      "t_s": 28.0,
+      "split": "holdout",
+      "categories": [
+        "motion_blur"
+      ]
+    },
+    {
+      "frame_idx": 860,
+      "t_s": 28.6667,
+      "split": "holdout",
+      "categories": [
+        "crowded"
+      ]
+    },
+    {
+      "frame_idx": 880,
+      "t_s": 29.3333,
+      "split": "holdout",
+      "categories": [
+        "sideline"
+      ]
+    },
+    {
+      "frame_idx": 900,
+      "t_s": 30.0,
+      "split": "holdout",
+      "categories": [
+        "occlusion"
+      ]
+    },
+    {
+      "frame_idx": 940,
+      "t_s": 31.3333,
+      "split": "holdout",
+      "categories": [
+        "small_distant"
+      ]
+    },
+    {
+      "frame_idx": 980,
+      "t_s": 32.6667,
+      "split": "holdout",
+      "categories": [
+        "crowded"
+      ]
+    },
+    {
+      "frame_idx": 1000,
+      "t_s": 33.3333,
+      "split": "holdout",
+      "categories": [
+        "goal_area"
+      ]
+    },
+    {
+      "frame_idx": 1010,
+      "t_s": 33.6667,
+      "split": "holdout",
+      "categories": [
+        "dark_clothing"
+      ]
+    }
+  ],
+  "written_at_utc": "2026-07-29T01:13:46.240707+00:00",
+  "note": "Manifest only — not GT. No agent/YOLO boxes included."
+}

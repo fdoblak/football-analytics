@@ -26,23 +26,23 @@ class R1F1R3IntegrityTests(unittest.TestCase):
         self.assertTrue(
             g.startswith("NO-GO — OFFICIAL SOCCER FOOTBALL DETECTOR")
             or g.startswith("PASS_WITH_FINDINGS — SOCCERNET FOOTBALL HUMAN DETECTOR")
+            or g.startswith("PASS — INDEPENDENT HUMAN GT REVIEW TOOL READY")
         )
 
     def test_nogo_has_no_candidate_media(self) -> None:
-        gate = json.loads((EV / "GATE_STATUS.json").read_text(encoding="utf-8"))
-        if not gate["gate"].startswith("NO-GO"):
-            self.skipTest("PASS path retains media")
+        # R3 blocker artifact remains the source of truth for SoccerNet NO-GO media policy.
+        blocker = json.loads((EV / "r1_f1_r3_BLOCKER.json").read_text(encoding="utf-8"))
+        self.assertTrue(blocker["gate"].startswith("NO-GO — OFFICIAL SOCCER FOOTBALL DETECTOR"))
+        self.assertFalse(blocker.get("media_retained", True))
+        self.assertIn("football-domain detector fine-tuning", blocker["next_mandatory_step"])
         cand = EV / "r1_soccernet_detector_candidate"
         if cand.is_dir():
             for pat in ("*.mp4", "*.png", "*.html"):
                 self.assertEqual(list(cand.glob(pat)), [])
-        blocker = json.loads((EV / "r1_f1_r3_BLOCKER.json").read_text(encoding="utf-8"))
-        self.assertFalse(blocker.get("media_retained", True))
-        self.assertIn("football-domain detector fine-tuning", blocker["next_mandatory_step"])
 
     def test_yolo11m_not_in_archive_on_nogo(self) -> None:
-        gate = json.loads((EV / "GATE_STATUS.json").read_text(encoding="utf-8"))
-        if not gate["gate"].startswith("NO-GO"):
+        blocker = json.loads((EV / "r1_f1_r3_BLOCKER.json").read_text(encoding="utf-8"))
+        if not blocker["gate"].startswith("NO-GO"):
             self.skipTest("selected model may remain archived")
         arch = Path("/home/fdoblak/football_data/model_archive/yolo11m.pt")
         self.assertFalse(arch.is_file())
