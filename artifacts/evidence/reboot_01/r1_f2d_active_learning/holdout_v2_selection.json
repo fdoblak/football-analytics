@@ -1,0 +1,462 @@
+{
+  "schema": "holdout_v2_selection_manifest_v2",
+  "n_frames": 30,
+  "frame_indices": [
+    378,
+    381,
+    408,
+    411,
+    470,
+    488,
+    508,
+    511,
+    572,
+    610,
+    644,
+    647,
+    651,
+    682,
+    731,
+    748,
+    751,
+    801,
+    804,
+    811,
+    828,
+    848,
+    851,
+    888,
+    908,
+    914,
+    926,
+    951,
+    954,
+    991
+  ],
+  "frames": [
+    {
+      "frame_idx": 378,
+      "t_s": 12.6,
+      "planned_categories": [
+        "small_distant",
+        "difficult"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 381,
+      "t_s": 12.7,
+      "planned_categories": [
+        "crowded",
+        "occlusion"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 408,
+      "t_s": 13.6,
+      "planned_categories": [
+        "goal_area",
+        "sideline"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 411,
+      "t_s": 13.7,
+      "planned_categories": [
+        "dark_clothing",
+        "wide_mid"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 470,
+      "t_s": 15.6667,
+      "planned_categories": [
+        "easy_negative_regions"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 488,
+      "t_s": 16.2667,
+      "planned_categories": [
+        "small_distant",
+        "difficult"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 508,
+      "t_s": 16.9333,
+      "planned_categories": [
+        "crowded",
+        "occlusion"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 511,
+      "t_s": 17.0333,
+      "planned_categories": [
+        "goal_area",
+        "sideline"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 572,
+      "t_s": 19.0667,
+      "planned_categories": [
+        "dark_clothing",
+        "wide_mid"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 610,
+      "t_s": 20.3333,
+      "planned_categories": [
+        "easy_negative_regions"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 644,
+      "t_s": 21.4667,
+      "planned_categories": [
+        "small_distant",
+        "difficult"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 647,
+      "t_s": 21.5667,
+      "planned_categories": [
+        "crowded",
+        "occlusion"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 651,
+      "t_s": 21.7,
+      "planned_categories": [
+        "goal_area",
+        "sideline"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 682,
+      "t_s": 22.7333,
+      "planned_categories": [
+        "dark_clothing",
+        "wide_mid"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 731,
+      "t_s": 24.3667,
+      "planned_categories": [
+        "easy_negative_regions"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 748,
+      "t_s": 24.9333,
+      "planned_categories": [
+        "small_distant",
+        "difficult"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 751,
+      "t_s": 25.0333,
+      "planned_categories": [
+        "crowded",
+        "occlusion"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 801,
+      "t_s": 26.7,
+      "planned_categories": [
+        "goal_area",
+        "sideline"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 804,
+      "t_s": 26.8,
+      "planned_categories": [
+        "dark_clothing",
+        "wide_mid"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 811,
+      "t_s": 27.0333,
+      "planned_categories": [
+        "easy_negative_regions"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 828,
+      "t_s": 27.6,
+      "planned_categories": [
+        "small_distant",
+        "difficult"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 848,
+      "t_s": 28.2667,
+      "planned_categories": [
+        "crowded",
+        "occlusion"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 851,
+      "t_s": 28.3667,
+      "planned_categories": [
+        "goal_area",
+        "sideline"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 888,
+      "t_s": 29.6,
+      "planned_categories": [
+        "dark_clothing",
+        "wide_mid"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 908,
+      "t_s": 30.2667,
+      "planned_categories": [
+        "easy_negative_regions"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 914,
+      "t_s": 30.4667,
+      "planned_categories": [
+        "small_distant",
+        "difficult"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 926,
+      "t_s": 30.8667,
+      "planned_categories": [
+        "crowded",
+        "occlusion"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 951,
+      "t_s": 31.7,
+      "planned_categories": [
+        "goal_area",
+        "sideline"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 954,
+      "t_s": 31.8,
+      "planned_categories": [
+        "dark_clothing",
+        "wide_mid"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    },
+    {
+      "frame_idx": 991,
+      "t_s": 33.0333,
+      "planned_categories": [
+        "easy_negative_regions"
+      ],
+      "section": "holdout_v2",
+      "split": "holdout"
+    }
+  ],
+  "selection_method": {
+    "deterministic_seed": 20260729,
+    "min_distance_from_old_80": 8,
+    "min_block_spacing": 3,
+    "bands": [
+      {
+        "name": "earliest_available",
+        "lo": 378,
+        "hi": 506
+      },
+      {
+        "name": "early_mid",
+        "lo": 506,
+        "hi": 635
+      },
+      {
+        "name": "mid",
+        "lo": 635,
+        "hi": 764
+      },
+      {
+        "name": "late_a",
+        "lo": 764,
+        "hi": 893
+      },
+      {
+        "name": "late_b",
+        "lo": 893,
+        "hi": 1023
+      }
+    ],
+    "uses_detector": false,
+    "uses_confidence": false,
+    "uses_error_analysis": false,
+    "note_early_clip": "Frames 0–~370 have no free slots under min_distance_from_old_80; earliest_available band starts at first free pocket."
+  },
+  "rules": {
+    "not_in_old_80": true,
+    "temporal_buffer_frames": 8,
+    "disjoint_from_active_learning": true,
+    "blind": true,
+    "no_proposals": true,
+    "no_predictions": true,
+    "no_inference_during_review": true
+  },
+  "old_80_excluded": [
+    0,
+    5,
+    15,
+    24,
+    30,
+    36,
+    45,
+    54,
+    60,
+    70,
+    80,
+    90,
+    100,
+    110,
+    120,
+    131,
+    138,
+    144,
+    150,
+    160,
+    170,
+    180,
+    190,
+    200,
+    210,
+    221,
+    232,
+    240,
+    250,
+    260,
+    270,
+    280,
+    290,
+    300,
+    306,
+    312,
+    320,
+    330,
+    340,
+    350,
+    360,
+    370,
+    390,
+    400,
+    420,
+    432,
+    450,
+    462,
+    480,
+    500,
+    520,
+    530,
+    540,
+    553,
+    564,
+    580,
+    591,
+    602,
+    620,
+    633,
+    660,
+    674,
+    690,
+    700,
+    710,
+    720,
+    740,
+    760,
+    770,
+    780,
+    793,
+    820,
+    840,
+    860,
+    880,
+    900,
+    940,
+    980,
+    1000,
+    1010
+  ],
+  "seed": 20260729,
+  "written_at_utc": "2026-07-29T16:06:23.936041+00:00",
+  "selection_fingerprint": "071bbccbd5e39187e7588f71660fec5628500087fc22d19266d3c45f26f3abcc"
+}

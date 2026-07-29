@@ -68,6 +68,7 @@ class ReviewApp:
         *,
         repair_mode: str | None = None,
         holdout_v2: bool = False,
+        active_learning: bool = False,
     ) -> None:
         self.runtime = runtime
         self.video = video
@@ -98,9 +99,23 @@ class ReviewApp:
             raise SystemExit(f"UNSUPPORTED_REPAIR_MODE:{repair_mode}")
         if holdout_v2 and repair_mode:
             raise SystemExit("HOLDOUT_V2_AND_REPAIR_MUTUALLY_EXCLUSIVE")
+        if active_learning and repair_mode:
+            raise SystemExit("ACTIVE_LEARNING_AND_REPAIR_MUTUALLY_EXCLUSIVE")
         self.repair_mode = repair_mode
-        self.holdout_v2 = bool(holdout_v2 or self.draft.get("holdout_v2"))
-        if self.holdout_v2:
+        self.active_learning = bool(active_learning or self.draft.get("active_learning"))
+        # Pure holdout_v2 mode vs dual AL+holdout draft
+        self.holdout_v2 = bool(
+            holdout_v2 or (self.draft.get("holdout_v2") and not self.active_learning)
+        )
+        if self.active_learning:
+            for fr in self.draft["frames"]:
+                if fr.get("section") == "holdout_v2":
+                    fr["proposals"] = []
+                    fr["rejected_proposals"] = []
+                    fr["split"] = "holdout"
+            self.draft["active_learning"] = True
+            self.draft["holdout_v2"] = True
+        elif self.holdout_v2:
             # Blind-only draft: no proposals, no model leakage, annotate from scratch.
             for fr in self.draft["frames"]:
                 fr["proposals"] = []
@@ -127,6 +142,7 @@ class ReviewApp:
                 "index": self.index,
                 "repair_mode": self.repair_mode,
                 "holdout_v2": self.holdout_v2,
+                "active_learning": self.active_learning,
                 "nav_n": len(self.nav_indices),
             }
         )
@@ -175,13 +191,15 @@ class ReviewApp:
 
     def save(self) -> None:
         after = collect_fingerprints(self.draft)
-        if self.holdout_v2:
-            # Holdout_v2 draft is the only mutable content; protect source id.
+        if self.holdout_v2 or self.active_learning:
+            # Protect frozen-era fingerprints / source; AL+holdout drafts are isolated runtimes.
             if after.get("source_sha256") != self.immutable_fp.get("source_sha256"):
-                raise IndependentGTError("HOLDOUT_V2_SOURCE_SHA_CHANGED")
+                raise IndependentGTError("AL_OR_HOLDOUT_SOURCE_SHA_CHANGED")
             if after.get("dev") != self.immutable_fp.get("dev"):
-                raise IndependentGTError("HOLDOUT_V2_MUST_NOT_TOUCH_DEV")
-            if after.get("protected_train") != self.immutable_fp.get("protected_train"):
+                raise IndependentGTError("AL_OR_HOLDOUT_MUST_NOT_TOUCH_DEV")
+            if not self.active_learning and after.get("protected_train") != self.immutable_fp.get(
+                "protected_train"
+            ):
                 raise IndependentGTError("HOLDOUT_V2_MUST_NOT_TOUCH_TRAIN")
         else:
             assert_immutable_fingerprints(self.immutable_fp, after)
@@ -195,6 +213,9 @@ class ReviewApp:
         if self.holdout_v2:
             self.draft["holdout_v2"] = True
             self.draft["blind"] = True
+        if self.active_learning:
+            self.draft["active_learning"] = True
+            self.draft["holdout_v2"] = True
         atomic_write_json(self.draft_path, self.draft)
         by = {
             "train": {"n": 0, "complete": 0},
@@ -215,22 +236,38 @@ class ReviewApp:
                 and fr.get("completed")
             ):
                 repair_complete += 1
-        atomic_write_json(
-            self.progress_path,
-            {
-                "schema": "independent_gt_progress_v1",
-                "n_frames": len(self.draft["frames"]),
-                "n_complete": n_complete,
-                "by_split": by,
-                "repair": {
-                    "mode": self.repair_mode,
-                    "target_n": len(FAILED_TRAIN_FRAME_INDICES),
-                    "complete_n": repair_complete,
-                    "protected_train": list(PROTECTED_TRAIN_FRAME_INDICES),
-                },
-                "updated_at_utc": utc_now(),
+        al_n = al_c = ho_n = ho_c = 0
+        for fr in self.draft["frames"]:
+            sec = fr.get("section")
+            if sec == "active_learning" or (self.active_learning and fr.get("split") == "train"):
+                al_n += 1
+                if fr.get("completed"):
+                    al_c += 1
+            if sec == "holdout_v2" or (self.active_learning and fr.get("split") == "holdout"):
+                ho_n += 1
+                if fr.get("completed"):
+                    ho_c += 1
+        prog_payload = {
+            "schema": (
+                "active_learning_progress_v1"
+                if self.active_learning
+                else "independent_gt_progress_v1"
+            ),
+            "n_frames": len(self.draft["frames"]),
+            "n_complete": n_complete,
+            "by_split": by,
+            "repair": {
+                "mode": self.repair_mode,
+                "target_n": len(FAILED_TRAIN_FRAME_INDICES),
+                "complete_n": repair_complete,
+                "protected_train": list(PROTECTED_TRAIN_FRAME_INDICES),
             },
-        )
+            "updated_at_utc": utc_now(),
+        }
+        if self.active_learning:
+            prog_payload["active_learning"] = {"n": al_n, "complete": al_c}
+            prog_payload["holdout_v2"] = {"n": ho_n, "complete": ho_c}
+        atomic_write_json(self.progress_path, prog_payload)
         atomic_write_json(
             self.session_path,
             {
@@ -238,6 +275,8 @@ class ReviewApp:
                 "index": self.index if not self.repair_mode else self.nav_indices[self.index],
                 "repair_nav_pos": self.index if self.repair_mode else None,
                 "repair_mode": self.repair_mode,
+                "active_learning": self.active_learning,
+                "holdout_v2": self.holdout_v2 or self.active_learning,
                 "video": str(self.video),
                 "source_sha256": self.source_sha,
                 "runtime": str(self.runtime),
@@ -278,40 +317,59 @@ class ReviewApp:
         fr = self.current()
         split = fr["split"]
         assert_no_prediction_leakage(fr, split=split)
+        section = str(fr.get("section") or "")
+        is_holdout_section = section == "holdout_v2" or (
+            self.holdout_v2 and not self.active_learning
+        )
+        is_al_section = section == "active_learning" or (self.active_learning and split == "train")
         proposals = []
-        if split == "train" and not self.holdout_v2:
+        if (is_al_section and not is_holdout_section) or (
+            split == "train" and not self.holdout_v2 and not self.active_learning
+        ):
             proposals = list(fr.get("proposals") or [])
         prog = json.loads(self.progress_path.read_text(encoding="utf-8"))
         counts = frame_gate_counts(fr)
-        gate_errs = validate_train_complete_allowed(fr) if split == "train" else []
+        gate_errs = (
+            validate_train_complete_allowed(fr)
+            if (split == "train" or is_al_section or is_holdout_section)
+            else []
+        )
+        blind = (
+            is_holdout_section
+            or split in {"dev", "holdout"}
+            or (self.holdout_v2 and not self.active_learning)
+        )
         return {
             "index": self.index,
             "n_frames": len(self.nav_indices),
             "frame_idx": fr["frame_idx"],
             "t_s": fr["t_s"],
             "split": split,
+            "section": section or None,
             "categories": fr.get("categories") or [],
             "completed": bool(fr.get("completed")),
             "humans": list(fr.get("humans") or []),
             "proposals": proposals,
-            "rejected_proposals": list(fr.get("rejected_proposals") or []),
+            "rejected_proposals": ([] if blind else list(fr.get("rejected_proposals") or [])),
             "no_human_confirmed": bool(fr.get("no_human_confirmed")),
             "repair_required": bool(fr.get("repair_required")),
             "repair_reason": fr.get("repair_reason"),
             "repair_mode": self.repair_mode,
-            "holdout_v2": self.holdout_v2,
+            "holdout_v2": self.holdout_v2 or is_holdout_section,
+            "active_learning": self.active_learning,
             "gate_counts": counts,
             "complete_hard_errors": gate_errs,
             "complete_soft_warnings": soft_complete_warnings(fr),
             "progress": prog,
             "source_wh": [SOURCE_WIDTH, SOURCE_HEIGHT],
             "coordinate_space": "source_xyxy_px_v1",
-            "blind": split in {"dev", "holdout"} or self.holdout_v2,
+            "blind": blind,
             "policy": {
                 "class": "human",
                 "train_proposals_are_not_gt": True,
                 "dev_holdout_blind": True,
                 "holdout_v2_blind": True,
+                "active_learning_dual_section": self.active_learning,
                 "freeze_requires_explicit_user_approval": True,
                 "false_complete_blocked": True,
                 "model_predictions_api_forbidden": True,
@@ -449,6 +507,7 @@ async function api(path, body){
 async function load(){
   state=await api('/api/state');
   const repair=!!state.repair_mode;
+  const al=!!state.active_learning;
   const banner=document.getElementById('repairBanner');
   const actions=document.getElementById('repairActions');
   if(repair){
@@ -457,29 +516,50 @@ async function load(){
     banner.innerHTML='<b>TRAIN REPAIR — 37 KARE</b><br/>Turuncu = model önerisi, henüz GT değil<br/>Camgöbeği = sizin kabul ettiğiniz insan kutusu';
     document.getElementById('title').textContent='TRAIN REPAIR';
     document.getElementById('topNote').textContent='Dev/holdout korunur. Model önerisi otomatik GT olmaz.';
+  } else if(al){
+    banner.style.display='block';
+    actions.style.display=(state.section==='active_learning')?'block':'none';
+    const sec=state.section||'';
+    banner.innerHTML=sec==='holdout_v2'
+      ? '<b>BÖLÜM B — BLIND HOLDOUT V2</b><br/>Proposal/prediction YOK — sıfırdan kör annotation'
+      : '<b>BÖLÜM A — ACTIVE LEARNING</b><br/>Turuncu = proposal (GT değil). Accept/düzelt/sil/çiz.';
+    document.getElementById('title').textContent='ACTIVE LEARNING + HOLDOUT V2';
+    document.getElementById('topNote').textContent='Freeze/eğitim/R2 YOK. Frozen GT v1 değişmez.';
   } else {
     banner.style.display='none';
     actions.style.display='none';
   }
-  document.getElementById('splitBadge').textContent=state.split.toUpperCase();
+  document.getElementById('splitBadge').textContent=(state.section||state.split).toUpperCase();
   document.getElementById('splitBadge').className='badge split-'+state.split;
   document.getElementById('meta').textContent=
     `i=${state.index+1}/${state.n_frames} f=${state.frame_idx} t=${state.t_s.toFixed(2)}s`+
     (state.completed?' ✓':'');
   const p=state.progress;
-  document.getElementById('prog').textContent=
-    `${p.n_complete}/${p.n_frames} · train ${p.by_split.train.complete}/${p.by_split.train.n}`+
-    ` · dev ${p.by_split.dev.complete}/${p.by_split.dev.n}`+
-    ` · holdout ${p.by_split.holdout.complete}/${p.by_split.holdout.n}`;
+  if(al && p.active_learning && p.holdout_v2){
+    document.getElementById('prog').textContent=
+      `active learning ${p.active_learning.complete}/${p.active_learning.n}`+
+      ` · blind holdout ${p.holdout_v2.complete}/${p.holdout_v2.n}`+
+      ` · total ${p.n_complete}/${p.n_frames}`;
+  } else {
+    document.getElementById('prog').textContent=
+      `${p.n_complete}/${p.n_frames} · train ${p.by_split.train.complete}/${p.by_split.train.n}`+
+      ` · dev ${p.by_split.dev.complete}/${p.by_split.dev.n}`+
+      ` · holdout ${p.by_split.holdout.complete}/${p.by_split.holdout.n}`;
+  }
   if(repair && p.repair){
     document.getElementById('repairProg').textContent=
       `Repair: ${p.repair.complete_n||0}/${p.repair.target_n||37} (ana 80-kare sayacından ayrı)`;
+  } else if(al){
+    document.getElementById('repairProg').textContent=
+      (state.section==='holdout_v2')
+        ? 'Blind holdout: model API kapalı'
+        : 'Pending proposal varken Complete çalışmaz';
   } else {
     document.getElementById('repairProg').textContent='';
   }
   document.getElementById('blindNote').textContent=state.blind
     ? 'DEV/HOLDOUT KÖR: proposal/prediction gizli — sıfırdan çizin'
-    : (repair
+    : (repair || (al && state.section==='active_learning')
       ? 'Turuncu kesikli = pending proposal (GT değil). Camgöbeği = accepted human.'
       : 'TRAIN: mavi kesikli = proposal (GT değil). Kabul/düzelt/sil.');
   const gc=state.gate_counts||{};
@@ -808,6 +888,7 @@ def build_handler(app: ReviewApp) -> type[BaseHTTPRequestHandler]:
                     "host": "127.0.0.1",
                     "repair_mode": app.repair_mode,
                     "holdout_v2": bool(app.holdout_v2),
+                    "active_learning": bool(app.active_learning),
                 }
                 self._json(200, payload)
                 return
@@ -881,7 +962,12 @@ def build_handler(app: ReviewApp) -> type[BaseHTTPRequestHandler]:
                         app._assert_mutable_current()
                         fr = app.current()
                         want = bool(body.get("completed", True))
-                        if want and fr.get("split") == "train":
+                        section = str(fr.get("section") or "")
+                        needs_gate = fr.get("split") == "train" or section in {
+                            "active_learning",
+                            "holdout_v2",
+                        }
+                        if want and needs_gate:
                             errs = validate_train_complete_allowed(fr)
                             if errs:
                                 raise IndependentGTError(";".join(errs))
@@ -976,7 +1062,9 @@ def build_handler(app: ReviewApp) -> type[BaseHTTPRequestHandler]:
                         self._json(200, {"state": app.public_state()})
                         return
                     if path == "/api/accept_proposal":
-                        if app.holdout_v2:
+                        if app.holdout_v2 or (
+                            app.active_learning and app.current().get("section") == "holdout_v2"
+                        ):
                             raise IndependentGTError("HOLDOUT_V2_PROPOSALS_FORBIDDEN")
                         app._assert_mutable_current()
                         fr = app.current()
@@ -1012,7 +1100,9 @@ def build_handler(app: ReviewApp) -> type[BaseHTTPRequestHandler]:
                         self._json(200, {"state": app.public_state()})
                         return
                     if path == "/api/bulk_accept_proposals":
-                        if app.holdout_v2:
+                        if app.holdout_v2 or (
+                            app.active_learning and app.current().get("section") == "holdout_v2"
+                        ):
                             raise IndependentGTError("HOLDOUT_V2_PROPOSALS_FORBIDDEN")
                         app._assert_mutable_current()
                         fr = app.current()
@@ -1033,7 +1123,9 @@ def build_handler(app: ReviewApp) -> type[BaseHTTPRequestHandler]:
                         )
                         return
                     if path == "/api/reject_proposals":
-                        if app.holdout_v2:
+                        if app.holdout_v2 or (
+                            app.active_learning and app.current().get("section") == "holdout_v2"
+                        ):
                             raise IndependentGTError("HOLDOUT_V2_PROPOSALS_FORBIDDEN")
                         app._assert_mutable_current()
                         fr = app.current()
@@ -1080,6 +1172,22 @@ def build_handler(app: ReviewApp) -> type[BaseHTTPRequestHandler]:
                         raise IndependentGTError(
                             "FREEZE_FORBIDDEN_IN_R1_F2_A_REQUIRES_EXPLICIT_LATER_APPROVAL"
                         )
+                    if path in {"/api/predict", "/api/infer", "/api/model"}:
+                        raise IndependentGTError("MODEL_INFERENCE_API_FORBIDDEN")
+                    if (
+                        app.active_learning
+                        and path.startswith("/api/")
+                        and (
+                            app.current().get("section") == "holdout_v2"
+                            and path
+                            in {
+                                "/api/accept_proposal",
+                                "/api/bulk_accept_proposals",
+                                "/api/reject_proposals",
+                            }
+                        )
+                    ):
+                        raise IndependentGTError("HOLDOUT_V2_PROPOSALS_FORBIDDEN")
             except (
                 IndependentGTError,
                 CoordinateError,
@@ -1111,6 +1219,11 @@ def main() -> int:
         action="store_true",
         help="Blind holdout_v2 review (no proposals / no model leakage)",
     )
+    ap.add_argument(
+        "--active-learning",
+        action="store_true",
+        help="Dual AL + blind holdout_v2 review",
+    )
     args = ap.parse_args()
     if args.host not in {"127.0.0.1", "localhost"}:
         raise SystemExit("HOST_MUST_BE_LOCALHOST")
@@ -1119,6 +1232,7 @@ def main() -> int:
         args.video,
         repair_mode=args.repair,
         holdout_v2=bool(args.holdout_v2),
+        active_learning=bool(args.active_learning),
     )
     handler = build_handler(app)
     server = ThreadingHTTPServer((args.host, args.port), handler)
@@ -1127,6 +1241,8 @@ def main() -> int:
         mode += f" repair={args.repair}"
     if args.holdout_v2:
         mode += " holdout_v2"
+    if args.active_learning:
+        mode += " active_learning"
     print(f"R1 Independent GT review on http://{args.host}:{args.port}/{mode}", flush=True)
     print(f"runtime={args.runtime}", flush=True)
     try:

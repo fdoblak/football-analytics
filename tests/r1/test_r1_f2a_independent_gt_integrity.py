@@ -33,6 +33,8 @@ class R1F2AIntegrityTests(unittest.TestCase):
                     "PASS — SMALL-OBJECT DETECTOR DEVELOPMENT GATE PASSED; "
                     "NEW BLIND HOLDOUT REVIEW READY"
                 ),
+                "PASS — ACTIVE LEARNING AND NEW BLIND HOLDOUT REVIEW READY",
+                "NO-GO — ACTIVE LEARNING REVIEW PACKAGE FAILURE",
             }
         )
         if gate["gate"].startswith("PASS —"):
@@ -46,6 +48,13 @@ class R1F2AIntegrityTests(unittest.TestCase):
         if "SMALL-OBJECT DETECTOR DEVELOPMENT GATE" in gate["gate"]:
             self.assertFalse(gate["acceptance_eligible"])
             self.assertEqual(gate.get("stage"), "R1-F2-C")
+            self.assertEqual(
+                gate.get("frozen_gt_fingerprint"),
+                "4e4e46d9edabd98aad53ea2538a2a67cd5cfeb6e0444abf7254b12f01ca4f9f1",
+            )
+        if "ACTIVE LEARNING" in gate["gate"]:
+            self.assertFalse(gate["acceptance_eligible"])
+            self.assertEqual(gate.get("stage"), "R1-F2-D")
             self.assertEqual(
                 gate.get("frozen_gt_fingerprint"),
                 "4e4e46d9edabd98aad53ea2538a2a67cd5cfeb6e0444abf7254b12f01ca4f9f1",
@@ -81,7 +90,9 @@ class R1F2AIntegrityTests(unittest.TestCase):
             {
                 "START_GT_REVIEW.bat",
                 "START_TRAIN_REPAIR.bat",
+                "START_ACTIVE_LEARNING_REVIEW.bat",
                 "README_TR.txt",
+                "ACTIVE_LEARNING_README_TR.txt",
                 "REVIEW_PROGRESS.html",
                 "NO_MODEL_RESULT_YET.txt",
             },

@@ -37,6 +37,8 @@ class R1F2BIntegrityFailureTests(unittest.TestCase):
                     "PASS — SMALL-OBJECT DETECTOR DEVELOPMENT GATE PASSED; "
                     "NEW BLIND HOLDOUT REVIEW READY"
                 ),
+                "PASS — ACTIVE LEARNING AND NEW BLIND HOLDOUT REVIEW READY",
+                "NO-GO — ACTIVE LEARNING REVIEW PACKAGE FAILURE",
             },
         )
         self.assertFalse(gate["acceptance_eligible"])
@@ -44,7 +46,10 @@ class R1F2BIntegrityFailureTests(unittest.TestCase):
             self.assertFalse(gate["frozen"])
         if gate["gate"] == "NO-GO — FINE-TUNED HUMAN DETECTOR HOLDOUT FAILURE":
             self.assertTrue(gate.get("frozen", False))
-        if "SMALL-OBJECT DETECTOR DEVELOPMENT GATE" in gate["gate"]:
+        if (
+            "SMALL-OBJECT DETECTOR DEVELOPMENT GATE" in gate["gate"]
+            or "ACTIVE LEARNING" in gate["gate"]
+        ):
             self.assertEqual(
                 gate.get("frozen_gt_fingerprint"),
                 "4e4e46d9edabd98aad53ea2538a2a67cd5cfeb6e0444abf7254b12f01ca4f9f1",
@@ -67,7 +72,7 @@ class R1F2BIntegrityFailureTests(unittest.TestCase):
         ):
             self.assertTrue(frozen.is_dir())
             return
-        if "SMALL-OBJECT DETECTOR DEVELOPMENT GATE" in g:
+        if "SMALL-OBJECT DETECTOR DEVELOPMENT GATE" in g or "ACTIVE LEARNING" in g:
             self.assertTrue(frozen.is_dir())
             return
         if g == "PASS — TRAIN ANNOTATION REPAIR READY":

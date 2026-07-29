@@ -1,13 +1,15 @@
 {
-  "schema": "r1_f2c_gate_status_v1",
-  "gate": "NO-GO — SMALL-OBJECT DETECTOR DEVELOPMENT GATE FAILED",
-  "stage": "R1-F2-C",
-  "dev_gate_passed": false,
+  "schema": "r1_f2d_gate_status_v1",
+  "gate": "PASS — ACTIVE LEARNING AND NEW BLIND HOLDOUT REVIEW READY",
+  "stage": "R1-F2-D",
   "acceptance_eligible": false,
+  "detector_trained": false,
   "holdout_v1_status": "CONSUMED_FAILED_EVALUATION",
   "acceptance_reusable": false,
   "frozen_gt_fingerprint": "4e4e46d9edabd98aad53ea2538a2a67cd5cfeb6e0444abf7254b12f01ca4f9f1",
-  "selected_run": "C",
-  "holdout_v2_frames": null,
-  "written_at_utc": "2026-07-29T14:26:42.419699+00:00"
+  "protocol_v3_fingerprint": "5531a63c565116c448b14273e2600ff9f7b233a3be5201398ccea079337b8efd",
+  "holdout_v2_n": 30,
+  "active_learning_n": 79,
+  "launcher": "/mnt/c/Users/furka/Desktop/Football Analytics Validation/R1 Independent GT/START_ACTIVE_LEARNING_REVIEW.bat",
+  "written_at_utc": "2026-07-29T16:07:31.643984+00:00"
 }

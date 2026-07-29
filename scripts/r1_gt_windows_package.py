@@ -15,7 +15,9 @@ ALLOWED = frozenset(
     {
         "START_GT_REVIEW.bat",
         "START_TRAIN_REPAIR.bat",
+        "START_ACTIVE_LEARNING_REVIEW.bat",
         "README_TR.txt",
+        "ACTIVE_LEARNING_README_TR.txt",
         "REVIEW_PROGRESS.html",
         "NO_MODEL_RESULT_YET.txt",
     }

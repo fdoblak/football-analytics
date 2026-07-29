@@ -35,9 +35,8 @@ class R1F1R3IntegrityTests(unittest.TestCase):
             or g.startswith("NO-GO — REPAIRED GT INTEGRITY FAILURE")
             or g.startswith("PASS_WITH_FINDINGS — INDEPENDENT HUMAN DETECTOR ACCEPTED")
             or g.startswith("NO-GO — SMALL-OBJECT DETECTOR DEVELOPMENT GATE FAILED")
-            or g.startswith(
-                "PASS — SMALL-OBJECT DETECTOR DEVELOPMENT GATE PASSED"
-            )
+            or g.startswith("PASS — SMALL-OBJECT DETECTOR DEVELOPMENT GATE PASSED")
+            or "ACTIVE LEARNING" in g
         )
 
     def test_nogo_has_no_candidate_media(self) -> None:

@@ -1,0 +1,61 @@
+{
+  "schema": "evaluation_protocol_v3",
+  "protocol_id": "own_video_human_eval_protocol_v3",
+  "frozen_gt_v1_fingerprint_required": "4e4e46d9edabd98aad53ea2538a2a67cd5cfeb6e0444abf7254b12f01ca4f9f1",
+  "primary_scope": "on_pitch_human",
+  "inherits_from": "own_video_human_eval_protocol_v2",
+  "ignore_eligibility": [
+    "uncertain"
+  ],
+  "ignore_prediction_iou": 0.5,
+  "match_iou": 0.5,
+  "matching": "greedy_one_to_one",
+  "data_roles": {
+    "development_data": {
+      "description": "Frozen train40+dev20 GT plus historical holdout_v1 annotations usable only for error analysis / AL candidate scoring",
+      "may_use_for_training": "train_split_only",
+      "may_use_for_threshold_tuning": "dev_split_only",
+      "may_use_for_final_acceptance": false
+    },
+    "active_learning_training_additions": {
+      "description": "New unlabeled frames selected for human review → future train",
+      "may_use_for_training": true,
+      "may_use_for_final_acceptance": false,
+      "proposals_allowed_during_review": true
+    },
+    "dev_calibration_set": {
+      "description": "Frozen dev 20 frames for fusion/conf selection only",
+      "may_use_for_threshold_tuning": true,
+      "may_use_for_final_acceptance": false
+    },
+    "untouched_blind_holdout_v2": {
+      "description": "New 30-frame blind holdout; no proposals; one-shot later",
+      "may_use_for_training": false,
+      "may_use_for_threshold_tuning": false,
+      "may_use_for_model_selection": false,
+      "may_use_for_final_acceptance": true,
+      "proposals_forbidden": true,
+      "inference_during_review_forbidden": true
+    },
+    "consumed_historical_holdout_v1": {
+      "status": "CONSUMED_FAILED_EVALUATION",
+      "acceptance_reusable": false,
+      "may_use_for_error_analysis": true,
+      "may_use_for_training": false,
+      "may_use_for_model_selection": false,
+      "may_use_for_threshold_tuning": false,
+      "may_produce_acceptance": false
+    }
+  },
+  "lineage_rules": {
+    "holdout_v1_not_acceptance": true,
+    "holdout_v2_locked_before_training": true,
+    "holdout_v2_no_tuning": true,
+    "al_and_holdout_v2_disjoint": true,
+    "frozen_gt_v1_immutable": true,
+    "defined_before_inference": true
+  },
+  "gt_mutation_forbidden_for_frozen_v1": true,
+  "written_at_utc": "2026-07-29T16:06:23.932024+00:00",
+  "protocol_fingerprint": "5531a63c565116c448b14273e2600ff9f7b233a3be5201398ccea079337b8efd"
+}

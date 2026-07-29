@@ -37,6 +37,8 @@ class R1F1R2IntegrityTests(unittest.TestCase):
             or gate["gate"].startswith("NO-GO — FINE-TUNED HUMAN DETECTOR HOLDOUT FAILURE")
             or gate["gate"].startswith("NO-GO — REPAIRED GT INTEGRITY FAILURE")
             or gate["gate"].startswith("PASS_WITH_FINDINGS — INDEPENDENT HUMAN DETECTOR ACCEPTED")
+            or "SMALL-OBJECT DETECTOR DEVELOPMENT GATE" in gate["gate"]
+            or "ACTIVE LEARNING" in gate["gate"]
         )
 
     def test_cleanup_receipt(self) -> None:

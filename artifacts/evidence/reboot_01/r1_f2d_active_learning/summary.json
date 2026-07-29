@@ -1,0 +1,36 @@
+{
+  "gate": "PASS — ACTIVE LEARNING AND NEW BLIND HOLDOUT REVIEW READY",
+  "protocol_fingerprint": "5531a63c565116c448b14273e2600ff9f7b233a3be5201398ccea079337b8efd",
+  "holdout_v2": {
+    "n": 30,
+    "fingerprint": "071bbccbd5e39187e7588f71660fec5628500087fc22d19266d3c45f26f3abcc"
+  },
+  "active_learning": {
+    "n": 79,
+    "counts": {
+      "small_distant_weighted": 53,
+      "crowded_occlusion": 76,
+      "hard_negative_fp": 75,
+      "goal_sideline": 57,
+      "total": 79
+    },
+    "fingerprint": "51576e98d64507e043c963181480d9fae17d6a2ac82e27724b45ddd4cc598e07"
+  },
+  "launcher": {
+    "windows_bat": "/mnt/c/Users/furka/Desktop/Football Analytics Validation/R1 Independent GT/START_ACTIVE_LEARNING_REVIEW.bat",
+    "repo_bat": "/home/fdoblak/projects/football-analytics/scripts/windows/START_ACTIVE_LEARNING_REVIEW.bat",
+    "wrapper": "/home/fdoblak/projects/football-analytics/scripts/start_r1_active_learning_review.sh",
+    "port": 8768,
+    "bat_sha256": "5ee699c71edebaf2f6b87734e5617559bd1b909394582637797a9be6729c6f5e"
+  },
+  "cleanup_bytes": 0,
+  "validation": {
+    "ok": true,
+    "errors": []
+  },
+  "detector_plan_ids": [
+    "D1",
+    "D2",
+    "D3"
+  ]
+}

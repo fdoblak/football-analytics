@@ -1,0 +1,17 @@
+{
+  "schema": "r1_f2d_cleanup_receipt_v1",
+  "data_loss": false,
+  "preserved": [
+    "/home/fdoblak/football_data/videos/raw_matches/own_video_97b298e4/original.mp4",
+    "/home/fdoblak/projects/football-analytics/annotations/own_video_97b298e4/human_detection_v1",
+    "/home/fdoblak/football_data/model_archive/yolo11n.pt",
+    "/home/fdoblak/football_data/model_archive/yolo11s.pt",
+    "/home/fdoblak/football_data/model_archive/own_video_human_v1_b_best.pt",
+    "/home/fdoblak/projects/football-analytics/model_registry.yaml",
+    "/home/fdoblak/projects/football-analytics/artifacts/evidence/reboot_01/r1_small_object_redesign"
+  ],
+  "removed": [],
+  "byte_total": 0,
+  "recoverability": "runtime regenerable; Git history intact",
+  "written_at_utc": "2026-07-29T16:07:31.622900+00:00"
+}

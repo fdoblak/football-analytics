@@ -1,0 +1,7 @@
+{
+  "windows_bat": "/mnt/c/Users/furka/Desktop/Football Analytics Validation/R1 Independent GT/START_ACTIVE_LEARNING_REVIEW.bat",
+  "repo_bat": "/home/fdoblak/projects/football-analytics/scripts/windows/START_ACTIVE_LEARNING_REVIEW.bat",
+  "wrapper": "/home/fdoblak/projects/football-analytics/scripts/start_r1_active_learning_review.sh",
+  "port": 8768,
+  "bat_sha256": "5ee699c71edebaf2f6b87734e5617559bd1b909394582637797a9be6729c6f5e"
+}

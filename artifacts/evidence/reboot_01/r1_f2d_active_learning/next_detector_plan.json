@@ -1,0 +1,48 @@
+{
+  "schema": "r1_f2d_next_detector_plan_v1",
+  "status": "PLAN_ONLY_NO_TRAINING",
+  "max_candidates": 3,
+  "candidates": [
+    {
+      "id": "D1",
+      "name": "YOLO11s_fullframe_hires",
+      "arch": "YOLO11s",
+      "inference": "full_frame",
+      "imgsz": [
+        960,
+        1280
+      ],
+      "notes": "Recover precision; higher res for small players without tile FP flood"
+    },
+    {
+      "id": "D2",
+      "name": "YOLO11s_full_tile_precision_fusion",
+      "arch": "YOLO11s",
+      "inference": "hybrid_precision_preserving",
+      "fusion_precision_strategy": {
+        "tile_only_requires_fullframe_support": true,
+        "temporal_persistence": true,
+        "pitch_eligibility_gate": true,
+        "size_aware_confidence": true,
+        "cross_tile_agreement": true,
+        "goal": "prevent F2-C precision collapse from tile-only FP"
+      }
+    },
+    {
+      "id": "D3",
+      "name": "P2_small_object_if_locally_verified",
+      "arch": "conditional",
+      "status": "LOCALLY_VERIFIED_P2_YAML_AVAILABLE",
+      "notes": "Local Ultralytics ships P2 YAMLs (e.g. yolov8-p2 / yolo26-p2). Next round may try one only after confirming trainability; do not invent a YOLO11-P2 YAML.",
+      "verified_local_p2_yaml": true,
+      "local_p2_yaml_sample": [
+        "/home/fdoblak/miniconda3/envs/ai-dev/lib/python3.10/site-packages/ultralytics/cfg/models/26/yolo26-p2.yaml",
+        "/home/fdoblak/miniconda3/envs/ai-dev/lib/python3.10/site-packages/ultralytics/cfg/models/v8/yolov8-ghost-p2.yaml",
+        "/home/fdoblak/miniconda3/envs/ai-dev/lib/python3.10/site-packages/ultralytics/cfg/models/v8/yolov8-p2.yaml"
+      ]
+    }
+  ],
+  "holdout_v2_tuning_forbidden": true,
+  "holdout_v1_acceptance_forbidden": true,
+  "written_at_utc": "2026-07-29T16:09:03.508550+00:00"
+}
