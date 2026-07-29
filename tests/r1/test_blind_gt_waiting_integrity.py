@@ -34,6 +34,8 @@ class R1F1R2IntegrityTests(unittest.TestCase):
             or gate["gate"].startswith("PASS — WINDOWS GT REVIEW LAUNCHER VERIFIED")
             or gate["gate"].startswith("PASS — TRAIN ANNOTATION REPAIR READY")
             or gate["gate"].startswith("NO-GO — TRAIN ANNOTATION REPAIR TOOL FAILURE")
+            or gate["gate"].startswith("NO-GO — FINE-TUNED HUMAN DETECTOR HOLDOUT FAILURE")
+            or gate["gate"].startswith("NO-GO — REPAIRED GT INTEGRITY FAILURE")
             or gate["gate"].startswith("PASS_WITH_FINDINGS — INDEPENDENT HUMAN DETECTOR ACCEPTED")
         )
 

@@ -22,6 +22,7 @@ class R1F2AIntegrityTests(unittest.TestCase):
                 "PASS — TRAIN ANNOTATION REPAIR READY",
                 "NO-GO — REVIEWED GT INTEGRITY FAILURE",
                 "NO-GO — FINE-TUNED HUMAN DETECTOR HOLDOUT FAILURE",
+                "NO-GO — REPAIRED GT INTEGRITY FAILURE",
                 "NO-GO — TRAIN ANNOTATION REPAIR TOOL FAILURE",
                 (
                     "PASS_WITH_FINDINGS — INDEPENDENT HUMAN DETECTOR ACCEPTED "
@@ -31,11 +32,16 @@ class R1F2AIntegrityTests(unittest.TestCase):
         )
         if gate["gate"].startswith("PASS —"):
             self.assertFalse(gate["acceptance_eligible"])
-            self.assertFalse(gate.get("frozen", False))
             if "human_approved" in gate:
                 self.assertFalse(gate["human_approved"])
             if "reviewed_gt" in gate:
                 self.assertFalse(gate["reviewed_gt"])
+        if gate["gate"].startswith("NO-GO — FINE-TUNED HUMAN DETECTOR HOLDOUT FAILURE"):
+            self.assertFalse(gate["acceptance_eligible"])
+            self.assertTrue(gate.get("frozen", False))
+        if gate["gate"].startswith("PASS_WITH_FINDINGS — INDEPENDENT HUMAN DETECTOR"):
+            self.assertFalse(gate["acceptance_eligible"])
+            self.assertTrue(gate.get("frozen", False))
 
     def test_selection_manifest(self) -> None:
         sel = json.loads(

@@ -1,0 +1,44 @@
+{
+  "schema": "r1_f2b_r1_repaired_gt_integrity_v1",
+  "ok": true,
+  "gate": "PASS — REPAIRED GT INTEGRITY",
+  "errors": [],
+  "problem_frames": [],
+  "by_split": {
+    "train": {
+      "n": 40,
+      "complete": 40,
+      "boxes": 827
+    },
+    "dev": {
+      "n": 20,
+      "complete": 20,
+      "boxes": 215
+    },
+    "holdout": {
+      "n": 20,
+      "complete": 20,
+      "boxes": 268
+    }
+  },
+  "fingerprints": {
+    "dev": "e2a9020a09bcba7e80c2b5e419cd79bfb05c344f7f836b03888807ea3e234d81",
+    "holdout": "29644e511b4f32369f9fb64459eabc92cac9bb7cef5ed894eafa44f1095519ed",
+    "protected_train": "9d4d5033d5c23f11e6c5ffc9c7c607c94ff4fcc6d8dabc7b1b8c221202d5f56f",
+    "source_sha256": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160"
+  },
+  "repair": {
+    "schema": "r1_f2a_fix2_repair_validator_v1",
+    "repair_complete": true,
+    "complete_n": 37,
+    "target_n": 37,
+    "errors": [],
+    "written_at_utc": "2026-07-29T11:38:16.370532+00:00",
+    "note": "Repair completion only — does not freeze GT."
+  },
+  "pending_total": 0,
+  "empty_bad": 0,
+  "invalid": 0,
+  "duplicate": 0,
+  "written_at_utc": "2026-07-29T11:38:16.393725+00:00"
+}

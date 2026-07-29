@@ -26,10 +26,19 @@ class R1F2BIntegrityFailureTests(unittest.TestCase):
                 "NO-GO — REVIEWED GT INTEGRITY FAILURE",
                 "PASS — TRAIN ANNOTATION REPAIR READY",
                 "NO-GO — TRAIN ANNOTATION REPAIR TOOL FAILURE",
+                "NO-GO — FINE-TUNED HUMAN DETECTOR HOLDOUT FAILURE",
+                "NO-GO — REPAIRED GT INTEGRITY FAILURE",
+                (
+                    "PASS_WITH_FINDINGS — INDEPENDENT HUMAN DETECTOR ACCEPTED "
+                    "ON OWN-VIDEO CLIP; GENERALIZATION NOT VALIDATED"
+                ),
             },
         )
-        self.assertFalse(gate["frozen"])
         self.assertFalse(gate["acceptance_eligible"])
+        if gate["gate"] == "NO-GO — REVIEWED GT INTEGRITY FAILURE":
+            self.assertFalse(gate["frozen"])
+        if gate["gate"] == "NO-GO — FINE-TUNED HUMAN DETECTOR HOLDOUT FAILURE":
+            self.assertTrue(gate.get("frozen", False))
 
     def test_integrity_report_lists_failed_train_frames(self) -> None:
         rep = json.loads((FAIL / "integrity_report.json").read_text(encoding="utf-8"))
@@ -39,9 +48,21 @@ class R1F2BIntegrityFailureTests(unittest.TestCase):
         self.assertEqual(failed["n"], len(failed["frame_indices"]))
         self.assertEqual(sorted(failed["train_labeled_frame_indices"]), [0, 5, 15])
 
-    def test_no_frozen_annotations_dir(self) -> None:
+    def test_no_frozen_annotations_dir_unless_r1_accepted(self) -> None:
         frozen = REPO / "annotations" / "own_video_97b298e4" / "human_detection_v1"
-        self.assertFalse(frozen.exists())
+        gate = json.loads((EV / "GATE_STATUS.json").read_text(encoding="utf-8"))
+        g = gate["gate"]
+        if g.startswith("PASS_WITH_FINDINGS — INDEPENDENT HUMAN DETECTOR ACCEPTED") or (
+            g.startswith("NO-GO — FINE-TUNED HUMAN DETECTOR HOLDOUT FAILURE") and gate.get("frozen")
+        ):
+            self.assertTrue(frozen.is_dir())
+            return
+        if g == "PASS — TRAIN ANNOTATION REPAIR READY":
+            # repair ready before freeze
+            return
+        # Historical integrity-failure era: freeze must not exist
+        if g == "NO-GO — REVIEWED GT INTEGRITY FAILURE":
+            self.assertFalse(frozen.exists())
 
     def test_no_acceptance_media_package(self) -> None:
         acc = EV / "r1_detector_acceptance"

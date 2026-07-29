@@ -1,11 +1,9 @@
 {
-  "schema": "r1_f2a_fix2_gate_status_v1",
-  "gate": "PASS — TRAIN ANNOTATION REPAIR READY",
+  "schema": "r1_f2b_r1_gate_status_v1",
+  "gate": "NO-GO — FINE-TUNED HUMAN DETECTOR HOLDOUT FAILURE",
   "acceptance_eligible": false,
+  "frozen": true,
   "human_approved": false,
   "reviewed_gt": false,
-  "frozen": false,
-  "repair_mode": "train-empty-complete",
-  "repair_target_n": 37,
-  "written_at_utc": "2026-07-29T10:36:59.525795+00:00"
+  "written_at_utc": "2026-07-29T12:08:38.002639+00:00"
 }

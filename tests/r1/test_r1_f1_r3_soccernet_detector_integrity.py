@@ -32,6 +32,7 @@ class R1F1R3IntegrityTests(unittest.TestCase):
             or g.startswith("NO-GO — TRAIN ANNOTATION REPAIR TOOL FAILURE")
             or g.startswith("NO-GO — REVIEWED GT INTEGRITY FAILURE")
             or g.startswith("NO-GO — FINE-TUNED HUMAN DETECTOR HOLDOUT FAILURE")
+            or g.startswith("NO-GO — REPAIRED GT INTEGRITY FAILURE")
             or g.startswith("PASS_WITH_FINDINGS — INDEPENDENT HUMAN DETECTOR ACCEPTED")
         )
 

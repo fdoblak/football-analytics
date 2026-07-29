@@ -1,134 +1,198 @@
 schema_version: 1
-updated_at: "2026-07-23T14:41:00+03:00"
-notes: >
-  Stage 1C model registry extended in Stage 5B with Ultralytics YOLO11n COCO person.
-  File presence and hashes verified locally.
-  Code license of source repos is recorded separately from weight redistribution terms.
+updated_at: '2026-07-29T15:10:00+03:00'
+notes: 'Stage 1C model registry extended in Stage 5B with Ultralytics YOLO11n COCO
+  person. File presence and hashes verified locally. Code license of source repos
+  is recorded separately from weight redistribution terms.
 
+  '
 models:
-  - id: sn_banner_sv_kp
-    display_name: SoccerNet Banner / NBJW SV keypoints
-    task: sports_field_keypoint_localization
-    status: available
-    file_path: /home/fdoblak/models/soccernet/sn-banner/SV_kp.pth
-    size_bytes: 264964645
-    sha256: 7ea78fa76aaf94976a8eca428d6e3c59697a93430cba1a4603e20284b61f5113
-    framework: pytorch
-    source_type: third_party_checkpoint
-    source_repo: no_bells_just_whistles
-    source_commit: bd993b31c2917096c23bb8aadf148314d17f8345
-    source_url: https://github.com/mguti97/No-Bells-Just-Whistles
-    related_soccernet_repo: sn_banner
-    related_soccernet_commit: f6d50b24a33d6705d4c04dc4d4d93ecd12b08e74
-    license: null
-    license_status: review_required
-    input_spec: {imgsz: [960, 540], color: rgb, normalize: none}
-    output_spec: {heatmap_channels: 58, used_channels: 57, drop_background: true}
-    classes: null
-    precision: fp32
-    device_requirements: {min_vram_mb: 2048, notes: "batch=1; CPU fallback supported; Stage 8B smoke"}
-    tested: true
-    test_scope: stage_8b_pitch_feature_baseline_smoke
-    last_verified: "2026-07-23"
-    approval: evaluation_only
-    production_approved: false
-    notes: >
-      Stage 8B evaluation_only smoke via lazy importlib HRNet (cls_hrnet.py) from locked
-      NBJW absolute path. GPL-2.0 architecture linking risk → evaluation_only;
-      production_approved=false. Do NOT vendor NBJW source into football-analytics.
-      Weight redistribution/license is NOT assumed from repo LICENSE; review_required.
-      Homography solve deferred to Stage 8C. Smoke ≠ football accuracy.
+- id: sn_banner_sv_kp
+  display_name: SoccerNet Banner / NBJW SV keypoints
+  task: sports_field_keypoint_localization
+  status: available
+  file_path: /home/fdoblak/models/soccernet/sn-banner/SV_kp.pth
+  size_bytes: 264964645
+  sha256: 7ea78fa76aaf94976a8eca428d6e3c59697a93430cba1a4603e20284b61f5113
+  framework: pytorch
+  source_type: third_party_checkpoint
+  source_repo: no_bells_just_whistles
+  source_commit: bd993b31c2917096c23bb8aadf148314d17f8345
+  source_url: https://github.com/mguti97/No-Bells-Just-Whistles
+  related_soccernet_repo: sn_banner
+  related_soccernet_commit: f6d50b24a33d6705d4c04dc4d4d93ecd12b08e74
+  license: null
+  license_status: review_required
+  input_spec:
+    imgsz:
+    - 960
+    - 540
+    color: rgb
+    normalize: none
+  output_spec:
+    heatmap_channels: 58
+    used_channels: 57
+    drop_background: true
+  classes: null
+  precision: fp32
+  device_requirements:
+    min_vram_mb: 2048
+    notes: batch=1; CPU fallback supported; Stage 8B smoke
+  tested: true
+  test_scope: stage_8b_pitch_feature_baseline_smoke
+  last_verified: '2026-07-23'
+  approval: evaluation_only
+  production_approved: false
+  notes: 'Stage 8B evaluation_only smoke via lazy importlib HRNet (cls_hrnet.py) from
+    locked NBJW absolute path. GPL-2.0 architecture linking risk → evaluation_only;
+    production_approved=false. Do NOT vendor NBJW source into football-analytics.
+    Weight redistribution/license is NOT assumed from repo LICENSE; review_required.
+    Homography solve deferred to Stage 8C. Smoke ≠ football accuracy.
 
-  - id: sn_banner_sv_lines
-    display_name: SoccerNet Banner / NBJW SV lines
-    task: sports_field_line_localization
-    status: available
-    file_path: /home/fdoblak/models/soccernet/sn-banner/SV_lines.pth
-    size_bytes: 264857893
-    sha256: 2751242917f8c0f858a396e0cfe4521be39fe07bf049590eb21714526acecac1
-    framework: pytorch
-    source_type: third_party_checkpoint
-    source_repo: no_bells_just_whistles
-    source_commit: bd993b31c2917096c23bb8aadf148314d17f8345
-    source_url: https://github.com/mguti97/No-Bells-Just-Whistles
-    related_soccernet_repo: sn_banner
-    related_soccernet_commit: f6d50b24a33d6705d4c04dc4d4d93ecd12b08e74
-    license: null
-    license_status: review_required
-    input_spec: {imgsz: [960, 540], color: rgb, normalize: none}
-    output_spec: {heatmap_channels: 24, used_channels: 23, drop_background: true}
-    classes: null
-    precision: fp32
-    device_requirements: {min_vram_mb: 2048, notes: "batch=1; CPU fallback supported; Stage 8B smoke"}
-    tested: true
-    test_scope: stage_8b_pitch_feature_baseline_smoke
-    last_verified: "2026-07-23"
-    approval: evaluation_only
-    production_approved: false
-    notes: >
-      Stage 8B evaluation_only smoke via lazy importlib HRNet (cls_hrnet_l.py) from locked
-      NBJW absolute path. GPL-2.0 architecture linking risk → evaluation_only;
-      production_approved=false. Do NOT vendor NBJW source. lines_list has trailing space
-      on "Goal left post left ". Weight license review_required. Homography deferred to 8C.
+    '
+- id: sn_banner_sv_lines
+  display_name: SoccerNet Banner / NBJW SV lines
+  task: sports_field_line_localization
+  status: available
+  file_path: /home/fdoblak/models/soccernet/sn-banner/SV_lines.pth
+  size_bytes: 264857893
+  sha256: 2751242917f8c0f858a396e0cfe4521be39fe07bf049590eb21714526acecac1
+  framework: pytorch
+  source_type: third_party_checkpoint
+  source_repo: no_bells_just_whistles
+  source_commit: bd993b31c2917096c23bb8aadf148314d17f8345
+  source_url: https://github.com/mguti97/No-Bells-Just-Whistles
+  related_soccernet_repo: sn_banner
+  related_soccernet_commit: f6d50b24a33d6705d4c04dc4d4d93ecd12b08e74
+  license: null
+  license_status: review_required
+  input_spec:
+    imgsz:
+    - 960
+    - 540
+    color: rgb
+    normalize: none
+  output_spec:
+    heatmap_channels: 24
+    used_channels: 23
+    drop_background: true
+  classes: null
+  precision: fp32
+  device_requirements:
+    min_vram_mb: 2048
+    notes: batch=1; CPU fallback supported; Stage 8B smoke
+  tested: true
+  test_scope: stage_8b_pitch_feature_baseline_smoke
+  last_verified: '2026-07-23'
+  approval: evaluation_only
+  production_approved: false
+  notes: 'Stage 8B evaluation_only smoke via lazy importlib HRNet (cls_hrnet_l.py)
+    from locked NBJW absolute path. GPL-2.0 architecture linking risk → evaluation_only;
+    production_approved=false. Do NOT vendor NBJW source. lines_list has trailing
+    space on "Goal left post left ". Weight license review_required. Homography deferred
+    to 8C.
 
-  - id: ultralytics_yolo11n_coco_person
-    display_name: Ultralytics YOLO11n COCO person + sports ball (Stage 5B/5C)
-    task: person_object_detection
-    status: available
-    file_path: /home/fdoblak/football_data/model_archive/yolo11n.pt
-    size_bytes: 5613764
-    sha256: 0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1
-    framework: ultralytics
-    source_type: official_release_asset
-    source_repo: ultralytics
-    source_commit: null
-    source_url: https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n.pt
-    related_soccernet_repo: null
-    related_soccernet_commit: null
-    license: AGPL-3.0
-    license_status: restricted
-    input_spec: {imgsz: 640, color: bgr}
-    output_spec: {bbox: xyxy, classes: coco80}
-    inference_profile: ball_detection_baseline
-    capabilities:
-      person:
-        class_id: 0
-        class_name: person
-        stage: 5b
-        maps_to_entity: human
-        maps_to_role: unknown
-      sports_ball:
-        class_id: 32
-        class_name: "sports ball"
-        stage: 5c
-        maps_to_entity: ball
-        maps_to_role: unknown
-    classes:
-      person:
-        class_id: 0
-        class_name: person
-        maps_to_entity: human
-        maps_to_role: unknown
-      sports_ball:
-        class_id: 32
-        class_name: sports ball
-        stage: 5c
-        maps_to_entity: ball
-        maps_to_role: unknown
-    precision: fp16_on_cuda_else_fp32
-    device_requirements: {min_vram_mb: 512, notes: "Nano model; batch=1; RTX 3050 4GB smoke-safe"}
-    tested: false
-    test_scope: stage_5b_human_detection_baseline;stage_5c_ball_detection_baseline
-    last_verified: "2026-07-23"
-    approval: evaluation_only
-    production_approved: false
-    notes: >
-      Official Ultralytics yolo11n.pt reused for Stage 5B (person) and Stage 5C (sports ball).
-      Same physical artifact; no second .pt copy. Registry id unchanged for backwards compat.
-      COCO person class id 0 → entity_type=human, role_label=unknown (never player).
-      COCO sports ball class id 32 → entity_type=ball, role_label=unknown (no ownership).
-      Stage 5B person adapter still rejects ball; Stage 5C ball adapter rejects person.
-      AGPL-3.0 distribution/copyleft risk → evaluation_only; production_approved=false.
-      Provenance sibling: /home/fdoblak/football_data/model_archive/yolo11n.pt.provenance.json
-      Network must remain OFF at inference; weights are local-only.
-      Logical profile note: inference_profile=ball_detection_baseline (no weight duplication).
+    '
+- id: ultralytics_yolo11n_coco_person
+  display_name: Ultralytics YOLO11n COCO person + sports ball (Stage 5B/5C)
+  task: person_object_detection
+  status: available
+  file_path: /home/fdoblak/football_data/model_archive/yolo11n.pt
+  size_bytes: 5613764
+  sha256: 0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1
+  framework: ultralytics
+  source_type: official_release_asset
+  source_repo: ultralytics
+  source_commit: null
+  source_url: https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n.pt
+  related_soccernet_repo: null
+  related_soccernet_commit: null
+  license: AGPL-3.0
+  license_status: restricted
+  input_spec:
+    imgsz: 640
+    color: bgr
+  output_spec:
+    bbox: xyxy
+    classes: coco80
+  inference_profile: ball_detection_baseline
+  capabilities:
+    person:
+      class_id: 0
+      class_name: person
+      stage: 5b
+      maps_to_entity: human
+      maps_to_role: unknown
+    sports_ball:
+      class_id: 32
+      class_name: sports ball
+      stage: 5c
+      maps_to_entity: ball
+      maps_to_role: unknown
+  classes:
+    person:
+      class_id: 0
+      class_name: person
+      maps_to_entity: human
+      maps_to_role: unknown
+    sports_ball:
+      class_id: 32
+      class_name: sports ball
+      stage: 5c
+      maps_to_entity: ball
+      maps_to_role: unknown
+  precision: fp16_on_cuda_else_fp32
+  device_requirements:
+    min_vram_mb: 512
+    notes: Nano model; batch=1; RTX 3050 4GB smoke-safe
+  tested: false
+  test_scope: stage_5b_human_detection_baseline;stage_5c_ball_detection_baseline
+  last_verified: '2026-07-23'
+  approval: evaluation_only
+  production_approved: false
+  notes: 'Official Ultralytics yolo11n.pt reused for Stage 5B (person) and Stage 5C
+    (sports ball). Same physical artifact; no second .pt copy. Registry id unchanged
+    for backwards compat. COCO person class id 0 → entity_type=human, role_label=unknown
+    (never player). COCO sports ball class id 32 → entity_type=ball, role_label=unknown
+    (no ownership). Stage 5B person adapter still rejects ball; Stage 5C ball adapter
+    rejects person. AGPL-3.0 distribution/copyleft risk → evaluation_only; production_approved=false.
+    Provenance sibling: /home/fdoblak/football_data/model_archive/yolo11n.pt.provenance.json
+    Network must remain OFF at inference; weights are local-only. Logical profile
+    note: inference_profile=ball_detection_baseline (no weight duplication).
+
+    '
+- id: ultralytics_yolo11s_coco_person
+  display_name: Ultralytics YOLO11s COCO person
+  task: human_detection
+  status: available
+  file_path: /home/fdoblak/football_data/model_archive/yolo11s.pt
+  size_bytes: 19313732
+  sha256: 85a76fe86dd8afe384648546b56a7a78580c7cb7b404fc595f97969322d502d5
+  framework: ultralytics
+  source_type: official_release_asset
+  source_url: https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11s.pt
+  license: AGPL-3.0
+  license_status: restricted
+  approval: evaluation_only
+  production_approved: false
+  notes: Downloaded for R1-F2-B-R1 candidate B parent. AGPL-3.0.
+  tested: true
+  test_scope: r1_f2b_r1_parent_weight
+  last_verified: '2026-07-29'
+- id: own_video_human_v1_yolo11s_ft
+  display_name: Own-video human FT YOLO11s (R1 holdout FAILED)
+  task: human_detection
+  status: deprecated
+  file_path: /home/fdoblak/football_data/model_archive/own_video_human_v1_b_best.pt
+  size_bytes: 19190746
+  sha256: 67176f4cad395712bc6c701cde0b82228ad122b32739a201a683d844c6ea6230
+  framework: ultralytics
+  source_type: third_party_checkpoint
+  license: AGPL-3.0
+  license_status: restricted
+  approval: evaluation_only
+  production_approved: false
+  notes: R1-F2-B-R1 selected on dev; FAILED holdout thresholds. evaluation_only; AGPL
+    parent YOLO11s. own_video_clip_specific.
+  tested: true
+  test_scope: r1_f2b_r1_holdout_failed
+  last_verified: '2026-07-29'

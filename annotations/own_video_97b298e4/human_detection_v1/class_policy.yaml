@@ -1,0 +1,5 @@
+detection_class:
+  id: 0
+  name: human
+role_team_not_in_detector_labels: true
+note: Role/team/eligibility retained in frozen annotations for R2 only.

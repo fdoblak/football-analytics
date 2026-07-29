@@ -1,0 +1,246 @@
+{
+  "status": "EVALUATED",
+  "true_positives": 169,
+  "false_positives": 93,
+  "false_negatives": 99,
+  "precision": 0.6450381679389313,
+  "recall": 0.6305970149253731,
+  "f1": 0.6377358490566037,
+  "ap50": 0.49427385033110033,
+  "ap50_95": 0.14279657357691272,
+  "mean_matched_iou": 0.6413543456371436,
+  "mean_localization_error": 5.646015483180972,
+  "fp_per_frame": 4.65,
+  "missed_humans_per_frame": 4.95,
+  "empty_frame_accuracy": null,
+  "mean_coverage_pred": null,
+  "mean_coverage_gt": null,
+  "predicted_count": 262,
+  "ground_truth_count": 268,
+  "matched_count": 169,
+  "frame_count": 20,
+  "iou_threshold": 0.5,
+  "role_accuracy": null,
+  "duplicate_rate": 0.0,
+  "duplicate_pairs": 0,
+  "small_distant_recall": 0.14285714285714285,
+  "on_pitch_recall": 0.6305970149253731,
+  "off_pitch_recall": null,
+  "n_small_gt": 7,
+  "missed_frames": [
+    {
+      "frame_idx": 660,
+      "fn": 1,
+      "n_gt": 10
+    },
+    {
+      "frame_idx": 674,
+      "fn": 3,
+      "n_gt": 11
+    },
+    {
+      "frame_idx": 690,
+      "fn": 4,
+      "n_gt": 13
+    },
+    {
+      "frame_idx": 700,
+      "fn": 3,
+      "n_gt": 15
+    },
+    {
+      "frame_idx": 710,
+      "fn": 3,
+      "n_gt": 14
+    },
+    {
+      "frame_idx": 720,
+      "fn": 2,
+      "n_gt": 15
+    },
+    {
+      "frame_idx": 740,
+      "fn": 5,
+      "n_gt": 14
+    },
+    {
+      "frame_idx": 760,
+      "fn": 5,
+      "n_gt": 13
+    },
+    {
+      "frame_idx": 770,
+      "fn": 4,
+      "n_gt": 12
+    },
+    {
+      "frame_idx": 780,
+      "fn": 6,
+      "n_gt": 13
+    },
+    {
+      "frame_idx": 793,
+      "fn": 9,
+      "n_gt": 15
+    },
+    {
+      "frame_idx": 820,
+      "fn": 9,
+      "n_gt": 15
+    },
+    {
+      "frame_idx": 840,
+      "fn": 2,
+      "n_gt": 13
+    },
+    {
+      "frame_idx": 860,
+      "fn": 7,
+      "n_gt": 13
+    },
+    {
+      "frame_idx": 880,
+      "fn": 5,
+      "n_gt": 13
+    },
+    {
+      "frame_idx": 900,
+      "fn": 7,
+      "n_gt": 14
+    },
+    {
+      "frame_idx": 940,
+      "fn": 10,
+      "n_gt": 14
+    },
+    {
+      "frame_idx": 980,
+      "fn": 4,
+      "n_gt": 13
+    },
+    {
+      "frame_idx": 1000,
+      "fn": 3,
+      "n_gt": 14
+    },
+    {
+      "frame_idx": 1010,
+      "fn": 7,
+      "n_gt": 14
+    }
+  ],
+  "fp_frames": [
+    {
+      "frame_idx": 660,
+      "fp": 1,
+      "n_pred": 10
+    },
+    {
+      "frame_idx": 674,
+      "fp": 3,
+      "n_pred": 11
+    },
+    {
+      "frame_idx": 690,
+      "fp": 4,
+      "n_pred": 13
+    },
+    {
+      "frame_idx": 700,
+      "fp": 3,
+      "n_pred": 15
+    },
+    {
+      "frame_idx": 710,
+      "fp": 3,
+      "n_pred": 14
+    },
+    {
+      "frame_idx": 720,
+      "fp": 2,
+      "n_pred": 15
+    },
+    {
+      "frame_idx": 740,
+      "fp": 6,
+      "n_pred": 15
+    },
+    {
+      "frame_idx": 760,
+      "fp": 3,
+      "n_pred": 11
+    },
+    {
+      "frame_idx": 770,
+      "fp": 4,
+      "n_pred": 12
+    },
+    {
+      "frame_idx": 780,
+      "fp": 6,
+      "n_pred": 13
+    },
+    {
+      "frame_idx": 793,
+      "fp": 9,
+      "n_pred": 15
+    },
+    {
+      "frame_idx": 820,
+      "fp": 8,
+      "n_pred": 14
+    },
+    {
+      "frame_idx": 840,
+      "fp": 2,
+      "n_pred": 13
+    },
+    {
+      "frame_idx": 860,
+      "fp": 5,
+      "n_pred": 11
+    },
+    {
+      "frame_idx": 880,
+      "fp": 4,
+      "n_pred": 12
+    },
+    {
+      "frame_idx": 900,
+      "fp": 6,
+      "n_pred": 13
+    },
+    {
+      "frame_idx": 940,
+      "fp": 9,
+      "n_pred": 13
+    },
+    {
+      "frame_idx": 980,
+      "fp": 5,
+      "n_pred": 14
+    },
+    {
+      "frame_idx": 1000,
+      "fp": 3,
+      "n_pred": 14
+    },
+    {
+      "frame_idx": 1010,
+      "fp": 7,
+      "n_pred": 14
+    }
+  ],
+  "config": {
+    "model_id": "B",
+    "weights_sha256": "67176f4cad395712bc6c701cde0b82228ad122b32739a201a683d844c6ea6230",
+    "conf": 0.35,
+    "iou": 0.45,
+    "imgsz": 960,
+    "gt_fingerprint": "4e4e46d9edabd98aad53ea2538a2a67cd5cfeb6e0444abf7254b12f01ca4f9f1",
+    "one_shot": true,
+    "config_fingerprint": "7613237d70e840516708ae5d70cb13c43986a98c0d63bdf6b5a8bad1254ba591"
+  },
+  "one_shot_confirmed": true,
+  "matches_n": 169
+}
