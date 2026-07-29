@@ -1,0 +1,25 @@
+{
+  "schema": "r1_f2a_fix1_e2e_receipt_v1",
+  "linux_health": {
+    "http": 200,
+    "body": {
+      "status": "ok",
+      "service": "r1_independent_gt_review",
+      "source_id": "own_video_97b298e4",
+      "source_sha256_ok": true
+    }
+  },
+  "windows_health": {
+    "result": "WIN_HEALTH=ok|r1_independent_gt_review|own_video_97b298e4",
+    "method": "powershell Invoke-RestMethod http://127.0.0.1:8766/health"
+  },
+  "home_http": 200,
+  "frame_http": 200,
+  "frame_content_type": "JPEG 1336x744",
+  "autosave_ok": true,
+  "duplicate_instance_exit_code": 10,
+  "bat_sha256": "bde51b99eaaa89d68a0ab5aeeb1c106424d5f4456a7c904a8827c39de52fa12d",
+  "mirror_sha_match": true,
+  "port_after_stop": "free",
+  "written_at_utc": "2026-07-29T01:35:00+00:00"
+}

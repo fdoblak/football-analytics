@@ -585,6 +585,17 @@ def build_handler(app: ReviewApp) -> type[BaseHTTPRequestHandler]:
 
         def do_GET(self) -> None:  # noqa: N802
             path = urlparse(self.path).path
+            if path == "/health":
+                # Read-only liveness; no annotation mutation / no predictions / no secrets.
+                payload = {
+                    "status": "ok",
+                    "service": "r1_independent_gt_review",
+                    "source_id": "own_video_97b298e4",
+                    "source_sha256_ok": app.source_sha == EXPECTED_SOURCE_SHA256,
+                    "host": "127.0.0.1",
+                }
+                self._json(200, payload)
+                return
             if path == "/":
                 data = HTML.encode("utf-8")
                 # Hard fail if CDN-looking strings appear

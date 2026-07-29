@@ -107,93 +107,18 @@ def generate_train_proposals(
 
 
 def write_windows_package(win_dir: Path, *, port: int = 8766) -> None:
-    win_dir.mkdir(parents=True, exist_ok=True)
-    # Remove anything except allowed files
-    allowed = {
-        "START_GT_REVIEW.bat",
-        "README_TR.txt",
-        "REVIEW_PROGRESS.html",
-        "NO_MODEL_RESULT_YET.txt",
-    }
-    for p in win_dir.rglob("*"):
-        if p.is_file() and p.name not in allowed:
-            p.unlink()
+    del port  # port is fixed at 8766 in the canonical ASCII BAT template
+    import importlib.util
+    import sys
 
-    bat = f"""@echo off
-chcp 65001 >nul
-title R1 Independent Human GT Review
-echo.
-echo  R1 Independent GT Review — yalnız localhost
-echo  Model sonucu / fine-tuning YOK
-echo.
-wsl -e bash -lc "pkill -f r1_independent_gt_review_server.py || true"
-wsl -e bash -lc "cd /home/fdoblak/projects/football-analytics && nohup /home/fdoblak/miniconda3/envs/ai-dev/bin/python scripts/r1_independent_gt_review_server.py --host 127.0.0.1 --port {port} > /home/fdoblak/workspace/independent_gt_review/own_video_97b298e4/server.log 2>&1 &"
-timeout /t 2 /nobreak >nul
-start "" "http://127.0.0.1:{port}/"
-echo Tarayici acildi: http://127.0.0.1:{port}/
-echo Kapatmak icin bu pencereyi kapatip ENTER'a basin.
-pause
-wsl -e bash -lc "pkill -f r1_independent_gt_review_server.py || true"
-"""
-    (win_dir / "START_GT_REVIEW.bat").write_text(bat, encoding="utf-8")
-
-    readme = """R1 Bağımsız İnsan GT İncelemesi
-================================
-
-Bu araç, kendi maç videonuzda sınırlı sayıda kareyi ETİKETLEMENİZ içindir.
-Model doğruluğu / fine-tuning / R2 henüz başlamaz.
-
-NASIL BAŞLATILIR
-----------------
-1) START_GT_REVIEW.bat dosyasına çift tıklayın.
-2) Tarayıcıda http://127.0.0.1:8766 açılır.
-3) Her karede insan kutularını çizin veya (yalnız TRAIN'de) önerileri düzeltin.
-4) Role / forma görünümü / saha içi-dışı / görünürlük seçin.
-5) Kareyi "Complete" yapın; C tuşu = complete + sonraki.
-
-KURALLAR (kısa)
----------------
-- Bir kutu = bir insan (sıkı, baştan ayağa).
-- İki kişiyi tek kutuya almayın.
-- Forma numarası okunmuyorsa yazmayın.
-- DEV ve HOLDOUT kördür: otomatik kutu gösterilmez; sıfırdan çizin.
-- TRAIN'deki mavi öneri kutuları GT değildir; düzeltmeden kabul etmeyin.
-
-KLAVYE
-------
-Y sarı oyuncu · W beyaz oyuncu · R hakem/official · G kaleci · U unknown
-O saha dışı · C complete+next · Delete seçili kutuyu sil
-Ok tuşları: prev/next · Ctrl+Z undo · Ctrl+Y redo
-
-DURDURMA
---------
-BAT penceresinde ENTER → sunucu kapanır.
-
-NOT
----
-Henüz freeze / acceptance yok. Bitince Cursor'a haber verin.
-"""
-    (win_dir / "README_TR.txt").write_text(readme, encoding="utf-8")
-    (win_dir / "NO_MODEL_RESULT_YET.txt").write_text(
-        "NO MODEL RESULT YET\n"
-        "This folder is only for independent human GT labeling.\n"
-        "No detector acceptance / fine-tuning / R2 package here.\n",
-        encoding="utf-8",
-    )
-    (win_dir / "REVIEW_PROGRESS.html").write_text(
-        """<!DOCTYPE html>
-<html lang="tr"><head><meta charset="utf-8"/>
-<title>R1 GT Progress</title>
-<style>body{font-family:Segoe UI,Arial,sans-serif;margin:24px;background:#111;color:#eee}
-a{color:#8cf}</style></head><body>
-<h1>R1 Independent GT</h1>
-<p>İlerleme canlı arayüzdedir. Başlatmak için <b>START_GT_REVIEW.bat</b>.</p>
-<p><a href="http://127.0.0.1:8766/">http://127.0.0.1:8766/</a> (sunucu çalışıyorsa)</p>
-<p>Model sonucu yok · Freeze yok · Acceptance yok</p>
-</body></html>
-""",
-        encoding="utf-8",
-    )
+    mod_path = Path(__file__).resolve().parent / "r1_gt_windows_package.py"
+    spec = importlib.util.spec_from_file_location("r1_gt_windows_package", mod_path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"cannot load {mod_path}")
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules["r1_gt_windows_package"] = mod
+    spec.loader.exec_module(mod)
+    mod.write_windows_package(win_dir)
 
 
 def main() -> int:

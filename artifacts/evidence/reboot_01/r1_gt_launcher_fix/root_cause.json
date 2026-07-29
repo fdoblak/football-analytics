@@ -1,0 +1,48 @@
+{
+  "schema": "r1_f2a_fix1_launcher_root_cause_v1",
+  "symptoms": [
+    "'o.' is not recognized as an internal or external command",
+    "'o' is not recognized as an internal or external command",
+    "Browser opened with ERR_CONNECTION_REFUSED on 127.0.0.1:8766"
+  ],
+  "evidence": {
+    "windows_bat_path": "C:\\Users\\furka\\Desktop\\Football Analytics Validation\\R1 Independent GT\\START_GT_REVIEW.bat",
+    "encoding": "UTF-8 without BOM, LF line endings",
+    "non_ascii_bytes_hex": {
+      "em_dash": "e28094",
+      "latin_small_dotless_i_in_yalniz": "c4b1"
+    },
+    "broken_echo_line": "echo  R1 Independent GT Review — yalnız localhost",
+    "server_start_pattern": "wsl -e bash -lc \"... nohup ... > log 2>&1 &\"",
+    "browser_gate": "timeout /t 2 then start http://127.0.0.1:8766/ with no /health check"
+  },
+  "root_causes": [
+    {
+      "id": "utf8_bat_parse",
+      "severity": true,
+      "summary": "cmd.exe batch parser mishandles UTF-8 multi-byte characters (em dash U+2014 and Turkish ı U+0131) in echo lines, splitting the line into stray tokens such as o. / o."
+    },
+    {
+      "id": "ephemeral_wsl_background",
+      "severity": true,
+      "summary": "Server was started via a short-lived wsl -e bash -lc session with nohup ... &. When that WSL session exits, the review process is not reliably kept alive as a visible long-running Windows-attached job, so port 8766 never serves."
+    },
+    {
+      "id": "no_health_gate",
+      "severity": true,
+      "summary": "Launcher opened the browser after a fixed 2s sleep and printed a false 'Tarayici acildi' message without verifying HTTP readiness."
+    }
+  ],
+  "non_causes": [
+    "Canonical source video SHA/path was valid",
+    "Repo review server Python module itself was not the first failure mode observed by the user (browser never reached a live socket)"
+  ],
+  "fix": {
+    "ascii_crlf_bat": "scripts/windows/START_GT_REVIEW.bat",
+    "linux_wrapper": "scripts/start_r1_gt_review.sh",
+    "health_endpoint": "GET /health",
+    "server_window": "start R1-GT-Server cmd /k wsl.exe -d Ubuntu-22.04 -- bash wrapper",
+    "browser_policy": "open only after Invoke-RestMethod health OK (max ~30s)"
+  },
+  "written_at_utc": "2026-07-29T01:30:00+00:00"
+}

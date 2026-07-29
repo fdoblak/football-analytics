@@ -1,17 +1,13 @@
 {
-  "schema": "r1_f2a_gate_status_v1",
-  "gate": "PASS — INDEPENDENT HUMAN GT REVIEW TOOL READY",
+  "schema": "r1_f2a_fix1_gate_status_v1",
+  "gate": "PASS — WINDOWS GT REVIEW LAUNCHER VERIFIED",
   "acceptance_eligible": false,
   "human_approved": false,
   "reviewed_gt": false,
   "frozen": false,
-  "runtime": "/home/fdoblak/workspace/independent_gt_review/own_video_97b298e4",
-  "windows_dir": "/mnt/c/Users/furka/Desktop/Football Analytics Validation/R1 Independent GT",
-  "n_frames": {
-    "train": 40,
-    "dev": 20,
-    "holdout": 20,
-    "total": 80
-  },
-  "written_at_utc": "2026-07-29T01:13:58.104209+00:00"
+  "previous_gate": "PASS — INDEPENDENT HUMAN GT REVIEW TOOL READY",
+  "launcher_bat_sha256": "bde51b99eaaa89d68a0ab5aeeb1c106424d5f4456a7c904a8827c39de52fa12d",
+  "health_endpoint": "/health",
+  "wrapper": "scripts/start_r1_gt_review.sh",
+  "written_at_utc": "2026-07-29T01:35:00+00:00"
 }

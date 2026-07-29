@@ -27,6 +27,7 @@ class R1F1R3IntegrityTests(unittest.TestCase):
             g.startswith("NO-GO — OFFICIAL SOCCER FOOTBALL DETECTOR")
             or g.startswith("PASS_WITH_FINDINGS — SOCCERNET FOOTBALL HUMAN DETECTOR")
             or g.startswith("PASS — INDEPENDENT HUMAN GT REVIEW TOOL READY")
+            or g.startswith("PASS — WINDOWS GT REVIEW LAUNCHER VERIFIED")
         )
 
     def test_nogo_has_no_candidate_media(self) -> None:

@@ -14,7 +14,13 @@ RUNTIME = Path("/home/fdoblak/workspace/independent_gt_review/own_video_97b298e4
 class R1F2AIntegrityTests(unittest.TestCase):
     def test_gate_tool_ready(self) -> None:
         gate = json.loads((EV / "GATE_STATUS.json").read_text(encoding="utf-8"))
-        self.assertEqual(gate["gate"], "PASS — INDEPENDENT HUMAN GT REVIEW TOOL READY")
+        self.assertTrue(
+            gate["gate"]
+            in {
+                "PASS — INDEPENDENT HUMAN GT REVIEW TOOL READY",
+                "PASS — WINDOWS GT REVIEW LAUNCHER VERIFIED",
+            }
+        )
         self.assertFalse(gate["acceptance_eligible"])
         self.assertFalse(gate["human_approved"])
         self.assertFalse(gate["reviewed_gt"])
