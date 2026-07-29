@@ -67,6 +67,7 @@ class ReviewApp:
         video: Path,
         *,
         repair_mode: str | None = None,
+        holdout_v2: bool = False,
     ) -> None:
         self.runtime = runtime
         self.video = video
@@ -95,7 +96,18 @@ class ReviewApp:
         self.draft = json.loads(self.draft_path.read_text(encoding="utf-8"))
         if repair_mode and repair_mode != REPAIR_MODE:
             raise SystemExit(f"UNSUPPORTED_REPAIR_MODE:{repair_mode}")
+        if holdout_v2 and repair_mode:
+            raise SystemExit("HOLDOUT_V2_AND_REPAIR_MUTUALLY_EXCLUSIVE")
         self.repair_mode = repair_mode
+        self.holdout_v2 = bool(holdout_v2 or self.draft.get("holdout_v2"))
+        if self.holdout_v2:
+            # Blind-only draft: no proposals, no model leakage, annotate from scratch.
+            for fr in self.draft["frames"]:
+                fr["proposals"] = []
+                fr["rejected_proposals"] = []
+                fr["split"] = "holdout"
+            self.draft["holdout_v2"] = True
+            self.draft["blind"] = True
         self.immutable_fp = collect_fingerprints(self.draft)
         self.nav_indices = self._build_nav_indices()
         self.index = 0
@@ -114,6 +126,7 @@ class ReviewApp:
                 "event": "server_start",
                 "index": self.index,
                 "repair_mode": self.repair_mode,
+                "holdout_v2": self.holdout_v2,
                 "nav_n": len(self.nav_indices),
             }
         )
@@ -162,7 +175,16 @@ class ReviewApp:
 
     def save(self) -> None:
         after = collect_fingerprints(self.draft)
-        assert_immutable_fingerprints(self.immutable_fp, after)
+        if self.holdout_v2:
+            # Holdout_v2 draft is the only mutable content; protect source id.
+            if after.get("source_sha256") != self.immutable_fp.get("source_sha256"):
+                raise IndependentGTError("HOLDOUT_V2_SOURCE_SHA_CHANGED")
+            if after.get("dev") != self.immutable_fp.get("dev"):
+                raise IndependentGTError("HOLDOUT_V2_MUST_NOT_TOUCH_DEV")
+            if after.get("protected_train") != self.immutable_fp.get("protected_train"):
+                raise IndependentGTError("HOLDOUT_V2_MUST_NOT_TOUCH_TRAIN")
+        else:
+            assert_immutable_fingerprints(self.immutable_fp, after)
         self.draft["updated_at_utc"] = utc_now()
         self.draft["human_approved"] = False
         self.draft["reviewed_gt"] = False
@@ -170,6 +192,9 @@ class ReviewApp:
         self.draft["acceptance_eligible"] = False
         if self.repair_mode:
             self.draft["repair_mode"] = self.repair_mode
+        if self.holdout_v2:
+            self.draft["holdout_v2"] = True
+            self.draft["blind"] = True
         atomic_write_json(self.draft_path, self.draft)
         by = {
             "train": {"n": 0, "complete": 0},
@@ -254,7 +279,7 @@ class ReviewApp:
         split = fr["split"]
         assert_no_prediction_leakage(fr, split=split)
         proposals = []
-        if split == "train":
+        if split == "train" and not self.holdout_v2:
             proposals = list(fr.get("proposals") or [])
         prog = json.loads(self.progress_path.read_text(encoding="utf-8"))
         counts = frame_gate_counts(fr)
@@ -274,19 +299,22 @@ class ReviewApp:
             "repair_required": bool(fr.get("repair_required")),
             "repair_reason": fr.get("repair_reason"),
             "repair_mode": self.repair_mode,
+            "holdout_v2": self.holdout_v2,
             "gate_counts": counts,
             "complete_hard_errors": gate_errs,
             "complete_soft_warnings": soft_complete_warnings(fr),
             "progress": prog,
             "source_wh": [SOURCE_WIDTH, SOURCE_HEIGHT],
             "coordinate_space": "source_xyxy_px_v1",
-            "blind": split in {"dev", "holdout"},
+            "blind": split in {"dev", "holdout"} or self.holdout_v2,
             "policy": {
                 "class": "human",
                 "train_proposals_are_not_gt": True,
                 "dev_holdout_blind": True,
+                "holdout_v2_blind": True,
                 "freeze_requires_explicit_user_approval": True,
                 "false_complete_blocked": True,
+                "model_predictions_api_forbidden": True,
             },
         }
 
@@ -779,6 +807,7 @@ def build_handler(app: ReviewApp) -> type[BaseHTTPRequestHandler]:
                     "source_sha256_ok": app.source_sha == EXPECTED_SOURCE_SHA256,
                     "host": "127.0.0.1",
                     "repair_mode": app.repair_mode,
+                    "holdout_v2": bool(app.holdout_v2),
                 }
                 self._json(200, payload)
                 return
@@ -947,6 +976,8 @@ def build_handler(app: ReviewApp) -> type[BaseHTTPRequestHandler]:
                         self._json(200, {"state": app.public_state()})
                         return
                     if path == "/api/accept_proposal":
+                        if app.holdout_v2:
+                            raise IndependentGTError("HOLDOUT_V2_PROPOSALS_FORBIDDEN")
                         app._assert_mutable_current()
                         fr = app.current()
                         if fr["split"] != "train":
@@ -981,6 +1012,8 @@ def build_handler(app: ReviewApp) -> type[BaseHTTPRequestHandler]:
                         self._json(200, {"state": app.public_state()})
                         return
                     if path == "/api/bulk_accept_proposals":
+                        if app.holdout_v2:
+                            raise IndependentGTError("HOLDOUT_V2_PROPOSALS_FORBIDDEN")
                         app._assert_mutable_current()
                         fr = app.current()
                         app.push_undo()
@@ -1000,6 +1033,8 @@ def build_handler(app: ReviewApp) -> type[BaseHTTPRequestHandler]:
                         )
                         return
                     if path == "/api/reject_proposals":
+                        if app.holdout_v2:
+                            raise IndependentGTError("HOLDOUT_V2_PROPOSALS_FORBIDDEN")
                         app._assert_mutable_current()
                         fr = app.current()
                         app.push_undo()
@@ -1071,13 +1106,27 @@ def main() -> int:
         default=None,
         help=f"Repair mode, e.g. {REPAIR_MODE}",
     )
+    ap.add_argument(
+        "--holdout-v2",
+        action="store_true",
+        help="Blind holdout_v2 review (no proposals / no model leakage)",
+    )
     args = ap.parse_args()
     if args.host not in {"127.0.0.1", "localhost"}:
         raise SystemExit("HOST_MUST_BE_LOCALHOST")
-    app = ReviewApp(args.runtime, args.video, repair_mode=args.repair)
+    app = ReviewApp(
+        args.runtime,
+        args.video,
+        repair_mode=args.repair,
+        holdout_v2=bool(args.holdout_v2),
+    )
     handler = build_handler(app)
     server = ThreadingHTTPServer((args.host, args.port), handler)
-    mode = f" repair={args.repair}" if args.repair else ""
+    mode = ""
+    if args.repair:
+        mode += f" repair={args.repair}"
+    if args.holdout_v2:
+        mode += " holdout_v2"
     print(f"R1 Independent GT review on http://{args.host}:{args.port}/{mode}", flush=True)
     print(f"runtime={args.runtime}", flush=True)
     try:

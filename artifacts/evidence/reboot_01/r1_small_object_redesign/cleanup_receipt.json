@@ -1,0 +1,15 @@
+{
+  "schema": "r1_f2c_cleanup_receipt_v1",
+  "data_loss": false,
+  "frozen_gt_preserved": true,
+  "removed_n": 4,
+  "removed_sample": [
+    "/home/fdoblak/workspace/r1_f2c_small_object/runs/C_yolo11s_tile_aware/weights/last.pt",
+    "/home/fdoblak/workspace/r1_f2c_small_object/runs/C_yolo11s_tile_aware/weights/best.pt",
+    "/home/fdoblak/workspace/training_datasets/own_video_human_v1_tiles/images",
+    "/home/fdoblak/workspace/training_datasets/own_video_human_v1_tiles/labels"
+  ],
+  "kept": [],
+  "gate_passed": false,
+  "written_at_utc": "2026-07-29T14:26:42.419206+00:00"
+}

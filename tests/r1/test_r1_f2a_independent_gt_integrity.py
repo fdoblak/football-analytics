@@ -28,6 +28,11 @@ class R1F2AIntegrityTests(unittest.TestCase):
                     "PASS_WITH_FINDINGS — INDEPENDENT HUMAN DETECTOR ACCEPTED "
                     "ON OWN-VIDEO CLIP; GENERALIZATION NOT VALIDATED"
                 ),
+                "NO-GO — SMALL-OBJECT DETECTOR DEVELOPMENT GATE FAILED",
+                (
+                    "PASS — SMALL-OBJECT DETECTOR DEVELOPMENT GATE PASSED; "
+                    "NEW BLIND HOLDOUT REVIEW READY"
+                ),
             }
         )
         if gate["gate"].startswith("PASS —"):
@@ -38,7 +43,13 @@ class R1F2AIntegrityTests(unittest.TestCase):
                 self.assertFalse(gate["reviewed_gt"])
         if gate["gate"].startswith("NO-GO — FINE-TUNED HUMAN DETECTOR HOLDOUT FAILURE"):
             self.assertFalse(gate["acceptance_eligible"])
-            self.assertTrue(gate.get("frozen", False))
+        if "SMALL-OBJECT DETECTOR DEVELOPMENT GATE" in gate["gate"]:
+            self.assertFalse(gate["acceptance_eligible"])
+            self.assertEqual(gate.get("stage"), "R1-F2-C")
+            self.assertEqual(
+                gate.get("frozen_gt_fingerprint"),
+                "4e4e46d9edabd98aad53ea2538a2a67cd5cfeb6e0444abf7254b12f01ca4f9f1",
+            )
         if gate["gate"].startswith("PASS_WITH_FINDINGS — INDEPENDENT HUMAN DETECTOR"):
             self.assertFalse(gate["acceptance_eligible"])
             self.assertTrue(gate.get("frozen", False))

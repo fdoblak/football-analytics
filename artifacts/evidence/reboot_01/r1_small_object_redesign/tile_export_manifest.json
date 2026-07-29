@@ -1,0 +1,21 @@
+{
+  "schema": "r1_f2c_tile_export_manifest_v1",
+  "counts": {
+    "train_full": 40,
+    "train_tiles": 240,
+    "dev_full": 20,
+    "ignored_clipped": 2385
+  },
+  "tile_geometry": {
+    "tile_w": 704,
+    "tile_h": 512,
+    "overlap_x": 140,
+    "overlap_y": 102,
+    "min_visible_frac": 0.35,
+    "n_tile_specs": 6
+  },
+  "dev_tiles_in_training": false,
+  "holdout_excluded": true,
+  "lineage_n": 300,
+  "written_at_utc": "2026-07-29T14:14:10.486161+00:00"
+}

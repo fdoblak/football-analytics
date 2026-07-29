@@ -32,6 +32,11 @@ class R1F2BIntegrityFailureTests(unittest.TestCase):
                     "PASS_WITH_FINDINGS — INDEPENDENT HUMAN DETECTOR ACCEPTED "
                     "ON OWN-VIDEO CLIP; GENERALIZATION NOT VALIDATED"
                 ),
+                "NO-GO — SMALL-OBJECT DETECTOR DEVELOPMENT GATE FAILED",
+                (
+                    "PASS — SMALL-OBJECT DETECTOR DEVELOPMENT GATE PASSED; "
+                    "NEW BLIND HOLDOUT REVIEW READY"
+                ),
             },
         )
         self.assertFalse(gate["acceptance_eligible"])
@@ -39,6 +44,11 @@ class R1F2BIntegrityFailureTests(unittest.TestCase):
             self.assertFalse(gate["frozen"])
         if gate["gate"] == "NO-GO — FINE-TUNED HUMAN DETECTOR HOLDOUT FAILURE":
             self.assertTrue(gate.get("frozen", False))
+        if "SMALL-OBJECT DETECTOR DEVELOPMENT GATE" in gate["gate"]:
+            self.assertEqual(
+                gate.get("frozen_gt_fingerprint"),
+                "4e4e46d9edabd98aad53ea2538a2a67cd5cfeb6e0444abf7254b12f01ca4f9f1",
+            )
 
     def test_integrity_report_lists_failed_train_frames(self) -> None:
         rep = json.loads((FAIL / "integrity_report.json").read_text(encoding="utf-8"))
@@ -55,6 +65,9 @@ class R1F2BIntegrityFailureTests(unittest.TestCase):
         if g.startswith("PASS_WITH_FINDINGS — INDEPENDENT HUMAN DETECTOR ACCEPTED") or (
             g.startswith("NO-GO — FINE-TUNED HUMAN DETECTOR HOLDOUT FAILURE") and gate.get("frozen")
         ):
+            self.assertTrue(frozen.is_dir())
+            return
+        if "SMALL-OBJECT DETECTOR DEVELOPMENT GATE" in g:
             self.assertTrue(frozen.is_dir())
             return
         if g == "PASS — TRAIN ANNOTATION REPAIR READY":

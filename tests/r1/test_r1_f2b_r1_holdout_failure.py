@@ -14,10 +14,13 @@ FROZEN = REPO / "annotations" / "own_video_97b298e4" / "human_detection_v1"
 
 class R1F2BR1HoldoutFailureTests(unittest.TestCase):
     def test_gate_nogo_holdout(self) -> None:
+        # Historical F2-B-R1 failure is preserved in evidence; GATE_STATUS may advance.
+        status = json.loads((FAIL / "status.json").read_text(encoding="utf-8"))
+        self.assertFalse(status["summary"]["acceptance"]["passed"])
+        self.assertTrue(status["frozen"])
         gate = json.loads((EV / "GATE_STATUS.json").read_text(encoding="utf-8"))
-        self.assertEqual(gate["gate"], "NO-GO — FINE-TUNED HUMAN DETECTOR HOLDOUT FAILURE")
-        self.assertTrue(gate["frozen"])
-        self.assertFalse(gate["acceptance_eligible"])
+        self.assertIn("gate", gate)
+        self.assertFalse(gate.get("acceptance_eligible", True))
 
     def test_frozen_gt_present(self) -> None:
         self.assertTrue((FROZEN / "annotations.json").is_file())

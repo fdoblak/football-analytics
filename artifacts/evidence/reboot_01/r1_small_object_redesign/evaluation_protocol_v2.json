@@ -1,0 +1,38 @@
+{
+  "schema": "evaluation_protocol_v2",
+  "protocol_id": "own_video_human_eval_protocol_v2",
+  "frozen_gt_fingerprint_required": "4e4e46d9edabd98aad53ea2538a2a67cd5cfeb6e0444abf7254b12f01ca4f9f1",
+  "primary_scope": "on_pitch_human",
+  "primary_roles": [
+    "goalkeeper",
+    "player",
+    "referee",
+    "unknown"
+  ],
+  "primary_eligibility": [
+    "on_pitch"
+  ],
+  "ignore_eligibility": [
+    "uncertain"
+  ],
+  "ignore_prediction_iou": 0.5,
+  "match_iou": 0.5,
+  "matching": "greedy_one_to_one",
+  "secondary_scopes": [
+    "all_human",
+    "off_pitch_human",
+    "uncertain_region_predictions"
+  ],
+  "holdout_v1": {
+    "status": "CONSUMED_FAILED_EVALUATION",
+    "acceptance_reusable": false,
+    "may_use_for_error_analysis": true,
+    "may_use_for_training": false,
+    "may_use_for_model_selection": false,
+    "may_use_for_threshold_tuning": false
+  },
+  "gt_mutation_forbidden": true,
+  "defined_before_holdout_v2": true,
+  "written_at_utc": "2026-07-29T14:13:56.410137+00:00",
+  "protocol_fingerprint": "58c807028a1d2a9f65e959d56132dce2ad3ec9871683763dcd90f09e677db5d7"
+}

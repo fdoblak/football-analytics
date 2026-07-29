@@ -1,0 +1,125 @@
+{
+  "A": {
+    "precision": 0.7616822429906542,
+    "recall": 0.7581395348837209,
+    "f1": 0.75990675990676,
+    "ap50": 0.6769775332476772,
+    "ap50_95": 0.22696629337213597,
+    "small_recall": 0.16666666666666666,
+    "duplicate_rate": 0.0,
+    "true_positives": 163,
+    "false_positives": 51,
+    "false_negatives": 52,
+    "fp_per_frame": 2.55,
+    "merged_person_diag": 2,
+    "height_bin_recall": {
+      "h_lt_16": {
+        "n_gt": 0,
+        "tp": 0,
+        "recall": null
+      },
+      "h_16_24": {
+        "n_gt": 1,
+        "tp": 0,
+        "recall": 0.0
+      },
+      "h_24_40": {
+        "n_gt": 3,
+        "tp": 0,
+        "recall": 0.0
+      },
+      "h_40_64": {
+        "n_gt": 9,
+        "tp": 4,
+        "recall": 0.4444444444444444
+      },
+      "h_ge_64": {
+        "n_gt": 202,
+        "tp": 159,
+        "recall": 0.7871287128712872
+      }
+    }
+  },
+  "B": {
+    "precision": 0.6334661354581673,
+    "recall": 0.7395348837209302,
+    "f1": 0.6824034334763949,
+    "ap50": 0.5923813029076187,
+    "ap50_95": 0.18964394241162028,
+    "small_recall": 0.3333333333333333,
+    "duplicate_rate": 0.0,
+    "true_positives": 159,
+    "false_positives": 92,
+    "false_negatives": 56,
+    "fp_per_frame": 4.6,
+    "merged_person_diag": 1,
+    "height_bin_recall": {
+      "h_lt_16": {
+        "n_gt": 0,
+        "tp": 0,
+        "recall": null
+      },
+      "h_16_24": {
+        "n_gt": 1,
+        "tp": 0,
+        "recall": 0.0
+      },
+      "h_24_40": {
+        "n_gt": 3,
+        "tp": 1,
+        "recall": 0.3333333333333333
+      },
+      "h_40_64": {
+        "n_gt": 9,
+        "tp": 2,
+        "recall": 0.2222222222222222
+      },
+      "h_ge_64": {
+        "n_gt": 202,
+        "tp": 156,
+        "recall": 0.7722772277227723
+      }
+    }
+  },
+  "C": {
+    "precision": 0.5129682997118156,
+    "recall": 0.827906976744186,
+    "f1": 0.6334519572953736,
+    "ap50": 0.7135184037802064,
+    "ap50_95": 0.23487978287196162,
+    "small_recall": 0.6666666666666666,
+    "duplicate_rate": 0.0,
+    "true_positives": 178,
+    "false_positives": 169,
+    "false_negatives": 37,
+    "fp_per_frame": 8.45,
+    "merged_person_diag": 14,
+    "height_bin_recall": {
+      "h_lt_16": {
+        "n_gt": 0,
+        "tp": 0,
+        "recall": null
+      },
+      "h_16_24": {
+        "n_gt": 1,
+        "tp": 0,
+        "recall": 0.0
+      },
+      "h_24_40": {
+        "n_gt": 3,
+        "tp": 2,
+        "recall": 0.6666666666666666
+      },
+      "h_40_64": {
+        "n_gt": 9,
+        "tp": 7,
+        "recall": 0.7777777777777778
+      },
+      "h_ge_64": {
+        "n_gt": 202,
+        "tp": 169,
+        "recall": 0.8366336633663366
+      }
+    }
+  }
+}

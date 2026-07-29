@@ -1,9 +1,13 @@
 {
-  "schema": "r1_f2b_r1_gate_status_v1",
-  "gate": "NO-GO — FINE-TUNED HUMAN DETECTOR HOLDOUT FAILURE",
+  "schema": "r1_f2c_gate_status_v1",
+  "gate": "NO-GO — SMALL-OBJECT DETECTOR DEVELOPMENT GATE FAILED",
+  "stage": "R1-F2-C",
+  "dev_gate_passed": false,
   "acceptance_eligible": false,
-  "frozen": true,
-  "human_approved": false,
-  "reviewed_gt": false,
-  "written_at_utc": "2026-07-29T12:08:38.002639+00:00"
+  "holdout_v1_status": "CONSUMED_FAILED_EVALUATION",
+  "acceptance_reusable": false,
+  "frozen_gt_fingerprint": "4e4e46d9edabd98aad53ea2538a2a67cd5cfeb6e0444abf7254b12f01ca4f9f1",
+  "selected_run": "C",
+  "holdout_v2_frames": null,
+  "written_at_utc": "2026-07-29T14:26:42.419699+00:00"
 }

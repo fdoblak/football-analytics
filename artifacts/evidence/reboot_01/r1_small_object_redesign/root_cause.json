@@ -1,0 +1,476 @@
+{
+  "schema": "r1_f2c_root_cause_v1",
+  "holdout_v1_status": "CONSUMED_FAILED_EVALUATION",
+  "acceptance_reusable": false,
+  "prior_holdout_v1_metrics": {
+    "precision": 0.6450381679389313,
+    "recall": 0.6305970149253731,
+    "f1": 0.6377358490566037,
+    "ap50": 0.49427385033110033,
+    "small_recall": 0.14285714285714285
+  },
+  "distributions": {
+    "splits": {
+      "train": {
+        "n_frames": 40,
+        "n_bbox": 827,
+        "bbox_stats": {
+          "n": 827,
+          "width": {
+            "mean": 39.45128603179021,
+            "p10": 23.407501220703125,
+            "p50": 33.46214294433594,
+            "p90": 65.06546783447266
+          },
+          "height": {
+            "mean": 89.70240956386887,
+            "p10": 44.87689185141065,
+            "p50": 87.02644348144531,
+            "p90": 135.54169006347655
+          },
+          "area_frac": {
+            "mean": 0.004016770696051025,
+            "p10": 0.0011917144584455315,
+            "p50": 0.0029531769836024045,
+            "p90": 0.008488416193578737
+          },
+          "height_bins": {
+            "h_lt_16": 0,
+            "h_16_24": 0,
+            "h_24_40": 63,
+            "h_40_64": 116,
+            "h_ge_64": 648
+          },
+          "eligibility": {
+            "on_pitch": 469,
+            "uncertain": 358
+          },
+          "role": {
+            "player": 421,
+            "goalkeeper": 28,
+            "referee": 37,
+            "unknown": 338,
+            "staff": 3
+          },
+          "team": {
+            "yellow": 165,
+            "white": 260,
+            "official": 37,
+            "unknown": 365
+          },
+          "size_class": {
+            "small_h_lt_40": 63,
+            "medium_40_64": 116,
+            "large_ge_64": 648
+          }
+        },
+        "categories": {
+          "topup": 14,
+          "easy_negative_regions": 1,
+          "off_pitch_people": 2,
+          "wide_camera": 3,
+          "sideline": 2,
+          "small_distant": 2,
+          "lattice": 8,
+          "partial_truncated": 1,
+          "mid_camera": 2,
+          "occlusion": 1,
+          "dark_clothing": 1,
+          "motion_blur": 1,
+          "crowded": 2
+        },
+        "temporal": {
+          "frame_idx_min": 0,
+          "frame_idx_max": 350,
+          "mean_gap": 8.974358974358974,
+          "median_gap": 10.0,
+          "n_pairs_gap_le_15": 39,
+          "high_temporal_correlation": true
+        },
+        "t_s_range": [
+          0.0,
+          11.6667
+        ]
+      },
+      "dev": {
+        "n_frames": 20,
+        "n_bbox": 215,
+        "bbox_stats": {
+          "n": 215,
+          "width": {
+            "mean": 61.37573634775947,
+            "p10": 38.0110780513625,
+            "p50": 58.20446326614865,
+            "p90": 88.61332570723866
+          },
+          "height": {
+            "mean": 102.89406650832304,
+            "p10": 70.55735198549151,
+            "p50": 100.96590772334633,
+            "p90": 137.3136345037511
+          },
+          "area_frac": {
+            "mean": 0.006663878383031946,
+            "p10": 0.0031938841673519814,
+            "p50": 0.0057035673708534474,
+            "p90": 0.011358303801548284
+          },
+          "height_bins": {
+            "h_lt_16": 0,
+            "h_16_24": 1,
+            "h_24_40": 3,
+            "h_40_64": 9,
+            "h_ge_64": 202
+          },
+          "eligibility": {
+            "on_pitch": 215
+          },
+          "role": {
+            "player": 213,
+            "referee": 2
+          },
+          "team": {
+            "yellow": 114,
+            "white": 99,
+            "official": 2
+          },
+          "size_class": {
+            "small_h_lt_40": 4,
+            "medium_40_64": 9,
+            "large_ge_64": 202
+          }
+        },
+        "categories": {
+          "occlusion": 2,
+          "easy_negative_regions": 1,
+          "wide_camera": 1,
+          "dark_clothing": 1,
+          "partial_truncated": 1,
+          "lattice": 8,
+          "mid_camera": 1,
+          "goal_area": 1,
+          "small_distant": 1,
+          "motion_blur": 1,
+          "crowded": 1,
+          "sideline": 1
+        },
+        "temporal": {
+          "frame_idx_min": 360,
+          "frame_idx_max": 633,
+          "mean_gap": 14.368421052631579,
+          "median_gap": 13.0,
+          "n_pairs_gap_le_15": 11,
+          "high_temporal_correlation": false
+        },
+        "t_s_range": [
+          12.0,
+          21.1
+        ]
+      },
+      "holdout": {
+        "n_frames": 20,
+        "n_bbox": 268,
+        "bbox_stats": {
+          "n": 268,
+          "width": {
+            "mean": 50.48506902753571,
+            "p10": 32.07184710583692,
+            "p50": 48.701693753308064,
+            "p90": 72.45861753540976
+          },
+          "height": {
+            "mean": 91.54301396479354,
+            "p10": 66.51871567655759,
+            "p50": 86.71189722122693,
+            "p90": 124.72259189354557
+          },
+          "area_frac": {
+            "mean": 0.0048801143107647296,
+            "p10": 0.0022873888654537703,
+            "p50": 0.004195344291826129,
+            "p90": 0.008511062529159567
+          },
+          "height_bins": {
+            "h_lt_16": 0,
+            "h_16_24": 1,
+            "h_24_40": 1,
+            "h_40_64": 18,
+            "h_ge_64": 248
+          },
+          "eligibility": {
+            "on_pitch": 268
+          },
+          "role": {
+            "player": 247,
+            "referee": 16,
+            "goalkeeper": 5
+          },
+          "team": {
+            "white": 137,
+            "yellow": 115,
+            "official": 16
+          },
+          "size_class": {
+            "small_h_lt_40": 2,
+            "medium_40_64": 18,
+            "large_ge_64": 248
+          }
+        },
+        "categories": {
+          "dark_clothing": 2,
+          "lattice": 3,
+          "off_pitch_people": 1,
+          "goal_area": 3,
+          "easy_negative_regions": 1,
+          "wide_camera": 1,
+          "partial_truncated": 1,
+          "mid_camera": 1,
+          "small_distant": 2,
+          "motion_blur": 1,
+          "crowded": 2,
+          "sideline": 1,
+          "occlusion": 1
+        },
+        "temporal": {
+          "frame_idx_min": 660,
+          "frame_idx_max": 1010,
+          "mean_gap": 18.42105263157895,
+          "median_gap": 20.0,
+          "n_pairs_gap_le_15": 8,
+          "high_temporal_correlation": false
+        },
+        "t_s_range": [
+          22.0,
+          33.6667
+        ]
+      }
+    },
+    "distribution_shift": {
+      "train_vs_dev_height_js": 0.03099164000590151,
+      "dev_vs_holdout_height_js": 0.003106729797133791,
+      "train_vs_holdout_height_js": 0.03097652414173034
+    }
+  },
+  "height_bin_recall": {
+    "holdout_v1_error_analysis_only": {
+      "h_lt_16": {
+        "n_gt": 0,
+        "tp": 0,
+        "recall": null
+      },
+      "h_16_24": {
+        "n_gt": 1,
+        "tp": 0,
+        "recall": 0.0
+      },
+      "h_24_40": {
+        "n_gt": 1,
+        "tp": 0,
+        "recall": 0.0
+      },
+      "h_40_64": {
+        "n_gt": 18,
+        "tp": 8,
+        "recall": 0.4444444444444444
+      },
+      "h_ge_64": {
+        "n_gt": 248,
+        "tp": 162,
+        "recall": 0.6532258064516129
+      }
+    },
+    "dev": {
+      "h_lt_16": {
+        "n_gt": 0,
+        "tp": 0,
+        "recall": null
+      },
+      "h_16_24": {
+        "n_gt": 1,
+        "tp": 0,
+        "recall": 0.0
+      },
+      "h_24_40": {
+        "n_gt": 3,
+        "tp": 0,
+        "recall": 0.0
+      },
+      "h_40_64": {
+        "n_gt": 9,
+        "tp": 4,
+        "recall": 0.4444444444444444
+      },
+      "h_ge_64": {
+        "n_gt": 202,
+        "tp": 160,
+        "recall": 0.7920792079207921
+      }
+    }
+  },
+  "error_magnitude_distribution": {
+    "primary_fn_by_height_bin": {
+      "h_lt_16": 0,
+      "h_16_24": 1,
+      "h_24_40": 1,
+      "h_40_64": 10,
+      "h_ge_64": 86
+    },
+    "primary_fp": 95,
+    "primary_fn": 98,
+    "ignored_predictions": 0
+  },
+  "hypotheses": [
+    {
+      "id": 1,
+      "claim": "Full-frame resize shrinks small humans excessively",
+      "verdict": "MIXED",
+      "evidence": {
+        "source_height_p10": 44.87689185141065,
+        "source_height_p50": 87.02644348144531,
+        "after_imgsz960_height_p10": 32.24686839622322,
+        "after_imgsz960_height_p50": 62.5339713639128,
+        "small_h_lt_40_frac": 0.0761789600967352,
+        "imgsz_scale": 0.718562874251497
+      }
+    },
+    {
+      "id": 2,
+      "claim": "40 train images are highly temporally correlated",
+      "verdict": "SUPPORTED",
+      "evidence": {
+        "frame_idx_min": 0,
+        "frame_idx_max": 350,
+        "mean_gap": 8.974358974358974,
+        "median_gap": 10.0,
+        "n_pairs_gap_le_15": 39,
+        "high_temporal_correlation": true
+      }
+    },
+    {
+      "id": 3,
+      "claim": "Train vs later temporal windows have camera/domain shift",
+      "verdict": "SUPPORTED",
+      "evidence": {
+        "train_t_s": [
+          0.0,
+          11.6667
+        ],
+        "dev_t_s": [
+          12.0,
+          21.1
+        ],
+        "holdout_t_s": [
+          22.0,
+          33.6667
+        ],
+        "train_vs_holdout_height_js": 0.03097652414173034,
+        "dev_vs_holdout_height_js": 0.003106729797133791,
+        "note": "Splits are time-separated by design (0-12 / 12-22 / 22-34s)"
+      }
+    },
+    {
+      "id": 4,
+      "claim": "Mosaic/scale augmentation further shrinks small humans",
+      "verdict": "SUPPORTED",
+      "evidence": {
+        "prior_train_mosaic": 0.5,
+        "prior_train_scale": 0.3,
+        "mechanism": "mosaic packs 4 images into one letterboxed canvas; scale=0.3 allows strong downscale of already-small players",
+        "mitigation": "tile-aware train with mosaic<=0.1 and reduced scale"
+      }
+    },
+    {
+      "id": 5,
+      "claim": "Confidence threshold suppresses small humans",
+      "verdict": "SUPPORTED",
+      "evidence": {
+        "holdout_small_recall": 0.14285714285714285,
+        "holdout_overall_recall": 0.6305970149253731,
+        "note": "Small recall much lower than overall suggests score/size interaction; sweep conf on DEV only in redesign"
+      }
+    },
+    {
+      "id": 6,
+      "claim": "Full-frame inference is insufficient for small-object recall",
+      "verdict": "SUPPORTED",
+      "evidence": {
+        "holdout_height_bin_recall": {
+          "h_lt_16": {
+            "n_gt": 0,
+            "tp": 0,
+            "recall": null
+          },
+          "h_16_24": {
+            "n_gt": 1,
+            "tp": 0,
+            "recall": 0.0
+          },
+          "h_24_40": {
+            "n_gt": 1,
+            "tp": 0,
+            "recall": 0.0
+          },
+          "h_40_64": {
+            "n_gt": 18,
+            "tp": 8,
+            "recall": 0.4444444444444444
+          },
+          "h_ge_64": {
+            "n_gt": 248,
+            "tp": 162,
+            "recall": 0.6532258064516129
+          }
+        },
+        "dev_height_bin_recall": {
+          "h_lt_16": {
+            "n_gt": 0,
+            "tp": 0,
+            "recall": null
+          },
+          "h_16_24": {
+            "n_gt": 1,
+            "tp": 0,
+            "recall": 0.0
+          },
+          "h_24_40": {
+            "n_gt": 3,
+            "tp": 0,
+            "recall": 0.0
+          },
+          "h_40_64": {
+            "n_gt": 9,
+            "tp": 4,
+            "recall": 0.4444444444444444
+          },
+          "h_ge_64": {
+            "n_gt": 202,
+            "tp": 160,
+            "recall": 0.7920792079207921
+          }
+        }
+      }
+    },
+    {
+      "id": 7,
+      "claim": "GT uncertain eligibility regions pollute the metric",
+      "verdict": "SUPPORTED",
+      "evidence": {
+        "uncertain_counts": {
+          "train": 358,
+          "dev": 0,
+          "holdout": 0
+        },
+        "protocol_v2_fix": "ignore uncertain as neither positive nor negative"
+      }
+    }
+  ],
+  "definitive_root_causes": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "media": null
+}
