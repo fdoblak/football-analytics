@@ -1,13 +1,11 @@
 {
-  "schema": "r1_f2a_fix1_gate_status_v1",
-  "gate": "PASS — WINDOWS GT REVIEW LAUNCHER VERIFIED",
-  "acceptance_eligible": false,
+  "schema": "r1_f2b_gate_status_v1",
+  "gate": "NO-GO \u2014 REVIEWED GT INTEGRITY FAILURE",
+  "frozen": false,
   "human_approved": false,
   "reviewed_gt": false,
-  "frozen": false,
-  "previous_gate": "PASS — INDEPENDENT HUMAN GT REVIEW TOOL READY",
-  "launcher_bat_sha256": "bde51b99eaaa89d68a0ab5aeeb1c106424d5f4456a7c904a8827c39de52fa12d",
-  "health_endpoint": "/health",
-  "wrapper": "scripts/start_r1_gt_review.sh",
-  "written_at_utc": "2026-07-29T01:35:00+00:00"
+  "acceptance_eligible": false,
+  "draft_sha256": "58c490da12be4feeea9c5b74b6f6ca82ff996eb4f554bead0b379e442cccd1ac",
+  "failed_train_empty_n": 37,
+  "written_at_utc": "2026-07-29T10:10:50.854974+00:00"
 }

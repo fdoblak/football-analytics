@@ -1,0 +1,23 @@
+{
+  "schema": "r1_f2b_cleanup_receipt_v1",
+  "data_loss": false,
+  "removed": [
+    {
+      "path": "/home/fdoblak/workspace/training_datasets/_qa_preview_r1_f2b",
+      "type": "dir",
+      "reason": "temporary_pixel_qa_previews_after_integrity_nogo",
+      "recoverability": "recreatable_from_draft_and_source_video",
+      "data_loss": false
+    }
+  ],
+  "not_removed": [
+    "/home/fdoblak/workspace/independent_gt_review/own_video_97b298e4/draft_annotations.json",
+    "/home/fdoblak/workspace/independent_gt_review/own_video_97b298e4/review_audit.jsonl",
+    "/home/fdoblak/football_data/videos/raw_matches/own_video_97b298e4/original.mp4"
+  ],
+  "draft_locked_mode": "0600_restored_for_train_repair_after_forensic_sha",
+  "frozen_gt_created": false,
+  "training_started": false,
+  "written_at_utc": "2026-07-29T10:15:00+00:00",
+  "forensic_draft_sha256": "58c490da12be4feeea9c5b74b6f6ca82ff996eb4f554bead0b379e442cccd1ac"
+}

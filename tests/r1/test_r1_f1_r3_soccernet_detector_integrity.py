@@ -28,6 +28,9 @@ class R1F1R3IntegrityTests(unittest.TestCase):
             or g.startswith("PASS_WITH_FINDINGS — SOCCERNET FOOTBALL HUMAN DETECTOR")
             or g.startswith("PASS — INDEPENDENT HUMAN GT REVIEW TOOL READY")
             or g.startswith("PASS — WINDOWS GT REVIEW LAUNCHER VERIFIED")
+            or g.startswith("NO-GO — REVIEWED GT INTEGRITY FAILURE")
+            or g.startswith("NO-GO — FINE-TUNED HUMAN DETECTOR HOLDOUT FAILURE")
+            or g.startswith("PASS_WITH_FINDINGS — INDEPENDENT HUMAN DETECTOR ACCEPTED")
         )
 
     def test_nogo_has_no_candidate_media(self) -> None:

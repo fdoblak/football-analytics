@@ -1,0 +1,50 @@
+{
+  "schema": "r1_f2b_agent_pixel_qa_v1",
+  "classification": [
+    "AGENT_PIXEL_GROUNDED_DIAGNOSTIC",
+    "NOT_INDEPENDENT_GT_FREEZE"
+  ],
+  "frames_inspected_min": 20,
+  "inspected": {
+    "train_empty_critical": [
+      24,
+      60,
+      110,
+      150,
+      200,
+      250
+    ],
+    "train_labeled": [
+      0,
+      5,
+      15
+    ],
+    "dev": [
+      360,
+      400,
+      450,
+      500,
+      540,
+      580
+    ],
+    "holdout": [
+      660,
+      690,
+      710,
+      760,
+      793,
+      860,
+      940,
+      1010
+    ]
+  },
+  "findings": [
+    "train_empty frames show many obvious on-pitch humans with leftover proposals but humans=[]",
+    "train labeled frames 0/5/15 look reasonable",
+    "dev/holdout samples look properly boxed with no proposal leakage",
+    "visibility all marked clear; no small/occluded tags used despite distant players",
+    "eligibility all on_pitch including likely off-pitch people in some train proposals"
+  ],
+  "critical": true,
+  "blocks_freeze": true
+}

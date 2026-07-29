@@ -32,6 +32,7 @@ class R1F1R2IntegrityTests(unittest.TestCase):
             or "STRONGER HUMAN DETECTION CANDIDATE READY" in gate["gate"]
             or gate["gate"].startswith("PASS — INDEPENDENT HUMAN GT REVIEW TOOL READY")
             or gate["gate"].startswith("PASS — WINDOWS GT REVIEW LAUNCHER VERIFIED")
+            or gate["gate"].startswith("PASS_WITH_FINDINGS — INDEPENDENT HUMAN DETECTOR ACCEPTED")
         )
 
     def test_cleanup_receipt(self) -> None:

@@ -1,0 +1,172 @@
+{
+  "schema": "r1_f2b_gt_integrity_report_v1",
+  "gate": "NO-GO \u2014 REVIEWED GT INTEGRITY FAILURE",
+  "frozen": false,
+  "user_completion_declaration": true,
+  "progress_complete_80_80": true,
+  "draft_sha256": "58c490da12be4feeea9c5b74b6f6ca82ff996eb4f554bead0b379e442cccd1ac",
+  "draft_mtime_utc": "2026-07-29T10:01:16.243680+00:00",
+  "source_sha256": "97b298e41a82b567a7d68bd2322993bea34492b1cbb58362b0d72ca4a5471160",
+  "geometry_metadata_hard_errors": 0,
+  "critical_failures": [
+    {
+      "code": "TRAIN_MASS_FALSE_NEGATIVES_COMPLETED_EMPTY",
+      "detail": "37/40 train frames marked complete with zero human boxes while YOLO proposals and pixels show many obvious humans",
+      "frame_indices": [
+        24,
+        30,
+        36,
+        45,
+        54,
+        60,
+        70,
+        80,
+        90,
+        100,
+        110,
+        120,
+        131,
+        138,
+        144,
+        150,
+        160,
+        170,
+        180,
+        190,
+        200,
+        210,
+        221,
+        232,
+        240,
+        250,
+        260,
+        270,
+        280,
+        290,
+        300,
+        306,
+        312,
+        320,
+        330,
+        340,
+        350
+      ],
+      "n_frames": 37,
+      "train_labeled_only": [
+        0,
+        5,
+        15
+      ]
+    },
+    {
+      "code": "TRAIN_UNUSABLE_FOR_FINE_TUNE",
+      "detail": "Only 43 train boxes across 3 frames vs 215 dev / 268 holdout \u2014 severe split imbalance and false-negative poisoning"
+    }
+  ],
+  "stats": {
+    "frame_count": 80,
+    "human_bbox_count": 526,
+    "bbox_by_split": {
+      "train": 43,
+      "dev": 215,
+      "holdout": 268
+    },
+    "empty_complete_frames_by_split": {
+      "train": 37,
+      "dev": 0,
+      "holdout": 0
+    },
+    "role": {
+      "player": 490,
+      "goalkeeper": 7,
+      "referee": 20,
+      "unknown": 9
+    },
+    "team_appearance": {
+      "yellow": 242,
+      "white": 255,
+      "official": 20,
+      "unknown": 9
+    },
+    "eligibility": {
+      "on_pitch": 526
+    },
+    "visibility": {
+      "clear": 526
+    },
+    "origin": {
+      "manual": 43,
+      "manual_blind": 483
+    },
+    "train_proposals_left_unreviewed": 886,
+    "small_distant": 0,
+    "occluded_truncated": 0,
+    "negative_frames_completed": 37
+  },
+  "pixel_qa": {
+    "schema": "r1_f2b_agent_pixel_qa_v1",
+    "classification": [
+      "AGENT_PIXEL_GROUNDED_DIAGNOSTIC",
+      "NOT_INDEPENDENT_GT_FREEZE"
+    ],
+    "frames_inspected_min": 20,
+    "inspected": {
+      "train_empty_critical": [
+        24,
+        60,
+        110,
+        150,
+        200,
+        250
+      ],
+      "train_labeled": [
+        0,
+        5,
+        15
+      ],
+      "dev": [
+        360,
+        400,
+        450,
+        500,
+        540,
+        580
+      ],
+      "holdout": [
+        660,
+        690,
+        710,
+        760,
+        793,
+        860,
+        940,
+        1010
+      ]
+    },
+    "findings": [
+      "train_empty frames show many obvious on-pitch humans with leftover proposals but humans=[]",
+      "train labeled frames 0/5/15 look reasonable",
+      "dev/holdout samples look properly boxed with no proposal leakage",
+      "visibility all marked clear; no small/occluded tags used despite distant players",
+      "eligibility all on_pitch including likely off-pitch people in some train proposals"
+    ],
+    "critical": true,
+    "blocks_freeze": true
+  },
+  "next_plan": {
+    "action": "reopen_train_annotation_only",
+    "required": [
+      "Re-open independent GT review for TRAIN frames only",
+      "For each train frame: accept/correct/delete proposals OR draw missing humans",
+      "Do not mark complete while obvious on-pitch humans remain unlabeled",
+      "Keep existing carefully labeled DEV/HOLDOUT unless user asks to re-check",
+      "Optional active-learning: prioritize train frames with leftover high-score proposals"
+    ],
+    "do_not": [
+      "freeze_current_draft",
+      "fine_tune_on_poisoned_train",
+      "start_R2"
+    ]
+  },
+  "written_at_utc": "2026-07-29T10:10:50.854337+00:00"
+}
