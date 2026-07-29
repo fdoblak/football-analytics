@@ -1,0 +1,28 @@
+{
+  "schema": "r1_f1_r1_rejection_manifest_v1",
+  "status": "REJECTED \u2014 INCOMPLETE AND MODEL/AGENT-DERIVED HUMAN PROPOSALS",
+  "acceptance_eligible": false,
+  "gt_freeze_eligible": false,
+  "human_approved": false,
+  "rejected_at_utc": "2026-07-28T23:46:34.160615+00:00",
+  "rejected_paths": [
+    "artifacts/evidence/reboot_01/r1_f1_gt_review/",
+    "artifacts/evidence/reboot_01/r1_f1_gt_review_REJECTED/",
+    "artifacts/evidence/reboot_01/coordinate_smoke_contact_sheet.png",
+    "artifacts/evidence/reboot_01/gt/blind_gt_annotations.json"
+  ],
+  "reasons": [
+    "boxes_on_only_12_of_150_frames",
+    "user_rejected_visual_quality",
+    "missing_human_boxes",
+    "loose_or_multi_person_boxes",
+    "possible_off_pitch_contamination",
+    "center_in_body_not_bbox_accuracy_proof",
+    "uniform_green_boxes_misread_as_team_labels",
+    "team_role_must_not_be_assigned_in_r1",
+    "agent_draft_is_not_independent_reviewed_gt",
+    "unusable_for_freeze_or_acceptance"
+  ],
+  "data_loss": false,
+  "note": "Historical evidence retained; not deleted. Do not present as active GT review package."
+}

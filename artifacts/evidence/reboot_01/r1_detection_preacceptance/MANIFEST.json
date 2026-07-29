@@ -1,0 +1,69 @@
+{
+  "schema": "r1_detection_preacceptance_manifest_v1",
+  "gate": "PASS_WITH_FINDINGS \u2014 IMPROVED HUMAN DETECTION PREACCEPTANCE READY; HUMAN GT NOT YET FROZEN",
+  "selected_config": "B_yolo11n_hybrid_tiled",
+  "diagnostic_not_accuracy": true,
+  "files": [
+    {
+      "file": "OPEN_R1_DETECTION_PREACCEPTANCE.html",
+      "sha256": "28dbdae006cfeb44e8e59832748c450edf8bda0e5ea5e0edcf1809215850235f",
+      "bytes": 1494
+    },
+    {
+      "file": "R1_human_detection_proof.mp4",
+      "sha256": "0dbf9c42faf3522351fefc53f8c9d6171bb77718c8fc1d095e485ac963839389",
+      "bytes": 11104022
+    },
+    {
+      "file": "R1_start.png",
+      "sha256": "94a1120fcbc42b96e46c0e3f5cab3f5281898807c5d69193dd7b5e45a250fc35",
+      "bytes": 989426
+    },
+    {
+      "file": "R1_middle.png",
+      "sha256": "b5192167d86726f07ed5f055d7287ee2ce6e581b637a6a1eb7a9df2a73ad9247",
+      "bytes": 560971
+    },
+    {
+      "file": "R1_holdout.png",
+      "sha256": "305034180788907e2c76168765ef6cbd2e559e572341f11124a67552fa8f68ed",
+      "bytes": 1350521
+    },
+    {
+      "file": "R1_crowded_cases.png",
+      "sha256": "9dfbfadfdfbe4720b2a12748e1d7ecb04a39827a0729721c2da2904c1ecba243",
+      "bytes": 1713633
+    },
+    {
+      "file": "R1_small_distant_cases.png",
+      "sha256": "92057c8d9966c2b1f0644d654588e41fca8f59bd5500064627032c26973010dd",
+      "bytes": 1680873
+    },
+    {
+      "file": "R1_off_pitch_filtering.png",
+      "sha256": "1be868eba25809a224f0dfb5915877ac52ef4e2e7f5b65fd365e94d33c799346",
+      "bytes": 813104
+    },
+    {
+      "file": "R1_before_after.png",
+      "sha256": "290c92c4b535a1fcd5a09f57795a8b210a78587dbd4824394cfecbcc934521ae",
+      "bytes": 706668
+    },
+    {
+      "file": "detector_bakeoff.json",
+      "sha256": "2ec8a794254e229429582d927322915d771d26249910a30d1964359ae9ca325a",
+      "bytes": 13351
+    },
+    {
+      "file": "diagnostic_quality.json",
+      "sha256": "fd2d6eb0575fb68ed04bce6dab5437f19c0908dda992c7e116bf118fb0457eda",
+      "bytes": 3231
+    },
+    {
+      "file": "README_TR.txt",
+      "sha256": "fe890982fc1e09b0a457a5935b9c384384050a7e5164f291aae9e5588c0a4ced",
+      "bytes": 107
+    }
+  ],
+  "written_at_utc": "2026-07-28T23:53:52.533180+00:00"
+}

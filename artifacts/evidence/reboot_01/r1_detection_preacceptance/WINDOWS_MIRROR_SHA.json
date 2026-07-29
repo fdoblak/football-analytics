@@ -1,0 +1,23 @@
+{
+  "files": [
+    {
+      "file": "OPEN_R1_DETECTION_PREACCEPTANCE.html",
+      "repo_sha": "28dbdae006cfeb44e8e59832748c450edf8bda0e5ea5e0edcf1809215850235f",
+      "win_sha": "28dbdae006cfeb44e8e59832748c450edf8bda0e5ea5e0edcf1809215850235f",
+      "match": true
+    },
+    {
+      "file": "R1_human_detection_proof.mp4",
+      "repo_sha": "0dbf9c42faf3522351fefc53f8c9d6171bb77718c8fc1d095e485ac963839389",
+      "win_sha": "0dbf9c42faf3522351fefc53f8c9d6171bb77718c8fc1d095e485ac963839389",
+      "match": true
+    },
+    {
+      "file": "README_TR.txt",
+      "repo_sha": "43554929853113b86e47a39ae8fb9f3e578377b654a7580296e330cac10f52ed",
+      "win_sha": "43554929853113b86e47a39ae8fb9f3e578377b654a7580296e330cac10f52ed",
+      "match": true
+    }
+  ],
+  "written_at_utc": "2026-07-28T23:59:07.184196+00:00"
+}

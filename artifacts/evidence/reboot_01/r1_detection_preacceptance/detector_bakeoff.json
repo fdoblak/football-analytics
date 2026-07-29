@@ -1,0 +1,571 @@
+{
+  "schema": "r1_f1_r1_detector_bakeoff_v1",
+  "diagnostic_not_accuracy": true,
+  "weights": {
+    "path": "/home/fdoblak/football_data/model_archive/yolo11n.pt",
+    "sha256": "0ebbc80d4a7680d14987a577cd21342b65ecfd94632bd9a8da63ae6417644ee1",
+    "size_bytes": 5613764,
+    "url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n.pt",
+    "license": "AGPL-3.0",
+    "usage": "evaluation_research_only",
+    "downloaded_this_stage": false
+  },
+  "configs": {
+    "A_yolo11n_full_baseline": {
+      "name": "A_yolo11n_full_baseline",
+      "conf": 0.22,
+      "predict_iou": 0.5,
+      "merge_iou": 0.5,
+      "imgsz_full": 960,
+      "imgsz_tile": 640,
+      "mode": "full_frame",
+      "tile_width": 672,
+      "tile_height": 420,
+      "overlap_x": 112,
+      "overlap_y": 84,
+      "max_tiles": 12,
+      "min_area": 160.0,
+      "min_h": 24.0,
+      "max_h_frac": 0.6,
+      "min_aspect": 0.15,
+      "max_aspect": 1.05,
+      "device": "auto"
+    },
+    "B_yolo11n_hybrid_tiled": {
+      "name": "B_yolo11n_hybrid_tiled",
+      "conf": 0.18,
+      "predict_iou": 0.5,
+      "merge_iou": 0.55,
+      "imgsz_full": 960,
+      "imgsz_tile": 640,
+      "mode": "hybrid",
+      "tile_width": 672,
+      "tile_height": 420,
+      "overlap_x": 112,
+      "overlap_y": 84,
+      "max_tiles": 12,
+      "min_area": 140.0,
+      "min_h": 22.0,
+      "max_h_frac": 0.6,
+      "min_aspect": 0.15,
+      "max_aspect": 1.05,
+      "device": "auto"
+    },
+    "C_yolo11n_highres_full": {
+      "name": "C_yolo11n_highres_full",
+      "conf": 0.18,
+      "predict_iou": 0.5,
+      "merge_iou": 0.5,
+      "imgsz_full": 1280,
+      "imgsz_tile": 640,
+      "mode": "full_frame",
+      "tile_width": 672,
+      "tile_height": 420,
+      "overlap_x": 112,
+      "overlap_y": 84,
+      "max_tiles": 12,
+      "min_area": 140.0,
+      "min_h": 22.0,
+      "max_h_frac": 0.6,
+      "min_aspect": 0.15,
+      "max_aspect": 1.05,
+      "device": "auto"
+    }
+  },
+  "results": {
+    "A_yolo11n_full_baseline": {
+      "config": {
+        "name": "A_yolo11n_full_baseline",
+        "conf": 0.22,
+        "predict_iou": 0.5,
+        "merge_iou": 0.5,
+        "imgsz_full": 960,
+        "imgsz_tile": 640,
+        "mode": "full_frame",
+        "tile_width": 672,
+        "tile_height": 420,
+        "overlap_x": 112,
+        "overlap_y": 84,
+        "max_tiles": 12,
+        "min_area": 160.0,
+        "min_h": 24.0,
+        "max_h_frac": 0.6,
+        "min_aspect": 0.15,
+        "max_aspect": 1.05,
+        "device": "auto"
+      },
+      "n_frames": 15,
+      "total_on_pitch": 204,
+      "total_off_pitch": 6,
+      "total_uncertain": 2,
+      "mean_on_pitch": 13.6,
+      "temporal_count_cv": 0.1856283807504768,
+      "duplicate_pair_count": 0,
+      "merged_person_candidate_count": 2,
+      "small_person_box_count_h_lt_55": 6,
+      "off_pitch_rate": 0.02830188679245283,
+      "per_frame": [
+        {
+          "frame_idx": 3,
+          "n_on": 15,
+          "n_off": 1,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 60,
+          "n_on": 18,
+          "n_off": 1,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 150,
+          "n_on": 16,
+          "n_off": 1,
+          "n_unc": 1,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 270,
+          "n_on": 17,
+          "n_off": 3,
+          "n_unc": 1,
+          "dup_pairs": 0,
+          "merged_candidates": 1
+        },
+        {
+          "frame_idx": 330,
+          "n_on": 15,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 400,
+          "n_on": 10,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 500,
+          "n_on": 9,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 580,
+          "n_on": 12,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 1
+        },
+        {
+          "frame_idx": 660,
+          "n_on": 10,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 720,
+          "n_on": 15,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 780,
+          "n_on": 13,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 860,
+          "n_on": 12,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 920,
+          "n_on": 14,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 980,
+          "n_on": 14,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 1010,
+          "n_on": 14,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        }
+      ],
+      "diagnostic_not_accuracy": true
+    },
+    "B_yolo11n_hybrid_tiled": {
+      "config": {
+        "name": "B_yolo11n_hybrid_tiled",
+        "conf": 0.18,
+        "predict_iou": 0.5,
+        "merge_iou": 0.55,
+        "imgsz_full": 960,
+        "imgsz_tile": 640,
+        "mode": "hybrid",
+        "tile_width": 672,
+        "tile_height": 420,
+        "overlap_x": 112,
+        "overlap_y": 84,
+        "max_tiles": 12,
+        "min_area": 140.0,
+        "min_h": 22.0,
+        "max_h_frac": 0.6,
+        "min_aspect": 0.15,
+        "max_aspect": 1.05,
+        "device": "auto"
+      },
+      "n_frames": 15,
+      "total_on_pitch": 251,
+      "total_off_pitch": 12,
+      "total_uncertain": 5,
+      "mean_on_pitch": 16.733333333333334,
+      "temporal_count_cv": 0.17108294239411806,
+      "duplicate_pair_count": 0,
+      "merged_person_candidate_count": 1,
+      "small_person_box_count_h_lt_55": 40,
+      "off_pitch_rate": 0.04477611940298507,
+      "per_frame": [
+        {
+          "frame_idx": 3,
+          "n_on": 19,
+          "n_off": 3,
+          "n_unc": 2,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 60,
+          "n_on": 23,
+          "n_off": 3,
+          "n_unc": 1,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 150,
+          "n_on": 16,
+          "n_off": 3,
+          "n_unc": 1,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 270,
+          "n_on": 19,
+          "n_off": 3,
+          "n_unc": 1,
+          "dup_pairs": 0,
+          "merged_candidates": 1
+        },
+        {
+          "frame_idx": 330,
+          "n_on": 20,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 400,
+          "n_on": 12,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 500,
+          "n_on": 15,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 580,
+          "n_on": 16,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 660,
+          "n_on": 12,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 720,
+          "n_on": 19,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 780,
+          "n_on": 16,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 860,
+          "n_on": 14,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 920,
+          "n_on": 16,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 980,
+          "n_on": 17,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 1010,
+          "n_on": 17,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        }
+      ],
+      "diagnostic_not_accuracy": true
+    },
+    "C_yolo11n_highres_full": {
+      "config": {
+        "name": "C_yolo11n_highres_full",
+        "conf": 0.18,
+        "predict_iou": 0.5,
+        "merge_iou": 0.5,
+        "imgsz_full": 1280,
+        "imgsz_tile": 640,
+        "mode": "full_frame",
+        "tile_width": 672,
+        "tile_height": 420,
+        "overlap_x": 112,
+        "overlap_y": 84,
+        "max_tiles": 12,
+        "min_area": 140.0,
+        "min_h": 22.0,
+        "max_h_frac": 0.6,
+        "min_aspect": 0.15,
+        "max_aspect": 1.05,
+        "device": "auto"
+      },
+      "n_frames": 15,
+      "total_on_pitch": 211,
+      "total_off_pitch": 8,
+      "total_uncertain": 2,
+      "mean_on_pitch": 14.066666666666666,
+      "temporal_count_cv": 0.1825721224167517,
+      "duplicate_pair_count": 0,
+      "merged_person_candidate_count": 1,
+      "small_person_box_count_h_lt_55": 12,
+      "off_pitch_rate": 0.03619909502262444,
+      "per_frame": [
+        {
+          "frame_idx": 3,
+          "n_on": 16,
+          "n_off": 2,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 60,
+          "n_on": 20,
+          "n_off": 1,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 150,
+          "n_on": 16,
+          "n_off": 3,
+          "n_unc": 1,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 270,
+          "n_on": 17,
+          "n_off": 2,
+          "n_unc": 1,
+          "dup_pairs": 0,
+          "merged_candidates": 1
+        },
+        {
+          "frame_idx": 330,
+          "n_on": 15,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 400,
+          "n_on": 10,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 500,
+          "n_on": 11,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 580,
+          "n_on": 13,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 660,
+          "n_on": 10,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 720,
+          "n_on": 14,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 780,
+          "n_on": 13,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 860,
+          "n_on": 13,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 920,
+          "n_on": 14,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 980,
+          "n_on": 14,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        },
+        {
+          "frame_idx": 1010,
+          "n_on": 15,
+          "n_off": 0,
+          "n_unc": 0,
+          "dup_pairs": 0,
+          "merged_candidates": 0
+        }
+      ],
+      "diagnostic_not_accuracy": true
+    }
+  },
+  "selected": "B_yolo11n_hybrid_tiled",
+  "pitch_mask_notes": [
+    {
+      "frame_idx": 3,
+      "area_frac": 0.5360901181507952,
+      "fence_y": 0
+    },
+    {
+      "frame_idx": 60,
+      "area_frac": 0.5389945914622368,
+      "fence_y": 0
+    },
+    {
+      "frame_idx": 150,
+      "area_frac": 0.5403527622175005,
+      "fence_y": 0
+    },
+    {
+      "frame_idx": 270,
+      "area_frac": 0.6680831884617862,
+      "fence_y": 0
+    },
+    {
+      "frame_idx": 330,
+      "area_frac": 0.8425266402678514,
+      "fence_y": 0
+    }
+  ],
+  "written_at_utc": "2026-07-28T23:49:05.115059+00:00"
+}

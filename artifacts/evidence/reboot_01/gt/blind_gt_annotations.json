@@ -1,7 +1,7 @@
 {
   "schema": "own_video_human_blind_gt_draft_v1",
   "dataset_id": "own_video_human_blind_gt_v1",
-  "status": "BLIND_GT_DRAFT_REVIEW_PACKAGE",
+  "status": "REJECTED_AGENT_DRAFT_INCOMPLETE",
   "provenance": "agent_blind_reviewed_draft",
   "human_approved": false,
   "gt_frozen": false,
@@ -4765,5 +4765,6 @@
       "notes": "Awaiting human blind review via R1 GT review tool."
     }
   ],
-  "written_at_utc": "2026-07-28T23:06:27.154429+00:00"
+  "written_at_utc": "2026-07-28T23:46:34.162024+00:00",
+  "rejected_reason": "R1-F1-R1 user visual rejection; incomplete agent proposals"
 }
